@@ -18,7 +18,7 @@
 			<li><a class="nav-entry" href="#Speaker">Vortragende</a></li>
 			<li><a class="nav-entry" href="#Sponsors">Sponsoren und Medienpartner</a></li>
 			<li><a class="nav-entry" href="#Shedule">Ablaufplan</a></li>
-			<li><a class="nav-entry" href="https://www.google.de">Login</a></li>
+			<li><a class="nav-entry" href="/login">Login</a></li>
 		</nav>
 	</div>
 </header>
@@ -56,6 +56,7 @@
 
 	.logo_small {
 		height: 5rem;
+		margin-left: 1rem;
 	}
 
 	header {
