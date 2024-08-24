@@ -2,6 +2,19 @@ html{
     scroll-behavior: smooth;
 }
 
+html.dark-mode {
+    --background-color: black
+}
+
+html.light-mode {
+    --background-color:white;
+}
+
+body {
+    background-color: var(--background-color);
+    transition: background-color 0.3s;
+}
+
 li {
     list-style-type: none;
 }

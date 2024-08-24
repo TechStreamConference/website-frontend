@@ -1,5 +1,7 @@
 <script>
 	import '../styles/Basic.css';
+	import StyleSwitcher from '../elements/style-switcher.svelte';
+
 	const logoPath = '/logo_klein.png';
 </script>
 
@@ -19,6 +21,8 @@
 			<li><a class="nav-entry" href="#Shedule">Ablaufplan</a></li>
 			<li><a class="nav-entry" href="/login">Login</a></li>
 		</nav>
+
+		<StyleSwitcher/>
 	</div>
 </header>
 
