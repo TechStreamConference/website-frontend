@@ -1,5 +1,5 @@
 <script>
-	import '../styles/Basic.css';
+	import 'styles/Basic.css';
 
 	const logoPath = '/logo_klein.png';
 </script>

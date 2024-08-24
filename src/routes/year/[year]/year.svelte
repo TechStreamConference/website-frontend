@@ -1,6 +1,6 @@
 <script>
-	import Header from '../../../elements/header.svelte';
-	import Footer from '../../../elements/footer.svelte';
+	import Header from 'elements/header.svelte';
+	import Footer from 'elements/footer.svelte';
 
 	export let year;
 </script>
