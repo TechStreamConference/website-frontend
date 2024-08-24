@@ -30,6 +30,7 @@
 		justify-content: space-between;
 		padding-top: 0.5rem;
 		padding-bottom: 0.5rem;
+		border-bottom: solid 5px black;
 	}
 
 	nav {
@@ -44,13 +45,13 @@
 		padding-right: 1.5rem;
 		font-size: 1.2rem;
 		color: white;
-        transition:0.3s;
-        border-radius:0.6rem;
+		transition: 0.3s;
+		border-radius: 0.6rem;
 	}
 
 	.nav-entry:hover {
 		background-color: rgb(132, 65, 132);
-        transition: 0.3s;
+		transition: 0.3s;
 	}
 
 	.logo_small {
