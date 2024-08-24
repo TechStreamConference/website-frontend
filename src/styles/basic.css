@@ -3,16 +3,7 @@ html {
     --transition-duration: 0.3s;
 }
 
-html.dark-mode {
-    --background-color: rgb(40, 40, 40);
-    --primary-color: #563e75;
-    --secondary-color: #5e4680;
-    --third-color: #674c8a;
-    --lines-color: #ccff57;
-    --text-color: white;
-}
-
-html.light-mode {
+:root {
     --background-color: white;
     --primary-color: #674c8a;
     --secondary-color: #5e4680;
@@ -20,6 +11,15 @@ html.light-mode {
     --lines-color: #ccff57;
     --text-color: black;
 }
+
+@media (prefers-color-scheme: dark) {:root {
+    --background-color: rgb(40, 40, 40);
+    --primary-color: #563e75;
+    --secondary-color: #5e4680;
+    --third-color: #674c8a;
+    --lines-color: #ccff57;
+    --text-color: white;
+}}
 
 body {
     background-color: var(--background-color);
@@ -38,7 +38,13 @@ a {
     transition: color var(--transition-duration);
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
     color: var(--text-color);
     transition: color var(--transition-duration);
 }
