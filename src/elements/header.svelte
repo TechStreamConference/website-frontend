@@ -49,10 +49,7 @@
 
 	li a {
 		text-decoration: none;
-		padding-top: 1rem;
-		padding-bottom: 1rem;
-		padding-left: 1.5rem;
-		padding-right: 1.5rem;
+		padding: 1rem 1.5rem;
 		border-radius: 0.6rem;
 		transition: background-color var(--transition-duration);
 		color: white;
