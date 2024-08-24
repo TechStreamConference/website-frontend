@@ -3,6 +3,11 @@ html {
     --transition-duration: 0.3s;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 :root {
     --background-color: white;
     --primary-color: #674c8a;
