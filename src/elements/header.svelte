@@ -5,7 +5,7 @@
 	const logoPath = '/logo_klein.png';
 </script>
 
-<header>	
+<header>
 	<div class="nav-wrapper">
 		<a href="#top">
 			<img
@@ -22,11 +22,19 @@
 			<li><a class="nav-entry" href="/login">Login</a></li>
 		</nav>
 
-		<StyleSwitcher/>
+		<StyleSwitcher />
 	</div>
 </header>
 
 <style>
+	header {
+		background-color: var(--primary-color);
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+
 	.nav-wrapper {
 		display: flex;
 		align-items: center;
@@ -46,27 +54,18 @@
 		padding-bottom: 1rem;
 		padding-left: 1.5rem;
 		padding-right: 1.5rem;
-		font-size: 1.2rem;
-		color: white;
-		transition: 0.3s;
 		border-radius: 0.6rem;
+		transition: background-color var(--transition-duration);
+		color: white;
 	}
 
 	.nav-entry:hover {
-		background-color: rgb(132, 65, 132);
-		transition: 0.3s;
+		background-color: var(--third-color);
+		transition: background-color var(--transition-duration);
 	}
 
 	.logo_small {
 		height: 5rem;
 		margin-left: 1rem;
-	}
-
-	header {
-		background-color: blueviolet;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
 	}
 </style>

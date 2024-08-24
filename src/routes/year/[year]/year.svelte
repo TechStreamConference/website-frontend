@@ -34,7 +34,7 @@
 		Schoo geh Radi heitzdog Engelgwand o’ha gscheit no? Wurscht es des is hoid aso, wea ko, dea ko!
 		Schaugn damischa heitzdog is, da san zwoa ghupft wia gsprunga auszutzeln! Hob Leonhardifahrt
 		Wurscht, d’ hoid Gaudi Biakriagal? Jodler a geh Marei a liabs Deandl ebba, ghupft wia gsprunga
-        fensdaln Bladl des is hoid aso Edlweiss umananda! Haferl auffi abfieseln, Gschicht. Jedza so
+		fensdaln Bladl des is hoid aso Edlweiss umananda! Haferl auffi abfieseln, Gschicht. Jedza so
 		schee Sauakraud, sodala. Griasnoggalsubbm i mog di fei und sei a bissal wos gehd ollaweil
 		Weibaleid unbandig hob! Graudwiggal Deandlgwand a liabs Deandl kimmt Steckerleis i bin a
 		woschechta Bayer, Graudwiggal obandln Stubn aasgem anbandeln. Woibbadinga Jodler a ganze Hoiwe,
@@ -52,7 +52,7 @@
 		Habedehre zwoa Brezn! Schdarmbeaga See Mamalad a bissal wos gehd ollaweil Haferl helfgod
 		Mongdratzal des muas ma hoid kenna unbandig Musi i moan oiwei Schuabladdla. Gor zua Biawambn,
 		damischa sowos. Amoi Biaschlegl ja, wo samma denn a geh Steckerleis ded kumm geh, so sog i
-        hallelujah sog i, luja Gams. Und glei wirds no fui lustiga woaß auszutzeln Schorsch no baddscher
+		hallelujah sog i, luja Gams. Und glei wirds no fui lustiga woaß auszutzeln Schorsch no baddscher
 		Haberertanz wiavui Wurscht Kaiwe, zua. Wia Namidog singan zwoa Auffisteign pfundig gelbe Rüam i
 		mog di fei, glei. Und glei wirds no fui lustiga Schneid trihöleridi dijidiholleri is, i sog ja
 		nix, i red ja bloß Sauakraud i moan scho aa aasgem naa: Gscheid kloan Schmankal zua dei, do
@@ -224,10 +224,10 @@
 		hallelujah sog i, luja Gams. Und glei wirds no fui lustiga woaß auszutzeln Schorsch no baddscher
 		Haberertanz wiavui Wurscht Kaiwe, zua. Wia Namidog singan zwoa Auffisteign pfundig gelbe Rüam i
 		mog di fei, glei. Und glei wirds no fui lustiga Schneid trihöleridi dijidiholleri is, i sog ja
-    </p>
-    <h1 id="Sponsors">Sponsoren</h1>
-    <p>
-        nix, i red ja bloß Sauakraud i moan scho aa aasgem naa: Gscheid kloan Schmankal zua dei, do
+	</p>
+	<h1 id="Sponsors">Sponsoren</h1>
+	<p>
+		nix, i red ja bloß Sauakraud i moan scho aa aasgem naa: Gscheid kloan Schmankal zua dei, do
 		fensdaln Namidog schnacksln Prosd nimma. Landla Schdeckalfisch gfreit mi ebba luja, da is
 		Watschnbaam i hob di narrisch gean Kaiwe hinter’m Berg san a no Leit. Hetschapfah Hemad
 		Hetschapfah luja Deandlgwand Heimatland Klampfn. Guglhupf san i moan oiwei fias, fensdaln mi
@@ -401,10 +401,10 @@
 		Watschnbaam i hob di narrisch gean Kaiwe hinter’m Berg san a no Leit. Hetschapfah Hemad
 		Hetschapfah luja Deandlgwand Heimatland Klampfn. Guglhupf san i moan oiwei fias, fensdaln mi
 		Kaiwe Engelgwand Kuaschwanz Schmankal: Ledahosn barfuaßat is ma Wuascht Bussal, gscheit! Kimmt
-    </p>
-    <h1 id="Shedule">Plan</h1>
-    <p>
-        Kaiwe i hob di narrisch gean glei jo mei is des schee kimmt, moand. Des muas ma hoid kenna
+	</p>
+	<h1 id="Shedule">Plan</h1>
+	<p>
+		Kaiwe i hob di narrisch gean glei jo mei is des schee kimmt, moand. Des muas ma hoid kenna
 		Enzian Gamsbart wuid, gschmeidig hod: Blärrd Vergeltsgott a ganze Hoiwe om auf’n Gipfe vo de
 		Fingahaggln wolpern, heitzdog Wurscht. I mechad dee Schwoanshaxn ma Leonhardifahrt zua sodala in
 		da hallelujah sog i, luja barfuaßat, des! Schoo so a bravs Kirwa sog i kimmt da, hog di hi om
@@ -527,7 +527,7 @@
 		padding-top: 6rem;
 	}
 
-    h1{
-        scroll-margin-top: 10rem;
-    }
+	h1 {
+		scroll-margin-top: 10rem;
+	}
 </style>

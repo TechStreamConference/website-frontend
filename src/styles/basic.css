@@ -1,24 +1,72 @@
-html{
+html {
     scroll-behavior: smooth;
+    --transition-duration: 0.3s;
 }
 
 html.dark-mode {
-    --background-color: black
+    --background-color: rgb(40, 40, 40);
+    --primary-color: #563e75;
+    --secondary-color: #5e4680;
+    --third-color: #674c8a;
+    --lines-color: #ccff57;
+    --text-color: white;
 }
 
 html.light-mode {
-    --background-color:white;
+    --background-color: white;
+    --primary-color: #674c8a;
+    --secondary-color: #5e4680;
+    --third-color: #563e75;
+    --lines-color: #ccff57;
+    --text-color: black;
 }
 
 body {
     background-color: var(--background-color);
-    transition: background-color 0.3s;
+    transition: background-color var(--transition-duration);
 }
 
 li {
     list-style-type: none;
+    color: var(--text-color);
+    transition: color var(--transition-duration);
 }
 
 a {
     text-decoration: none;
+    color: var(--text-color);
+    transition: color var(--transition-duration);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    color: var(--text-color);
+    transition: color var(--transition-duration);
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+h5 {
+    font-size: 1rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+p {
+    font-size: 1.5rem;
 }
