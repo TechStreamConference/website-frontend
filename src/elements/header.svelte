@@ -2,14 +2,14 @@
 	<div class="nav-wrapper">
 		<a href="#top">
 			<img
-				src = '/logo_klein.png'
+				src = '/logo_small.png'
 				alt="The small Test-Conf logo. It shows the name on black clouds."
 			/>
 		</a>
 		<nav>
 			<li><a href="#top">Start</a></li>
-			<li><a href="#Sponsors">Sponsoren und Medienpartner</a></li>
 			<li><a href="#Speaker">Vortragende</a></li>
+			<li><a href="#Sponsors">Sponsoren und Medienpartner</a></li>
 			<li><a href="#Shedule">Ablaufplan</a></li>
 			<li><a href="/login">Login</a></li>
 		</nav>
@@ -54,6 +54,12 @@
 		border-radius: 0.6rem;
 		transition: background-color var(--transition-duration);
 		color: white;
+		font-family: gnuolane, sans-serif;
+		font-weight: 500;
+		font-style: normal;
+		font-size: 1.5rem;
+		text-transform: uppercase;
+		letter-spacing: 2px;
 	}
 
 	li a:hover {
