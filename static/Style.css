@@ -17,14 +17,16 @@ body {
     --text-color: black;
 }
 
-@media (prefers-color-scheme: dark) {:root {
-    --background-color: rgb(40, 40, 40);
-    --primary-color: #563e75;
-    --secondary-color: #5e4680;
-    --third-color: #674c8a;
-    --lines-color: #ccff57;
-    --text-color: white;
-}}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: rgb(40, 40, 40);
+        --primary-color: #563e75;
+        --secondary-color: #5e4680;
+        --third-color: #674c8a;
+        --lines-color: #ccff57;
+        --text-color: white;
+    }
+}
 
 body {
     background-color: var(--background-color);
