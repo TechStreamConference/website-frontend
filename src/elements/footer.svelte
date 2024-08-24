@@ -1,7 +1,3 @@
-<script>
-    import "../styles/Basic.css"
-</script>
-
 <footer>
     <nav>
         <li><a href="https://www.google.de">Login</a></li>
@@ -11,4 +7,3 @@
 
     <p>copyright 2024</p>
 </footer>
-

@@ -1,24 +1,17 @@
-<script>
-	import 'styles/Basic.css';
-
-	const logoPath = '/logo_klein.png';
-</script>
-
 <header>
 	<div class="nav-wrapper">
 		<a href="#top">
 			<img
-				class="logo_small"
-				src={logoPath}
+				src = '/logo_klein.png'
 				alt="The small Test-Conf logo. It shows the name on black clouds."
 			/>
 		</a>
 		<nav>
-			<li><a class="nav-entry" href="#top">Start</a></li>
-			<li><a class="nav-entry" href="#Speaker">Vortragende</a></li>
-			<li><a class="nav-entry" href="#Sponsors">Sponsoren und Medienpartner</a></li>
-			<li><a class="nav-entry" href="#Shedule">Ablaufplan</a></li>
-			<li><a class="nav-entry" href="/login">Login</a></li>
+			<li><a href="#top">Start</a></li>
+			<li><a href="#Sponsors">Sponsoren und Medienpartner</a></li>
+			<li><a href="#Speaker">Vortragende</a></li>
+			<li><a href="#Shedule">Ablaufplan</a></li>
+			<li><a href="/login">Login</a></li>
 		</nav>
 	</div>
 </header>
@@ -46,7 +39,14 @@
 		margin: 1rem;
 	}
 
-	.nav-entry {
+	li {
+		list-style-type: none;
+		color: var(--text-color);
+		transition: color var(--transition-duration);
+	}
+
+	li a {
+		text-decoration: none;
 		padding-top: 1rem;
 		padding-bottom: 1rem;
 		padding-left: 1.5rem;
@@ -56,12 +56,12 @@
 		color: white;
 	}
 
-	.nav-entry:hover {
+	li a:hover {
 		background-color: var(--third-color);
 		transition: background-color var(--transition-duration);
 	}
 
-	.logo_small {
+	img {
 		height: 5rem;
 		margin-left: 1rem;
 	}
