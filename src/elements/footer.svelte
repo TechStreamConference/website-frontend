@@ -1,5 +1,5 @@
 <script>
-    import "../styles/nav.css"
+    import "../styles/Basic.css"
 </script>
 
 <footer>

@@ -1,18 +1,17 @@
 <script>
-	import '../styles/nav.css';
-	import '../styles/basic.css';
+	import '../styles/Basic.css';
 	const logoPath = '/logo_klein.png';
 </script>
 
-<header>
+<header>	
 	<div class="nav-wrapper">
-		<a href="#top"
-			><img
+		<a href="#top">
+			<img
 				class="logo_small"
 				src={logoPath}
 				alt="The small Test-Conf logo. It shows the name on black clouds."
-			/></a
-		>
+			/>
+		</a>
 		<nav>
 			<li><a class="nav-entry" href="#top">Start</a></li>
 			<li><a class="nav-entry" href="#Speaker">Vortragende</a></li>
