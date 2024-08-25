@@ -47,7 +47,7 @@
 	.nav-wrapper {
 		display: flex;
 		flex-direction: row;
-		justify-content: space-around;
+		justify-content: space-evenly;
 	}
 
 	img {
