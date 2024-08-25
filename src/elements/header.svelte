@@ -27,6 +27,11 @@
 		right: 0;
 	}
 
+	img {
+		height: 5rem;
+		margin-left: 1rem;
+	}
+
 	.nav-wrapper {
 		display: flex;
 		align-items: center;
@@ -64,10 +69,5 @@
 	li a:hover {
 		background-color: var(--third-color);
 		transition: background-color var(--transition-duration);
-	}
-
-	img {
-		height: 5rem;
-		margin-left: 1rem;
 	}
 </style>
