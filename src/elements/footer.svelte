@@ -51,7 +51,7 @@
 	}
 
 	img {
-		height: 10rem;
+		height: 7rem;
 	}
 
 	ul {
@@ -89,7 +89,7 @@
 	}
 
 	.copyright {
-		padding-top: 5rem;
+		padding-top: 2rem;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
