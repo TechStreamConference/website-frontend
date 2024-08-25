@@ -35,7 +35,7 @@
 		display: flex;
 		flex-direction: column;
 		background-color: var(--primary-color);
-		padding: 3rem 0;
+		padding: 2rem 0;
 		color: var(--white-color);
 		font-family: 'Gnuolane Extra Light', sans-serif;
 		font-weight: 500;
@@ -89,9 +89,10 @@
 	}
 
 	.copyright {
-		padding-top: 2rem;
+		padding-top: 1rem;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
+		font-size: 0.8rem;
 	}
 </style>
