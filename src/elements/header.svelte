@@ -2,7 +2,7 @@
 	<div class="nav-wrapper">
 		<a href="#top">
 			<img
-				src = '/logo_small.png'
+				src="/logo_small.png"
 				alt="The small Test-Conf logo. It shows the name on black clouds."
 			/>
 		</a>
