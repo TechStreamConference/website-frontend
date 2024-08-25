@@ -36,7 +36,7 @@
 		flex-direction: column;
 		background-color: var(--primary-color);
 		padding: 3rem 0;
-		color: white;
+		color: var(--white-color);
 		font-family: 'Gnuolane Extra Light', sans-serif;
 		font-weight: 500;
 		font-style: normal;
@@ -78,7 +78,7 @@
 
 	a {
 		text-decoration: none;
-		color: white;
+		color: var(--white-color);
 		padding: 0.3rem;
 		border-radius: 0.6rem;
 	}

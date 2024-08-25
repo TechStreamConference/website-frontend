@@ -57,7 +57,7 @@
 		padding: 1rem 1.5rem;
 		border-radius: 0.6rem;
 		transition: background-color var(--transition-duration);
-		color: white;
+		color: var(--white-color);
 		font-family: gnuolane, sans-serif;
 		font-weight: 500;
 		font-style: normal;
