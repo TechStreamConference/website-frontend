@@ -41,7 +41,7 @@
 		font-weight: 500;
 		font-style: normal;
 		letter-spacing: 2px;
-		font-size: 1.5rem;
+		font-size: 1rem;
 	}
 
 	.nav-wrapper {
