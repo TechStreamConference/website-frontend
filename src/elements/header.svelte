@@ -7,11 +7,13 @@
 			/>
 		</a>
 		<nav>
-			<li><a href="#top">Start</a></li>
-			<li><a href="#Speaker">Vortragende</a></li>
-			<li><a href="#Sponsors">Sponsoren und Medienpartner</a></li>
-			<li><a href="#Shedule">Ablaufplan</a></li>
-			<li><a href="/login">Login</a></li>
+			<ul>
+				<li><a href="#top">Start</a></li>
+				<li><a href="#Speaker">Vortragende</a></li>
+				<li><a href="#Sponsors">Sponsoren und Medienpartner</a></li>
+				<li><a href="#Shedule">Ablaufplan</a></li>
+				<li><a href="/login">Login</a></li>
+			</ul>
 		</nav>
 	</div>
 </header>
@@ -34,7 +36,7 @@
 		border-bottom: solid 3px black;
 	}
 
-	nav {
+	ul {
 		display: flex;
 		margin: 1rem;
 	}
