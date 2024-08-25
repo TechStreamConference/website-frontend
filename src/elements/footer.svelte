@@ -9,7 +9,7 @@
 		</nav>
 		
 		<nav>
-			<p class="YearHeadline">Alle Test-Conf:</p>
+			<p class="YearHeadline">Alle Events:</p>
 			<ul>
 				<li><a href="/year/2023">2023</a></li>
 				<li><a href="/year/2024">2024</a></li>
