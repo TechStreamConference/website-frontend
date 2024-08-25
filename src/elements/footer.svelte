@@ -24,7 +24,7 @@
 			sdgaölkjskdhg
 		</p>
 
-		<img src={"/logo_big.png"} alt="The small Test-Conf logo. It shows the name on black clouds."/>
+		<img src={"/logo_big.png"} alt="The big Test-Conf logo. It shows the name on black clouds. Black lines emerge from the clouds with yellow dots at the ends. They look like circuits."/>
 	</div>
 
 	<p class="copyright">&copy; Tech Stream Conference 2024</p>
