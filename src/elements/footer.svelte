@@ -1,9 +1,98 @@
 <footer>
-    <nav>
-        <li><a href="https://www.google.de">Login</a></li>
-        <li><a href="https://www.google.de">Register</a></li>
-        <li><a href="https://www.google.de">Impressum</a></li>
-    </nav>
+	<div class="nav-wrapper">
+		<nav>
+			<ul>
+				<li><a href="/login">Login</a></li>
+				<li><a href="/login">Register</a></li>
+				<li><a href="/impressum">Impressum</a></li>
+			</ul>
+		</nav>
+		
+		<nav>
+			<p class="YearHeadline">Alle Events:</p>
+			<ul>
+				<li><a href="/year/2023">2023</a></li>
+				<li><a href="/year/2024">2024</a></li>
+			</ul>
+		</nav>
+		
+		<p>
+			Bester Beschreibungstext <br />
+			aös,jkdhfga <br />
+			sgasdg asdgasdgasd <br />
+			gasdgökajsdhga <br />
+			sdgaölkjskdhg
+		</p>
 
-    <p>copyright 2024</p>
+		<img src={"/logo_big.png"} alt="The big Test-Conf logo. It shows the name on black clouds. Black lines emerge from the clouds with yellow dots at the ends. They look like circuits."/>
+	</div>
+
+	<p class="copyright">&copy; Tech Stream Conference 2024</p>
 </footer>
+
+<style>
+	footer {
+		display: flex;
+		flex-direction: column;
+		background-color: var(--primary-color);
+		padding: 2rem 0;
+		color: var(--white-color);
+		font-family: 'Gnuolane Extra Light', sans-serif;
+		font-weight: 500;
+		font-style: normal;
+		letter-spacing: 2px;
+		font-size: 1rem;
+	}
+
+	.nav-wrapper {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+	}
+
+	img {
+		height: 7rem;
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		padding: 0;
+	}
+
+	li {
+		list-style: none;
+		padding: 0.2rem 0;
+	}
+
+	.YearHeadline {
+		padding-left: 0.2rem;
+		padding-bottom: 1rem;
+	}
+
+	a:hover {
+		background-color: var(--third-color);
+		transition: background-color var(--transition-duration);
+	}
+
+	a {
+		text-decoration: none;
+		color: var(--white-color);
+		padding: 0.3rem;
+		border-radius: 0.6rem;
+	}
+
+	p {
+		margin: 0;
+		padding: 0;
+	}
+
+	.copyright {
+		padding-top: 1rem;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		font-size: 0.8rem;
+	}
+</style>

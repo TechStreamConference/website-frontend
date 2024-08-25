@@ -27,6 +27,11 @@
 		right: 0;
 	}
 
+	img {
+		height: 5rem;
+		margin-left: 1rem;
+	}
+
 	.nav-wrapper {
 		display: flex;
 		align-items: center;
@@ -49,13 +54,10 @@
 
 	li a {
 		text-decoration: none;
-		padding-top: 1rem;
-		padding-bottom: 1rem;
-		padding-left: 1.5rem;
-		padding-right: 1.5rem;
+		padding: 1rem 1.5rem;
 		border-radius: 0.6rem;
 		transition: background-color var(--transition-duration);
-		color: white;
+		color: var(--white-color);
 		font-family: gnuolane, sans-serif;
 		font-weight: 500;
 		font-style: normal;
@@ -67,10 +69,5 @@
 	li a:hover {
 		background-color: var(--third-color);
 		transition: background-color var(--transition-duration);
-	}
-
-	img {
-		height: 5rem;
-		margin-left: 1rem;
 	}
 </style>

@@ -1,6 +1,13 @@
 html {
     scroll-behavior: smooth;
     --transition-duration: 0.3s;
+    --lines-color: #ccff57;
+    --white-color: white;
+}
+
+body {
+    margin: 0;
+    padding: 0;
 }
 
 :root {
@@ -8,18 +15,18 @@ html {
     --primary-color: #674c8a;
     --secondary-color: #5e4680;
     --third-color: #563e75;
-    --lines-color: #ccff57;
     --text-color: black;
 }
 
-@media (prefers-color-scheme: dark) {:root {
-    --background-color: rgb(40, 40, 40);
-    --primary-color: #563e75;
-    --secondary-color: #5e4680;
-    --third-color: #674c8a;
-    --lines-color: #ccff57;
-    --text-color: white;
-}}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: rgb(40, 40, 40);
+        --primary-color: #563e75;
+        --secondary-color: #5e4680;
+        --third-color: #674c8a;
+        --text-color: white;
+    }
+}
 
 body {
     background-color: var(--background-color);
