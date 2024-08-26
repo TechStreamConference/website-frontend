@@ -1,5 +1,6 @@
 <script>
 	import Page from './year/[year]/year.svelte';
+	let currentYear = 2025; // get current year from database
 </script>
 
-<Page year={2024} />
+<Page displayedYear={currentYear} {currentYear} />

@@ -1,3 +1,10 @@
+<script>
+	export let currentYear;
+	const startYear = 2024;
+
+	const numbers = Array.from({ length: currentYear + 1 - startYear }, (_, i) => startYear + i);
+</script>
+
 <footer>
 	<div class="nav-wrapper">
 		<nav>
@@ -7,15 +14,16 @@
 				<li><a href="/impressum">Impressum</a></li>
 			</ul>
 		</nav>
-		
+
 		<nav>
 			<p class="YearHeadline">Alle Events:</p>
 			<ul>
-				<li><a href="/year/2023">2023</a></li>
-				<li><a href="/year/2024">2024</a></li>
+				{#each numbers as number}
+					<li><a href="/year/{number}">{number}</a></li>
+				{/each}
 			</ul>
 		</nav>
-		
+
 		<p>
 			Bester Beschreibungstext <br />
 			aös,jkdhfga <br />
@@ -24,10 +32,13 @@
 			sdgaölkjskdhg
 		</p>
 
-		<img src={"/logo_big.png"} alt="The big Test-Conf logo. It shows the name on black clouds. Black lines emerge from the clouds with yellow dots at the ends. They look like circuits."/>
+		<img
+			src={'/logo_big.png'}
+			alt="The big Test-Conf logo. It shows the name on black clouds. Black lines emerge from the clouds with yellow dots at the ends. They look like circuits."
+		/>
 	</div>
 
-	<p class="copyright">&copy; Tech Stream Conference 2024</p>
+	<p class="copyright">&copy; Tech Stream Conference {currentYear}</p>
 </footer>
 
 <style>
