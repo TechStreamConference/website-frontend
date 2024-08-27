@@ -11,5 +11,9 @@
 <style>
 	.footer {
 		height: 7rem;
+		flex: 1;
+		min-width: 10rem;
+		object-fit: contain;
+		max-height: 12rem;
 	}
 </style>

@@ -114,11 +114,6 @@
 		overflow-wrap: normal;
 	}
 
-	.logo {
-		object-fit: contain;
-		max-height: 12rem;
-	}
-
 	.copyright {
 		padding-top: 1rem;
 		display: flex;
