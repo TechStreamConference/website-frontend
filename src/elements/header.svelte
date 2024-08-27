@@ -1,10 +1,11 @@
+<script>
+	import LogoSmall from './logoSmall.svelte';
+</script>
+
 <header>
 	<div class="nav-wrapper">
 		<a href="/">
-			<img
-				src="/logo_small.png"
-				alt="The small Test-Conf logo. It shows the name on black clouds."
-			/>
+			<LogoSmall classList={'header'} />
 		</a>
 		<nav>
 			<ul>
@@ -25,11 +26,6 @@
 		top: 0;
 		left: 0;
 		right: 0;
-	}
-
-	img {
-		height: 5rem;
-		margin-left: 1rem;
 	}
 
 	.nav-wrapper {

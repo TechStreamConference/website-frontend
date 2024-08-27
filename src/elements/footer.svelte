@@ -1,4 +1,5 @@
 <script>
+	import LogoBig from './logoBig.svelte';
 	export let currentYear;
 	const startYear = 2024;
 
@@ -42,11 +43,7 @@
 			habe 200 Wörter.
 		</p>
 
-		<img
-			class="nav-element logo"
-			src={'/logo_big.png'}
-			alt="The big Test-Conf logo. It shows the name on black clouds. Black lines emerge from the clouds with yellow dots at the ends. They look like circuits."
-		/>
+		<LogoBig classList={'footer'} />
 	</div>
 
 	<p class="copyright">&copy; Tech Stream Conference {currentYear}</p>
@@ -115,11 +112,6 @@
 
 	.discription {
 		overflow-wrap: normal;
-	}
-
-	.logo {
-		object-fit: contain;
-		max-height: 12rem;
 	}
 
 	.copyright {
