@@ -43,7 +43,7 @@
 			habe 200 Wörter.
 		</p>
 
-		<LogoBig classList={'footer'} />
+		<LogoBig classList={'footer-img footer-nav-element'} />
 	</div>
 
 	<p class="copyright">&copy; Tech Stream Conference {currentYear}</p>
@@ -66,6 +66,7 @@
 	.nav-wrapper {
 		display: flex;
 		flex-direction: row;
+		flex-wrap: wrap;
 		justify-content: space-evenly;
 		gap: 10rem;
 		padding: 0 10rem;

@@ -9,11 +9,14 @@
 />
 
 <style>
-	.footer {
+	.footer-img {
 		height: 7rem;
-		flex: 1;
-		min-width: 10rem;
 		object-fit: contain;
 		max-height: 12rem;
+	}
+
+	.footer-nav-element {
+		min-width: 10rem;
+		flex: 1;
 	}
 </style>
