@@ -10,7 +10,7 @@
 
 <style>
 	.footer-img {
-		height: 7rem;
+		height: 10rem;
 		object-fit: contain;
 		max-height: 12rem;
 	}
