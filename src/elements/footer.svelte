@@ -75,6 +75,7 @@
 	.nav-element {
 		flex: 1;
 		min-width: 10rem;
+		text-align: center;
 	}
 
 	ul {
