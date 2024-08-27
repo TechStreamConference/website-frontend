@@ -1,33 +1,55 @@
+<script>
+	export let currentYear;
+	const startYear = 2024;
+
+	const numbers = Array.from({ length: currentYear + 1 - startYear }, (_, i) => startYear + i);
+</script>
+
 <footer>
 	<div class="nav-wrapper">
-		<nav>
+		<nav class="nav-element">
+			<p class="Headline">Menu:</p>
 			<ul>
 				<li><a href="/login">Login</a></li>
 				<li><a href="/login">Register</a></li>
 				<li><a href="/impressum">Impressum</a></li>
 			</ul>
 		</nav>
-		
-		<nav>
-			<p class="YearHeadline">Alle Events:</p>
+
+		<nav class="nav-element">
+			<p class="Headline">Alle Events:</p>
 			<ul>
-				<li><a href="/year/2023">2023</a></li>
-				<li><a href="/year/2024">2024</a></li>
+				{#each numbers as number}
+					<li><a href="/year/{number}">{number}</a></li>
+				{/each}
 			</ul>
 		</nav>
-		
-		<p>
-			Bester Beschreibungstext <br />
-			aös,jkdhfga <br />
-			sgasdg asdgasdgasd <br />
-			gasdgökajsdhga <br />
-			sdgaölkjskdhg
+
+		<p class="discription nav-element">
+			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+			invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+			justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+			ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+			eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+			et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+			sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
+			elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+			diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+			gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure
+			dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat
+			nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+			zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, -- ich
+			habe 200 Wörter.
 		</p>
 
-		<img src={"/logo_big.png"} alt="The big Test-Conf logo. It shows the name on black clouds. Black lines emerge from the clouds with yellow dots at the ends. They look like circuits."/>
+		<img
+			class="nav-element logo"
+			src={'/logo_big.png'}
+			alt="The big Test-Conf logo. It shows the name on black clouds. Black lines emerge from the clouds with yellow dots at the ends. They look like circuits."
+		/>
 	</div>
 
-	<p class="copyright">&copy; Tech Stream Conference 2024</p>
+	<p class="copyright">&copy; Tech Stream Conference {currentYear}</p>
 </footer>
 
 <style>
@@ -48,10 +70,13 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-evenly;
+		gap: 10rem;
+		padding: 0 10rem;
 	}
 
-	img {
-		height: 7rem;
+	.nav-element {
+		flex: 1;
+		min-width: 10rem;
 	}
 
 	ul {
@@ -66,14 +91,9 @@
 		padding: 0.2rem 0;
 	}
 
-	.YearHeadline {
+	.Headline {
 		padding-left: 0.2rem;
 		padding-bottom: 1rem;
-	}
-
-	a:hover {
-		background-color: var(--third-color);
-		transition: background-color var(--transition-duration);
 	}
 
 	a {
@@ -83,9 +103,23 @@
 		border-radius: 0.6rem;
 	}
 
+	a:hover {
+		background-color: var(--third-color);
+		transition: background-color var(--transition-duration);
+	}
+
 	p {
 		margin: 0;
 		padding: 0;
+	}
+
+	.discription {
+		overflow-wrap: normal;
+	}
+
+	.logo {
+		object-fit: contain;
+		max-height: 12rem;
 	}
 
 	.copyright {

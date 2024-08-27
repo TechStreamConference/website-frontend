@@ -2,13 +2,14 @@
 	import Header from 'elements/header.svelte';
 	import Footer from 'elements/footer.svelte';
 
-	export let year;
+	export let displayedYear;
+	export let currentYear
 </script>
 
 <Header />
 
 <div class="page">
-	<h1>This is Year {year}</h1>
+	<h1>This is Year {displayedYear}</h1>
 	<p>
 		Bavaria ipsum dolor sit amet wo hi i moan scho aa Charivari. Kimmt ham des muas ma hoid kenna
 		nia need Fingahaggln da du dadst ma scho daugn zünftig schnacksln. Biazelt nackata so schee
@@ -520,7 +521,7 @@
 	</p>
 </div>
 
-<Footer />
+<Footer {currentYear}/>
 
 <style>
 	.page {
