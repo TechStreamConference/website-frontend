@@ -1,11 +1,18 @@
 <script>
 	import LogoSmall from './logoSmall.svelte';
+
+	let isOpen = false;
+
+	function toggleMobileMenu() {
+		isOpen = !isOpen;
+	}
 </script>
 
 <header>
-	<div class="nav-wrapper">
+	<!-- Desktop -->
+	<div class="desktop-wrapper">
 		<a href="/">
-			<LogoSmall classList={'header'} />
+			<LogoSmall classList={'header-desktop-img'} />
 		</a>
 		<nav>
 			<ul>
@@ -17,9 +24,31 @@
 			</ul>
 		</nav>
 	</div>
+
+	<!-- Mobile -->
+	<div class="mobile-wrapper">
+		<div class="hamburger" on:click={toggleMobileMenu}>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+
+		<nav class="mobile-menu menu-{isOpen ? 'show' : 'close'}">
+			<a href="#top">Start</a>
+			<a href="#Speaker">Vortragende</a>
+			<a href="#Sponsors">Sponsoren und Medienpartner</a>
+			<a href="#Shedule">Ablaufplan</a>
+			<a href="/login">Login</a>
+		</nav>
+	</div>
 </header>
 
 <style>
+	/* Desktop */
+	.mobile-wrapper {
+		display: none;
+	}
+
 	header {
 		background-color: var(--primary-color);
 		position: fixed;
@@ -28,7 +57,7 @@
 		right: 0;
 	}
 
-	.nav-wrapper {
+	.desktop-wrapper {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -65,5 +94,17 @@
 	li a:hover {
 		background-color: var(--third-color);
 		transition: background-color var(--transition-duration);
+	}
+
+
+	/* Mobile */
+	@media (max-width: 1200px) {
+		.desktop-wrapper {
+			display: none;
+		}
+
+		.mobile-wrapper {
+			display: flex;
+		}
 	}
 </style>

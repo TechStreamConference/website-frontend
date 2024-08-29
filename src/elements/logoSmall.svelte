@@ -9,7 +9,7 @@
 />
 
 <style>
-	.header {
+	.header-desktop-img {
 		height: 5rem;
 		margin-left: 1rem;
 	}
