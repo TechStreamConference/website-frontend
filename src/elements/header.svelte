@@ -1,9 +1,17 @@
 <script>
 	import LogoSmall from './logoSmall.svelte';
 
+	const menu = [
+		['Start', '#top'],
+		['Vortragende', '#Speaker'],
+		['Sponsoren und Medienpartner', '#Sponsors'],
+		['Ablaufplan', '#Shedule'],
+		['Login', '/login']
+	];
+
 	let isOpen = false;
 
-	function toggleMobileMenu() {
+	function toggleOpen() {
 		isOpen = !isOpen;
 	}
 </script>
@@ -16,30 +24,29 @@
 		</a>
 		<nav>
 			<ul>
-				<li><a href="#top">Start</a></li>
-				<li><a href="#Speaker">Vortragende</a></li>
-				<li><a href="#Sponsors">Sponsoren und Medienpartner</a></li>
-				<li><a href="#Shedule">Ablaufplan</a></li>
-				<li><a href="/login">Login</a></li>
+				{#each menu as entry}
+					<li><a href={entry[1]}>{entry[0]}</a></li>
+				{/each}
 			</ul>
 		</nav>
 	</div>
 
 	<!-- Mobile -->
 	<div class="mobile-wrapper">
-		<div class="hamburger" on:click={toggleMobileMenu}>
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
+		<div class="hamburger-wrapper">
+			<LogoSmall classList="header-mobile-img" />
 
-		<nav class="mobile-menu menu-{isOpen ? 'show' : 'close'}">
-			<a href="#top">Start</a>
-			<a href="#Speaker">Vortragende</a>
-			<a href="#Sponsors">Sponsoren und Medienpartner</a>
-			<a href="#Shedule">Ablaufplan</a>
-			<a href="/login">Login</a>
-		</nav>
+			<button class="hamburger" on:click={toggleOpen}>
+				<div></div>
+				<div></div>
+				<div></div>
+			</button>
+		</div>
+		<div class="mobile-menu {isOpen ? 'show' : 'hide'}">
+			{#each menu as entry}
+				<a href={entry[1]}>{entry[0]}</a>
+			{/each}
+		</div>
 	</div>
 </header>
 
@@ -96,7 +103,6 @@
 		transition: background-color var(--transition-duration);
 	}
 
-
 	/* Mobile */
 	@media (max-width: 1200px) {
 		.desktop-wrapper {
@@ -105,6 +111,52 @@
 
 		.mobile-wrapper {
 			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.hamburger-wrapper {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+
+		.hamburger {
+			display: block;
+			cursor: pointer;
+			margin: 1rem;
+			background: transparent;
+			border: none;
+		}
+
+		.hamburger div {
+			width: 25px;
+			height: 3px;
+			background-color: white;
+			margin: 5px 0;
+			transition: 0.4s;
+		}
+
+		.mobile-menu {
+			flex-direction: column;
+			display: none;
+		}
+
+		.mobile-menu.show {
+			display: flex;
+		}
+
+		.mobile-menu a {
+			text-align: right;
+			margin: 1rem;
+			text-decoration: none;
+			color: var(--white-color);
+			font-family: gnuolane, sans-serif;
+			font-weight: 500;
+			font-style: normal;
+			font-size: 1.5rem;
+			text-transform: uppercase;
+			letter-spacing: 2px;
 		}
 	}
 </style>
