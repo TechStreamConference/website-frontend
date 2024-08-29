@@ -1,5 +1,6 @@
 <script>
 	import LogoSmall from './logoSmall.svelte';
+	import { fade } from 'svelte/transition';
 
 	const menu = [
 		['Start', '#top'],
@@ -42,11 +43,13 @@
 				<div></div>
 			</button>
 		</div>
-		<div class="mobile-menu {isOpen ? 'show' : 'hide'}">
-			{#each menu as entry}
-				<a href={entry[1]}>{entry[0]}</a>
-			{/each}
-		</div>
+		{#if isOpen}
+			<div class="mobile-menu" transition:fade={{ duration: 300 }}>
+				{#each menu as entry}
+					<a href={entry[1]}>{entry[0]}</a>
+				{/each}
+			</div>
+		{/if}
 	</div>
 </header>
 
@@ -57,7 +60,6 @@
 	}
 
 	header {
-		background-color: var(--primary-color);
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -65,6 +67,7 @@
 	}
 
 	.desktop-wrapper {
+		background-color: var(--primary-color);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -116,6 +119,7 @@
 		}
 
 		.hamburger-wrapper {
+			background-color: var(--primary-color);
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
@@ -124,7 +128,7 @@
 		.hamburger {
 			display: block;
 			cursor: pointer;
-			margin: 1rem;
+			margin: 1.5rem;
 			background: transparent;
 			border: none;
 		}
@@ -138,17 +142,14 @@
 		}
 
 		.mobile-menu {
+			background-color: var(--primary-color);
 			flex-direction: column;
-			display: none;
-		}
-
-		.mobile-menu.show {
 			display: flex;
 		}
 
 		.mobile-menu a {
 			text-align: right;
-			margin: 1rem;
+			margin: 1.5rem;
 			text-decoration: none;
 			color: var(--white-color);
 			font-family: gnuolane, sans-serif;
