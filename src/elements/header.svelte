@@ -42,7 +42,7 @@
 
 	<!-- Mobile -->
 	<div class="mobile-wrapper">
-		<div class="hamburger-wrapper">
+		<div class="hamburger-wrapper {isOpen ? 'open' : 'close'}">
 			<LogoSmall classList="header-mobile-img" />
 
 			<button class="hamburger" on:click={toggleOpen}>
@@ -131,6 +131,13 @@
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
+			border-bottom: solid 1px black;
+			transition: border var(--transition-duration);
+		}
+
+		.hamburger-wrapper.open {
+			border-bottom: none;
+			transition: border var(--transition-duration);
 		}
 
 		.hamburger {
@@ -174,12 +181,13 @@
 			background-color: var(--primary-color);
 			flex-direction: column;
 			display: flex;
+			border-bottom: solid 1px black;
 		}
 
 		.mobile-menu a {
 			text-align: right;
 			margin: 1.5rem;
-			text-decoration: none;	
+			text-decoration: none;
 			color: var(--white-color);
 			font-family: gnuolane, sans-serif;
 			font-weight: 500;
@@ -194,7 +202,7 @@
 	@media (max-height: 450px) {
 		.mobile-menu a {
 			font-size: 1rem;
-			margin:1rem;
+			margin: 1rem;
 		}
 	}
 </style>
