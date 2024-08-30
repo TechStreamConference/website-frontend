@@ -179,7 +179,7 @@
 		.mobile-menu a {
 			text-align: right;
 			margin: 1.5rem;
-			text-decoration: none;
+			text-decoration: none;	
 			color: var(--white-color);
 			font-family: gnuolane, sans-serif;
 			font-weight: 500;
@@ -187,6 +187,14 @@
 			font-size: 1.5rem;
 			text-transform: uppercase;
 			letter-spacing: 2px;
+		}
+	}
+
+	/* Mobile in Landscape */
+	@media (max-height: 450px) {
+		.mobile-menu a {
+			font-size: 1rem;
+			margin:1rem;
 		}
 	}
 </style>
