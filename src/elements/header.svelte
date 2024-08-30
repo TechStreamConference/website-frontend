@@ -1,4 +1,5 @@
 <script>
+	import { onMount, onDestroy } from 'svelte';
 	import LogoSmall from './logoSmall.svelte';
 	import { fade } from 'svelte/transition';
 
@@ -9,6 +10,19 @@
 	function toggleOpen() {
 		isOpen = !isOpen;
 	}
+
+	onMount(() => {
+		const colapse = () => {
+			isOpen = false;
+		};
+
+		window.addEventListener('scroll', colapse);
+
+		// Clean up the event listener when the component is destroyed
+		onDestroy(() => {
+			window.removeEventListener('scroll', colapse);
+		});
+	});
 </script>
 
 <header>
