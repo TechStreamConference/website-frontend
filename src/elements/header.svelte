@@ -11,11 +11,11 @@
 		isOpen = !isOpen;
 	}
 
-	onMount(() => {
-		const collapse = () => {
-			isOpen = false;
-		};
+	function collapse() {
+		isOpen = false;
+	}
 
+	onMount(() => {
 		window.addEventListener('scroll', collapse);
 
 		// Clean up the event listener when the component is destroyed
@@ -54,7 +54,7 @@
 		{#if isOpen}
 			<div class="mobile-menu" transition:fade={{ duration: 300 }}>
 				{#each menu as entry}
-					<a href={entry[1]}>{entry[0]}</a>
+					<a href={entry[1]} on:click={collapse}>{entry[0]}</a>
 				{/each}
 			</div>
 		{/if}
