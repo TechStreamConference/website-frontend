@@ -12,15 +12,15 @@
 	}
 
 	onMount(() => {
-		const colapse = () => {
+		const collapse = () => {
 			isOpen = false;
 		};
 
-		window.addEventListener('scroll', colapse);
+		window.addEventListener('scroll', collapse);
 
 		// Clean up the event listener when the component is destroyed
 		onDestroy(() => {
-			window.removeEventListener('scroll', colapse);
+			window.removeEventListener('scroll', collapse);
 		});
 	});
 </script>
