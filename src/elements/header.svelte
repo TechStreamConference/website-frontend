@@ -115,7 +115,7 @@
 	}
 
 	/* Mobile */
-	@media (max-width: 1200px) {
+	@media (max-width: 1280px) {
 		.desktop-wrapper {
 			display: none;
 		}
