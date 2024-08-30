@@ -2,13 +2,7 @@
 	import LogoSmall from './logoSmall.svelte';
 	import { fade } from 'svelte/transition';
 
-	const menu = [
-		['Start', '#top'],
-		['Vortragende', '#Speaker'],
-		['Sponsoren und Medienpartner', '#Sponsors'],
-		['Ablaufplan', '#Shedule'],
-		['Login', '/login']
-	];
+	export let menu;
 
 	let isOpen = false;
 

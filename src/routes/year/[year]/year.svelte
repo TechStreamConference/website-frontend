@@ -4,9 +4,22 @@
 
 	export let displayedYear;
 	export let currentYear
+
+	const headerMenu = [
+		['Start', '#top'],
+		['Vortragende', '#Speaker'],
+		['Sponsoren und Medienpartner', '#Sponsors'],
+		['Ablaufplan', '#Shedule'],
+		['Login', '/login']
+	];
+	const footerMenu = [
+		['Login', "/login"],
+		['Register', "/login"],
+		['Impressum', "/impressum"],
+	];
 </script>
 
-<Header />
+<Header menu={headerMenu}/>
 
 <div class="page">
 	<h1>This is Year {displayedYear}</h1>
@@ -521,7 +534,7 @@
 	</p>
 </div>
 
-<Footer {currentYear}/>
+<Footer {currentYear} menu={footerMenu}/>
 
 <style>
 	.page {

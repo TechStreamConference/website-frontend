@@ -2,6 +2,7 @@
 	import LogoBig from './logoBig.svelte';
 	export let currentYear;
 	const startYear = 2024;
+	export let menu;
 
 	const numbers = Array.from({ length: currentYear + 1 - startYear }, (_, i) => startYear + i);
 </script>
@@ -11,9 +12,9 @@
 		<nav class="nav-element">
 			<p class="Headline">Menu:</p>
 			<ul>
-				<li><a href="/login">Login</a></li>
-				<li><a href="/login">Register</a></li>
-				<li><a href="/impressum">Impressum</a></li>
+				{#each menu as entry}
+					<li><a href={entry[1]}>{entry[0]}</a></li>
+				{/each}
 			</ul>
 		</nav>
 
