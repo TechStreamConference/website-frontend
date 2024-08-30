@@ -542,6 +542,6 @@
 	}
 
 	h1 {
-		scroll-margin-top: 10rem;
+		scroll-margin-top: 7rem;
 	}
 </style>
