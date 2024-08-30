@@ -69,13 +69,13 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: space-evenly;
-		gap: 10rem;
-		padding: 0 10rem;
+		gap: 5rem;
+		padding: 0 5rem;
 	}
 
 	.nav-element {
 		flex: 1;
-		min-width: 10rem;
+		min-width: 14rem;
 		text-align: center;
 	}
 
