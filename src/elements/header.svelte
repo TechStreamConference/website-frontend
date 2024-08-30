@@ -38,9 +38,9 @@
 			<LogoSmall classList="header-mobile-img" />
 
 			<button class="hamburger" on:click={toggleOpen}>
-				<div></div>
-				<div></div>
-				<div></div>
+				<div class={isOpen ? 'rotated' : 'normal'}></div>
+				<div class={isOpen ? 'rotated' : 'normal'}></div>
+				<div class={isOpen ? 'rotated' : 'normal'}></div>
 			</button>
 		</div>
 		{#if isOpen}
@@ -138,7 +138,28 @@
 			height: 3px;
 			background-color: white;
 			margin: 5px 0;
-			transition: 0.4s;
+			transition: var(--transition-duration);
+		}
+
+		.hamburger div:nth-child(1).normal {
+			transform: rotate(0) translateY(0);
+		}
+		.hamburger div:nth-child(1).rotated {
+			transform: rotate(45deg) translateY(0.72rem);
+		}
+
+		.hamburger div:nth-child(2).normal {
+			opacity: 1;
+		}
+		.hamburger div:nth-child(2).rotated {
+			opacity: 0;
+		}
+
+		.hamburger div:nth-child(3).normal {
+			transform: rotate(0) translateY(0);
+		}
+		.hamburger div:nth-child(3).rotated {
+			transform: rotate(-45deg) translateY(-0.72rem);
 		}
 
 		.mobile-menu {
