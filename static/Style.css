@@ -1,8 +1,11 @@
 html {
     scroll-behavior: smooth;
     --transition-duration: 0.3s;
+    --fast-transition-duration: 0.1s;
     --lines-color: #ccff57;
     --white-color: white;
+    --gray-color: gray;
+    --light-gray-color: rgb(190, 190, 190);
 }
 
 body {
@@ -31,4 +34,25 @@ body {
 body {
     background-color: var(--background-color);
     transition: background-color var(--transition-duration);
+}
+
+.my-button {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition-duration);
+}
+
+.my-button:hover {
+    background-color: var(--secondary-color);
+    box-shadow: 6px 6px var(--gray-color);
+    transition: var(--transition-duration);
+}
+
+.my-button:active {
+    background-color: var(--third-color);
+    box-shadow: 2px 2px var(--light-gray-color);
+    transform: translateY(4px) translateX(4px);
+    transition: var(--fast-transition-duration);
 }
