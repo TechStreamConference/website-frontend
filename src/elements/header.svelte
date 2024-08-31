@@ -1,5 +1,4 @@
 <script>
-	import { onMount, onDestroy } from 'svelte';
 	import LogoSmall from './logoSmall.svelte';
 	import { fade } from 'svelte/transition';
 
@@ -14,15 +13,6 @@
 	function collapse() {
 		isOpen = false;
 	}
-
-	onMount(() => {
-		window.addEventListener('scroll', collapse);
-
-		// Clean up the event listener when the component is destroyed
-		onDestroy(() => {
-			window.removeEventListener('scroll', collapse);
-		});
-	});
 </script>
 
 <header>
