@@ -1,40 +1,79 @@
 <script>
 	import LogoSmall from './logoSmall.svelte';
+	import { fade } from 'svelte/transition';
+
+	export let menu;
+
+	let isOpen = false;
+
+	function toggleOpen() {
+		isOpen = !isOpen;
+	}
+
+	function collapse() {
+		isOpen = false;
+	}
 </script>
 
 <header>
-	<div class="nav-wrapper">
-		<a href="/">
-			<LogoSmall classList={'header'} />
+	<!-- Desktop -->
+	<div class="desktop-wrapper">
+		<a href="/" class="logo-wrapper">
+			<LogoSmall classList={'header-desktop-img'} />
 		</a>
 		<nav>
 			<ul>
-				<li><a href="#top">Start</a></li>
-				<li><a href="#Speaker">Vortragende</a></li>
-				<li><a href="#Sponsors">Sponsoren und Medienpartner</a></li>
-				<li><a href="#Shedule">Ablaufplan</a></li>
-				<li><a href="/login">Login</a></li>
+				{#each menu as entry}
+					<li><a href={entry[1]}>{entry[0]}</a></li>
+				{/each}
 			</ul>
 		</nav>
+	</div>
+
+	<!-- Mobile -->
+	<div class="mobile-wrapper">
+		<div class="hamburger-wrapper {isOpen ? 'open' : 'close'}">
+			<a href="/" class="logo-wrapper">
+				<LogoSmall classList="header-mobile-img" />
+			</a>
+
+			<button class="hamburger" on:click={toggleOpen}>
+				<div class={isOpen ? 'rotated' : 'normal'}></div>
+				<div class={isOpen ? 'rotated' : 'normal'}></div>
+				<div class={isOpen ? 'rotated' : 'normal'}></div>
+			</button>
+		</div>
+		{#if isOpen}
+			<div class="mobile-menu" transition:fade={{ duration: 300 }}>
+				{#each menu as entry}
+					<a href={entry[1]} on:click={collapse}>{entry[0]}</a>
+				{/each}
+			</div>
+		{/if}
 	</div>
 </header>
 
 <style>
+	/* Desktop */
+	.mobile-wrapper {
+		display: none;
+	}
+
 	header {
-		background-color: var(--primary-color);
 		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 	}
 
-	.nav-wrapper {
+	.desktop-wrapper {
+		background-color: var(--primary-color);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		padding-top: 0.5rem;
 		padding-bottom: 0.5rem;
-		border-bottom: solid 3px black;
+		border-bottom: solid 1px black;
 	}
 
 	ul {
@@ -65,5 +104,103 @@
 	li a:hover {
 		background-color: var(--third-color);
 		transition: background-color var(--transition-duration);
+	}
+
+	/* Mobile */
+	@media (max-width: 1280px) {
+		.desktop-wrapper {
+			display: none;
+		}
+
+		.mobile-wrapper {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.hamburger-wrapper {
+			background-color: var(--primary-color);
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			border-bottom: solid 1px black;
+			transition: border var(--transition-duration);
+			align-items: center;
+		}
+
+		.hamburger-wrapper.open {
+			border-bottom: none;
+			transition: border var(--transition-duration);
+		}
+
+		.logo-wrapper {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.hamburger {
+			display: block;
+			cursor: pointer;
+			margin: 1.5rem;
+			background: transparent;
+			border: none;
+		}
+
+		.hamburger div {
+			width: 25px;
+			height: 3px;
+			background-color: white;
+			margin: 5px 0;
+			transition: var(--transition-duration);
+		}
+
+		.hamburger div:nth-child(1).normal {
+			transform: translateX(0) rotate(0) translateY(0);
+		}
+		.hamburger div:nth-child(1).rotated {
+			transform: translateX(7px) rotate(45deg) translateY(0.72rem);
+		}
+
+		.hamburger div:nth-child(2).normal {
+			opacity: 1;
+		}
+		.hamburger div:nth-child(2).rotated {
+			opacity: 0;
+		}
+
+		.hamburger div:nth-child(3).normal {
+			transform: translateX(0) rotate(0) translateY(0);
+		}
+		.hamburger div:nth-child(3).rotated {
+			transform: translateX(7px) rotate(-45deg) translateY(-0.72rem);
+		}
+
+		.mobile-menu {
+			background-color: var(--primary-color);
+			flex-direction: column;
+			display: flex;
+			border-bottom: solid 1px black;
+		}
+
+		.mobile-menu a {
+			text-align: right;
+			margin: 1.5rem;
+			text-decoration: none;
+			color: var(--white-color);
+			font-family: gnuolane, sans-serif;
+			font-weight: 500;
+			font-style: normal;
+			font-size: 1.5rem;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+		}
+	}
+
+	/* Mobile in Landscape */
+	@media (max-height: 450px) {
+		.mobile-menu a {
+			font-size: 1rem;
+			margin: 1rem;
+		}
 	}
 </style>

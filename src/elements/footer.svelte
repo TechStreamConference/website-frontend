@@ -2,6 +2,7 @@
 	import LogoBig from './logoBig.svelte';
 	export let currentYear;
 	const startYear = 2024;
+	export let menu;
 
 	const numbers = Array.from({ length: currentYear + 1 - startYear }, (_, i) => startYear + i);
 </script>
@@ -11,9 +12,9 @@
 		<nav class="nav-element">
 			<p class="Headline">Menu:</p>
 			<ul>
-				<li><a href="/login">Login</a></li>
-				<li><a href="/login">Register</a></li>
-				<li><a href="/impressum">Impressum</a></li>
+				{#each menu as entry}
+					<li><a href={entry[1]}>{entry[0]}</a></li>
+				{/each}
 			</ul>
 		</nav>
 
@@ -43,7 +44,7 @@
 			habe 200 Wörter.
 		</p>
 
-		<LogoBig classList={'footer'} />
+		<LogoBig classList={'footer-img footer-nav-element'} />
 	</div>
 
 	<p class="copyright">&copy; Tech Stream Conference {currentYear}</p>
@@ -66,14 +67,16 @@
 	.nav-wrapper {
 		display: flex;
 		flex-direction: row;
+		flex-wrap: wrap;
 		justify-content: space-evenly;
-		gap: 10rem;
-		padding: 0 10rem;
+		gap: 5rem;
+		padding: 0 5rem;
 	}
 
 	.nav-element {
 		flex: 1;
-		min-width: 10rem;
+		min-width: 14rem;
+		text-align: center;
 	}
 
 	ul {
