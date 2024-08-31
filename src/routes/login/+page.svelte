@@ -7,9 +7,16 @@
 
 	const headerMenu = [['Home', '/ ']];
 	const footerMenu = [
-		['Register', '/login'],
 		['Impressum', '/impressum']
 	];
+
+	function login() {
+		console.log('TODO: login');
+	}
+
+	function register() {
+		console.log('TODO: register');
+	}
 </script>
 
 <Header menu={headerMenu} />
@@ -20,12 +27,12 @@
 	<div class="content">
 		<div class="content-wrapper">
 			<h1 class="headline-small center-text">Login</h1>
-			<button class="my-button">Login</button>
+			<button class="my-button" on:click={login}>Login</button>
 		</div>
 		<div class="line"></div>
 		<div class="content-wrapper">
 			<h1 class="headline-small center-text">Register</h1>
-			<button class="my-button">Register</button>
+			<button class="my-button" on:click={register}>Register</button>
 		</div>
 	</div>
 
@@ -43,7 +50,6 @@
 		flex-grow: 1;
 		display: flex;
 		flex-direction: row;
-		min-width: 100vh;
 		margin: 3rem;
 	}
 
@@ -57,8 +63,12 @@
 		text-align: center;
 	}
 
-	.my-button{
-		margin:0 auto;
+	.headline-small{
+		margin-top: 0;
+	}
+
+	.my-button {
+		margin: 0 auto;
 		height: 3rem;
 		width: 7rem;
 	}
@@ -66,5 +76,17 @@
 	.line {
 		width: 3px;
 		background-color: var(--lines-color);
+	}
+
+	@media (max-width: 1280px) {
+		.content {
+			flex-direction: column;
+		}
+
+		.line {
+			height: 3px;
+			width: 100%;
+			margin: 3rem 0;
+		}
 	}
 </style>

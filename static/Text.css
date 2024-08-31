@@ -58,3 +58,33 @@
     font-style: normal;
     color: var(--text-color);
 }
+
+@media (max-width: 1280px) {
+    .headline {
+        font-size: 5rem;
+    }
+
+    .headline-small {
+        font-size: 3rem;
+    }
+
+    .sub-headline {
+        font-size: 3rem;
+    }
+
+    .sub-headline-small {
+        font-size: 1.5rem;
+    }
+
+    .text-block {
+        font-size: 1rem;
+    }
+
+    .text-line {
+        font-size: 1rem;
+    }
+
+    .my-button {
+        font-size: 1rem;
+    }
+}

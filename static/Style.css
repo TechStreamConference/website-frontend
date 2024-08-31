@@ -56,3 +56,16 @@ body {
     transform: translateY(4px) translateX(4px);
     transition: var(--fast-transition-duration);
 }
+
+@media (max-width: 1280px) {
+    .my-button:hover {
+        background-color: var(--primary-color);
+        box-shadow: none;
+        transition: var(--transition-duration);
+    }
+
+    .my-button:active {
+        box-shadow: 2px 2px var(--light-gray-color);
+        transition: var(--fast-transition-duration);
+    }
+}
