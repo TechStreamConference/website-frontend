@@ -14,11 +14,8 @@
 		margin-left: 1rem;
 	}
 
-	.header-mobile-img{
+	.header-mobile-img {
 		height: 3rem;
 		margin-left: 1rem;
-		display: block;
-		margin-bottom: auto;
-		margin-top: auto;
 	}
 </style>

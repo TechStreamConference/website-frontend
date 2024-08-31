@@ -18,7 +18,7 @@
 <header>
 	<!-- Desktop -->
 	<div class="desktop-wrapper">
-		<a href="/">
+		<a href="/" class="logo-wrapper">
 			<LogoSmall classList={'header-desktop-img'} />
 		</a>
 		<nav>
@@ -33,7 +33,9 @@
 	<!-- Mobile -->
 	<div class="mobile-wrapper">
 		<div class="hamburger-wrapper {isOpen ? 'open' : 'close'}">
-			<LogoSmall classList="header-mobile-img" />
+			<a href="/" class="logo-wrapper">
+				<LogoSmall classList="header-mobile-img" />
+			</a>
 
 			<button class="hamburger" on:click={toggleOpen}>
 				<div class={isOpen ? 'rotated' : 'normal'}></div>
@@ -123,11 +125,17 @@
 			justify-content: space-between;
 			border-bottom: solid 1px black;
 			transition: border var(--transition-duration);
+			align-items: center;
 		}
 
 		.hamburger-wrapper.open {
 			border-bottom: none;
 			transition: border var(--transition-duration);
+		}
+
+		.logo-wrapper {
+			display: inline-block;
+			vertical-align: middle;
 		}
 
 		.hamburger {
