@@ -157,10 +157,10 @@
 		}
 
 		.hamburger div:nth-child(1).normal {
-			transform: rotate(0) translateY(0);
+			transform: translateX(0) rotate(0) translateY(0);
 		}
 		.hamburger div:nth-child(1).rotated {
-			transform: rotate(45deg) translateY(0.72rem);
+			transform: translateX(7px) rotate(45deg) translateY(0.72rem);
 		}
 
 		.hamburger div:nth-child(2).normal {
@@ -171,10 +171,10 @@
 		}
 
 		.hamburger div:nth-child(3).normal {
-			transform: rotate(0) translateY(0);
+			transform: translateX(0) rotate(0) translateY(0);
 		}
 		.hamburger div:nth-child(3).rotated {
-			transform: rotate(-45deg) translateY(-0.72rem);
+			transform: translateX(7px) rotate(-45deg) translateY(-0.72rem);
 		}
 
 		.mobile-menu {
