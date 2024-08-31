@@ -18,8 +18,16 @@
 	<MainPage />
 
 	<div class="content">
-        <p>content here</p>
-    </div>
+		<div class="content-wrapper">
+			<h1 class="headline-small center-text">Login</h1>
+			<button class="my-button">Login</button>
+		</div>
+		<div class="line"></div>
+		<div class="content-wrapper">
+			<h1 class="headline-small center-text">Register</h1>
+			<button class="my-button">Register</button>
+		</div>
+	</div>
 
 	<Footer {currentYear} menu={footerMenu} />
 </div>
@@ -33,5 +41,30 @@
 
 	.content {
 		flex-grow: 1;
+		display: flex;
+		flex-direction: row;
+		min-width: 100vh;
+		margin: 3rem;
+	}
+
+	.content-wrapper {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	.center-text {
+		text-align: center;
+	}
+
+	.my-button{
+		margin:0 auto;
+		height: 3rem;
+		width: 7rem;
+	}
+
+	.line {
+		width: 3px;
+		background-color: var(--lines-color);
 	}
 </style>
