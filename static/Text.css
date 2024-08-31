@@ -1,0 +1,52 @@
+.headline {
+    font-size: 7rem;
+    font-family: proxima-nova, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: normal;
+    color: var(--text-color);
+}
+
+.headline-small {
+    font-size: 5rem;
+    font-family: proxima-nova, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: normal;
+    color: var(--text-color);
+}
+
+.sub-headline {
+    font-size: 5rem;
+    font-family: gnuolane, sans-serif;
+    font-weight: 200;
+    text-transform: capitalize;
+    font-style: normal;
+    color: var(--text-color);
+}
+
+.sub-headline-small {
+    font-size: 3rem;
+    font-family: gnuolane, sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    text-transform: capitalize;
+    color: var(--text-color);
+}
+
+.text-line {
+    font-size: 1.5rem;
+    font-family: gnuolane, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: var(--text-color);
+}
+
+.text-block {
+    font-size: 1.5rem;
+    font-family: gnuolane, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: var(--text-color);
+    text-wrap: wrap;
+}
