@@ -5,6 +5,8 @@
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
 	import Button from 'elements/input/button.svelte';
 	import Input from 'elements/input/input.svelte';
+	import ErrorMessage from 'elements/error/errorMessage.svelte';
+	import MessageWrapper from 'elements/error/messageWrapper.svelte';
 
 	let currentYear = 2025; // get current year from database
 
@@ -42,6 +44,9 @@
 			<div class="content-wrapper">
 				<h1 class="headline-small center-text">Registrieren</h1>
 				<div class="my-line-horizontal"></div>
+				<MessageWrapper>
+					<ErrorMessage bind:message={usernameMessage} />
+				</MessageWrapper>
 				<div class="input-line-wrapper">
 					<Input
 						id="register-username"
@@ -84,6 +89,9 @@
 			<div class="content-wrapper">
 				<h1 class="headline-small center-text">Anmelden</h1>
 				<div class="my-line-horizontal"></div>
+				<MessageWrapper>
+					<ErrorMessage bind:message={usernameMessage} />
+				</MessageWrapper>
 				<div class="input-line-wrapper">
 					<Input
 						id="login-username"
@@ -115,12 +123,6 @@
 				<Button text={'Einloggen'} on:click={login} />
 			</div>
 		{/if}
-
-		<div class="message-wrapper">
-			{#if usernameMessage !== ''}
-				<p class="my-error-message">{usernameMessage}</p>
-			{/if}
-		</div>
 	</div>
 
 	<Footer {currentYear} menu={footerMenu} />
@@ -157,17 +159,5 @@
 	.my-line-horizontal {
 		width: 30rem;
 		margin-bottom: 5rem;
-	}
-
-	.message-wrapper {
-		display: flex;
-		flex-direction: column;
-		margin: 0 auto;
-	}
-
-	@media (max-width: 1280px) {
-		.content {
-			flex-direction: column;
-		}
 	}
 </style>

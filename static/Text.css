@@ -51,17 +51,6 @@
     text-wrap: wrap;
 }
 
-.my-error-message {
-    background-color: red;
-    color: var(--white-color);
-    padding: 0.5rem 1rem;
-    font-size: 1.5rem;
-    font-family: gnuolane, sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    border-radius: var(--border-radius);
-}
-
 @media (max-width: 1280px) {
     .headline {
         font-size: 5rem;
