@@ -8,6 +8,7 @@
 	import ErrorMessage from 'elements/error/errorMessage.svelte';
 	import MessageWrapper from 'elements/error/messageWrapper.svelte';
 	import Headline from 'elements/text/headline.svelte';
+	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 
 	let currentYear = 2025; // get current year from database
 
@@ -44,7 +45,8 @@
 		{#if displayRegister}
 			<div class="content-wrapper">
 				<Headline>Registrieren</Headline>
-				<div class="my-line-horizontal"></div>
+				<HorizontalLine --width="30rem" />
+				<Spacer --height="5rem" />
 				<MessageWrapper>
 					<ErrorMessage bind:message={usernameMessage} />
 				</MessageWrapper>
@@ -84,12 +86,13 @@
 					/>
 				</div>
 				<Spacer --height="3rem" />
-				<Button text={'Registrieren'} on:click={register} />
+				<Button on:click={register}>Registrieren</Button>
 			</div>
 		{:else}
 			<div class="content-wrapper">
 				<Headline>Anmelden</Headline>
-				<div class="my-line-horizontal"></div>
+				<HorizontalLine --width="30rem" />
+				<Spacer --height="5rem" />
 				<MessageWrapper>
 					<ErrorMessage bind:message={usernameMessage} />
 				</MessageWrapper>
@@ -121,7 +124,7 @@
 					/>
 				</div>
 				<Spacer --height="3rem" />
-				<Button text={'Einloggen'} on:click={login} />
+				<Button on:click={login}>Einloggen</Button>
 			</div>
 		{/if}
 	</div>
@@ -147,10 +150,5 @@
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
-	}
-
-	.my-line-horizontal {
-		width: 30rem;
-		margin-bottom: 5rem;
 	}
 </style>

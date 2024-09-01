@@ -12,7 +12,7 @@
 </script>
 
 <div class="wrapper">
-	<Label {id} {labelText} />
+	<Label {id}>{labelText}</Label>
 	{#if type === 'text'}
 		<TextInput {id} {placeholderText} on:input bind:value={textValue} />
 	{:else if type === 'password'}

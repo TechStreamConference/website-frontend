@@ -1,8 +1,4 @@
-<script>
-	export let text = '';
-</script>
-
-<button class="button" on:click>{text}</button>
+<button class="button" on:click><slot /></button>
 
 <style>
 	.button {

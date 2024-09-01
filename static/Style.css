@@ -43,15 +43,3 @@ body {
     background-color: var(--background-color);
     transition: background-color var(--transition-duration);
 }
-
-.my-line-horizontal {
-    background-color: var(--lines-color);
-    height: 1px;
-    margin: 0 auto;
-}
-
-.my-line-vertical {
-    background-color: var(--lines-color);
-    width: 1px;
-    margin: auto 0;
-}

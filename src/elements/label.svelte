@@ -1,9 +1,8 @@
 <script>
-	export let labelText = '';
 	export let id = '';
 </script>
 
-<label for={id}>{labelText}</label>
+<label for={id}><slot /></label>
 
 <style>
 	label {
