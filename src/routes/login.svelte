@@ -2,8 +2,14 @@
 	import Header from 'elements/header.svelte';
 	import Footer from 'elements/footer.svelte';
 	import MainPage from 'elements/mainPage.svelte';
+	import Button from 'elements/input/button.svelte';
+	import Input from 'elements/input/input.svelte';
+	import Spacer from 'elements/spacer/spacer.svelte';
 
 	let currentYear = 2025; // get current year from database
+
+	const inputLineWidth = 30;
+	const inputLineSpacer = 1;
 
 	export let displayRegister = false;
 	export let headerMenu = [['', '']];
@@ -34,51 +40,78 @@
 	<div class="content">
 		{#if displayRegister}
 			<div class="content-wrapper">
-				<h1 class="headline-small center-text">Register</h1>
-				<div class=my-line-horizontal></div>
+				<h1 class="headline-small center-text">Registrieren</h1>
+				<div class="my-line-horizontal"></div>
 				<div class="input-line-wrapper">
-					<label for="username" class="my-label">Username:</label>
-					<input
+					<Input
 						type="text"
-						name="username"
-						placeholder="username"
-						class="my-input-line"
+						labelText="Nutzername:"
+						placeholderText="Nutzername"
+						--width="{inputLineWidth}rem"
 						on:input={usernameChance}
-						bind:value={username}
+						bind:textValue={username}
 					/>
-					<label for="email" class="my-label">E-Mail:</label>
-					<input type="text" name="email" placeholder="e-mail" class="my-input-line" />
-					<label for="password" class="my-label">Password:</label>
-					<input type="password" name="password" placeholder="passowrd" class="my-input-line" />
-					<label for="password" class="my-label">Password:</label>
-					<input
-						type="password-repeated"
-						name="password-repeated"
-						placeholder="passowrd"
-						class="my-input-line"
+					<Spacer --height="{inputLineSpacer}rem" />
+					<Input
+					type="text"
+					labelText="E-Mail:"
+					placeholderText="E-Mail"
+					--width="{inputLineWidth}rem"
+					/>
+					<Spacer --height="{inputLineSpacer}rem" />
+					<Input
+					type="password"
+					labelText="Passwort:"
+					placeholderText="Passwort"
+					--width="{inputLineWidth}rem"
+					/>
+					<Spacer --height="{inputLineSpacer}rem" />
+					<Input
+						type="password"
+						labelText="Passwort:"
+						placeholderText="Passwort Wiederholung"
+						--width="{inputLineWidth}rem"
 					/>
 				</div>
-				<button class="my-button" on:click={register}>Register</button>
+				<Spacer --height="3rem"/>
+				<Button text={'Registrieren'} on:click={register} />
 			</div>
 		{:else}
 			<div class="content-wrapper">
-				<h1 class="headline-small center-text">Login</h1>
-				<div class=my-line-horizontal></div>
+				<h1 class="headline-small center-text">Anmelden</h1>
+				<div class="my-line-horizontal"></div>
 				<div class="input-line-wrapper">
-					<label for="username" class="my-label">Username:</label>
-					<input type="text" name="username" placeholder="username" class="my-input-line" />
-					<label for="email" class="my-label">E-Mail:</label>
-					<input type="text" name="email" placeholder="e-mail" class="my-input-line" />
-					<label for="password" class="my-label">Password:</label>
-					<input type="password" name="password" placeholder="passowrd" class="my-input-line" />
+					<Input
+						type="text"
+						labelText="Nutzername:"
+						placeholderText="Nutzername"
+						--width="{inputLineWidth}rem"
+						on:input={usernameChance}
+						bind:textValue={username}
+					/>
+					<Spacer --height="{inputLineSpacer}rem" />
+					<Input
+						type="text"
+						labelText="E-Mail:"
+						placeholderText="E-Mail"
+						--width="{inputLineWidth}rem"
+					/>
+					<Spacer --height="{inputLineSpacer}rem" />
+					<Input
+						type="password"
+						labelText="Passwort:"
+						placeholderText="Passwort"
+						--width="{inputLineWidth}rem"
+					/>
 				</div>
-				<button class="my-button" on:click={login}>Login</button>
+				<Spacer --height="3rem"/>
+				<Button text={'Einloggen'} on:click={login} />
 			</div>
 		{/if}
 
 		<div class="message-wrapper">
 			{#if usernameMessage !== ''}
-				<p class="error-message">{usernameMessage}</p>
+				<p class="my-error-message">{usernameMessage}</p>
 			{/if}
 		</div>
 	</div>
@@ -116,33 +149,13 @@
 
 	.my-line-horizontal {
 		width: 30rem;
-		margin-bottom:5rem;
-	}
-
-	.input-line-wrapper {
-		display: flex;
-		flex-direction: column;
-		margin: 0 auto;
-	}
-
-	.my-input-line {
-		margin-bottom: 1rem;
-		width: 30rem;
-	}
-
-	.my-button {
-		margin: 3rem auto 0 auto;
+		margin-bottom: 5rem;
 	}
 
 	.message-wrapper {
 		display: flex;
 		flex-direction: column;
 		margin: 0 auto;
-	}
-
-	.error-message {
-		background-color: red;
-		color: var(--text-color);
 	}
 
 	@media (max-width: 1280px) {

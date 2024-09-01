@@ -37,33 +37,10 @@ body {
     transition: background-color var(--transition-duration);
 }
 
-.my-button {
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: var(--transition-duration);
-    padding: 1rem 2rem;
-}
 
-.my-button:hover {
-    background-color: var(--secondary-color);
-    box-shadow: 6px 6px var(--gray-color);
-    transition: var(--transition-duration);
-}
-
-.my-button:active {
-    background-color: var(--third-color);
-    box-shadow: 2px 2px var(--light-gray-color);
-    transform: translateY(4px) translateX(4px);
-    transition: var(--fast-transition-duration);
-}
 
 .my-input-line {
-    background-color: var(--primary-color);
-    border-radius: var(--border-radius);
-    border: none;
-    padding: 0.5rem;
+
 }
 
 .my-line-horizontal {
@@ -78,15 +55,3 @@ body {
     margin: auto 0;
 }
 
-@media (max-width: 1280px) {
-    .my-button:hover {
-        background-color: var(--primary-color);
-        box-shadow: none;
-        transition: var(--transition-duration);
-    }
-
-    .my-button:active {
-        box-shadow: 2px 2px var(--light-gray-color);
-        transition: var(--fast-transition-duration);
-    }
-}

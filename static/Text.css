@@ -51,28 +51,23 @@
     text-wrap: wrap;
 }
 
-.my-button {
-    font-size: 1.5rem;
-    font-family: gnuolane, sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    color: var(--white-color);
-}
-
-.my-input-line {
-    font-size: 1.5rem;
-    font-family: gnuolane, sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    color: var(--white-color);
-}
-
 .my-label {
     font-size: 1.5rem;
     font-family: gnuolane, sans-serif;
     font-weight: 500;
     font-style: normal;
     color: var(--text-color);
+}
+
+.my-error-message {
+    background-color: red;
+    color: var(--white-color);
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    font-family: gnuolane, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    border-radius: var(--border-radius);
 }
 
 @media (max-width: 1280px) {
@@ -97,10 +92,6 @@
     }
 
     .text-line {
-        font-size: 1rem;
-    }
-
-    .my-button {
         font-size: 1rem;
     }
 }
