@@ -1,7 +1,7 @@
 <script>
 	import Header from 'elements/header.svelte';
 	import Footer from 'elements/footer.svelte';
-	import MainPage from 'elements/mainPage.svelte';
+	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
 
 	export let displayedYear;
 	export let currentYear;
@@ -21,7 +21,7 @@
 </script>
 
 <Header menu={headerMenu} />
-<MainPage />
+<SpacerHeader />
 
 <h1>This is Year {displayedYear}</h1>
 <p>

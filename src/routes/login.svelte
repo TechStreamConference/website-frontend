@@ -1,10 +1,10 @@
 <script>
 	import Header from 'elements/header.svelte';
 	import Footer from 'elements/footer.svelte';
-	import MainPage from 'elements/mainPage.svelte';
+	import Spacer from 'elements/spacer/spacer.svelte';
+	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
 	import Button from 'elements/input/button.svelte';
 	import Input from 'elements/input/input.svelte';
-	import Spacer from 'elements/spacer/spacer.svelte';
 
 	let currentYear = 2025; // get current year from database
 
@@ -35,7 +35,7 @@
 <Header menu={headerMenu} />
 
 <div class="page">
-	<MainPage />
+	<SpacerHeader />
 
 	<div class="content">
 		{#if displayRegister}
