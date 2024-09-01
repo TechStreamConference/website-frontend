@@ -1,5 +1,6 @@
 html {
     scroll-behavior: smooth;
+    box-sizing: border-box;
     --transition-duration: 0.3s;
     --fast-transition-duration: 0.1s;
     --lines-color: #ccff57;
@@ -7,6 +8,12 @@ html {
     --gray-color: gray;
     --light-gray-color: rgb(190, 190, 190);
     --border-radius: 5px;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
 }
 
 body {
@@ -37,12 +44,6 @@ body {
     transition: background-color var(--transition-duration);
 }
 
-
-
-.my-input-line {
-
-}
-
 .my-line-horizontal {
     background-color: var(--lines-color);
     height: 1px;
@@ -54,4 +55,3 @@ body {
     width: 1px;
     margin: auto 0;
 }
-

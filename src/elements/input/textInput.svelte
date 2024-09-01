@@ -1,6 +1,7 @@
 <script>
 	export let placeholderText = '';
-    export let value = "";
+	export let value = '';
+	export let id = '';
 </script>
 
-<input type="text" name="input" placeholder={placeholderText} on:input bind:value />
+<input {id} type="text" name={id} placeholder={placeholderText} on:input bind:value />

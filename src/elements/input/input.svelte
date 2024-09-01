@@ -1,8 +1,10 @@
 <script>
+	import Label from 'elements/label.svelte';
 	import TextInput from './textInput.svelte';
 	import PasswordInput from './passwordInput.svelte';
 
 	export let type = '';
+	export let id = '';
 	export let labelText = '';
 	export let placeholderText = '';
 	export let textValue = '';
@@ -10,11 +12,11 @@
 </script>
 
 <div class="wrapper">
-	<label for="input" class="my-label">{labelText}</label>
+	<Label {id} {labelText} />
 	{#if type === 'text'}
-		<TextInput {placeholderText} on:input bind:value={textValue} />
+		<TextInput {id} {placeholderText} on:input bind:value={textValue} />
 	{:else if type === 'password'}
-		<PasswordInput {placeholderText} on:input bind:value={textValue} />
+		<PasswordInput {id} {placeholderText} on:input bind:value={textValue} />
 	{/if}
 </div>
 

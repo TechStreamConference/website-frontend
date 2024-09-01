@@ -44,6 +44,7 @@
 				<div class="my-line-horizontal"></div>
 				<div class="input-line-wrapper">
 					<Input
+						id="register-username"
 						type="text"
 						labelText="Nutzername:"
 						placeholderText="Nutzername"
@@ -53,27 +54,30 @@
 					/>
 					<Spacer --height="{inputLineSpacer}rem" />
 					<Input
-					type="text"
-					labelText="E-Mail:"
-					placeholderText="E-Mail"
-					--width="{inputLineWidth}rem"
+						id="register-email"
+						type="text"
+						labelText="E-Mail:"
+						placeholderText="E-Mail"
+						--width="{inputLineWidth}rem"
 					/>
 					<Spacer --height="{inputLineSpacer}rem" />
 					<Input
-					type="password"
-					labelText="Passwort:"
-					placeholderText="Passwort"
-					--width="{inputLineWidth}rem"
+						id="register-password"
+						type="password"
+						labelText="Passwort:"
+						placeholderText="Passwort"
+						--width="{inputLineWidth}rem"
 					/>
 					<Spacer --height="{inputLineSpacer}rem" />
 					<Input
+						id="register-password-repeat"
 						type="password"
 						labelText="Passwort:"
 						placeholderText="Passwort Wiederholung"
 						--width="{inputLineWidth}rem"
 					/>
 				</div>
-				<Spacer --height="3rem"/>
+				<Spacer --height="3rem" />
 				<Button text={'Registrieren'} on:click={register} />
 			</div>
 		{:else}
@@ -82,6 +86,7 @@
 				<div class="my-line-horizontal"></div>
 				<div class="input-line-wrapper">
 					<Input
+						id="login-username"
 						type="text"
 						labelText="Nutzername:"
 						placeholderText="Nutzername"
@@ -91,6 +96,7 @@
 					/>
 					<Spacer --height="{inputLineSpacer}rem" />
 					<Input
+						id="login-email"
 						type="text"
 						labelText="E-Mail:"
 						placeholderText="E-Mail"
@@ -98,13 +104,14 @@
 					/>
 					<Spacer --height="{inputLineSpacer}rem" />
 					<Input
+						id="login-password"
 						type="password"
 						labelText="Passwort:"
 						placeholderText="Passwort"
 						--width="{inputLineWidth}rem"
 					/>
 				</div>
-				<Spacer --height="3rem"/>
+				<Spacer --height="3rem" />
 				<Button text={'Einloggen'} on:click={login} />
 			</div>
 		{/if}
