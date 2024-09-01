@@ -7,6 +7,7 @@
 	import Input from 'elements/input/input.svelte';
 	import ErrorMessage from 'elements/error/errorMessage.svelte';
 	import MessageWrapper from 'elements/error/messageWrapper.svelte';
+	import Headline from 'elements/text/headline.svelte';
 
 	let currentYear = 2025; // get current year from database
 
@@ -42,7 +43,7 @@
 	<div class="content">
 		{#if displayRegister}
 			<div class="content-wrapper">
-				<h1 class="headline-small center-text">Registrieren</h1>
+				<Headline>Registrieren</Headline>
 				<div class="my-line-horizontal"></div>
 				<MessageWrapper>
 					<ErrorMessage bind:message={usernameMessage} />
@@ -87,7 +88,7 @@
 			</div>
 		{:else}
 			<div class="content-wrapper">
-				<h1 class="headline-small center-text">Anmelden</h1>
+				<Headline>Anmelden</Headline>
 				<div class="my-line-horizontal"></div>
 				<MessageWrapper>
 					<ErrorMessage bind:message={usernameMessage} />
@@ -146,14 +147,6 @@
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
-	}
-
-	.center-text {
-		text-align: center;
-	}
-
-	.headline-small {
-		margin: 0;
 	}
 
 	.my-line-horizontal {
