@@ -15,7 +15,7 @@
 	];
 	const footerMenu = [
 		['Login', '/login'],
-		['Register', '/login'],
+		['Register', '/register'],
 		['Impressum', '/impressum']
 	];
 </script>

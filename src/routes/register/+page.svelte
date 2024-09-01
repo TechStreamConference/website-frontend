@@ -3,9 +3,9 @@
 
 	const headerMenu = [['Home', '/ ']];
 	const footerMenu = [
-		['Register', '/register'],
+		['Login', '/login'],
 		['Impressum', '/impressum']
 	];
 </script>
 
-<Login {headerMenu} {footerMenu} />
+<Login {headerMenu} {footerMenu} displayRegister={true} />
