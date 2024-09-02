@@ -1,5 +1,5 @@
 <script>
-	import Login from '../login.svelte';
+	import Login from '../login-register.svelte';
 
 	const headerMenu = [['Home', '/ ']];
 	const footerMenu = [
