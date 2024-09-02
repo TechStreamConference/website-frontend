@@ -10,8 +10,7 @@
 	export let inputLineWidth;
 	export let inputLineSpacer;
 
-	let usernameMessage = '';
-	let username = '';
+	let errorMessage = '';
 
 	function login() {
 		console.log('TODO: Login');
@@ -22,23 +21,14 @@
 <HorizontalLine --width="30rem" />
 <Spacer --height="5rem" />
 <MessageWrapper>
-	<ErrorMessage bind:message={usernameMessage} />
+	<ErrorMessage bind:message={errorMessage} />
 </MessageWrapper>
 <div class="input-line-wrapper">
 	<Input
-		id="login-username"
+		id="login-username-or-email"
 		type="text"
-		labelText="Nutzername:"
-		placeholderText="Nutzername"
-		--width="{inputLineWidth}rem"
-		bind:textValue={username}
-	/>
-	<Spacer --height="{inputLineSpacer}rem" />
-	<Input
-		id="login-email"
-		type="text"
-		labelText="E-Mail:"
-		placeholderText="E-Mail"
+		labelText="Nutzername oder E-Mail:"
+		placeholderText="Nutzername oder E-Mail"
 		--width="{inputLineWidth}rem"
 	/>
 	<Spacer --height="{inputLineSpacer}rem" />

@@ -13,8 +13,7 @@
 	export let inputLineWidth;
 	export let inputLineSpacer;
 
-	let usernameMessage = '';
-	let username = '';
+	let errorMessage = '';
 
 	function register() {
 		console.log('TODO Register');
@@ -25,7 +24,7 @@
 <HorizontalLine --width="30rem" />
 <Spacer --height="5rem" />
 <MessageWrapper>
-	<ErrorMessage bind:message={usernameMessage} />
+	<ErrorMessage bind:message={errorMessage} />
 </MessageWrapper>
 <div class="input-line-wrapper">
 	<Input
@@ -34,7 +33,6 @@
 		labelText="Nutzername:"
 		placeholderText="Nutzername"
 		--width="{inputLineWidth}rem"
-		bind:textValue={username}
 	/>
 	<Spacer --height="{inputLineSpacer}rem" />
 	<Input
