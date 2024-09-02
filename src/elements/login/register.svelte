@@ -6,6 +6,9 @@
 	import ErrorMessage from 'elements/error/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
+	import Textline from 'elements/text/textline.svelte';
+	import List from 'elements/list/list.svelte';
+	import ListElement from 'elements/list/listElement.svelte';
 
 	export let inputLineWidth;
 	export let inputLineSpacer;
@@ -57,6 +60,16 @@
 		placeholderText="Passwort Wiederholung"
 		--width="{inputLineWidth}rem"
 	/>
+	<Spacer --height="3rem" />
+	<Textline>Dein Password sollte folgendes enthalten:</Textline>
+	<Spacer --height="0.5rem"/>
+	<List classes="padding-left">
+		<ListElement classes="dot">min. 8 Zeichen</ListElement>
+		<ListElement classes="dot">min. 1 Kleinbuchstaben</ListElement>
+		<ListElement classes="dot">min. 1 Großbuchstaben</ListElement>
+		<ListElement classes="dot">min. 1 Zahl</ListElement>
+		<ListElement classes="dot">min. 1 Sonderzeichen</ListElement>
+	</List>
 </div>
-<Spacer --height="3rem" />
+<Spacer --height="5rem" />
 <Button on:click={register}>Registrieren</Button>

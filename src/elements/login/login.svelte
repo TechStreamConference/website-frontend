@@ -50,5 +50,5 @@
 		--width="{inputLineWidth}rem"
 	/>
 </div>
-<Spacer --height="3rem" />
+<Spacer --height="5rem" />
 <Button on:click={login}>Einloggen</Button>
