@@ -8,15 +8,14 @@
 	export let labelText = '';
 	export let placeholderText = '';
 	export let textValue = '';
-	export let numberValue = 0;
 </script>
 
 <div class="wrapper">
 	<Label {id}>{labelText}</Label>
 	{#if type === 'text'}
-		<TextInput {id} {placeholderText} on:input bind:value={textValue} />
+		<TextInput {id} {placeholderText} bind:value={textValue} on:input />
 	{:else if type === 'password'}
-		<PasswordInput {id} {placeholderText} on:input bind:value={textValue} />
+		<PasswordInput {id} {placeholderText} bind:value={textValue} on:input />
 	{/if}
 </div>
 

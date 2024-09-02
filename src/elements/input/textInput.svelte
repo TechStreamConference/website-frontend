@@ -4,4 +4,4 @@
 	export let id = '';
 </script>
 
-<input {id} type="text" name={id} placeholder={placeholderText} on:input bind:value />
+<input {id} type="text" name={id} placeholder={placeholderText} bind:value on:input />
