@@ -19,10 +19,11 @@
 
 <Headline>Anmelden</Headline>
 <HorizontalLine --width="30rem" />
-<Spacer --height="5rem" />
+<Spacer --height="3rem" />
 <MessageWrapper>
 	<ErrorMessage bind:message={errorMessage} />
 </MessageWrapper>
+<Spacer --height="2rem" />
 <div class="input-line-wrapper">
 	<Input
 		id="login-username-or-email"
