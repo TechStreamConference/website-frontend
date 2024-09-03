@@ -27,7 +27,7 @@
 		console.log('TODO Register');
 	}
 
-	async function usernameChanged() {
+	async function onUsernameChanged() {
 		const reset = () => {
 			usernameMessage = '';
 		};
@@ -61,7 +61,7 @@
 		reset();
 	}
 
-	async function emailChanged() {
+	async function onEmailChanged() {
 		const reset = () => {
 			emailMessage = '';
 		};
