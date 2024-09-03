@@ -23,10 +23,6 @@
 	let passwordMessage = '';
 	let errorMessage = '';
 
-	function register() {
-		console.log('TODO Register');
-	}
-
 	async function onUsernameChanged() {
 		const reset = () => {
 			usernameMessage = '';
@@ -39,7 +35,6 @@
 
 		const response = await fetch('api/account/username/exists?username=' + username);
 		if (!response.ok) {
-			console.error('Response while username checking was not ok. Errorcode: ' + response.status);
 			usernameMessage = 'Fehler beim überprüfen des Nutzernamen. Fehlercode: ' + response.status;
 			return;
 		}
@@ -72,9 +67,7 @@
 		}
 
 		const response = await fetch('api/account/email/exists?email=' + email);
-
 		if (!response.ok) {
-			console.error('Response while email checking was not ok. Errorcode: ' + response.status);
 			emailMessage = 'Fehler beim überprüfen der E-Mail. Fehlercode: ' + response.status;
 			return;
 		}
@@ -117,6 +110,42 @@
 		}
 
 		reset();
+	}
+
+	async function register() {
+		const reset = () => {
+			errorMessage = '';
+		};
+
+		const data = {
+			username: username,
+			email: email,
+			password: password_1
+		};
+		const response = await fetch('api/account/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'applcation/json'
+			},
+			body: JSON.stringify(data)
+		});
+
+		console.log(response.text());
+		console.log(response.statusText);
+
+		if (!response.ok) {
+			errorMessage = 'Fehler beim anlegen eines Accounts. Fehlercode: ' + response.status;
+			return;
+		}
+
+		let result;
+		try {
+			result = await response.json();
+		} catch (error) {
+			console.error('error while parsing register json', error);
+			reset();
+			return;
+		}
 	}
 </script>
 
