@@ -60,6 +60,41 @@
 
 		reset();
 	}
+
+	async function emailChanged() {
+		const reset = () => {
+			emailMessage = '';
+		};
+
+		if (email.trim() === '') {
+			reset();
+			return;
+		}
+
+		const response = await fetch('api/account/email/exists?email=' + email);
+
+		if (!response.ok) {
+			console.error('Response while email checking was not ok. Errorcode: ' + response.status);
+			emailMessage = 'Fehler beim überprüfen der E-Mail. Fehlercode: ' + response.status;
+			return;
+		}
+
+		let data;
+		try {
+			data = await response.json();
+		} catch (error) {
+			console.error('error while parsing email json', error);
+			reset();
+			return;
+		}
+
+		if (data.exists) {
+			emailMessage = 'Die E-Mail wird bereits verwendet.';
+			return;
+		}
+
+		reset();
+	}
 </script>
 
 <Headline>Registrieren</Headline>
@@ -89,6 +124,7 @@
 		placeholderText="E-Mail"
 		--width="{inputLineWidth}rem"
 		bind:textValue={email}
+		on:input={emailChanged}
 	/>
 	<Spacer --height="{inputLineSpacer}rem" />
 	<Input
