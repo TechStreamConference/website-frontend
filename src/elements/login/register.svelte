@@ -99,13 +99,14 @@
 
 <Headline>Registrieren</Headline>
 <HorizontalLine --width="30rem" />
-<Spacer --height="5rem" />
+<Spacer --height="3rem" />
 <MessageWrapper>
 	<ErrorMessage bind:message={usernameMessage} />
 	<ErrorMessage bind:message={emailMessage} />
 	<ErrorMessage bind:message={passwordMessage} />
 	<ErrorMessage bind:message={errorMessage} />
 </MessageWrapper>
+<Spacer --height="2rem" />
 <div class="input-line-wrapper">
 	<Input
 		id="register-username"
