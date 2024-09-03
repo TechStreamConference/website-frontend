@@ -38,9 +38,23 @@
 		}
 
 		const response = await fetch('api/account/username/exists?username=' + username);
-		console.log(response);
 		if (!response.ok) {
-			usernameMessage = 'Fehler beim überprüfen des Nutzernamen.';
+			console.error('Response while username checking was not ok. Errorcode: ' + response.status);
+			usernameMessage = 'Fehler beim überprüfen des Nutzernamen. Fehlercode: ' + response.status;
+			return;
+		}
+
+		let data;
+		try {
+			data = await response.json();
+		} catch (error) {
+			console.error('error while parsing username json', error);
+			reset();
+			return;
+		}
+
+		if (data.exists) {
+			usernameMessage = 'Der Nutzername ist bereits vergeben.';
 			return;
 		}
 
