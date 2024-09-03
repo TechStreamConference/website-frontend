@@ -95,6 +95,29 @@
 
 		reset();
 	}
+
+	function onPasswordChanged() {
+		const reset = () => {
+			passwordMessage = '';
+		};
+
+		if (password_1.trim() === '') {
+			reset();
+			return;
+		}
+
+		if (password_2.trim() === '') {
+			reset();
+			return;
+		}
+
+		if (password_1.trim() !== password_2.trim()) {
+			passwordMessage = 'Die Passwörter stimmen nicht überein.';
+			return;
+		}
+
+		reset();
+	}
 </script>
 
 <Headline>Registrieren</Headline>
@@ -115,7 +138,7 @@
 		placeholderText="Nutzername"
 		--width="{inputLineWidth}rem"
 		bind:textValue={username}
-		on:input={usernameChanged}
+		on:input={onUsernameChanged}
 	/>
 	<Spacer --height="{inputLineSpacer}rem" />
 	<Input
@@ -125,7 +148,7 @@
 		placeholderText="E-Mail"
 		--width="{inputLineWidth}rem"
 		bind:textValue={email}
-		on:input={emailChanged}
+		on:input={onEmailChanged}
 	/>
 	<Spacer --height="{inputLineSpacer}rem" />
 	<Input
@@ -135,6 +158,7 @@
 		placeholderText="Passwort"
 		--width="{inputLineWidth}rem"
 		bind:textValue={password_1}
+		on:input={onPasswordChanged}
 	/>
 	<Spacer --height="{inputLineSpacer}rem" />
 	<Input
@@ -144,6 +168,7 @@
 		placeholderText="Passwort Wiederholung"
 		--width="{inputLineWidth}rem"
 		bind:textValue={password_2}
+		on:input={onPasswordChanged}
 	/>
 	<Spacer --height="3rem" />
 	<Textline>Dein Password sollte folgendes enthalten:</Textline>
