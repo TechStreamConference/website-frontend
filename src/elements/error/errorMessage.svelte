@@ -18,5 +18,6 @@
 		font-style: normal;
 		border-radius: var(--border-radius);
 		margin: 2px 0;
+		text-align: center;
 	}
 </style>
