@@ -21,7 +21,7 @@
 	let usernameMessage = '';
 	let emailMessage = '';
 	let passwordMessage = '';
-	let errorMessage = '';
+	let errorMessage = [''];
 
 	async function onUsernameChanged() {
 		const reset = () => {
@@ -114,7 +114,7 @@
 
 	async function register() {
 		const reset = () => {
-			errorMessage = '';
+			errorMessage = [''];
 		};
 
 		const data = {
@@ -130,22 +130,17 @@
 			body: JSON.stringify(data)
 		});
 
-		console.log(response.text());
-		console.log(response.statusText);
-
 		if (!response.ok) {
-			errorMessage = 'Fehler beim anlegen eines Accounts. Fehlercode: ' + response.status;
+			const entries = async (r) => {
+				const text = await r.text();
+				const json = JSON.parse(text);
+				return Object.values(json);
+			};
+			errorMessage = await entries(response);
 			return;
 		}
 
-		let result;
-		try {
-			result = await response.json();
-		} catch (error) {
-			console.error('error while parsing register json', error);
-			reset();
-			return;
-		}
+		reset();
 	}
 </script>
 
@@ -156,7 +151,9 @@
 	<ErrorMessage bind:message={usernameMessage} />
 	<ErrorMessage bind:message={emailMessage} />
 	<ErrorMessage bind:message={passwordMessage} />
-	<ErrorMessage bind:message={errorMessage} />
+	{#each errorMessage as message}
+		<ErrorMessage bind:message />
+	{/each}
 </MessageWrapper>
 <Spacer --height="2rem" />
 <div class="input-line-wrapper">
