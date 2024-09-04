@@ -23,6 +23,10 @@
 	let passwordMessage = '';
 	let errorMessage = [''];
 
+	function samePassword() {
+		return password_1.trim() === password_2.trim();
+	}
+
 	async function onUsernameChanged() {
 		const reset = () => {
 			usernameMessage = '';
@@ -104,7 +108,7 @@
 			return;
 		}
 
-		if (password_1.trim() !== password_2.trim()) {
+		if (!samePassword()) {
 			passwordMessage = 'Die Passwörter stimmen nicht überein.';
 			return;
 		}
@@ -113,6 +117,10 @@
 	}
 
 	async function register() {
+		if (!samePassword()) {
+			return;
+		}
+
 		const reset = () => {
 			errorMessage = [''];
 		};
@@ -129,14 +137,13 @@
 
 		if (!response.ok) {
 			const entries = async (r) => {
-				const text = await r.text();
-				const json = JSON.parse(text);
-				return Object.values(json);
+				const t = await r.text();
+				const j = JSON.parse(t);
+				return Object.values(j);
 			};
 			errorMessage = await entries(response);
 			return;
 		}
-
 		reset();
 	}
 </script>
