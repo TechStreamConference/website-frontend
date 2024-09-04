@@ -124,9 +124,6 @@
 		};
 		const response = await fetch('api/account/register', {
 			method: 'POST',
-			headers: {
-				'Content-Type': 'applcation/json'
-			},
 			body: JSON.stringify(data)
 		});
 
