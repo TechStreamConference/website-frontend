@@ -8,7 +8,7 @@
 		font-style: normal;
 		color: var(--text-color);
 		text-wrap: wrap;
-		margin: 0;
+		margin: 0 auto;
 		text-align: var(--text-align);
 		width: var(--width);
 	}
