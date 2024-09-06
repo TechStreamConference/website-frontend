@@ -2,8 +2,8 @@
 	import Headline from 'elements/text/headline.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
-	import MessageWrapper from 'elements/error/messageWrapper.svelte';
-	import ErrorMessage from 'elements/error/errorMessage.svelte';
+	import MessageWrapper from 'elements/messanges/messageWrapper.svelte';
+	import ErrorMessage from 'elements/messanges/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
 	import Textline from 'elements/text/textline.svelte';
