@@ -14,6 +14,9 @@
 	export let inputLineWidth;
 	export let inputLineSpacer;
 
+	let timerUsername = null;
+	let timerEmail = null;
+
 	let username = '';
 	let email = '';
 	let password_1 = '';
@@ -25,6 +28,28 @@
 	let errorMessage = [''];
 
 	let registered = false;
+
+	function startTimerUsername() {
+		console.log('TIMER: Username');
+		if (timerUsername !== null) {
+			clearTimeout(timerUsername);
+			timerUsername = null;
+		}
+		timerUsername = setTimeout(() => {
+			onUsernameChanged();
+		}, 2000);
+	}
+
+	function startTimerEmail() {
+		console.log('TIMER: E-Mail');
+		if (timerEmail !== null) {
+			clearTimeout(timerEmail);
+			timerEmail = null;
+		}
+		timerEmail = setTimeout(() => {
+			onEmailChanged();
+		}, 2000);
+	}
 
 	function samePassword() {
 		return password_1.trim() === password_2.trim();
@@ -40,6 +65,7 @@
 			return;
 		}
 
+		console.log('API: Username');
 		const response = await fetch('api/account/username/exists?username=' + username);
 		if (!response.ok) {
 			usernameMessage = 'Fehler beim überprüfen des Namen. Fehlercode: ' + response.status;
@@ -73,6 +99,7 @@
 			return;
 		}
 
+		console.log('API: E-Mail');
 		const response = await fetch('api/account/email/exists?email=' + email);
 		if (!response.ok) {
 			emailMessage = 'Fehler beim überprüfen der E-Mail. Fehlercode: ' + response.status;
@@ -173,7 +200,7 @@
 			placeholderText="Name"
 			--width="{inputLineWidth}rem"
 			bind:textValue={username}
-			on:input={onUsernameChanged}
+			on:input={startTimerUsername}
 		/>
 		<Spacer --height="{inputLineSpacer}rem" />
 		<Input
@@ -183,7 +210,7 @@
 			placeholderText="E-Mail"
 			--width="{inputLineWidth}rem"
 			bind:textValue={email}
-			on:input={onEmailChanged}
+			on:input={startTimerEmail}
 		/>
 		<Spacer --height="{inputLineSpacer}rem" />
 		<Input
