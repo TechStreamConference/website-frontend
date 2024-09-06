@@ -1,9 +1,9 @@
 <script>
 	import Login from '../login-register.svelte';
 
-	const headerMenu = [['Home', '/ ']];
+	const headerMenu = [['Start', '/']];
 	const footerMenu = [
-		['Login', '/login'],
+		['Anmelden', '/login'],
 		['Impressum', '/impressum']
 	];
 </script>
