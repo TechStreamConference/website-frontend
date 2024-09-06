@@ -206,9 +206,9 @@
 			on:input={onPasswordChanged}
 		/>
 		<Spacer --height="3rem" />
-		<Textline>Dein Password sollte folgendes enthalten:</Textline>
+		<Textline --width="30rem">Dein Password sollte folgendes enthalten:</Textline>
 		<Spacer --height="0.5rem" />
-		<List classes="padding-left">
+		<List --width="30rem" classes="padding-left">
 			<ListElement classes="dot">min. 8 Zeichen</ListElement>
 			<ListElement classes="dot">min. 1 Kleinbuchstaben</ListElement>
 			<ListElement classes="dot">min. 1 Großbuchstaben</ListElement>

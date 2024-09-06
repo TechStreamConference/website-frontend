@@ -8,8 +8,9 @@
 
 <style>
 	ul {
-		margin: 0;
+		margin: 0 auto;
 		padding: var(--padding);
+		width: var(--width)
 	}
 
 	.padding-left {

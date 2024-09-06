@@ -7,7 +7,7 @@
 		font-weight: 500;
 		font-style: normal;
 		color: var(--text-color);
-		margin: 0;
+		margin: 0 auto;
 		text-align: var(--text-align);
 		width: var(--width);
 	}

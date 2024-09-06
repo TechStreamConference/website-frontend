@@ -5,7 +5,7 @@
 <Line --width="1px" />
 
 <style>
-	:global(div) {
+	:global(div.line) {
 		height: var(--height);
 		margin: auto 0;
 	}
