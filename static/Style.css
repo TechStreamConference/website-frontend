@@ -8,6 +8,7 @@ html {
     --gray-color: gray;
     --light-gray-color: rgb(190, 190, 190);
     --border-radius: 5px;
+    /*--horizontal-break: 1280px;*/
 }
 
 *,
