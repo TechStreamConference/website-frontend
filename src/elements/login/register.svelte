@@ -42,7 +42,7 @@
 
 		const response = await fetch('api/account/username/exists?username=' + username);
 		if (!response.ok) {
-			usernameMessage = 'Fehler beim überprüfen des Nutzernamen. Fehlercode: ' + response.status;
+			usernameMessage = 'Fehler beim überprüfen des Namen. Fehlercode: ' + response.status;
 			return;
 		}
 
@@ -56,7 +56,7 @@
 		}
 
 		if (data.exists) {
-			usernameMessage = 'Der Nutzername ist bereits vergeben.';
+			usernameMessage = 'Der Name  "' + username + '" ist bereits vergeben.';
 			return;
 		}
 
@@ -89,7 +89,7 @@
 		}
 
 		if (data.exists) {
-			emailMessage = 'Die E-Mail wird bereits verwendet.';
+			emailMessage = 'Die E-Mail "' + email + '" wird bereits verwendet.';
 			return;
 		}
 
@@ -169,8 +169,8 @@
 		<Input
 			id="register-username"
 			type="text"
-			labelText="Nutzername:"
-			placeholderText="Nutzername"
+			labelText="Name:"
+			placeholderText="Name"
 			--width="{inputLineWidth}rem"
 			bind:textValue={username}
 			on:input={onUsernameChanged}
