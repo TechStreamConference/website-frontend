@@ -183,68 +183,71 @@
 
 {#if !registered}
 	<Headline>Registrieren</Headline>
-	<div class="width-wrapper">
-		<HorizontalLine />
-		<Spacer --height="3rem" />
-		<MessageWrapper>
-			<ErrorMessage bind:message={usernameMessage} />
-			<ErrorMessage bind:message={emailMessage} />
-			<ErrorMessage bind:message={passwordMessage} />
-			{#each errorMessage as message}
-				<ErrorMessage bind:message />
-			{/each}
-		</MessageWrapper>
-		<Spacer --height="2rem" />
-		<Input
-			id="register-username"
-			type="text"
-			labelText="Name:"
-			placeholderText="Name"
-			bind:textValue={username}
-			on:input={startTimerUsername}
-		/>
-		<Spacer --height="1rem" />
-		<Input
-			id="register-email"
-			type="text"
-			labelText="E-Mail:"
-			placeholderText="E-Mail"
-			bind:textValue={email}
-			on:input={startTimerEmail}
-		/>
-		<Spacer --height="1rem" />
-		<Input
-			id="register-password"
-			type="password"
-			labelText="Passwort:"
-			placeholderText="Passwort"
-			bind:textValue={password_1}
-			on:input={onPasswordChanged}
-		/>
-		<Spacer --height="1rem" />
-		<Input
-			id="register-password-repeat"
-			type="password"
-			labelText="Passwort:"
-			placeholderText="Passwort Wiederholung"
-			bind:textValue={password_2}
-			on:input={onPasswordChanged}
-		/>
-		<div class="password-list-wrapper">
+	<form on:submit|preventDefault={register}>
+		<div class="width-wrapper">
+			<HorizontalLine />
 			<Spacer --height="3rem" />
-			<Textline>Dein Password sollte folgendes enthalten:</Textline>
-			<Spacer --height="0.5rem" />
-			<List classes="padding-left">
-				<ListElement classes="dot">min. 8 Zeichen</ListElement>
-				<ListElement classes="dot">min. 1 Kleinbuchstaben</ListElement>
-				<ListElement classes="dot">min. 1 Großbuchstaben</ListElement>
-				<ListElement classes="dot">min. 1 Zahl</ListElement>
-				<ListElement classes="dot">min. 1 Sonderzeichen</ListElement>
-			</List>
+			<MessageWrapper>
+				<ErrorMessage bind:message={usernameMessage} />
+				<ErrorMessage bind:message={emailMessage} />
+				<ErrorMessage bind:message={passwordMessage} />
+				{#each errorMessage as message}
+					<ErrorMessage bind:message />
+				{/each}
+			</MessageWrapper>
+			<Spacer --height="2rem" />
+			<Input
+				id="register-username"
+				type="text"
+				labelText="Name:"
+				placeholderText="Name"
+				bind:textValue={username}
+				on:input={startTimerUsername}
+			/>
+			<Spacer --height="1rem" />
+			<Input
+				id="register-email"
+				type="text"
+				labelText="E-Mail:"
+				placeholderText="E-Mail"
+				bind:textValue={email}
+				on:input={startTimerEmail}
+			/>
+			<Spacer --height="1rem" />
+			<Input
+				id="register-password"
+				type="password"
+				labelText="Passwort:"
+				placeholderText="Passwort"
+				bind:textValue={password_1}
+				on:input={onPasswordChanged}
+			/>
+			<Spacer --height="1rem" />
+			<Input
+				id="register-password-repeat"
+				type="password"
+				labelText="Passwort:"
+				placeholderText="Passwort Wiederholung"
+				bind:textValue={password_2}
+				on:input={onPasswordChanged}
+			/>
+
+			<div class="password-list-wrapper">
+				<Spacer --height="3rem" />
+				<Textline>Dein Password sollte folgendes enthalten:</Textline>
+				<Spacer --height="0.5rem" />
+				<List classes="padding-left">
+					<ListElement classes="dot">min. 8 Zeichen</ListElement>
+					<ListElement classes="dot">min. 1 Kleinbuchstaben</ListElement>
+					<ListElement classes="dot">min. 1 Großbuchstaben</ListElement>
+					<ListElement classes="dot">min. 1 Zahl</ListElement>
+					<ListElement classes="dot">min. 1 Sonderzeichen</ListElement>
+				</List>
+			</div>
+			<Spacer --height="5rem" />
+			<Button type={"submit"}>Registrieren</Button>
 		</div>
-		<Spacer --height="5rem" />
-	</div>
-	<Button on:click={register}>Registrieren</Button>
+	</form>
 	<Spacer --height="3rem" />
 {:else}
 	<Headline>Registriert</Headline>

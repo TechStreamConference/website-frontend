@@ -1,7 +1,13 @@
-<button class="button" on:click><slot /></button>
+<script>
+	export let type = 'button';
+
+	const typeWorkaround = (node) => (node.type = type);
+</script>
+
+<button use:typeWorkaround on:click><slot /></button>
 
 <style>
-	.button {
+	button {
 		background-color: var(--primary-color);
 		border: none;
 		border-radius: var(--border-radius);
@@ -17,13 +23,13 @@
 		justify-self: center;
 	}
 
-	.button:hover {
+	button:hover {
 		background-color: var(--secondary-color);
 		box-shadow: 6px 6px var(--gray-color);
 		transition: var(--transition-duration);
 	}
 
-	.button:active {
+	button:active {
 		background-color: var(--third-color);
 		box-shadow: 2px 2px var(--light-gray-color);
 		transform: translateY(4px) translateX(4px);
@@ -31,26 +37,26 @@
 	}
 
 	@media (max-width: 1280px) {
-		.button:hover {
+		button:hover {
 			background-color: var(--primary-color);
 			box-shadow: none;
 			transition: var(--transition-duration);
 		}
 
-		.button:active {
+		button:active {
 			box-shadow: 2px 2px var(--light-gray-color);
 			transition: var(--fast-transition-duration);
 		}
 	}
 
 	@media (max-width: 1280px) {
-		p {
+		button {
 			font-size: 1.3rem;
 		}
 	}
 
 	@media (max-width: 600px) {
-		.button {
+		button {
 			font-size: 1rem;
 		}
 	}
