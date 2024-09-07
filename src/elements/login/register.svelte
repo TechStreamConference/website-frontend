@@ -186,42 +186,42 @@
 			{/each}
 		</MessageWrapper>
 		<Spacer --height="2rem" />
-		<div class="input-line-wrapper">
-			<Input
-				id="register-username"
-				type="text"
-				labelText="Name:"
-				placeholderText="Name"
-				bind:textValue={username}
-				on:input={startTimerUsername}
-			/>
-			<Spacer --height="1rem" />
-			<Input
-				id="register-email"
-				type="text"
-				labelText="E-Mail:"
-				placeholderText="E-Mail"
-				bind:textValue={email}
-				on:input={startTimerEmail}
-			/>
-			<Spacer --height="1rem" />
-			<Input
-				id="register-password"
-				type="password"
-				labelText="Passwort:"
-				placeholderText="Passwort"
-				bind:textValue={password_1}
-				on:input={onPasswordChanged}
-			/>
-			<Spacer --height="1rem" />
-			<Input
-				id="register-password-repeat"
-				type="password"
-				labelText="Passwort:"
-				placeholderText="Passwort Wiederholung"
-				bind:textValue={password_2}
-				on:input={onPasswordChanged}
-			/>
+		<Input
+			id="register-username"
+			type="text"
+			labelText="Name:"
+			placeholderText="Name"
+			bind:textValue={username}
+			on:input={startTimerUsername}
+		/>
+		<Spacer --height="1rem" />
+		<Input
+			id="register-email"
+			type="text"
+			labelText="E-Mail:"
+			placeholderText="E-Mail"
+			bind:textValue={email}
+			on:input={startTimerEmail}
+		/>
+		<Spacer --height="1rem" />
+		<Input
+			id="register-password"
+			type="password"
+			labelText="Passwort:"
+			placeholderText="Passwort"
+			bind:textValue={password_1}
+			on:input={onPasswordChanged}
+		/>
+		<Spacer --height="1rem" />
+		<Input
+			id="register-password-repeat"
+			type="password"
+			labelText="Passwort:"
+			placeholderText="Passwort Wiederholung"
+			bind:textValue={password_2}
+			on:input={onPasswordChanged}
+		/>
+		<div class="password-list-wrapper">
 			<Spacer --height="3rem" />
 			<Textline>Dein Password sollte folgendes enthalten:</Textline>
 			<Spacer --height="0.5rem" />
@@ -282,6 +282,10 @@
 		flex-direction: column;
 	}
 
+	.password-list-wrapper {
+		margin: 0 auto;
+	}
+
 	.button-wrapper {
 		display: flex;
 		flex-direction: row;
@@ -295,6 +299,10 @@
 		}
 		.width-wrapper-registered {
 			max-width: 32rem;
+		}
+
+		.password-list-wrapper {
+			margin: 0;
 		}
 	}
 </style>

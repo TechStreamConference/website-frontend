@@ -10,7 +10,6 @@
 	ul {
 		margin: 0;
 		padding: var(--padding);
-		width: 100%;
 	}
 
 	.padding-left {

@@ -8,7 +8,6 @@
 		font-style: normal;
 		color: var(--text-color);
 		text-align: var(--text-align);
-		width: 100%;
 		margin: 0;
 	}
 
