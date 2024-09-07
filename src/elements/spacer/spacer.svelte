@@ -1,7 +1,16 @@
-<div></div>
+<script>
+	export let classes = '';
+</script>
+
+<div class={classes}></div>
 
 <style>
 	div {
+		height: var(--height);
+		width: var(--width);
+	}
+
+	.header {
 		height: var(--height);
 		width: var(--width);
 	}

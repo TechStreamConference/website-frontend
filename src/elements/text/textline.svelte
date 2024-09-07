@@ -11,4 +11,10 @@
 		width: 100%;
 		margin: 0;
 	}
+
+	@media (max-width: 600px){
+		p {
+			font-size: 1rem;
+		}
+	}
 </style>

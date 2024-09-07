@@ -38,4 +38,10 @@
 		padding: 0.5rem;
 		width: 100%;
 	}
+
+	@media (max-width: 600px) {
+		.wrapper :global(input) {
+			font-size: 1rem;
+		}
+	}
 </style>

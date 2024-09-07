@@ -41,4 +41,10 @@
 			transition: var(--fast-transition-duration);
 		}
 	}
+
+	@media (max-width: 600px) {
+		.button {
+			font-size: 1rem;
+		}
+	}
 </style>

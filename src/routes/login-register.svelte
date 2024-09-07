@@ -52,4 +52,10 @@
 		flex-direction: column;
 		flex-grow: 1;
 	}
+
+	@media (max-width: 600px) {
+		.content {
+			margin: 2rem;
+		}
+	}
 </style>

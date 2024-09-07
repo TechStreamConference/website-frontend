@@ -2,4 +2,4 @@
 	import Spacer from './spacer.svelte';
 </script>
 
-<Spacer --height="6rem" />
+<Spacer --height="6rem" classes="header"/>

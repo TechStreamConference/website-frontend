@@ -20,4 +20,10 @@
 		margin: 2px 0;
 		text-align: center;
 	}
+
+	@media (max-width: 600px) {
+		p {
+			font-size: 1rem;
+		}
+	}
 </style>

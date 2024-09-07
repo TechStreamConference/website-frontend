@@ -238,6 +238,7 @@
 		<Spacer --height="5rem" />
 	</div>
 	<Button on:click={register}>Registrieren</Button>
+	<Spacer --height="3rem" />
 {:else}
 	<Headline>Registriert</Headline>
 	<div class="width-wrapper-registered">
@@ -282,5 +283,12 @@
 		flex-direction: row;
 		justify-content: space-evenly;
 		margin: 0;
+	}
+
+	@media (max-width: 1280px) {
+		.width-wrapper {
+			width: 100%;
+			max-width: 30rem;
+		}
 	}
 </style>

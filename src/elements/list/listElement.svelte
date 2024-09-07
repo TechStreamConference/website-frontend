@@ -20,4 +20,10 @@
 	.dot {
 		list-style-type: disc;
 	}
+
+	@media (max-width: 600px){
+		li {
+			font-size: 1rem;
+		}
+	}
 </style>
