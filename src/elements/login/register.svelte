@@ -11,7 +11,6 @@
 	import ListElement from 'elements/list/listElement.svelte';
 	import Textblock from 'elements/text/textblock.svelte';
 
-	export let inputLineWidth;
 	export let inputLineSpacer;
 
 	let timerUsername = null;
@@ -30,25 +29,23 @@
 	let registered = false;
 
 	function startTimerUsername() {
-		console.log('TIMER: Username');
 		if (timerUsername !== null) {
 			clearTimeout(timerUsername);
 			timerUsername = null;
 		}
 		timerUsername = setTimeout(() => {
 			onUsernameChanged();
-		}, 2000);
+		}, 1000);
 	}
 
 	function startTimerEmail() {
-		console.log('TIMER: E-Mail');
 		if (timerEmail !== null) {
 			clearTimeout(timerEmail);
 			timerEmail = null;
 		}
 		timerEmail = setTimeout(() => {
 			onEmailChanged();
-		}, 2000);
+		}, 1000);
 	}
 
 	function samePassword() {
@@ -65,7 +62,6 @@
 			return;
 		}
 
-		console.log('API: Username');
 		const response = await fetch('api/account/username/exists?username=' + username);
 		if (!response.ok) {
 			usernameMessage = 'Fehler beim überprüfen des Namen. Fehlercode: ' + response.status;
@@ -99,7 +95,6 @@
 			return;
 		}
 
-		console.log('API: E-Mail');
 		const response = await fetch('api/account/email/exists?email=' + email);
 		if (!response.ok) {
 			emailMessage = 'Fehler beim überprüfen der E-Mail. Fehlercode: ' + response.status;
@@ -181,88 +176,88 @@
 
 {#if !registered}
 	<Headline>Registrieren</Headline>
-	<HorizontalLine --width="30rem" />
-	<Spacer --height="3rem" />
-	<MessageWrapper>
-		<ErrorMessage bind:message={usernameMessage} />
-		<ErrorMessage bind:message={emailMessage} />
-		<ErrorMessage bind:message={passwordMessage} />
-		{#each errorMessage as message}
-			<ErrorMessage bind:message />
-		{/each}
-	</MessageWrapper>
-	<Spacer --height="2rem" />
-	<div class="input-line-wrapper">
-		<Input
-			id="register-username"
-			type="text"
-			labelText="Name:"
-			placeholderText="Name"
-			--width="{inputLineWidth}rem"
-			bind:textValue={username}
-			on:input={startTimerUsername}
-		/>
-		<Spacer --height="{inputLineSpacer}rem" />
-		<Input
-			id="register-email"
-			type="text"
-			labelText="E-Mail:"
-			placeholderText="E-Mail"
-			--width="{inputLineWidth}rem"
-			bind:textValue={email}
-			on:input={startTimerEmail}
-		/>
-		<Spacer --height="{inputLineSpacer}rem" />
-		<Input
-			id="register-password"
-			type="password"
-			labelText="Passwort:"
-			placeholderText="Passwort"
-			--width="{inputLineWidth}rem"
-			bind:textValue={password_1}
-			on:input={onPasswordChanged}
-		/>
-		<Spacer --height="{inputLineSpacer}rem" />
-		<Input
-			id="register-password-repeat"
-			type="password"
-			labelText="Passwort:"
-			placeholderText="Passwort Wiederholung"
-			--width="{inputLineWidth}rem"
-			bind:textValue={password_2}
-			on:input={onPasswordChanged}
-		/>
+	<div class="width-wrapper">
+		<HorizontalLine />
 		<Spacer --height="3rem" />
-		<Textline --width="30rem">Dein Password sollte folgendes enthalten:</Textline>
-		<Spacer --height="0.5rem" />
-		<List --width="30rem" classes="padding-left">
-			<ListElement classes="dot">min. 8 Zeichen</ListElement>
-			<ListElement classes="dot">min. 1 Kleinbuchstaben</ListElement>
-			<ListElement classes="dot">min. 1 Großbuchstaben</ListElement>
-			<ListElement classes="dot">min. 1 Zahl</ListElement>
-			<ListElement classes="dot">min. 1 Sonderzeichen</ListElement>
-		</List>
+		<MessageWrapper>
+			<ErrorMessage bind:message={usernameMessage} />
+			<ErrorMessage bind:message={emailMessage} />
+			<ErrorMessage bind:message={passwordMessage} />
+			{#each errorMessage as message}
+				<ErrorMessage bind:message />
+			{/each}
+		</MessageWrapper>
+		<Spacer --height="2rem" />
+		<div class="input-line-wrapper">
+			<Input
+				id="register-username"
+				type="text"
+				labelText="Name:"
+				placeholderText="Name"
+				bind:textValue={username}
+				on:input={startTimerUsername}
+			/>
+			<Spacer --height="{inputLineSpacer}rem" />
+			<Input
+				id="register-email"
+				type="text"
+				labelText="E-Mail:"
+				placeholderText="E-Mail"
+				bind:textValue={email}
+				on:input={startTimerEmail}
+			/>
+			<Spacer --height="{inputLineSpacer}rem" />
+			<Input
+				id="register-password"
+				type="password"
+				labelText="Passwort:"
+				placeholderText="Passwort"
+				bind:textValue={password_1}
+				on:input={onPasswordChanged}
+			/>
+			<Spacer --height="{inputLineSpacer}rem" />
+			<Input
+				id="register-password-repeat"
+				type="password"
+				labelText="Passwort:"
+				placeholderText="Passwort Wiederholung"
+				bind:textValue={password_2}
+				on:input={onPasswordChanged}
+			/>
+			<Spacer --height="3rem" />
+			<Textline>Dein Password sollte folgendes enthalten:</Textline>
+			<Spacer --height="0.5rem" />
+			<List classes="padding-left">
+				<ListElement classes="dot">min. 8 Zeichen</ListElement>
+				<ListElement classes="dot">min. 1 Kleinbuchstaben</ListElement>
+				<ListElement classes="dot">min. 1 Großbuchstaben</ListElement>
+				<ListElement classes="dot">min. 1 Zahl</ListElement>
+				<ListElement classes="dot">min. 1 Sonderzeichen</ListElement>
+			</List>
+		</div>
+		<Spacer --height="5rem" />
 	</div>
-	<Spacer --height="5rem" />
 	<Button on:click={register}>Registrieren</Button>
 {:else}
 	<Headline>Registriert</Headline>
-	<HorizontalLine --width="32rem" />
-	<Spacer --height="7rem" />
-	<Textline --text-align="center">Deine Registrierung war erfolgreich.</Textline>
-	<Spacer --height="2rem" />
-	<Textblock --text-align="center" --width="40rem">
-		Du bekommst jetzt eine Mail. Bestätige deine Mailadresse und du kannst dich anmelden. Weitere
-		Infos findest du nach dem anmelden.
-	</Textblock>
-	<Spacer --height="6rem" />
-	<div class="button-wrapper">
-		<a href="/">
-			<Button>Start</Button>
-		</a>
-		<a href="./login">
-			<Button>Anmelden</Button>
-		</a>
+	<div class="width-wrapper-registered">
+		<HorizontalLine />
+		<Spacer --height="7rem" />
+		<Textline --text-align="center">Deine Registrierung war erfolgreich.</Textline>
+		<Spacer --height="2rem" />
+		<Textblock --text-align="center">
+			Du bekommst jetzt eine Mail. Bestätige deine Mailadresse und du kannst dich anmelden. Weitere
+			Infos findest du nach dem anmelden.
+		</Textblock>
+		<Spacer --height="6rem" />
+		<div class="button-wrapper">
+			<a href="/">
+				<Button>Start</Button>
+			</a>
+			<a href="./login">
+				<Button>Anmelden</Button>
+			</a>
+		</div>
 	</div>
 	<Spacer --height="3rem" />
 {/if}
@@ -270,6 +265,16 @@
 <style>
 	a {
 		align-self: center;
+	}
+
+	.width-wrapper {
+		width: 30rem;
+		margin: 0 auto;
+	}
+
+	.width-wrapper-registered {
+		width: 32rem;
+		margin: 0 auto;
 	}
 
 	.button-wrapper {

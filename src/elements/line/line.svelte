@@ -1,7 +1,7 @@
-<div class="line"></div>
+<div></div>
 
 <style>
-	div.line {
+	div {
 		height: var(--height);
 		width: var(--width);
 		background-color: var(--lines-color);

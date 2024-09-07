@@ -23,8 +23,7 @@
 	.wrapper {
 		display: flex;
 		flex-direction: column;
-		margin: 0 auto;
-		width: var(--width);
+		width: 100%;
 	}
 
 	.wrapper :global(input) {

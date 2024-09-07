@@ -23,7 +23,7 @@
 	<div class="content">
 		<div class="content-wrapper">
 			{#if displayRegister}
-				<Register {inputLineWidth} {inputLineSpacer} />
+				<Register {inputLineSpacer} />
 			{:else}
 				<Login {inputLineWidth} {inputLineSpacer} />
 			{/if}
