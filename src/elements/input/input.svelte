@@ -39,6 +39,12 @@
 		width: 100%;
 	}
 
+	@media (max-width: 1280px) {
+		.wrapper :global(input){
+			font-size: 1.3rem;
+		}
+	}
+
 	@media (max-width: 600px) {
 		.wrapper :global(input) {
 			font-size: 1rem;

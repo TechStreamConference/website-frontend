@@ -15,6 +15,13 @@
 		width: var(--width);
 	}
 
+	@media (max-width: 600px) {
+		div {
+			height: calc(var(--height) / 1.5);
+			width: calc(var(--width) / 1.5);
+		}
+	}
+
 	@media (max-width: 1280px) {
 		div {
 			height: calc(var(--height) / 2);

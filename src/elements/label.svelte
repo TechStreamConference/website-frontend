@@ -13,6 +13,12 @@
 		color: var(--text-color);
 	}
 
+	@media (max-width: 1280px) {
+		p {
+			font-size: 1.3rem;
+		}
+	}
+
 	@media (max-width: 600px) {
 		label {
 			font-size: 1rem;

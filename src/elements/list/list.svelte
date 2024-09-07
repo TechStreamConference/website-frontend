@@ -17,6 +17,12 @@
 		padding-left: 2rem;
 	}
 
+	@media (max-width: 1280px) {
+		.padding-left {
+			font-size: 1.7rem;
+		}
+	}
+
 	@media (max-width: 600px) {
 		.padding-left {
 			padding-left: 1.5rem;

@@ -20,7 +20,7 @@
 		font-size: 1.5rem;
 	}
 
-	/*@media (max-width: 1280px) {
+	@media (max-width: 1280px) {
 		.big {
 			font-size: 2.5rem;
 		}
@@ -28,7 +28,7 @@
 		.small {
 			font-size: 1.5rem;
 		}
-	}*/
+	}
 
 	@media (max-width: 600px){
 		.big {
