@@ -7,9 +7,6 @@
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
 
-	export let inputLineWidth;
-	export let inputLineSpacer;
-
 	let errorMessage = '';
 
 	function login() {
@@ -18,28 +15,40 @@
 </script>
 
 <Headline>Anmelden</Headline>
-<HorizontalLine --width="30rem" />
-<Spacer --height="3rem" />
-<MessageWrapper>
-	<ErrorMessage bind:message={errorMessage} />
-</MessageWrapper>
-<Spacer --height="2rem" />
-<div class="input-line-wrapper">
-	<Input
-		id="login-username-or-email"
-		type="text"
-		labelText="Nutzername oder E-Mail:"
-		placeholderText="Nutzername oder E-Mail"
-		--width="{inputLineWidth}rem"
-	/>
-	<Spacer --height="{inputLineSpacer}rem" />
-	<Input
-		id="login-password"
-		type="password"
-		labelText="Passwort:"
-		placeholderText="Passwort"
-		--width="{inputLineWidth}rem"
-	/>
+<div class="width-wrapper">
+	<HorizontalLine />
+	<Spacer --height="3rem" />
+	<MessageWrapper>
+		<ErrorMessage bind:message={errorMessage} />
+	</MessageWrapper>
+	<Spacer --height="2rem" />
+	<div class="input-line-wrapper">
+		<Input
+			id="login-username-or-email"
+			type="text"
+			labelText="Nutzername oder E-Mail:"
+			placeholderText="Nutzername oder E-Mail"
+		/>
+		<Spacer --height="1rem" />
+		<Input id="login-password" type="password" labelText="Passwort:" placeholderText="Passwort" />
+	</div>
+	<Spacer --height="5rem" />
+	<Button on:click={login}>Einloggen</Button>
+	<Spacer --height="3rem" />
 </div>
-<Spacer --height="5rem" />
-<Button on:click={login}>Einloggen</Button>
+
+<style>
+	.width-wrapper {
+		width: 100%;
+		max-width: 50rem;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+	}
+
+	@media (max-width: 1280px) {
+		.width-wrapper {
+			max-width: 30rem;
+		}
+	}
+</style>

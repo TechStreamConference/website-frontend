@@ -8,12 +8,13 @@
 		cursor: pointer;
 		transition: var(--transition-duration);
 		padding: 1rem 2rem;
-		margin: auto;
+		margin: 0 auto;
 		font-size: 1.5rem;
 		font-family: gnuolane, sans-serif;
 		font-weight: 500;
 		font-style: normal;
 		color: var(--white-color);
+		justify-self: center;
 	}
 
 	.button:hover {

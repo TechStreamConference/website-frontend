@@ -7,9 +7,6 @@
 
 	let currentYear = 2025; // get current year from database
 
-	const inputLineWidth = 30;
-	const inputLineSpacer = 1;
-
 	export let displayRegister = false;
 	export let headerMenu = [['', '']];
 	export let footerMenu = [['', '']];
@@ -23,9 +20,9 @@
 	<div class="content">
 		<div class="content-wrapper">
 			{#if displayRegister}
-				<Register {inputLineSpacer} />
+				<Register />
 			{:else}
-				<Login {inputLineWidth} {inputLineSpacer} />
+				<Login />
 			{/if}
 		</div>
 	</div>
@@ -51,11 +48,5 @@
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
-	}
-
-	@media (max-width: 600px) {
-		.content {
-			margin: 2rem;
-		}
 	}
 </style>

@@ -11,8 +11,6 @@
 	import ListElement from 'elements/list/listElement.svelte';
 	import Textblock from 'elements/text/textblock.svelte';
 
-	export let inputLineSpacer;
-
 	let timerUsername = null;
 	let timerEmail = null;
 
@@ -197,7 +195,7 @@
 				bind:textValue={username}
 				on:input={startTimerUsername}
 			/>
-			<Spacer --height="{inputLineSpacer}rem" />
+			<Spacer --height="1rem" />
 			<Input
 				id="register-email"
 				type="text"
@@ -206,7 +204,7 @@
 				bind:textValue={email}
 				on:input={startTimerEmail}
 			/>
-			<Spacer --height="{inputLineSpacer}rem" />
+			<Spacer --height="1rem" />
 			<Input
 				id="register-password"
 				type="password"
@@ -215,7 +213,7 @@
 				bind:textValue={password_1}
 				on:input={onPasswordChanged}
 			/>
-			<Spacer --height="{inputLineSpacer}rem" />
+			<Spacer --height="1rem" />
 			<Input
 				id="register-password-repeat"
 				type="password"
@@ -269,13 +267,19 @@
 	}
 
 	.width-wrapper {
-		width: 30rem;
+		width: 100%;
+		max-width: 50rem;
 		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.width-wrapper-registered {
-		width: 32rem;
+		width: 100%;
+		max-width: 50rem;
 		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.button-wrapper {
@@ -287,8 +291,10 @@
 
 	@media (max-width: 1280px) {
 		.width-wrapper {
-			width: 100%;
 			max-width: 30rem;
+		}
+		.width-wrapper-registered {
+			max-width: 32rem;
 		}
 	}
 </style>
