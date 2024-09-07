@@ -25,7 +25,7 @@
 			username_or_email: usernameOrEmail.trim(),
 			password: password.trim()
 		};
-		
+
 		const response = await fetch('api/account/login', {
 			method: 'POST',
 			body: JSON.stringify(data)
@@ -47,11 +47,11 @@
 
 <Headline>Anmelden</Headline>
 <div class="width-wrapper">
-	<HorizontalLine />
-	<Spacer --height="3rem" />
-	<ErrorMessage bind:message={errorMessage} />
-	<Spacer --height="2rem" />
-	<div class="input-line-wrapper">
+	<form on:submit|preventDefault={login}>
+		<HorizontalLine />
+		<Spacer --height="3rem" />
+		<ErrorMessage bind:message={errorMessage} />
+		<Spacer --height="2rem" />
 		<Input
 			id="login-username-or-email"
 			type="text"
@@ -67,9 +67,12 @@
 			placeholderText="Passwort"
 			bind:textValue={password}
 		/>
-	</div>
-	<Spacer --height="5rem" />
-	<Button on:click={login}>Einloggen</Button>
+
+		<Spacer --height="5rem" />
+		<div class="button-wrapper">
+			<Button type="submit">Einloggen</Button>
+		</div>
+	</form>
 	<Spacer --height="3rem" />
 </div>
 
@@ -80,6 +83,12 @@
 		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
+	}
+
+	.button-wrapper{
+		display: flex;
+		flex-direction: row;
+		margin: 0 auto;
 	}
 
 	@media (max-width: 1280px) {
