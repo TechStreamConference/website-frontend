@@ -2,25 +2,47 @@
 	import Header from 'elements/header.svelte';
 	import Footer from 'elements/footer.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
+	import { isLoggedIn } from 'login/loggedIn';
+	import { onMount } from 'svelte';
 
 	export let displayedYear;
 	export let currentYear;
 
+	let loggedIn = false;
+
+	onMount(async () => {
+		loggedIn = await isLoggedIn();
+	});
+
 	const headerMenu = [
 		['Start', '#top'],
 		['Vortragende', '#Speaker'],
-		['Sponsoren und Medienpartner', '#Sponsors'],
+		['Partner', '#Sponsors'],
 		['Ablaufplan', '#Shedule'],
-		['Login', '/login']
+		['Anmelden', '/login']
+	];
+	const headerMenuLoggedIn = [
+		['Start', '#top'],
+		['Vortragende', '#Speaker'],
+		['Partner', '#Sponsors'],
+		['Ablaufplan', '#Shedule'],
+		['Intern', '/backend'],
+		['Abmelden', '/logout']
 	];
 	const footerMenu = [
-		['Login', '/login'],
-		['Register', '/register'],
+		['Anmelden', '/login'],
+		['Registrieren', '/register'],
+		['Impressum', '/impressum']
+	];
+	const footerMenuLoggedIn = [
+		['Abmelden', '/logout'],
+		['Intern', '/backend'],
 		['Impressum', '/impressum']
 	];
 </script>
 
-<Header menu={headerMenu} />
+<Header menu={loggedIn ? headerMenuLoggedIn : headerMenu} />
+
 <SpacerHeader />
 
 <h1>This is Year {displayedYear}</h1>
@@ -525,7 +547,7 @@
 	Maß wolln, Namidog
 </p>
 
-<Footer {currentYear} menu={footerMenu} />
+<Footer {currentYear} menu={loggedIn ? footerMenuLoggedIn : footerMenu} />
 
 <style>
 	h1 {

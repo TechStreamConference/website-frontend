@@ -10,6 +10,8 @@
 	import List from 'elements/list/list.svelte';
 	import ListElement from 'elements/list/listElement.svelte';
 	import Textblock from 'elements/text/textblock.svelte';
+	import { isLoggedIn } from 'login/loggedIn';
+	import { onMount } from 'svelte';
 
 	let timerUsername = null;
 	let timerEmail = null;
@@ -25,6 +27,13 @@
 	let errorMessage = [''];
 
 	let registered = false;
+
+	onMount(async () => {
+		const loggedIn = await isLoggedIn();
+		if (loggedIn) {
+			window.location.href = '/';
+		}
+	});
 
 	function startTimerUsername() {
 		if (timerUsername !== null) {
@@ -149,9 +158,9 @@
 		};
 
 		const data = {
-			username: username,
-			email: email,
-			password: password_1
+			username: username.trim(),
+			email: email.trim(),
+			password: password_1.trim()
 		};
 		const response = await fetch('api/account/register', {
 			method: 'POST',
