@@ -14,7 +14,6 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			'elements' : 'src/elements',
-			'login' : 'src/loggedIn'
 		}
 	}
 };

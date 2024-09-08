@@ -2,24 +2,16 @@
 	import Header from 'elements/header.svelte';
 	import Footer from 'elements/footer.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
-	import { isLoggedIn } from 'login/loggedIn';
-	import { onMount } from 'svelte';
 
 	export let displayedYear;
 	export let currentYear;
-
-	let loggedIn = false;
-
-	onMount(async () => {
-		loggedIn = await isLoggedIn();
-	});
 
 	const headerMenu = [
 		['Start', '#top'],
 		['Vortragende', '#Speaker'],
 		['Partner', '#Sponsors'],
 		['Ablaufplan', '#Shedule'],
-		['Anmelden', '/login']
+		['Anmelden', '/logout']
 	];
 	const headerMenuLoggedIn = [
 		['Start', '#top'],
@@ -41,7 +33,7 @@
 	];
 </script>
 
-<Header menu={loggedIn ? headerMenuLoggedIn : headerMenu} />
+<Header menu={headerMenu} />
 
 <SpacerHeader />
 
@@ -547,7 +539,7 @@
 	Maß wolln, Namidog
 </p>
 
-<Footer {currentYear} menu={loggedIn ? footerMenuLoggedIn : footerMenu} />
+<Footer {currentYear} menu={footerMenu} />
 
 <style>
 	h1 {
