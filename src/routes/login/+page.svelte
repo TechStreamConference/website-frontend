@@ -9,6 +9,7 @@
 	import ErrorMessage from 'elements/messanges/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
+	import { goto } from '$app/navigation';
 
 	const currentYear = 2025; // load from database
 
@@ -35,7 +36,7 @@
 		});
 
 		if (response.ok) {
-			window.location.href = '/backend';
+			goto('/backend');
 			return;
 		}
 
