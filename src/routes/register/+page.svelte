@@ -4,7 +4,7 @@
 	import Header from 'elements/header.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
 	import Footer from 'elements/footer.svelte';
-	
+
 	import Headline from 'elements/text/headline.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
@@ -17,7 +17,10 @@
 	import Button from 'elements/input/button.svelte';
 	import Textblock from 'elements/text/textblock.svelte';
 
-	const headerMenu = [['Start', '/']];
+	const headerMenu = [
+		['Start', '/'],
+		['Anmelden', '/login']
+	];
 	const footerMenu = [
 		['Anmelden', '/login'],
 		['Impressum', '/impressum']
