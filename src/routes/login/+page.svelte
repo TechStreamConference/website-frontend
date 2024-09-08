@@ -1,18 +1,18 @@
 <script>
+	export let data; // data from database
+
 	import { goto } from '$app/navigation';
-	
+
 	import Header from 'elements/header.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
 	import Footer from 'elements/footer.svelte';
-
+	
 	import Headline from 'elements/text/headline.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import ErrorMessage from 'elements/messanges/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
-
-	const currentYear = 2025; // load from database
 
 	const headerMenu = [['Start', '/ ']];
 	const footerMenu = [
@@ -88,7 +88,7 @@
 		</div>
 	</div>
 
-	<Footer {currentYear} menu={footerMenu} />
+	<Footer currentYear={data.curentYear} menu={footerMenu} />
 </div>
 
 <style>

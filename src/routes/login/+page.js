@@ -7,5 +7,9 @@ export async function load({ fetch }) {
         throw redirect(302, '/');
     }
 
-    return {};
+    const curentYear = 2025; // TODO: load from database
+
+    return {
+        curentYear: curentYear
+    };
 }
