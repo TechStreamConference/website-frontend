@@ -7,8 +7,6 @@
 	export let currentYear;
 	export let loggedIn;
 
-	console.log(loggedIn);
-
 	const headerMenu = [
 		['Start', '#top'],
 		['Vortragende', '#Speaker'],

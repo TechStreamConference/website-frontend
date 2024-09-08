@@ -25,7 +25,7 @@
 			<ul>
 				{#each menu as entry}
 					<li><a href={entry[1]}>{entry[0]}</a></li>
-				{/each}
+				{/each}  
 			</ul>
 		</nav>
 	</div>
