@@ -5,13 +5,16 @@
 
 	export let displayedYear;
 	export let currentYear;
+	export let loggedIn;
+
+	console.log(loggedIn);
 
 	const headerMenu = [
 		['Start', '#top'],
 		['Vortragende', '#Speaker'],
 		['Partner', '#Sponsors'],
 		['Ablaufplan', '#Shedule'],
-		['Anmelden', '/logout']
+		['Anmelden', '/login']
 	];
 	const headerMenuLoggedIn = [
 		['Start', '#top'],
@@ -27,13 +30,13 @@
 		['Impressum', '/impressum']
 	];
 	const footerMenuLoggedIn = [
-		['Abmelden', '/logout'],
 		['Intern', '/backend'],
+		['Abmelden', '/logout'],
 		['Impressum', '/impressum']
 	];
 </script>
 
-<Header menu={headerMenu} />
+<Header menu={loggedIn ? headerMenuLoggedIn : headerMenu} />
 
 <SpacerHeader />
 
@@ -539,7 +542,7 @@
 	Maß wolln, Namidog
 </p>
 
-<Footer {currentYear} menu={footerMenu} />
+<Footer {currentYear} menu={loggedIn ? footerMenuLoggedIn : footerMenu} />
 
 <style>
 	h1 {
