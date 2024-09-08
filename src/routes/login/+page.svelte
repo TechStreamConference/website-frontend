@@ -1,4 +1,6 @@
 <script>
+	import { goto } from '$app/navigation';
+	
 	import Header from 'elements/header.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
 	import Footer from 'elements/footer.svelte';
@@ -9,7 +11,6 @@
 	import ErrorMessage from 'elements/messanges/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
-	import { goto } from '$app/navigation';
 
 	const currentYear = 2025; // load from database
 
