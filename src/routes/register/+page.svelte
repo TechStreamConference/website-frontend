@@ -1,5 +1,6 @@
-<script>
-	export let data; // data from database
+<script lang="ts">
+	import type { LoadRegister } from 'types/types';
+	export let data: LoadRegister; // data from database
 
 	import Header from 'elements/header.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
@@ -17,56 +18,53 @@
 	import Button from 'elements/input/button.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 
-	const headerMenu = [
+	type MenuItem = [string, string];
+	const headerMenu: MenuItem[] = [
 		['Start', '/'],
 		['Anmelden', '/login']
 	];
-	const footerMenu = [
+	const footerMenu: MenuItem[] = [
 		['Anmelden', '/login'],
 		['Impressum', '/impressum']
 	];
 
-	let timerUsername = null;
-	let timerEmail = null;
+	let timerUsername: number | null = null;
+	let timerEmail: number | null = null;
+	let timerPassword: number | null = null;
 
-	let username = '';
-	let email = '';
-	let password_1 = '';
-	let password_2 = '';
+	let timerUsernameRef = { current: timerUsername };
+	let timerEmailRef = { current: timerEmail };
+	let timerPasswordRef = { current: timerPassword };
 
-	let usernameMessage = '';
-	let emailMessage = '';
-	let passwordMessage = '';
-	let errorMessage = [''];
+	let username: string = '';
+	let email: string = '';
+	let password_1: string = '';
+	let password_2: string = '';
 
-	let registered = false;
+	let usernameMessage: string = '';
+	let emailMessage: string = '';
+	let passwordMessage: string = '';
+	let errorMessage: string[] = [''];
 
-	function startTimerUsername() {
-		if (timerUsername !== null) {
-			clearTimeout(timerUsername);
-			timerUsername = null;
+	let registered: boolean = false;
+
+	function startTimer(timer: { current: number | null }, callback: Function, time: number): void {
+		if (timer.current !== null) {
+			clearTimeout(timer.current);
+			timer.current = null;
 		}
-		timerUsername = setTimeout(() => {
-			onUsernameChanged();
-		}, 1000);
+		timer.current = setTimeout(() => {
+			console.log('callback');
+			callback();
+		}, time);
 	}
 
-	function startTimerEmail() {
-		if (timerEmail !== null) {
-			clearTimeout(timerEmail);
-			timerEmail = null;
-		}
-		timerEmail = setTimeout(() => {
-			onEmailChanged();
-		}, 1000);
-	}
-
-	function samePassword() {
+	function samePassword(): boolean {
 		return password_1.trim() === password_2.trim();
 	}
 
-	async function onUsernameChanged() {
-		const reset = () => {
+	async function onUsernameChanged(): Promise<void> {
+		const reset: Function = (): void => {
 			usernameMessage = '';
 		};
 
@@ -75,13 +73,15 @@
 			return;
 		}
 
-		const response = await fetch('api/account/username/exists?username=' + username);
+		const response: Response = await fetch(
+			'api/account/username/exists?username=' + username.trim()
+		);
 		if (!response.ok) {
 			usernameMessage = 'Fehler beim überprüfen des Namen. Fehlercode: ' + response.status;
 			return;
 		}
 
-		let data;
+		let data: { exists: boolean };
 		try {
 			data = await response.json();
 		} catch (error) {
@@ -91,15 +91,15 @@
 		}
 
 		if (data.exists) {
-			usernameMessage = 'Der Name  "' + username + '" ist bereits vergeben.';
+			usernameMessage = 'Der Name  "' + username.trim() + '" ist bereits vergeben.';
 			return;
 		}
 
 		reset();
 	}
 
-	async function onEmailChanged() {
-		const reset = () => {
+	async function onEmailChanged(): Promise<void> {
+		const reset: Function = (): void => {
 			emailMessage = '';
 		};
 
@@ -108,13 +108,13 @@
 			return;
 		}
 
-		const response = await fetch('api/account/email/exists?email=' + email);
+		const response: Response = await fetch('api/account/email/exists?email=' + email.trim());
 		if (!response.ok) {
 			emailMessage = 'Fehler beim überprüfen der E-Mail. Fehlercode: ' + response.status;
 			return;
 		}
 
-		let data;
+		let data: { exists: boolean };
 		try {
 			data = await response.json();
 		} catch (error) {
@@ -124,15 +124,15 @@
 		}
 
 		if (data.exists) {
-			emailMessage = 'Die E-Mail "' + email + '" wird bereits verwendet.';
+			emailMessage = 'Die E-Mail "' + email.trim() + '" wird bereits verwendet.';
 			return;
 		}
 
 		reset();
 	}
 
-	function onPasswordChanged() {
-		const reset = () => {
+	function onPasswordChanged(): void {
+		const reset: Function = (): void => {
 			passwordMessage = '';
 		};
 
@@ -154,29 +154,29 @@
 		reset();
 	}
 
-	async function register() {
+	async function register(): Promise<void> {
 		if (!samePassword()) {
 			return;
 		}
 
-		const reset = () => {
+		const reset: Function = () => {
 			errorMessage = [''];
 		};
 
-		const data = {
+		const data: { username: string; email: string; password: string } = {
 			username: username.trim(),
 			email: email.trim(),
 			password: password_1.trim()
 		};
-		const response = await fetch('api/account/register', {
+		const response: Response = await fetch('api/account/register', {
 			method: 'POST',
 			body: JSON.stringify(data)
 		});
 
 		if (!response.ok) {
-			const entries = async (r) => {
-				const t = await r.text();
-				const j = JSON.parse(t);
+			const entries = async (response: Response): Promise<string[]> => {
+				const text: string = await response.text();
+				const j: { [key: string]: string } = JSON.parse(text);
 				return Object.values(j);
 			};
 			errorMessage = await entries(response);
@@ -214,7 +214,9 @@
 						labelText="Name:"
 						placeholderText="Name"
 						bind:textValue={username}
-						on:input={startTimerUsername}
+						on:input={() => {
+							startTimer(timerUsernameRef, onUsernameChanged, 2000);
+						}}
 					/>
 					<Spacer --height="1rem" />
 					<Input
@@ -223,7 +225,9 @@
 						labelText="E-Mail:"
 						placeholderText="E-Mail"
 						bind:textValue={email}
-						on:input={startTimerEmail}
+						on:input={() => {
+							startTimer(timerEmailRef, onEmailChanged, 2000);
+						}}
 					/>
 					<Spacer --height="1rem" />
 					<Input
@@ -232,7 +236,9 @@
 						labelText="Passwort:"
 						placeholderText="Passwort"
 						bind:textValue={password_1}
-						on:input={onPasswordChanged}
+						on:input={() => {
+							startTimer(timerPasswordRef, onPasswordChanged, 4000);
+						}}
 					/>
 					<Spacer --height="1rem" />
 					<Input
@@ -241,7 +247,9 @@
 						labelText="Passwort wiederholen:"
 						placeholderText="Passwort wiederholen"
 						bind:textValue={password_2}
-						on:input={onPasswordChanged}
+						on:input={() => {
+							startTimer(timerPasswordRef, onPasswordChanged, 4000);
+						}}
 					/>
 
 					<div class="password-list-wrapper">

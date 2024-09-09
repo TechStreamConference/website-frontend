@@ -1,8 +1,9 @@
+import type { LoadYearPromise } from "types/types";
+
 import { redirect } from "@sveltejs/kit";
 import { checkLoggedIn } from "helper/loggedIn";
 
-export type LoadYear = { currentYear: number; displayedYear: number; loggedIn: boolean };
-export type LoadYearPromise = Promise<LoadYear>;
+
 
 export async function loadYear(fetch: Function, params: { year: string }): LoadYearPromise {
     const loggedIn: boolean = await checkLoggedIn(fetch);

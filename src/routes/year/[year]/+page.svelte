@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LoadYear } from './year';
+	import type { LoadYear } from 'types/types';
 	export let data: LoadYear; // data from database
 
 	import Year from './year.svelte';

@@ -1,5 +1,5 @@
 import type { PageLoad } from "./$types";
-import type { LoadYearPromise } from "./year";
+import type { LoadYearPromise } from "types/types";
 
 import { loadYear } from "./year";
 
