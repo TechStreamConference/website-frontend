@@ -11,11 +11,11 @@
 	import MessageWrapper from 'elements/messages/messageWrapper.svelte';
 	import ErrorMessage from 'elements/messages/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
-	import Textline from 'elements/text/textLine.svelte';
+	import TextLine from 'elements/text/textLine.svelte';
 	import List from 'elements/list/list.svelte';
 	import ListElement from 'elements/list/listElement.svelte';
 	import Button from 'elements/input/button.svelte';
-	import Textblock from 'elements/text/paragraph.svelte';
+	import Paragraph from 'elements/text/paragraph.svelte';
 
 	const headerMenu = [
 		['Start', '/'],
@@ -246,7 +246,7 @@
 
 					<div class="password-list-wrapper">
 						<Spacer --height="3rem" />
-						<Textline>Dein Password sollte folgendes enthalten:</Textline>
+						<TextLine>Dein Password sollte folgendes enthalten:</TextLine>
 						<Spacer --height="0.5rem" />
 						<List classes="padding-left">
 							<ListElement classes="dot">min. 8 Zeichen</ListElement>
@@ -266,12 +266,12 @@
 			<div class="width-wrapper-registered">
 				<HorizontalLine />
 				<Spacer --height="7rem" />
-				<Textline --text-align="center">Deine Registrierung war erfolgreich.</Textline>
+				<TextLine --text-align="center">Deine Registrierung war erfolgreich.</TextLine>
 				<Spacer --height="2rem" />
-				<Textblock --text-align="center">
+				<Paragraph --text-align="center">
 					Du bekommst jetzt eine Mail. Bestätige deine Mailadresse und du kannst dich anmelden.
 					Weitere Infos findest du nach dem anmelden.
-				</Textblock>
+				</Paragraph>
 				<Spacer --height="6rem" />
 				<div class="button-wrapper">
 					<a href="/">
