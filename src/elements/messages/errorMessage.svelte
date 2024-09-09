@@ -9,8 +9,8 @@
 
 <style>
 	p {
-		background-color: red;
-		color: var(--white-color);
+		background-color: var(--error-color);
+		color: var(--text-color);
 		padding: 0.5rem 1rem;
 		font-size: 1.5rem;
 		font-family: gnuolane, sans-serif;

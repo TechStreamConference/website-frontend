@@ -6,6 +6,7 @@ html {
     --lines-color: #ccff57;
     --white-color: white;
     --gray-color: gray;
+    --error-color: orange;
     --light-gray-color: rgb(190, 190, 190);
     --border-radius: 5px;
     /*horizontal-break-1: 1280px;*/
