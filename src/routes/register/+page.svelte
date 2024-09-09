@@ -238,8 +238,8 @@
 					<Input
 						id="register-password-repeat"
 						type="password"
-						labelText="Passwort:"
-						placeholderText="Passwort Wiederholung"
+						labelText="Passwort wiederholen:"
+						placeholderText="Passwort wiederholen"
 						bind:textValue={password_2}
 						on:input={onPasswordChanged}
 					/>
