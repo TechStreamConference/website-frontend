@@ -11,11 +11,11 @@
 	import MessageWrapper from 'elements/messages/messageWrapper.svelte';
 	import ErrorMessage from 'elements/messages/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
-	import Textline from 'elements/text/textline.svelte';
+	import Textline from 'elements/text/textLine.svelte';
 	import List from 'elements/list/list.svelte';
 	import ListElement from 'elements/list/listElement.svelte';
 	import Button from 'elements/input/button.svelte';
-	import Textblock from 'elements/text/textblock.svelte';
+	import Textblock from 'elements/text/textBlock.svelte';
 
 	const headerMenu = [
 		['Start', '/'],

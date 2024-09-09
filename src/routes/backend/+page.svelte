@@ -1,6 +1,6 @@
 <script>
 	import Headline from 'elements/text/headline.svelte';
-	import TextLine from 'elements/text/textline.svelte';
+	import TextLine from 'elements/text/textLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import Button from 'elements/input/button.svelte';
 </script>
