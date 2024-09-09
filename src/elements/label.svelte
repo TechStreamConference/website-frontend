@@ -14,7 +14,7 @@
 	}
 
 	@media (max-width: 1280px) {
-		p {
+		label {
 			font-size: 1.3rem;
 		}
 	}
