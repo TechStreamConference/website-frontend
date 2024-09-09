@@ -1,16 +1,16 @@
-<script>
+<script lang="ts">
 	import LogoSmall from './logoSmall.svelte';
 	import { fade } from 'svelte/transition';
 
-	export let menu;
+	export let menu: [string, string][];
 
-	let isOpen = false;
+	let isOpen: boolean = false;
 
-	function toggleOpen() {
+	function toggleOpen(): void {
 		isOpen = !isOpen;
 	}
 
-	function collapse() {
+	function collapse(): void {
 		isOpen = false;
 	}
 </script>
@@ -19,13 +19,13 @@
 	<!-- Desktop -->
 	<div class="desktop-wrapper">
 		<a href="/" class="logo-wrapper">
-			<LogoSmall classList={'header-desktop-img'} />
+			<LogoSmall />
 		</a>
 		<nav>
 			<ul>
 				{#each menu as entry}
 					<li><a href={entry[1]}>{entry[0]}</a></li>
-				{/each}  
+				{/each}
 			</ul>
 		</nav>
 	</div>
@@ -34,7 +34,7 @@
 	<div class="mobile-wrapper">
 		<div class="hamburger-wrapper {isOpen ? 'open' : 'close'}">
 			<a href="/" class="logo-wrapper">
-				<LogoSmall classList="header-mobile-img" />
+				<LogoSmall />
 			</a>
 
 			<button class="hamburger" on:click={toggleOpen}>
@@ -74,6 +74,11 @@
 		padding-top: 0.5rem;
 		padding-bottom: 0.5rem;
 		border-bottom: solid 1px black;
+	}
+
+	:global(.logo-small) {
+		height: 5rem;
+		margin-left: 1rem;
 	}
 
 	ul {
@@ -117,6 +122,11 @@
 			flex-direction: column;
 			justify-content: space-between;
 			margin: 0;
+		}
+
+		:global(.logo-small) {
+			height: 3rem;
+			margin-left: 1rem;
 		}
 
 		.hamburger-wrapper {
