@@ -1,10 +1,9 @@
-<script>
-	export let type = 'button';
-
-	const typeWorkaround = (node) => (node.type = type);
+<script lang="ts">
+	import { typeWorkaround } from 'types/workaround';
+	export let type: string = 'button';
 </script>
 
-<button use:typeWorkaround on:click><slot /></button>
+<button use:typeWorkaround={type} on:click><slot /></button>
 
 <style>
 	button {

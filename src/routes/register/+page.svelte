@@ -54,7 +54,6 @@
 			timer.current = null;
 		}
 		timer.current = setTimeout(() => {
-			console.log('callback');
 			callback();
 		}, time);
 	}
@@ -213,7 +212,7 @@
 						type="text"
 						labelText="Name:"
 						placeholderText="Name"
-						bind:textValue={username}
+						bind:value={username}
 						on:input={() => {
 							startTimer(timerUsernameRef, onUsernameChanged, 2000);
 						}}
@@ -224,7 +223,7 @@
 						type="text"
 						labelText="E-Mail:"
 						placeholderText="E-Mail"
-						bind:textValue={email}
+						bind:value={email}
 						on:input={() => {
 							startTimer(timerEmailRef, onEmailChanged, 2000);
 						}}
@@ -235,7 +234,7 @@
 						type="password"
 						labelText="Passwort:"
 						placeholderText="Passwort"
-						bind:textValue={password_1}
+						bind:value={password_1}
 						on:input={() => {
 							startTimer(timerPasswordRef, onPasswordChanged, 4000);
 						}}
@@ -246,7 +245,7 @@
 						type="password"
 						labelText="Passwort wiederholen:"
 						placeholderText="Passwort wiederholen"
-						bind:textValue={password_2}
+						bind:value={password_2}
 						on:input={() => {
 							startTimer(timerPasswordRef, onPasswordChanged, 4000);
 						}}

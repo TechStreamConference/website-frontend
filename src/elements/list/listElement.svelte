@@ -1,5 +1,5 @@
-<script>
-	export let classes = '';
+<script lang="ts">
+	export let classes: string = '';
 </script>
 
 <li class={classes}>
@@ -27,7 +27,7 @@
 		}
 	}
 
-	@media (max-width: 600px){
+	@media (max-width: 600px) {
 		li {
 			font-size: 1rem;
 		}

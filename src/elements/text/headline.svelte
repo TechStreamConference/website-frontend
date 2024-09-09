@@ -1,5 +1,5 @@
-<script>
-	export let size = 'big';
+<script lang="ts">
+	export let size: string = 'big';
 </script>
 
 <h1 class={size}><slot /></h1>
@@ -31,7 +31,7 @@
 		}
 	}
 
-	@media (max-width: 600px){
+	@media (max-width: 600px) {
 		.big {
 			font-size: 2.5rem;
 		}

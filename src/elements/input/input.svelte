@@ -1,22 +1,24 @@
-<script>
+<script lang="ts">
+	import { typeWorkaround } from 'types/workaround';
 	import Label from 'elements/label.svelte';
-	import TextInput from './textInput.svelte';
-	import PasswordInput from './passwordInput.svelte';
 
-	export let type = '';
-	export let id = '';
-	export let labelText = '';
-	export let placeholderText = '';
-	export let textValue = '';
+	export let type: string = '';
+	export let id: string = '';
+	export let labelText: string = '';
+	export let placeholderText: string = '';
+	export let value: string | number = '';
 </script>
 
 <div class="wrapper">
 	<Label {id}>{labelText}</Label>
-	{#if type === 'text'}
-		<TextInput {id} {placeholderText} bind:value={textValue} on:input />
-	{:else if type === 'password'}
-		<PasswordInput {id} {placeholderText} bind:value={textValue} on:input />
-	{/if}
+	<input
+		{id}
+		use:typeWorkaround={type}
+		name={id}
+		placeholder={placeholderText}
+		bind:value
+		on:input
+	/>
 </div>
 
 <style>
@@ -40,7 +42,7 @@
 	}
 
 	@media (max-width: 1280px) {
-		.wrapper :global(input){
+		.wrapper :global(input) {
 			font-size: 1.3rem;
 		}
 	}

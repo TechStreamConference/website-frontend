@@ -1,6 +1,6 @@
-<script>
+<script lang="ts">
 	import { fade } from 'svelte/transition';
-	export let message = '';
+	export let message: string = '';
 </script>
 
 {#if message !== ''}

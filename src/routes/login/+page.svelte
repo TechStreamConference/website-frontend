@@ -73,7 +73,7 @@
 					type="text"
 					labelText="Nutzername oder E-Mail:"
 					placeholderText="Nutzername oder E-Mail"
-					bind:textValue={usernameOrEmail}
+					bind:value={usernameOrEmail}
 				/>
 				<Spacer --height="1rem" />
 				<Input
@@ -81,7 +81,7 @@
 					type="password"
 					labelText="Passwort:"
 					placeholderText="Passwort"
-					bind:textValue={password}
+					bind:value={password}
 				/>
 
 				<Spacer --height="5rem" />

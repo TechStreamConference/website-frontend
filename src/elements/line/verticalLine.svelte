@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Line from './line.svelte';
 </script>
 
