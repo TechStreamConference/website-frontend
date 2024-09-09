@@ -14,6 +14,7 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			'elements' : 'src/elements',
+			'helper' : 'src/helper',
 		}
 	}
 };
