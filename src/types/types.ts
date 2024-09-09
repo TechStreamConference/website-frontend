@@ -6,3 +6,6 @@ export type LoadRegisterPromise = Promise<LoadRegister>;
 
 export type LoadLogin = { currentYear: number };
 export type LoadLoginPromise = Promise<LoadLogin>;
+
+export type LoadBackend = {};
+export type LoadBackendPromise = Promise<LoadBackend>;

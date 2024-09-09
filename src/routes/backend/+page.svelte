@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Headline from 'elements/text/headline.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
