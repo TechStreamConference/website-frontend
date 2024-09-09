@@ -25,14 +25,15 @@
 
 	button:hover {
 		background-color: var(--secondary-color);
-		box-shadow: 6px 6px var(--gray-color);
+		box-shadow: 4px 4px var(--gray-color);
+		transform: translateY(-4px) translateX(-4px);
 		transition: var(--transition-duration);
 	}
 
 	button:active {
 		background-color: var(--third-color);
-		box-shadow: 2px 2px var(--light-gray-color);
-		transform: translateY(4px) translateX(4px);
+		box-shadow: 1px 1px var(--light-gray-color);
+		transform: translateY(0px) translateX(0px);
 		transition: var(--fast-transition-duration);
 	}
 
