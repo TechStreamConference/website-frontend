@@ -86,7 +86,7 @@
 
 				<Spacer --height="5rem" />
 				<div class="button-wrapper">
-					<Button type="submit">Einloggen</Button>
+					<Button type="submit">Anmelden</Button>
 				</div>
 			</form>
 			<Spacer --height="3rem" />
