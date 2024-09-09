@@ -15,7 +15,7 @@
 	import List from 'elements/list/list.svelte';
 	import ListElement from 'elements/list/listElement.svelte';
 	import Button from 'elements/input/button.svelte';
-	import Textblock from 'elements/text/textBlock.svelte';
+	import Textblock from 'elements/text/paragraph.svelte';
 
 	const headerMenu = [
 		['Start', '/'],
