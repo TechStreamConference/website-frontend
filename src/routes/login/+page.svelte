@@ -1,5 +1,6 @@
-<script>
-	export let data; // data from database
+<script lang="ts">
+	import type { LoadLogin } from 'types/types';
+	export let data: LoadLogin; // data from database
 
 	import { goto } from '$app/navigation';
 
@@ -14,40 +15,41 @@
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
 
-	const headerMenu = [
-		['Start', '/ '],
+	type MenuItem = [string, string];
+	const headerMenu: MenuItem[] = [
+		['Start', '/'],
 		['Registrieren', '/register']
 	];
-	const footerMenu = [
+	const footerMenu: MenuItem[] = [
 		['Registrieren', '/register'],
 		['Impressum', '/impressum']
 	];
 
-	let usernameOrEmail = '';
-	let password = '';
+	let usernameOrEmail: string = '';
+	let password: string = '';
 
-	let errorMessage = '';
+	let errorMessage: string = '';
 
-	async function login() {
+	async function login(): Promise<void> {
 		const data = {
 			username_or_email: usernameOrEmail.trim(),
 			password: password.trim()
 		};
 
-		const response = await fetch('api/account/login', {
+		const response: Response = await fetch('api/account/login', {
 			method: 'POST',
 			body: JSON.stringify(data)
 		});
 
-		if (response.ok) {
+		if (response.ok) {-
 			goto('/backend');
 			return;
 		}
 
-		const entries = async (r) => {
-			const t = await r.text();
-			const j = JSON.parse(t);
-			return Object.values(j)[0];
+		const entries = async (response: Response): Promise<string> => {
+			const text: string = await response.text();
+			const json: { [key: string]: string } = JSON.parse(text);
+			return Object.values(json)[0];
 		};
 		errorMessage = await entries(response);
 	}
@@ -91,7 +93,7 @@
 		</div>
 	</div>
 
-	<Footer currentYear={data.curentYear} menu={footerMenu} />
+	<Footer currentYear={data.currentYear} menu={footerMenu} />
 </div>
 
 <style>
