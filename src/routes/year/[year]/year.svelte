@@ -1,20 +1,21 @@
-<script>
+<script lang="ts">
 	import Header from 'elements/header.svelte';
 	import Footer from 'elements/footer.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
 
-	export let displayedYear;
-	export let currentYear;
-	export let loggedIn;
+	export let displayedYear: Number;
+	export let currentYear: Number;
+	export let loggedIn: Boolean;
 
-	const headerMenu = [
+	type MenuItem = [string, string];
+	const headerMenu: MenuItem[] = [
 		['Start', '#top'],
 		['Vortragende', '#Speaker'],
 		['Partner', '#Sponsors'],
 		['Ablaufplan', '#Shedule'],
 		['Anmelden', '/login']
 	];
-	const headerMenuLoggedIn = [
+	const headerMenuLoggedIn: MenuItem[] = [
 		['Start', '#top'],
 		['Vortragende', '#Speaker'],
 		['Partner', '#Sponsors'],
@@ -22,12 +23,12 @@
 		['Intern', '/backend'],
 		['Abmelden', '/logout']
 	];
-	const footerMenu = [
+	const footerMenu: MenuItem[] = [
 		['Anmelden', '/login'],
 		['Registrieren', '/register'],
 		['Impressum', '/impressum']
 	];
-	const footerMenuLoggedIn = [
+	const footerMenuLoggedIn: MenuItem[] = [
 		['Intern', '/backend'],
 		['Abmelden', '/logout'],
 		['Impressum', '/impressum']

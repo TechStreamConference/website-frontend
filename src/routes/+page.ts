@@ -1,6 +1,8 @@
-import { loadYear } from "./year/[year]/year";
-import type { LoadYear } from "./year/[year]/year";
+import type { PageLoad } from "./$types";
+import type { LoadYearPromise } from "./year/[year]/year";
 
-export async function load({ fetch }: { fetch: typeof globalThis.fetch }): LoadYear {
-    return loadYear(fetch);
+import { loadCurrentYear } from "./year/[year]/year";
+
+export const load: PageLoad = async ({ fetch }: { fetch: typeof globalThis.fetch }): LoadYearPromise => {
+    return await loadCurrentYear(fetch);
 }
