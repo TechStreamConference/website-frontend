@@ -8,8 +8,8 @@
 	import Headline from 'elements/text/headline.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
-	import MessageWrapper from 'elements/messanges/messageWrapper.svelte';
-	import ErrorMessage from 'elements/messanges/errorMessage.svelte';
+	import MessageWrapper from 'elements/messages/messageWrapper.svelte';
+	import ErrorMessage from 'elements/messages/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Textline from 'elements/text/textline.svelte';
 	import List from 'elements/list/list.svelte';

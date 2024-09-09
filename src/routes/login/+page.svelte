@@ -10,7 +10,7 @@
 	import Headline from 'elements/text/headline.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
-	import ErrorMessage from 'elements/messanges/errorMessage.svelte';
+	import ErrorMessage from 'elements/messages/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
 
