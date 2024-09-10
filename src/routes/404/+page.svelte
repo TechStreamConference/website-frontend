@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+
 	import Headline from 'elements/text/headline.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
@@ -12,7 +14,7 @@
 	<Spacer --height="5rem" />
 	<Button
 		on:click={() => {
-			window.location.href = '/';
+			goto('/');
 		}}>Start</Button
 	>
 </div>
