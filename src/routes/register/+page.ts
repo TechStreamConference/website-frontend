@@ -1,9 +1,9 @@
 import type { LoadRegisterPromise } from 'types/types';
 
-import { checkAndRedirect } from 'helper/loggedIn';
+import { getLoginStatusAndCheckRedirect } from 'helper/loggedIn';
 
 export async function load({ fetch }: { fetch: typeof globalThis.fetch }): LoadRegisterPromise {
-    await checkAndRedirect(fetch, '/', false);
+    await getLoginStatusAndCheckRedirect(fetch, '/', false);
 
     const currentYear: number = 2025; // TODO: load from database
 

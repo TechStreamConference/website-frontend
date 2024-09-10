@@ -16,6 +16,7 @@ const config = {
 			'elements': 'src/elements',
 			'helper': 'src/helper',
 			'types': 'src/types',
+			'stores': 'src/stores',
 		}
 	}
 };

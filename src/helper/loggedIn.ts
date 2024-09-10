@@ -1,18 +1,37 @@
 import { redirect } from '@sveltejs/kit';
+import { loginStatus } from 'stores/auth';
 
-// this should only be called from svelte functions like load.
-// otherwise this could cause internal server errors because of the redirect. 
-export async function checkAndRedirect(fetch: Function, link: string, expectedLogginStatus: boolean): Promise<boolean> {
-    const result = await checkLoggedIn(fetch);
-    if (result !== expectedLogginStatus) {
-        console.log("Should redirect");
-        redirect(302, link);
-    }
-
-    return result;
+async function fetchLoginStatus(fetch: Function): Promise<boolean> {
+    console.log("fetcching");
+    const response = await fetch('/api/account');
+    return response.ok;
 }
 
-export async function checkLoggedIn(fetch: Function): Promise<boolean> {
-    const loggedInResult = await fetch('/api/account');
-    return loggedInResult.ok;
+export async function getLoginStatus(fetch: Function): Promise<boolean> {
+    let status: boolean | null = null;
+    loginStatus.subscribe(value => { status = value });
+
+    if (status === null) {
+        const fetchedStatus = await fetchLoginStatus(fetch);
+        loginStatus.set(fetchedStatus);
+        return fetchedStatus;
+    }
+
+    return status;
+}
+
+export async function getLoginStatusAndCheckRedirect(fetch: Function, link: string, expectedLogginStatus: boolean): Promise<boolean> {
+    const status = await getLoginStatus(fetch);
+    if (status !== expectedLogginStatus) {
+        redirect(302, link);
+    }
+    return status;
+}
+
+export function querryLogin() {
+    loginStatus.set(true);
+}
+
+export function querryLogout() {
+    loginStatus.set(false);
 }

@@ -3,6 +3,7 @@
 	export let data: LoadLogin; // data from database
 
 	import { goto } from '$app/navigation';
+	import { querryLogin } from 'helper/loggedIn';
 
 	import Header from 'elements/header.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
@@ -41,7 +42,8 @@
 			body: JSON.stringify(data)
 		});
 
-		if (response.ok) {-
+		if (response.ok) {
+			querryLogin();
 			goto('/backend');
 			return;
 		}
