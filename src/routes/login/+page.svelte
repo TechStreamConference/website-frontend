@@ -29,6 +29,7 @@
 	let usernameOrEmail: string = '';
 	let password: string = '';
 
+	const loggedInMessage = data.loggedIn ? 'Du bist bereits angemeldet.' : '';
 	let errorMessage: string = '';
 
 	async function login(): Promise<void> {
@@ -68,7 +69,8 @@
 			<form on:submit|preventDefault={login}>
 				<HorizontalLine />
 				<Spacer --height="3rem" />
-				<ErrorMessage bind:message={errorMessage} />
+				<ErrorMessage message={loggedInMessage} />
+				<ErrorMessage message={errorMessage} />
 				<Spacer --height="2rem" />
 				<Input
 					id="login-username-or-email"

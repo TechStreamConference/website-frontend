@@ -41,6 +41,7 @@
 	let password_1: string = '';
 	let password_2: string = '';
 
+	const loggedInMessage = data.loggedIn ? 'Du bist bereits angemeldet' : '';
 	let usernameMessage: string = '';
 	let emailMessage: string = '';
 	let passwordMessage: string = '';
@@ -199,11 +200,12 @@
 					<HorizontalLine />
 					<Spacer --height="3rem" />
 					<MessageWrapper>
-						<ErrorMessage bind:message={usernameMessage} />
-						<ErrorMessage bind:message={emailMessage} />
-						<ErrorMessage bind:message={passwordMessage} />
+						<ErrorMessage message={loggedInMessage} />
+						<ErrorMessage message={usernameMessage} />
+						<ErrorMessage message={emailMessage} />
+						<ErrorMessage message={passwordMessage} />
 						{#each errorMessage as message}
-							<ErrorMessage bind:message />
+							<ErrorMessage message = {message} />
 						{/each}
 					</MessageWrapper>
 					<Spacer --height="2rem" />
