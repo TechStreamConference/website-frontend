@@ -255,7 +255,7 @@
 
 					<div class="password-list-wrapper">
 						<Spacer --height="3rem" />
-						<TextLine>Dein Password sollte folgendes enthalten:</TextLine>
+						<TextLine>Dein Passwort sollte folgendes enthalten:</TextLine>
 						<Spacer --height="0.5rem" />
 						<List classes="padding-left">
 							<ListElement classes="dot">min. 8 Zeichen</ListElement>
