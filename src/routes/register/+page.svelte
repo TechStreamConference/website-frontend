@@ -276,7 +276,7 @@
 				<TextLine --text-align="center">Deine Registrierung war erfolgreich.</TextLine>
 				<Spacer --height="2rem" />
 				<Paragraph --text-align="center">
-					Du bekommst jetzt eine Mail. Bestätige deine Mailadresse um dich anmelden zu können.
+					Du bekommst jetzt eine Mail. Bestätige deine Mailadresse, um dich anmelden zu können.
 					Weitere Infos findest du nach dem Anmelden.
 				</Paragraph>
 				<Spacer --height="6rem" />
