@@ -3,9 +3,9 @@
 	import Footer from 'elements/footer.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
 
-	export let displayedYear: Number;
-	export let currentYear: Number;
-	export let loggedIn: Boolean;
+	export let displayedYear: number;
+	export let currentYear: number;
+	export let loggedIn: boolean;
 
 	type MenuItem = [string, string];
 	const headerMenu: MenuItem[] = [
