@@ -2,8 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import { loginStatus } from 'stores/auth';
 
 async function fetchLoginStatus(fetch: Function): Promise<boolean> {
-    console.log("fetcching");
-    const response = await fetch('/api/account');
+    const response: Response = await fetch('/api/account');
     return response.ok;
 }
 
@@ -21,17 +20,14 @@ export async function getLoginStatus(fetch: Function): Promise<boolean> {
 }
 
 export async function getLoginStatusAndCheckRedirect(fetch: Function, link: string, expectedLogginStatus: boolean): Promise<boolean> {
-    const status = await getLoginStatus(fetch);
+    const status: boolean = await getLoginStatus(fetch);
     if (status !== expectedLogginStatus) {
         redirect(302, link);
     }
     return status;
 }
 
-export function querryLogin() {
-    loginStatus.set(true);
-}
-
-export function querryLogout() {
-    loginStatus.set(false);
+export async function udpateLoginStatus(fetch: Function): Promise<void> {
+    const response: boolean = await fetchLoginStatus(fetch);
+    loginStatus.set(response);
 }

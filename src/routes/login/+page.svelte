@@ -3,7 +3,7 @@
 	export let data: LoadLogin; // data from database
 
 	import { goto } from '$app/navigation';
-	import { querryLogin } from 'helper/loggedIn';
+	import { udpateLoginStatus } from 'helper/loggedIn';
 
 	import Header from 'elements/header.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
@@ -43,7 +43,7 @@
 		});
 
 		if (response.ok) {
-			querryLogin();
+			await udpateLoginStatus(fetch);
 			goto('/backend');
 			return;
 		}
