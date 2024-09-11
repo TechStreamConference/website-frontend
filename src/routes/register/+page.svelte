@@ -77,7 +77,7 @@
 			'api/account/username/exists?username=' + username.trim()
 		);
 		if (!response.ok) {
-			usernameMessage = 'Fehler beim überprüfen des Namen. Fehlercode: ' + response.status;
+			console.error('Fehler beim überprüfen des Namen. Fehlercode: ' + response.status);
 			return;
 		}
 
@@ -110,7 +110,7 @@
 
 		const response: Response = await fetch('api/account/email/exists?email=' + email.trim());
 		if (!response.ok) {
-			emailMessage = 'Fehler beim überprüfen der E-Mail. Fehlercode: ' + response.status;
+			console.error('Fehler beim überprüfen der E-Mail. Fehlercode: ' + response.status);
 			return;
 		}
 
