@@ -216,7 +216,7 @@
 						placeholderText="Name"
 						bind:value={username}
 						on:input={() => {
-							startTimer(timerUsernameRef, onUsernameChanged, 2000);
+							startTimer(timerUsernameRef, onUsernameChanged, 500);
 						}}
 					/>
 					<Spacer --height="1rem" />
@@ -227,7 +227,7 @@
 						placeholderText="E-Mail"
 						bind:value={email}
 						on:input={() => {
-							startTimer(timerEmailRef, onEmailChanged, 2000);
+							startTimer(timerEmailRef, onEmailChanged, 500);
 						}}
 					/>
 					<Spacer --height="1rem" />
@@ -238,7 +238,7 @@
 						placeholderText="Passwort"
 						bind:value={password_1}
 						on:input={() => {
-							startTimer(timerPasswordRef, onPasswordChanged, 4000);
+							startTimer(timerPasswordRef, onPasswordChanged, 500);
 						}}
 					/>
 					<Spacer --height="1rem" />
@@ -249,7 +249,7 @@
 						placeholderText="Passwort wiederholen"
 						bind:value={password_2}
 						on:input={() => {
-							startTimer(timerPasswordRef, onPasswordChanged, 4000);
+							startTimer(timerPasswordRef, onPasswordChanged, 500);
 						}}
 					/>
 
