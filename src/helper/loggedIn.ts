@@ -8,7 +8,7 @@ async function fetchLoginStatus(fetch: Function): Promise<boolean> {
 
 export async function getLoginStatus(fetch: Function): Promise<boolean> {
     let status: boolean | null = null;
-    loginStatus.subscribe(value => { status = value });
+    loginStatus.update(value => { status = value; return value; });
 
     if (status === null) {
         const fetchedStatus = await fetchLoginStatus(fetch);
@@ -22,7 +22,7 @@ export async function getLoginStatus(fetch: Function): Promise<boolean> {
 export async function redirectIfUnautorised(fetch: Function) {
     const status: boolean = await getLoginStatus(fetch);
     if (!status) {
-        redirect(302, '/login');
+        redirect(302, '/login?showLoginMessage=true');
     }
     return status;
 }

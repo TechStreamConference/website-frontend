@@ -205,7 +205,7 @@
 						<ErrorMessage message={emailMessage} />
 						<ErrorMessage message={passwordMessage} />
 						{#each errorMessage as message}
-							<ErrorMessage message = {message} />
+							<ErrorMessage {message} />
 						{/each}
 					</MessageWrapper>
 					<Spacer --height="2rem" />
