@@ -15,6 +15,7 @@
 	import ErrorMessage from 'elements/messages/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
+	import Link from 'elements/text/link.svelte';
 
 	type MenuItem = [string, string];
 	const headerMenu: MenuItem[] = [
@@ -66,37 +67,36 @@
 
 	<div class="content">
 		<Headline>Anmelden</Headline>
-		<div class="width-wrapper">
-			<form on:submit|preventDefault={login}>
-				<HorizontalLine />
-				<Spacer --height="3rem" />
-				<ErrorMessage message={loggedInMessage} />
-				<ErrorMessage message={displayLoginMessage} />
-				<ErrorMessage message={errorMessage} />
-				<Spacer --height="2rem" />
-				<Input
-					id="login-username-or-email"
-					type="text"
-					labelText="Nutzername oder E-Mail:"
-					placeholderText="Nutzername oder E-Mail"
-					bind:value={usernameOrEmail}
-				/>
-				<Spacer --height="1rem" />
-				<Input
-					id="login-password"
-					type="password"
-					labelText="Passwort:"
-					placeholderText="Passwort"
-					bind:value={password}
-				/>
-
-				<Spacer --height="5rem" />
-				<div class="button-wrapper">
-					<Button type="submit">Anmelden</Button>
-				</div>
-			</form>
+		<form class="width-wrapper" on:submit|preventDefault={login}>
+			<HorizontalLine />
 			<Spacer --height="3rem" />
-		</div>
+			<ErrorMessage message={loggedInMessage} />
+			<ErrorMessage message={displayLoginMessage} />
+			<ErrorMessage message={errorMessage} />
+			<Spacer --height="2rem" />
+			<Input
+				id="login-username-or-email"
+				type="text"
+				labelText="Nutzername oder E-Mail:"
+				placeholderText="Nutzername oder E-Mail"
+				bind:value={usernameOrEmail}
+			/>
+			<Spacer --height="1rem" />
+			<Input
+				id="login-password"
+				type="password"
+				labelText="Passwort:"
+				placeholderText="Passwort"
+				bind:value={password}
+			/>
+			<Spacer --height="1.5rem" />
+			<Link href="/register">Noch keinen Account?</Link>
+			<Spacer --height="5rem" />
+			<div class="button-wrapper">
+				<Button type="submit">Anmelden</Button>
+			</div>
+			<Spacer --height="3rem" />
+		</form>
 	</div>
 
 	<Footer currentYear={data.currentYear} menu={footerMenu} />
