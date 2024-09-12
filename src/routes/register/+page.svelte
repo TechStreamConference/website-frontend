@@ -61,7 +61,17 @@
 
 	function startPasswordTimer() {
 		const isSecondShorter = password_1.trim().length > password_2.trim().length;
-		startTimer(timerPasswordRef, onPasswordChanged, isSecondShorter ? 1000 : 200);
+		if (isSecondShorter) {
+			startTimer(timerPasswordRef, onPasswordChanged, 500);
+			return;
+		}
+
+		if (timerPassword) {
+			clearTimeout(timerPassword);
+			timerPassword = null;
+		}
+
+		onPasswordChanged();
 	}
 
 	function samePassword(): boolean {
