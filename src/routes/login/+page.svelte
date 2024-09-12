@@ -30,7 +30,7 @@
 	let password: string = '';
 
 	const loggedInMessage = data.loggedIn ? 'Du bist bereits angemeldet.' : '';
-	const displayLoginMessage = data.showLoginMessage ? 'Du musst dich zunächst anmelden' : '';
+	const displayLoginMessage = data.showLoginMessage ? 'Du musst dich zunächst anmelden.' : '';
 	let errorMessage: string = '';
 
 	async function login(): Promise<void> {

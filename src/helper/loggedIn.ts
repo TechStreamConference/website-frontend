@@ -19,7 +19,7 @@ export async function getLoginStatus(fetch: Function): Promise<boolean> {
     return status;
 }
 
-export async function redirectIfUnautorised(fetch: Function) {
+export async function redirectIfUnauthorized(fetch: Function) {
     const status: boolean = await getLoginStatus(fetch);
     if (!status) {
         redirect(302, '/login?showLoginMessage=true');

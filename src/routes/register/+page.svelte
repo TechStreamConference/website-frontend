@@ -253,21 +253,20 @@
 						bind:value={password_2}
 						on:input={startPasswordTimer}
 					/>
-
+					<Spacer --height="3rem" />
+					<Button type={'submit'}>Registrieren</Button>
 					<div class="password-list-wrapper">
-						<Spacer --height="3rem" />
+						<Spacer --height="5rem" />
 						<TextLine>Dein Passwort sollte folgendes enthalten:</TextLine>
 						<Spacer --height="0.5rem" />
 						<List classes="padding-left">
-							<ListElement classes="dot">min. 8 Zeichen</ListElement>
-							<ListElement classes="dot">min. 1 Kleinbuchstaben</ListElement>
-							<ListElement classes="dot">min. 1 Großbuchstaben</ListElement>
-							<ListElement classes="dot">min. 1 Zahl</ListElement>
-							<ListElement classes="dot">min. 1 Sonderzeichen</ListElement>
+							<ListElement classes="dot">mind. 8 Zeichen</ListElement>
+							<ListElement classes="dot">mind. 1 Kleinbuchstaben</ListElement>
+							<ListElement classes="dot">mind. 1 Großbuchstaben</ListElement>
+							<ListElement classes="dot">mind. 1 Zahl</ListElement>
+							<ListElement classes="dot">mind. 1 Sonderzeichen</ListElement>
 						</List>
 					</div>
-					<Spacer --height="5rem" />
-					<Button type={'submit'}>Registrieren</Button>
 				</div>
 			</form>
 			<Spacer --height="3rem" />
