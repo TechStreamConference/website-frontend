@@ -2,12 +2,12 @@ import type { LoadYearPromise } from "types/types";
 
 import { redirect } from "@sveltejs/kit";
 import { getLoginStatus } from "helper/loggedIn";
-import { defaultcurrentYear } from "delete/toDelete";
+import { defaultCurrentYear } from "delete/toDelete";
 
 
 export async function loadYear(fetch: Function, params: { year: string }): LoadYearPromise {
     const loggedIn: boolean = await getLoginStatus(fetch);
-    const currentYear: number = defaultcurrentYear;
+    const currentYear: number = defaultCurrentYear;
     const displayedYear: number = Number(params.year);
 
     if (isNaN(displayedYear)) {
@@ -23,7 +23,7 @@ export async function loadYear(fetch: Function, params: { year: string }): LoadY
 
 export async function loadCurrentYear(fetch: Function): LoadYearPromise {
     const loggedIn: boolean = await getLoginStatus(fetch);
-    const currentYear: number = defaultcurrentYear;
+    const currentYear: number = defaultCurrentYear;
     const displayedYear: number = currentYear;
 
     return {
