@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
+	import type { LoadYear } from 'types/types';
+	export let data: LoadYear; // data from database
+
 	import Year from './year.svelte';
-	import { page } from '$app/stores';
-	let displayedYear = $page.params.year;
-	let currentYear = 2025; // get current year from database
 </script>
 
-<Year {displayedYear} {currentYear}/>
+<Year displayedYear={data.displayedYear} currentYear={data.currentYear} loggedIn={data.loggedIn} />

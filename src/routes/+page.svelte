@@ -1,6 +1,8 @@
-<script>
-	import Page from './year/[year]/year.svelte';
-	let currentYear = 2025; // get current year from database
+<script lang="ts">
+	import type { LoadYear } from 'types/types';
+	export let data: LoadYear; // data from database
+
+	import Year from './year/[year]/year.svelte';
 </script>
 
-<Page displayedYear={currentYear} {currentYear} />
+<Year displayedYear={data.currentYear} currentYear={data.currentYear} loggedIn={data.loggedIn} />

@@ -1,10 +1,15 @@
-<script>
+<script lang="ts">
 	import LogoBig from './logoBig.svelte';
-	export let currentYear;
-	const startYear = 2024;
-	export let menu;
+	
+	export let currentYear: number;
+	export let menu: [string, string][];
 
-	const numbers = Array.from({ length: currentYear + 1 - startYear }, (_, i) => startYear + i);
+	const startYear: number = 2024;
+
+	const numbers: number[] = Array.from(
+		{ length: currentYear + 1 - startYear },
+		(_, i) => startYear + i
+	);
 </script>
 
 <footer>
@@ -44,7 +49,9 @@
 			habe 200 Wörter.
 		</p>
 
-		<LogoBig classList={'footer-img footer-nav-element'} />
+		<div class="nav-element">
+			<LogoBig />
+		</div>
 	</div>
 
 	<p class="copyright">&copy; Tech Stream Conference {currentYear}</p>
@@ -115,6 +122,12 @@
 
 	.discription {
 		overflow-wrap: normal;
+	}
+
+	:global(.logo-big) {
+		height: 10rem;
+		object-fit: contain;
+		max-height: 12rem;
 	}
 
 	.copyright {

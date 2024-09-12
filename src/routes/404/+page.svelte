@@ -8,9 +8,9 @@
 </script>
 
 <div class="wrapper">
-	<Headline>Impressum</Headline>
+	<Headline>404</Headline>
 	<Spacer --height="3rem" />
-	<TextLine --text-align="center">TODO: Hier kommt das Beste Impressum hin.</TextLine>
+	<TextLine --text-align="center">TODO: 404 Page.</TextLine>
 	<Spacer --height="5rem" />
 	<Button
 		on:click={() => {

@@ -1,8 +1,22 @@
 html {
     scroll-behavior: smooth;
+    box-sizing: border-box;
     --transition-duration: 0.3s;
+    --fast-transition-duration: 0.1s;
     --lines-color: #ccff57;
     --white-color: white;
+    --gray-color: gray;
+    --error-color: orange;
+    --light-gray-color: rgb(190, 190, 190);
+    --border-radius: 5px;
+    /*horizontal-break-1: 1280px;*/
+    /*horizontal-break-2: 600px;*/
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
 }
 
 body {
