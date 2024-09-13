@@ -1,30 +1,42 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import type { LoadImpressum } from 'types/types';
+	export let data: LoadImpressum; // data from database;
+
+	import Header from 'elements/header.svelte';
+	import Footer from 'elements/footer.svelte';
+	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
 
 	import Headline from 'elements/text/headline.svelte';
-	import TextLine from 'elements/text/textLine.svelte';
-	import Spacer from 'elements/spacer/spacer.svelte';
-	import Button from 'elements/input/button.svelte';
+
+	type MenuItem = [string, string];
+	const headerMenu: MenuItem[] = [
+		['Start', '/'],
+		['Anmelden', '/login'],
+		['Registrieren', '/register']
+	];
+	const headerMenuLoggedIn: MenuItem[] = [
+		['Start', '/'],
+		['Abmelden', '/logout']
+	];
+
+	const footerMenu: MenuItem[] = [
+		['Anmelden', '/login'],
+		['Registrieren', '/register']
+	];
+	const footerMenuLoggedIn: MenuItem[] = [['Intern', '/backend']];
 </script>
 
-<div class="wrapper">
+<Header menu={data.loggedIn ? headerMenuLoggedIn : headerMenu} />
+<SpacerHeader />
+
+<div class="content-wrapper">
 	<Headline>Impressum</Headline>
-	<Spacer --height="3rem" />
-	<TextLine --text-align="center">TODO: Hier kommt das Beste Impressum hin.</TextLine>
-	<Spacer --height="5rem" />
-	<Button
-		on:click={() => {
-			goto('/');
-		}}>Start</Button
-	>
 </div>
 
+<Footer menu={data.loggedIn ? footerMenuLoggedIn : footerMenu} currentYear={data.currentYear} />
+
 <style>
-	.wrapper {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		margin: 0 auto;
+	.content-wrapper {
 		min-height: 100vh;
 	}
 </style>

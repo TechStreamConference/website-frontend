@@ -15,9 +15,9 @@ export async function loadYear(fetch: Function, params: { year: string }): LoadY
     }
 
     return {
+        loggedIn,
         currentYear,
         displayedYear,
-        loggedIn,
     }
 }
 
@@ -27,8 +27,8 @@ export async function loadCurrentYear(fetch: Function): LoadYearPromise {
     const displayedYear: number = currentYear;
 
     return {
+        loggedIn,
         currentYear,
         displayedYear,
-        loggedIn,
     }
 }
