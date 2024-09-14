@@ -43,14 +43,12 @@
 		<HeadlinePage>Impressum</HeadlinePage>
 		<Spacer --height="5rem" />
 
-		<div class="adress-wrapper">
-			<TextLine>Michael Gerhold</TextLine>
-			<TextLine>c/o LEADERLY UG (haftungsbeschränkt)</TextLine>
-			<TextLine>Carl-Zeiss-Str. 4</TextLine>
-			<TextLine>14727 Premnitz OT Mögelin</TextLine>
-			<SpacerOneLine />
-			<TextLine>E-Mail: info@test-conf.de</TextLine>
-		</div>
+		<TextLine>Michael Gerhold</TextLine>
+		<TextLine>c/o LEADERLY UG (haftungsbeschränkt)</TextLine>
+		<TextLine>Carl-Zeiss-Str. 4</TextLine>
+		<TextLine>14727 Premnitz OT Mögelin</TextLine>
+		<SpacerOneLine />
+		<TextLine>E-Mail: <Link href="mailto:info@test-conf.de">info@test-conf.de</Link></TextLine>
 
 		<Spacer --height="5rem" />
 		<SubHeadline>Hinweis gemäß Online-Streitbeilegungs-Verordnung</SubHeadline>
@@ -139,8 +137,20 @@
 
 	.content-wrapper {
 		flex-grow: 1;
+		padding: 0 3rem;
+		max-width: 100rem;
+		margin: 0 auto;
 	}
 
-	.adress-wrapper {
+	@media (max-width: 1280px) {
+		.content-wrapper {
+			padding: 0 2rem;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.content-wrapper {
+			padding: 0 1.5rem;
+		}
 	}
 </style>
