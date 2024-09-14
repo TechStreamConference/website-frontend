@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { udpateLoginStatus } from 'helper/loggedIn';
+	import { udpateLoginStatusAsync } from 'helper/loggedIn';
 
-	async function logout(): Promise<void> {
+	async function logoutAsync(): Promise<void> {
 		const response: Response = await fetch('api/account/logout', { method: 'POST' });
 		if (!response.ok) {
 			return;
 		}
-		await udpateLoginStatus(fetch);
+		await udpateLoginStatusAsync(fetch);
 		goto('/');
 	}
 
-	logout();
+	logoutAsync();
 </script>
 
 <p>Logging out...</p>

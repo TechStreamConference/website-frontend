@@ -1,12 +1,12 @@
 import type { LoadYearPromise } from "types/types";
 
 import { redirect } from "@sveltejs/kit";
-import { getLoginStatus } from "helper/loggedIn";
+import { getLoginStatusAsync } from "helper/loggedIn";
 import { defaultCurrentYear } from "delete/toDelete";
 
 
-export async function loadYear(fetch: Function, params: { year: string }): LoadYearPromise {
-    const loggedIn: boolean = await getLoginStatus(fetch);
+export async function loadYearAsync(fetch: Function, params: { year: string }): LoadYearPromise {
+    const loggedIn: boolean = await getLoginStatusAsync(fetch);
     const currentYear: number = defaultCurrentYear;
     const displayedYear: number = Number(params.year);
 
@@ -21,8 +21,8 @@ export async function loadYear(fetch: Function, params: { year: string }): LoadY
     }
 }
 
-export async function loadCurrentYear(fetch: Function): LoadYearPromise {
-    const loggedIn: boolean = await getLoginStatus(fetch);
+export async function loadCurrentYearAsync(fetch: Function): LoadYearPromise {
+    const loggedIn: boolean = await getLoginStatusAsync(fetch);
     const currentYear: number = defaultCurrentYear;
     const displayedYear: number = currentYear;
 
