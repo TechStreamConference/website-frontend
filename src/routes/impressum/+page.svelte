@@ -48,7 +48,10 @@
 		<TextLine>Carl-Zeiss-Str. 4</TextLine>
 		<TextLine>14727 Premnitz OT Mögelin</TextLine>
 		<SpacerOneLine />
-		<TextLine>E-Mail: <Link href="mailto:info@test-conf.de">info@test-conf.de</Link></TextLine>
+		<TextLine
+			>E-Mail: <Link href="mailto:info@test-conf.de">info@test-conf.de</Link
+			></TextLine
+		>
 
 		<Spacer --height="5rem" />
 		<SubHeadline>Hinweis gemäß Online-Streitbeilegungs-Verordnung</SubHeadline>
