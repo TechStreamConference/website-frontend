@@ -14,17 +14,22 @@
 		text-align: var(--text-align);
 		margin: 0 auto;
 		align-self: center;
-		padding: 0.3rem;
-		border-radius: 0.6rem;
+		border-radius: 0.2rem;
 		text-decoration-color: var(--primary-color);
 		background-color: none;
 		transition: background-color var(--transition-duration);
 		transition: text-decoration-color var(--transition-duration);
+		outline: none;
+		outline-color: var(--third-color);
+		transition: outline var(--transition-duration);
 	}
 
 	a:hover {
 		background-color: var(--third-color);
-		transition: background-color var(--transition-duration);
+		transition: background-color outline-color var(--transition-duration);
+		outline: 0.5rem solid;
+		outline-color: var(--third-color);
+		transition: outline var(--transition-duration);
 	}
 
 	a:active {
