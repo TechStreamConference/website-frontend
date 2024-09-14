@@ -3,10 +3,9 @@
 	export let data: LoadRegister; // data from database
 
 	import Header from 'elements/header.svelte';
-	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
+	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import Footer from 'elements/footer.svelte';
 
-	import Headline from 'elements/text/headline.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import MessageWrapper from 'elements/messages/messageWrapper.svelte';
@@ -205,85 +204,79 @@
 <Header menu={headerMenu} />
 
 <div class="page">
-	<SpacerHeader />
-
 	<div class="content">
 		{#if !registered}
-			<Headline>Registrieren</Headline>
-			<form on:submit|preventDefault={register}>
-				<div class="width-wrapper">
-					<HorizontalLine />
-					<Spacer --height="3rem" />
-					<MessageWrapper>
-						<ErrorMessage message={loggedInMessage} />
-						<ErrorMessage message={usernameMessage} />
-						<ErrorMessage message={emailMessage} />
-						<ErrorMessage message={passwordMessage} />
-						{#each errorMessage as message}
-							<ErrorMessage {message} />
-						{/each}
-					</MessageWrapper>
-					<Spacer --height="2rem" />
-					<Input
-						id="register-username"
-						type="text"
-						labelText="Name:"
-						placeholderText="Name"
-						bind:value={username}
-						on:input={() => {
-							startTimer(timerUsernameRef, onUsernameChanged, 200);
-						}}
-					/>
-					<Spacer --height="1rem" />
-					<Input
-						id="register-email"
-						type="text"
-						labelText="E-Mail:"
-						placeholderText="E-Mail"
-						bind:value={email}
-						on:input={() => {
-							startTimer(timerEmailRef, onEmailChanged, 200);
-						}}
-					/>
-					<Spacer --height="1rem" />
-					<Input
-						id="register-password"
-						type="password"
-						labelText="Passwort:"
-						placeholderText="Passwort"
-						bind:value={password_1}
-						on:input={startPasswordTimer}
-					/>
-					<Spacer --height="1rem" />
-					<Input
-						id="register-password-repeat"
-						type="password"
-						labelText="Passwort wiederholen:"
-						placeholderText="Passwort wiederholen"
-						bind:value={password_2}
-						on:input={startPasswordTimer}
-					/>
-					<Spacer --height="3rem" />
-					<Button type={'submit'}>Registrieren</Button>
-					<div class="password-list-wrapper">
-						<Spacer --height="5rem" />
-						<TextLine>Dein Passwort sollte folgendes enthalten:</TextLine>
-						<Spacer --height="0.5rem" />
-						<List classes="padding-left">
-							<ListElement classes="dot">mind. 8 Zeichen</ListElement>
-							<ListElement classes="dot">mind. 1 Kleinbuchstaben</ListElement>
-							<ListElement classes="dot">mind. 1 Großbuchstaben</ListElement>
-							<ListElement classes="dot">mind. 1 Zahl</ListElement>
-							<ListElement classes="dot">mind. 1 Sonderzeichen</ListElement>
-						</List>
-					</div>
+			<form class="width-wrapper" on:submit|preventDefault={register}>
+				<HeadlinePage>Registrieren</HeadlinePage>
+				<Spacer --height="3rem" />
+				<MessageWrapper>
+					<ErrorMessage message={loggedInMessage} />
+					<ErrorMessage message={usernameMessage} />
+					<ErrorMessage message={emailMessage} />
+					<ErrorMessage message={passwordMessage} />
+					{#each errorMessage as message}
+						<ErrorMessage {message} />
+					{/each}
+				</MessageWrapper>
+				<Spacer --height="2rem" />
+				<Input
+					id="register-username"
+					type="text"
+					labelText="Name:"
+					placeholderText="Name"
+					bind:value={username}
+					on:input={() => {
+						startTimer(timerUsernameRef, onUsernameChanged, 200);
+					}}
+				/>
+				<Spacer --height="1rem" />
+				<Input
+					id="register-email"
+					type="text"
+					labelText="E-Mail:"
+					placeholderText="E-Mail"
+					bind:value={email}
+					on:input={() => {
+						startTimer(timerEmailRef, onEmailChanged, 200);
+					}}
+				/>
+				<Spacer --height="1rem" />
+				<Input
+					id="register-password"
+					type="password"
+					labelText="Passwort:"
+					placeholderText="Passwort"
+					bind:value={password_1}
+					on:input={startPasswordTimer}
+				/>
+				<Spacer --height="1rem" />
+				<Input
+					id="register-password-repeat"
+					type="password"
+					labelText="Passwort wiederholen:"
+					placeholderText="Passwort wiederholen"
+					bind:value={password_2}
+					on:input={startPasswordTimer}
+				/>
+				<Spacer --height="3rem" />
+				<Button type={'submit'}>Registrieren</Button>
+				<div class="password-list-wrapper">
+					<Spacer --height="5rem" />
+					<TextLine>Dein Passwort sollte folgendes enthalten:</TextLine>
+					<Spacer --height="0.5rem" />
+					<List classes="padding-left">
+						<ListElement classes="dot">mind. 8 Zeichen</ListElement>
+						<ListElement classes="dot">mind. 1 Kleinbuchstaben</ListElement>
+						<ListElement classes="dot">mind. 1 Großbuchstaben</ListElement>
+						<ListElement classes="dot">mind. 1 Zahl</ListElement>
+						<ListElement classes="dot">mind. 1 Sonderzeichen</ListElement>
+					</List>
 				</div>
 			</form>
 			<Spacer --height="3rem" />
 		{:else}
-			<Headline>Registriert</Headline>
 			<div class="width-wrapper-registered">
-				<HorizontalLine />
+				<HeadlinePage>Registriert</HeadlinePage>
 				<Spacer --height="7rem" />
 				<TextLine --text-align="center">Deine Registrierung war erfolgreich.</TextLine>
 				<Spacer --height="2rem" />

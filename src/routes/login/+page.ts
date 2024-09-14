@@ -9,7 +9,7 @@ export async function load({ fetch, url }: { fetch: typeof globalThis.fetch, url
 
     return {
         loggedIn,
+        currentYear,
         showLoginMessage,
-        currentYear
     };
 }

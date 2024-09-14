@@ -1,8 +1,9 @@
 <script lang="ts">
 	export let size: string = 'big';
+	export let classes: string = '';
 </script>
 
-<h1 class={size}><slot /></h1>
+<h1 class="{size} {classes}"><slot /></h1>
 
 <style>
 	h1 {
