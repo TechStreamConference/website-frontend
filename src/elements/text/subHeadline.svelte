@@ -7,7 +7,7 @@
 <style>
 	h2 {
 		font-family: gnuolane, sans-serif;
-		font-weight: 200;
+		font-weight: 500;
 		text-transform: capitalize;
 		font-style: normal;
 		color: var(--text-color);
