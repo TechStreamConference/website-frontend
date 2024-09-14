@@ -2,4 +2,4 @@
 	import Line from './line.svelte';
 </script>
 
-<Line --width="1px" --height="100%" />
+<Line --width="1px" />

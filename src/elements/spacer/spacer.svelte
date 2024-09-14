@@ -10,11 +10,6 @@
 		width: var(--width);
 	}
 
-	.header {
-		height: var(--height);
-		width: var(--width);
-	}
-
 	@media (max-width: 600px) {
 		div {
 			height: calc(var(--height) / 1.5);

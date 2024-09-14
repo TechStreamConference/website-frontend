@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	import Headline from 'elements/text/headline.svelte';
+	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import Button from 'elements/input/button.svelte';
 </script>
 
 <div class="wrapper">
-	<Headline>Backend</Headline>
+	<HeadlinePage>Backend</HeadlinePage>
 	<Spacer --height="3rem" />
 	<TextLine --text-align="center">TODO: Hier kommt das Beste Backend hin.</TextLine>
 	<Spacer --height="5rem" />

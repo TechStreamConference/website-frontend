@@ -6,10 +6,9 @@
 	import { udpateLoginStatus } from 'helper/loggedIn';
 
 	import Header from 'elements/header.svelte';
-	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
+	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import Footer from 'elements/footer.svelte';
 
-	import Headline from 'elements/text/headline.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import ErrorMessage from 'elements/messages/errorMessage.svelte';
@@ -63,12 +62,9 @@
 <Header menu={headerMenu} />
 
 <div class="page">
-	<SpacerHeader />
-
 	<div class="content">
-		<Headline>Anmelden</Headline>
 		<form class="width-wrapper" on:submit|preventDefault={login}>
-			<HorizontalLine />
+			<HeadlinePage>Anmelden</HeadlinePage>
 			<Spacer --height="3rem" />
 			<ErrorMessage message={loggedInMessage} />
 			<ErrorMessage message={displayLoginMessage} />
