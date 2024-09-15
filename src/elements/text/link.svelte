@@ -51,4 +51,8 @@
 		text-decoration-color: var(--lines-color);
 		transition: text-decoration-color var(--transition-duration);
 	}
+
+	.white {
+		color: var(--white-color);
+	}
 </style>

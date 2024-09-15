@@ -1,4 +1,8 @@
-<p><slot /></p>
+<script lang="ts">
+	export let classes: string = '';
+</script>
+
+<p class={classes}><slot /></p>
 
 <style>
 	p {
@@ -13,5 +17,9 @@
 		margin: 0;
 		text-align: var(--text-align);
 		width: var(--width);
+	}
+
+	.white {
+		color: var(--white-color);
 	}
 </style>

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import TextLine from "elements/text/textLine.svelte";
-	import List from "elements/list/list.svelte";
-	import ListElement from "elements/list/listElement.svelte";
-	import SpacerOneLine from "elements/spacer/spacerOneLine.svelte";
-	import Link from "elements/text/link.svelte";
-	import Paragraph from "elements/text/paragraph.svelte";
-	import LogoBig from "elements/image/logoBig.svelte";
+	import TextLine from 'elements/text/textLine.svelte';
+	import List from 'elements/list/list.svelte';
+	import ListElement from 'elements/list/listElement.svelte';
+	import SpacerOneLine from 'elements/spacer/spacerOneLine.svelte';
+	import Link from 'elements/text/link.svelte';
+	import Paragraph from 'elements/text/paragraph.svelte';
+	import LogoBig from 'elements/image/logoBig.svelte';
 
 	export let currentYear: number;
 	export let menu: [string, string][];
@@ -21,31 +21,31 @@
 <footer>
 	<div class="nav-wrapper">
 		<nav class="nav-element">
-			<TextLine>Menu:</TextLine>
+			<TextLine classes={'white'}>Menu:</TextLine>
 			<SpacerOneLine />
 			<List>
 				{#each menu as entry}
 					<ListElement>
-						<Link href={entry[1]}>{entry[0]}</Link>
+						<Link classes={'standart white'} href={entry[1]}>{entry[0]}</Link>
 					</ListElement>
 				{/each}
 			</List>
 		</nav>
 
 		<nav class="nav-element">
-			<TextLine>Alle Events:</TextLine>
+			<TextLine classes={'white'}>Alle Events:</TextLine>
 			<SpacerOneLine />
 			<List>
 				{#each numbers as number}
 					<ListElement>
-						<Link href="/year/{number}">{number}</Link>
+						<Link classes={'standart white'} href="/year/{number}">{number}</Link>
 					</ListElement>
 				{/each}
 			</List>
 		</nav>
 
 		<div class="nav-element">
-			<Paragraph>
+			<Paragraph classes={'white'}>
 				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
 				invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
 				et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
@@ -70,7 +70,7 @@
 	<SpacerOneLine />
 	<SpacerOneLine />
 	<div class="copyright">
-		<TextLine>&copy; Tech Stream Conference {currentYear}</TextLine>
+		<TextLine classes={'white'}>&copy; Tech Stream Conference {currentYear}</TextLine>
 	</div>
 </footer>
 
