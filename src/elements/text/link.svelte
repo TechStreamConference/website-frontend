@@ -6,7 +6,9 @@
 
 <style>
 	a {
-		font-size: 1.5rem;
+		font-size: 1rem;
+		letter-spacing: 1px;
+		line-height: 1.5rem;
 		font-family: gnuolane, sans-serif;
 		font-weight: 300;
 		font-style: normal;
@@ -27,17 +29,5 @@
 	a:active {
 		text-decoration-color: var(--lines-color);
 		transition: text-decoration-color var(--transition-duration);
-	}
-
-	@media (max-width: 1280px) {
-		a {
-			font-size: 1.3rem;
-		}
-	}
-
-	@media (max-width: 600px) {
-		a {
-			font-size: 1rem;
-		}
 	}
 </style>

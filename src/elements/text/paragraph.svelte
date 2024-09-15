@@ -2,7 +2,9 @@
 
 <style>
 	p {
-		font-size: 1.5rem;
+		font-size: 1rem;
+		letter-spacing: 1px;
+		line-height: 1.5rem;
 		font-family: gnuolane, sans-serif;
 		font-weight: 300;
 		font-style: normal;
@@ -11,19 +13,5 @@
 		margin: 0;
 		text-align: var(--text-align);
 		width: var(--width);
-		line-height: var(--line-height);
-		letter-spacing: var(--letter-spacing);
-	}
-
-	@media (max-width: 1280px) {
-		p {
-			font-size: 1.3rem;
-		}
-	}
-
-	@media (max-width: 600px) {
-		p {
-			font-size: 1rem;
-		}
 	}
 </style>

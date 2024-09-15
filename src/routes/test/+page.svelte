@@ -9,8 +9,8 @@
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
 
-	const letterSpacing: string[] = ['0px', '1px', '2px', '3px'];
-	const lineHeight: string[] = ['1.5rem', '1,75rem', '2rem', '2.25rem'];
+	const letterSpacing: string[] = ['1px', '2px'];
+	const lineHeight: string[] = ['1.25rem','1.5rem'];
 
 	const dummyMenu: [string, string][] = [['Start', '/']];
 </script>
