@@ -10,7 +10,7 @@
 	import Footer from 'elements/navigation/footer.svelte';
 
 	import Spacer from 'elements/spacer/spacer.svelte';
-	import ErrorMessage from 'elements/messages/errorMessage.svelte';
+	import ErrorMessage from 'elements/message/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
 	import Link from 'elements/text/link.svelte';
