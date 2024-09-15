@@ -12,24 +12,14 @@
 		background-color: var(--error-color);
 		color: var(--text-color);
 		padding: 0.5rem 1rem;
-		font-size: 1.5rem;
+		font-size: 1rem;
+		line-height: 1.5rem;
+		letter-spacing: 1px;
 		font-family: gnuolane, sans-serif;
 		font-weight: 500;
 		font-style: normal;
 		border-radius: var(--border-radius);
 		margin: 2px 0;
 		text-align: center;
-	}
-
-	@media (max-width: 1280px) {
-		p {
-			font-size: 1.3rem;
-		}
-	}
-
-	@media (max-width: 600px) {
-		p {
-			font-size: 1rem;
-		}
 	}
 </style>

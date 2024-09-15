@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { typeWorkaround } from 'types/workaround';
-	import Label from 'elements/label.svelte';
+	import Label from 'elements/text/label.svelte';
 
 	export let type: string = '';
 	export let id: string = '';
@@ -29,7 +29,9 @@
 	}
 
 	.wrapper :global(input) {
-		font-size: 1.5rem;
+		font-size: 1rem;
+		line-height: 1.5rem;
+		letter-spacing: 1px;
 		font-family: gnuolane, sans-serif;
 		font-weight: 500;
 		font-style: normal;
@@ -39,17 +41,5 @@
 		border: none;
 		padding: 0.5rem;
 		width: 100%;
-	}
-
-	@media (max-width: 1280px) {
-		.wrapper :global(input) {
-			font-size: 1.3rem;
-		}
-	}
-
-	@media (max-width: 600px) {
-		.wrapper :global(input) {
-			font-size: 1rem;
-		}
 	}
 </style>

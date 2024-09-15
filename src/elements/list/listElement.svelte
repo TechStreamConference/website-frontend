@@ -8,7 +8,9 @@
 
 <style>
 	li {
-		font-size: 1.5rem;
+		font-size: 1rem;
+		line-height: 1.5rem;
+		letter-spacing: 1px;
 		font-family: gnuolane, sans-serif;
 		font-weight: 500;
 		font-style: normal;
@@ -19,17 +21,5 @@
 
 	.dot {
 		list-style-type: disc;
-	}
-
-	@media (max-width: 1280px) {
-		li {
-			font-size: 1.3rem;
-		}
-	}
-
-	@media (max-width: 600px) {
-		li {
-			font-size: 1rem;
-		}
 	}
 </style>

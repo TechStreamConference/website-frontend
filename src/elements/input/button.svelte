@@ -14,7 +14,9 @@
 		transition: var(--transition-duration);
 		padding: 1rem 2rem;
 		margin: 0 auto;
-		font-size: 1.5rem;
+		font-size: 1rem;
+		line-height: 1.5rem;
+		letter-spacing: 1px;
 		font-family: gnuolane, sans-serif;
 		font-weight: 500;
 		font-style: normal;
@@ -46,18 +48,6 @@
 		button:active {
 			box-shadow: 2px 2px var(--light-gray-color);
 			transition: var(--fast-transition-duration);
-		}
-	}
-
-	@media (max-width: 1280px) {
-		button {
-			font-size: 1.3rem;
-		}
-	}
-
-	@media (max-width: 600px) {
-		button {
-			font-size: 1rem;
 		}
 	}
 </style>
