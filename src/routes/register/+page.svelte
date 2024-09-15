@@ -77,7 +77,7 @@
 		return password_1.trim() === password_2.trim();
 	}
 
-	async function onUsernameChanged(): Promise<void> {
+	async function onUsernameChangedAsync(): Promise<void> {
 		const reset: Function = (): void => {
 			usernameMessage = '';
 		};
@@ -112,7 +112,7 @@
 		reset();
 	}
 
-	async function onEmailChanged(): Promise<void> {
+	async function onEmailChangedAsync(): Promise<void> {
 		const reset: Function = (): void => {
 			emailMessage = '';
 		};
@@ -168,7 +168,7 @@
 		reset();
 	}
 
-	async function register(): Promise<void> {
+	async function registerAsync(): Promise<void> {
 		if (!samePassword()) {
 			return;
 		}
@@ -188,12 +188,12 @@
 		});
 
 		if (!response.ok) {
-			const entries = async (response: Response): Promise<string[]> => {
+			const entriesAsync = async (response: Response): Promise<string[]> => {
 				const text: string = await response.text();
 				const j: { [key: string]: string } = JSON.parse(text);
 				return Object.values(j);
 			};
-			errorMessage = await entries(response);
+			errorMessage = await entriesAsync(response);
 			return;
 		}
 		reset();
@@ -206,7 +206,7 @@
 <div class="page">
 	<div class="content">
 		{#if !registered}
-			<form class="width-wrapper" on:submit|preventDefault={register}>
+			<form class="width-wrapper" on:submit|preventDefault={registerAsync}>
 				<HeadlinePage>Registrieren</HeadlinePage>
 				<Spacer --height="3rem" />
 				<MessageWrapper>
@@ -226,7 +226,7 @@
 					placeholderText="Name"
 					bind:value={username}
 					on:input={() => {
-						startTimer(timerUsernameRef, onUsernameChanged, 200);
+						startTimer(timerUsernameRef, onUsernameChangedAsync, 200);
 					}}
 				/>
 				<Spacer --height="1rem" />
@@ -237,7 +237,7 @@
 					placeholderText="E-Mail"
 					bind:value={email}
 					on:input={() => {
-						startTimer(timerEmailRef, onEmailChanged, 200);
+						startTimer(timerEmailRef, onEmailChangedAsync, 200);
 					}}
 				/>
 				<Spacer --height="1rem" />

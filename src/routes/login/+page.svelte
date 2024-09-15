@@ -3,7 +3,7 @@
 	export let data: LoadLogin; // data from database
 
 	import { goto } from '$app/navigation';
-	import { udpateLoginStatus } from 'helper/loggedIn';
+	import { udpateLoginStatusAsync } from 'helper/loggedIn';
 
 	import Header from 'elements/header.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
@@ -33,7 +33,7 @@
 	const displayLoginMessage = data.showLoginMessage ? 'Du musst dich zunächst anmelden.' : '';
 	let errorMessage: string = '';
 
-	async function login(): Promise<void> {
+	async function loginAsync(): Promise<void> {
 		const data = {
 			username_or_email: usernameOrEmail.trim(),
 			password: password.trim()
@@ -45,17 +45,17 @@
 		});
 
 		if (response.ok) {
-			await udpateLoginStatus(fetch);
+			await udpateLoginStatusAsync(fetch);
 			goto('/backend');
 			return;
 		}
 
-		const entries = async (response: Response): Promise<string> => {
+		const entriesAsync = async (response: Response): Promise<string> => {
 			const text: string = await response.text();
 			const json: { [key: string]: string } = JSON.parse(text);
 			return Object.values(json)[0];
 		};
-		errorMessage = await entries(response);
+		errorMessage = await entriesAsync(response);
 	}
 </script>
 
@@ -63,7 +63,7 @@
 
 <div class="page">
 	<div class="content">
-		<form class="width-wrapper" on:submit|preventDefault={login}>
+		<form class="width-wrapper" on:submit|preventDefault={loginAsync}>
 			<HeadlinePage>Anmelden</HeadlinePage>
 			<Spacer --height="3rem" />
 			<ErrorMessage message={loggedInMessage} />
