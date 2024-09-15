@@ -5,7 +5,7 @@
 	import SpacerOneLine from "elements/spacer/spacerOneLine.svelte";
 	import Link from "elements/text/link.svelte";
 	import Paragraph from "elements/text/paragraph.svelte";
-	import LogoBig from "elements/logoBig.svelte";
+	import LogoBig from "elements/image/logoBig.svelte";
 
 	export let currentYear: number;
 	export let menu: [string, string][];
