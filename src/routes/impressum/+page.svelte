@@ -2,9 +2,9 @@
 	import type { LoadImpressum } from 'types/types';
 	export let data: LoadImpressum; // data from database;
 
-	import Header from 'elements/header.svelte';
+	import Header from 'elements/navigation/header.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
-	import Footer from 'elements/footer.svelte';
+	import Footer from 'elements/navigation/footer.svelte';
 
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import SpacerOneLine from 'elements/spacer/spacerOneLine.svelte';

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import List from './list/list.svelte';
-	import ListElement from './list/listElement.svelte';
-	import Link from './text/link.svelte';
-	import LogoBig from './logoBig.svelte';
-	import Paragraph from './text/paragraph.svelte';
-	import TextLine from './text/textLine.svelte';
-	import SpacerOneLine from './spacer/spacerOneLine.svelte';
+	import TextLine from "elements/text/textLine.svelte";
+	import List from "elements/list/list.svelte";
+	import ListElement from "elements/list/listElement.svelte";
+	import SpacerOneLine from "elements/spacer/spacerOneLine.svelte";
+	import Link from "elements/text/link.svelte";
+	import Paragraph from "elements/text/paragraph.svelte";
+	import LogoBig from "elements/logoBig.svelte";
 
 	export let currentYear: number;
 	export let menu: [string, string][];

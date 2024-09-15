@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LogoSmall from './logoSmall.svelte';
+	import LogoSmall from '../logoSmall.svelte';
 	import { fade } from 'svelte/transition';
 
 	export let menu: [string, string][];
