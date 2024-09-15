@@ -86,11 +86,11 @@
 			/>
 			<Spacer --height="1.5rem" />
 			<Link href="/register">Noch keinen Account?</Link>
-			<Spacer --height="5rem" />
+			<Spacer --height="3rem" />
 			<div class="button-wrapper">
 				<Button type="submit">Anmelden</Button>
 			</div>
-			<Spacer --height="3rem" />
+			<Spacer --height="5rem" />
 		</form>
 	</div>
 
@@ -108,7 +108,7 @@
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
-		margin: 3rem;
+		margin: 0 3rem;
 	}
 
 	.width-wrapper {

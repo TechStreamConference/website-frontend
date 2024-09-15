@@ -260,7 +260,7 @@
 				<Spacer --height="3rem" />
 				<Button type={'submit'}>Registrieren</Button>
 				<div class="password-list-wrapper">
-					<Spacer --height="5rem" />
+					<Spacer --height="3rem" />
 					<TextLine>Dein Passwort sollte folgendes enthalten:</TextLine>
 					<Spacer --height="0.5rem" />
 					<List classes="padding-left">
@@ -272,7 +272,7 @@
 					</List>
 				</div>
 			</form>
-			<Spacer --height="3rem" />
+			<Spacer --height="5rem" />
 		{:else}
 			<div class="width-wrapper-registered">
 				<HeadlinePage>Registriert</HeadlinePage>
@@ -293,7 +293,7 @@
 					</a>
 				</div>
 			</div>
-			<Spacer --height="3rem" />
+			<Spacer --height="5rem" />
 		{/if}
 	</div>
 
@@ -311,7 +311,7 @@
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
-		margin: 3rem;
+		margin: 0 3rem;
 	}
 
 	a {

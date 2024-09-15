@@ -127,7 +127,7 @@
 			Nutzungsbedingungen. Quelle:
 			<Link classes="inline" href="https://www.juraforum.de/" newTab={true}>Hier ansehen >></Link>
 		</Paragraph>
-		<Spacer --height="5rem" />
+		<Spacer --height="7rem" />
 	</div>
 
 	<Footer menu={data.loggedIn ? footerMenuLoggedIn : footerMenu} currentYear={data.currentYear} />
