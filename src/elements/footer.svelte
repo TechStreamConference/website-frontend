@@ -1,6 +1,12 @@
 <script lang="ts">
+	import List from './list/list.svelte';
+	import ListElement from './list/listElement.svelte';
+	import Link from './text/link.svelte';
 	import LogoBig from './logoBig.svelte';
-	
+	import Paragraph from './text/paragraph.svelte';
+	import TextLine from './text/textLine.svelte';
+	import SpacerOneLine from './spacer/spacerOneLine.svelte';
+
 	export let currentYear: number;
 	export let menu: [string, string][];
 
@@ -15,46 +21,57 @@
 <footer>
 	<div class="nav-wrapper">
 		<nav class="nav-element">
-			<p class="Headline">Menu:</p>
-			<ul>
+			<TextLine>Menu:</TextLine>
+			<SpacerOneLine />
+			<List>
 				{#each menu as entry}
-					<li><a href={entry[1]}>{entry[0]}</a></li>
+					<ListElement>
+						<Link href={entry[1]}>{entry[0]}</Link>
+					</ListElement>
 				{/each}
-			</ul>
+			</List>
 		</nav>
 
 		<nav class="nav-element">
-			<p class="Headline">Alle Events:</p>
-			<ul>
+			<TextLine>Alle Events:</TextLine>
+			<SpacerOneLine />
+			<List>
 				{#each numbers as number}
-					<li><a href="/year/{number}">{number}</a></li>
+					<ListElement>
+						<Link href="/year/{number}">{number}</Link>
+					</ListElement>
 				{/each}
-			</ul>
+			</List>
 		</nav>
 
-		<p class="discription nav-element">
-			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-			invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-			justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-			ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-			eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
-			et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-			sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
-			elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-			diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-			gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure
-			dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat
-			nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-			zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, -- ich
-			habe 200 Wörter.
-		</p>
+		<div class="nav-element">
+			<Paragraph>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+				invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+				et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+				diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+				voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+				gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+				amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+				dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+				et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+				amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+				consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto
+				odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
+				nulla facilisi. Lorem ipsum dolor sit amet, -- ich habe 200 Wörter.
+			</Paragraph>
+		</div>
 
 		<div class="nav-element">
 			<LogoBig />
 		</div>
 	</div>
-
-	<p class="copyright">&copy; Tech Stream Conference {currentYear}</p>
+	<SpacerOneLine />
+	<SpacerOneLine />
+	<div class="copyright">
+		<TextLine>&copy; Tech Stream Conference {currentYear}</TextLine>
+	</div>
 </footer>
 
 <style>
@@ -86,44 +103,6 @@
 		text-align: center;
 	}
 
-	ul {
-		display: flex;
-		flex-direction: column;
-		margin: 0;
-		padding: 0;
-	}
-
-	li {
-		list-style: none;
-		padding: 0.2rem 0;
-	}
-
-	.Headline {
-		padding-left: 0.2rem;
-		padding-bottom: 1rem;
-	}
-
-	a {
-		text-decoration: none;
-		color: var(--white-color);
-		padding: 0.3rem;
-		border-radius: 0.6rem;
-	}
-
-	a:hover {
-		background-color: var(--third-color);
-		transition: background-color var(--transition-duration);
-	}
-
-	p {
-		margin: 0;
-		padding: 0;
-	}
-
-	.discription {
-		overflow-wrap: normal;
-	}
-
 	:global(.logo-big) {
 		height: 10rem;
 		object-fit: contain;
@@ -131,10 +110,7 @@
 	}
 
 	.copyright {
-		padding-top: 1rem;
 		display: flex;
-		flex-direction: row;
 		justify-content: center;
-		font-size: 0.8rem;
 	}
 </style>

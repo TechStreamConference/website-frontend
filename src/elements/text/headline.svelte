@@ -17,23 +17,12 @@
 		margin: 0;
 	}
 	.big {
-		font-size: 5rem;
-		line-height: 6rem;
-	}
-	.small {
 		font-size: 3rem;
 		line-height: 4rem;
 	}
-
-	@media (max-width: 1280px) {
-		.big {
-			font-size: 4rem;
-			line-height: 5rem;
-		}
-		.small {
-			font-size: 2rem;
-			line-height: 2.5rem;
-		}
+	.small {
+		font-size: 2rem;
+		line-height: 3rem;
 	}
 
 	@media (max-width: 600px) {
