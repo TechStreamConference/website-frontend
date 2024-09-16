@@ -2,7 +2,7 @@ type RegisterDict = {
     [key: string]: string;
 };
 
-const registerLookup: RegisterDict = {
+const lookup: RegisterDict = {
     // username
     "The username field is required.": "Server: Das Namens Feld ist erforderlich.",
     "The username field must be at least 3 characters in length.": "Server: Der Name muss mindestens aus 3 Zeichen bestehen.",
@@ -22,10 +22,9 @@ const registerLookup: RegisterDict = {
     "PASSWORD_MISSING_SPECIAL_CHARACTER": "Server: Deinem Passwort fehlt ein Sonderzeichen.",
 };
 
-export function RegisterLookup(key: string): string {
-    console.log("lookup key: " + key);
-    if (key in registerLookup) {
-        return registerLookup[key];
+export function registerLookup(key: string): string {
+    if (key in lookup) {
+        return lookup[key];
     }
 
     return key;

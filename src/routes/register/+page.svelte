@@ -16,7 +16,7 @@
 	import Button from 'elements/input/button.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 
-	import { RegisterLookup } from 'lookup/registerLookup';
+	import { registerLookup } from 'lookup/registerLookup';
 
 	type MenuItem = [string, string];
 	const headerMenu: MenuItem[] = [
@@ -192,12 +192,10 @@
 			const entriesAsync = async (response: Response): Promise<string[]> => {
 				const text: string = await response.text();
 				const json: { [key: string]: string } = JSON.parse(text);
-				console.log(json);
 				const values: string[] = Object.values(json);
-				console.log(values);
 				let toReturn: string[] = [];
 				for (const value of values) {
-					toReturn.push(RegisterLookup(value));
+					toReturn.push(registerLookup(value));
 				}
 				return toReturn;
 			};
