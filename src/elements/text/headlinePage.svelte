@@ -21,16 +21,16 @@
 		width: fit-content;
 	}
 
-	@media (max-width: 600px) {
+	@media (max-width: 1280px) {
 		:global(.headline) {
-			padding: 0 1rem;
+			padding: 0 2rem;
 			width: fit-content;
 		}
 	}
 
-	@media (max-width: 1280px) {
+	@media (max-width: 600px) {
 		:global(.headline) {
-			padding: 0 2rem;
+			padding: 0 1rem;
 			width: fit-content;
 		}
 	}

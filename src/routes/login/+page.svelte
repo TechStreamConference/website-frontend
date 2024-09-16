@@ -5,13 +5,12 @@
 	import { goto } from '$app/navigation';
 	import { udpateLoginStatusAsync } from 'helper/loggedIn';
 
-	import Header from 'elements/header.svelte';
+	import Header from 'elements/navigation/header.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
-	import Footer from 'elements/footer.svelte';
+	import Footer from 'elements/navigation/footer.svelte';
 
-	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
-	import ErrorMessage from 'elements/messages/errorMessage.svelte';
+	import ErrorMessage from 'elements/message/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
 	import Link from 'elements/text/link.svelte';
@@ -87,11 +86,11 @@
 			/>
 			<Spacer --height="1.5rem" />
 			<Link href="/register">Noch keinen Account?</Link>
-			<Spacer --height="5rem" />
+			<Spacer --height="3rem" />
 			<div class="button-wrapper">
 				<Button type="submit">Anmelden</Button>
 			</div>
-			<Spacer --height="3rem" />
+			<Spacer --height="5rem" />
 		</form>
 	</div>
 
@@ -109,7 +108,7 @@
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
-		margin: 3rem;
+		margin: 0 3rem;
 	}
 
 	.width-wrapper {

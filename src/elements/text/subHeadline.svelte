@@ -6,37 +6,20 @@
 
 <style>
 	h2 {
+		letter-spacing: 1px;
 		font-family: gnuolane, sans-serif;
-		font-weight: 200;
+		font-weight: 500;
 		text-transform: capitalize;
 		font-style: normal;
 		color: var(--text-color);
 		margin: 0;
 	}
 	.big {
-		font-size: 3rem;
+		font-size: 1.5rem;
+		line-height: 2rem;
 	}
 	.small {
-		font-size: 1.5rem;
-	}
-
-	@media (max-width: 1280px) {
-		.big {
-			font-size: 2.5rem;
-		}
-
-		.small {
-			font-size: 1.5rem;
-		}
-	}
-
-	@media (max-width: 600px) {
-		.big {
-			font-size: 2rem;
-		}
-
-		.small {
-			font-size: 1rem;
-		}
+		font-size: 1.2rem;
+		line-height: 1.7rem;
 	}
 </style>

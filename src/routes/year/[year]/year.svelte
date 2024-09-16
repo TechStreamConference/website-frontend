@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Header from 'elements/header.svelte';
-	import Footer from 'elements/footer.svelte';
+	import Header from 'elements/navigation/header.svelte';
+	import Footer from 'elements/navigation/footer.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
 
 	export let displayedYear: number;

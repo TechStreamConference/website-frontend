@@ -6,13 +6,7 @@
 
 <style>
 	:global(.header-spacer) {
-		height: 7rem !important;
-	}
-
-	@media (max-width: 600px) {
-		:global(.header-spacer) {
-			height: 6rem !important;
-		}
+		height: 9rem !important;
 	}
 
 	@media (max-width: 1280px) {

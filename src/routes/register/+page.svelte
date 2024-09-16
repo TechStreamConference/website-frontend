@@ -2,14 +2,13 @@
 	import type { LoadRegister } from 'types/types';
 	export let data: LoadRegister; // data from database
 
-	import Header from 'elements/header.svelte';
+	import Header from 'elements/navigation/header.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
-	import Footer from 'elements/footer.svelte';
+	import Footer from 'elements/navigation/footer.svelte';
 
-	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
-	import MessageWrapper from 'elements/messages/messageWrapper.svelte';
-	import ErrorMessage from 'elements/messages/errorMessage.svelte';
+	import MessageWrapper from 'elements/message/messageWrapper.svelte';
+	import ErrorMessage from 'elements/message/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
 	import List from 'elements/list/list.svelte';
@@ -261,7 +260,7 @@
 				<Spacer --height="3rem" />
 				<Button type={'submit'}>Registrieren</Button>
 				<div class="password-list-wrapper">
-					<Spacer --height="5rem" />
+					<Spacer --height="3rem" />
 					<TextLine>Dein Passwort sollte folgendes enthalten:</TextLine>
 					<Spacer --height="0.5rem" />
 					<List classes="padding-left">
@@ -273,7 +272,7 @@
 					</List>
 				</div>
 			</form>
-			<Spacer --height="3rem" />
+			<Spacer --height="5rem" />
 		{:else}
 			<div class="width-wrapper-registered">
 				<HeadlinePage>Registriert</HeadlinePage>
@@ -294,7 +293,7 @@
 					</a>
 				</div>
 			</div>
-			<Spacer --height="3rem" />
+			<Spacer --height="5rem" />
 		{/if}
 	</div>
 
@@ -312,7 +311,7 @@
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
-		margin: 3rem;
+		margin: 0 3rem;
 	}
 
 	a {

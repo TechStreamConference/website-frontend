@@ -2,9 +2,9 @@
 	import type { LoadImpressum } from 'types/types';
 	export let data: LoadImpressum; // data from database;
 
-	import Header from 'elements/header.svelte';
+	import Header from 'elements/navigation/header.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
-	import Footer from 'elements/footer.svelte';
+	import Footer from 'elements/navigation/footer.svelte';
 
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import SpacerOneLine from 'elements/spacer/spacerOneLine.svelte';
@@ -48,10 +48,10 @@
 		<TextLine>Carl-Zeiss-Str. 4</TextLine>
 		<TextLine>14727 Premnitz OT Mögelin</TextLine>
 		<SpacerOneLine />
-		<TextLine
-			>E-Mail: <Link href="mailto:info@test-conf.de">info@test-conf.de</Link
-			></TextLine
-		>
+		<TextLine>
+			E-Mail:
+			<Link classes="inline" href="mailto:info@test-conf.de" newTab={true}>info@test-conf.de</Link>
+		</TextLine>
 
 		<Spacer --height="5rem" />
 		<SubHeadline>Hinweis gemäß Online-Streitbeilegungs-Verordnung</SubHeadline>
@@ -63,8 +63,10 @@
 			genutzt werden kann, ohne dass ein Gericht eingeschaltet werden muss. Für die Einrichtung der
 			Plattform ist die Europäische Kommission zuständig. Die Europäische
 			Online-Streitbeilegungs-Plattform ist hier zu finden:
-			<Link href="http://ec.europa.eu/odr">http://ec.europa.eu/odr</Link>. Unsere E-Mail lautet:
-			<Link href="mailto:info@test-conf.de">info@test-conf.de</Link>
+			<Link classes="inline" href="http://ec.europa.eu/odr" newTab={true}>
+				http://ec.europa.eu/odr</Link
+			>. Unsere E-Mail lautet:
+			<Link classes="inline" href="mailto:info@test-conf.de" newTab={true}>info@test-conf.de</Link>
 		</Paragraph>
 		<SpacerOneLine />
 		<Paragraph>
@@ -123,9 +125,9 @@
 			Website von den vorgenannten Paragraphen abweichen, wird an entsprechender Stelle ausdrücklich
 			darauf hingewiesen. In diesem Falle gelten im jeweiligen Einzelfall die besonderen
 			Nutzungsbedingungen. Quelle:
-			<Link href="https://www.juraforum.de/">Hier ansehen >></Link>
+			<Link classes="inline" href="https://www.juraforum.de/" newTab={true}>Hier ansehen >></Link>
 		</Paragraph>
-		<Spacer --height="5rem" />
+		<Spacer --height="7rem" />
 	</div>
 
 	<Footer menu={data.loggedIn ? footerMenuLoggedIn : footerMenu} currentYear={data.currentYear} />
