@@ -15,6 +15,8 @@
 	import Button from 'elements/input/button.svelte';
 	import Link from 'elements/text/link.svelte';
 
+	import { loginLookup } from 'lookup/loginLookup';
+
 	type MenuItem = [string, string];
 	const headerMenu: MenuItem[] = [
 		['Start', '/'],
@@ -52,7 +54,7 @@
 		const entriesAsync = async (response: Response): Promise<string> => {
 			const text: string = await response.text();
 			const json: { [key: string]: string } = JSON.parse(text);
-			return Object.values(json)[0];
+			return loginLookup(Object.values(json)[0]);
 		};
 		errorMessage = await entriesAsync(response);
 	}
