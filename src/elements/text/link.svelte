@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let classes: string = 'standart';
+	export let classes: string = 'standard';
 	export let href: string = '';
 	export let newTab: boolean = false;
 </script>
@@ -24,11 +24,11 @@
 		text-decoration: none;
 	}
 
-	.standart {
+	.standard {
 		transition: background-color var(--transition-duration);
 	}
 
-	.standart:hover {
+	.standard:hover {
 		background-color: var(--third-color);
 		transition: background-color var(--transition-duration);
 	}

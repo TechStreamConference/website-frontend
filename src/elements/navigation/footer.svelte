@@ -26,7 +26,7 @@
 			<List>
 				{#each menu as entry}
 					<ListElement>
-						<Link classes={'standart white'} href={entry[1]}>{entry[0]}</Link>
+						<Link classes={'standard white'} href={entry[1]}>{entry[0]}</Link>
 					</ListElement>
 				{/each}
 			</List>
@@ -38,7 +38,7 @@
 			<List>
 				{#each numbers as number}
 					<ListElement>
-						<Link classes={'standart white'} href="/year/{number}">{number}</Link>
+						<Link classes={'standard white'} href="/year/{number}">{number}</Link>
 					</ListElement>
 				{/each}
 			</List>
