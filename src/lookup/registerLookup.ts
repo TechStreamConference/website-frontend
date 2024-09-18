@@ -4,7 +4,7 @@ type RegisterDict = {
 
 const lookup: RegisterDict = {
     // username
-    "The username field is required.": "Server: Das Feld 'Namen' ist erforderlich.",
+    "The username field is required.": "Server: Das Feld 'Name' ist erforderlich.",
     "The username field must be at least 3 characters in length.": "Server: Der Name muss mindestens aus 3 Zeichen bestehen.",
     "The username field cannot exceed 30 characters in length.": "Server: Der Name darf maximal aus 30 Zeichen bestehen.",
 
