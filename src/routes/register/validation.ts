@@ -14,14 +14,14 @@ export async function onUsernameChanged(username: string, fetch: Function): Prom
     if (trimmed.length < 3) {
         return {
             valid: false,
-            message: 'Der Name muss mindestens 3 Zeichen haben.',
+            message: 'Der Name muss mindestens 3 Zeichen enthalten.',
         };
     }
 
     if (trimmed.length > 30) {
         return {
             valid: false,
-            message: 'Der Name darf maximal 30 Zeichen haben.',
+            message: 'Der Name darf maximal 30 Zeichen enthalten.',
         };
     }
 
@@ -130,11 +130,41 @@ export function onPasswordChanged(password_1: string, password_2: string): Valid
     if (trimmed.length < 8) {
         return {
             valid: false,
-            message: 'Das Password muss mindestens 3 Zeichen haben.'
+            message: 'Das Password muss mindestens 8 Zeichen enthalten.'
         };
     }
 
-    // TODO: Check for valid password
+    const hasLowerCase: boolean = /[a-z]/.test(trimmed);
+    if (!hasLowerCase) {
+        return {
+            valid: false,
+            message: 'Das Passwort muss mindestens ein kleinen Buchstaben enthalten.'
+        }
+    }
+
+    const hasUpperCase: boolean = /[A-Z]/.test(trimmed);
+    if (!hasUpperCase) {
+        return {
+            valid: false,
+            message: 'Das Passwort muss mindestens ein großen Buchstaben enthalten.'
+        }
+    }
+
+    const hasNumber: boolean = /[1-9]/.test(trimmed);
+    if (!hasNumber) {
+        return {
+            valid: false,
+            message: 'Das Passwort muss mindestens eine Zahl enthalten.'
+        }
+    }
+
+    const hasSpecialCharacter: boolean = /[!@#$%^&*()\-_+=\{};:,<.>§~ ]/.test(trimmed);
+    if (!hasSpecialCharacter) {
+        return {
+            valid: false,
+            message: 'Das Passwort muss mindestens ein Sonderzeichen enthalten.'
+        }
+    }
 
     return {
         valid: true,
