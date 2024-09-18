@@ -69,9 +69,9 @@ export async function onMailChanged(mail: string, fetch: Function): Promise<Vali
     }
 
     const valid: boolean = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
-    if (! valid){
+    if (!valid) {
         return {
-            valid:false,
+            valid: false,
             message: "Die angegebene E-Mail ist keine gültige E-Mail."
         }
     }
