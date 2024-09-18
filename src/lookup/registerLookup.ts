@@ -21,7 +21,7 @@ const lookup: RegisterDict = {
     "PASSWORD_TOO_SHORT": "Server: Dein Passwort ist zu kurz. Mindestanzahl: 8 Zeichen",
     "PASSWORD_MISSING_LOWERCASE_LETTER": "Server: Deinem Passwort fehlt ein kleiner Buchstabe.",
     "PASSWORD_MISSING_UPPERCASE_LETTER": "Server: Deinem Passwort fehlt ein großer Buchstabe.",
-    "PASSWORD_MISSING_NUMBER": "Server; Deinem Passwort fehlt eine Zahl.",
+    "PASSWORD_MISSING_NUMBER": "Server: Deinem Passwort fehlt eine Zahl.",
     "PASSWORD_MISSING_SPECIAL_CHARACTER": "Server: Deinem Passwort fehlt ein Sonderzeichen.",
 };
 
