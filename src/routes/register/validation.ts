@@ -68,7 +68,13 @@ export async function onMailChanged(mail: string, fetch: Function): Promise<Vali
         }
     }
 
-    // TODO: check for valid email
+    const valid: boolean = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+    if (! valid){
+        return {
+            valid:false,
+            message: "Die angegebene E-Mail ist keine gültige E-Mail."
+        }
+    }
 
     const response: Response = await fetch('api/account/email/exists?email=' + trimmed);
     if (!response.ok) {
