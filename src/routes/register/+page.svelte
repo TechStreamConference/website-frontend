@@ -2,6 +2,8 @@
 	import type { LoadRegister } from 'types/loadTypes';
 	export let data: LoadRegister; // data from database
 
+	import * as Validators from './validation';
+
 	import Header from 'elements/navigation/header.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
@@ -45,7 +47,7 @@
 	let usernameMessage: string = '';
 	let emailMessage: string = '';
 	let passwordMessage: string = '';
-	let errorMessage: string[] = [''];
+	let errorMessages: string[] = [''];
 
 	let registered: boolean = false;
 
@@ -74,110 +76,39 @@
 		onPasswordChanged();
 	}
 
-	function samePassword(): boolean {
-		return password_1.trim() === password_2.trim();
-	}
-
 	async function onUsernameChangedAsync(): Promise<void> {
-		const reset: Function = (): void => {
-			usernameMessage = '';
-		};
-
-		if (username.trim() === '') {
-			reset();
-			return;
-		}
-
-		const response: Response = await fetch(
-			'api/account/username/exists?username=' + username.trim()
-		);
-		if (!response.ok) {
-			console.error('Fehler beim überprüfen des Namen. Fehlercode: ' + response.status);
-			return;
-		}
-
-		let data: { exists: boolean };
-		try {
-			data = await response.json();
-		} catch (error) {
-			console.error('error while parsing username json', error);
-			reset();
-			return;
-		}
-
-		if (data.exists) {
-			usernameMessage = 'Der Name  "' + username.trim() + '" ist bereits vergeben.';
-			return;
-		}
-
-		reset();
+		const result = await Validators.onUsernameChanged(username, fetch);
+		usernameMessage = result.message;
 	}
 
 	async function onEmailChangedAsync(): Promise<void> {
-		const reset: Function = (): void => {
-			emailMessage = '';
-		};
-
-		if (email.trim() === '') {
-			reset();
-			return;
-		}
-
-		const response: Response = await fetch('api/account/email/exists?email=' + email.trim());
-		if (!response.ok) {
-			console.error('Fehler beim überprüfen der E-Mail. Fehlercode: ' + response.status);
-			return;
-		}
-
-		let data: { exists: boolean };
-		try {
-			data = await response.json();
-		} catch (error) {
-			console.error('error while parsing email json', error);
-			reset();
-			return;
-		}
-
-		if (data.exists) {
-			emailMessage = 'Die E-Mail "' + email.trim() + '" wird bereits verwendet.';
-			return;
-		}
-
-		reset();
+		const result = await Validators.onMailChanged(email, fetch);
+		emailMessage = result.message;
 	}
 
 	function onPasswordChanged(): void {
-		const reset: Function = (): void => {
-			passwordMessage = '';
-		};
+		const result = Validators.onPasswordChanged(password_1, password_2);
+		passwordMessage = result.message;
+	}
 
-		if (password_1.trim() === '') {
-			reset();
+	async function tryRegisterAsync(): Promise<void> {
+		const nameResult = await Validators.onUsernameChanged(username, fetch);
+		const mailResult = await Validators.onMailChanged(email, fetch);
+		const passwordResult = Validators.onPasswordChanged(password_1, password_2);
+
+		errorMessages = [];
+		usernameMessage = nameResult.message;
+		emailMessage = mailResult.message;
+		passwordMessage = passwordResult.message;
+
+		if (!nameResult.valid || !mailResult.valid || !passwordResult.valid) {
 			return;
 		}
 
-		if (password_2.trim() === '') {
-			reset();
-			return;
-		}
-
-		if (!samePassword()) {
-			passwordMessage = 'Die Passwörter stimmen nicht überein.';
-			return;
-		}
-
-		reset();
+		await registerAsync();
 	}
 
 	async function registerAsync(): Promise<void> {
-		if (!samePassword()) {
-			return;
-		}
-
-		const reset: Function = () => {
-			errorMessage = [''];
-		};
-
 		const data: { username: string; email: string; password: string } = {
 			username: username.trim(),
 			email: email.trim(),
@@ -200,10 +131,9 @@
 				}
 				return toReturn;
 			};
-			errorMessage = await entriesAsync(response);
+			errorMessages = await entriesAsync(response);
 			return;
 		}
-		reset();
 		registered = true;
 	}
 </script>
@@ -213,7 +143,7 @@
 <div class="page">
 	<div class="content">
 		{#if !registered}
-			<form class="width-wrapper" on:submit|preventDefault={registerAsync}>
+			<form class="width-wrapper" on:submit|preventDefault={tryRegisterAsync}>
 				<HeadlinePage>Registrieren</HeadlinePage>
 				<Spacer --height="3rem" />
 				<MessageWrapper>
@@ -221,7 +151,7 @@
 					<ErrorMessage message={usernameMessage} />
 					<ErrorMessage message={emailMessage} />
 					<ErrorMessage message={passwordMessage} />
-					{#each errorMessage as message}
+					{#each errorMessages as message}
 						<ErrorMessage {message} />
 					{/each}
 				</MessageWrapper>
