@@ -1,4 +1,4 @@
-import type { LoadLoginPromise } from "types/types";
+import type { LoadLoginPromise } from "types/loadTypes";
 import { getLoginStatusAsync } from "helper/loggedIn";
 import { defaultCurrentYear } from "delete/toDelete";
 

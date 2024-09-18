@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LoadLogin } from 'types/types';
+	import type { LoadLogin } from 'types/loadTypes';
 	export let data: LoadLogin; // data from database
 
 	import { goto } from '$app/navigation';

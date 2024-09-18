@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LoadRegister } from 'types/types';
+	import type { LoadRegister } from 'types/loadTypes';
 	export let data: LoadRegister; // data from database
 
 	import Header from 'elements/navigation/header.svelte';
