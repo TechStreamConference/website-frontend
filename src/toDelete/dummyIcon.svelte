@@ -1,16 +1,14 @@
 <script lang="ts">
-	import Link from 'elements/text/link.svelte';
 	import type { IconLink } from 'types/provideTypes';
 	export let linkType: IconLink;
 </script>
 
-<Link classes="standard inline" href={linkType.link} newTab={true}>
-	<div class="img" />
-</Link>
+<a href={linkType.link} target="_blank" rel="noopener noreferrer"><div class="img" /></a>
 
 <style>
 	.img {
-		min-width: 1rem;
-		min-height: 1rem;
+		width: 2rem;
+		height: 2rem;
+		background-color: var(--primary-color);
 	}
 </style>

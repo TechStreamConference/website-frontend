@@ -1,7 +1,10 @@
 <script lang="ts">
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
+	import Spacer from 'elements/spacer/spacer.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
+	import type { IconLink } from 'types/provideTypes';
+	import Speaker from 'elements/speaker/speaker.svelte';
 
 	export let displayedYear: number;
 	export let currentYear: number;
@@ -33,6 +36,18 @@
 		['Abmelden', '/logout'],
 		['Impressum', '/impressum']
 	];
+
+	const testLinkData: IconLink[] = [
+		{ link: 'https://www.google.de', type: 'web' },
+		{ link: 'https://www.google.de', type: 'web' },
+		{ link: 'https://www.google.de', type: 'web' },
+		{ link: 'https://www.google.de', type: 'web' },
+		{ link: 'https://www.google.de', type: 'web' },
+		{ link: 'https://www.google.de', type: 'web' },
+		{ link: 'https://www.google.de', type: 'web' },
+		{ link: 'https://www.google.de', type: 'web' },
+		{ link: 'https://www.google.de', type: 'web' }
+	];
 </script>
 
 <Header menu={loggedIn ? headerMenuLoggedIn : headerMenu} />
@@ -44,6 +59,12 @@
 		<h1 id="Speaker">Vortragende</h1>
 		<h1 id="Sponsors">Sponsoren</h1>
 		<h1 id="Shedule">Plan</h1>
+
+		<div class="speaker-wrapper">
+			<Speaker links={testLinkData} />
+		</div>
+
+		<Spacer --height="10rem"/>
 	</div>
 	<Footer {currentYear} menu={loggedIn ? footerMenuLoggedIn : footerMenu} />
 </div>
@@ -61,5 +82,12 @@
 
 	.content-wrapper {
 		flex-grow: 1;
+	}
+
+	.speaker-wrapper {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
 	}
 </style>

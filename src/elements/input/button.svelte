@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { typeWorkaround } from 'types/workaround';
 	export let type: string = 'button';
+	export let classes: string = '';
 </script>
 
-<button use:typeWorkaround={type} on:click><slot /></button>
+<button class={classes} use:typeWorkaround={type} on:click><slot /></button>
 
 <style>
 	button {

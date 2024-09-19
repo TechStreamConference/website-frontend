@@ -5,17 +5,24 @@
 	export let links: IconLink[];
 </script>
 
-<div class="link-wrapper">
-	{#each links as link}
-		<DummyIcon linkType={link} />
-	{/each}
+<div class="parent-wrapper">
+	<div class="link-wrapper">
+		{#each links as link}
+			<DummyIcon linkType={link} />
+		{/each}
+	</div>
 </div>
 
 <style>
+	.parent-wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
 	.link-wrapper {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.5rem 3rem;
 	}
 </style>
