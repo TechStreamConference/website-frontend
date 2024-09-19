@@ -11,8 +11,9 @@
 
 <style>
 	.speaker-wrapper {
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
 		gap: 3rem;
+		justify-items: center;
 	}
 </style>
