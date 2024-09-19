@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SubHeadline from 'elements/text/subHeadline.svelte';
-	import TextLine from 'elements/text/textLine.svelte';
+	import Paragraph from 'elements/text/paragraph.svelte';
 
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import LinkArray from './linkArray.svelte';
@@ -12,12 +12,15 @@
 	<img class="picture" src="/dummy_1_1.png" alt="" />
 	<Spacer --height="1rem" />
 	<SubHeadline>OwlOrientedProgramming</SubHeadline>
-	<TextLine>Ich mache das Beste, das wir je begenet ist</TextLine>
+	<Paragraph>
+		Ich mache das Beste, das wir je begenet ist. Ich bin doch länger. Viel zu lang um genau zu sein.
+		LUL
+	</Paragraph>
 	<Spacer --height="3rem" />
 	<div class="bottom-wrapper">
 		<HorizontalLine />
 		<Spacer --height="2rem" />
-		<LinkArray/>
+		<LinkArray />
 		<Spacer --height="2rem" />
 		<Button classes="speaker-button">Info</Button>
 	</div>
@@ -30,15 +33,15 @@
 		border: none;
 		background-color: transparent;
 		outline: 1px solid var(--primary-color);
-        border-radius: var(--border-radius);
+		border-radius: var(--border-radius);
 	}
 
 	.picture {
 		width: 100%;
 		height: auto;
 		background-color: var(--primary-color);
-        border-top-left-radius: var(--border-radius);
-        border-top-right-radius: var(--border-radius);
+		border-top-left-radius: var(--border-radius);
+		border-top-right-radius: var(--border-radius);
 	}
 
 	.bottom-wrapper {

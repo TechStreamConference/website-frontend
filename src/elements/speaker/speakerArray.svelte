@@ -16,4 +16,16 @@
 		gap: 3rem;
 		justify-items: center;
 	}
+
+	@media (max-width: 1280px) {
+		.speaker-wrapper {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.speaker-wrapper {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
 </style>

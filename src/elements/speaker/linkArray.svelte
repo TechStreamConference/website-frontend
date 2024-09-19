@@ -28,4 +28,10 @@
 		gap: 2rem 0;
 		justify-items: center;
 	}
+
+	@media (max-width: 1280px) {
+		.link-wrapper {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
 </style>
