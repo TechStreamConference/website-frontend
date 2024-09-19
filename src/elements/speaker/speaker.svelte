@@ -25,7 +25,7 @@
 
 <style>
 	.speaker {
-		width: 25rem;
+		min-width: 15rem;
 		padding: 0;
 		border: none;
 		background-color: transparent;
@@ -34,8 +34,8 @@
 	}
 
 	.picture {
-		width: auto;
-		height: 25rem;
+		width: 100%;
+		height: auto;
 		background-color: var(--primary-color);
         border-top-left-radius: var(--border-radius);
         border-top-right-radius: var(--border-radius);

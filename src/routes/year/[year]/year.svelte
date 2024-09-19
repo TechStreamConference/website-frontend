@@ -97,5 +97,6 @@
 		flex-grow: 1;
 		max-width: 100rem;
 		margin: 0 auto;
+		padding: 0 3rem;
 	}
 </style>

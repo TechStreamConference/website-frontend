@@ -3,7 +3,7 @@
 	export let linkType: IconLink;
 </script>
 
-<a href={linkType.link} target="_blank" rel="noopener noreferrer"><div class="img" /></a>
+<a href={linkType.link} target="_blank" rel="noopener noreferrer"><img class="img" src="/dummy_1_1.png" alt=""/></a>
 
 <style>
 	.img {
