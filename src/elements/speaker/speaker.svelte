@@ -34,6 +34,13 @@
 		background-color: transparent;
 		outline: 1px solid var(--primary-color);
 		border-radius: var(--border-radius);
+        transition: var(--transition-duration);
+	}
+
+    .speaker:hover {
+		box-shadow: 4px 4px var(--gray-color);
+		transform: translateY(-4px) translateX(-4px);
+		transition: var(--transition-duration);
 	}
 
 	.picture {
