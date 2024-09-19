@@ -1,6 +1,4 @@
 <script lang="ts">
-	import type { IconLink } from 'types/provideTypes';
-
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
 
@@ -8,8 +6,6 @@
 	import LinkArray from './linkArray.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Button from 'elements/input/button.svelte';
-
-	export let links: IconLink[];
 </script>
 
 <button class="speaker">
@@ -21,7 +17,7 @@
 	<div class="bottom-wrapper">
 		<HorizontalLine />
 		<Spacer --height="2rem" />
-		<LinkArray {links} />
+		<LinkArray/>
 		<Spacer --height="2rem" />
 		<Button classes="speaker-button">Info</Button>
 	</div>
@@ -46,7 +42,7 @@
 	}
 
 	.bottom-wrapper {
-		margin: 1rem;
+		margin: 2rem;
 	}
 
 	:global(.speaker-button) {

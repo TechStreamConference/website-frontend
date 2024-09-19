@@ -3,8 +3,10 @@
 	import Footer from 'elements/navigation/footer.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
-	import type { IconLink } from 'types/provideTypes';
-	import Speaker from 'elements/speaker/speaker.svelte';
+	import SpeakerArray from 'elements/speaker/speakerArray.svelte';
+	import HeadlineH2 from 'elements/text/headlineH2.svelte';
+	import HorizontalLine from 'elements/line/horizontalLine.svelte';
+	import SpacerOneLine from 'elements/spacer/spacerOneLine.svelte';
 
 	export let displayedYear: number;
 	export let currentYear: number;
@@ -36,18 +38,6 @@
 		['Abmelden', '/logout'],
 		['Impressum', '/impressum']
 	];
-
-	const testLinkData: IconLink[] = [
-		{ link: 'https://www.google.de', type: 'web' },
-		{ link: 'https://www.google.de', type: 'web' },
-		{ link: 'https://www.google.de', type: 'web' },
-		{ link: 'https://www.google.de', type: 'web' },
-		{ link: 'https://www.google.de', type: 'web' },
-		{ link: 'https://www.google.de', type: 'web' },
-		{ link: 'https://www.google.de', type: 'web' },
-		{ link: 'https://www.google.de', type: 'web' },
-		{ link: 'https://www.google.de', type: 'web' }
-	];
 </script>
 
 <Header menu={loggedIn ? headerMenuLoggedIn : headerMenu} />
@@ -56,15 +46,17 @@
 		<SpacerHeader />
 
 		<h1>This is Year {displayedYear}</h1>
-		<h1 id="Speaker">Vortragende</h1>
+		<div id="Speaker" />
+		<HeadlineH2>Vortragende</HeadlineH2>
+		<HorizontalLine />
+		<SpacerOneLine/>
+		<div class="speaker-wrapper">
+			<SpeakerArray />
+		</div>
 		<h1 id="Sponsors">Sponsoren</h1>
 		<h1 id="Shedule">Plan</h1>
 
-		<div class="speaker-wrapper">
-			<Speaker links={testLinkData} />
-		</div>
-
-		<Spacer --height="10rem"/>
+		<Spacer --height="10rem" />
 	</div>
 	<Footer {currentYear} menu={loggedIn ? footerMenuLoggedIn : footerMenu} />
 </div>
@@ -82,12 +74,7 @@
 
 	.content-wrapper {
 		flex-grow: 1;
-	}
-
-	.speaker-wrapper {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: center;
+		max-width: 100rem;
+		margin: 0 auto;
 	}
 </style>
