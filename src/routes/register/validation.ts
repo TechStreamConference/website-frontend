@@ -1,7 +1,7 @@
 import type { ValidationWithMessage } from "types/returnTypes";
 import { isSameString } from "helper/string";
 
-export async function onUsernameChanged(username: string, fetch: Function): Promise<ValidationWithMessage> {
+export async function onUsernameChangedAsync(username: string, fetch: Function): Promise<ValidationWithMessage> {
     const trimmed: string = username.trim();
 
     if (trimmed.length === 0) {
@@ -58,7 +58,7 @@ export async function onUsernameChanged(username: string, fetch: Function): Prom
     };
 }
 
-export async function onMailChanged(mail: string, fetch: Function): Promise<ValidationWithMessage> {
+export async function onMailChangedAsync(mail: string, fetch: Function): Promise<ValidationWithMessage> {
     const trimmed: string = mail.trim();
 
     if (trimmed.length === 0) {

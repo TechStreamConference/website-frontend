@@ -77,12 +77,12 @@
 	}
 
 	async function onUsernameChangedAsync(): Promise<void> {
-		const result = await Validators.onUsernameChanged(username, fetch);
+		const result = await Validators.onUsernameChangedAsync(username, fetch);
 		usernameMessage = result.message;
 	}
 
 	async function onEmailChangedAsync(): Promise<void> {
-		const result = await Validators.onMailChanged(email, fetch);
+		const result = await Validators.onMailChangedAsync(email, fetch);
 		emailMessage = result.message;
 	}
 
@@ -92,8 +92,8 @@
 	}
 
 	async function tryRegisterAsync(): Promise<void> {
-		const nameResult = await Validators.onUsernameChanged(username, fetch);
-		const mailResult = await Validators.onMailChanged(email, fetch);
+		const nameResult = await Validators.onUsernameChangedAsync(username, fetch);
+		const mailResult = await Validators.onMailChangedAsync(email, fetch);
 		const passwordResult = Validators.onPasswordChanged(password_1, password_2);
 
 		errorMessages = [];
