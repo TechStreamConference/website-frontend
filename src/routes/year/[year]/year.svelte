@@ -5,8 +5,8 @@
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
 	import SpeakerArray from 'elements/speaker/speakerArray.svelte';
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
+	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
-	import SpacerOneLine from 'elements/spacer/spacerOneLine.svelte';
 
 	export let displayedYear: number;
 	export let currentYear: number;
@@ -17,6 +17,7 @@
 		['Start', '#top'],
 		['Vortragende', '#Speaker'],
 		['Partner', '#Sponsors'],
+		['Team', '#Team'],
 		['Ablaufplan', '#Shedule'],
 		['Anmelden', '/login']
 	];
@@ -24,6 +25,7 @@
 		['Start', '#top'],
 		['Vortragende', '#Speaker'],
 		['Partner', '#Sponsors'],
+		['Team', '#Team'],
 		['Ablaufplan', '#Shedule'],
 		['Intern', '/backend'],
 		['Abmelden', '/logout']
@@ -43,18 +45,37 @@
 <Header menu={loggedIn ? headerMenuLoggedIn : headerMenu} />
 <div class="page">
 	<div class="content-wrapper">
-		<SpacerHeader />
+		<HeadlinePage>This is Year {displayedYear}</HeadlinePage>
 
-		<h1>This is Year {displayedYear}</h1>
-		<div id="Speaker" />
+		<Spacer --height="10rem" />
+		<div id="Speaker" class="scroll-anker" />
 		<HeadlineH2>Vortragende</HeadlineH2>
 		<HorizontalLine />
-		<SpacerOneLine/>
+		<Spacer --height="3rem" />
 		<div class="speaker-wrapper">
 			<SpeakerArray />
 		</div>
-		<h1 id="Sponsors">Sponsoren</h1>
-		<h1 id="Shedule">Plan</h1>
+
+		<Spacer --height="10rem" />
+		<div id="Sponsors" class="scroll-anker" />
+		<HeadlineH2>Sponsoren</HeadlineH2>
+		<HorizontalLine />
+		<Spacer --height="3rem" />
+
+		<Spacer --height="10rem" />
+		<div id="Team" class="scroll-anker" />
+		<HeadlineH2>Team</HeadlineH2>
+		<HorizontalLine />
+		<Spacer --height="3rem" />
+		<div class="speaker-wrapper">
+			<SpeakerArray />
+		</div>
+
+		<Spacer --height="10rem" />
+		<div id="Shedule" class="scroll-anker" />
+		<HeadlineH2>Plan</HeadlineH2>
+		<HorizontalLine />
+		<Spacer --height="3rem" />
 
 		<Spacer --height="10rem" />
 	</div>
@@ -62,7 +83,7 @@
 </div>
 
 <style>
-	h1 {
+	.scroll-anker {
 		scroll-margin-top: 7rem;
 	}
 
