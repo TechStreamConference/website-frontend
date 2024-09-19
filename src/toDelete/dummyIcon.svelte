@@ -27,4 +27,17 @@
 		transform: translateY(0px) translateX(0px);
 		transition: var(--fast-transition-duration);
 	}
+
+	@media (max-width: 1280px) {
+		.img:hover {
+			background-color: var(--primary-color);
+			box-shadow: none;
+			transition: var(--transition-duration);
+		}
+
+		.img:active {
+			box-shadow: 2px 2px var(--light-gray-color);
+			transition: var(--fast-transition-duration);
+		}
+	}
 </style>
