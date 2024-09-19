@@ -6,9 +6,18 @@
 	import LinkArray from './linkArray.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Button from 'elements/input/button.svelte';
+
+	function onSpeakerClicked(event: Event) {
+		console.log('pressed');
+		event.stopPropagation();
+	}
+
+	function onLinkClicked(event: Event) {
+		event.stopPropagation();
+	}
 </script>
 
-<button class="speaker">
+<button class="speaker" on:click={onSpeakerClicked}>
 	<img class="picture" src="/dummy_1_1.png" alt="" />
 	<Spacer --height="1rem" />
 	<SubHeadline>OwlOrientedProgramming</SubHeadline>
@@ -20,9 +29,9 @@
 	<div class="bottom-wrapper">
 		<HorizontalLine />
 		<Spacer --height="2rem" />
-		<LinkArray />
+		<LinkArray on:click={onLinkClicked} />
 		<Spacer --height="2rem" />
-		<Button classes="speaker-button">Info</Button>
+		<Button classes="speaker-button" on:click={onSpeakerClicked}>Info</Button>
 	</div>
 </button>
 
@@ -34,10 +43,10 @@
 		background-color: transparent;
 		outline: 1px solid var(--primary-color);
 		border-radius: var(--border-radius);
-        transition: var(--transition-duration);
+		transition: var(--transition-duration);
 	}
 
-    .speaker:hover {
+	.speaker:hover {
 		box-shadow: 4px 4px var(--gray-color);
 		transform: translateY(-4px) translateX(-4px);
 		transition: var(--transition-duration);

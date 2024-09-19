@@ -17,7 +17,7 @@
 
 <div class="link-wrapper">
 	{#each testLinkData as link}
-		<DummyIcon linkType={link} />
+		<DummyIcon linkType={link} on:click/>
 	{/each}
 </div>
 
