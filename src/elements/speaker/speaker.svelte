@@ -30,15 +30,15 @@
 		border: none;
 		background-color: transparent;
 		outline: 1px solid var(--primary-color);
-        border-radius: 6px;
+        border-radius: var(--border-radius);
 	}
 
 	.picture {
 		width: auto;
 		height: 25rem;
 		background-color: var(--primary-color);
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
+        border-top-left-radius: var(--border-radius);
+        border-top-right-radius: var(--border-radius);
 	}
 
 	.bottom-wrapper {
