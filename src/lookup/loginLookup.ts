@@ -3,9 +3,9 @@ type LoginDict = {
 };
 
 const lookup: LoginDict = {
-    "Username/email or password missing": "Name / E-Mail oder Passwort fehlt.",
-    "Unknown username or email": "Name / E-mail oder Passwort ungültig.",
-    "Invalid password": "Name / E-mail oder Passwort ungültig.",
+    "Username/email or password missing": "Name/E-Mail oder Passwort fehlt.",
+    "Unknown username or email": "Name oder E-Mail ungültig.",
+    "Invalid password": "Passwort ungültig.",
 }
 
 export function loginLookup(key: string): string {
