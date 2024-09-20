@@ -155,11 +155,11 @@ export function onPasswordChanged(password_1: string, password_2: string): Valid
         }
     }
 
-    const hasNumber: boolean = /[1-9]/.test(trimmed);
+    const hasNumber: boolean = /[0-9]/.test(trimmed);
     if (!hasNumber) {
         return {
             valid: false,
-            message: 'Das Passwort muss mindestens eine Zahl enthalten.'
+            message: 'Das Passwort muss mindestens eine Ziffer enthalten.'
         }
     }
 
