@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Speaker from './speaker.svelte';
+	import Speaker from './speakerRectangle.svelte';
 	const numbers: number[] = Array.from({ length: 10 }, (_, i) => i);
 </script>
 

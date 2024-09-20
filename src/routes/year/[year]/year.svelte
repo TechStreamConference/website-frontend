@@ -3,7 +3,7 @@
 	import Footer from 'elements/navigation/footer.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
-	import SpeakerArray from 'elements/speaker/speakerArray.svelte';
+	import SpeakerArray from 'elements/speaker/speakerGrid.svelte';
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';

@@ -3,7 +3,7 @@
 	import Paragraph from 'elements/text/paragraph.svelte';
 
 	import Spacer from 'elements/spacer/spacer.svelte';
-	import LinkArray from './linkArray.svelte';
+	import LinkArray from './linkGrid.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Button from 'elements/input/button.svelte';
 
