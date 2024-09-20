@@ -143,7 +143,7 @@ export function onPasswordChanged(password_1: string, password_2: string): Valid
     if (!hasLowerCase) {
         return {
             valid: false,
-            message: 'Das Passwort muss mindestens ein kleinen Buchstaben enthalten.'
+            message: 'Das Passwort muss mindestens ein Kleinbuchstaben enthalten.'
         }
     }
 
@@ -151,7 +151,7 @@ export function onPasswordChanged(password_1: string, password_2: string): Valid
     if (!hasUpperCase) {
         return {
             valid: false,
-            message: 'Das Passwort muss mindestens ein großen Buchstaben enthalten.'
+            message: 'Das Passwort muss mindestens ein Großbuchstaben enthalten.'
         }
     }
 
