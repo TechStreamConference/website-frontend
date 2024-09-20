@@ -78,17 +78,17 @@
 
 	async function onUsernameChangedAsync(): Promise<void> {
 		const result = await Validators.onUsernameChangedAsync(username, fetch);
-		usernameMessage = result.message;
+		usernameMessage = result ? result : '';
 	}
 
 	async function onEmailChangedAsync(): Promise<void> {
 		const result = await Validators.onMailChangedAsync(email, fetch);
-		emailMessage = result.message;
+		emailMessage = result ? result : '';
 	}
 
 	function onPasswordChanged(): void {
 		const result = Validators.onPasswordChanged(password_1, password_2);
-		passwordMessage = result.message;
+		passwordMessage = result ? result : '';
 	}
 
 	async function tryRegisterAsync(): Promise<void> {
@@ -97,11 +97,11 @@
 		const passwordResult = Validators.onPasswordChanged(password_1, password_2);
 
 		errorMessages = [];
-		usernameMessage = nameResult.message;
-		emailMessage = mailResult.message;
-		passwordMessage = passwordResult.message;
+		usernameMessage = nameResult ? nameResult : '';
+		emailMessage = mailResult ? mailResult : '';
+		passwordMessage = passwordResult ? passwordResult : '';
 
-		if (!nameResult.valid || !mailResult.valid || !passwordResult.valid) {
+		if (nameResult || mailResult || passwordResult) {
 			return;
 		}
 
