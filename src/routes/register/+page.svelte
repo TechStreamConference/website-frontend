@@ -16,6 +16,8 @@
 	import Button from 'elements/input/button.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 
+	import { registerLookup } from 'lookup/registerLookup';
+
 	type MenuItem = [string, string];
 	const headerMenu: MenuItem[] = [
 		['Start', '/'],
@@ -189,8 +191,14 @@
 		if (!response.ok) {
 			const entriesAsync = async (response: Response): Promise<string[]> => {
 				const text: string = await response.text();
-				const j: { [key: string]: string } = JSON.parse(text);
-				return Object.values(j);
+				const json: { [key: string]: string } = JSON.parse(text);
+				const values: string[] = Object.values(json);
+				let toReturn: string[] = [];
+				for (const value of values) {
+					toReturn.push(registerLookup(value));
+					console.log('error while register from backend: ' + value);
+				}
+				return toReturn;
 			};
 			errorMessage = await entriesAsync(response);
 			return;

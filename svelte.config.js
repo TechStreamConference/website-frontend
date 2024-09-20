@@ -18,6 +18,7 @@ const config = {
 			'types': 'src/types',
 			'stores': 'src/stores',
 			'delete': 'src/toDelete',
+			'lookup': 'src/lookup',
 		}
 	}
 };
