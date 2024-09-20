@@ -71,7 +71,7 @@ export async function onMailChangedAsync(mail: string, fetch: Function): Promise
     if (!valid) {
         return {
             valid: false,
-            message: "Die angegebene E-Mail ist keine gültige E-Mail."
+            message: "Die angegebene E-Mail-Adresse ist nicht gültig."
         }
     }
 
