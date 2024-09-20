@@ -28,7 +28,7 @@ export async function onUsernameChangedAsync(username: string, fetch: Function):
     if (!response.ok) {
         console.error('Fehler beim überprüfen des Namen. Fehlercode: ' + response.status);
         return {
-            valid: false,
+            valid: true,
             message: '',
         };
     }
@@ -39,7 +39,7 @@ export async function onUsernameChangedAsync(username: string, fetch: Function):
     } catch (error) {
         console.error('error while parsing username json', error);
         return {
-            valid: false,
+            valid: true,
             message: '',
         };
     }
@@ -79,7 +79,7 @@ export async function onMailChangedAsync(mail: string, fetch: Function): Promise
     if (!response.ok) {
         console.error('Fehler beim überprüfen der E-Mail. Fehlercode: ' + response.status);
         return {
-            valid: false,
+            valid: true,
             message: '',
         };
     }
@@ -90,7 +90,7 @@ export async function onMailChangedAsync(mail: string, fetch: Function): Promise
     } catch (error) {
         console.error('error while parsing email json', error);
         return {
-            valid: false,
+            valid: true,
             message: '',
         };
     }
