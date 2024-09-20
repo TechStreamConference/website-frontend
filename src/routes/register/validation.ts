@@ -1,5 +1,4 @@
 import type { ValidationWithMessage } from "types/returnTypes";
-import { isSameString } from "helper/string";
 
 export async function onUsernameChangedAsync(username: string, fetch: Function): Promise<ValidationWithMessage> {
     const trimmed: string = username.trim();
@@ -126,7 +125,7 @@ export function onPasswordChanged(password_1: string, password_2: string): Valid
         };
     }
 
-    if (!isSameString(trimmed, password_2)) {
+    if (trimmed !== password_2.trim()) {
         return {
             valid: false,
             message: 'Die Passwörter stimmen nicht überein.',
