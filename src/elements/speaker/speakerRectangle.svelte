@@ -6,6 +6,7 @@
 	import LinkArray from './speakerLinkGrid.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Button from 'elements/input/button.svelte';
+	import SpeakerPopup from './speakerPopup.svelte';
 
 	function onSpeakerClicked(event: Event) {
 		console.log('pressed');
@@ -33,6 +34,7 @@
 		<Spacer --height="2rem" />
 		<Button classes="speaker-button" on:click={onSpeakerClicked}>Info</Button>
 	</div>
+	<SpeakerPopup />
 </button>
 
 <style>
