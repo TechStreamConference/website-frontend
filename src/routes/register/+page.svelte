@@ -101,7 +101,9 @@
 		emailMessage = mailResult.message;
 		passwordMessage = passwordResult.message;
 
-		// no return here to not bypass the backend
+		if (!nameResult.valid || !mailResult.valid || !passwordResult.valid) {
+			return;
+		}
 
 		await registerAsync();
 	}
