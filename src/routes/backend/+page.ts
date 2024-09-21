@@ -1,4 +1,4 @@
-import type { LoadBackendPromise } from "types/types";
+import type { LoadBackendPromise } from "types/loadTypes";
 
 import { redirectIfUnauthorizedAsync } from "helper/loggedIn";
 

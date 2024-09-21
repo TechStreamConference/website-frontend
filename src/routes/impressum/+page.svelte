@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LoadImpressum } from 'types/types';
+	import type { LoadImpressum } from 'types/loadTypes';
 	export let data: LoadImpressum; // data from database;
 
 	import Header from 'elements/navigation/header.svelte';

@@ -1,4 +1,4 @@
-import type { LoadYearPromise } from "types/types";
+import type { LoadYearPromise } from "types/loadTypes";
 
 import { loadCurrentYearAsync } from "./year/[year]/year";
 

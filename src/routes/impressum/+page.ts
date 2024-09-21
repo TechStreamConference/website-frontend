@@ -1,4 +1,4 @@
-import type { LoadImpressumPromise } from "types/types";
+import type { LoadImpressumPromise } from "types/loadTypes";
 import { getLoginStatusAsync } from "helper/loggedIn";
 import { defaultCurrentYear } from "delete/toDelete";
 
