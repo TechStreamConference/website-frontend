@@ -173,7 +173,7 @@
 				<Spacer --height="1rem" />
 				<Input
 					id="register-email"
-					type="text"
+					type="email"
 					labelText="E-Mail:"
 					placeholderText="E-Mail"
 					bind:value={email}
