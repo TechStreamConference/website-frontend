@@ -84,12 +84,12 @@ export function onPasswordChanged(password_1: string, password_2: string): strin
 
     const hasLowerCase: boolean = /[a-z]/.test(trimmed);
     if (!hasLowerCase) {
-        return 'Das Passwort muss mindestens ein Kleinbuchstaben enthalten.';
+        return 'Das Passwort muss mindestens einen Kleinbuchstaben enthalten.';
     }
 
     const hasUpperCase: boolean = /[A-Z]/.test(trimmed);
     if (!hasUpperCase) {
-        return 'Das Passwort muss mindestens ein Großbuchstaben enthalten.';
+        return 'Das Passwort muss mindestens einen Großbuchstaben enthalten.';
     }
 
     const hasNumber: boolean = /[0-9]/.test(trimmed);
