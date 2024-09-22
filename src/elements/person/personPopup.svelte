@@ -42,7 +42,7 @@
 		</div>
 	</div>
 	<Button classes="close-button picture" on:click
-		><img class="close-picture" src="/dummy_1_1.png" alt="" /></Button
+		><img class="close-picture" src="/cross.png" alt="" /></Button
 	>
 </div>
 
@@ -109,8 +109,9 @@
 	}
 
 	.close-picture {
-		height: 2rem;
-		width: 2rem;
+		height: 1.5rem;
+		width: 1.5rem;
+		margin: 0.25rem;
 	}
 
 	@media (max-width: 1280px) {
