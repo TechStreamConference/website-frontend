@@ -5,4 +5,4 @@
 	import Year from './year.svelte';
 </script>
 
-<Year displayedYear={data.displayedYear} currentYear={data.currentYear} loggedIn={data.loggedIn} />
+<Year {data} />

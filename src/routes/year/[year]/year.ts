@@ -22,6 +22,13 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
     let yearData: Year;
     if (yearDataResponse.ok) {
         yearData = await yearDataResponse.json();
+        for (let i = 0; i < yearData.speakers.length; ++i) {
+            // TODO: remove when backend provides Speaker-ID
+            // https://github.com/TechStreamConference/website-backend/issues/22
+            if (yearData.speakers[i].id === undefined) {
+                yearData.speakers[i].id = `${i}`;
+            }
+        }
     } else {
         redirect(302, "/404");
     }

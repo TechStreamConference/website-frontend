@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { LoadYear } from 'types/loadTypes';
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
@@ -6,10 +7,10 @@
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
+	import type { Speaker } from 'types/provideTypes';
+	import SpeakerPopup from 'elements/speaker/speakerPopup.svelte';
 
-	export let displayedYear: number;
-	export let currentYear: number;
-	export let loggedIn: boolean;
+	export let data: LoadYear;
 
 	type MenuItem = [string, string];
 	const headerMenu: MenuItem[] = [
@@ -39,12 +40,21 @@
 		['Abmelden', '/logout'],
 		['Impressum', '/impressum']
 	];
+
+	let speakerPopup: Speaker | undefined = undefined;
+	function openSpeakerPopup(event: Event, speaker: Speaker) {
+		speakerPopup = speaker;
+	}
+
+	function closeSpeakerPopup() {
+		speakerPopup = undefined;
+	}
 </script>
 
-<Header menu={loggedIn ? headerMenuLoggedIn : headerMenu} />
+<Header menu={data.loggedIn ? headerMenuLoggedIn : headerMenu} />
 <div class="page">
 	<div class="content-wrapper">
-		<HeadlinePage>This is Year {displayedYear}</HeadlinePage>
+		<HeadlinePage>This is Year {data.displayedYear}</HeadlinePage>
 
 		<Spacer --height="10rem" />
 		<div id="Speaker" class="scroll-anker" />
@@ -52,7 +62,7 @@
 		<HorizontalLine />
 		<Spacer --height="3rem" />
 		<div class="speaker-wrapper">
-			<SpeakerArray />
+			<SpeakerArray speakerData={data.year.speakers} speakerPopupCallback={openSpeakerPopup} />
 		</div>
 
 		<Spacer --height="10rem" />
@@ -67,7 +77,8 @@
 		<HorizontalLine />
 		<Spacer --height="3rem" />
 		<div class="speaker-wrapper">
-			<SpeakerArray />
+			<SpeakerArray speakerData={[]} speakerPopupCallback={openSpeakerPopup} />
+			<!--TODO: Add Team Data-->
 		</div>
 
 		<Spacer --height="10rem" />
@@ -78,8 +89,12 @@
 
 		<Spacer --height="10rem" />
 	</div>
-	<Footer {currentYear} menu={loggedIn ? footerMenuLoggedIn : footerMenu} />
+	<Footer currentYear={data.currentYear} menu={data.loggedIn ? footerMenuLoggedIn : footerMenu} />
 </div>
+
+{#if speakerPopup}
+	<SpeakerPopup data={speakerPopup} on:click={closeSpeakerPopup} />
+{/if}
 
 <style>
 	.scroll-anker {

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { Speaker } from 'types/provideTypes';
+
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 
@@ -6,36 +8,31 @@
 	import LinkArray from './speakerLinkGrid.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Button from 'elements/input/button.svelte';
-	import SpeakerPopup from './speakerPopup.svelte';
 
-	function onSpeakerClicked(event: Event) {
-		console.log('pressed');
-		event.stopPropagation();
-	}
+	export let data: Speaker;
 
 	function onLinkClicked(event: Event) {
 		event.stopPropagation();
 	}
 </script>
 
-<button class="speaker" on:click={onSpeakerClicked}>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- No a11y correctnes here because the "speaker-button" already does the same. -->
+<div class="speaker" on:click>
 	<img class="picture" src="/dummy_1_1.png" alt="" />
 	<Spacer --height="1rem" />
-	<SubHeadline>OwlOrientedProgramming</SubHeadline>
-	<Paragraph>
-		Ich mache das Beste, das wir je begenet ist. Ich bin doch länger. Viel zu lang um genau zu sein.
-		LUL
-	</Paragraph>
+	<SubHeadline>{data.name} {data.id}</SubHeadline>
+	<Paragraph>{data.short_bio}</Paragraph>
 	<Spacer --height="3rem" />
 	<div class="bottom-wrapper">
 		<HorizontalLine />
 		<Spacer --height="2rem" />
-		<LinkArray on:click={onLinkClicked} />
+		<LinkArray on:click={onLinkClicked} /> <!--TODO: Add Social Media Links-->
 		<Spacer --height="2rem" />
-		<Button classes="speaker-button" on:click={onSpeakerClicked}>Info</Button>
+		<Button classes="speaker-button" on:click>Info</Button>
 	</div>
-	<SpeakerPopup />
-</button>
+</div>
 
 <style>
 	.speaker {
@@ -46,6 +43,7 @@
 		outline: 1px solid var(--primary-color);
 		border-radius: var(--border-radius);
 		transition: var(--transition-duration);
+		text-align: center;
 	}
 
 	.speaker:hover {

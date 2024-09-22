@@ -3,6 +3,7 @@ export type Speaker = {
     name: string,
     photo: string,
     short_bio: string,
+    id: string,
 }
 
 export type Event = {
@@ -21,7 +22,7 @@ export type Event = {
 
 export type Year = {
     event: Event,
-    speakers: { [key: number]: Speaker },
+    speakers: [Speaker],
 }
 
 export type IconLink = { link: string, type: string };

@@ -1,11 +1,19 @@
 <script lang="ts">
-	import Speaker from './speakerRectangle.svelte';
-	const numbers: number[] = Array.from({ length: 10 }, (_, i) => i);
+	import type { Speaker } from 'types/provideTypes';
+	import SpeakerRectangle from './speakerRectangle.svelte';
+	export let speakerData: Speaker[];
+
+	export let speakerPopupCallback: (event: Event, speaker: Speaker) => void;
 </script>
 
 <div class="speaker-wrapper">
-	{#each numbers as number}
-		<Speaker />
+	{#each speakerData as speaker}
+		<SpeakerRectangle
+			data={speaker}
+			on:click={(event) => {
+				speakerPopupCallback(event, speaker);
+			}}
+		/>
 	{/each}
 </div>
 

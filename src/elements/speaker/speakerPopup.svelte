@@ -1,45 +1,36 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import VerticalLine from 'elements/line/verticalLine.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import SpacerOneLine from 'elements/spacer/spacerOneLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import SpeakerLinkGrid from './speakerLinkGrid.svelte';
+	import type { Speaker } from 'types/provideTypes';
+
+	export let data: Speaker;
 </script>
 
-<div class="page-wrapper">
-	<div class="popup-wrapper">
+<div class="page-wrapper" transition:fade={{ duration: 300 }} on:click>
+	<div
+		class="popup-wrapper"
+		on:click={(event) => {
+			event.stopPropagation();
+		}}
+	>
 		<div class="content-wrapper">
-			<div class="column-wrapper">
+			<div class="column-wrapper align-center">
 				<img class="picture" src="/dummy_1_1.png" alt="" />
 				<SpacerOneLine />
-				<SubHeadline>OwlOrientedProgramming</SubHeadline>
-				<Paragraph>
-					Ich mache das Beste, das wir je begenet ist. Ich bin doch länger. Viel zu lang um genau zu
-					sein. LUL
-				</Paragraph>
+				<SubHeadline>{data.name}</SubHeadline>
+				<Paragraph>{data.short_bio}</Paragraph>
 				<Spacer --height="3rem" />
 				<SpeakerLinkGrid />
 			</div>
 			<VerticalLine />
 			<div class="column-wrapper">
 				<SpacerOneLine />
-				<Paragraph>
-					Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-					invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-					accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-					sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
-					elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-					diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-					gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-					amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-					dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-					et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-					amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-					consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto
-					odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
-					nulla facilisi. Lorem ipsum dolor sit amet, -- ich habe 200 Wörter.
-				</Paragraph>
+				<Paragraph>{data.bio}</Paragraph>
 			</div>
 		</div>
 	</div>
@@ -73,9 +64,13 @@
 		justify-content: space-between;
 	}
 
-    .column-wrapper {
+	.align-center {
+		text-align: center;
+	}
+
+	.column-wrapper {
 		width: 47%;
-        height: 100%;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
 	}
@@ -83,6 +78,6 @@
 	.picture {
 		width: auto;
 		height: auto;
-        border: 1px solid var(--primary-color);
+		border: 1px solid var(--primary-color);
 	}
 </style>
