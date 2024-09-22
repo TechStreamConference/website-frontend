@@ -23,7 +23,7 @@
 <div class="person" on:click>
 	<PersonImage classes="person-rectangle-picture" {data}/>
 	<Spacer --height="1rem" />
-	<SubHeadline>{data.name} {data.id}</SubHeadline>
+	<SubHeadline>{data.name}</SubHeadline>
 	<Paragraph>{data.short_bio}</Paragraph>
 	<div class="bottom-wrapper">
 		<HorizontalLine />

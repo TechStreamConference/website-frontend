@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import VerticalLine from 'elements/line/verticalLine.svelte';
+	import Line from 'elements/line/line.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import SpacerOneLine from 'elements/spacer/spacerOneLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
@@ -32,14 +32,18 @@
 				<Spacer --height="3rem" />
 				<PersonLinkGrid />
 			</div>
-			<VerticalLine />
+			<Line classes="personPopupLine" />
 			<div class="column-wrapper">
 				<SpacerOneLine />
 				<Paragraph>{data.bio}</Paragraph>
 			</div>
+
+			<div class="flex-spacer" />
 		</div>
 	</div>
-	<Button classes="close-button picture" on:click><img class="close-picture" src="/dummy_1_1.png" alt="" /></Button>
+	<Button classes="close-button picture" on:click
+		><img class="close-picture" src="/dummy_1_1.png" alt="" /></Button
+	>
 </div>
 
 <style>
@@ -81,6 +85,16 @@
 		flex-direction: column;
 	}
 
+	.flex-spacer {
+		flex-grow: 1;
+		display: none;
+	}
+
+	:global(.personPopupLine) {
+		height: 100%;
+		width: 1px;
+	}
+
 	:global(.person-popup-picture) {
 		width: auto;
 		height: auto;
@@ -88,7 +102,7 @@
 	}
 
 	:global(.close-button) {
-		position:fixed;
+		position: fixed;
 		top: calc(50% - 25rem);
 		left: calc(50% + 30rem);
 		margin-left: 0.5rem;
@@ -99,4 +113,61 @@
 		width: 2rem;
 	}
 
+	@media (max-width: 1280px) {
+		.popup-wrapper {
+			width: calc(100vw - 8rem);
+			height: calc(100vh - 12rem);
+		}
+
+		:global(.close-button) {
+			top: calc(100vh - 6rem);
+			left: calc(100vw - 50% - 1rem);
+			margin-left: 0;
+			margin-top: 1rem;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.popup-wrapper {
+			width: calc(100vw - 2rem);
+			height: calc(100vh - 10rem);
+		}
+
+		.content-wrapper {
+			flex-direction: column;
+			overflow: scroll;
+		}
+
+		.column-wrapper {
+			width: 100%;
+			height: auto;
+		}
+
+		.flex-spacer {
+			display: flex;
+		}
+
+		:global(.personPopupLine) {
+			width: 100%;
+			height: 1px;
+			margin: 2rem 0 1rem 0;
+			flex-shrink: 0;
+		}
+
+		:global(.person-popup-picture) {
+			max-width: 20rem;
+			align-self: center;
+		}
+
+		:global(.close-button) {
+			top: calc(100vh - 5rem);
+		}
+	}
+
+	@media (max-width: 380px) {
+		:global(.person-popup-picture) {
+			max-width: 20rem;
+			align-self: normal;
+		}
+	}
 </style>
