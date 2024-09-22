@@ -4,7 +4,7 @@
 </script>
 
 <a href={linkType.link} target="_blank" rel="noopener noreferrer" on:click>
-	<img class="img" src="/dummy_1_1.png" alt="" />
+	<img class="img" src="/cross.png" alt="" />
 </a>
 
 <style>
