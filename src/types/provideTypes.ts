@@ -1,4 +1,4 @@
-export type Speaker = {
+export type Person = {
     bio: string,
     name: string,
     photo: string,
@@ -22,7 +22,7 @@ export type Event = {
 
 export type Year = {
     event: Event,
-    speakers: [Speaker],
+    speakers: [Person],
 }
 
 export type IconLink = { link: string, type: string };

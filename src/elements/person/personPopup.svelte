@@ -5,10 +5,10 @@
 	import SpacerOneLine from 'elements/spacer/spacerOneLine.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
-	import SpeakerLinkGrid from './speakerLinkGrid.svelte';
-	import type { Speaker } from 'types/provideTypes';
+	import PersonLinkGrid from './personLinkGrid.svelte';
+	import type { Person } from 'types/provideTypes';
 
-	export let data: Speaker;
+	export let data: Person;
 </script>
 
 <div class="page-wrapper" transition:fade={{ duration: 300 }} on:click>
@@ -25,7 +25,7 @@
 				<SubHeadline>{data.name}</SubHeadline>
 				<Paragraph>{data.short_bio}</Paragraph>
 				<Spacer --height="3rem" />
-				<SpeakerLinkGrid />
+				<PersonLinkGrid />
 			</div>
 			<VerticalLine />
 			<div class="column-wrapper">

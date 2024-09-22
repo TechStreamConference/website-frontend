@@ -3,12 +3,12 @@
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 	import Spacer from 'elements/spacer/spacer.svelte';
-	import SpeakerArray from 'elements/speaker/speakerGrid.svelte';
+	import PersonArray from 'elements/person/personGrid.svelte';
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
-	import type { Speaker } from 'types/provideTypes';
-	import SpeakerPopup from 'elements/speaker/speakerPopup.svelte';
+	import type { Person } from 'types/provideTypes';
+	import PersonPopup from 'elements/person/personPopup.svelte';
 
 	export let data: LoadYear;
 
@@ -41,13 +41,13 @@
 		['Impressum', '/impressum']
 	];
 
-	let speakerPopup: Speaker | undefined = undefined;
-	function openSpeakerPopup(event: Event, speaker: Speaker) {
-		speakerPopup = speaker;
+	let personPopup: Person | undefined = undefined;
+	function openPersonPopup(event: Event, person: Person) {
+		personPopup = person;
 	}
 
-	function closeSpeakerPopup() {
-		speakerPopup = undefined;
+	function closePersonPopup() {
+		personPopup = undefined;
 	}
 </script>
 
@@ -61,8 +61,8 @@
 		<HeadlineH2>Vortragende</HeadlineH2>
 		<HorizontalLine />
 		<Spacer --height="3rem" />
-		<div class="speaker-wrapper">
-			<SpeakerArray speakerData={data.year.speakers} speakerPopupCallback={openSpeakerPopup} />
+		<div class="person-wrapper">
+			<PersonArray personData={data.year.speakers} personPopupCallback={openPersonPopup} />
 		</div>
 
 		<Spacer --height="10rem" />
@@ -76,8 +76,8 @@
 		<HeadlineH2>Team</HeadlineH2>
 		<HorizontalLine />
 		<Spacer --height="3rem" />
-		<div class="speaker-wrapper">
-			<SpeakerArray speakerData={[]} speakerPopupCallback={openSpeakerPopup} />
+		<div class="person-wrapper">
+			<PersonArray personData={[]} personPopupCallback={openPersonPopup} />
 			<!--TODO: Add Team Data-->
 		</div>
 
@@ -92,8 +92,8 @@
 	<Footer currentYear={data.currentYear} menu={data.loggedIn ? footerMenuLoggedIn : footerMenu} />
 </div>
 
-{#if speakerPopup}
-	<SpeakerPopup data={speakerPopup} on:click={closeSpeakerPopup} />
+{#if personPopup}
+	<PersonPopup data={personPopup} on:click={closePersonPopup} />
 {/if}
 
 <style>

@@ -1,15 +1,15 @@
 <script lang="ts">
-	import type { Speaker } from 'types/provideTypes';
+	import type { Person } from 'types/provideTypes';
 
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 
 	import Spacer from 'elements/spacer/spacer.svelte';
-	import LinkArray from './speakerLinkGrid.svelte';
+	import LinkArray from './personLinkGrid.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Button from 'elements/input/button.svelte';
 
-	export let data: Speaker;
+	export let data: Person;
 
 	function onLinkClicked(event: Event) {
 		event.stopPropagation();
@@ -18,8 +18,8 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- No a11y correctnes here because the "speaker-button" already does the same. -->
-<div class="speaker" on:click>
+<!-- No a11y correctnes here because the "person-button" already does the same. -->
+<div class="person" on:click>
 	<img class="picture" src="/dummy_1_1.png" alt="" />
 	<Spacer --height="1rem" />
 	<SubHeadline>{data.name} {data.id}</SubHeadline>
@@ -30,12 +30,12 @@
 		<Spacer --height="2rem" />
 		<LinkArray on:click={onLinkClicked} /> <!--TODO: Add Social Media Links-->
 		<Spacer --height="2rem" />
-		<Button classes="speaker-button" on:click>Info</Button>
+		<Button classes="person-button" on:click>Info</Button>
 	</div>
 </div>
 
 <style>
-	.speaker {
+	.person {
 		min-width: 15rem;
 		padding: 0;
 		border: none;
@@ -46,7 +46,7 @@
 		text-align: center;
 	}
 
-	.speaker:hover {
+	.person:hover {
 		box-shadow: 4px 4px var(--gray-color);
 		transform: translateY(-4px) translateX(-4px);
 		transition: var(--transition-duration);
@@ -64,7 +64,7 @@
 		margin: 2rem;
 	}
 
-	:global(.speaker-button) {
+	:global(.person-button) {
 		width: 100%;
 		padding: 0.2rem 2rem !important;
 	}
