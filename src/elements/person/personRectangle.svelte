@@ -31,7 +31,7 @@
 		<LinkArray on:click={onLinkClicked} />
 		<!--TODO: Add Social Media Links-->
 		<Spacer --height="2rem" />
-		<Button classes="person-button" on:click>Info</Button>
+		<Button classes="person-button text" on:click>Info</Button>
 	</div>
 </div>
 
