@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { LoadRegister } from 'types/loadTypes';
 	export let data: LoadRegister; // data from database
+	import { apiUrl } from 'helper/links';
 
 	import * as Validators from './validation';
 
@@ -118,7 +119,7 @@
 			email: email.trim(),
 			password: password_1.trim()
 		};
-		const response: Response = await fetch('api/account/register', {
+		const response: Response = await fetch(apiUrl('/api/account/register'), {
 			method: 'POST',
 			body: JSON.stringify(data)
 		});

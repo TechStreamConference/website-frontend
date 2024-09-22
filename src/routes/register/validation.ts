@@ -1,3 +1,5 @@
+import { apiUrl } from "helper/links";
+
 export async function onUsernameChangedAsync(username: string, fetch: Function): Promise<string | undefined> {
     const trimmed: string = username.trim();
 
@@ -13,7 +15,7 @@ export async function onUsernameChangedAsync(username: string, fetch: Function):
         return 'Der Name darf maximal 30 Zeichen enthalten.';
     }
 
-    const response: Response = await fetch('api/account/username/exists?username=' + trimmed);
+    const response: Response = await fetch(apiUrl('/api/account/username/exists?username=' + trimmed));
     if (!response.ok) {
         console.error('Fehler beim überprüfen des Namen. Fehlercode: ' + response.status);
         return;
@@ -44,7 +46,7 @@ export async function onMailChangedAsync(mail: string, fetch: Function): Promise
         return "Die angegebene E-Mail-Adresse ist nicht gültig.";
     }
 
-    const response: Response = await fetch('api/account/email/exists?email=' + trimmed);
+    const response: Response = await fetch(apiUrl('/api/account/email/exists?email=' + trimmed));
     if (!response.ok) {
         console.error('Fehler beim überprüfen der E-Mail. Fehlercode: ' + response.status);
         return;
