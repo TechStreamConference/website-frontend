@@ -53,14 +53,14 @@
 	.popup-wrapper {
 		background-color: var(--background-color);
 		border: 1px solid var(--primary-color);
-		width: 50rem;
-		height: 40rem;
+		width: 60rem;
+		height: 50rem;
 	}
 
 	.content-wrapper {
 		margin: 1rem;
 		display: flex;
-		height: 38rem;
+		height: calc(100% - 2rem);
 		justify-content: space-between;
 	}
 

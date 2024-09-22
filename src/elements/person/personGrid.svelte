@@ -20,12 +20,19 @@
 <style>
 	.person-wrapper {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 		gap: 3rem;
 		justify-items: center;
 	}
 
 	@media (max-width: 1280px) {
+		.person-wrapper {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	
+	@media (max-width: 960px) {
 		.person-wrapper {
 			grid-template-columns: repeat(2, 1fr);
 		}

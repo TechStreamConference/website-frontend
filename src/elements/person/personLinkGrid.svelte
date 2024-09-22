@@ -24,14 +24,8 @@
 <style>
 	.link-wrapper {
 		display: grid;
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
 		gap: 2rem 0;
 		justify-items: center;
-	}
-
-	@media (max-width: 1280px) {
-		.link-wrapper {
-			grid-template-columns: repeat(4, 1fr);
-		}
 	}
 </style>
