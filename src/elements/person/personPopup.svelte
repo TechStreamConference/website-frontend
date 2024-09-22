@@ -7,6 +7,7 @@
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import PersonLinkGrid from './personLinkGrid.svelte';
 	import type { Person } from 'types/provideTypes';
+	import PersonImage from './personImage.svelte';
 
 	export let data: Person;
 </script>
@@ -20,7 +21,7 @@
 	>
 		<div class="content-wrapper">
 			<div class="column-wrapper align-center">
-				<img class="picture" src="/dummy_1_1.png" alt="" />
+				<PersonImage classes="person-popup-picture" {data}/>
 				<SpacerOneLine />
 				<SubHeadline>{data.name}</SubHeadline>
 				<Paragraph>{data.short_bio}</Paragraph>
@@ -75,7 +76,7 @@
 		flex-direction: column;
 	}
 
-	.picture {
+	:global(.person-popup-picture) {
 		width: auto;
 		height: auto;
 		border: 1px solid var(--primary-color);

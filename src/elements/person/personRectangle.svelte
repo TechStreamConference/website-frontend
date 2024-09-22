@@ -8,6 +8,7 @@
 	import LinkArray from './personLinkGrid.svelte';
 	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Button from 'elements/input/button.svelte';
+	import PersonImage from './personImage.svelte';
 
 	export let data: Person;
 
@@ -20,15 +21,15 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- No a11y correctnes here because the "person-button" already does the same. -->
 <div class="person" on:click>
-	<img class="picture" src="/dummy_1_1.png" alt="" />
+	<PersonImage classes="person-rectangle-picture" {data}/>
 	<Spacer --height="1rem" />
 	<SubHeadline>{data.name} {data.id}</SubHeadline>
 	<Paragraph>{data.short_bio}</Paragraph>
-	<Spacer --height="3rem" />
 	<div class="bottom-wrapper">
 		<HorizontalLine />
 		<Spacer --height="2rem" />
-		<LinkArray on:click={onLinkClicked} /> <!--TODO: Add Social Media Links-->
+		<LinkArray on:click={onLinkClicked} />
+		<!--TODO: Add Social Media Links-->
 		<Spacer --height="2rem" />
 		<Button classes="person-button" on:click>Info</Button>
 	</div>
@@ -52,7 +53,7 @@
 		transition: var(--transition-duration);
 	}
 
-	.picture {
+	:global(.person-rectangle-picture) {
 		width: 100%;
 		height: auto;
 		background-color: var(--primary-color);
