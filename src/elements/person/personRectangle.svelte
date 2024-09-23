@@ -48,8 +48,7 @@
 	}
 
 	.person:hover {
-		box-shadow: 4px 4px var(--gray-color);
-		transform: translateY(-4px) translateX(-4px);
+		outline: 1px solid var(--white-color);
 		transition: var(--transition-duration);
 	}
 
