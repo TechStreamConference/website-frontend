@@ -12,5 +12,6 @@
 
 	div {
 		background-color: var(--lines-color);
+		flex-shrink: 0;
 	}
 </style>

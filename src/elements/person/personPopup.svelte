@@ -152,7 +152,6 @@
 			width: 100%;
 			height: 1px;
 			margin: 2rem 0 1rem 0;
-			flex-shrink: 0;
 		}
 
 		:global(.person-popup-picture) {
