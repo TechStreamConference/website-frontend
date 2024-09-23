@@ -15,7 +15,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- No a11y correctnes here because the "close-button" already does the same. -->
+<!-- No a11y correctness here because the "close-button" already does the same. -->
 <div class="page-wrapper" transition:fade={{ duration: 300 }} on:click>
 	<div
 		class="popup-wrapper"
