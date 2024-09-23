@@ -19,7 +19,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- No a11y correctnes here because the "person-button" already does the same. -->
+<!-- No a11y correctness here because the "person-button" already does the same. -->
 <div class="person" on:click>
 	<PersonImage classes="person-rectangle-picture" {data}/>
 	<Spacer --height="1rem" />
