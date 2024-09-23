@@ -57,7 +57,7 @@
 		<HeadlinePage>This is Year {data.displayedYear}</HeadlinePage>
 
 		<Spacer --height="10rem" />
-		<div id="Speaker" class="scroll-anker" />
+		<div id="Speaker" class="scroll-anchor" />
 		<HeadlineH2>Vortragende</HeadlineH2>
 		<HorizontalLine />
 		<Spacer --height="3rem" />
@@ -66,13 +66,13 @@
 		</div>
 
 		<Spacer --height="10rem" />
-		<div id="Sponsors" class="scroll-anker" />
+		<div id="Sponsors" class="scroll-anchor" />
 		<HeadlineH2>Sponsoren</HeadlineH2>
 		<HorizontalLine />
 		<Spacer --height="3rem" />
 
 		<Spacer --height="10rem" />
-		<div id="Team" class="scroll-anker" />
+		<div id="Team" class="scroll-anchor" />
 		<HeadlineH2>Team</HeadlineH2>
 		<HorizontalLine />
 		<Spacer --height="3rem" />
@@ -82,7 +82,7 @@
 		</div>
 
 		<Spacer --height="10rem" />
-		<div id="Shedule" class="scroll-anker" />
+		<div id="Shedule" class="scroll-anchor" />
 		<HeadlineH2>Plan</HeadlineH2>
 		<HorizontalLine />
 		<Spacer --height="3rem" />
@@ -97,7 +97,7 @@
 {/if}
 
 <style>
-	.scroll-anker {
+	.scroll-anchor {
 		scroll-margin-top: 7rem;
 	}
 
