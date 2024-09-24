@@ -3,7 +3,6 @@ export type Person = {
     name: string,
     photo: string,
     short_bio: string,
-    id: string,
 }
 
 export type Event = {
