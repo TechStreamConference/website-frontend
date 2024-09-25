@@ -1,4 +1,6 @@
-export type LoadYear = { loggedIn: boolean; currentYear: number; displayedYear: number; };
+import type { Year } from "./provideTypes";
+
+export type LoadYear = { loggedIn: boolean; currentYear: number; displayedYear: number; year: Year };
 export type LoadYearPromise = Promise<LoadYear>;
 
 export type LoadRegister = { loggedIn: boolean; currentYear: number };

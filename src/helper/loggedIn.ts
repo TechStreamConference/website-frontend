@@ -1,8 +1,9 @@
 import { redirect } from '@sveltejs/kit';
 import { loginStatus } from 'stores/auth';
+import { apiUrl } from './links';
 
 async function fetchLoginStatusAsync(fetch: Function): Promise<boolean> {
-    const response: Response = await fetch('/api/account');
+    const response: Response = await fetch(apiUrl('/api/account'));
     return response.ok;
 }
 

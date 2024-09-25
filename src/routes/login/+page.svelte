@@ -4,6 +4,7 @@
 
 	import { goto } from '$app/navigation';
 	import { udpateLoginStatusAsync } from 'helper/loggedIn';
+	import { apiUrl } from 'helper/links';
 
 	import Header from 'elements/navigation/header.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
@@ -40,7 +41,7 @@
 			password: password.trim()
 		};
 
-		const response: Response = await fetch('api/account/login', {
+		const response: Response = await fetch(apiUrl('/api/account/login'), {
 			method: 'POST',
 			body: JSON.stringify(data)
 		});
