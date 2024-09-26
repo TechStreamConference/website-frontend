@@ -28,6 +28,7 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
 		gap: 1rem 0;
+		margin: 2rem 0;
 		justify-items: center;
 	}
 </style>

@@ -4,9 +4,7 @@
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 
-	import Spacer from 'elements/spacer/spacer.svelte';
 	import LinkArray from './personLinkGrid.svelte';
-	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import Button from 'elements/input/button.svelte';
 	import PersonImage from './personImage.svelte';
 
@@ -21,22 +19,21 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- No a11y correctness here because the "person-button" already does the same. -->
 <div class="person" on:click>
-	<PersonImage classes="person-rectangle-picture" {data}/>
-	<Spacer --height="1rem" />
+	<PersonImage classes="person-rectangle-picture" {data} />
 	<SubHeadline>{data.name}</SubHeadline>
 	<Paragraph>{data.short_bio}</Paragraph>
+	<div class="test" />
 	<div class="bottom-wrapper">
-		<HorizontalLine />
-		<Spacer --height="2rem" />
 		<LinkArray on:click={onLinkClicked} />
 		<!--TODO: Add Social Media Links-->
-		<Spacer --height="2rem" />
-		<Button classes="person-button text" on:click>Info</Button>
 	</div>
+	<Button classes="person-button text" on:click>Info</Button>
 </div>
 
 <style>
 	.person {
+		display: flex;
+		flex-direction: column;
 		min-width: 15rem;
 		padding: 0;
 		border: none;
@@ -58,14 +55,21 @@
 		background-color: var(--primary-color);
 		border-top-left-radius: var(--border-radius);
 		border-top-right-radius: var(--border-radius);
+		margin-bottom: 1rem;
+	}
+
+	.test {
+		flex-grow: 1;
 	}
 
 	.bottom-wrapper {
-		margin: 2rem;
+		border-top: 1px solid var(--lines-color);
+		margin: 2rem 2rem 0 2rem;
 	}
 
 	:global(.person-button) {
-		width: 100%;
+		display: block;
 		padding: 0.2rem 2rem !important;
+		margin: 0 2rem 2rem 2rem !important;
 	}
 </style>
