@@ -285,7 +285,6 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-evenly;
-		margin: 0;
 	}
 
 	@media (max-width: 1280px) {
@@ -294,10 +293,6 @@
 		}
 		.width-wrapper-registered {
 			max-width: 32rem;
-		}
-
-		.password-list-wrapper {
-			margin: 0;
 		}
 	}
 </style>

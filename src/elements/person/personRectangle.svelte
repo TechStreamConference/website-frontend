@@ -35,7 +35,6 @@
 		display: flex;
 		flex-direction: column;
 		min-width: 15rem;
-		padding: 0;
 		border: none;
 		background-color: transparent;
 		outline: 1px solid var(--primary-color);

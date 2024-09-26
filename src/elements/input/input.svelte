@@ -7,6 +7,7 @@
 	export let labelText: string = '';
 	export let placeholderText: string = '';
 	export let value: string | number = '';
+	export let ariaLabel: string;
 </script>
 
 <div class="wrapper">
@@ -18,6 +19,7 @@
 		placeholder={placeholderText}
 		bind:value
 		on:input
+		aria-label={ariaLabel}
 	/>
 </div>
 

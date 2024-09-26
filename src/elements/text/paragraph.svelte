@@ -14,7 +14,6 @@
 		font-style: normal;
 		color: var(--text-color);
 		text-wrap: wrap;
-		margin: 0;
 		text-align: var(--text-align);
 		width: var(--width);
 	}

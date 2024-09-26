@@ -14,7 +14,6 @@
 		font-style: normal;
 		color: var(--text-color);
 		text-align: center;
-		margin: 0;
 	}
 	.big {
 		font-size: 3rem;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { IconLink } from 'types/provideTypes';
-	import DummyIcon from 'elements/image/icon.svelte';
+	import Icon from 'elements/image/icon.svelte';
 
 	export let person: string;
 
@@ -21,7 +21,7 @@
 
 <div class="link-wrapper">
 	{#each testLinkData as link}
-		<DummyIcon linkType={link} {person} on:click />
+		<Icon linkType={link} {person} on:click />
 	{/each}
 </div>
 

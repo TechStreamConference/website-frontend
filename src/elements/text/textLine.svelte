@@ -14,7 +14,6 @@
 		font-style: normal;
 		color: var(--text-color);
 		text-align: var(--text-align);
-		margin: 0;
 	}
 
 	.white {

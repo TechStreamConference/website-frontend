@@ -1,8 +1,9 @@
 <script lang="ts">
+	import type { MenuItem } from 'types/provideTypes';
 	import LogoSmall from 'elements/image/logoSmall.svelte';
 	import { fade } from 'svelte/transition';
 
-	export let menu: [string, string][];
+	export let menu: MenuItem[];
 
 	let isOpen: boolean = false;
 
@@ -18,13 +19,17 @@
 <header>
 	<!-- Desktop -->
 	<div class="desktop-wrapper">
-		<a href="/" class="logo-wrapper">
+		<a
+			href="/"
+			class="logo-wrapper"
+			title="Tech Stream Conference Seite des aktuellen Jahres anschauen"
+		>
 			<LogoSmall />
 		</a>
 		<nav>
 			<ul>
 				{#each menu as entry}
-					<li><a href={entry[1]}>{entry[0]}</a></li>
+					<li><a href={entry.url} title={entry.description}>{entry.name}</a></li>
 				{/each}
 			</ul>
 		</nav>
@@ -33,11 +38,15 @@
 	<!-- Mobile -->
 	<div class="mobile-wrapper">
 		<div class="hamburger-wrapper {isOpen ? 'open' : 'close'}">
-			<a href="/" class="logo-wrapper">
+			<a
+				href="/"
+				class="logo-wrapper"
+				title="Tech Stream Conference Seite des aktuellen Jahres anschauen"
+			>
 				<LogoSmall />
 			</a>
 
-			<button class="hamburger" on:click={toggleOpen}>
+			<button class="hamburger" aria-label="Menü aufklappen" on:click={toggleOpen}>
 				<div class={isOpen ? 'rotated' : 'normal'}></div>
 				<div class={isOpen ? 'rotated' : 'normal'}></div>
 				<div class={isOpen ? 'rotated' : 'normal'}></div>
@@ -46,7 +55,7 @@
 		{#if isOpen}
 			<div class="mobile-menu" transition:fade={{ duration: 300 }}>
 				{#each menu as entry}
-					<a href={entry[1]} on:click={collapse}>{entry[0]}</a>
+					<a href={entry.url} title={entry.description} on:click={collapse}>{entry.url}</a>
 				{/each}
 			</div>
 		{/if}
@@ -122,7 +131,6 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
-			margin: 0;
 		}
 
 		:global(.logo-small) {

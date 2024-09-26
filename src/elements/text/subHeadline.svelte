@@ -1,8 +1,9 @@
 <script lang="ts">
+	export let classes: string = '';
 	export let size: string = 'big';
 </script>
 
-<h2 class={size}><slot /></h2>
+<h2 class="{classes} {size}"><slot /></h2>
 
 <style>
 	h2 {
@@ -12,7 +13,6 @@
 		text-transform: capitalize;
 		font-style: normal;
 		color: var(--text-color);
-		margin: 0;
 	}
 	.big {
 		font-size: 1.5rem;

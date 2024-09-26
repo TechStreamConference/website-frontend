@@ -25,3 +25,9 @@ export type Year = {
 }
 
 export type IconLink = { link: string, type: string };
+
+export type MenuItem = {
+    name: string,
+    url: string,
+    description: string,
+}
