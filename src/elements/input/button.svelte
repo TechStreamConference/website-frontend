@@ -2,9 +2,10 @@
 	import { typeWorkaround } from 'types/workaround';
 	export let type: string = 'button';
 	export let classes: string = 'text';
+	export let ariaLabel: string = '';
 </script>
 
-<button class={classes} use:typeWorkaround={type} on:click><slot /></button>
+<button class={classes} use:typeWorkaround={type} on:click aria-label={ariaLabel}><slot /></button>
 
 <style>
 	button {

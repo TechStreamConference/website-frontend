@@ -3,12 +3,13 @@
 
 	import type { IconLink } from 'types/provideTypes';
 	export let linkType: IconLink;
+	export let person: string;
 
 	import { iconLookup } from 'lookup/iconLookup';
 </script>
 
-<a href={linkType.link} target="_blank" rel="noopener noreferrer" class="icon" on:click>
-	<i class="fa {iconLookup(linkType.type)}" />
+<a href={linkType.link} target="_blank" rel="noopener noreferrer" class="icon" title="{linkType.type} von {person} besuchen" on:click >
+	<i class="fa {iconLookup(linkType.type)}" aria-hidden="true"/>
 </a>
 
 <style>

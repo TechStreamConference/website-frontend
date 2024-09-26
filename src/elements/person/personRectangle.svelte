@@ -24,10 +24,10 @@
 	<Paragraph>{data.short_bio}</Paragraph>
 	<div class="test" />
 	<div class="bottom-wrapper">
-		<LinkArray on:click={onLinkClicked} />
+		<LinkArray on:click={onLinkClicked} person={data.name} />
 		<!--TODO: Add Social Media Links-->
 	</div>
-	<Button classes="person-button text" on:click>Info</Button>
+	<Button classes="person-button text" on:click ariaLabel="Mehr Informationen zu {data.name}">Info</Button>
 </div>
 
 <style>

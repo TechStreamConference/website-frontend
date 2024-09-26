@@ -2,24 +2,26 @@
 	import type { IconLink } from 'types/provideTypes';
 	import DummyIcon from 'elements/image/icon.svelte';
 
+	export let person: string;
+
 	const testLinkData: IconLink[] = [
-		{ link: 'https://www.google.de', type: 'web' },
-		{ link: 'https://www.google.de', type: 'twitch' },
-		{ link: 'https://www.google.de', type: 'discord' },
-		{ link: 'https://www.google.de', type: 'linkedin' },
-		{ link: 'https://www.google.de', type: 'youtube' },
-		{ link: 'https://www.google.de', type: 'instagram' },
-		{ link: 'https://www.google.de', type: 'x' },
-		{ link: 'https://www.google.de', type: 'git' },
-		{ link: 'https://www.google.de', type: 'mail' },
-		{ link: 'https://www.google.de', type: 'download' },
-		{ link: 'https://www.google.de', type: 'calender' },
+		{ link: 'https://www.google.de', type: 'Web' },
+		{ link: 'https://www.google.de', type: 'Twitch' },
+		{ link: 'https://www.google.de', type: 'Discord' },
+		{ link: 'https://www.google.de', type: 'LinkedIn' },
+		{ link: 'https://www.google.de', type: 'YouTube' },
+		{ link: 'https://www.google.de', type: 'Instagram' },
+		{ link: 'https://www.google.de', type: 'X' },
+		{ link: 'https://www.google.de', type: 'Git' },
+		{ link: 'https://www.google.de', type: 'Mail' },
+		{ link: 'https://www.google.de', type: 'Download' },
+		{ link: 'https://www.google.de', type: 'Calender' },
 	];
 </script>
 
 <div class="link-wrapper">
 	{#each testLinkData as link}
-		<DummyIcon linkType={link} on:click />
+		<DummyIcon linkType={link} {person} on:click />
 	{/each}
 </div>
 
