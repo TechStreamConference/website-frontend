@@ -5,7 +5,9 @@
     --secondary-color: #5e4680;
     --third-color: #563e75;
     --text-color: black;
+    --green-color: #ccff57;
     --lines-color: var(--primary-color);
+    --icon-color: var(--green-color);
     --white-color: white;
     --light-gray-color: rgb(190, 190, 190);
     --gray-color: gray;
@@ -42,6 +44,7 @@ body {
         --secondary-color: #5e4680;
         --third-color: #674c8a;
         --text-color: white;
-        --lines-color: #ccff57;
+        --lines-color: var(--green-color);
+        --icon-color: var(--primary-color);
     }
 }
