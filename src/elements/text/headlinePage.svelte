@@ -1,13 +1,10 @@
 <script lang="ts">
-	import SpacerHeader from 'elements/spacer/spacerHeader.svelte';
 	import Headline from 'elements/text/headline.svelte';
-	import HorizontalLine from 'elements/line/horizontalLine.svelte';
+	export let classes: string = '';
 </script>
 
 <div class="wrapper">
-	<SpacerHeader />
-	<Headline classes="headline"><slot /></Headline>
-	<HorizontalLine />
+	<Headline classes="headline border {classes}"><slot /></Headline>
 </div>
 
 <style>
@@ -18,12 +15,14 @@
 
 	:global(.headline) {
 		padding: 0 3rem;
+		margin-top: 9rem;
 		width: fit-content;
 	}
 
 	@media (max-width: 1280px) {
 		:global(.headline) {
 			padding: 0 2rem;
+			margin-top: 6rem;
 			width: fit-content;
 		}
 	}

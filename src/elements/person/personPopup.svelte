@@ -147,10 +147,6 @@
 			height: auto;
 		}
 
-		.flex-spacer {
-			display: flex;
-		}
-
 		:global(.personPopupLine) {
 			width: 100%;
 			height: 1px;

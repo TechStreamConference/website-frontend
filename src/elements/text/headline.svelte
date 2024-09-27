@@ -24,6 +24,10 @@
 		line-height: 3rem;
 	}
 
+	.border {
+		border-bottom: 1px solid var(--lines-color);
+	}
+
 	@media (max-width: 600px) {
 		.big {
 			font-size: 2rem;
