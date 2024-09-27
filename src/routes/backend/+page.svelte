@@ -30,11 +30,11 @@
 		min-height: 100vh;
 	}
 
-	:global(.backend-headline){
+	:global(.backend-headline) {
 		margin-bottom: 3rem;
 	}
 
-	:global(.backend-text){
+	:global(.backend-text) {
 		margin-bottom: 5rem;
 	}
 </style>

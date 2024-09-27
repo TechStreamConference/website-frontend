@@ -31,3 +31,5 @@ export type MenuItem = {
     url: string,
     description: string,
 }
+
+export type Menu = MenuItem[];

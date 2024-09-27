@@ -3,7 +3,6 @@
 
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
-	import Spacer from 'elements/spacer/spacer.svelte';
 	import Button from 'elements/input/button.svelte';
 </script>
 
