@@ -55,7 +55,7 @@
 		{#if isOpen}
 			<div class="mobile-menu" transition:fade={{ duration: 300 }}>
 				{#each menu as entry}
-					<a href={entry.url} title={entry.description} on:click={collapse}>{entry.url}</a>
+					<a href={entry.url} title={entry.description} on:click={collapse}>{entry.name}</a>
 				{/each}
 			</div>
 		{/if}
