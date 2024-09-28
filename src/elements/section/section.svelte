@@ -7,7 +7,7 @@
 
 <style>
 	.section {
-        scroll-margin-top: 7rem;
+		scroll-margin-top: 7rem;
 		margin: 10rem auto;
 	}
 </style>

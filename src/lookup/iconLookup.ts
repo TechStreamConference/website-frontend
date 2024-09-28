@@ -21,5 +21,5 @@ export function iconLookup(type: string): string {
         return lookup[type];
     }
 
-    return lookup['web'];
+    return lookup['Web'];
 }
