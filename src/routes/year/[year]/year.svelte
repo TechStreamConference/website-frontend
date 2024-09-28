@@ -16,6 +16,7 @@
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import Link from 'elements/text/link.svelte';
 	import Icon from 'elements/image/icon.svelte';
+	import YoutubeVideo from 'elements/image/youtubeVideo.svelte';
 
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
@@ -66,6 +67,11 @@
 		</div>
 	</div>
 	<div class="content-wrapper">
+		<Section id="Trailer">
+			<div class="video-wrapper">
+				<YoutubeVideo />
+			</div>
+		</Section>
 		<Section id="Speaker">
 			<HeadlineH2 classes="border">Vortragende</HeadlineH2>
 			<div class="section-inner">
@@ -159,6 +165,10 @@
 
 	.section-inner {
 		margin-top: 3rem;
+	}
+
+	.video-wrapper {
+		margin: 2rem;
 	}
 
 	@media (max-width: 1280px) {
