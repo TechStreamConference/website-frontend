@@ -22,4 +22,8 @@
 		font-size: 1.2rem;
 		line-height: 1.7rem;
 	}
+
+	.white {
+		color: var(--white-color);
+	}
 </style>

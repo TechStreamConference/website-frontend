@@ -70,7 +70,7 @@
 		</div>
 
 		<div class="nav-element">
-			<LogoBig />
+			<LogoBig classes="header-logo-big" />
 		</div>
 	</div>
 	<div class="copyright">
@@ -111,7 +111,7 @@
 		margin-top: 1rem;
 	}
 
-	:global(.logo-big) {
+	:global(.header-logo-big) {
 		height: 10rem;
 		object-fit: contain;
 		max-height: 12rem;

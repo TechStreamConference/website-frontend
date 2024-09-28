@@ -1,5 +1,9 @@
+<script lang="ts">
+	export let classes: string = '';
+</script>
+
 <img
-	class="logo-big"
+	class={classes}
 	src={'/logo_big.png'}
 	alt="Das große Tech Stream Conference Logo. Es zeigt den Schriftzug auf schwarzen Wolken. Aus den Wolken kommen schwarze Schaltkreise, an deren Enden gelbe Punkte sind. Test ist in Großbuchstaben und weiß / grün. conf in Kleinbuchstaben darunter und weiß."
 />

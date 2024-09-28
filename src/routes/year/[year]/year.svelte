@@ -3,14 +3,18 @@
 	export let data: LoadYear;
 	import * as Menu from 'menu/year';
 
+	import LogoBig from 'elements/image/logoBig.svelte';
+
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 	import PersonArray from 'elements/person/personGrid.svelte';
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
-	import HeadlinePage from 'elements/text/headlinePage.svelte';
+	import Headline from 'elements/text/headline.svelte';
 	import type { Person } from 'types/provideTypes';
 	import PersonPopup from 'elements/person/personPopup.svelte';
 	import Section from 'elements/section/section.svelte';
+	import SubHeadline from 'elements/text/subHeadline.svelte';
+	import Button from 'elements/input/button.svelte';
 
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
@@ -24,9 +28,31 @@
 
 <Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
 <div class="page">
-	<div class="content-wrapper">
-		<HeadlinePage>This is Year {data.year.event.year}</HeadlinePage>
+	<div class="header">
+		<div class="header-content">
+			<LogoBig classes="year-header-logo-big" />
 
+			<div class="header-text-wrapper">
+				<Headline classes="green left">{data.year.event.title}</Headline>
+				<SubHeadline classes="year-header-subheadline white">
+					Online-Konferenz {data.year.event.startDate} - {data.year.event.endDate}
+				</SubHeadline>
+				<SubHeadline classes="year-header-subtitle white">{data.year.event.subtitle}</SubHeadline>
+				<div class="header-button-wrapper">
+					<Button ariaLabel="Klicker hier um auf den Discord Server der Test-Conf zu gelangen">
+						Discord
+					</Button>
+					<Button ariaLabel="Klicke hier um auf die Twitch Seite der Test-Conf zu gelangen">
+						Twitch
+					</Button>
+					<Button ariaLabel="Klicke hier um das Presskit der Test-Conf herunter zu laden">
+						Presskit
+					</Button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content-wrapper">
 		<Section id="Speaker">
 			<HeadlineH2 classes="border">Vortragende</HeadlineH2>
 			<div class="section-inner">
@@ -64,6 +90,44 @@
 		min-height: 100vh;
 	}
 
+	.header {
+		width: 100vw;
+		background-image: url('/background.png');
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		height: fit-content;
+	}
+
+	.header-content {
+		justify-content: center;
+		margin: 10rem 3rem;
+		display: flex;
+	}
+
+	:global(.year-header-logo-big) {
+		height: 18rem;
+	}
+
+	.header-text-wrapper {
+		margin-left: 3rem;
+	}
+
+	:global(.year-header-subheadline) {
+		padding-bottom: 1rem;
+		border-bottom: 1px solid var(--green-color);
+	}
+
+	:global(.year-header-subtitle) {
+		margin: 2rem 0 1rem;
+	}
+
+	.header-button-wrapper {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
 	.content-wrapper {
 		flex-grow: 1;
 		max-width: 100rem;
@@ -73,5 +137,15 @@
 
 	.section-inner {
 		margin-top: 3rem;
+	}
+
+	@media (max-width: 1280px) {
+		:global(.year-header-logo-big) {
+			display: none;
+		}
+
+		.header-text-wrapper {
+		margin-left: 0;
+	}
 	}
 </style>
