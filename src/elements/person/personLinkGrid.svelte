@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { IconLinks } from 'types/provideTypes';
-	import Icon from 'elements/image/icon.svelte';
+	import IconLink from 'elements/image/iconLink.svelte';
 
 	export let person: string;
 
@@ -15,13 +15,13 @@
 		{ link: 'https://www.google.de', name: 'Git' },
 		{ link: 'https://www.google.de', name: 'Mail' },
 		{ link: 'https://www.google.de', name: 'Download' },
-		{ link: 'https://www.google.de', name: 'Calender' },
+		{ link: 'https://www.google.de', name: 'Calender' }
 	];
 </script>
 
 <div class="link-wrapper">
 	{#each testLinkData as link}
-		<Icon linkType={link} {person} on:click />
+		<IconLink linkType={link} title="Klicke für {link.name} von {person}" on:click />
 	{/each}
 </div>
 

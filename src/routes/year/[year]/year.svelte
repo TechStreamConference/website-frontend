@@ -14,7 +14,8 @@
 	import PersonPopup from 'elements/person/personPopup.svelte';
 	import Section from 'elements/section/section.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
-	import Button from 'elements/input/button.svelte';
+	import Link from 'elements/text/link.svelte';
+	import Icon from 'elements/image/icon.svelte';
 
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
@@ -35,19 +36,31 @@
 			<div class="header-text-wrapper">
 				<Headline classes="green left">{data.year.event.title}</Headline>
 				<SubHeadline classes="year-header-subheadline white">
-					Online-Konferenz {data.year.event.startDate} - {data.year.event.endDate}
+					Online-Konferenz {data.year.event.start_date} - {data.year.event.end_date}
 				</SubHeadline>
 				<SubHeadline classes="year-header-subtitle white">{data.year.event.subtitle}</SubHeadline>
-				<div class="header-button-wrapper">
-					<Button ariaLabel="Klicker hier um auf den Discord Server der Test-Conf zu gelangen">
-						Discord
-					</Button>
-					<Button ariaLabel="Klicke hier um auf die Twitch Seite der Test-Conf zu gelangen">
-						Twitch
-					</Button>
-					<Button ariaLabel="Klicke hier um das Presskit der Test-Conf herunter zu laden">
-						Presskit
-					</Button>
+				<div class="header-link-wrapper">
+					<Link
+						href={data.year.event.discord_url}
+						classes="animated white"
+						title="Klicker hier um auf den Discord Server der Test-Conf zu gelangen"
+					>
+						<div class="header-link-entry-wrapper"><Icon type="Discord" />Sei dabei</div>
+					</Link>
+					<Link
+						href={data.year.event.twitch_url}
+						classes="animated white"
+						title="Klicke hier um auf die Twitch Seite der Test-Conf zu gelangen"
+					>
+						<div class="header-link-entry-wrapper"><Icon type="Twitch" />Schau zu</div>
+					</Link>
+					<Link
+						href={data.year.event.presskit_url}
+						classes="animated white"
+						title="Klicke hier um das Presskit der Test-Conf herunter zu laden"
+					>
+						<div class="header-link-entry-wrapper"><Icon type="Download" />Presskit</div>
+					</Link>
 				</div>
 			</div>
 		</div>
@@ -101,7 +114,7 @@
 
 	.header-content {
 		justify-content: center;
-		margin: 10rem 3rem;
+		margin: 11rem 3rem;
 		display: flex;
 	}
 
@@ -122,10 +135,19 @@
 		margin: 2rem 0 1rem;
 	}
 
-	.header-button-wrapper {
+	.header-link-wrapper {
 		display: flex;
 		gap: 1rem;
 		flex-wrap: wrap;
+	}
+
+	.header-link-entry-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		background-color: var(--primary-color);
+		padding: 0.1rem 0.5rem 0.1rem 0.3rem;
+		border-radius: var(--border-radius);
 	}
 
 	.content-wrapper {
@@ -145,7 +167,7 @@
 		}
 
 		.header-text-wrapper {
-		margin-left: 0;
-	}
+			margin-left: 0;
+		}
 	}
 </style>
