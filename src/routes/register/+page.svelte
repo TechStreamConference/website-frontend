@@ -296,9 +296,6 @@
 		.width-wrapper {
 			max-width: 30rem;
 		}
-		.width-wrapper-registered {
-			max-width: 32rem;
-		}
 	}
 
 	:global(.register-registered-text-line) {

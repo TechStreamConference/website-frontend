@@ -1,5 +1,8 @@
 <script lang="ts">
 	import type { LoadYear } from 'types/loadTypes';
+	export let data: LoadYear;
+	import * as Menu from 'menu/year';
+
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 	import PersonArray from 'elements/person/personGrid.svelte';
@@ -8,37 +11,6 @@
 	import type { Person } from 'types/provideTypes';
 	import PersonPopup from 'elements/person/personPopup.svelte';
 	import Section from 'elements/section/section.svelte';
-
-	export let data: LoadYear;
-
-	type MenuItem = [string, string];
-	const headerMenu: MenuItem[] = [
-		['Start', '#top'],
-		['Vortragende', '#Speaker'],
-		['Partner', '#Sponsors'],
-		['Team', '#Team'],
-		['Ablaufplan', '#Shedule'],
-		['Anmelden', '/login']
-	];
-	const headerMenuLoggedIn: MenuItem[] = [
-		['Start', '#top'],
-		['Vortragende', '#Speaker'],
-		['Partner', '#Sponsors'],
-		['Team', '#Team'],
-		['Ablaufplan', '#Shedule'],
-		['Intern', '/backend'],
-		['Abmelden', '/logout']
-	];
-	const footerMenu: MenuItem[] = [
-		['Anmelden', '/login'],
-		['Registrieren', '/register'],
-		['Impressum', '/impressum']
-	];
-	const footerMenuLoggedIn: MenuItem[] = [
-		['Intern', '/backend'],
-		['Abmelden', '/logout'],
-		['Impressum', '/impressum']
-	];
 
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
@@ -50,7 +22,7 @@
 	}
 </script>
 
-<Header menu={data.loggedIn ? headerMenuLoggedIn : headerMenu} />
+<Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
 <div class="page">
 	<div class="content-wrapper">
 		<HeadlinePage>This is Year {data.displayedYear}</HeadlinePage>
@@ -78,7 +50,7 @@
 			<HeadlineH2 classes="border">Plan</HeadlineH2>
 		</Section>
 	</div>
-	<Footer currentYear={data.currentYear} menu={data.loggedIn ? footerMenuLoggedIn : footerMenu} />
+	<Footer currentYear={data.currentYear} menu={data.loggedIn ? Menu.footerIn : Menu.footerOut} />
 </div>
 
 {#if personPopup}
