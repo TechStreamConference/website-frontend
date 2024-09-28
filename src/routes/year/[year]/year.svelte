@@ -5,6 +5,7 @@
 
 	import LogoBig from 'elements/image/logoBig.svelte';
 
+	import YearSocialLinks from 'elements/input/yearSocialLinks.svelte';
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 	import PersonArray from 'elements/person/personGrid.svelte';
@@ -17,6 +18,7 @@
 	import Link from 'elements/text/link.svelte';
 	import Icon from 'elements/image/icon.svelte';
 	import YoutubeVideo from 'elements/image/youtubeVideo.svelte';
+	import Paragraph from 'elements/text/paragraph.svelte';
 
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
@@ -40,29 +42,7 @@
 					Online-Konferenz {data.year.event.start_date} - {data.year.event.end_date}
 				</SubHeadline>
 				<SubHeadline classes="year-header-subtitle white">{data.year.event.subtitle}</SubHeadline>
-				<div class="header-link-wrapper">
-					<Link
-						href={data.year.event.discord_url}
-						classes="animated white"
-						title="Klicker hier um auf den Discord Server der Test-Conf zu gelangen"
-					>
-						<div class="header-link-entry-wrapper"><Icon type="Discord" />Sei dabei</div>
-					</Link>
-					<Link
-						href={data.year.event.twitch_url}
-						classes="animated white"
-						title="Klicke hier um auf die Twitch Seite der Test-Conf zu gelangen"
-					>
-						<div class="header-link-entry-wrapper"><Icon type="Twitch" />Schau zu</div>
-					</Link>
-					<Link
-						href={data.year.event.presskit_url}
-						classes="animated white"
-						title="Klicke hier um das Presskit der Test-Conf herunter zu laden"
-					>
-						<div class="header-link-entry-wrapper"><Icon type="Download" />Presskit</div>
-					</Link>
-				</div>
+				<YearSocialLinks {data} />
 			</div>
 		</div>
 	</div>
@@ -72,6 +52,18 @@
 				<YoutubeVideo />
 			</div>
 		</Section>
+
+		<Section id="Discription">
+			<HeadlineH2 classes="border">{data.year.event.description_headline}</HeadlineH2>
+			<div class="discription-wrapper">
+				<div class="discription-text-wrapper">
+					<Paragraph classes="year-discription-paragraph">{data.year.event.description}</Paragraph>
+					<YearSocialLinks {data} />
+				</div>
+				<LogoBig classes="year-header-logo-big" />
+			</div>
+		</Section>
+
 		<Section id="Speaker">
 			<HeadlineH2 classes="border">Vortragende</HeadlineH2>
 			<div class="section-inner">
@@ -141,19 +133,20 @@
 		margin: 2rem 0 1rem;
 	}
 
-	.header-link-wrapper {
+	.discription-wrapper {
 		display: flex;
-		gap: 1rem;
-		flex-wrap: wrap;
+		flex-direction: row;
+		margin-top: 2rem;
 	}
 
-	.header-link-entry-wrapper {
+	.discription-text-wrapper {
 		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		background-color: var(--primary-color);
-		padding: 0.1rem 0.5rem 0.1rem 0.3rem;
-		border-radius: var(--border-radius);
+		flex-direction: column;
+		margin-right: 3rem;
+	}
+
+	:global(.year-discription-paragraph) {
+		margin: 2rem 0;
 	}
 
 	.content-wrapper {
@@ -178,6 +171,20 @@
 
 		.header-text-wrapper {
 			margin-left: 0;
+		}
+
+		.discription-text-wrapper {
+			margin-right: 0;
+		}
+
+		.video-wrapper {
+			margin: 1rem;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.video-wrapper {
+			margin: 0;
 		}
 	}
 </style>
