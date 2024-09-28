@@ -15,9 +15,7 @@
 	import PersonPopup from 'elements/person/personPopup.svelte';
 	import Section from 'elements/section/section.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
-	import Link from 'elements/text/link.svelte';
-	import Icon from 'elements/image/icon.svelte';
-	import YoutubeVideo from 'elements/image/youtubeVideo.svelte';
+	import YouTubeVideo from 'elements/image/youTubeVideo.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 
 	let personPopup: Person | undefined = undefined;
@@ -49,7 +47,10 @@
 	<div class="content-wrapper">
 		<Section id="Trailer">
 			<div class="video-wrapper">
-				<YoutubeVideo />
+				<YouTubeVideo
+					href={data.year.event.trailer_url}
+					title="Tech Stream Conference Traile {data.year.event.year}"
+				/>
 			</div>
 		</Section>
 

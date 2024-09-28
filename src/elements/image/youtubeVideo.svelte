@@ -1,17 +1,17 @@
 <script lang="ts">
-	export let classes: string = '';
+	export let title: string;
+	export let href: string;
 </script>
 
 <div class="video-wrapper">
 	<iframe
-		class={classes}
 		width="100%"
 		height="100%"
-		src="https://youtube.com/embed/IW1vQAB6B18"
+		src={href}
 		frameborder="0"
 		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 		allowfullscreen
-		title="Tech Stream Conference Trailer"
+		{title}
 	/>
 </div>
 
