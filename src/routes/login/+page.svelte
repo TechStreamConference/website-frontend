@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { LoadLogin } from 'types/loadTypes';
 	export let data: LoadLogin; // data from database
+	import * as Menu from 'menu/login';
 
 	import { goto } from '$app/navigation';
 	import { udpateLoginStatusAsync } from 'helper/loggedIn';
@@ -10,23 +11,12 @@
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 
-	import Spacer from 'elements/spacer/spacer.svelte';
-	import ErrorMessage from 'elements/message/errorMessage.svelte';
+	import ErrorMessage from 'elements/text/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
 	import Link from 'elements/text/link.svelte';
 
 	import { loginLookup } from 'lookup/loginLookup';
-
-	type MenuItem = [string, string];
-	const headerMenu: MenuItem[] = [
-		['Start', '/'],
-		['Registrieren', '/register']
-	];
-	const footerMenu: MenuItem[] = [
-		['Registrieren', '/register'],
-		['Impressum', '/impressum']
-	];
 
 	let usernameOrEmail: string = '';
 	let password: string = '';
@@ -61,43 +51,45 @@
 	}
 </script>
 
-<Header menu={headerMenu} />
+<Header menu={Menu.loginHeaderOut} />
 
 <div class="page">
 	<div class="content">
 		<form class="width-wrapper" on:submit|preventDefault={loginAsync}>
 			<HeadlinePage>Anmelden</HeadlinePage>
-			<Spacer --height="3rem" />
-			<ErrorMessage message={loggedInMessage} />
-			<ErrorMessage message={displayLoginMessage} />
-			<ErrorMessage message={errorMessage} />
-			<Spacer --height="2rem" />
+			<div class="message-wrapper">
+				<ErrorMessage message={loggedInMessage} />
+				<ErrorMessage message={displayLoginMessage} />
+				<ErrorMessage message={errorMessage} />
+			</div>
 			<Input
+				classes="login-input-username-mail"
 				id="login-username-or-email"
 				type="text"
 				labelText="Nutzername oder E-Mail:"
 				placeholderText="Nutzername oder E-Mail"
+				ariaLabel="Gebe den Nutzernamen oder die E-Mail ein"
 				bind:value={usernameOrEmail}
 			/>
-			<Spacer --height="1rem" />
 			<Input
+				classes="login-input-password"
 				id="login-password"
 				type="password"
 				labelText="Passwort:"
 				placeholderText="Passwort"
+				ariaLabel="Gebe das Passwort ein"
 				bind:value={password}
 			/>
-			<Spacer --height="1.5rem" />
-			<Link href="/register">Noch keinen Account?</Link>
-			<Spacer --height="3rem" />
+			<Link href="/register" title="Klicke um einen neuen Account anzulegen">
+				Noch keinen Account?
+			</Link>
 			<div class="button-wrapper">
-				<Button type="submit">Anmelden</Button>
+				<Button type="submit" ariaLabel="Klicke zum anmelden">Anmelden</Button>
 			</div>
-			<Spacer --height="5rem" />
 		</form>
 	</div>
 
-	<Footer currentYear={data.currentYear} menu={footerMenu} />
+	<Footer currentYear={data.currentYear} menu={Menu.loginFooterOut} />
 </div>
 
 <style>
@@ -122,10 +114,24 @@
 		flex-direction: column;
 	}
 
+	.message-wrapper {
+		display: flex;
+		flex-direction: column;
+		margin: 3rem auto 2rem;
+	}
+
+	:global(.login-input-username-mail) {
+		margin-bottom: 1rem;
+	}
+
+	:global(.login-input-password) {
+		margin-bottom: 1.5rem;
+	}
+
 	.button-wrapper {
 		display: flex;
 		flex-direction: row;
-		margin: 0 auto;
+		margin: 3rem auto 5rem;
 	}
 
 	@media (max-width: 1280px) {

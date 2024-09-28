@@ -2,6 +2,7 @@
 	import { typeWorkaround } from 'types/workaround';
 	import Label from 'elements/text/label.svelte';
 
+	export let classes: string = '';
 	export let type: string = '';
 	export let id: string = '';
 	export let labelText: string = '';
@@ -10,7 +11,7 @@
 	export let ariaLabel: string;
 </script>
 
-<div class="wrapper">
+<div class="wrapper {classes}">
 	<Label {id}>{labelText}</Label>
 	<input
 		{id}

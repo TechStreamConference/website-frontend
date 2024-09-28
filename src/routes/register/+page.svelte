@@ -11,7 +11,7 @@
 
 	import Spacer from 'elements/spacer/spacer.svelte';
 	import MessageWrapper from 'elements/message/messageWrapper.svelte';
-	import ErrorMessage from 'elements/message/errorMessage.svelte';
+	import ErrorMessage from 'elements/text/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
 	import List from 'elements/list/list.svelte';

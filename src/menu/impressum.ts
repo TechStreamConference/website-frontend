@@ -1,6 +1,6 @@
 import type { Menu } from "types/provideTypes";
 
-export const impressumMenuHeaderOut: Menu = [
+export const impressumHeaderOut: Menu = [
     {
         name: 'Start',
         url: '/',
@@ -18,7 +18,7 @@ export const impressumMenuHeaderOut: Menu = [
     },
 ];
 
-export const impressumMenuHeaderIn: Menu = [
+export const impressumHeaderIn: Menu = [
     {
         name: 'Start',
         url: '/',
@@ -32,7 +32,7 @@ export const impressumMenuHeaderIn: Menu = [
 ];
 
 
-export const impressumMenuFooterOut: Menu = [
+export const impressumFooterOut: Menu = [
     {
         name: 'Start',
         url: '/',
@@ -50,7 +50,7 @@ export const impressumMenuFooterOut: Menu = [
     },
 ];
 
-export const impressumMenuFooterIn: Menu = [
+export const impressumFooterIn: Menu = [
     {
         name: 'Start',
         url: '/',
