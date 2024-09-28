@@ -1,4 +1,4 @@
-import type { Menu } from "types/provideTypes";
+import type { Menu } from "types/provideTypes"
 
 export const headerOut: Menu = [
     {
@@ -7,17 +7,17 @@ export const headerOut: Menu = [
         description: 'Klicke hier um zur aktuellen Hauptseite zurückzukehren'
     },
     {
-        name: 'Registrieren',
-        url: '/register',
-        description: 'Klicke hier zum registrieren'
+        name: 'Anmelden',
+        url: '/login',
+        description: 'Klicke hier zum anmelden'
     },
 ];
 
 export const footerOut: Menu = [
     {
-        name: 'Registrieren',
-        url: '/register',
-        description: 'Klicke hier zum registrieren'
+        name: 'Anmelden',
+        url: '/login',
+        description: 'Klicke hier zum anmelden'
     },
     {
         name: 'Impressum',

@@ -4,13 +4,12 @@
 	import { apiUrl } from 'helper/links';
 
 	import * as Validators from './validation';
+	import * as Menu from 'menu/register';
 
 	import Header from 'elements/navigation/header.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 
-	import Spacer from 'elements/spacer/spacer.svelte';
-	import MessageWrapper from 'elements/message/messageWrapper.svelte';
 	import ErrorMessage from 'elements/text/errorMessage.svelte';
 	import Input from 'elements/input/input.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
@@ -20,16 +19,6 @@
 	import Paragraph from 'elements/text/paragraph.svelte';
 
 	import { registerLookup } from 'lookup/registerLookup';
-
-	type MenuItem = [string, string];
-	const headerMenu: MenuItem[] = [
-		['Start', '/'],
-		['Anmelden', '/login']
-	];
-	const footerMenu: MenuItem[] = [
-		['Anmelden', '/login'],
-		['Impressum', '/impressum']
-	];
 
 	let timerUsername: number | null = null;
 	let timerEmail: number | null = null;
@@ -143,15 +132,14 @@
 	}
 </script>
 
-<Header menu={headerMenu} />
+<Header menu={Menu.headerOut} />
 
 <div class="page">
 	<div class="content">
 		{#if !registered}
 			<form class="width-wrapper" on:submit|preventDefault={tryRegisterAsync}>
 				<HeadlinePage>Registrieren</HeadlinePage>
-				<Spacer --height="3rem" />
-				<MessageWrapper>
+				<div class="message-wrapper">
 					<ErrorMessage message={loggedInMessage} />
 					<ErrorMessage message={usernameMessage} />
 					<ErrorMessage message={emailMessage} />
@@ -159,53 +147,62 @@
 					{#each errorMessages as message}
 						<ErrorMessage {message} />
 					{/each}
-				</MessageWrapper>
-				<Spacer --height="2rem" />
+				</div>
 				<Input
+					classes="register-basic-input-line"
 					id="register-username"
 					type="text"
 					labelText="Name:"
 					placeholderText="Name"
 					bind:value={username}
+					ariaLabel="Gebe den Nutzernamen ein"
 					on:input={() => {
 						startTimer(timerUsernameRef, onUsernameChangedAsync, 200);
 					}}
 				/>
-				<Spacer --height="1rem" />
 				<Input
+					classes="register-basic-input-line"
 					id="register-email"
 					type="email"
 					labelText="E-Mail:"
 					placeholderText="E-Mail"
 					bind:value={email}
+					ariaLabel="Gebe die E-Mail ein"
 					on:input={() => {
 						startTimer(timerEmailRef, onEmailChangedAsync, 200);
 					}}
 				/>
-				<Spacer --height="1rem" />
 				<Input
+					classes="register-basic-input-line"
 					id="register-password"
 					type="password"
 					labelText="Passwort:"
 					placeholderText="Passwort"
 					bind:value={password_1}
+					ariaLabel="Gebe das passwort ein"
 					on:input={startPasswordTimer}
 				/>
-				<Spacer --height="1rem" />
 				<Input
+					classes="register-basic-input-line"
 					id="register-password-repeat"
 					type="password"
 					labelText="Passwort wiederholen:"
 					placeholderText="Passwort wiederholen"
 					bind:value={password_2}
+					ariaLabel="Wiederhole das Password"
 					on:input={startPasswordTimer}
 				/>
-				<Spacer --height="3rem" />
-				<Button type={'submit'}>Registrieren</Button>
+				<Button
+					classes="text register-submit-button"
+					type={'submit'}
+					ariaLabel="Klicke zum Registrieren"
+				>
+					Registrieren
+				</Button>
 				<div class="password-list-wrapper">
-					<Spacer --height="3rem" />
-					<TextLine>Dein Passwort sollte folgendes enthalten:</TextLine>
-					<Spacer --height="0.5rem" />
+					<TextLine classes="register-password-text-line">
+						Dein Passwort sollte folgendes enthalten:
+					</TextLine>
 					<List classes="padding-left">
 						<ListElement classes="dot">mind. 8 Zeichen</ListElement>
 						<ListElement classes="dot">mind. 1 Kleinbuchstaben</ListElement>
@@ -215,32 +212,29 @@
 					</List>
 				</div>
 			</form>
-			<Spacer --height="5rem" />
 		{:else}
-			<div class="width-wrapper-registered">
+			<div class="width-wrapper">
 				<HeadlinePage>Registriert</HeadlinePage>
-				<Spacer --height="7rem" />
-				<TextLine --text-align="center">Deine Registrierung war erfolgreich.</TextLine>
-				<Spacer --height="2rem" />
+				<TextLine classes="register-registered-text-line" --text-align="center">
+					Deine Registrierung war erfolgreich.
+				</TextLine>
 				<Paragraph --text-align="center">
 					Du bekommst jetzt eine Mail. Bestätige deine Mailadresse, um dich anmelden zu können.
 					Weitere Infos findest du nach dem Anmelden.
 				</Paragraph>
-				<Spacer --height="6rem" />
 				<div class="button-wrapper">
 					<a href="/">
-						<Button>Start</Button>
+						<Button ariaLabel="Klicke um zur aktuellen Hauptseite zu gelangen">Start</Button>
 					</a>
 					<a href="./login">
-						<Button>Anmelden</Button>
+						<Button ariaLabel="Klicke um dich anzumelden">Anmelden</Button>
 					</a>
 				</div>
 			</div>
-			<Spacer --height="5rem" />
 		{/if}
 	</div>
 
-	<Footer currentYear={data.currentYear} menu={footerMenu} />
+	<Footer currentYear={data.currentYear} menu={Menu.footerOut} />
 </div>
 
 <style>
@@ -264,17 +258,27 @@
 	.width-wrapper {
 		width: 100%;
 		max-width: 50rem;
-		margin: 0 auto;
+		margin: 0 auto 5rem;
 		display: flex;
 		flex-direction: column;
 	}
 
-	.width-wrapper-registered {
-		width: 100%;
-		max-width: 50rem;
-		margin: 0 auto;
+	.message-wrapper {
 		display: flex;
 		flex-direction: column;
+		margin: 3rem auto 2rem;
+	}
+
+	:global(.register-basic-input-line) {
+		margin-bottom: 1rem;
+	}
+
+	:global(.register-submit-button) {
+		margin: 5rem auto 0;
+	}
+
+	:global(.register-password-text-line) {
+		margin: 3rem 0 1.5rem;
 	}
 
 	.password-list-wrapper {
@@ -285,6 +289,7 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-evenly;
+		margin-top: 6rem;
 	}
 
 	@media (max-width: 1280px) {
@@ -294,5 +299,9 @@
 		.width-wrapper-registered {
 			max-width: 32rem;
 		}
+	}
+
+	:global(.register-registered-text-line) {
+		margin: 7rem 0 2rem;
 	}
 </style>

@@ -10,6 +10,7 @@
 	<HeadlinePage classes="_404-headline">404</HeadlinePage>
 	<TextLine classes="_404-text" --text-align="center">TODO: 404 Page.</TextLine>
 	<Button
+		classes="text _404-button"
 		ariaLabel="Kehre zur aktuellen Hauptseite zurück"
 		on:click={() => {
 			goto('/');
@@ -34,5 +35,8 @@
 
 	:global(._404-text) {
 		margin-bottom: 5rem;
+	}
+	:global(._404-button){
+		margin: 0 auto;
 	}
 </style>

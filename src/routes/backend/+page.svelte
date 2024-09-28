@@ -12,6 +12,7 @@
 		TODO: Hier kommt das Beste Backend hin.
 	</TextLine>
 	<Button
+		classes="text backend-button"
 		ariaLabel="Kehre zur akruellen Hautseite zurück"
 		on:click={() => {
 			goto('/');
@@ -36,5 +37,9 @@
 
 	:global(.backend-text) {
 		margin-bottom: 5rem;
+	}
+
+	:global(.backend-button) {
+		margin: 0 auto;
 	}
 </style>

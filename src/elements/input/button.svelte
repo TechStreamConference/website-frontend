@@ -33,7 +33,6 @@
 
 	.text {
 		padding: 1rem 2rem;
-		margin: 0 auto;
 		font-size: 1rem;
 		line-height: 1.5rem;
 		letter-spacing: 1px;

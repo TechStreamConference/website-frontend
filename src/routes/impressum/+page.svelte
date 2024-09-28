@@ -13,7 +13,7 @@
 	import Link from 'elements/text/link.svelte';
 </script>
 
-<Header menu={data.loggedIn ? Menu.impressumHeaderIn : Menu.impressumHeaderOut} />
+<Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
 
 <div class="page">
 	<div class="content-wrapper">
@@ -123,7 +123,7 @@
 	</div>
 
 	<Footer
-		menu={data.loggedIn ? Menu.impressumFooterIn : Menu.impressumFooterOut}
+		menu={data.loggedIn ? Menu.footerIn : Menu.footerOut}
 		currentYear={data.currentYear}
 	/>
 </div>

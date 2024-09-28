@@ -51,7 +51,7 @@
 	}
 </script>
 
-<Header menu={Menu.loginHeaderOut} />
+<Header menu={Menu.headerOut} />
 
 <div class="page">
 	<div class="content">
@@ -83,13 +83,13 @@
 			<Link href="/register" title="Klicke um einen neuen Account anzulegen">
 				Noch keinen Account?
 			</Link>
-			<div class="button-wrapper">
-				<Button type="submit" ariaLabel="Klicke zum anmelden">Anmelden</Button>
-			</div>
+			<Button classes="text login-submit-button" type="submit" ariaLabel="Klicke zum anmelden">
+				Anmelden
+			</Button>
 		</form>
 	</div>
 
-	<Footer currentYear={data.currentYear} menu={Menu.loginFooterOut} />
+	<Footer currentYear={data.currentYear} menu={Menu.footerOut} />
 </div>
 
 <style>
@@ -128,9 +128,7 @@
 		margin-bottom: 1.5rem;
 	}
 
-	.button-wrapper {
-		display: flex;
-		flex-direction: row;
+	:global(.login-submit-button) {
 		margin: 3rem auto 5rem;
 	}
 
