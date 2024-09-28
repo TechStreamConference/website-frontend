@@ -1,21 +1,21 @@
 <script lang="ts">
-	import type { IconLink } from 'types/provideTypes';
+	import type { IconLinks } from 'types/provideTypes';
 	import Icon from 'elements/image/icon.svelte';
 
 	export let person: string;
 
-	const testLinkData: IconLink[] = [
-		{ link: 'https://www.google.de', type: 'Web' },
-		{ link: 'https://www.google.de', type: 'Twitch' },
-		{ link: 'https://www.google.de', type: 'Discord' },
-		{ link: 'https://www.google.de', type: 'LinkedIn' },
-		{ link: 'https://www.google.de', type: 'YouTube' },
-		{ link: 'https://www.google.de', type: 'Instagram' },
-		{ link: 'https://www.google.de', type: 'X' },
-		{ link: 'https://www.google.de', type: 'Git' },
-		{ link: 'https://www.google.de', type: 'Mail' },
-		{ link: 'https://www.google.de', type: 'Download' },
-		{ link: 'https://www.google.de', type: 'Calender' },
+	const testLinkData: IconLinks = [
+		{ link: 'https://www.google.de', name: 'Web' },
+		{ link: 'https://www.google.de', name: 'Twitch' },
+		{ link: 'https://www.google.de', name: 'Discord' },
+		{ link: 'https://www.google.de', name: 'LinkedIn' },
+		{ link: 'https://www.google.de', name: 'YouTube' },
+		{ link: 'https://www.google.de', name: 'Instagram' },
+		{ link: 'https://www.google.de', name: 'X' },
+		{ link: 'https://www.google.de', name: 'Git' },
+		{ link: 'https://www.google.de', name: 'Mail' },
+		{ link: 'https://www.google.de', name: 'Download' },
+		{ link: 'https://www.google.de', name: 'Calender' },
 	];
 </script>
 

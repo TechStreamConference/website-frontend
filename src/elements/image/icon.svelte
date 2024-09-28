@@ -8,8 +8,8 @@
 	import { iconLookup } from 'lookup/iconLookup';
 </script>
 
-<a href={linkType.link} target="_blank" rel="noopener noreferrer" class="icon" title="{linkType.type} von {person} besuchen" on:click >
-	<i class="fa {iconLookup(linkType.type)}" aria-hidden="true"/>
+<a href={linkType.link} target="_blank" rel="noopener noreferrer" class="icon" title="{linkType.name} von {person} besuchen" on:click >
+	<i class="fa {iconLookup(linkType.name)}" aria-hidden="true"/>
 </a>
 
 <style>
