@@ -22,12 +22,14 @@
 	<PersonImage classes="person-rectangle-picture" {data} />
 	<SubHeadline>{data.name}</SubHeadline>
 	<Paragraph>{data.short_bio}</Paragraph>
-	<div class="test" />
+	<div class="flex-line-spacer" />
 	<div class="bottom-wrapper">
 		<LinkArray on:click={onLinkClicked} person={data.name} />
 		<!--TODO: Add Social Media Links-->
 	</div>
-	<Button classes="person-button text" on:click ariaLabel="Mehr Informationen zu {data.name}">Info</Button>
+	<Button classes="person-button text" on:click ariaLabel="Mehr Informationen zu {data.name}">
+		Info
+	</Button>
 </div>
 
 <style>
@@ -57,7 +59,7 @@
 		margin-bottom: 1rem;
 	}
 
-	.test {
+	.flex-line-spacer {
 		flex-grow: 1;
 	}
 
