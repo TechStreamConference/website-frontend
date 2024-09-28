@@ -17,6 +17,7 @@ export type Event = {
     title: string,
     trailerUrl: string,
     twitchUrl: string,
+    year: string,
 }
 
 export type Year = {

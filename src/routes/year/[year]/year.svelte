@@ -25,7 +25,7 @@
 <Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
 <div class="page">
 	<div class="content-wrapper">
-		<HeadlinePage>This is Year {data.displayedYear}</HeadlinePage>
+		<HeadlinePage>This is Year {data.year.event.year}</HeadlinePage>
 
 		<Section id="Speaker">
 			<HeadlineH2 classes="border">Vortragende</HeadlineH2>
