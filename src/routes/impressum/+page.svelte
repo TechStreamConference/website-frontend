@@ -57,7 +57,7 @@
 				classes="inline impressum-one-line-margin"
 				href="mailto:info@test-conf.de"
 				newTab={true}
-				title="Klicke hier um uns eine Mail zu schreiben"
+				title="Klicke hier, um uns eine Mail zu schreiben"
 			>
 				info@test-conf.de
 			</Link>
