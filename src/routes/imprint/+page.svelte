@@ -17,12 +17,12 @@
 
 <div class="page">
 	<div class="content-wrapper">
-		<HeadlinePage classes="impressum-headline">Impressum</HeadlinePage>
+		<HeadlinePage classes="imprint-headline">Impressum</HeadlinePage>
 
 		<TextLine>Michael Gerhold</TextLine>
 		<TextLine>c/o LEADERLY UG (haftungsbeschränkt)</TextLine>
 		<TextLine>Carl-Zeiss-Str. 4</TextLine>
-		<TextLine classes="impressum-one-line-margin">14727 Premnitz OT Mögelin</TextLine>
+		<TextLine classes="imprint-one-line-margin">14727 Premnitz OT Mögelin</TextLine>
 		<TextLine>
 			E-Mail:
 			<Link
@@ -33,7 +33,7 @@
 			>
 		</TextLine>
 
-		<SubHeadline classes="impressum-subheadline"
+		<SubHeadline classes="imprint-subheadline"
 			>Hinweis gemäß Online-Streitbeilegungs-Verordnung</SubHeadline
 		>
 
@@ -53,7 +53,7 @@
 			</Link>
 			. Unsere E-Mail lautet:
 			<Link
-				classes="inline impressum-one-line-margin"
+				classes="inline imprint-one-line-margin"
 				href="mailto:info@test-conf.de"
 				newTab={true}
 				title="Klicke, um uns eine Mail zu schreiben"
@@ -67,9 +67,9 @@
 			Kontaktaufnahme bitte unsere obige E-Mail und Telefonnummer.
 		</Paragraph>
 
-		<SubHeadline classes="imperssum-subheadline">Disclaimer – rechtliche Hinweise</SubHeadline>
+		<SubHeadline classes="imprint-subheadline">Disclaimer – rechtliche Hinweise</SubHeadline>
 
-		<Paragraph classes="impressum-one-line-margin">
+		<Paragraph classes="imprint-one-line-margin">
 			§ 1 Warnhinweis zu Inhalten Die kostenlosen und frei zugänglichen Inhalte dieser Webseite
 			wurden mit größtmöglicher Sorgfalt erstellt. Der Anbieter dieser Webseite übernimmt jedoch
 			keine Gewähr für die Richtigkeit und Aktualität der bereitgestellten kostenlosen und frei
@@ -79,7 +79,7 @@
 			Vertragsverhältnis zwischen dem Nutzer und dem Anbieter zustande, insoweit fehlt es am
 			Rechtsbindungswillen des Anbieters.
 		</Paragraph>
-		<Paragraph classes="impressum-one-line-margin">
+		<Paragraph classes="imprint-one-line-margin">
 			§ 2 Externe Links Diese Website enthält Verknüpfungen zu Websites Dritter ("externe Links").
 			Diese Websites unterliegen der Haftung der jeweiligen Betreiber. Der Anbieter hat bei der
 			erstmaligen Verknüpfung der externen Links die fremden Inhalte daraufhin überprüft, ob etwaige
@@ -90,7 +90,7 @@
 			externen Links ist für den Anbieter ohne konkrete Hinweise auf Rechtsverstöße nicht zumutbar.
 			Bei Kenntnis von Rechtsverstößen werden jedoch derartige externe Links unverzüglich gelöscht.
 		</Paragraph>
-		<Paragraph classes="impressum-one-line-margin">
+		<Paragraph classes="imprint-one-line-margin">
 			§ 3 Urheber- und Leistungsschutzrechte Die auf dieser Website veröffentlichten Inhalte
 			unterliegen dem deutschen Urheber- und Leistungsschutzrecht. Jede vom deutschen Urheber- und
 			Leistungsschutzrecht nicht zugelassene Verwertung bedarf der vorherigen schriftlichen
@@ -102,10 +102,10 @@
 			Herstellung von Kopien und Downloads für den persönlichen, privaten und nicht kommerziellen
 			Gebrauch ist erlaubt.
 		</Paragraph>
-		<TextLine classes="impressum-one-line-margin">
+		<TextLine classes="imprint-one-line-margin">
 			Die Darstellung dieser Website in fremden Frames ist nur mit schriftlicher Erlaubnis zulässig.
 		</TextLine>
-		<Paragraph classes="impressum-last-paragraph">
+		<Paragraph classes="imprint-last-paragraph">
 			§ 4 Besondere Nutzungsbedingungen Soweit besondere Bedingungen für einzelne Nutzungen dieser
 			Website von den vorgenannten Paragraphen abweichen, wird an entsprechender Stelle ausdrücklich
 			darauf hingewiesen. In diesem Falle gelten im jeweiligen Einzelfall die besonderen
@@ -138,20 +138,20 @@
 		margin: 0 auto;
 	}
 
-	:global(.impressum-headline) {
+	:global(.imprint-headline) {
 		margin-bottom: 5rem;
 	}
 
-	:global(.impressum-one-line-margin) {
+	:global(.imprint-one-line-margin) {
 		margin-bottom: 1rem;
 	}
 
-	:global(.impressum-subheadline) {
+	:global(.imprint-subheadline) {
 		margin-top: 5rem;
 		margin-bottom: 2rem;
 	}
 
-	:global(.impressum-last-paragraph) {
+	:global(.imprint-last-paragraph) {
 		margin-bottom: 7rem;
 	}
 
