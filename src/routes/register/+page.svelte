@@ -155,7 +155,7 @@
 					labelText="Name:"
 					placeholderText="Name"
 					bind:value={username}
-					ariaLabel="Gebe den Nutzernamen ein"
+					ariaLabel="Gib den Nutzernamen ein"
 					on:input={() => {
 						startTimer(timerUsernameRef, onUsernameChangedAsync, 200);
 					}}
