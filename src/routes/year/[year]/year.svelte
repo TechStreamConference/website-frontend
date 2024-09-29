@@ -163,6 +163,8 @@
 
 	.video-wrapper {
 		margin: 2rem;
+		width: 100%;
+		height: auto;
 	}
 
 	@media (max-width: 1280px) {
