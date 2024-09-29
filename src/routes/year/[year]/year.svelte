@@ -51,7 +51,7 @@
 			<div class="video-wrapper">
 				<YouTubeVideo
 					id={data.year.event.trailer_youtube_id}
-					title="Tech Stream Conference Traile {data.year.event.year}"
+					title="Tech Stream Conference Trailer {data.year.event.year}"
 				/>
 			</div>
 		</Section>
