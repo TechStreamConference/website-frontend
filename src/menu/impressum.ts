@@ -4,7 +4,7 @@ export const headerOut: Menu = [
     {
         name: 'Start',
         url: '/',
-        description: 'Klicke hier um zur aktuellen Hauptseite zurückzukehren'
+        description: 'Klicke hier, um zur aktuellen Hauptseite zurückzukehren'
     },
     {
         name: 'Anmelden',
