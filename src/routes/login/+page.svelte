@@ -83,7 +83,7 @@
 			<Link href="/register" title="Klicke, um einen neuen Account anzulegen">
 				Noch keinen Account?
 			</Link>
-			<Button classes="text login-submit-button" type="submit" ariaLabel="Klicke, zum Anmelden">
+			<Button classes="text login-submit-button" type="submit" ariaLabel="Klicke zum Anmelden">
 				Anmelden
 			</Button>
 		</form>

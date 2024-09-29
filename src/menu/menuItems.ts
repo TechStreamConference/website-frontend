@@ -16,23 +16,23 @@ export const intern: MenuItem = {
 export const logout: MenuItem = {
     name: 'Abmelden',
     url: '/logout',
-    description: 'Klicke, um zum Abmelden'
+    description: 'Klicke zum Abmelden'
 }
 
 export const login: MenuItem = {
     name: 'Anmelden',
     url: '/login',
-    description: 'Klicke, um zum Anmelden'
+    description: 'Klicke zum Anmelden'
 }
 
 export const register: MenuItem = {
     name: 'Registrieren',
     url: '/register',
-    description: 'Klicke, zum registrieren'
+    description: 'Klicke zum Registrieren'
 }
 
 export const imprint: MenuItem = {
     name: 'Impressum',
     url: '/imprint',
-    description: 'Klicke, um zum impressum zu gelangen'
+    description: 'Klicke, um zum Impressum zu gelangen'
 }

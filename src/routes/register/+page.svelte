@@ -195,7 +195,7 @@
 				<Button
 					classes="text register-submit-button"
 					type={'submit'}
-					ariaLabel="Klicke, zum Registrieren"
+					ariaLabel="Klicke zum Registrieren"
 				>
 					Registrieren
 				</Button>
