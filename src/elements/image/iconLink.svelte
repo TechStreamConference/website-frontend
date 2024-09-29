@@ -13,8 +13,8 @@
 	.icon {
 		background-color: var(--primary-color);
 		transition: var(--transition-duration);
-        border-radius: var(--border-radius);
-    }
+		border-radius: var(--border-radius);
+	}
 
 	.icon:hover {
 		background-color: var(--secondary-color);
