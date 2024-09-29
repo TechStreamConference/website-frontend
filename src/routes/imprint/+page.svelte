@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { LoadImpressum } from 'types/loadTypes';
-	export let data: LoadImpressum; // data from database;
-	import * as Menu from 'menu/impressum';
+	import type { LoadImprint } from 'types/loadTypes';
+	export let data: LoadImprint; // data from database;
+	import * as Menu from 'menu/imprint';
 
 	import Header from 'elements/navigation/header.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';

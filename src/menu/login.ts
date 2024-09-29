@@ -21,7 +21,7 @@ export const footerOut: Menu = [
     },
     {
         name: 'Impressum',
-        url: '/impressum',
+        url: '/imprint',
         description: 'Klicke hier um zum impressum zu gelangen'
     },
 ];
