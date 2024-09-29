@@ -11,21 +11,21 @@
 	<Link
 		href={data.year.event.discord_url}
 		classes="animated white"
-		title="Klicker hier um auf den Discord Server der Test-Conf zu gelangen"
+		title="Klicker hier, um auf den Discord-Server der Tech Stream Conference zu gelangen"
 	>
 		<div class="entry-wrapper"><Icon type="Discord" />Sei dabei</div>
 	</Link>
 	<Link
 		href={data.year.event.twitch_url}
 		classes="animated white"
-		title="Klicke hier um auf die Twitch Seite der Test-Conf zu gelangen"
+		title="Klicke hier, um auf die Twitch-Seite der Tech Stream Conference zu gelangen"
 	>
 		<div class="entry-wrapper"><Icon type="Twitch" />Schau zu</div>
 	</Link>
 	<Link
 		href={data.year.event.presskit_url}
 		classes="animated white"
-		title="Klicke hier um das Presskit der Test-Conf herunter zu laden"
+		title="Klicke hier, um das Presskit der Tech Stream Conference herunterzuladen"
 	>
 		<div class="entry-wrapper"><Icon type="Download" />Presskit</div>
 	</Link>

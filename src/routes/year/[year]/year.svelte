@@ -6,7 +6,7 @@
 	import LogoBig from 'elements/image/logoBig.svelte';
 	import { formatDate } from 'helper/dates';
 
-	import YearSocialLinks from 'elements/input/yearSocialLinks.svelte';
+	import YearEventLinks from 'elements/input/yearEventLinks.svelte';
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 	import PersonArray from 'elements/person/personGrid.svelte';
@@ -41,7 +41,7 @@
 					Online-Konferenz {formatDate(data.year.event.start_date)} - {formatDate(data.year.event.end_date)}
 				</SubHeadline>
 				<SubHeadline classes="year-header-subtitle white">{data.year.event.subtitle}</SubHeadline>
-				<YearSocialLinks {data} />
+				<YearEventLinks {data} />
 			</div>
 		</div>
 	</div>
@@ -60,7 +60,7 @@
 			<div class="discription-wrapper">
 				<div class="discription-text-wrapper">
 					<Paragraph classes="year-discription-paragraph">{data.year.event.description}</Paragraph>
-					<YearSocialLinks {data} />
+					<YearEventLinks {data} />
 				</div>
 				<LogoBig classes="year-header-logo-big" />
 			</div>
