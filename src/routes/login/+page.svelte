@@ -68,7 +68,7 @@
 				type="text"
 				labelText="Nutzername oder E-Mail:"
 				placeholderText="Nutzername oder E-Mail"
-				ariaLabel="Gebe den Nutzernamen oder die E-Mail ein"
+				ariaLabel="Gib den Nutzernamen oder die E-Mail ein"
 				bind:value={usernameOrEmail}
 			/>
 			<Input
@@ -77,13 +77,13 @@
 				type="password"
 				labelText="Passwort:"
 				placeholderText="Passwort"
-				ariaLabel="Gebe das Passwort ein"
+				ariaLabel="Gib das Passwort ein"
 				bind:value={password}
 			/>
-			<Link href="/register" title="Klicke um einen neuen Account anzulegen">
+			<Link href="/register" title="Klicke, um einen neuen Account anzulegen">
 				Noch keinen Account?
 			</Link>
-			<Button classes="text login-submit-button" type="submit" ariaLabel="Klicke zum anmelden">
+			<Button classes="text login-submit-button" type="submit" ariaLabel="Klicke, zum Anmelden">
 				Anmelden
 			</Button>
 		</form>

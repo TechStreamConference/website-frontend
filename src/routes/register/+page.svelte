@@ -179,7 +179,7 @@
 					labelText="Passwort:"
 					placeholderText="Passwort"
 					bind:value={password_1}
-					ariaLabel="Gebe das passwort ein"
+					ariaLabel="Gib das Passwort ein"
 					on:input={startPasswordTimer}
 				/>
 				<Input
@@ -189,13 +189,13 @@
 					labelText="Passwort wiederholen:"
 					placeholderText="Passwort wiederholen"
 					bind:value={password_2}
-					ariaLabel="Wiederhole das Password"
+					ariaLabel="Wiederhole das Passwort"
 					on:input={startPasswordTimer}
 				/>
 				<Button
 					classes="text register-submit-button"
 					type={'submit'}
-					ariaLabel="Klicke zum Registrieren"
+					ariaLabel="Klicke, zum Registrieren"
 				>
 					Registrieren
 				</Button>
@@ -224,10 +224,10 @@
 				</Paragraph>
 				<div class="button-wrapper">
 					<a href="/">
-						<Button ariaLabel="Klicke um zur aktuellen Hauptseite zu gelangen">Start</Button>
+						<Button ariaLabel="Klicke, um zur aktuellen Hauptseite zu gelangen">Start</Button>
 					</a>
 					<a href="./login">
-						<Button ariaLabel="Klicke um dich anzumelden">Anmelden</Button>
+						<Button ariaLabel="Klicke, um dich anzumelden">Anmelden</Button>
 					</a>
 				</div>
 			</div>

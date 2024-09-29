@@ -29,7 +29,7 @@
 				classes="inline"
 				href="mailto:info@test-conf.de"
 				newTab={true}
-				title="Klicke hier, um uns eine Mail zu schreiben">info@test-conf.de</Link
+				title="Klicke, um uns eine Mail zu schreiben">info@test-conf.de</Link
 			>
 		</TextLine>
 
@@ -47,8 +47,7 @@
 				classes="inline"
 				href="http://ec.europa.eu/odr"
 				newTab={true}
-				title="Klicke hier, um dich über die Europäische
-			Online-Streitbeilegungs-Plattform zu informieren"
+				title="Klicke, um dich über die Europäische Online-Streitbeilegungs-Plattform zu informieren"
 			>
 				http://ec.europa.eu/odr
 			</Link>
@@ -57,7 +56,7 @@
 				classes="inline impressum-one-line-margin"
 				href="mailto:info@test-conf.de"
 				newTab={true}
-				title="Klicke hier, um uns eine Mail zu schreiben"
+				title="Klicke, um uns eine Mail zu schreiben"
 			>
 				info@test-conf.de
 			</Link>
@@ -122,10 +121,7 @@
 		</Paragraph>
 	</div>
 
-	<Footer
-		menu={data.loggedIn ? Menu.footerIn : Menu.footerOut}
-		currentYear={data.currentYear}
-	/>
+	<Footer menu={data.loggedIn ? Menu.footerIn : Menu.footerOut} currentYear={data.currentYear} />
 </div>
 
 <style>
