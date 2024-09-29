@@ -29,7 +29,7 @@
 				classes="inline"
 				href="mailto:info@test-conf.de"
 				newTab={true}
-				title="Klicke hier um uns eine Mail zu schreiben">info@test-conf.de</Link
+				title="Klicke hier, um uns eine Mail zu schreiben">info@test-conf.de</Link
 			>
 		</TextLine>
 
