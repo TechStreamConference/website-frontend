@@ -1,27 +1,12 @@
 import type { Menu } from "types/provideTypes";
+import * as Item from './menuItems'
 
 export const headerOut: Menu = [
-    {
-        name: 'Start',
-        url: '/',
-        description: 'Klicke hier um zur aktuellen Hauptseite zurückzukehren'
-    },
-    {
-        name: 'Registrieren',
-        url: '/register',
-        description: 'Klicke hier zum registrieren'
-    },
+    Item.start,
+    Item.register,
 ];
 
 export const footerOut: Menu = [
-    {
-        name: 'Registrieren',
-        url: '/register',
-        description: 'Klicke hier zum registrieren'
-    },
-    {
-        name: 'Impressum',
-        url: '/imprint',
-        description: 'Klicke hier um zum impressum zu gelangen'
-    },
+    Item.register,
+    Item.imprint,
 ];

@@ -1,64 +1,25 @@
 import type { Menu } from "types/provideTypes";
+import * as Item from './menuItems'
 
 export const headerOut: Menu = [
-    {
-        name: 'Start',
-        url: '/',
-        description: 'Klicke hier, um zur aktuellen Hauptseite zurückzukehren'
-    },
-    {
-        name: 'Anmelden',
-        url: '/login',
-        description: 'Klicke hier zum Anmelden'
-    },
-    {
-        name: 'Registrieren',
-        url: '/register',
-        description: 'Klicke hier zum Registrieren'
-    },
+    Item.start,
+    Item.login,
+    Item.register,
 ];
 
 export const headerIn: Menu = [
-    {
-        name: 'Start',
-        url: '/',
-        description: 'Klicke hier, um zur aktuellen Hauptseite zurückzukehren'
-    },
-    {
-        name: 'Abmelden',
-        url: '/logout',
-        description: 'Klicke hier zum Abmelden'
-    },
+    Item.start,
+    Item.logout,
 ];
 
 
 export const footerOut: Menu = [
-    {
-        name: 'Start',
-        url: '/',
-        description: 'Klicke hier, um zur aktuellen Hauptseite zurückzukehren'
-    },
-    {
-        name: 'Anmelden',
-        url: '/login',
-        description: 'Klicke hier zum Anmelden'
-    },
-    {
-        name: 'Registrieren',
-        url: '/register',
-        description: 'Klicke hier zum Registrieren'
-    },
+    Item.start,
+    Item.login,
+    Item.register,
 ];
 
 export const footerIn: Menu = [
-    {
-        name: 'Start',
-        url: '/',
-        description: 'Klicke hier, um zur aktuellen Hauptseite zurückzukehren'
-    },
-    {
-        name: 'Intern',
-        url: '/intern',
-        description: 'Klicke hier, um in den internen Bereich zu gelangen'
-    },
+    Item.start,
+    Item.intern,
 ];

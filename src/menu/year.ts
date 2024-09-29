@@ -1,108 +1,64 @@
-import type { Menu } from "types/provideTypes";
+import type { Menu, MenuItem } from "types/provideTypes";
+import * as Item from './menuItems'
+
+const top: MenuItem = {
+    name: 'Top',
+    url: '#top',
+    description: 'Klicke, um zur aktuellen Hauptseite zurückzukehren'
+}
+
+const speaker: MenuItem = {
+    name: 'Vortragende',
+    url: '#Speaker',
+    description: 'Klicke, um zu den Vortragenden zu navigieren'
+}
+
+const sponsors: MenuItem = {
+    name: 'Partner',
+    url: '#Sponsors',
+    description: 'Klicke, um zu den Sponsoren und Partnern zu navigieren'
+}
+
+const team: MenuItem = {
+    name: 'Team',
+    url: '#Team',
+    description: 'Klicke, um zum Tech Stream Conference Team zu navigieren'
+}
+
+const shedule: MenuItem = {
+    name: 'Ablaufplan',
+    url: '#Shedule',
+    description: 'Klicke, um zum Ablaufplan der Koferenz zu navigieren'
+}
+
 
 export const headerIn: Menu = [
-    {
-        name: 'Start',
-        url: '#top',
-        description: 'Klicke hier um zur aktuellen Hauptseite zurückzukehren'
-    },
-    {
-        name: 'Vortragende',
-        url: '#Speaker',
-        description: 'Klicke hier um zu den Vortragenden zu navigieren'
-    },
-    {
-        name: 'Partner',
-        url: '#Sponsors',
-        description: 'Klicke hier um zu den Sponsoren und Partnern zu navigieren'
-    },
-    {
-        name: 'Team',
-        url: '#Team',
-        description: 'Klicke hier um zum Tech Stream Conference Team zu navigieren'
-    },
-    {
-        name: 'Ablaufplan',
-        url: '#Shedule',
-        description: 'Klicke hier um zum Ablaufplan der Koferenz zu navigieren'
-    },
-    {
-        name: 'Intern',
-        url: '/backend',
-        description: "Klicke hier um zum internen Bereich zu navigieren"
-    },
-    {
-        name: 'Abmelden',
-        url: '/logout',
-        description: 'Klicke hier um zum Abmelden'
-    },
+    top,
+    speaker,
+    sponsors,
+    team,
+    shedule,
+    Item.intern,
+    Item.logout,
 ];
 
 export const headerOut: Menu = [
-    {
-        name: 'Start',
-        url: '#top',
-        description: 'Klicke hier um zur aktuellen Hauptseite zurückzukehren'
-    },
-    {
-        name: 'Vortragende',
-        url: '#Speaker',
-        description: 'Klicke hier um zu den Vortragenden zu navigieren'
-    },
-    {
-        name: 'Partner',
-        url: '#Sponsors',
-        description: 'Klicke hier um zu den Sponsoren und Partnern zu navigieren'
-    },
-    {
-        name: 'Team',
-        url: '#Team',
-        description: 'Klicke hier um zum Tech Stream Conference Team zu navigieren'
-    },
-    {
-        name: 'Ablaufplan',
-        url: '#Shedule',
-        description: 'Klicke hier um zum Ablaufplan der Koferenz zu navigieren'
-    },
-    {
-        name: 'Anmelden',
-        url: '/login',
-        description: 'Klicke hier um zum Anmelden'
-    },
+    top,
+    speaker,
+    sponsors,
+    team,
+    shedule,
+    Item.login,
 ];
 
 export const footerIn: Menu = [
-    {
-        name: 'Intern',
-        url: '/backend',
-        description: "Klicke hier um zum internen Bereich zu navigieren"
-    },
-    {
-        name: 'Abmelden',
-        url: '/logout',
-        description: 'Klicke hier um zum Abmelden'
-    },
-    {
-        name: 'Impressum',
-        url: '/imprint',
-        description: 'Klicke hier um zum impressum zu gelangen'
-    },
+    Item.intern,
+    Item.logout,
+    Item.imprint,
 ];
 
 export const footerOut: Menu = [
-    {
-        name: 'Anmelden',
-        url: '/login',
-        description: 'Klicke hier um zum Anmelden'
-    },
-    {
-        name: 'Registrieren',
-        url: '/register',
-        description: 'Klicke hier zum registrieren'
-    },
-    {
-        name: 'Impressum',
-        url: '/imprint',
-        description: 'Klicke hier um zum impressum zu gelangen'
-    },
+    Item.login,
+    Item.register,
+    Item.imprint,
 ];
