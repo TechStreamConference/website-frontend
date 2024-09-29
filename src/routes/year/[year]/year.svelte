@@ -49,7 +49,7 @@
 		<Section id="Trailer">
 			<div class="video-wrapper">
 				<YouTubeVideo
-					href={data.year.event.trailer_url}
+					id={data.year.event.trailer_url}
 					title="Tech Stream Conference Traile {data.year.event.year}"
 				/>
 			</div>
