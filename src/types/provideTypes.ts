@@ -7,16 +7,16 @@ export type Person = {
 
 export type Event = {
     description: string,
-    descriptionHeadline: string,
-    discordUrl: string,
-    endDate: string,
+    description_headline: string,
+    discord_url: string,
+    end_date: string,
     id: string,
-    presskitUrl: string,
-    startDate: string,
+    presskit_url: string,
+    start_date: string,
     subtitle: string,
     title: string,
-    trailerUrl: string,
-    twitchUrl: string,
+    trailer_youtube_id: string,
+    twitch_url: string,
     year: string,
 }
 

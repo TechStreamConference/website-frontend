@@ -28,6 +28,14 @@
 		border-bottom: 1px solid var(--lines-color);
 	}
 
+	.green {
+		color: var(--green-color);
+	}
+
+	.left {
+		text-align: left;
+	}
+
 	@media (max-width: 600px) {
 		.big {
 			font-size: 2rem;

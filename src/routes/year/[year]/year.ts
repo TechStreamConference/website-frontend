@@ -13,15 +13,13 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
         route += '/' + year;
     }
     const yearDataPromise: Promise<Response> = fetch(apiUrl(route));
-
-    const displayedYear: number = year ? year : 2025; // get in event later on
-    const currentYear: number = defaultCurrentYear; // get on an extra route later on
+    const currentYear: number = defaultCurrentYear; // get from an extra route later on
 
     const loggedIn: boolean = await loggedInPromise;
     const yearDataResponse: Response = await yearDataPromise;
+
     let yearData: Year;
     if (yearDataResponse.ok) {
-        // TODO: add links when provided
         yearData = await yearDataResponse.json();
     } else {
         redirect(302, "/404");
@@ -30,7 +28,6 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
     return {
         loggedIn,
         currentYear,
-        displayedYear,
         year: yearData,
     }
 }
