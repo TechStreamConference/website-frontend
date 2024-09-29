@@ -14,7 +14,6 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
     }
     const yearDataPromise: Promise<Response> = fetch(apiUrl(route));
 
-    const displayedYear: number = year ? year : 2025; // get in event later on
     const currentYear: number = defaultCurrentYear; // get on an extra route later on
 
     const loggedIn: boolean = await loggedInPromise;
@@ -30,7 +29,6 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
     return {
         loggedIn,
         currentYear,
-        displayedYear,
         year: yearData,
     }
 }
