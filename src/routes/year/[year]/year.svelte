@@ -4,6 +4,7 @@
 	import * as Menu from 'menu/year';
 
 	import LogoBig from 'elements/image/logoBig.svelte';
+	import { formatDate } from 'helper/dates';
 
 	import YearSocialLinks from 'elements/input/yearSocialLinks.svelte';
 	import Header from 'elements/navigation/header.svelte';
@@ -37,7 +38,7 @@
 			<div class="header-text-wrapper">
 				<Headline classes="green left">{data.year.event.title}</Headline>
 				<SubHeadline classes="year-header-subheadline white">
-					Online-Konferenz {data.year.event.start_date} - {data.year.event.end_date}
+					Online-Konferenz {formatDate(data.year.event.start_date)} - {formatDate(data.year.event.end_date)}
 				</SubHeadline>
 				<SubHeadline classes="year-header-subtitle white">{data.year.event.subtitle}</SubHeadline>
 				<YearSocialLinks {data} />
