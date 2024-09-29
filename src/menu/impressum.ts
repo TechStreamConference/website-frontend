@@ -59,6 +59,6 @@ export const footerIn: Menu = [
     {
         name: 'Intern',
         url: '/intern',
-        description: 'Klicke hier um in den internen Bereich zu gelangen'
+        description: 'Klicke hier, um in den internen Bereich zu gelangen'
     },
 ];
