@@ -163,7 +163,7 @@
 
 	.video-wrapper {
 		margin: 2rem;
-		width: 100%;
+		width: calc(100% - 4rem);
 		height: auto;
 	}
 
@@ -182,12 +182,14 @@
 
 		.video-wrapper {
 			margin: 1rem;
+			width: calc(100% - 2rem);
 		}
 	}
 
 	@media (max-width: 600px) {
 		.video-wrapper {
 			margin: 0;
+			width: 100%;
 		}
 	}
 </style>
