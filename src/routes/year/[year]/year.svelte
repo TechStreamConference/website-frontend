@@ -39,7 +39,7 @@
 				<Headline classes="green left">{data.year.event.title}</Headline>
 				<SubHeadline classes="year-header-subheadline white">
 					Online-Konferenz {formatDate(data.year.event.start_date, '%d.%m.')}
-					& {formatDate(data.year.event.end_date, '%d.%m.%y')}
+					- {formatDate(data.year.event.end_date, '%d.%m.%y')}
 				</SubHeadline>
 				<SubHeadline classes="year-header-subtitle white">{data.year.event.subtitle}</SubHeadline>
 				<YearEventLinks {data} />
