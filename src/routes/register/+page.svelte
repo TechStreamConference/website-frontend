@@ -167,7 +167,7 @@
 					labelText="E-Mail:"
 					placeholderText="E-Mail"
 					bind:value={email}
-					ariaLabel="Gebe die E-Mail ein"
+					ariaLabel="Gib die E-Mail ein"
 					on:input={() => {
 						startTimer(timerEmailRef, onEmailChangedAsync, 200);
 					}}
