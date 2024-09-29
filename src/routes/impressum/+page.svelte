@@ -47,7 +47,7 @@
 				classes="inline"
 				href="http://ec.europa.eu/odr"
 				newTab={true}
-				title="Klicke hier um dich über die Europäische
+				title="Klicke hier, um dich über die Europäische
 			Online-Streitbeilegungs-Plattform zu informieren"
 			>
 				http://ec.europa.eu/odr
