@@ -11,7 +11,7 @@
 	<Link
 		href={data.year.event.discord_url}
 		classes="animated white"
-		title="Klicker hier, um auf den Discord-Server der Tech Stream Conference zu gelangen"
+		title="Klicke hier, um auf den Discord-Server der Tech Stream Conference zu gelangen"
 	>
 		<div class="entry-wrapper"><Icon type="Discord" />Sei dabei</div>
 	</Link>
