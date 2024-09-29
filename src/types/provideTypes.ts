@@ -17,11 +17,20 @@ export type Event = {
     title: string,
     trailerUrl: string,
     twitchUrl: string,
+    year: string,
 }
 
 export type Year = {
     event: Event,
-    speakers: [Person],
+    speakers: Person[],
 }
 
-export type IconLink = { link: string, type: string };
+export type IconLink = { link: string, name: string };
+export type IconLinks = IconLink[];
+
+export type MenuItem = {
+    name: string,
+    url: string,
+    description: string,
+}
+export type Menu = MenuItem[];

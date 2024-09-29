@@ -12,5 +12,5 @@ export type LoadLoginPromise = Promise<LoadLogin>;
 export type LoadBackend = {};
 export type LoadBackendPromise = Promise<LoadBackend>;
 
-export type LoadImpressum = { loggedIn: boolean; currentYear: number; };
-export type LoadImpressumPromise = Promise<LoadImpressum>;
+export type LoadImprint = { loggedIn: boolean; currentYear: number; };
+export type LoadImprintPromise = Promise<LoadImprint>;

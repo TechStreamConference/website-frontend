@@ -1,14 +1,14 @@
 <script lang="ts">
+	import type { MenuItem } from 'types/provideTypes';
 	import TextLine from 'elements/text/textLine.svelte';
 	import List from 'elements/list/list.svelte';
 	import ListElement from 'elements/list/listElement.svelte';
-	import SpacerOneLine from 'elements/spacer/spacerOneLine.svelte';
 	import Link from 'elements/text/link.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import LogoBig from 'elements/image/logoBig.svelte';
 
 	export let currentYear: number;
-	export let menu: [string, string][];
+	export let menu: MenuItem[];
 
 	const startYear: number = 2024;
 
@@ -22,11 +22,12 @@
 	<div class="nav-wrapper">
 		<nav class="nav-element">
 			<TextLine classes={'white'}>Menu:</TextLine>
-			<SpacerOneLine />
-			<List>
+			<List classes="footer-list-margin">
 				{#each menu as entry}
 					<ListElement>
-						<Link classes={'standard white'} href={entry[1]}>{entry[0]}</Link>
+						<Link classes={'standard white'} href={entry.url} title={entry.description}>
+							{entry.name}
+						</Link>
 					</ListElement>
 				{/each}
 			</List>
@@ -34,11 +35,16 @@
 
 		<nav class="nav-element">
 			<TextLine classes={'white'}>Alle Events:</TextLine>
-			<SpacerOneLine />
-			<List>
+			<List classes="footer-list-margin">
 				{#each numbers as number}
 					<ListElement>
-						<Link classes={'standard white'} href="/year/{number}">{number}</Link>
+						<Link
+							classes={'standard white'}
+							href="/year/{number}"
+							title="Tech Stream Conference Seite des Jahres {number} anschauen"
+						>
+							{number}
+						</Link>
 					</ListElement>
 				{/each}
 			</List>
@@ -67,8 +73,6 @@
 			<LogoBig />
 		</div>
 	</div>
-	<SpacerOneLine />
-	<SpacerOneLine />
 	<div class="copyright">
 		<TextLine classes={'white'}>&copy; Tech Stream Conference {currentYear}</TextLine>
 	</div>
@@ -103,6 +107,10 @@
 		text-align: center;
 	}
 
+	:global(.footer-list-margin) {
+		margin-top: 1rem;
+	}
+
 	:global(.logo-big) {
 		height: 10rem;
 		object-fit: contain;
@@ -110,6 +118,7 @@
 	}
 
 	.copyright {
+		margin-top: 2rem;
 		display: flex;
 		justify-content: center;
 	}

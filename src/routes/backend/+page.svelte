@@ -3,20 +3,23 @@
 
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
-	import Spacer from 'elements/spacer/spacer.svelte';
 	import Button from 'elements/input/button.svelte';
 </script>
 
 <div class="wrapper">
-	<HeadlinePage>Backend</HeadlinePage>
-	<Spacer --height="3rem" />
-	<TextLine --text-align="center">TODO: Hier kommt das Beste Backend hin.</TextLine>
-	<Spacer --height="5rem" />
+	<HeadlinePage classes="backend-headline">Backend</HeadlinePage>
+	<TextLine classes="backend-text" --text-align="center">
+		TODO: Hier kommt das Beste Backend hin.
+	</TextLine>
 	<Button
+		classes="text backend-button"
+		ariaLabel="Kehre zur akruellen Hautseite zurück"
 		on:click={() => {
 			goto('/');
-		}}>Start</Button
+		}}
 	>
+		Start
+	</Button>
 </div>
 
 <style>
@@ -26,5 +29,17 @@
 		justify-content: center;
 		margin: 0 auto;
 		min-height: 100vh;
+	}
+
+	:global(.backend-headline) {
+		margin-bottom: 3rem;
+	}
+
+	:global(.backend-text) {
+		margin-bottom: 5rem;
+	}
+
+	:global(.backend-button) {
+		margin: 0 auto;
 	}
 </style>

@@ -15,7 +15,6 @@
 		font-weight: 500;
 		font-style: normal;
 		color: var(--text-color);
-		margin: 0;
 		list-style-type: none;
 	}
 

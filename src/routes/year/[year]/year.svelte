@@ -1,45 +1,16 @@
 <script lang="ts">
 	import type { LoadYear } from 'types/loadTypes';
+	export let data: LoadYear;
+	import * as Menu from 'menu/year';
+
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
-	import Spacer from 'elements/spacer/spacer.svelte';
 	import PersonArray from 'elements/person/personGrid.svelte';
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
-	import HorizontalLine from 'elements/line/horizontalLine.svelte';
 	import type { Person } from 'types/provideTypes';
 	import PersonPopup from 'elements/person/personPopup.svelte';
-
-	export let data: LoadYear;
-
-	type MenuItem = [string, string];
-	const headerMenu: MenuItem[] = [
-		['Start', '#top'],
-		['Vortragende', '#Speaker'],
-		['Partner', '#Sponsors'],
-		['Team', '#Team'],
-		['Ablaufplan', '#Shedule'],
-		['Anmelden', '/login']
-	];
-	const headerMenuLoggedIn: MenuItem[] = [
-		['Start', '#top'],
-		['Vortragende', '#Speaker'],
-		['Partner', '#Sponsors'],
-		['Team', '#Team'],
-		['Ablaufplan', '#Shedule'],
-		['Intern', '/backend'],
-		['Abmelden', '/logout']
-	];
-	const footerMenu: MenuItem[] = [
-		['Anmelden', '/login'],
-		['Registrieren', '/register'],
-		['Impressum', '/impressum']
-	];
-	const footerMenuLoggedIn: MenuItem[] = [
-		['Intern', '/backend'],
-		['Abmelden', '/logout'],
-		['Impressum', '/impressum']
-	];
+	import Section from 'elements/section/section.svelte';
 
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
@@ -51,45 +22,35 @@
 	}
 </script>
 
-<Header menu={data.loggedIn ? headerMenuLoggedIn : headerMenu} />
+<Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
 <div class="page">
 	<div class="content-wrapper">
-		<HeadlinePage>This is Year {data.displayedYear}</HeadlinePage>
+		<HeadlinePage>This is Year {data.year.event.year}</HeadlinePage>
 
-		<Spacer --height="10rem" />
-		<div id="Speaker" class="scroll-anchor" />
-		<HeadlineH2>Vortragende</HeadlineH2>
-		<HorizontalLine />
-		<Spacer --height="3rem" />
-		<div class="person-wrapper">
-			<PersonArray personData={data.year.speakers} personPopupCallback={openPersonPopup} />
-		</div>
+		<Section id="Speaker">
+			<HeadlineH2 classes="border">Vortragende</HeadlineH2>
+			<div class="section-inner">
+				<PersonArray personData={data.year.speakers} personPopupCallback={openPersonPopup} />
+			</div>
+		</Section>
 
-		<Spacer --height="10rem" />
-		<div id="Sponsors" class="scroll-anchor" />
-		<HeadlineH2>Sponsoren</HeadlineH2>
-		<HorizontalLine />
-		<Spacer --height="3rem" />
+		<Section id="Sponsors">
+			<HeadlineH2 classes="border">Sponsoren</HeadlineH2>
+		</Section>
 
-		<Spacer --height="10rem" />
-		<div id="Team" class="scroll-anchor" />
-		<HeadlineH2>Team</HeadlineH2>
-		<HorizontalLine />
-		<Spacer --height="3rem" />
-		<div class="person-wrapper">
-			<PersonArray personData={[]} personPopupCallback={openPersonPopup} />
-			<!--TODO: Add Team Data-->
-		</div>
+		<Section id="Team">
+			<HeadlineH2 classes="border">Team</HeadlineH2>
+			<div class="person-wrapper">
+				<PersonArray personData={[]} personPopupCallback={openPersonPopup} />
+				<!--TODO: Add Team Data-->
+			</div>
+		</Section>
 
-		<Spacer --height="10rem" />
-		<div id="Shedule" class="scroll-anchor" />
-		<HeadlineH2>Plan</HeadlineH2>
-		<HorizontalLine />
-		<Spacer --height="3rem" />
-
-		<Spacer --height="10rem" />
+		<Section id="Shedule">
+			<HeadlineH2 classes="border">Plan</HeadlineH2>
+		</Section>
 	</div>
-	<Footer currentYear={data.currentYear} menu={data.loggedIn ? footerMenuLoggedIn : footerMenu} />
+	<Footer currentYear={data.currentYear} menu={data.loggedIn ? Menu.footerIn : Menu.footerOut} />
 </div>
 
 {#if personPopup}
@@ -97,10 +58,6 @@
 {/if}
 
 <style>
-	.scroll-anchor {
-		scroll-margin-top: 7rem;
-	}
-
 	.page {
 		display: flex;
 		flex-direction: column;
@@ -110,7 +67,11 @@
 	.content-wrapper {
 		flex-grow: 1;
 		max-width: 100rem;
-		margin: 0 auto;
+		margin: 0 auto 10rem;
 		padding: 0 3rem;
+	}
+
+	.section-inner {
+		margin-top: 3rem;
 	}
 </style>

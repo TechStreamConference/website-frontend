@@ -2,9 +2,12 @@
 	export let classes: string = 'standard';
 	export let href: string = '';
 	export let newTab: boolean = false;
+	export let title: string;
 </script>
 
-<a {href} class={classes} target={newTab ? '_blank' : ''} rel="noopener noreferrer"><slot /></a>
+<a {href} class={classes} target={newTab ? '_blank' : ''} rel="noopener noreferrer" {title}>
+	<slot />
+</a>
 
 <style>
 	a {
@@ -36,7 +39,6 @@
 	.inline {
 		transition: color var(--transition-duration);
 		transition: text-decoration-color var(--transition-duration);
-		padding: 0;
 		border-radius: 0;
 		text-decoration: underline;
 		text-decoration-color: var(--primary-color);

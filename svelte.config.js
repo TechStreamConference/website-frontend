@@ -19,6 +19,7 @@ const config = {
 			'stores': 'src/stores',
 			'delete': 'src/toDelete',
 			'lookup': 'src/lookup',
+			'menu': 'src/menu',
 		}
 	}
 };

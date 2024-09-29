@@ -14,7 +14,6 @@
 		font-style: normal;
 		color: var(--text-color);
 		text-align: center;
-		margin: 0;
 	}
 	.big {
 		font-size: 3rem;
@@ -23,6 +22,9 @@
 	.small {
 		font-size: 2rem;
 		line-height: 3rem;
+	}
+	.border {
+		border-bottom: 1px solid var(--lines-color);
 	}
 
 	@media (max-width: 600px) {

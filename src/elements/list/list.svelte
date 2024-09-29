@@ -8,7 +8,6 @@
 
 <style>
 	ul {
-		margin: 0;
 		padding: var(--padding);
 	}
 

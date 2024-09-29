@@ -1,9 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import Line from 'elements/line/line.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
-	import SpacerOneLine from 'elements/spacer/spacerOneLine.svelte';
-	import Spacer from 'elements/spacer/spacer.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import PersonLinkGrid from './personLinkGrid.svelte';
 	import type { Person } from 'types/provideTypes';
@@ -16,34 +13,29 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- No a11y correctness here because the "close-button" already does the same. -->
-<div class="page-wrapper" transition:fade={{ duration: 300 }} on:click>
+<div class="page-wrapper" transition:fade={{ duration: 300 }} aria-hidden="true" on:click>
 	<div
 		class="popup-wrapper"
+		aria-hidden="true"
 		on:click={(event) => {
 			event.stopPropagation();
 		}}
 	>
 		<div class="content-wrapper">
-			<div class="column-wrapper align-center">
+			<div class="column-wrapper align-center line">
 				<PersonImage classes="person-popup-picture" {data} />
-				<SpacerOneLine />
-				<SubHeadline>{data.name}</SubHeadline>
-				<Paragraph>{data.short_bio}</Paragraph>
-				<Spacer --height="3rem" />
-				<PersonLinkGrid />
+				<SubHeadline classes="person-popup-one-line-spacer">{data.name}</SubHeadline>
+				<Paragraph classes="person-popup-paragraph">{data.short_bio}</Paragraph>
+				<PersonLinkGrid person={data.name} />
 			</div>
-			<Line classes="personPopupLine" />
 			<div class="column-wrapper">
-				<SpacerOneLine />
-				<Paragraph>{data.bio}</Paragraph>
+				<Paragraph classes="person-popup-one-line-spacer">{data.bio}</Paragraph>
 			</div>
-
-			<div class="flex-spacer" />
 		</div>
 	</div>
-	<Button classes="close-button picture" on:click
-		><img class="close-picture" src="/cross.png" alt="" /></Button
-	>
+	<Button classes="close-button picture" ariaLabel="close popup" on:click>
+		<img class="close-picture" src="/cross.png" alt="cross" />
+	</Button>
 </div>
 
 <style>
@@ -71,7 +63,6 @@
 		margin: 1rem;
 		display: flex;
 		height: calc(100% - 2rem);
-		justify-content: space-between;
 	}
 
 	.align-center {
@@ -79,15 +70,23 @@
 	}
 
 	.column-wrapper {
-		width: 47%;
-		height: 100%;
+		width: 50%;
+		height: fit-content;
 		display: flex;
 		flex-direction: column;
+		padding: 2rem;
 	}
 
-	.flex-spacer {
+	:global(.person-popup-one-line-spacer) {
+		margin-top: 1rem;
+	}
+
+	:global(.person-popup-paragraph) {
 		flex-grow: 1;
-		display: none;
+	}
+
+	.line {
+		border-right: 1px solid var(--lines-color);
 	}
 
 	:global(.personPopupLine) {
@@ -126,6 +125,10 @@
 			margin-left: 0;
 			margin-top: 1rem;
 		}
+
+		:global(.person-popup-paragraph) {
+			flex-grow: unset;
+		}
 	}
 
 	@media (max-width: 700px) {
@@ -144,10 +147,6 @@
 			height: auto;
 		}
 
-		.flex-spacer {
-			display: flex;
-		}
-
 		:global(.personPopupLine) {
 			width: 100%;
 			height: 1px;
@@ -161,6 +160,10 @@
 
 		:global(.close-button) {
 			top: calc(100vh - 5rem);
+		}
+
+		.line{
+			border-bottom: 1px solid var(--lines-color);
 		}
 	}
 

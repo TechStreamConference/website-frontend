@@ -21,6 +21,7 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
     const yearDataResponse: Response = await yearDataPromise;
     let yearData: Year;
     if (yearDataResponse.ok) {
+        // TODO: add links when provided
         yearData = await yearDataResponse.json();
     } else {
         redirect(302, "/404");
