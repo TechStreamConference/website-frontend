@@ -69,8 +69,9 @@
 
 		<SubHeadline classes="imprint-subheadline">Disclaimer – rechtliche Hinweise</SubHeadline>
 
+		<TextLine>§ 1 Warnhinweis zu Inhalten:</TextLine>
 		<Paragraph classes="imprint-one-line-margin">
-			§ 1 Warnhinweis zu Inhalten Die kostenlosen und frei zugänglichen Inhalte dieser Webseite
+			Die kostenlosen und frei zugänglichen Inhalte dieser Webseite
 			wurden mit größtmöglicher Sorgfalt erstellt. Der Anbieter dieser Webseite übernimmt jedoch
 			keine Gewähr für die Richtigkeit und Aktualität der bereitgestellten kostenlosen und frei
 			zugänglichen journalistischen Ratgeber und Nachrichten. Namentlich gekennzeichnete Beiträge
@@ -79,8 +80,10 @@
 			Vertragsverhältnis zwischen dem Nutzer und dem Anbieter zustande, insoweit fehlt es am
 			Rechtsbindungswillen des Anbieters.
 		</Paragraph>
+
+		<TextLine>§ 2 Externe Links:</TextLine>
 		<Paragraph classes="imprint-one-line-margin">
-			§ 2 Externe Links Diese Website enthält Verknüpfungen zu Websites Dritter ("externe Links").
+			Diese Website enthält Verknüpfungen zu Websites Dritter ("externe Links").
 			Diese Websites unterliegen der Haftung der jeweiligen Betreiber. Der Anbieter hat bei der
 			erstmaligen Verknüpfung der externen Links die fremden Inhalte daraufhin überprüft, ob etwaige
 			Rechtsverstöße bestehen. Zu dem Zeitpunkt waren keine Rechtsverstöße ersichtlich. Der Anbieter
@@ -90,8 +93,10 @@
 			externen Links ist für den Anbieter ohne konkrete Hinweise auf Rechtsverstöße nicht zumutbar.
 			Bei Kenntnis von Rechtsverstößen werden jedoch derartige externe Links unverzüglich gelöscht.
 		</Paragraph>
+
+		<TextLine>§ 3 Urheber- und Leistungsschutzrechte:</TextLine>
 		<Paragraph classes="imprint-one-line-margin">
-			§ 3 Urheber- und Leistungsschutzrechte Die auf dieser Website veröffentlichten Inhalte
+			Die auf dieser Website veröffentlichten Inhalte
 			unterliegen dem deutschen Urheber- und Leistungsschutzrecht. Jede vom deutschen Urheber- und
 			Leistungsschutzrecht nicht zugelassene Verwertung bedarf der vorherigen schriftlichen
 			Zustimmung des Anbieters oder jeweiligen Rechteinhabers. Dies gilt insbesondere für
@@ -105,8 +110,10 @@
 		<TextLine classes="imprint-one-line-margin">
 			Die Darstellung dieser Website in fremden Frames ist nur mit schriftlicher Erlaubnis zulässig.
 		</TextLine>
+
+		<TextLine>§ 4 Besondere Nutzungsbedingungen:</TextLine>
 		<Paragraph classes="imprint-last-paragraph">
-			§ 4 Besondere Nutzungsbedingungen Soweit besondere Bedingungen für einzelne Nutzungen dieser
+			Soweit besondere Bedingungen für einzelne Nutzungen dieser
 			Website von den vorgenannten Paragraphen abweichen, wird an entsprechender Stelle ausdrücklich
 			darauf hingewiesen. In diesem Falle gelten im jeweiligen Einzelfall die besonderen
 			Nutzungsbedingungen. Quelle:
