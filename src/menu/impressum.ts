@@ -27,7 +27,7 @@ export const headerIn: Menu = [
     {
         name: 'Abmelden',
         url: '/logout',
-        description: 'Klicke hier zum abmelden'
+        description: 'Klicke hier zum Abmelden'
     },
 ];
 
