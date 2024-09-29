@@ -15,7 +15,7 @@ export type Event = {
     start_date: string,
     subtitle: string,
     title: string,
-    trailer_url: string,
+    trailer_youtube_id: string,
     twitch_url: string,
     year: string,
 }
