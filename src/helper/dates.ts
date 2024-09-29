@@ -1,3 +1,6 @@
+export const dateFull: string = "%d.%m.%y";
+export const dateShort: string = "%d.%m";
+
 export function formatDate(provided: string, format: string): string {
     const date = new Date(provided);
 
