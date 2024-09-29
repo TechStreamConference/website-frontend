@@ -46,7 +46,7 @@ export const footerOut: Menu = [
     {
         name: 'Registrieren',
         url: '/register',
-        description: 'Klicke hier zum registrieren'
+        description: 'Klicke hier zum Registrieren'
     },
 ];
 
