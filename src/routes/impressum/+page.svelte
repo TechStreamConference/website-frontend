@@ -115,7 +115,7 @@
 				classes="inline"
 				href="https://www.juraforum.de/"
 				newTab={true}
-				title="Klicke hier um dich über besondere Nutzungsbedingungen zu informieren"
+				title="Klicke hier, um zur Quelle dieses Online-Impressums zu gelangen"
 			>
 				Hier ansehen >>
 			</Link>
