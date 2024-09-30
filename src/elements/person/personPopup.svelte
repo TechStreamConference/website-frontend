@@ -54,7 +54,7 @@
 
 	.popup-wrapper {
 		background-color: var(--background-color);
-		border: 1px solid var(--primary-color);
+		border: 1px solid var(--primary-color-light);
 		width: 60rem;
 		height: 50rem;
 	}
@@ -97,7 +97,7 @@
 	:global(.person-popup-picture) {
 		width: auto;
 		height: auto;
-		border: 1px solid var(--primary-color);
+		border: 1px solid var(--primary-color-light);
 	}
 
 	:global(.close-button) {

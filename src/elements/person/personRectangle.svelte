@@ -39,7 +39,7 @@
 		min-width: 15rem;
 		border: none;
 		background-color: transparent;
-		outline: 1px solid var(--primary-color);
+		outline: 1px solid var(--primary-color-light);
 		border-radius: var(--border-radius);
 		transition: var(--transition-duration);
 		text-align: center;
@@ -53,7 +53,7 @@
 	:global(.person-rectangle-picture) {
 		width: 100%;
 		height: auto;
-		background-color: var(--primary-color);
+		background-color: var(--primary-color-light);
 		border-top-left-radius: var(--border-radius);
 		border-top-right-radius: var(--border-radius);
 		margin-bottom: 1rem;

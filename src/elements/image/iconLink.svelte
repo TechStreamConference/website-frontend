@@ -11,7 +11,7 @@
 
 <style>
 	.icon {
-		background-color: var(--primary-color);
+		background-color: var(--primary-color-light);
 		transition: var(--transition-duration);
 		border-radius: var(--border-radius);
 	}
@@ -32,7 +32,7 @@
 
 	@media (max-width: 1280px) {
 		.icon:hover {
-			background-color: var(--primary-color);
+			background-color: var(--primary-color-light);
 			box-shadow: none;
 			transition: var(--transition-duration);
 		}

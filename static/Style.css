@@ -1,12 +1,12 @@
 :root {
     --transition-duration: 0.3s;
     --fast-transition-duration: 0.1s;
-    --primary-color: #674c8a;
-    --secondary-color: #5e4680;
-    --third-color: #563e75;
+    --primary-color-light: #674c8a;
+    --primary-color-mid: #5e4680;
+    --primary-color-dark: #563e75;
     --text-color: black;
     --green-color: #ccff57;
-    --lines-color: var(--primary-color);
+    --lines-color: var(--primary-color-light);
     --icon-color: var(--green-color);
     --white-color: white;
     --light-gray-color: rgb(190, 190, 190);
@@ -41,11 +41,11 @@ body {
     :root {
         --background-color: rgb(40, 40, 40);
         --background-light-color: rgba(40, 40, 40, 0.7);
-        --primary-color: #563e75;
+        --primary-color-light: #563e75;
         --secondary-color: #5e4680;
         --third-color: #674c8a;
         --text-color: white;
         --lines-color: var(--green-color);
-        --icon-color: var(--primary-color);
+        --icon-color: var(--primary-color-light);
     }
 }

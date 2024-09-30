@@ -41,7 +41,7 @@
 		transition: text-decoration-color var(--transition-duration);
 		border-radius: 0;
 		text-decoration: underline;
-		text-decoration-color: var(--primary-color);
+		text-decoration-color: var(--primary-color-light);
 	}
 
 	.inline:hover {
@@ -74,7 +74,7 @@
 
 	@media (max-width: 1280px) {
 		.animated:hover {
-			background-color: var(--primary-color);
+			background-color: var(--primary-color-light);
 			box-shadow: none;
 			transition: var(--transition-duration);
 		}

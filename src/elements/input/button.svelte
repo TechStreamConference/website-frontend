@@ -9,7 +9,7 @@
 
 <style>
 	button {
-		background-color: var(--primary-color);
+		background-color: var(--primary-color-light);
 		border: none;
 		border-radius: var(--border-radius);
 		cursor: pointer;
@@ -44,7 +44,7 @@
 
 	@media (max-width: 1280px) {
 		button:hover {
-			background-color: var(--primary-color);
+			background-color: var(--primary-color-light);
 			box-shadow: none;
 			transition: var(--transition-duration);
 		}

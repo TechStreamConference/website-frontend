@@ -82,7 +82,7 @@
 	footer {
 		display: flex;
 		flex-direction: column;
-		background-color: var(--primary-color);
+		background-color: var(--primary-color-light);
 		padding: 2rem 0;
 		color: var(--white-color);
 		font-family: 'Gnuolane Extra Light', sans-serif;
