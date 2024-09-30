@@ -29,7 +29,7 @@
 	}
 
 	.green {
-		color: var(--green-color);
+		color: var(--secondary-color);
 	}
 
 	.left {

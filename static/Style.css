@@ -4,10 +4,10 @@
     --primary-color-light: #674c8a;
     --primary-color-mid: #5e4680;
     --primary-color-dark: #563e75;
+    --secondary-color: #ccff57;
     --text-color: black;
-    --green-color: #ccff57;
     --lines-color: var(--primary-color-light);
-    --icon-color: var(--green-color);
+    --icon-color: var(--secondary-color);
     --white-color: white;
     --light-gray-color: rgb(190, 190, 190);
     --gray-color: gray;
@@ -45,7 +45,7 @@ body {
         --primary-color-mid: #5e4680;
         --primary-color-dark: #674c8a;
         --text-color: white;
-        --lines-color: var(--green-color);
+        --lines-color: var(--secondary-color);
         --icon-color: var(--primary-color-light);
     }
 }
