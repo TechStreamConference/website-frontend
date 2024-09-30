@@ -24,7 +24,7 @@
 	}
 
 	.icon:active {
-		background-color: var(--third-color);
+		background-color: var(--primary-color-dark);
 		box-shadow: 1px 1px var(--light-gray-color);
 		transform: translateY(0px) translateX(0px);
 		transition: var(--fast-transition-duration);

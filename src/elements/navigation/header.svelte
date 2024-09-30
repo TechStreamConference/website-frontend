@@ -117,7 +117,7 @@
 	}
 
 	li a:hover {
-		background-color: var(--third-color);
+		background-color: var(--primary-color-dark);
 		transition: background-color var(--transition-duration);
 	}
 

@@ -43,7 +43,7 @@ body {
         --background-light-color: rgba(40, 40, 40, 0.7);
         --primary-color-light: #563e75;
         --primary-color-mid: #5e4680;
-        --third-color: #674c8a;
+        --primary-color-dark: #674c8a;
         --text-color: white;
         --lines-color: var(--green-color);
         --icon-color: var(--primary-color-light);
