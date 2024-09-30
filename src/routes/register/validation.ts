@@ -1,6 +1,13 @@
 import { apiUrl } from "helper/links";
-import Joi from "joi";
+import Joi, { options } from "joi";
 import { parseProvidingJson } from "helper/parseJson";
+
+const tlds: string[] = [
+    'com', 'org', 'net', 'info', 'web',
+    'us', 'uk', 'ca', 'de', 'fr', 'au', 'jp', 'cn', 'in', 'br', 'ru', 'it', 'es',
+    'mx', 'nl', 'se', 'ch', 'no', 'fi', 'hk', 'kr', 'sg', 'za', 'pt', 'dk',
+    'ie', 'co', 'cl', 'tw', 'ae',
+];
 
 type Data = {
     exists: boolean;
@@ -45,8 +52,8 @@ export async function onMailChangedAsync(mail: string, fetch: Function): Promise
         return 'Das Feld "E-Mail" ist leer.';
     }
 
-    const valid: boolean = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
-    if (!valid) {
+    const { error } = Joi.string().email({ tlds: { allow: tlds } }).required().validate(trimmed);
+    if (error) {
         return "Die angegebene E-Mail-Adresse ist nicht gültig.";
     }
 
