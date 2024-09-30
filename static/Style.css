@@ -7,12 +7,13 @@
     --background-color: white;
     --background-color-light: rgba(255, 255, 255, 0.7);
 
+    --white-color: white;
+    --gray-color: gray;
+    --gray-color-light: rgb(190, 190, 190);
+
     --text-color: black;
     --lines-color: var(--primary-color-light);
     --icon-color: var(--secondary-color);
-    --white-color: white;
-    --light-gray-color: rgb(190, 190, 190);
-    --gray-color: gray;
     --error-color: orange;
     --border-radius: 5px;
     --transition-duration: 0.3s;
