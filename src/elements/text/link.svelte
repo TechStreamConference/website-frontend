@@ -69,7 +69,7 @@
 		background-color: var(--primary-color-dark);
 		box-shadow: 1px 1px var(--gray-color-light);
 		transform: translateY(0px) translateX(0px);
-		transition: var(--fast-transition-duration);
+		transition: var(--transition-duration-fast);
 	}
 
 	@media (max-width: 1280px) {
@@ -81,7 +81,7 @@
 
 		.animated:active {
 			box-shadow: 2px 2px var(--gray-color-light);
-			transition: var(--fast-transition-duration);
+			transition: var(--transition-duration-fast);
 		}
 	}
 </style>

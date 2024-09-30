@@ -18,7 +18,7 @@
 
     --border-radius: 5px;
     --transition-duration: 0.3s;
-    --fast-transition-duration: 0.1s;
+    --transition-duration-fast: 0.1s;
     /*horizontal-break-1: 1280px;*/
     /*horizontal-break-2: 600px;*/
 }
