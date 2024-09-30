@@ -64,7 +64,7 @@
 	}
 
 	.bottom-wrapper {
-		border-top: 1px solid var(--lines-color);
+		border-top: 1px solid var(--line-color);
 		margin: 2rem 2rem 0 2rem;
 	}
 

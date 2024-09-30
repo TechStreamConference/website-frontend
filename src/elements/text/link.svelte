@@ -50,7 +50,7 @@
 	}
 
 	.inline:active {
-		text-decoration-color: var(--lines-color);
+		text-decoration-color: var(--line-color);
 		transition: text-decoration-color var(--transition-duration);
 	}
 

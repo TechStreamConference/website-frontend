@@ -86,7 +86,7 @@
 	}
 
 	.line {
-		border-right: 1px solid var(--lines-color);
+		border-right: 1px solid var(--line-color);
 	}
 
 	:global(.personPopupLine) {
@@ -163,7 +163,7 @@
 		}
 
 		.line{
-			border-bottom: 1px solid var(--lines-color);
+			border-bottom: 1px solid var(--line-color);
 		}
 	}
 
