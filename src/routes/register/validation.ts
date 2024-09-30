@@ -1,4 +1,14 @@
 import { apiUrl } from "helper/links";
+import Joi from "joi";
+import { parseProvidingJson } from "helper/parseJson";
+
+type Data = {
+    exists: boolean;
+}
+const dataScheme: Joi.ObjectSchema = Joi.object({
+    exists: Joi.boolean().required(),
+})
+
 
 export async function onUsernameChangedAsync(username: string, fetch: Function): Promise<string | undefined> {
     const trimmed: string = username.trim();
@@ -21,13 +31,7 @@ export async function onUsernameChangedAsync(username: string, fetch: Function):
         return;
     }
 
-    let data: { exists: boolean };
-    try {
-        data = await response.json();
-    } catch (error) {
-        console.error('error while parsing username json', error);
-        return;
-    }
+    const data: Data = await parseProvidingJson<Data>(response, dataScheme);
 
     if (data.exists) {
         return 'Der Name  "' + trimmed + '" ist bereits vergeben.';
@@ -52,13 +56,7 @@ export async function onMailChangedAsync(mail: string, fetch: Function): Promise
         return;
     }
 
-    let data: { exists: boolean };
-    try {
-        data = await response.json();
-    } catch (error) {
-        console.error('error while parsing email json', error);
-        return;
-    }
+    const data: Data = await parseProvidingJson<Data>(response, dataScheme);
 
     if (data.exists) {
         return 'Die E-Mail "' + trimmed + '" wird bereits verwendet.';
