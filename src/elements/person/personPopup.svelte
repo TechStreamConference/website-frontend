@@ -46,7 +46,7 @@
 		left: 0;
 		justify-content: center;
 		align-items: center;
-		background-color: var(--background-light-color);
+		background-color: var(--background-color-light);
 		width: 100%;
 		height: 100%;
 		z-index: 1000;
