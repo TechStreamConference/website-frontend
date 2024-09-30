@@ -1,6 +1,6 @@
 import type Joi from "joi";
 
-export async function parseProvidingJson<T>(response: Response, scheme: Joi.Schema<T>): Promise<T> {
+export async function parseProvidedJsonAsync<T>(response: Response, scheme: Joi.Schema<T>): Promise<T> {
     const type: T = await response.json();
     const { error } = scheme.validate(type);
 

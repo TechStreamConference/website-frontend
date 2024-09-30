@@ -1,6 +1,6 @@
 import { apiUrl } from "helper/links";
-import Joi, { options } from "joi";
-import { parseProvidingJson } from "helper/parseJson";
+import Joi from "joi";
+import { parseProvidedJsonAsync } from "helper/parseJson";
 
 const tlds: string[] = [
     'com', 'org', 'net', 'info', 'web',
@@ -38,7 +38,7 @@ export async function onUsernameChangedAsync(username: string, fetch: Function):
         return;
     }
 
-    const data: Data = await parseProvidingJson<Data>(response, dataScheme);
+    const data: Data = await parseProvidedJsonAsync<Data>(response, dataScheme);
 
     if (data.exists) {
         return 'Der Name  "' + trimmed + '" ist bereits vergeben.';
@@ -63,7 +63,7 @@ export async function onMailChangedAsync(mail: string, fetch: Function): Promise
         return;
     }
 
-    const data: Data = await parseProvidingJson<Data>(response, dataScheme);
+    const data: Data = await parseProvidedJsonAsync<Data>(response, dataScheme);
 
     if (data.exists) {
         return 'Die E-Mail "' + trimmed + '" wird bereits verwendet.';
