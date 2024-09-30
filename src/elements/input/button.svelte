@@ -18,7 +18,7 @@
 	}
 
 	button:hover {
-		background-color: var(--secondary-color);
+		background-color: var(--primary-color-mid);
 		box-shadow: 4px 4px var(--gray-color);
 		transform: translateY(-4px) translateX(-4px);
 		transition: var(--transition-duration);
