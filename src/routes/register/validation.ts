@@ -2,10 +2,10 @@ import { apiUrl } from "helper/links";
 import { z } from 'zod';
 import { parseProvidedJsonAsync } from "helper/parseJson";
 
-const responseDataScheme = z.object({
+const existsResponseDataScheme = z.object({
     exists: z.boolean(),
 })
-type ResponseData = z.infer<typeof responseDataScheme>;
+type ExistsResponseData = z.infer<typeof existsResponseDataScheme>;
 
 export async function onUsernameChangedAsync(username: string, fetch: Function): Promise<string | undefined> {
     const trimmed: string = username.trim();
@@ -28,7 +28,7 @@ export async function onUsernameChangedAsync(username: string, fetch: Function):
         return;
     }
 
-    const data: ResponseData | undefined = await parseProvidedJsonAsync<ResponseData>(response, responseDataScheme);
+    const data: ExistsResponseData | undefined = await parseProvidedJsonAsync<ExistsResponseData>(response, existsResponseDataScheme);
     if (!data) {
         console.log('Error while checking username');
         return;
@@ -57,7 +57,7 @@ export async function onMailChangedAsync(mail: string, fetch: Function): Promise
         return;
     }
 
-    const data: ResponseData | undefined = await parseProvidedJsonAsync<ResponseData>(response, responseDataScheme);
+    const data: ExistsResponseData | undefined = await parseProvidedJsonAsync<ExistsResponseData>(response, existsResponseDataScheme);
     if (!data) {
         console.log('Error while checking mail');
         return;
