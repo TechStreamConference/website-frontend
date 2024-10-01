@@ -1,14 +1,20 @@
-import type Joi from "joi";
+import type { ZodType } from "zod";
 
-export async function parseProvidedJsonAsync<T>(response: Response, scheme: Joi.Schema<T>): Promise<T> {
-    const type: T = await response.json();
-    const { error } = scheme.validate(type);
+export async function parseProvidedJsonAsync<T>(response: Response, scheme: ZodType<T>): Promise<T | undefined> {
+    try {
+        const type : T = await response.json();
+        const validated = scheme.safeParse(type);
 
-    if (error) {
-        console.error(error);
-        console.log("Validation-Original:", error._original);
-        console.log("Validation-Details:", error.details);
+        if (validated.success) {
+            return validated.data;
+        }
+
+        console.error(validated.error.errors);
+        console.log("Validation-Original:", type);
+
+        return type;
+
+    } catch (error) {
+        console.error('Error occurred during fetch or validation:', error);
     }
-
-    return type;
 }
