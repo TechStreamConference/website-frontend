@@ -46,7 +46,7 @@
 		left: 0;
 		justify-content: center;
 		align-items: center;
-		background-color: var(--background-light-color);
+		background-color: var(--background-color-light);
 		width: 100%;
 		height: 100%;
 		z-index: 1000;
@@ -54,7 +54,7 @@
 
 	.popup-wrapper {
 		background-color: var(--background-color);
-		border: 1px solid var(--primary-color);
+		border: 1px solid var(--primary-color-light);
 		width: 60rem;
 		height: 50rem;
 	}
@@ -86,7 +86,7 @@
 	}
 
 	.line {
-		border-right: 1px solid var(--lines-color);
+		border-right: 1px solid var(--line-color);
 	}
 
 	:global(.personPopupLine) {
@@ -97,7 +97,7 @@
 	:global(.person-popup-picture) {
 		width: auto;
 		height: auto;
-		border: 1px solid var(--primary-color);
+		border: 1px solid var(--primary-color-light);
 	}
 
 	:global(.close-button) {
@@ -163,7 +163,7 @@
 		}
 
 		.line{
-			border-bottom: 1px solid var(--lines-color);
+			border-bottom: 1px solid var(--line-color);
 		}
 	}
 

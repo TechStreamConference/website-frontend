@@ -13,7 +13,7 @@
 <style>
 	.icon {
 		display: inline-block;
-		color: var(--green-color);
+		color: var(--secondary-color);
 		font-size: 1.6rem;
 		line-height: 2.3rem;
 		text-align: center;

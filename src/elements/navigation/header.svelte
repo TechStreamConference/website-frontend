@@ -77,7 +77,7 @@
 	}
 
 	.desktop-wrapper {
-		background-color: var(--primary-color);
+		background-color: var(--primary-color-light);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -117,7 +117,7 @@
 	}
 
 	li a:hover {
-		background-color: var(--third-color);
+		background-color: var(--primary-color-dark);
 		transition: background-color var(--transition-duration);
 	}
 
@@ -139,7 +139,7 @@
 		}
 
 		.hamburger-wrapper {
-			background-color: var(--primary-color);
+			background-color: var(--primary-color-light);
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
@@ -196,7 +196,7 @@
 		}
 
 		.mobile-menu {
-			background-color: var(--primary-color);
+			background-color: var(--primary-color-light);
 			flex-direction: column;
 			display: flex;
 			border-bottom: solid 1px black;

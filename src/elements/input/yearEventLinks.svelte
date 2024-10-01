@@ -42,7 +42,7 @@
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-		background-color: var(--primary-color);
+		background-color: var(--primary-color-light);
 		padding: 0.1rem 0.5rem 0.1rem 0.3rem;
 		border-radius: var(--border-radius);
 	}

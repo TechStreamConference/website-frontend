@@ -130,7 +130,7 @@
 
 	:global(.year-header-subheadline) {
 		padding-bottom: 1rem;
-		border-bottom: 1px solid var(--green-color);
+		border-bottom: 1px solid var(--secondary-color);
 	}
 
 	:global(.year-header-subtitle) {

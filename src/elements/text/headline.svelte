@@ -25,11 +25,11 @@
 	}
 
 	.border {
-		border-bottom: 1px solid var(--lines-color);
+		border-bottom: 1px solid var(--line-color);
 	}
 
 	.green {
-		color: var(--green-color);
+		color: var(--secondary-color);
 	}
 
 	.left {

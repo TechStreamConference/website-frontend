@@ -39,7 +39,7 @@
 		font-weight: 500;
 		font-style: normal;
 		color: var(--white-color);
-		background-color: var(--primary-color);
+		background-color: var(--primary-color-light);
 		border-radius: var(--border-radius);
 		border: none;
 		padding: 0.5rem;

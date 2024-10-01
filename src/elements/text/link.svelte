@@ -32,7 +32,7 @@
 	}
 
 	.standard:hover {
-		background-color: var(--third-color);
+		background-color: var(--primary-color-dark);
 		transition: background-color var(--transition-duration);
 	}
 
@@ -41,16 +41,16 @@
 		transition: text-decoration-color var(--transition-duration);
 		border-radius: 0;
 		text-decoration: underline;
-		text-decoration-color: var(--primary-color);
+		text-decoration-color: var(--primary-color-light);
 	}
 
 	.inline:hover {
-		color: var(--third-color);
+		color: var(--primary-color-dark);
 		transition: color var(--transition-duration);
 	}
 
 	.inline:active {
-		text-decoration-color: var(--lines-color);
+		text-decoration-color: var(--line-color);
 		transition: text-decoration-color var(--transition-duration);
 	}
 
@@ -59,29 +59,29 @@
 	}
 
 	.animated:hover {
-		background-color: var(--secondary-color);
+		background-color: var(--primary-color-mid);
 		box-shadow: 4px 4px var(--gray-color);
 		transform: translateY(-4px) translateX(-4px);
 		transition: var(--transition-duration);
 	}
 
 	.animated:active {
-		background-color: var(--third-color);
-		box-shadow: 1px 1px var(--light-gray-color);
+		background-color: var(--primary-color-dark);
+		box-shadow: 1px 1px var(--gray-color-light);
 		transform: translateY(0px) translateX(0px);
-		transition: var(--fast-transition-duration);
+		transition: var(--transition-duration-fast);
 	}
 
 	@media (max-width: 1280px) {
 		.animated:hover {
-			background-color: var(--primary-color);
+			background-color: var(--primary-color-light);
 			box-shadow: none;
 			transition: var(--transition-duration);
 		}
 
 		.animated:active {
-			box-shadow: 2px 2px var(--light-gray-color);
-			transition: var(--fast-transition-duration);
+			box-shadow: 2px 2px var(--gray-color-light);
+			transition: var(--transition-duration-fast);
 		}
 	}
 </style>
