@@ -20,9 +20,11 @@
 <!-- No a11y correctness here because the "person-button" already does the same. -->
 <div class="person" on:click>
 	<PersonImage classes="person-rectangle-picture" {data} />
-	<SubHeadline>{data.name}</SubHeadline>
-	<Paragraph>{data.short_bio}</Paragraph>
-	<div class="flex-line-spacer" />
+	<div class="text-wrapper">
+		<SubHeadline>{data.name}</SubHeadline>
+		<Paragraph classes="person-rectangle-paragraph">{data.short_bio}</Paragraph>
+	</div>
+	<div class="flex-groth" />
 	<div class="bottom-wrapper">
 		<LinkArray on:click={onLinkClicked} person={data.name} />
 		<!--TODO: Add Social Media Links-->
@@ -59,12 +61,26 @@
 		margin-bottom: 1rem;
 	}
 
-	.flex-line-spacer {
+	.text-wrapper {
+		height: 7rem;
+		margin: 0 0.5rem;
+	}
+
+	:global(.person-rectangle-paragraph) {
+		margin-top: 0.5rem;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.flex-groth {
 		flex-grow: 1;
+		margin: 2rem 2rem 0 2rem;
+		border-top: 1px solid var(--line-color);
 	}
 
 	.bottom-wrapper {
-		border-top: 1px solid var(--line-color);
 		margin: 2rem 2rem 0 2rem;
 	}
 
