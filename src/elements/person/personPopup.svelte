@@ -162,8 +162,9 @@
 			top: calc(100vh - 5rem);
 		}
 
-		.line{
+		.line {
 			border-bottom: 1px solid var(--line-color);
+			border-right: none;
 		}
 	}
 
