@@ -26,7 +26,7 @@
 				<PersonImage classes="person-popup-picture" {data} />
 				<SubHeadline classes="person-popup-one-line-spacer">{data.name}</SubHeadline>
 				<Paragraph classes="person-popup-paragraph">{data.short_bio}</Paragraph>
-				<PersonLinkGrid person={data.name} />
+				<PersonLinkGrid person={data.name} links={data.social_media_links} />
 			</div>
 			<div class="column-wrapper">
 				<Paragraph classes="person-popup-one-line-spacer">{data.bio}</Paragraph>

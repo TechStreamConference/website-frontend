@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Icon from './icon.svelte';
-	import type { IconLink } from 'types/provideTypes';
-	export let linkType: IconLink;
+	import type { SocialMediaLink } from 'types/provideTypes';
+	export let linkType: SocialMediaLink;
 	export let title: string;
 </script>
 
-<a href={linkType.link} target="_blank" rel="noopener noreferrer" class="icon" {title} on:click>
+<a href={linkType.url} target="_blank" rel="noopener noreferrer" class="icon" {title} on:click>
 	<Icon type={linkType.name} />
 </a>
 
