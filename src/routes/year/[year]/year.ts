@@ -25,9 +25,9 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
         redirect(302, "/404");
     }
 
-    const yearData: Year | undefined = await parseProvidedJsonAsync<Year>(yearDataResponse, yearScheme);
+    const yearData = await parseProvidedJsonAsync<Year>(yearDataResponse, yearScheme);
 
-    if (!yearData){
+    if (!yearData) {
         redirect(302, "/404");
     }
 
