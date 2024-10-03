@@ -30,7 +30,7 @@ export async function onUsernameChangedAsync(username: string, fetch: Function):
 
     const data = await parseProvidedJsonAsync<ExistsResponseData>(response, existsResponseDataScheme);
     if (!data) {
-        console.log('Error while checking username');
+        console.error('Error while checking username');
         return;
     }
 
@@ -59,7 +59,7 @@ export async function onMailChangedAsync(mail: string, fetch: Function): Promise
 
     const data = await parseProvidedJsonAsync<ExistsResponseData>(response, existsResponseDataScheme);
     if (!data) {
-        console.log('Error while checking mail');
+        console.error('Error while checking mail');
         return;
     }
 
