@@ -3,18 +3,18 @@
 	import Img from './image.svelte';
 	export let image: Image;
 
-	export let classesLink: string = 'size-default';
+	export let classes: string = 'size-default';
 </script>
 
 <a
 	href={image.url}
 	target="_blank"
 	rel="noopener noreferrer"
-	class={classesLink}
+	class={classes}
 	title="Klicke hier um zu {image.name} zu navigieren."
 	on:click
 >
-	<Img src={image.image_url} alt={image.description} />
+	<Img classes="size-default hover" src={image.image_url} alt={image.description} />
 </a>
 
 <style>
@@ -24,7 +24,7 @@
 		align-items: center;
 	}
 
-    .size-default {
+	.size-default {
 		max-height: 100%;
 		max-width: 100%;
 		height: auto;

@@ -2,37 +2,40 @@
 	import type { Images } from 'types/provideTypes';
 	export let logos: Images;
 	import ImageLink from './imageLink.svelte';
+	import TextLine from 'elements/text/textLine.svelte';
 </script>
 
-<div class="image-flex">
+<div class="image-grid">
 	{#each logos as logo}
 		<div class="image-container">
-			<ImageLink image={logo} classesLink={'logo-array-link'} />
+			<ImageLink image={logo} classes={'logo-array-link'} />
+			{#if logo.copyright}
+				<TextLine>{logo.copyright}</TextLine>
+			{/if}
 		</div>
 	{/each}
 </div>
 
 <style>
-	.image-flex {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
+	.image-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
 		gap: 3rem;
 	}
 
 	.image-container {
-		flex-grow: 1;
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 	}
 
 	:global(.logo-array-link) {
-		height: 15rem;
+		height: 10rem;
 	}
 
 	@media (max-width: 600px) {
-		.image-flex {
+		.image-grid {
 			gap: 2rem;
 		}
 	}
