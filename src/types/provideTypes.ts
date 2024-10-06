@@ -12,8 +12,9 @@ export type SocialMediaLinks = z.infer<typeof socialMediaLinksScheme>;
 export const imageScheme = z.object({
     url: z.string(),
     image_url: z.string(),
-    name:z.string(),
+    name: z.string(),
     description: z.string(),
+    copyright: z.string(),
 })
 export type Image = z.infer<typeof imageScheme>;
 
