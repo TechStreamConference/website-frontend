@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { LoadYear } from 'types/loadTypes';
+	import type { Images } from 'types/provideTypes';
 	export let data: LoadYear;
 	import * as Menu from 'menu/year';
-	import * as Format from 'helper/dates'
+	import * as Format from 'helper/dates';
 
 	import LogoBig from 'elements/image/logoBig.svelte';
 	import { formatDate } from 'helper/dates';
@@ -19,6 +20,7 @@
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import YouTubeVideo from 'elements/image/youTubeVideo.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
+	import LogoArray from 'elements/image/logoArray.svelte';
 
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
@@ -28,6 +30,39 @@
 	function closePersonPopup() {
 		personPopup = undefined;
 	}
+
+	const logos: Images = [
+		{
+			url: 'https://www.google.de',
+			image_url: './background.png',
+			name: 'background',
+			description: 'background-logo der Test-Conf. '
+		},
+		{
+			url: 'https://www.google.de',
+			image_url: './cross.png',
+			name: 'background',
+			description: 'background-logo der Test-Conf. '
+		},
+		{
+			url: 'https://www.google.de',
+			image_url: './favicon.png',
+			name: 'background',
+			description: 'background-logo der Test-Conf. '
+		},
+		{
+			url: 'https://www.google.de',
+			image_url: './logo_big.png',
+			name: 'background',
+			description: 'background-logo der Test-Conf. '
+		},
+		{
+			url: 'https://www.google.de',
+			image_url: './logo_small.png',
+			name: 'background',
+			description: 'background-logo der Test-Conf. '
+		}
+	];
 </script>
 
 <Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
@@ -77,6 +112,16 @@
 
 		<Section id="Sponsors">
 			<HeadlineH2 classes="border">Sponsoren</HeadlineH2>
+			<div class="section-inner">
+				<LogoArray {logos} />
+			</div>
+		</Section>
+
+		<Section>
+			<HeadlineH2 classes="border">Medienpartner</HeadlineH2>
+			<div class="section-inner">
+				<LogoArray {logos} />
+			</div>
 		</Section>
 
 		<Section id="Team">
