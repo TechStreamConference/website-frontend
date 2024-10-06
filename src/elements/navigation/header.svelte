@@ -24,7 +24,7 @@
 			class="logo-wrapper"
 			title="Tech Stream Conference Seite des aktuellen Jahres anschauen"
 		>
-			<LogoSmall />
+			<LogoSmall classes={'header-logo-small'} />
 		</a>
 		<nav>
 			<ul>
@@ -43,7 +43,7 @@
 				class="logo-wrapper"
 				title="Tech Stream Conference Seite des aktuellen Jahres anschauen"
 			>
-				<LogoSmall />
+				<LogoSmall classes={'header-logo-small'} />
 			</a>
 
 			<button class="hamburger" aria-label="Menü aufklappen" on:click={toggleOpen}>
@@ -86,7 +86,7 @@
 		border-bottom: solid 1px black;
 	}
 
-	:global(.logo-small) {
+	:global(.header-logo-small) {
 		height: 5rem;
 		margin-left: 1rem;
 	}
@@ -133,7 +133,7 @@
 			justify-content: space-between;
 		}
 
-		:global(.logo-small) {
+		:global(.header-logo-small) {
 			height: 3rem;
 			margin-left: 1rem;
 		}
