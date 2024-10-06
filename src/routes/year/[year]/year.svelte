@@ -31,13 +31,14 @@
 		personPopup = undefined;
 	}
 
-	const logos: Images = [
+	const sponsors: Images = [
 		{
 			url: 'https://www.google.de',
 			image_url: 'https://test-conf.de/assets/jetbrains_logo.fa17e4bd.png',
 			name: 'background',
 			description: 'background-logo der Test-Conf. ',
-			copyright: 'Copyright © 2000-2024 JetBrains s.r.o. JetBrains and the JetBrains logo are registered trademarks of JetBrains s.r.o.'
+			copyright:
+				'Copyright © 2000-2024 JetBrains s.r.o. JetBrains and the JetBrains logo are registered trademarks of JetBrains s.r.o.'
 		},
 		{
 			url: 'https://www.google.de',
@@ -52,7 +53,10 @@
 			name: 'background',
 			description: 'background-logo der Test-Conf. ',
 			copyright: ''
-		},
+		}
+	];
+
+	const partners: Images = [
 		{
 			url: 'https://www.google.de',
 			image_url: 'https://test-conf.de/assets/indie_logo.f1cfcca1.png',
@@ -72,7 +76,8 @@
 			image_url: 'https://test-conf.de/assets/Manasoup_Network.6fd25249.png',
 			name: 'background',
 			description: 'background-logo der Test-Conf. ',
-			copyright: 'Copyright © 2000-2024 JetBrains s.r.o. JetBrains and the JetBrains logo are registered trademarks of JetBrains s.r.o.'
+			copyright:
+				'Copyright © 2000-2024 JetBrains s.r.o. JetBrains and the JetBrains logo are registered trademarks of JetBrains s.r.o.'
 		},
 		{
 			url: 'https://www.google.de',
@@ -132,14 +137,14 @@
 		<Section id="Sponsors">
 			<HeadlineH2 classes="border">Sponsoren</HeadlineH2>
 			<div class="section-inner">
-				<LogoArray {logos} />
+				<LogoArray logos={sponsors} />
 			</div>
 		</Section>
 
 		<Section>
 			<HeadlineH2 classes="border">Medienpartner</HeadlineH2>
 			<div class="section-inner">
-				<LogoArray {logos} />
+				<LogoArray logos={partners} />
 			</div>
 		</Section>
 

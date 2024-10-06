@@ -52,9 +52,6 @@ export const yearScheme = z.object({
 });
 export type Year = z.infer<typeof yearScheme>;
 
-
-
-
 export const menuItemScheme = z.object({
     name: z.string(),
     url: z.string(),
