@@ -9,6 +9,17 @@ export type SocialMediaLink = z.infer<typeof socialMediaLinkScheme>;
 export const socialMediaLinksScheme = z.array(socialMediaLinkScheme);
 export type SocialMediaLinks = z.infer<typeof socialMediaLinksScheme>;
 
+export const imageScheme = z.object({
+    url: z.string(),
+    image_url: z.string(),
+    name:z.string(),
+    description: z.string(),
+})
+export type Image = z.infer<typeof imageScheme>;
+
+export const imagesScheme = z.array(imageScheme);
+export type Images = z.infer<typeof imagesScheme>;
+
 export const personScheme = z.object({
     bio: z.string(),
     short_bio: z.string(),
