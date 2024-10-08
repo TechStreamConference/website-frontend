@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { SponsorLink } from 'types/provideTypes';
-	import Image from './image.svelte';
+	import Image from 'elements/image/image.svelte';
 	export let link: SponsorLink;
 
 	export let classes: string = 'size-default';

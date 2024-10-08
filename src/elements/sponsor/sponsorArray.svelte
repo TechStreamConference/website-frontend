@@ -1,14 +1,14 @@
 <script lang="ts">
 	import type { SponsorLinks } from 'types/provideTypes';
 	export let logos: SponsorLinks;
-	import Sponsor from './sponsor.svelte';
+	import Sponsor from 'elements/sponsor/sponsor.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
 </script>
 
 <div class="image-grid">
 	{#each logos as logo}
 		<div class="image-container">
-			<Sponsor link={logo} classes={'logo-array-link'} />
+			<Sponsor link={logo} classes={'link'} />
 			{#if logo.copyright}
 				<TextLine>{logo.copyright}</TextLine>
 			{/if}
@@ -30,7 +30,7 @@
 		justify-content: center;
 	}
 
-	:global(.logo-array-link) {
+	.image-container :global(.link) {
 		height: 10rem;
 	}
 

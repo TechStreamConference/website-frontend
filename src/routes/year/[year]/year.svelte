@@ -20,7 +20,7 @@
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import YouTubeVideo from 'elements/image/youTubeVideo.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
-	import SponsorArray from 'elements/image/sponsorArray.svelte';
+	import SponsorArray from 'elements/sponsor/sponsorArray.svelte';
 
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
