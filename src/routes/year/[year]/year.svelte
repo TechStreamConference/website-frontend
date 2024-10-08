@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { LoadYear } from 'types/loadTypes';
-	import type { Images } from 'types/provideTypes';
+	import type { SponsorLinks } from 'types/provideTypes';
 	export let data: LoadYear;
 	import * as Menu from 'menu/year';
 	import * as Format from 'helper/dates';
@@ -20,7 +20,7 @@
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import YouTubeVideo from 'elements/image/youTubeVideo.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
-	import LogoArray from 'elements/image/logoArray.svelte';
+	import SponsorArray from 'elements/image/sponsorArray.svelte';
 
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
@@ -31,7 +31,7 @@
 		personPopup = undefined;
 	}
 
-	const sponsors: Images = [
+	const sponsors: SponsorLinks = [
 		{
 			url: 'https://www.google.de',
 			image_url: 'https://test-conf.de/assets/jetbrains_logo.fa17e4bd.png',
@@ -56,7 +56,7 @@
 		}
 	];
 
-	const partners: Images = [
+	const partners: SponsorLinks = [
 		{
 			url: 'https://www.google.de',
 			image_url: 'https://test-conf.de/assets/indie_logo.f1cfcca1.png',
@@ -137,14 +137,14 @@
 		<Section id="Sponsors">
 			<HeadlineH2 classes="border">Sponsoren</HeadlineH2>
 			<div class="section-inner">
-				<LogoArray logos={sponsors} />
+				<SponsorArray logos={sponsors} />
 			</div>
 		</Section>
 
 		<Section>
 			<HeadlineH2 classes="border">Medienpartner</HeadlineH2>
 			<div class="section-inner">
-				<LogoArray logos={partners} />
+				<SponsorArray logos={partners} />
 			</div>
 		</Section>
 

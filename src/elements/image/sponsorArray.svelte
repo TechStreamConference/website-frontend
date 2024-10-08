@@ -1,14 +1,14 @@
 <script lang="ts">
-	import type { Images } from 'types/provideTypes';
-	export let logos: Images;
-	import ImageLink from './imageLink.svelte';
+	import type { SponsorLinks } from 'types/provideTypes';
+	export let logos: SponsorLinks;
+	import Sponsor from './sponsor.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
 </script>
 
 <div class="image-grid">
 	{#each logos as logo}
 		<div class="image-container">
-			<ImageLink image={logo} classes={'logo-array-link'} />
+			<Sponsor link={logo} classes={'logo-array-link'} />
 			{#if logo.copyright}
 				<TextLine>{logo.copyright}</TextLine>
 			{/if}

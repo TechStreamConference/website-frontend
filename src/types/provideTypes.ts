@@ -9,17 +9,17 @@ export type SocialMediaLink = z.infer<typeof socialMediaLinkScheme>;
 export const socialMediaLinksScheme = z.array(socialMediaLinkScheme);
 export type SocialMediaLinks = z.infer<typeof socialMediaLinksScheme>;
 
-export const imageScheme = z.object({
+export const sponsorLinkScheme = z.object({
     url: z.string(),
     image_url: z.string(),
     name: z.string(),
     description: z.string(),
     copyright: z.string(),
 })
-export type Image = z.infer<typeof imageScheme>;
+export type SponsorLink = z.infer<typeof sponsorLinkScheme>;
 
-export const imagesScheme = z.array(imageScheme);
-export type Images = z.infer<typeof imagesScheme>;
+export const sponsorLinksScheme = z.array(sponsorLinkScheme);
+export type SponsorLinks = z.infer<typeof sponsorLinksScheme>;
 
 export const personScheme = z.object({
     bio: z.string(),
