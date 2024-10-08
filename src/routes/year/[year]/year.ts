@@ -1,6 +1,9 @@
 import type { LoadYearPromise } from "types/loadTypes";
 import type { Year } from "types/provideTypes";
+import { yearScheme } from "types/provideTypes";
 
+
+import { parseProvidedJsonAsync } from "helper/parseJson";
 import { apiUrl } from "helper/links";
 import { redirect } from "@sveltejs/kit";
 import { getLoginStatusAsync } from "helper/loggedIn";
@@ -18,10 +21,13 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
     const loggedIn: boolean = await loggedInPromise;
     const yearDataResponse: Response = await yearDataPromise;
 
-    let yearData: Year;
-    if (yearDataResponse.ok) {
-        yearData = await yearDataResponse.json();
-    } else {
+    if (!yearDataResponse.ok) {
+        redirect(302, "/404");
+    }
+
+    const yearData = await parseProvidedJsonAsync<Year>(yearDataResponse, yearScheme);
+
+    if (!yearData) {
         redirect(302, "/404");
     }
 

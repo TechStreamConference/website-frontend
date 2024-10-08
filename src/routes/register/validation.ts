@@ -1,4 +1,11 @@
 import { apiUrl } from "helper/links";
+import { z } from 'zod';
+import { parseProvidedJsonAsync } from "helper/parseJson";
+
+const existsResponseDataScheme = z.object({
+    exists: z.boolean(),
+})
+type ExistsResponseData = z.infer<typeof existsResponseDataScheme>;
 
 export async function onUsernameChangedAsync(username: string, fetch: Function): Promise<string | undefined> {
     const trimmed: string = username.trim();
@@ -21,16 +28,14 @@ export async function onUsernameChangedAsync(username: string, fetch: Function):
         return;
     }
 
-    let data: { exists: boolean };
-    try {
-        data = await response.json();
-    } catch (error) {
-        console.error('error while parsing username json', error);
+    const data = await parseProvidedJsonAsync<ExistsResponseData>(response, existsResponseDataScheme);
+    if (!data) {
+        console.error('Error while checking username');
         return;
     }
 
     if (data.exists) {
-        return 'Der Name  "' + trimmed + '" ist bereits vergeben.';
+        return `Der Name "${trimmed}" ist bereits vergeben.`;
     }
 }
 
@@ -41,9 +46,9 @@ export async function onMailChangedAsync(mail: string, fetch: Function): Promise
         return 'Das Feld "E-Mail" ist leer.';
     }
 
-    const valid: boolean = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
-    if (!valid) {
-        return "Die angegebene E-Mail-Adresse ist nicht gültig.";
+    const validated = z.string().email().safeParse(trimmed);
+    if (!validated.success) {
+        return 'Die angegebene E-Mail-Adresse ist nicht gültig.';
     }
 
     const response: Response = await fetch(apiUrl('/api/account/email/exists?email=' + trimmed));
@@ -52,16 +57,14 @@ export async function onMailChangedAsync(mail: string, fetch: Function): Promise
         return;
     }
 
-    let data: { exists: boolean };
-    try {
-        data = await response.json();
-    } catch (error) {
-        console.error('error while parsing email json', error);
+    const data = await parseProvidedJsonAsync<ExistsResponseData>(response, existsResponseDataScheme);
+    if (!data) {
+        console.error('Error while checking mail');
         return;
     }
 
     if (data.exists) {
-        return 'Die E-Mail "' + trimmed + '" wird bereits verwendet.';
+        return `Die E-Mail "${trimmed}" wird bereits verwendet.`;
     }
 }
 
