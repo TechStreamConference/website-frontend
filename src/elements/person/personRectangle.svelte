@@ -26,8 +26,7 @@
 	</div>
 	<div class="flex-groth" />
 	<div class="bottom-wrapper">
-		<LinkArray on:click={onLinkClicked} person={data.name} />
-		<!--TODO: Add Social Media Links-->
+		<LinkArray on:click={onLinkClicked} person={data.name} links={data.social_media_links} />
 	</div>
 	<Button classes="person-button text" on:click ariaLabel="Mehr Informationen zu {data.name}">
 		Info

@@ -1,10 +1,32 @@
 import { z } from 'zod';
 
+export const socialMediaLinkScheme = z.object({
+    name: z.string(),
+    url: z.string(),
+});
+export type SocialMediaLink = z.infer<typeof socialMediaLinkScheme>;
+
+export const socialMediaLinksScheme = z.array(socialMediaLinkScheme);
+export type SocialMediaLinks = z.infer<typeof socialMediaLinksScheme>;
+
+export const sponsorLinkScheme = z.object({
+    url: z.string(),
+    image_url: z.string(),
+    name: z.string(),
+    description: z.string(),
+    copyright: z.string(),
+})
+export type SponsorLink = z.infer<typeof sponsorLinkScheme>;
+
+export const sponsorLinksScheme = z.array(sponsorLinkScheme);
+export type SponsorLinks = z.infer<typeof sponsorLinksScheme>;
+
 export const personScheme = z.object({
     bio: z.string(),
     short_bio: z.string(),
     name: z.string(),
     photo: z.string(),
+    social_media_links: socialMediaLinksScheme,
 })
 export type Person = z.infer<typeof personScheme>;
 
@@ -27,18 +49,9 @@ export type Event = z.infer<typeof eventScheme>;
 export const yearScheme = z.object({
     event: eventScheme,
     speakers: z.array(personScheme),
+    team_members: z.array(personScheme),
 });
 export type Year = z.infer<typeof yearScheme>;
-
-export const iconLinkScheme = z.object({
-    link: z.string(),
-    name: z.string(),
-});
-export type IconLink = z.infer<typeof iconLinkScheme>;
-
-export const iconLinksScheme = z.array(iconLinkScheme);
-export type IconLinks = z.infer<typeof iconLinksScheme>;
-
 
 export const menuItemScheme = z.object({
     name: z.string(),

@@ -1,29 +1,34 @@
 <script lang="ts">
-	import Icon from './icon.svelte';
-	import type { SocialMediaLink } from 'types/provideTypes';
-	export let linkType: SocialMediaLink;
-	export let title: string;
+	export let classes: string = 'size-default';
+	export let alt: string;
+	export let src: string;
 </script>
 
-<a href={linkType.url} target="_blank" rel="noopener noreferrer" class="icon" {title} on:click>
-	<Icon type={linkType.name} />
-</a>
+<img class={classes} {src} {alt} />
 
 <style>
-	.icon {
-		background-color: var(--primary-color-light);
-		transition: var(--transition-duration);
+	.size-default {
+		max-height: 100%;
+		max-width: 100%;
+		height: auto;
+		width: auto;
 		border-radius: var(--border-radius);
 	}
 
-	.icon:hover {
+	.hover {
+		transition: var(--transition-duration);
+		padding: 0.5rem;
+		background-color: none;
+	}
+
+	.hover:hover {
 		background-color: var(--primary-color-mid);
 		box-shadow: 4px 4px var(--gray-color);
 		transform: translateY(-4px) translateX(-4px);
 		transition: var(--transition-duration);
 	}
 
-	.icon:active {
+	.hover:active {
 		background-color: var(--primary-color-dark);
 		box-shadow: 1px 1px var(--gray-color-light);
 		transform: translateY(0px) translateX(0px);
@@ -31,13 +36,13 @@
 	}
 
 	@media (max-width: 1280px) {
-		.icon:hover {
+		.hover:hover {
 			background-color: var(--primary-color-light);
 			box-shadow: none;
 			transition: var(--transition-duration);
 		}
 
-		.icon:active {
+		.hover:active {
 			box-shadow: 2px 2px var(--gray-color-light);
 			transition: var(--transition-duration-fast);
 		}

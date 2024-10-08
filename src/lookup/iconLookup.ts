@@ -11,6 +11,8 @@ const lookup: IconDict = {
     "Instagram": "fa-brands fa-instagram",
     "X": "fa-brands fa-x-twitter",
     "Git": "fa-brands fa-git-alt",
+    "GitHub": "fa-brands fa-github",
+    "GitLab": "fa-brands fa-gitlab",
     "Mail": "fa-solid fa-envelope",
     "Download": "fa-solid fa-download",
     "Calender": "fa-solid fa-calendar-days",
