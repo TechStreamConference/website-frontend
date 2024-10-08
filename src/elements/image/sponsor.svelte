@@ -14,7 +14,7 @@
 	title="Klicke hier um zu {link.name} zu navigieren."
 	on:click
 >
-	<Image classes="size-default hover" src={link.image_url} alt={link.description} />
+	<Image classes="size-default" src={link.image_url} alt={link.description} />
 </a>
 
 <style>
