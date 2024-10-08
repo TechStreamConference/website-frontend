@@ -49,6 +49,7 @@ export type Event = z.infer<typeof eventScheme>;
 export const yearScheme = z.object({
     event: eventScheme,
     speakers: z.array(personScheme),
+    team_members: z.array(personScheme),
 });
 export type Year = z.infer<typeof yearScheme>;
 

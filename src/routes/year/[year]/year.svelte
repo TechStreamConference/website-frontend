@@ -150,9 +150,8 @@
 
 		<Section id="Team">
 			<HeadlineH2 classes="border">Team</HeadlineH2>
-			<div class="person-wrapper">
-				<PersonArray personData={[]} personPopupCallback={openPersonPopup} />
-				<!--TODO: Add Team Data-->
+			<div class="section-inner">
+				<PersonArray personData={data.year.team_members} personPopupCallback={openPersonPopup} />
 			</div>
 		</Section>
 
