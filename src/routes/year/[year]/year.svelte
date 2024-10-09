@@ -90,18 +90,18 @@
 </script>
 
 <Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
-<div class="page">
+<div class="page page-year">
 	<div class="header">
 		<div class="header-content">
-			<LogoBig classes="year-header-logo-big" />
+			<LogoBig classes="logo-big" />
 
 			<div class="header-text-wrapper">
 				<Headline classes="green left">{data.year.event.title}</Headline>
-				<SubHeadline classes="year-header-subheadline white">
+				<SubHeadline classes="subheadline white">
 					Online-Konferenz {formatDate(data.year.event.start_date, Format.dateShort)}
 					- {formatDate(data.year.event.end_date, Format.dateFull)}
 				</SubHeadline>
-				<SubHeadline classes="year-header-subtitle white">{data.year.event.subtitle}</SubHeadline>
+				<SubHeadline classes="subtitle white">{data.year.event.subtitle}</SubHeadline>
 				<YearEventLinks {data} />
 			</div>
 		</div>
@@ -120,10 +120,10 @@
 			<HeadlineH2 classes="border">{data.year.event.description_headline}</HeadlineH2>
 			<div class="discription-wrapper">
 				<div class="discription-text-wrapper">
-					<Paragraph classes="year-discription-paragraph">{data.year.event.description}</Paragraph>
+					<Paragraph classes="discription-paragraph">{data.year.event.description}</Paragraph>
 					<YearEventLinks {data} />
 				</div>
-				<LogoBig classes="year-header-logo-big" />
+				<LogoBig classes="logo-big" />
 			</div>
 		</Section>
 
@@ -188,7 +188,7 @@
 		display: flex;
 	}
 
-	:global(.year-header-logo-big) {
+	.page-year :global(.logo-big) {
 		height: 18rem;
 	}
 
@@ -196,12 +196,12 @@
 		margin-left: 3rem;
 	}
 
-	:global(.year-header-subheadline) {
+	.page-year :global(.subheadline) {
 		padding-bottom: 1rem;
 		border-bottom: 1px solid var(--secondary-color);
 	}
 
-	:global(.year-header-subtitle) {
+	.page-year :global(.subtitle) {
 		margin: 2rem 0 1rem;
 	}
 
@@ -217,7 +217,7 @@
 		margin-right: 3rem;
 	}
 
-	:global(.year-discription-paragraph) {
+	.page-year :global(.discription-paragraph) {
 		margin: 2rem 0;
 	}
 
@@ -239,7 +239,7 @@
 	}
 
 	@media (max-width: 1280px) {
-		:global(.year-header-logo-big) {
+		.page-year :global(.logo-big) {
 			display: none;
 		}
 
