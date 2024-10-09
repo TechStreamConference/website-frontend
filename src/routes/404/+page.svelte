@@ -6,11 +6,11 @@
 	import Button from 'elements/input/button.svelte';
 </script>
 
-<div class="wrapper">
-	<HeadlinePage classes="_404-headline">404</HeadlinePage>
-	<TextLine classes="_404-text" --text-align="center">TODO: 404 Page.</TextLine>
+<div class="wrapper page-404">
+	<HeadlinePage classes="headline">404</HeadlinePage>
+	<TextLine classes="text" --text-align="center">TODO: 404 Page.</TextLine>
 	<Button
-		classes="text _404-button"
+		classes="text button"
 		ariaLabel="Kehre zur aktuellen Hauptseite zurück"
 		on:click={() => {
 			goto('/');
@@ -29,14 +29,14 @@
 		min-height: 100vh;
 	}
 
-	:global(._404-headline) {
+	.page-404 :global(.headline) {
 		margin-bottom: 3rem;
 	}
 
-	:global(._404-text) {
+	.page-404 :global(.text) {
 		margin-bottom: 5rem;
 	}
-	:global(._404-button){
+	.page-404 :global(.button){
 		margin: 0 auto;
 	}
 </style>
