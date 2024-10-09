@@ -30,63 +30,6 @@
 	function closePersonPopup() {
 		personPopup = undefined;
 	}
-
-	const sponsors: SponsorLinks = [
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/jetbrains_logo.fa17e4bd.png',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright:
-				'Copyright © 2000-2024 JetBrains s.r.o. JetBrains and the JetBrains logo are registered trademarks of JetBrains s.r.o.'
-		},
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/holy.e52d21da.gif',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright: ''
-		},
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/nobreakpoint.b6bfb972.png',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright: ''
-		}
-	];
-
-	const partners: SponsorLinks = [
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/indie_logo.f1cfcca1.png',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright: ''
-		},
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/indihub.086d1de0.png',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright: ''
-		},
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/Manasoup_Network.6fd25249.png',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright:
-				'Copyright © 2000-2024 JetBrains s.r.o. JetBrains and the JetBrains logo are registered trademarks of JetBrains s.r.o.'
-		},
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/devcom.bd710ec0.png',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright: ''
-		}
-	];
 </script>
 
 <Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
@@ -137,14 +80,14 @@
 		<Section id="Sponsors">
 			<HeadlineH2 classes="border">Sponsoren</HeadlineH2>
 			<div class="section-inner">
-				<SponsorArray logos={sponsors} />
+				<SponsorArray logos={data.year.sponsors} />
 			</div>
 		</Section>
 
 		<Section>
 			<HeadlineH2 classes="border">Medienpartner</HeadlineH2>
 			<div class="section-inner">
-				<SponsorArray logos={partners} />
+				<SponsorArray logos={data.year.media_partners} />
 			</div>
 		</Section>
 

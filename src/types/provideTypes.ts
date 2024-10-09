@@ -11,10 +11,10 @@ export type SocialMediaLinks = z.infer<typeof socialMediaLinksScheme>;
 
 export const sponsorLinkScheme = z.object({
     url: z.string(),
-    image_url: z.string(),
+    logo: z.string(),
     name: z.string(),
-    description: z.string(),
-    copyright: z.string(),
+    alt_text: z.string(),
+    copyright: z.string().nullable(),
 })
 export type SponsorLink = z.infer<typeof sponsorLinkScheme>;
 
@@ -50,6 +50,8 @@ export const yearScheme = z.object({
     event: eventScheme,
     speakers: z.array(personScheme),
     team_members: z.array(personScheme),
+    sponsors: sponsorLinksScheme,
+    media_partners: sponsorLinksScheme,
 });
 export type Year = z.infer<typeof yearScheme>;
 

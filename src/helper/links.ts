@@ -4,6 +4,6 @@ export function apiUrl(link: string): string {
     return prefix + link;
 }
 
-export function personImageUrl(link: string): string {
+export function imageUrl(link: string): string {
     return prefix + '/api/' + link;
 }
