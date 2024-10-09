@@ -5,7 +5,7 @@
 	import TextLine from 'elements/text/textLine.svelte';
 </script>
 
-<div class="image-grid">
+<div class="image-grid sponsor-arrray">
 	{#each logos as logo}
 		<div class="image-container">
 			<Sponsor link={logo} classes={'link'} />
@@ -30,7 +30,7 @@
 		justify-content: center;
 	}
 
-	.image-container :global(.link) {
+	.sponsor-arrray :global(.link) {
 		height: 10rem;
 	}
 
