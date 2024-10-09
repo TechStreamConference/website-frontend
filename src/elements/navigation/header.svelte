@@ -16,7 +16,7 @@
 	}
 </script>
 
-<header>
+<header class="navigation-header">
 	<!-- Desktop -->
 	<div class="desktop-wrapper">
 		<a
@@ -86,7 +86,7 @@
 		border-bottom: solid 1px black;
 	}
 
-	.desktop-wrapper :global(.logo) {
+	.navigation-header :global(.logo) {
 		height: 5rem;
 		margin-left: 1rem;
 	}
@@ -133,7 +133,7 @@
 			justify-content: space-between;
 		}
 
-		.hamburger-wrapper :global(.logo) {
+		.navigation-header :global(.logo) {
 			height: 3rem;
 			margin-left: 1rem;
 		}

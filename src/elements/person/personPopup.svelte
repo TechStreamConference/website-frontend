@@ -13,7 +13,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- No a11y correctness here because the "close-button" already does the same. -->
-<div class="page-wrapper" transition:fade={{ duration: 300 }} aria-hidden="true" on:click>
+<div class="page-wrapper person-popup" transition:fade={{ duration: 300 }} aria-hidden="true" on:click>
 	<div
 		class="popup-wrapper"
 		aria-hidden="true"
@@ -23,13 +23,13 @@
 	>
 		<div class="content-wrapper">
 			<div class="column-wrapper align-center line">
-				<PersonImage classes="person-popup-picture" {data} />
-				<SubHeadline classes="person-popup-one-line-spacer">{data.name}</SubHeadline>
-				<Paragraph classes="person-popup-paragraph">{data.short_bio}</Paragraph>
+				<PersonImage classes="picture" {data} />
+				<SubHeadline classes="one-line-spacer">{data.name}</SubHeadline>
+				<Paragraph classes="paragraph">{data.short_bio}</Paragraph>
 				<PersonLinkGrid person={data.name} links={data.social_media_links} />
 			</div>
 			<div class="column-wrapper">
-				<Paragraph classes="person-popup-one-line-spacer">{data.bio}</Paragraph>
+				<Paragraph classes="one-line-spacer">{data.bio}</Paragraph>
 			</div>
 		</div>
 	</div>
@@ -77,11 +77,11 @@
 		padding: 2rem;
 	}
 
-	:global(.person-popup-one-line-spacer) {
+	.person-popup :global(.one-line-spacer) {
 		margin-top: 1rem;
 	}
 
-	:global(.person-popup-paragraph) {
+	.person-popup :global(.paragraph) {
 		flex-grow: 1;
 	}
 
@@ -89,18 +89,13 @@
 		border-right: 1px solid var(--line-color);
 	}
 
-	:global(.personPopupLine) {
-		height: 100%;
-		width: 1px;
-	}
-
-	:global(.person-popup-picture) {
+	.person-popup :global(.picture) {
 		width: auto;
 		height: auto;
 		border: 1px solid var(--primary-color-light);
 	}
 
-	:global(.close-button) {
+	.person-popup :global(.close-button) {
 		position: fixed;
 		top: calc(50% - 25rem);
 		left: calc(50% + 30rem);
@@ -119,14 +114,14 @@
 			height: calc(100vh - 12rem);
 		}
 
-		:global(.close-button) {
+		.person-popup :global(.close-button) {
 			top: calc(100vh - 6rem);
 			left: calc(100vw - 50% - 1rem);
 			margin-left: 0;
 			margin-top: 1rem;
 		}
 
-		:global(.person-popup-paragraph) {
+		.person-popup :global(.paragraph) {
 			flex-grow: unset;
 		}
 	}
@@ -147,18 +142,12 @@
 			height: auto;
 		}
 
-		:global(.personPopupLine) {
-			width: 100%;
-			height: 1px;
-			margin: 2rem 0 1rem 0;
-		}
-
-		:global(.person-popup-picture) {
+		.person-popup :global(.picture) {
 			max-width: 20rem;
 			align-self: center;
 		}
 
-		:global(.close-button) {
+		.person-popup :global(.close-button) {
 			top: calc(100vh - 5rem);
 		}
 
@@ -169,7 +158,7 @@
 	}
 
 	@media (max-width: 380px) {
-		:global(.person-popup-picture) {
+		.person-popup :global(.picture) {
 			max-width: 20rem;
 			align-self: normal;
 		}

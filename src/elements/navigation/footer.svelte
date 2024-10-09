@@ -18,7 +18,7 @@
 	);
 </script>
 
-<footer>
+<footer class="navigation-footer">
 	<div class="nav-wrapper">
 		<nav class="nav-element">
 			<TextLine classes={'white'}>Menu:</TextLine>
@@ -107,11 +107,11 @@
 		text-align: center;
 	}
 
-	.nav-element :global(.list) {
+	.navigation-footer :global(.list) {
 		margin-top: 1rem;
 	}
 
-	.nav-element :global(.logo) {
+	.navigation-footer :global(.logo) {
 		height: 10rem;
 		object-fit: contain;
 		max-height: 12rem;
