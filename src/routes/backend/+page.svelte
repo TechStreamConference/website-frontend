@@ -6,13 +6,11 @@
 	import Button from 'elements/input/button.svelte';
 </script>
 
-<div class="wrapper">
-	<HeadlinePage classes="backend-headline">Backend</HeadlinePage>
-	<TextLine classes="backend-text" --text-align="center">
-		TODO: Hier kommt das Beste Backend hin.
-	</TextLine>
+<div class="wrapper page-backend">
+	<HeadlinePage classes="headline">Backend</HeadlinePage>
+	<TextLine classes="text" --text-align="center">TODO: Hier kommt das Beste Backend hin.</TextLine>
 	<Button
-		classes="text backend-button"
+		classes="text button"
 		ariaLabel="Kehre zur akruellen Hautseite zurück"
 		on:click={() => {
 			goto('/');
@@ -31,15 +29,15 @@
 		min-height: 100vh;
 	}
 
-	:global(.backend-headline) {
+	.page-backend :global(.headline) {
 		margin-bottom: 3rem;
 	}
 
-	:global(.backend-text) {
+	.page-backend :global(.text) {
 		margin-bottom: 5rem;
 	}
 
-	:global(.backend-button) {
+	.page-backend :global(.button) {
 		margin: 0 auto;
 	}
 </style>
