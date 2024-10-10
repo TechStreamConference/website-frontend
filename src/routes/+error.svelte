@@ -51,5 +51,6 @@
 
 	.page-404 :global(.button) {
 		margin-top: 5rem;
+        margin-bottom: 5rem;
 	}
 </style>
