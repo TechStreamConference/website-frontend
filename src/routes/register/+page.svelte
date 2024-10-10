@@ -134,7 +134,7 @@
 
 <Header menu={Menu.headerOut} />
 
-<div class="page">
+<div class="page page-register">
 	<div class="content">
 		{#if !registered}
 			<form class="width-wrapper" on:submit|preventDefault={tryRegisterAsync}>
@@ -183,7 +183,7 @@
 					on:input={startPasswordTimer}
 				/>
 				<Input
-					classes="register-basic-input-line"
+					classes="input-line"
 					id="register-password-repeat"
 					type="password"
 					labelText="Passwort wiederholen:"
@@ -192,15 +192,11 @@
 					ariaLabel="Wiederhole das Passwort"
 					on:input={startPasswordTimer}
 				/>
-				<Button
-					classes="text register-submit-button"
-					type={'submit'}
-					ariaLabel="Klicke zum Registrieren"
-				>
+				<Button classes="text submit-button" type={'submit'} ariaLabel="Klicke zum Registrieren">
 					Registrieren
 				</Button>
 				<div class="password-list-wrapper">
-					<TextLine classes="register-password-text-line">
+					<TextLine classes="password-text-line">
 						Dein Passwort sollte folgendes enthalten:
 					</TextLine>
 					<List classes="padding-left">
@@ -215,7 +211,7 @@
 		{:else}
 			<div class="width-wrapper">
 				<HeadlinePage>Registriert</HeadlinePage>
-				<TextLine classes="register-registered-text-line" --text-align="center">
+				<TextLine classes="registered-text-line" --text-align="center">
 					Deine Registrierung war erfolgreich.
 				</TextLine>
 				<Paragraph --text-align="center">
@@ -269,15 +265,15 @@
 		margin: 3rem auto 2rem;
 	}
 
-	:global(.register-basic-input-line) {
+	.page-register :global(.input-line) {
 		margin-bottom: 1rem;
 	}
 
-	:global(.register-submit-button) {
+	.page-register :global(.submit-button) {
 		margin: 3rem auto 0;
 	}
 
-	:global(.register-password-text-line) {
+	.page-register :global(.password-text-line) {
 		margin: 3rem 0 1.5rem;
 	}
 
@@ -298,7 +294,7 @@
 		}
 	}
 
-	:global(.register-registered-text-line) {
+	.page-register :global(.registered-text-line) {
 		margin: 7rem 0 2rem;
 	}
 </style>

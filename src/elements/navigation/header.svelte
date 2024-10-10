@@ -16,7 +16,7 @@
 	}
 </script>
 
-<header>
+<header class="navigation-header">
 	<!-- Desktop -->
 	<div class="desktop-wrapper">
 		<a
@@ -24,7 +24,7 @@
 			class="logo-wrapper"
 			title="Tech Stream Conference Seite des aktuellen Jahres anschauen"
 		>
-			<LogoSmall classes={'header-logo-small'} />
+			<LogoSmall classes={'logo'} />
 		</a>
 		<nav>
 			<ul>
@@ -43,7 +43,7 @@
 				class="logo-wrapper"
 				title="Tech Stream Conference Seite des aktuellen Jahres anschauen"
 			>
-				<LogoSmall classes={'header-logo-small'} />
+				<LogoSmall classes={'logo'} />
 			</a>
 
 			<button class="hamburger" aria-label="Menü aufklappen" on:click={toggleOpen}>
@@ -86,7 +86,7 @@
 		border-bottom: solid 1px black;
 	}
 
-	:global(.header-logo-small) {
+	.navigation-header :global(.logo) {
 		height: 5rem;
 		margin-left: 1rem;
 	}
@@ -133,7 +133,7 @@
 			justify-content: space-between;
 		}
 
-		:global(.header-logo-small) {
+		.navigation-header :global(.logo) {
 			height: 3rem;
 			margin-left: 1rem;
 		}

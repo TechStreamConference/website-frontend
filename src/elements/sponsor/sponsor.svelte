@@ -1,9 +1,12 @@
 <script lang="ts">
 	import type { SponsorLink } from 'types/provideTypes';
-	import Image from './image.svelte';
+	import {imageUrl} from 'helper/links';
+	import Image from 'elements/image/image.svelte';
 	export let link: SponsorLink;
 
 	export let classes: string = 'size-default';
+
+	console.log(link.logo);
 </script>
 
 <a
@@ -14,7 +17,7 @@
 	title="Klicke hier um zu {link.name} zu navigieren."
 	on:click
 >
-	<Image classes="size-default" src={link.image_url} alt={link.description} />
+	<Image classes="size-default" src={imageUrl(link.logo)} alt={link.alt_text} />
 </a>
 
 <style>

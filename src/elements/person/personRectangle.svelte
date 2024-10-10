@@ -18,17 +18,17 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- No a11y correctness here because the "person-button" already does the same. -->
-<div class="person" on:click>
-	<PersonImage classes="person-rectangle-picture" {data} />
+<div class="person person-rectangle" on:click>
+	<PersonImage classes="picture" {data} />
 	<div class="text-wrapper">
 		<SubHeadline>{data.name}</SubHeadline>
-		<Paragraph classes="person-rectangle-paragraph">{data.short_bio}</Paragraph>
+		<Paragraph classes="paragraph">{data.short_bio}</Paragraph>
 	</div>
 	<div class="flex-groth" />
 	<div class="bottom-wrapper">
 		<LinkArray on:click={onLinkClicked} person={data.name} links={data.social_media_links} />
 	</div>
-	<Button classes="person-button text" on:click ariaLabel="Mehr Informationen zu {data.name}">
+	<Button classes="button text" on:click ariaLabel="Mehr Informationen zu {data.name}">
 		Info
 	</Button>
 </div>
@@ -51,7 +51,7 @@
 		transition: var(--transition-duration);
 	}
 
-	:global(.person-rectangle-picture) {
+	.person-rectangle :global(.picture) {
 		width: 100%;
 		height: auto;
 		background-color: var(--primary-color-light);
@@ -65,7 +65,7 @@
 		margin: 0 0.5rem;
 	}
 
-	:global(.person-rectangle-paragraph) {
+	.person-rectangle :global(.paragraph) {
 		margin-top: 0.5rem;
 		display: -webkit-box;
 		-webkit-line-clamp: 3;
@@ -83,7 +83,7 @@
 		margin: 2rem 2rem 0 2rem;
 	}
 
-	:global(.person-button) {
+	.person-rectangle :global(.button) {
 		display: block;
 		padding: 0.2rem 2rem !important;
 		margin: 0 2rem 2rem 2rem !important;

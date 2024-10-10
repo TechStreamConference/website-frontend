@@ -18,11 +18,11 @@
 	);
 </script>
 
-<footer>
+<footer class="navigation-footer">
 	<div class="nav-wrapper">
 		<nav class="nav-element">
 			<TextLine classes={'white'}>Menu:</TextLine>
-			<List classes="footer-list-margin">
+			<List classes="list">
 				{#each menu as entry}
 					<ListElement>
 						<Link classes={'standard white'} href={entry.url} title={entry.description}>
@@ -35,7 +35,7 @@
 
 		<nav class="nav-element">
 			<TextLine classes={'white'}>Alle Events:</TextLine>
-			<List classes="footer-list-margin">
+			<List classes="list">
 				{#each numbers as number}
 					<ListElement>
 						<Link
@@ -70,7 +70,7 @@
 		</div>
 
 		<div class="nav-element">
-			<LogoBig classes="header-logo-big" />
+			<LogoBig classes="logo" />
 		</div>
 	</div>
 	<div class="copyright">
@@ -107,11 +107,11 @@
 		text-align: center;
 	}
 
-	:global(.footer-list-margin) {
+	.navigation-footer :global(.list) {
 		margin-top: 1rem;
 	}
 
-	:global(.header-logo-big) {
+	.navigation-footer :global(.logo) {
 		height: 10rem;
 		object-fit: contain;
 		max-height: 12rem;

@@ -10,21 +10,24 @@
 <div class="wrapper">
 	<Link
 		href={data.year.event.discord_url}
-		classes="animated white"
+		classes="hover-move white"
+		newTab={true}
 		title="Klicke hier, um auf den Discord-Server der Tech Stream Conference zu gelangen"
 	>
 		<div class="entry-wrapper"><Icon type="Discord" />Sei dabei</div>
 	</Link>
 	<Link
 		href={data.year.event.twitch_url}
-		classes="animated white"
+		classes="hover-move white"
+		newTab={true}
 		title="Klicke hier, um auf die Twitch-Seite der Tech Stream Conference zu gelangen"
 	>
 		<div class="entry-wrapper"><Icon type="Twitch" />Schau zu</div>
 	</Link>
 	<Link
 		href={data.year.event.presskit_url}
-		classes="animated white"
+		classes="hover-move white"
+		newTab={true}
 		title="Klicke hier, um das Presskit der Tech Stream Conference herunterzuladen"
 	>
 		<div class="entry-wrapper"><Icon type="Download" />Presskit</div>

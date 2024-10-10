@@ -53,7 +53,7 @@
 
 <Header menu={Menu.headerOut} />
 
-<div class="page">
+<div class="page page-login">
 	<div class="content">
 		<form class="width-wrapper" on:submit|preventDefault={loginAsync}>
 			<HeadlinePage>Anmelden</HeadlinePage>
@@ -63,7 +63,7 @@
 				<ErrorMessage message={errorMessage} />
 			</div>
 			<Input
-				classes="login-input-username-mail"
+				classes="username-mail"
 				id="login-username-or-email"
 				type="text"
 				labelText="Nutzername oder E-Mail:"
@@ -72,7 +72,7 @@
 				bind:value={usernameOrEmail}
 			/>
 			<Input
-				classes="login-input-password"
+				classes="password"
 				id="login-password"
 				type="password"
 				labelText="Passwort:"
@@ -83,9 +83,7 @@
 			<Link href="/register" title="Klicke, um einen neuen Account anzulegen">
 				Noch keinen Account?
 			</Link>
-			<Button classes="text login-submit-button" type="submit" ariaLabel="Klicke zum Anmelden">
-				Anmelden
-			</Button>
+			<Button classes="text button" type="submit" ariaLabel="Klicke zum Anmelden">Anmelden</Button>
 		</form>
 	</div>
 
@@ -120,15 +118,15 @@
 		margin: 3rem auto 2rem;
 	}
 
-	:global(.login-input-username-mail) {
+	.page-login :global(.username-mail) {
 		margin-bottom: 1rem;
 	}
 
-	:global(.login-input-password) {
+	.page-login :global(.password) {
 		margin-bottom: 1.5rem;
 	}
 
-	:global(.login-submit-button) {
+	.page-login :global(.button) {
 		margin: 3rem auto 5rem;
 	}
 

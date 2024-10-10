@@ -15,14 +15,14 @@
 
 <Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
 
-<div class="page">
+<div class="page page-imprint">
 	<div class="content-wrapper">
-		<HeadlinePage classes="imprint-headline">Impressum</HeadlinePage>
+		<HeadlinePage classes="headline">Impressum</HeadlinePage>
 
 		<TextLine>Michael Gerhold</TextLine>
 		<TextLine>c/o LEADERLY UG (haftungsbeschränkt)</TextLine>
 		<TextLine>Carl-Zeiss-Str. 4</TextLine>
-		<TextLine classes="imprint-one-line-margin">14727 Premnitz OT Mögelin</TextLine>
+		<TextLine classes="one-line-margin">14727 Premnitz OT Mögelin</TextLine>
 		<TextLine>
 			E-Mail:
 			<Link
@@ -33,7 +33,7 @@
 			>
 		</TextLine>
 
-		<SubHeadline classes="imprint-subheadline"
+		<SubHeadline classes="subheadline"
 			>Hinweis gemäß Online-Streitbeilegungs-Verordnung</SubHeadline
 		>
 
@@ -53,7 +53,7 @@
 			</Link>
 			. Unsere E-Mail lautet:
 			<Link
-				classes="inline imprint-one-line-margin"
+				classes="inline one-line-margin"
 				href="mailto:info@test-conf.de"
 				newTab={true}
 				title="Klicke, um uns eine Mail zu schreiben"
@@ -67,10 +67,10 @@
 			Kontaktaufnahme bitte unsere obige E-Mail und Telefonnummer.
 		</Paragraph>
 
-		<SubHeadline classes="imprint-subheadline">Disclaimer – rechtliche Hinweise</SubHeadline>
+		<SubHeadline classes="subheadline">Disclaimer – rechtliche Hinweise</SubHeadline>
 
 		<TextLine>§ 1 Warnhinweis zu Inhalten:</TextLine>
-		<Paragraph classes="imprint-one-line-margin">
+		<Paragraph classes="one-line-margin">
 			Die kostenlosen und frei zugänglichen Inhalte dieser Webseite
 			wurden mit größtmöglicher Sorgfalt erstellt. Der Anbieter dieser Webseite übernimmt jedoch
 			keine Gewähr für die Richtigkeit und Aktualität der bereitgestellten kostenlosen und frei
@@ -82,7 +82,7 @@
 		</Paragraph>
 
 		<TextLine>§ 2 Externe Links:</TextLine>
-		<Paragraph classes="imprint-one-line-margin">
+		<Paragraph classes="one-line-margin">
 			Diese Website enthält Verknüpfungen zu Websites Dritter ("externe Links").
 			Diese Websites unterliegen der Haftung der jeweiligen Betreiber. Der Anbieter hat bei der
 			erstmaligen Verknüpfung der externen Links die fremden Inhalte daraufhin überprüft, ob etwaige
@@ -95,7 +95,7 @@
 		</Paragraph>
 
 		<TextLine>§ 3 Urheber- und Leistungsschutzrechte:</TextLine>
-		<Paragraph classes="imprint-one-line-margin">
+		<Paragraph classes="one-line-margin">
 			Die auf dieser Website veröffentlichten Inhalte
 			unterliegen dem deutschen Urheber- und Leistungsschutzrecht. Jede vom deutschen Urheber- und
 			Leistungsschutzrecht nicht zugelassene Verwertung bedarf der vorherigen schriftlichen
@@ -107,12 +107,12 @@
 			Herstellung von Kopien und Downloads für den persönlichen, privaten und nicht kommerziellen
 			Gebrauch ist erlaubt.
 		</Paragraph>
-		<TextLine classes="imprint-one-line-margin">
+		<TextLine classes="one-line-margin">
 			Die Darstellung dieser Website in fremden Frames ist nur mit schriftlicher Erlaubnis zulässig.
 		</TextLine>
 
 		<TextLine>§ 4 Besondere Nutzungsbedingungen:</TextLine>
-		<Paragraph classes="imprint-last-paragraph">
+		<Paragraph classes="last-paragraph">
 			Soweit besondere Bedingungen für einzelne Nutzungen dieser
 			Website von den vorgenannten Paragraphen abweichen, wird an entsprechender Stelle ausdrücklich
 			darauf hingewiesen. In diesem Falle gelten im jeweiligen Einzelfall die besonderen
@@ -145,20 +145,20 @@
 		margin: 0 auto;
 	}
 
-	:global(.imprint-headline) {
+	.page-imprint :global(.headline) {
 		margin-bottom: 5rem;
 	}
 
-	:global(.imprint-one-line-margin) {
+	.page-imprint :global(.one-line-margin) {
 		margin-bottom: 1rem;
 	}
 
-	:global(.imprint-subheadline) {
+	.page-imprint :global(.subheadline) {
 		margin-top: 5rem;
 		margin-bottom: 2rem;
 	}
 
-	:global(.imprint-last-paragraph) {
+	.page-imprint :global(.last-paragraph) {
 		margin-bottom: 7rem;
 	}
 

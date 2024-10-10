@@ -11,7 +11,7 @@
 	export let ariaLabel: string;
 </script>
 
-<div class="wrapper {classes}">
+<div class="wrapper input-line {classes}">
 	<Label {id}>{labelText}</Label>
 	<input
 		{id}
@@ -31,7 +31,7 @@
 		width: 100%;
 	}
 
-	.wrapper :global(input) {
+	.input-line :global(input) {
 		font-size: 1rem;
 		line-height: 1.5rem;
 		letter-spacing: 1px;

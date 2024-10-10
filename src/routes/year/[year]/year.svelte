@@ -20,7 +20,7 @@
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import YouTubeVideo from 'elements/image/youTubeVideo.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
-	import SponsorArray from 'elements/image/sponsorArray.svelte';
+	import SponsorArray from 'elements/sponsor/sponsorArray.svelte';
 
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
@@ -30,78 +30,21 @@
 	function closePersonPopup() {
 		personPopup = undefined;
 	}
-
-	const sponsors: SponsorLinks = [
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/jetbrains_logo.fa17e4bd.png',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright:
-				'Copyright © 2000-2024 JetBrains s.r.o. JetBrains and the JetBrains logo are registered trademarks of JetBrains s.r.o.'
-		},
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/holy.e52d21da.gif',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright: ''
-		},
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/nobreakpoint.b6bfb972.png',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright: ''
-		}
-	];
-
-	const partners: SponsorLinks = [
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/indie_logo.f1cfcca1.png',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright: ''
-		},
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/indihub.086d1de0.png',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright: ''
-		},
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/Manasoup_Network.6fd25249.png',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright:
-				'Copyright © 2000-2024 JetBrains s.r.o. JetBrains and the JetBrains logo are registered trademarks of JetBrains s.r.o.'
-		},
-		{
-			url: 'https://www.google.de',
-			image_url: 'https://test-conf.de/assets/devcom.bd710ec0.png',
-			name: 'background',
-			description: 'background-logo der Test-Conf. ',
-			copyright: ''
-		}
-	];
 </script>
 
 <Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
-<div class="page">
+<div class="page page-year">
 	<div class="header">
 		<div class="header-content">
-			<LogoBig classes="year-header-logo-big" />
+			<LogoBig classes="logo-big" />
 
 			<div class="header-text-wrapper">
 				<Headline classes="green left">{data.year.event.title}</Headline>
-				<SubHeadline classes="year-header-subheadline white">
+				<SubHeadline classes="subheadline white">
 					Online-Konferenz {formatDate(data.year.event.start_date, Format.dateShort)}
 					- {formatDate(data.year.event.end_date, Format.dateFull)}
 				</SubHeadline>
-				<SubHeadline classes="year-header-subtitle white">{data.year.event.subtitle}</SubHeadline>
+				<SubHeadline classes="subtitle white">{data.year.event.subtitle}</SubHeadline>
 				<YearEventLinks {data} />
 			</div>
 		</div>
@@ -120,10 +63,10 @@
 			<HeadlineH2 classes="border">{data.year.event.description_headline}</HeadlineH2>
 			<div class="discription-wrapper">
 				<div class="discription-text-wrapper">
-					<Paragraph classes="year-discription-paragraph">{data.year.event.description}</Paragraph>
+					<Paragraph classes="discription-paragraph">{data.year.event.description}</Paragraph>
 					<YearEventLinks {data} />
 				</div>
-				<LogoBig classes="year-header-logo-big" />
+				<LogoBig classes="logo-big" />
 			</div>
 		</Section>
 
@@ -137,14 +80,14 @@
 		<Section id="Sponsors">
 			<HeadlineH2 classes="border">Sponsoren</HeadlineH2>
 			<div class="section-inner">
-				<SponsorArray logos={sponsors} />
+				<SponsorArray logos={data.year.sponsors} />
 			</div>
 		</Section>
 
 		<Section>
 			<HeadlineH2 classes="border">Medienpartner</HeadlineH2>
 			<div class="section-inner">
-				<SponsorArray logos={partners} />
+				<SponsorArray logos={data.year.media_partners} />
 			</div>
 		</Section>
 
@@ -188,7 +131,7 @@
 		display: flex;
 	}
 
-	:global(.year-header-logo-big) {
+	.page-year :global(.logo-big) {
 		height: 18rem;
 	}
 
@@ -196,12 +139,12 @@
 		margin-left: 3rem;
 	}
 
-	:global(.year-header-subheadline) {
+	.page-year :global(.subheadline) {
 		padding-bottom: 1rem;
 		border-bottom: 1px solid var(--secondary-color);
 	}
 
-	:global(.year-header-subtitle) {
+	.page-year :global(.subtitle) {
 		margin: 2rem 0 1rem;
 	}
 
@@ -217,7 +160,7 @@
 		margin-right: 3rem;
 	}
 
-	:global(.year-discription-paragraph) {
+	.page-year :global(.discription-paragraph) {
 		margin: 2rem 0;
 	}
 
@@ -239,7 +182,7 @@
 	}
 
 	@media (max-width: 1280px) {
-		:global(.year-header-logo-big) {
+		.page-year :global(.logo-big) {
 			display: none;
 		}
 

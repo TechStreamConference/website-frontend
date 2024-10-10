@@ -57,31 +57,4 @@
 	.white {
 		color: var(--white-color);
 	}
-
-	.animated:hover {
-		background-color: var(--primary-color-mid);
-		box-shadow: 4px 4px var(--gray-color);
-		transform: translateY(-4px) translateX(-4px);
-		transition: var(--transition-duration);
-	}
-
-	.animated:active {
-		background-color: var(--primary-color-dark);
-		box-shadow: 1px 1px var(--gray-color-light);
-		transform: translateY(0px) translateX(0px);
-		transition: var(--transition-duration-fast);
-	}
-
-	@media (max-width: 1280px) {
-		.animated:hover {
-			background-color: var(--primary-color-light);
-			box-shadow: none;
-			transition: var(--transition-duration);
-		}
-
-		.animated:active {
-			box-shadow: 2px 2px var(--gray-color-light);
-			transition: var(--transition-duration-fast);
-		}
-	}
 </style>
