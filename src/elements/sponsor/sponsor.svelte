@@ -5,8 +5,6 @@
 	export let link: SponsorLink;
 
 	export let classes: string = 'size-default';
-
-	console.log(link.logo);
 </script>
 
 <a
