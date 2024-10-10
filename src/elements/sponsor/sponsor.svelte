@@ -1,23 +1,21 @@
 <script lang="ts">
 	import type { SponsorLink } from 'types/provideTypes';
-	import {imageUrl} from 'helper/links';
+	import { imageUrl } from 'helper/links';
 	import Image from 'elements/image/image.svelte';
 	export let link: SponsorLink;
 
 	export let classes: string = 'size-default';
-
-	console.log(link.logo);
 </script>
 
 <a
 	href={link.url}
 	target="_blank"
 	rel="noopener noreferrer"
-	class={classes}
+	class="sponsor-link {classes}"
 	title="Klicke hier um zu {link.name} zu navigieren."
 	on:click
 >
-	<Image classes="size-default" src={imageUrl(link.logo)} alt={link.alt_text} />
+	<Image classes="size-default hover" src={imageUrl(link.logo)} alt={link.alt_text} />
 </a>
 
 <style>
@@ -32,5 +30,34 @@
 		max-width: 100%;
 		height: auto;
 		width: auto;
+	}
+
+	.sponsor-link :global(.hover) {
+		padding: 0.3rem;
+		transition: padding var(--transition-duration);
+	}
+
+	.sponsor-link :global(.hover:hover) {
+		padding: 0;
+		transition: padding var(--transition-duration);
+	}
+
+	.sponsor-link :global(.hover:active) {
+		padding: 0.2rem;
+		transition: padding var(--transition-duration);
+	}
+
+	@media (max-width: 1280px) {
+		.sponsor-link :global(.hover) {
+			padding: 0.3rem;
+		}
+
+		.sponsor-link :global(.hover:hover) {
+			padding: 0.3rem;
+		}
+
+		.sponsor-link :global(.hover:active) {
+			padding: 0.3rem;
+		}
 	}
 </style>

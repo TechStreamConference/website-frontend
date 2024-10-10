@@ -5,7 +5,7 @@ import { yearScheme } from "types/provideTypes";
 
 import { parseProvidedJsonAsync } from "helper/parseJson";
 import { apiUrl } from "helper/links";
-import { redirect } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import { getLoginStatusAsync } from "helper/loggedIn";
 import { defaultCurrentYear } from "delete/toDelete";
 
@@ -22,13 +22,13 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
     const yearDataResponse: Response = await yearDataPromise;
 
     if (!yearDataResponse.ok) {
-        redirect(302, "/404");
+        throw error(400, `Serveranfrage für das Jahr ${year} nicht erfolgreich.`)
     }
 
     const yearData = await parseProvidedJsonAsync<Year>(yearDataResponse, yearScheme);
 
     if (!yearData) {
-        redirect(302, "/404");
+        throw error(400, `Unerwartete Daten für das Jahr ${year}.`)
     }
 
     return {
