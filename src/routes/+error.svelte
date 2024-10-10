@@ -7,7 +7,7 @@
 	import Footer from 'elements/navigation/footer.svelte';
 
 	import Button from 'elements/input/button.svelte';
-	import Headline from 'elements/text/headline.svelte';
+	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 
 	function onClick() {
@@ -18,7 +18,7 @@
 <Header menu={Menu.header} />
 <div class="wrapper page-404">
 	<div class="content">
-		<Headline classes="border">{$page.status}</Headline>
+		<HeadlinePage classes="border">{$page.status}</HeadlinePage>
 		{#if $page.error}
 			<SubHeadline classes="subheadline">Fehler: {$page.error.message}</SubHeadline>
 		{/if}
