@@ -23,9 +23,13 @@
 			<SubHeadline classes="subheadline">Fehler: {$page.error.message}</SubHeadline>
 		{/if}
 
-		<Button classes="text button" ariaLabel="Klicke um zur Hauptseite zu navigieren" on:click={onClick}
-			>Hauptseite</Button
+		<Button
+			classes="text button"
+			ariaLabel="Klicke um zur Hauptseite zu navigieren"
+			on:click={onClick}
 		>
+			Hauptseite
+		</Button>
 	</div>
 	<Footer menu={Menu.footer} currentYear={2024} />
 </div>
@@ -51,6 +55,6 @@
 
 	.page-404 :global(.button) {
 		margin-top: 5rem;
-        margin-bottom: 5rem;
+		margin-bottom: 5rem;
 	}
 </style>
