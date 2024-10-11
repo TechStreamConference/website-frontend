@@ -37,7 +37,9 @@
 					Uuups! Die Seite konnte nicht gefunden werden 👻
 				</SubHeadline>
 			{:else}
-				<SubHeadline classes="subheadline">{$page.error.message}</SubHeadline>
+				<SubHeadline classes="subheadline">
+					Uuuups, irgendwas ist mächtig schief gelaufen, sorry! 🫨
+				</SubHeadline>
 			{/if}
 		{/if}
 
