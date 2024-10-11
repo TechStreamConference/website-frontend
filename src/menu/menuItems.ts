@@ -1,8 +1,8 @@
 import type { MenuItem } from "types/provideTypes";
 
-export const start: MenuItem =
+export const mainPage: MenuItem =
 {
-    name: 'Start',
+    name: 'Hauptseite',
     url: '/',
     description: 'Klicke, um zur aktuellen Hauptseite zurückzukehren'
 }
