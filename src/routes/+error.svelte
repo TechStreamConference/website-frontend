@@ -20,7 +20,11 @@
 	<div class="content">
 		<HeadlinePage classes="border">{$page.status}</HeadlinePage>
 		{#if $page.error}
-			<SubHeadline classes="subheadline">Fehler: {$page.error.message}</SubHeadline>
+			{#if $page.status === 404}
+				<SubHeadline classes="subheadline">Uuups! Die Seite konnte nicht gefunden werden 👻</SubHeadline>
+			{:else}
+				<SubHeadline classes="subheadline">{$page.error.message}</SubHeadline>
+			{/if}
 		{/if}
 
 		<Button
