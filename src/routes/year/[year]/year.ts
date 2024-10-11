@@ -22,13 +22,15 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
     const yearDataResponse: Response = await yearDataPromise;
 
     if (!yearDataResponse.ok) {
-        throw error(400, `Serveranfrage für das Jahr ${year} nicht erfolgreich.`)
+        console.error(`Serveranfrage für das Jahr ${year} nicht erfolgreich. throw error(404)`);
+        throw error(404);
     }
 
     const yearData = await parseProvidedJsonAsync<Year>(yearDataResponse, yearScheme);
 
     if (!yearData) {
-        throw error(400, `Unerwartete Daten für das Jahr ${year}.`)
+        console.error(`Unerwartete Daten für das Jahr ${year}. throw error(404)`);
+        throw error(404);
     }
 
     return {
