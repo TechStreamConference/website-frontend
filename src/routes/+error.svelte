@@ -3,12 +3,24 @@
 	import { page } from '$app/stores';
 	import * as Menu from 'menu/404';
 
+	import { onMount } from 'svelte';
+	import { defaultCurrentYear } from 'delete/toDelete';
+	export let data: number;
+
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 
 	import Button from 'elements/input/button.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
+
+	onMount(async (): Promise<void> => {
+		data = defaultCurrentYear; // API call when endpoint is implemented
+		if (data) {
+			return;
+		}
+		data = 0; // initialize to prevent an error
+	});
 
 	function onClick() {
 		goto('/');
@@ -21,7 +33,9 @@
 		<HeadlinePage classes="border">{$page.status}</HeadlinePage>
 		{#if $page.error}
 			{#if $page.status === 404}
-				<SubHeadline classes="subheadline">Uuups! Die Seite konnte nicht gefunden werden 👻</SubHeadline>
+				<SubHeadline classes="subheadline">
+					Uuups! Die Seite konnte nicht gefunden werden 👻
+				</SubHeadline>
 			{:else}
 				<SubHeadline classes="subheadline">{$page.error.message}</SubHeadline>
 			{/if}
@@ -35,7 +49,7 @@
 			Hauptseite
 		</Button>
 	</div>
-	<Footer menu={Menu.footer} currentYear={2024} />
+	<Footer menu={Menu.footer} currentYear={data} />
 </div>
 
 <style>
