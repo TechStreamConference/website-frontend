@@ -23,19 +23,27 @@
 	}
 </script>
 
-<div class="schedule-element">
-	<!-- always shows the date of the first talk -->
-	<SubHeadline classes="subheadline-schedule">
-		{formatDate(schedule[0].starts_at, '%d, %DD.%MM.%YYYY')}
-	</SubHeadline>
-	<div class="day">
-		{#each schedule as talk}
-			<ScheduleEntry speaker={getSpeakerById(talk.speaker_id)} {talk} {personPopupCallback} />
-		{/each}
+{#if schedule[0]}
+	<div class="schedule-element">
+		{#if schedule[0].is_special}
+			<SubHeadline>Bonusinhalte auf Youtube:</SubHeadline>
+		{/if}
+		<SubHeadline classes="subheadline-schedule">
+			{formatDate(schedule[0].starts_at, '%d, %DD.%MM.%YYYY')}
+		</SubHeadline>
+		<div class="day">
+			{#each schedule as talk}
+				<ScheduleEntry speaker={getSpeakerById(talk.speaker_id)} {talk} {personPopupCallback} />
+			{/each}
+		</div>
 	</div>
-</div>
+{/if}
 
 <style>
+	.schedule-element {
+		margin-bottom: 3rem;
+	}
+
 	.schedule-element :global(.subheadline-schedule) {
 		border-bottom: 1px solid var(--text-color);
 		margin-bottom: 2rem;

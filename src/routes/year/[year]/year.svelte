@@ -36,6 +36,9 @@
 		let dict: { [key: string]: Talk[] } = {};
 
 		for (let talk of talks) {
+			if (talk.is_special) {
+				continue;
+			}
 			const date = formatDate(talk.starts_at, '%DD.%MM.%YYYY');
 			if (!dict[date]) {
 				dict[date] = [];
@@ -44,6 +47,20 @@
 		}
 
 		return Object.values(dict);
+	}
+
+	function specialTalks(): Talk[] {
+		const talks: Talk[] = data.year.talks;
+		let toReturn: Talk[] = [];
+
+		for (let talk of talks) {
+			if (!talk.is_special) {
+				continue;
+			}
+			toReturn.push(talk);
+		}
+
+		return toReturn;
 	}
 </script>
 
@@ -123,11 +140,11 @@
 						personPopupCallback={openPersonPopup}
 					/>
 				{/each}
-				<!-- Day 1 -->
-				<!-- Line  -->
-				<!-- Day 2 -->
-				<!-- Line  -->
-				<!-- Bonus Stuff  -->
+				<Schedule
+					schedule={specialTalks()}
+					speakers={data.year.speakers}
+					personPopupCallback={openPersonPopup}
+				/>
 			</div>
 		</Section>
 	</div>

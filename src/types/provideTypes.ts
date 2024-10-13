@@ -13,6 +13,7 @@ export const talkScheme = z.object({
     title: z.string(),
     description: z.string(),
     tags: z.array(talkTagScheme),
+    is_special: z.boolean(),
 })
 export type Talk = z.infer<typeof talkScheme>;
 
