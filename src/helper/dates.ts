@@ -1,11 +1,11 @@
 const lookup: string[] = [
+    'Sonntag',
     'Montag',
     'Dienstag',
     'Mittwoch',
     'Donnerstag',
     'Freitag',
     'Samstag',
-    'Sonntag',
 ];
 
 export function formatDate(provided: string, format: string): string {

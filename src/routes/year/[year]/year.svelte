@@ -12,7 +12,7 @@
 	import PersonArray from 'elements/person/personGrid.svelte';
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
 	import Headline from 'elements/text/headline.svelte';
-	import type { Person } from 'types/provideTypes';
+	import type { Person, Talk } from 'types/provideTypes';
 	import PersonPopup from 'elements/person/personPopup.svelte';
 	import Section from 'elements/section/section.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
@@ -30,6 +30,21 @@
 	function closePersonPopup(): void {
 		personPopup = undefined;
 	}
+
+	function splitTalks(): Talk[][] {
+		const talks: Talk[] = data.year.talks;
+		let dict: { [key: string]: Talk[] } = {};
+
+		for (let talk of talks) {
+			const date = formatDate(talk.starts_at, '%DD.%MM.%YYYY');
+			if (!dict[date]) {
+				dict[date] = [];
+			}
+			dict[date].push(talk);
+		}
+
+		return Object.values(dict);
+	}
 </script>
 
 <Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
@@ -42,7 +57,7 @@
 				<Headline classes="green left">{data.year.event.title}</Headline>
 				<SubHeadline classes="subheadline white">
 					Online-Konferenz {formatDate(data.year.event.start_date, '%DD.%MM.')}
-					- {formatDate(data.year.event.end_date,'%DD.%MM.%YYYY')}
+					- {formatDate(data.year.event.end_date, '%DD.%MM.%YYYY')}
 				</SubHeadline>
 				<SubHeadline classes="subtitle white">{data.year.event.subtitle}</SubHeadline>
 				<YearEventLinks {data} />
@@ -101,11 +116,13 @@
 		<Section id="Shedule">
 			<HeadlineH2 classes="border">Plan</HeadlineH2>
 			<div class="section-inner">
-				<Schedule
-					schedule={data.year.talks}
-					speakers={data.year.speakers}
-					personPopupCallback={openPersonPopup}
-				/>
+				{#each splitTalks() as talks}
+					<Schedule
+						schedule={talks}
+						speakers={data.year.speakers}
+						personPopupCallback={openPersonPopup}
+					/>
+				{/each}
 				<!-- Day 1 -->
 				<!-- Line  -->
 				<!-- Day 2 -->
