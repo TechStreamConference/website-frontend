@@ -38,6 +38,7 @@ export const sponsorLinksScheme = z.array(sponsorLinkScheme);
 export type SponsorLinks = z.infer<typeof sponsorLinksScheme>;
 
 export const personScheme = z.object({
+    id: z.string(),
     bio: z.string(),
     short_bio: z.string(),
     name: z.string(),
