@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Person } from "types/provideTypes";
+	import Button from 'elements/input/button.svelte';
+	import type { Person } from 'types/provideTypes';
 
-    export let speaker: Person;
+	export let speaker: Person;
 </script>
 
-<p>{speaker.name}</p>
-
+<Button ariaLabel="Mehr Informationen zu {speaker.name}" on:click>{speaker.name}</Button>

@@ -102,7 +102,11 @@
 		<Section id="Shedule">
 			<HeadlineH2 classes="border">Plan</HeadlineH2>
 			<div class="section-inner">
-				<Schedule schedule={data.year.talks} speakers={data.year.speakers} />
+				<Schedule
+					schedule={data.year.talks}
+					speakers={data.year.speakers}
+					personPopupCallback={openPersonPopup}
+				/>
 				<!-- Day 1 -->
 				<!-- Line  -->
 				<!-- Day 2 -->

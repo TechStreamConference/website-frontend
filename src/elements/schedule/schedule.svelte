@@ -8,6 +8,8 @@
 	import { error } from '@sveltejs/kit';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 
+	export let personPopupCallback: (event: Event, person: Person) => void;
+
 	function getSpeakerById(id: string): Person {
 		for (const speaker of speakers) {
 			if (speaker.id === id) {
@@ -23,7 +25,7 @@
 <SubHeadline>Samstag, 24.05.25</SubHeadline>
 <div class="day">
 	{#each schedule as talk}
-		<ScheduleEntry speaker={getSpeakerById(talk.speaker_id)} {talk} />
+		<ScheduleEntry speaker={getSpeakerById(talk.speaker_id)} {talk} {personPopupCallback} />
 	{/each}
 </div>
 
@@ -31,5 +33,6 @@
 	.day {
 		display: grid;
 		grid-template-columns: 15rem 1fr;
+		row-gap: 3rem;
 	}
 </style>

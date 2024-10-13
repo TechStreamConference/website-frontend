@@ -4,6 +4,9 @@
 	import ScheduleTag from './scheduleTag.svelte';
 	import ScheduleSpeaker from './scheduleSpeaker.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
+	import Paragraph from 'elements/text/paragraph.svelte';
+
+	export let personPopupCallback: (event: Event, person: Person) => void;
 
 	export let speaker: Person;
 	export let talk: Talk;
@@ -17,8 +20,13 @@
 			<ScheduleTag {tag} />
 		{/each}
 	</div>
-	<ScheduleSpeaker {speaker} />
-	<p>{talk.description}</p>
+	<ScheduleSpeaker
+		{speaker}
+		on:click={(event) => {
+			personPopupCallback(event, speaker);
+		}}
+	/>
+	<Paragraph>{talk.description}</Paragraph>
 </div>
 
 <style>
@@ -32,7 +40,7 @@
 		flex-direction: row;
 	}
 
-    .schedule-entry :global(.subheadline-entry){
-        margin-right: 1rem;
-    }
+	.schedule-entry :global(.subheadline-entry) {
+		margin-right: 1rem;
+	}
 </style>
