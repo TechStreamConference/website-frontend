@@ -1,5 +1,21 @@
 import { z } from 'zod';
 
+export const talkTagScheme = z.object({
+    color_index: z.string(),
+    text: z.string(),
+})
+export type TalkTag = z.infer<typeof talkTagScheme>;
+
+export const talkScheme = z.object({
+    speaker_id: z.string(),
+    starts_at: z.string(),
+    duration: z.string(),
+    title: z.string(),
+    description: z.string(),
+    tags: z.array(talkTagScheme),
+})
+export type Talk = z.infer<typeof talkScheme>;
+
 export const socialMediaLinkScheme = z.object({
     name: z.string(),
     url: z.string(),
@@ -52,6 +68,7 @@ export const yearScheme = z.object({
     team_members: z.array(personScheme),
     sponsors: sponsorLinksScheme,
     media_partners: sponsorLinksScheme,
+    talks: z.array(talkScheme),
 });
 export type Year = z.infer<typeof yearScheme>;
 
