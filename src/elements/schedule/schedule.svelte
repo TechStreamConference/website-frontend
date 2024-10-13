@@ -44,7 +44,7 @@
 
 	.day {
 		display: grid;
-		grid-template-columns: 15rem 1fr;
+		grid-template-columns: 10rem 1fr;
 		row-gap: 2rem;
 		margin: 0 2rem;
 	}

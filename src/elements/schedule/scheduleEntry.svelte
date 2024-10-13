@@ -1,5 +1,4 @@
 <script lang="ts">
-	import TextLine from 'elements/text/textLine.svelte';
 	import type { Person, Talk } from 'types/provideTypes';
 	import ScheduleTag from './scheduleTag.svelte';
 	import ScheduleSpeaker from './scheduleSpeaker.svelte';
@@ -14,7 +13,7 @@
 </script>
 
 <div class="horizontal-line">
-	<TextLine classes="time">{formatDate(talk.starts_at, '%hh:%mm Uhr')}</TextLine>
+	<SubHeadline classes="time">{formatDate(talk.starts_at, '%hh:%mm Uhr')}</SubHeadline>
 </div>
 <div class="entry-wrapper schedule-entry horizontal-line">
 	<div class="title-wrapper">
