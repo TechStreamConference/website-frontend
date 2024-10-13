@@ -4,6 +4,7 @@
 	export let schedule: Talk[];
 
 	import ScheduleEntry from './scheduleEntry.svelte';
+	import { formatDate } from 'helper/dates';
 
 	import { error } from '@sveltejs/kit';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
@@ -23,7 +24,10 @@
 </script>
 
 <div class="schedule-element">
-	<SubHeadline classes="subheadline-schedule">Samstag, 24.05.25</SubHeadline>
+	<!-- always shows the date of the first talk -->
+	<SubHeadline classes="subheadline-schedule"
+		>{formatDate(schedule[0].starts_at, '%D, %d.%m.%y')}</SubHeadline
+	>
 	<div class="day">
 		{#each schedule as talk}
 			<ScheduleEntry speaker={getSpeakerById(talk.speaker_id)} {talk} {personPopupCallback} />
