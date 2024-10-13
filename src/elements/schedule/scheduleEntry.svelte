@@ -33,7 +33,7 @@
 
 <style>
 	.horizontal-line {
-		border-bottom: 1px solid var(--secondary-color);
+		border-bottom: 1px solid var(--text-color);
 		padding-bottom: 2rem;
 	}
 	.entry-wrapper {

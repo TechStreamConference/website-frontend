@@ -22,18 +22,25 @@
 	}
 </script>
 
-<SubHeadline>Samstag, 24.05.25</SubHeadline>
-<div class="day">
-	{#each schedule as talk}
-		<ScheduleEntry speaker={getSpeakerById(talk.speaker_id)} {talk} {personPopupCallback} />
-	{/each}
+<div class="schedule-element">
+	<SubHeadline classes="subheadline-schedule">Samstag, 24.05.25</SubHeadline>
+	<div class="day">
+		{#each schedule as talk}
+			<ScheduleEntry speaker={getSpeakerById(talk.speaker_id)} {talk} {personPopupCallback} />
+		{/each}
+	</div>
 </div>
 
 <style>
+	.schedule-element :global(.subheadline-schedule) {
+		border-bottom: 1px solid var(--text-color);
+		margin-bottom: 2rem;
+		padding-bottom: 0.2rem;
+	}
+
 	.day {
 		display: grid;
 		grid-template-columns: 15rem 1fr;
 		row-gap: 2rem;
-
 	}
 </style>
