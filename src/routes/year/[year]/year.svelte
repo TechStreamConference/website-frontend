@@ -2,7 +2,6 @@
 	import type { LoadYear } from 'types/loadTypes';
 	export let data: LoadYear;
 	import * as Menu from 'menu/year';
-	import * as Format from 'helper/dates';
 
 	import LogoBig from 'elements/image/logoBig.svelte';
 	import { formatDate } from 'helper/dates';
@@ -42,8 +41,8 @@
 			<div class="header-text-wrapper">
 				<Headline classes="green left">{data.year.event.title}</Headline>
 				<SubHeadline classes="subheadline white">
-					Online-Konferenz {formatDate(data.year.event.start_date, Format.dateShort)}
-					- {formatDate(data.year.event.end_date, Format.dateFull)}
+					Online-Konferenz {formatDate(data.year.event.start_date, '%DD.%MM.')}
+					- {formatDate(data.year.event.end_date,'%DD.%MM.%YYYY')}
 				</SubHeadline>
 				<SubHeadline classes="subtitle white">{data.year.event.subtitle}</SubHeadline>
 				<YearEventLinks {data} />

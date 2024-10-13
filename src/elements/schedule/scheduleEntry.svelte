@@ -5,6 +5,7 @@
 	import ScheduleSpeaker from './scheduleSpeaker.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
+	import { formatDate } from 'helper/dates';
 
 	export let personPopupCallback: (event: Event, person: Person) => void;
 
@@ -13,7 +14,7 @@
 </script>
 
 <div class="horizontal-line">
-	<TextLine>{talk.starts_at}</TextLine>
+	<TextLine>{formatDate(talk.starts_at, "%hh:%mm Uhr")}</TextLine>
 </div>
 <div class="entry-wrapper schedule-entry horizontal-line">
 	<div class="title-wrapper">
