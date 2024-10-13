@@ -12,7 +12,7 @@
 
 	const startYear: number = 2024;
 
-	const numbers: number[] = Array.from(
+	$: numbers = Array.from(
 		{ length: currentYear + 1 - startYear },
 		(_, i) => startYear + i
 	);
