@@ -1,6 +1,3 @@
-export const dateFull: string = "%d.%m.%y";
-export const dateShort: string = "%d.%m.";
-
 const lookup: string[] = [
     'Montag',
     'Dienstag',
