@@ -11,7 +11,7 @@
 
 	export let personPopupCallback: (event: Event, person: Person) => void;
 
-	function getSpeakerById(id: string): Person {
+	function getSpeakerById(id: number): Person {
 		for (const speaker of speakers) {
 			if (speaker.id === id) {
 				return speaker;
