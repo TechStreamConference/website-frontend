@@ -14,7 +14,7 @@
 </script>
 
 <div class="horizontal-line">
-	<TextLine>{formatDate(talk.starts_at, "%hh:%mm Uhr")}</TextLine>
+	<TextLine classes="time">{formatDate(talk.starts_at, '%hh:%mm Uhr')}</TextLine>
 </div>
 <div class="entry-wrapper schedule-entry horizontal-line">
 	<div class="title-wrapper">
@@ -50,5 +50,9 @@
 
 	.schedule-entry :global(.subheadline-entry) {
 		margin-right: 1rem;
+	}
+
+	.horizontal-line :global(.time) {
+		margin-left: 1rem;
 	}
 </style>

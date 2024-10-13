@@ -10,26 +10,33 @@
 
 <style>
 	.button {
+		transform: translate(-2px);
+		padding: 4px;
 		background: none;
 		border: none;
 		transition: background-color var(--transition-duration);
-		box-sizing: content-box;
 		border-radius: var(--border-radius);
+		margin-bottom: 2rem;
+		cursor: pointer;
 	}
 
 	.button:hover {
-		background-color: var(--gray-color);
+		background-color: var(--primary-color-dark);
 		transition: background-color var(--transition-duration);
 	}
 
+	.button:active {
+		background-color: var(--primary-color-light);
+		transition: text-decoration-color var(--transition-duration);
+	}
+
 	.text {
-		padding: 1rem 2rem;
 		font-size: 1rem;
 		line-height: 1.5rem;
 		letter-spacing: 1px;
 		font-family: gnuolane, sans-serif;
 		font-weight: 500;
 		font-style: normal;
-		color: var(--white-color);
+		color: var(--text-color);
 	}
 </style>
