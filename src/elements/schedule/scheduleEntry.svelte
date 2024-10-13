@@ -12,8 +12,10 @@
 	export let talk: Talk;
 </script>
 
-<TextLine>{talk.starts_at}</TextLine>
-<div class="entry-wrapper schedule-entry">
+<div class="horizontal-line">
+	<TextLine>{talk.starts_at}</TextLine>
+</div>
+<div class="entry-wrapper schedule-entry horizontal-line">
 	<div class="title-wrapper">
 		<SubHeadline classes="subheadline-entry">{talk.title}</SubHeadline>
 		{#each talk.tags as tag}
@@ -30,9 +32,14 @@
 </div>
 
 <style>
+	.horizontal-line {
+		border-bottom: 1px solid var(--secondary-color);
+		padding-bottom: 2rem;
+	}
 	.entry-wrapper {
 		display: flex;
 		flex-direction: column;
+		align-items: flex-start;
 	}
 
 	.title-wrapper {

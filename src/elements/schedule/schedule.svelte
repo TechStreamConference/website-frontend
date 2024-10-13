@@ -33,6 +33,7 @@
 	.day {
 		display: grid;
 		grid-template-columns: 15rem 1fr;
-		row-gap: 3rem;
+		row-gap: 2rem;
+
 	}
 </style>
