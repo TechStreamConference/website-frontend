@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { LoadYear } from 'types/loadTypes';
-	import type { SponsorLinks } from 'types/provideTypes';
 	export let data: LoadYear;
 	import * as Menu from 'menu/year';
 	import * as Format from 'helper/dates';
@@ -22,12 +21,14 @@
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import SponsorArray from 'elements/sponsor/sponsorArray.svelte';
 
+	import Schedule from 'elements/schedule/schedule.svelte';
+
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
 		personPopup = person;
 	}
 
-	function closePersonPopup() {
+	function closePersonPopup(): void {
 		personPopup = undefined;
 	}
 </script>
@@ -100,6 +101,14 @@
 
 		<Section id="Shedule">
 			<HeadlineH2 classes="border">Plan</HeadlineH2>
+			<div class="section-inner">
+				<Schedule schedule={data.year.talks} speakers={data.year.speakers} />
+				<!-- Day 1 -->
+				<!-- Line  -->
+				<!-- Day 2 -->
+				<!-- Line  -->
+				<!-- Bonus Stuff  -->
+			</div>
 		</Section>
 	</div>
 	<Footer currentYear={data.currentYear} menu={data.loggedIn ? Menu.footerIn : Menu.footerOut} />
