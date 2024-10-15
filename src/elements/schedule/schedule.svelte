@@ -26,9 +26,11 @@
 {#if schedule[0]}
 	<div class="schedule-element">
 		{#if schedule[0].is_special}
+			<!-- only using first element here because all elemenets schould be the same by now -->
 			<SubHeadline>Bonusinhalte auf Youtube:</SubHeadline>
 		{/if}
 		<SubHeadline classes="subheadline-schedule">
+			<!-- only using first element here because all elemenets schould be the same by now -->
 			{formatDate(schedule[0].starts_at, '%d, %DD.%MM.%YYYY')}
 		</SubHeadline>
 		<div class="day">
