@@ -31,36 +31,27 @@
 		personPopup = undefined;
 	}
 
-	function splitTalks(): Talk[][] {
+	function splitTalks(): Talk /* days */[] /* 0 = normal; 1 = special */[] /* talks */[] {
+		// no sorting here because database returnes the data already sorted. So just splitting here.
 		const talks: Talk[] = data.year.talks;
-		let dict: { [key: string]: Talk[] } = {};
+		let dict: { [key: string]: Talk[][] } = {};
 
 		for (let talk of talks) {
-			if (talk.is_special) {
-				continue;
-			}
 			const date = formatDate(talk.starts_at, '%DD.%MM.%YYYY');
 			if (!dict[date]) {
 				dict[date] = [];
+				dict[date].push([]);
+				dict[date].push([]);
 			}
-			dict[date].push(talk);
+
+			if (talk.is_special) {
+				dict[date][1].push(talk);
+			} else {
+				dict[date][0].push(talk);
+			}
 		}
 
 		return Object.values(dict);
-	}
-
-	function specialTalks(): Talk[] {
-		const talks: Talk[] = data.year.talks;
-		let toReturn: Talk[] = [];
-
-		for (let talk of talks) {
-			if (!talk.is_special) {
-				continue;
-			}
-			toReturn.push(talk);
-		}
-
-		return toReturn;
 	}
 </script>
 
@@ -133,18 +124,18 @@
 		<Section id="Shedule">
 			<HeadlineH2 classes="border">Plan</HeadlineH2>
 			<div class="section-inner">
-				{#each splitTalks() as talks}
+				{#each splitTalks() as days}
 					<Schedule
-						schedule={talks}
+						schedule={days[0]}
+						speakers={data.year.speakers}
+						personPopupCallback={openPersonPopup}
+					/>
+					<Schedule
+						schedule={days[1]}
 						speakers={data.year.speakers}
 						personPopupCallback={openPersonPopup}
 					/>
 				{/each}
-				<Schedule
-					schedule={specialTalks()}
-					speakers={data.year.speakers}
-					personPopupCallback={openPersonPopup}
-				/>
 			</div>
 		</Section>
 	</div>
