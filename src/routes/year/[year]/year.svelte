@@ -22,6 +22,11 @@
 
 	import Schedule from 'elements/schedule/schedule.svelte';
 
+	type ScheduleDay = {
+		normal: Talk[];
+		special: Talk[];
+	};
+
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
 		personPopup = person;
@@ -31,23 +36,24 @@
 		personPopup = undefined;
 	}
 
-	function splitTalks(): Talk /* days */[] /* 0 = normal; 1 = special */[] /* talks */[] {
+	function splitTalks(): ScheduleDay[] {
 		// no sorting here because database returnes the data already sorted. So just splitting here.
 		const talks: Talk[] = data.year.talks;
-		let dict: { [key: string]: Talk[][] } = {};
+		let dict: { [key: string]: ScheduleDay } = {};
+		const newDays = (): ScheduleDay => {
+			return { normal: [], special: [] };
+		};
 
 		for (let talk of talks) {
 			const date = formatDate(talk.starts_at, '%DD.%MM.%YYYY');
 			if (!dict[date]) {
-				dict[date] = [];
-				dict[date].push([]);
-				dict[date].push([]);
+				dict[date] = newDays();
 			}
 
 			if (talk.is_special) {
-				dict[date][1].push(talk);
+				dict[date].special.push(talk);
 			} else {
-				dict[date][0].push(talk);
+				dict[date].normal.push(talk);
 			}
 		}
 
@@ -126,12 +132,12 @@
 			<div class="section-inner">
 				{#each splitTalks() as days}
 					<Schedule
-						schedule={days[0]}
+						schedule={days.normal}
 						speakers={data.year.speakers}
 						personPopupCallback={openPersonPopup}
 					/>
 					<Schedule
-						schedule={days[1]}
+						schedule={days.special}
 						speakers={data.year.speakers}
 						personPopupCallback={openPersonPopup}
 					/>
