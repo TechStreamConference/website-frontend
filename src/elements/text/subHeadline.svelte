@@ -3,10 +3,10 @@
 	export let size: string = 'big';
 </script>
 
-<h2 class="{classes} {size}"><slot /></h2>
+<h3 class="{classes} {size}"><slot /></h3>
 
 <style>
-	h2 {
+	h3 {
 		letter-spacing: 1px;
 		font-family: gnuolane, sans-serif;
 		font-weight: 500;

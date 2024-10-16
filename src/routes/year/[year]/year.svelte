@@ -1,9 +1,7 @@
 <script lang="ts">
 	import type { LoadYear } from 'types/loadTypes';
-	import type { SponsorLinks } from 'types/provideTypes';
 	export let data: LoadYear;
 	import * as Menu from 'menu/year';
-	import * as Format from 'helper/dates';
 
 	import LogoBig from 'elements/image/logoBig.svelte';
 	import { formatDate } from 'helper/dates';
@@ -14,7 +12,7 @@
 	import PersonArray from 'elements/person/personGrid.svelte';
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
 	import Headline from 'elements/text/headline.svelte';
-	import type { Person } from 'types/provideTypes';
+	import type { Person, Talk } from 'types/provideTypes';
 	import PersonPopup from 'elements/person/personPopup.svelte';
 	import Section from 'elements/section/section.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
@@ -22,13 +20,44 @@
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import SponsorArray from 'elements/sponsor/sponsorArray.svelte';
 
+	import Schedule from 'elements/schedule/schedule.svelte';
+
+	type ScheduleDay = {
+		normal: Talk[];
+		special: Talk[];
+	};
+
 	let personPopup: Person | undefined = undefined;
 	function openPersonPopup(event: Event, person: Person) {
 		personPopup = person;
 	}
 
-	function closePersonPopup() {
+	function closePersonPopup(): void {
 		personPopup = undefined;
+	}
+
+	function splitTalks(): ScheduleDay[] {
+		// no sorting here because database returnes the data already sorted. So just splitting here.
+		const talks: Talk[] = data.year.talks;
+		let dict: { [key: string]: ScheduleDay } = {};
+		const newDays = (): ScheduleDay => {
+			return { normal: [], special: [] };
+		};
+
+		for (let talk of talks) {
+			const date = formatDate(talk.starts_at, '%DD.%MM.%YYYY');
+			if (!dict[date]) {
+				dict[date] = newDays();
+			}
+
+			if (talk.is_special) {
+				dict[date].special.push(talk);
+			} else {
+				dict[date].normal.push(talk);
+			}
+		}
+
+		return Object.values(dict);
 	}
 </script>
 
@@ -41,8 +70,8 @@
 			<div class="header-text-wrapper">
 				<Headline classes="green left">{data.year.event.title}</Headline>
 				<SubHeadline classes="subheadline white">
-					Online-Konferenz {formatDate(data.year.event.start_date, Format.dateShort)}
-					- {formatDate(data.year.event.end_date, Format.dateFull)}
+					Online-Konferenz {formatDate(data.year.event.start_date, '%DD.%MM.')}
+					- {formatDate(data.year.event.end_date, '%DD.%MM.%YYYY')}
 				</SubHeadline>
 				<SubHeadline classes="subtitle white">{data.year.event.subtitle}</SubHeadline>
 				<YearEventLinks {data} />
@@ -100,6 +129,20 @@
 
 		<Section id="Shedule">
 			<HeadlineH2 classes="border">Plan</HeadlineH2>
+			<div class="section-inner">
+				{#each splitTalks() as days}
+					<Schedule
+						schedule={days.normal}
+						speakers={data.year.speakers}
+						personPopupCallback={openPersonPopup}
+					/>
+					<Schedule
+						schedule={days.special}
+						speakers={data.year.speakers}
+						personPopupCallback={openPersonPopup}
+					/>
+				{/each}
+			</div>
 		</Section>
 	</div>
 	<Footer currentYear={data.currentYear} menu={data.loggedIn ? Menu.footerIn : Menu.footerOut} />

@@ -1,8 +1,9 @@
 <script lang="ts">
 	export let classes: string = '';
+	export let id :string = "";
 </script>
 
-<p class={classes}><slot /></p>
+<p {id} class={classes}><slot /></p>
 
 <style>
 	p {
