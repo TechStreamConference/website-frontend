@@ -7,7 +7,7 @@ import { checkAndParseGlobals } from "helper/parseJson";
 export async function load({ fetch }: { fetch: typeof globalThis.fetch }): LoadImprintPromise {
     // call
     const loggedInPromise: Promise<boolean> = getLoginStatusAsync(fetch);
-    const globalsPromise: Promise<Response> = fetch(apiUrl('/globals'));
+    const globalsPromise: Promise<Response> = fetch(apiUrl('/api/globals'));
 
     // data
     const loggedIn: boolean = await loggedInPromise;

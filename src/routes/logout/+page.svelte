@@ -14,7 +14,7 @@
 		goto('/');
 	}
 
-	onMount( async ()=> {
+	onMount(async () => {
 		await logoutAsync();
 	});
 </script>

@@ -7,7 +7,7 @@ import { checkAndParseGlobals } from "helper/parseJson";
 export async function load({ fetch, url }: { fetch: typeof globalThis.fetch, url: URL }): LoadLoginPromise {
     // call
     const loggedInPromise: Promise<boolean> = getLoginStatusAsync(fetch);
-    const globalsPromise: Promise<Response> = fetch(apiUrl('/globals'));
+    const globalsPromise: Promise<Response> = fetch(apiUrl('/api/globals'));
 
     // data
     const showLoginMessage: boolean = url.searchParams.get('showLoginMessage') === 'true';

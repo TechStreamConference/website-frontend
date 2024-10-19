@@ -7,7 +7,7 @@ import { apiUrl } from 'helper/links';
 
 export async function load({ fetch }: { fetch: typeof globalThis.fetch }): LoadRegisterPromise {
     // call
-    const globalsPromise: Promise<Response> = fetch(apiUrl('/globals'));
+    const globalsPromise: Promise<Response> = fetch(apiUrl('/api/globals'));
     const loggedInPromise: Promise<boolean> = getLoginStatusAsync(fetch);
 
     // data

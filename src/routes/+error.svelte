@@ -26,7 +26,7 @@
 		};
 
 		try {
-			const response: Response = await fetch(apiUrl('/globals'));
+			const response: Response = await fetch(apiUrl('/api/globals'));
 			if (!response.ok) {
 				handleFail();
 				return;

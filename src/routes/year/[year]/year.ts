@@ -8,7 +8,7 @@ import { apiUrl } from "helper/links";
 import { getLoginStatusAsync } from "helper/loggedIn";
 
 export async function loadYearAsync(fetch: Function, year: number | undefined = undefined): LoadYearPromise {
-    let yearRoute: string = '/events';
+    let yearRoute: string = '/api/events';
     if (year) {
         yearRoute += '/' + year;
     }
@@ -16,7 +16,7 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
     // call
     const loggedInPromise: Promise<boolean> = getLoginStatusAsync(fetch);
     const yearDataPromise: Promise<Response> = fetch(apiUrl(yearRoute));
-    const globalsPromise: Promise<Response> = fetch(apiUrl('/globals'));
+    const globalsPromise: Promise<Response> = fetch(apiUrl('/api/globals'));
 
     // data
     const loggedIn: boolean = await loggedInPromise;
