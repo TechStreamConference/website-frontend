@@ -1,15 +1,21 @@
 import type { LoadRegisterPromise } from 'types/loadTypes';
+import type { Globals } from 'types/provideTypes';
 
 import { getLoginStatusAsync } from 'helper/loggedIn';
-import { defaultCurrentYear } from 'delete/toDelete';
+import { checkAndParseGlobals } from 'helper/parseJson';
+import { apiUrl } from 'helper/links';
 
 export async function load({ fetch }: { fetch: typeof globalThis.fetch }): LoadRegisterPromise {
-    const loggedIn = await getLoginStatusAsync(fetch);
+    // call
+    const globalsPromise: Promise<Response> = fetch(apiUrl('/globals'));
+    const loggedInPromise: Promise<boolean> = getLoginStatusAsync(fetch);
 
-    const currentYear: number = defaultCurrentYear;
+    // data
+    const loggedIn: boolean = await loggedInPromise;
+    const globalsData: Globals = await checkAndParseGlobals(await globalsPromise);
 
     return {
         loggedIn,
-        currentYear
+        globals: globalsData,
     };
 }

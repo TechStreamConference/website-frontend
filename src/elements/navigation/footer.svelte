@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { MenuItem } from 'types/provideTypes';
+	import type { Globals, MenuItem } from 'types/provideTypes';
 	import TextLine from 'elements/text/textLine.svelte';
 	import List from 'elements/list/list.svelte';
 	import ListElement from 'elements/list/listElement.svelte';
@@ -7,13 +7,13 @@
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import LogoBig from 'elements/image/logoBig.svelte';
 
-	export let currentYear: number;
+	export let globals: Globals = { default_year: 0, footer_text: 'some text' }; // default values so that numbers can not fail because of undefiend
 	export let menu: MenuItem[];
 
+	const currentYear: number = new Date().getFullYear();
 	const startYear: number = 2024;
-
 	$: numbers = Array.from(
-		{ length: currentYear + 1 - startYear },
+		{ length: globals.default_year + 1 - startYear },
 		(_, i) => startYear + i
 	);
 </script>
@@ -52,20 +52,7 @@
 
 		<div class="nav-element">
 			<Paragraph classes={'white'}>
-				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-				invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-				et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-				diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-				voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-				gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-				amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-				dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-				et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-				amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-				consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto
-				odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
-				nulla facilisi. Lorem ipsum dolor sit amet, -- ich habe 200 Wörter.
+				{globals.footer_text}
 			</Paragraph>
 		</div>
 
