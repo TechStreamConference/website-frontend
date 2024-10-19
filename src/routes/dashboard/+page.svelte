@@ -6,9 +6,10 @@
 	import Button from 'elements/input/button.svelte';
 </script>
 
-<div class="wrapper page-backend">
-	<HeadlinePage classes="headline">Backend</HeadlinePage>
-	<TextLine classes="text" --text-align="center">TODO: Hier kommt das Beste Backend hin.</TextLine>
+<div class="wrapper page-dashboard">
+	<HeadlinePage classes="headline">Dashboard</HeadlinePage>
+	<TextLine classes="text" --text-align="center">TODO: Hier kommt das Beste Dashboard hin.</TextLine
+	>
 	<Button
 		classes="text button"
 		ariaLabel="Kehre zur akruellen Hautseite zurück"
@@ -29,15 +30,15 @@
 		min-height: 100vh;
 	}
 
-	.page-backend :global(.headline) {
+	.page-dashboard :global(.headline) {
 		margin-bottom: 3rem;
 	}
 
-	.page-backend :global(.text) {
+	.page-dashboard :global(.text) {
 		margin-bottom: 5rem;
 	}
 
-	.page-backend :global(.button) {
+	.page-dashboard :global(.button) {
 		margin: 0 auto;
 	}
 </style>

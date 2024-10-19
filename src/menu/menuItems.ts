@@ -9,7 +9,7 @@ export const mainPage: MenuItem =
 
 export const intern: MenuItem = {
     name: 'Intern',
-    url: '/backend',
+    url: '/dashboard',
     description: "Klicke, um zum internen Bereich zu navigieren"
 }
 

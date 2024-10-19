@@ -121,7 +121,7 @@
 				let toReturn: string[] = [];
 				for (const value of values) {
 					toReturn.push(registerLookup(value));
-					console.log('error while register from backend: ' + value);
+					console.log('error while register from dashboard: ' + value);
 				}
 				return toReturn;
 			};

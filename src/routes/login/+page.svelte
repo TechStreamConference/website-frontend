@@ -38,7 +38,7 @@
 
 		if (response.ok) {
 			await udpateLoginStatusAsync(fetch);
-			goto('/backend');
+			goto('/dashboard');
 			return;
 		}
 
