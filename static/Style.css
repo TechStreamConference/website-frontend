@@ -15,6 +15,7 @@
     --line-color: var(--primary-color-light);
     --icon-color: var(--secondary-color);
     --error-color: orange;
+    --success-color: green;
 
     --border-radius: 5px;
     --transition-duration: 0.3s;

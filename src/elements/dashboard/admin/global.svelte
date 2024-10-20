@@ -2,21 +2,51 @@
 	export let data: Admin;
 
 	import type { Admin } from 'types/provideTypes';
+	import { apiUrl } from 'helper/links';
 
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
 	import SectionBackend from 'elements/section/sectionBackend.svelte';
 
 	import Button from 'elements/input/button.svelte';
 	import Input from 'elements/input/input.svelte';
+	import Message from 'elements/text/message.svelte';
 
-	async function trySave(): Promise<void> {
-		console.log('try save');
+	let errorMessage: string = '';
+	let successMessage: string = '';
+	let successTimer: number | null = null;
+
+	async function trySaveAsync(): Promise<void> {
+		if (successTimer) {
+			clearTimeout(successTimer);
+		}
+		const response: Response = await fetch(apiUrl('/api/dashboard/admin/globals'), {
+			method: 'PUT',
+			body: JSON.stringify(data)
+		});
+
+		if (response.ok) {
+			successMessage = 'Gespeichert';
+			errorMessage = '';
+			setTimeout(() => {
+				resetSuccessMessage();
+			}, 3000);
+			return;
+		}
+
+		successMessage = '';
+		errorMessage = 'Fehler beim Speichern';
+	}
+
+	function resetSuccessMessage(): void {
+		successMessage = '';
 	}
 </script>
 
 <SectionBackend>
-	<HeadlineH2 classes="border">Globale Einstellungen</HeadlineH2>
-	<form class="width-wrapper global-admin-form" on:submit|preventDefault={trySave}>
+	<HeadlineH2 classes="border global-admin-form-headline">Globale Einstellungen</HeadlineH2>
+	<Message message={errorMessage} />
+	<Message classes="success-color" message={successMessage} />
+	<form class="width-wrapper global-admin-form" on:submit|preventDefault={trySaveAsync}>
 		<Input
 			classes="admin-default-year input"
 			id="admin-default-year"
@@ -43,6 +73,9 @@
 </SectionBackend>
 
 <style>
+	:global(.global-admin-form-headline) {
+		margin-bottom: 1rem;
+	}
 	.global-admin-form {
 		display: flex;
 		flex-direction: column;

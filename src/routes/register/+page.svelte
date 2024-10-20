@@ -10,7 +10,7 @@
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 
-	import ErrorMessage from 'elements/text/errorMessage.svelte';
+	import ErrorMessage from 'elements/text/message.svelte';
 	import Input from 'elements/input/input.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
 	import List from 'elements/list/list.svelte';
