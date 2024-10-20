@@ -8,4 +8,10 @@ export type LoadLogin = { loggedIn: boolean; globals: Globals; showLoginMessage:
 
 export type LoadImprint = { loggedIn: boolean; globals: Globals; };
 
+export type LoadUser = { roles: Roles };
+
 export type LoadSpeaker = { roles: Roles };
+
+export type LoadTeamMember = { roles: Roles };
+
+export type LoadAdmin = { roles: Roles };
