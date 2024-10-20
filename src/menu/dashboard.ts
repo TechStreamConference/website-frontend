@@ -1,7 +1,7 @@
 import type { Menu, Roles } from "types/provideTypes";
 import * as Item from './menuItems'
 
-export function headerOut(roles: Roles): Menu {
+export function headerIn(roles: Roles): Menu {
     let menu: Menu = [
         Item.mainPage,
     ];
@@ -21,6 +21,6 @@ export function headerOut(roles: Roles): Menu {
     return menu;
 }
 
-export const footerOut: Menu = [
+export const footerIn: Menu = [
     Item.imprint,
 ];

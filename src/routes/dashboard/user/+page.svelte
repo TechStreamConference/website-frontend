@@ -9,7 +9,7 @@
 	import TextLine from 'elements/text/textLine.svelte';
 </script>
 
-<Header menu={Menu.headerOut(data.roles)} />
+<Header menu={Menu.headerIn(data.roles)} />
 <div class="wrapper page-dashboard-user">
 	<HeadlinePage classes="headline">User</HeadlinePage>
 	<TextLine classes="text" --text-align="center">TODO: Hier kommt das Beste User hin.</TextLine>
