@@ -7,6 +7,8 @@
 	import Footer from 'elements/navigation/footer.svelte';
 	import Tabs from 'elements/navigation/tabs.svelte';
 
+	import Global from 'elements/dashboard/admin/global.svelte';
+
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
 
@@ -47,7 +49,7 @@
 		<HeadlinePage classes="headline">Admin</HeadlinePage>
 		<Tabs entries={tabsEntries} />
 		{#if current === Tab.Global}
-			<TextLine>Tab 1</TextLine>
+			<Global data={data.admin} />
 		{/if}
 		{#if current === Tab.Two}
 			<TextLine>Tab 2</TextLine>
