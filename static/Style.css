@@ -5,7 +5,7 @@
     --secondary-color: #ccff57;
 
     --background-color: white;
-    --background-color-light: rgba(255, 255, 255, 0.7);
+    --background-color-light: rgb(102, 102, 102);
 
     --white-color: white;
     --gray-color: gray;
@@ -48,7 +48,7 @@ body {
         --primary-color-dark: #674c8a;
 
         --background-color: rgb(40, 40, 40);
-        --background-color-light: rgba(40, 40, 40, 0.7);
+        --background-color-light: rgb(60, 60, 60);
 
         --text-color: white;
         --line-color: var(--secondary-color);
