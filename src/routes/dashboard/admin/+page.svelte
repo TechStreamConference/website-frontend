@@ -1,4 +1,7 @@
 <script lang="ts">
+	import unsavedInputPreventNavigation from 'helper/prefentTabClose';
+	const { store, action } = unsavedInputPreventNavigation();
+
 	import type { LoadAdmin } from 'types/loadTypes';
 	export let data: LoadAdmin; // data from database
 
@@ -41,15 +44,29 @@
 			}
 		}
 	];
+
+	let changes: number = 0;
+
+	function valueSaved(): void {
+		--changes;
+		valueUpdated();
+	}
+	function valueChanged(): void {
+		++changes;
+		valueUpdated();
+	}
+	function valueUpdated(): void {
+		$store = changes > 0;
+	}
 </script>
 
 <Header menu={Menu.headerIn(data.roles)} />
-<div class="wrapper page-dashboard-admin">
+<div class="wrapper page-dashboard-admin" use:action>
 	<div class="content">
 		<HeadlinePage classes="headline">Admin</HeadlinePage>
 		<Tabs entries={tabsEntries} />
 		{#if current === Tab.Global}
-			<Global bind:data={data.admin} />
+			<Global bind:data={data.admin} changedCallback={valueChanged} savedCallback={valueSaved} />
 		{/if}
 		{#if current === Tab.Two}
 			<TextLine>Tab 2</TextLine>

@@ -15,6 +15,10 @@
 	let successMessage: string = '';
 	let successTimer: number | null = null;
 
+	export let savedCallback: Function;
+	export let changedCallback: Function;
+	let saved: boolean = true;
+
 	async function trySaveAsync(): Promise<void> {
 		if (successTimer) {
 			clearTimeout(successTimer);
@@ -27,6 +31,10 @@
 		if (response.ok) {
 			successMessage = 'Gespeichert';
 			errorMessage = '';
+			if (!saved) {
+				savedCallback();
+				saved = true;
+			}
 			setTimeout(() => {
 				resetSuccessMessage();
 			}, 3000);
@@ -39,6 +47,13 @@
 
 	function resetSuccessMessage(): void {
 		successMessage = '';
+	}
+
+	function handleInputChance() {
+		if (saved) {
+			changedCallback();
+			saved = false;
+		}
 	}
 </script>
 
@@ -55,6 +70,7 @@
 			placeholderText="Aktuelles Jahr"
 			ariaLabel="Gib das aktuelle Jahr der Internetseite ein"
 			bind:value={data.default_year}
+			on:input={handleInputChance}
 		/>
 		<Input
 			classes="admin-footer-description input"
@@ -64,6 +80,7 @@
 			placeholderText="Footer Beschreibung"
 			ariaLabel="Gib das Footer Beschreibung Internetseite ein"
 			bind:value={data.footer_text}
+			on:input={handleInputChance}
 		/>
 
 		<Button classes="text submit-button" type={'submit'} ariaLabel="Klicke zum Registrieren">
