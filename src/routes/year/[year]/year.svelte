@@ -145,7 +145,7 @@
 			</div>
 		</Section>
 	</div>
-	<Footer currentYear={data.currentYear} menu={data.loggedIn ? Menu.footerIn : Menu.footerOut} />
+	<Footer globals={data.globals} menu={data.loggedIn ? Menu.footerIn : Menu.footerOut} />
 </div>
 
 {#if personPopup}

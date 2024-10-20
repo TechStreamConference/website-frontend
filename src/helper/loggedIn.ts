@@ -3,7 +3,7 @@ import { loginStatus } from 'stores/auth';
 import { apiUrl } from './links';
 
 async function fetchLoginStatusAsync(fetch: Function): Promise<boolean> {
-    const response: Response = await fetch(apiUrl('/api/account'));
+    const response: Response = await fetch(apiUrl('/api/account/roles'));
     return response.ok;
 }
 

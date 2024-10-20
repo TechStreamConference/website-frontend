@@ -1,13 +1,20 @@
 import type { LoadImprintPromise } from "types/loadTypes";
+import type { Globals } from "types/provideTypes";
+import { apiUrl } from "helper/links";
 import { getLoginStatusAsync } from "helper/loggedIn";
-import { defaultCurrentYear } from "delete/toDelete";
+import { checkAndParseGlobals } from "helper/parseJson";
 
 export async function load({ fetch }: { fetch: typeof globalThis.fetch }): LoadImprintPromise {
-    const loggedIn = await getLoginStatusAsync(fetch);
-    const currentYear = defaultCurrentYear;
+    // call
+    const loggedInPromise: Promise<boolean> = getLoginStatusAsync(fetch);
+    const globalsPromise: Promise<Response> = fetch(apiUrl('/api/globals'));
+
+    // data
+    const loggedIn: boolean = await loggedInPromise;
+    const globalsData: Globals = await checkAndParseGlobals(await globalsPromise);
 
     return {
         loggedIn,
-        currentYear
+        globals: globalsData,
     }
 }

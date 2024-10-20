@@ -4,8 +4,7 @@
 	import * as Menu from 'menu/404';
 
 	import { onMount } from 'svelte';
-	import { defaultCurrentYear } from 'delete/toDelete';
-	export let data: number;
+	let data: Globals;
 
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
@@ -13,13 +12,37 @@
 	import Button from 'elements/input/button.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
+	import { apiUrl } from 'helper/links';
+	import { globalsScheme, type Globals } from 'types/provideTypes';
+	import { parseProvidedJsonAsync } from 'helper/parseJson';
 
 	onMount(async (): Promise<void> => {
-		data = defaultCurrentYear; // API call when endpoint is implemented
-		if (data) {
+		const handleFail = () => {
+			data = {
+				default_year: 0,
+				footer_text: ''
+			};
+		};
+
+		try {
+			// don't use `checkAndParseInputDataAsync<T>()` here because that could cause an `throw error(404)` loop
+			const response: Response = await fetch(apiUrl('/api/globals'));
+			if (!response.ok) {
+				handleFail();
+				return;
+			}
+
+			const provided = await parseProvidedJsonAsync<Globals>(response, globalsScheme);
+			if (!provided) {
+				handleFail();
+				return;
+			}
+
+			data = provided;
+		} catch (error) {
+			handleFail();
 			return;
 		}
-		data = 0; // initialize to prevent an error
 	});
 
 	function onClick() {
@@ -51,7 +74,7 @@
 			Hauptseite
 		</Button>
 	</div>
-	<Footer menu={Menu.footer} currentYear={data} />
+	<Footer menu={Menu.footer} globals={data} />
 </div>
 
 <style>

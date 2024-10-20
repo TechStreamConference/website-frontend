@@ -1,5 +1,11 @@
 import { z } from 'zod';
 
+export const globalsScheme = z.object({
+    default_year: z.number(),
+    footer_text: z.string(),
+})
+export type Globals = z.infer<typeof globalsScheme>;
+
 export const talkTagScheme = z.object({
     color_index: z.number(),
     text: z.string(),

@@ -87,7 +87,7 @@
 		</form>
 	</div>
 
-	<Footer currentYear={data.currentYear} menu={Menu.footerOut} />
+	<Footer globals={data.globals} menu={Menu.footerOut} />
 </div>
 
 <style>
