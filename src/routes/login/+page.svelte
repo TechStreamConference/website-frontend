@@ -4,7 +4,6 @@
 	import * as Menu from 'menu/login';
 
 	import { goto } from '$app/navigation';
-	import { udpateLoginStatusAsync } from 'helper/loggedIn';
 	import { apiUrl } from 'helper/links';
 
 	import Header from 'elements/navigation/header.svelte';
@@ -37,7 +36,6 @@
 		});
 
 		if (response.ok) {
-			await udpateLoginStatusAsync(fetch);
 			goto('/dashboard');
 			return;
 		}

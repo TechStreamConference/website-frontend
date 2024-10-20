@@ -5,7 +5,7 @@ import { yearScheme } from "types/provideTypes";
 
 import { checkAndParseGlobalsAsync, checkAndParseInputDataAsync } from "helper/parseJson";
 import { apiUrl } from "helper/links";
-import { getLoginStatusAsync } from "helper/loggedIn";
+import { fetchLoginStatusAsync } from "helper/loggedIn";
 
 export async function loadYearAsync(fetch: Function, year: number | undefined = undefined): Promise<LoadYear> {
     let yearRoute: string = '/api/events';
@@ -14,7 +14,7 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
     }
 
     // call
-    const loggedInPromise: Promise<boolean> = getLoginStatusAsync(fetch);
+    const loggedInPromise: Promise<boolean> = fetchLoginStatusAsync(fetch);
     const yearDataPromise: Promise<Response> = fetch(apiUrl(yearRoute));
     const globalsPromise: Promise<Response> = fetch(apiUrl('/api/globals'));
 
