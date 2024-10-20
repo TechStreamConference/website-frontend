@@ -1,10 +1,10 @@
-import type { LoadLoginPromise } from "types/loadTypes";
+import type { LoadLogin } from "types/loadTypes";
 import type { Globals } from "types/provideTypes";
 import { apiUrl } from "helper/links";
 import { getLoginStatusAsync } from "helper/loggedIn";
 import { checkAndParseGlobals } from "helper/parseJson";
 
-export async function load({ fetch, url }: { fetch: typeof globalThis.fetch, url: URL }): LoadLoginPromise {
+export async function load({ fetch, url }: { fetch: typeof globalThis.fetch, url: URL }): Promise<LoadLogin> {
     // call
     const loggedInPromise: Promise<boolean> = getLoginStatusAsync(fetch);
     const globalsPromise: Promise<Response> = fetch(apiUrl('/api/globals'));
