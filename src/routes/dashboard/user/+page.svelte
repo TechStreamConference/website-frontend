@@ -1,23 +1,18 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import * as Menu from 'menu/dashboard';
+	import Header from 'elements/navigation/header.svelte';
+
+	import type { LoadUser } from 'types/loadTypes';
+	export let data: LoadUser; // data from database
 
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
-	import Button from 'elements/input/button.svelte';
 </script>
 
+<Header menu={Menu.headerOut(data.roles)} />
 <div class="wrapper page-dashboard-user">
 	<HeadlinePage classes="headline">User</HeadlinePage>
 	<TextLine classes="text" --text-align="center">TODO: Hier kommt das Beste User hin.</TextLine>
-	<Button
-		classes="text button"
-		ariaLabel="Kehre zur akruellen Hautseite zurück"
-		on:click={() => {
-			goto('/');
-		}}
-	>
-		Start
-	</Button>
 </div>
 
 <style>

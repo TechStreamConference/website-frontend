@@ -1,23 +1,18 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import * as Menu from 'menu/dashboard';
+	import Header from 'elements/navigation/header.svelte';
+
+	import type { LoadAdmin } from 'types/loadTypes';
+	export let data: LoadAdmin; // data from database
 
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
-	import Button from 'elements/input/button.svelte';
 </script>
 
+<Header menu={Menu.headerOut(data.roles)} />
 <div class="wrapper page-dashboard-admin">
 	<HeadlinePage classes="headline">Admin</HeadlinePage>
 	<TextLine classes="text" --text-align="center">TODO: Hier kommt das Beste Admin hin.</TextLine>
-	<Button
-		classes="text button"
-		ariaLabel="Kehre zur akruellen Hautseite zurück"
-		on:click={() => {
-			goto('/');
-		}}
-	>
-		Start
-	</Button>
 </div>
 
 <style>
