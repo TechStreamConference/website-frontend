@@ -17,15 +17,15 @@
 	import { parseProvidedJsonAsync } from 'helper/parseJson';
 
 	onMount(async (): Promise<void> => {
-		// dont use all helper functions because this page is a fallback
 		const handleFail = () => {
 			data = {
 				default_year: 0,
-				footer_text: 'some Fail'
+				footer_text: ''
 			};
 		};
 
 		try {
+			// don't use `checkAndParseInputDataAsync<T>()` here because that could cause an `throw error(404)` loop
 			const response: Response = await fetch(apiUrl('/api/globals'));
 			if (!response.ok) {
 				handleFail();

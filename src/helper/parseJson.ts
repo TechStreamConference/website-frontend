@@ -15,7 +15,7 @@ export async function parseProvidedJsonAsync<T>(response: Response, scheme: ZodT
         console.log("Validation-Original:", type);
 
     } catch (error) {
-        console.error('Error occurred during fetch or validation:', error);
+        console.error('Error occurred during parse or validation:', error);
     }
 }
 
