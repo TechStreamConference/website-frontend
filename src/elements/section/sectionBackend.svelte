@@ -9,6 +9,6 @@
 
 <style>
 	.section {
-		margin: 2rem auto;
+		margin: 5rem auto;
 	}
 </style>

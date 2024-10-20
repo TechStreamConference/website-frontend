@@ -49,7 +49,7 @@
 		<HeadlinePage classes="headline">Admin</HeadlinePage>
 		<Tabs entries={tabsEntries} />
 		{#if current === Tab.Global}
-			<Global data={data.admin} />
+			<Global bind:data={data.admin} />
 		{/if}
 		{#if current === Tab.Two}
 			<TextLine>Tab 2</TextLine>
@@ -75,17 +75,5 @@
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
-	}
-
-	.page-dashboard-admin :global(.headline) {
-		margin-bottom: 3rem;
-	}
-
-	.page-dashboard-admin :global(.text) {
-		margin-bottom: 5rem;
-	}
-
-	.page-dashboard-admin :global(.button) {
-		margin: 0 auto;
 	}
 </style>
