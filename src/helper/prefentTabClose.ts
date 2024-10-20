@@ -11,6 +11,7 @@ export default function (eventName = "input", message = "Are you sure?") {
             if (get(store)) {
                 if (!confirm(message)) {
                     e.preventDefault();
+                    e.stopPropagation();
                     if (e.type === "beforeunload") {
                         e.returnValue = "";
                     }

@@ -1,10 +1,9 @@
 <script lang="ts">
-	export let data: Admin;
+	import type { LoadAdmin } from 'types/loadTypes';
+	export let data: LoadAdmin; // data from database
 
-	import type { Admin } from 'types/provideTypes';
 	import { apiUrl } from 'helper/links';
 
-	import HeadlineH2 from 'elements/text/headlineH2.svelte';
 	import SectionBackend from 'elements/section/sectionBackend.svelte';
 
 	import Button from 'elements/input/button.svelte';
@@ -15,26 +14,20 @@
 	let successMessage: string = '';
 	let successTimer: number | null = null;
 
-	export let savedCallback: Function;
-	export let changedCallback: Function;
-	let saved: boolean = true;
-
 	async function trySaveAsync(): Promise<void> {
 		if (successTimer) {
 			clearTimeout(successTimer);
 		}
 		const response: Response = await fetch(apiUrl('/api/dashboard/admin/globals'), {
 			method: 'PUT',
-			body: JSON.stringify(data)
+			body: JSON.stringify(data.admin)
 		});
+
+		console.log(response);
 
 		if (response.ok) {
 			successMessage = 'Gespeichert';
 			errorMessage = '';
-			if (!saved) {
-				savedCallback();
-				saved = true;
-			}
 			setTimeout(() => {
 				resetSuccessMessage();
 			}, 3000);
@@ -48,17 +41,9 @@
 	function resetSuccessMessage(): void {
 		successMessage = '';
 	}
-
-	function handleInputChance() {
-		if (saved) {
-			changedCallback();
-			saved = false;
-		}
-	}
 </script>
 
-<SectionBackend>
-	<HeadlineH2 classes="border global-admin-form-headline">Globale Einstellungen</HeadlineH2>
+<SectionBackend classes="dashboard-admin-global-section">
 	<Message message={errorMessage} />
 	<Message classes="success-color" message={successMessage} />
 	<form class="width-wrapper global-admin-form" on:submit|preventDefault={trySaveAsync}>
@@ -69,8 +54,7 @@
 			labelText="Aktuelles Jahr:"
 			placeholderText="Aktuelles Jahr"
 			ariaLabel="Gib das aktuelle Jahr der Internetseite ein"
-			bind:value={data.default_year}
-			on:input={handleInputChance}
+			bind:value={data.admin.default_year}
 		/>
 		<Input
 			classes="admin-footer-description input"
@@ -79,8 +63,7 @@
 			labelText="Footer Beschreibung:"
 			placeholderText="Footer Beschreibung"
 			ariaLabel="Gib das Footer Beschreibung Internetseite ein"
-			bind:value={data.footer_text}
-			on:input={handleInputChance}
+			bind:value={data.admin.footer_text}
 		/>
 
 		<Button classes="text submit-button" type={'submit'} ariaLabel="Klicke zum Registrieren">
@@ -90,6 +73,9 @@
 </SectionBackend>
 
 <style>
+	:global(.dashboard-admin-global-section) {
+		width: 50rem;
+	}
 	:global(.global-admin-form-headline) {
 		margin-bottom: 1rem;
 	}

@@ -1,14 +1,12 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-
 	export let id: string = '';
 	export let classes: string = '';
 </script>
 
-<section {id} class="section {classes}" transition:fade={{ duration: 300 }}><slot /></section>
+<section {id} class="section {classes}"><slot /></section>
 
 <style>
 	.section {
-		margin: 5rem auto;
+		margin: 0 auto 5rem;
 	}
 </style>

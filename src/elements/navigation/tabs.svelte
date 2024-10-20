@@ -1,28 +1,27 @@
 <script lang="ts">
 	import TextLine from 'elements/text/textLine.svelte';
 	import { typeWorkaround } from 'types/workaround';
+	import type { Menu } from 'types/provideTypes';
+	import { goto } from '$app/navigation';
 
-	export let entries: { entry: string; callback: Function }[];
+	export let entries: Menu;
+	export let classes: string = '';
 
 	let current: number = 0;
 
-	function setActive(index: number): void {
+	function setActive(index: number, url: string): void {
 		current = index;
-		callCallback();
-	}
-
-	function callCallback(): void {
-		entries[current].callback();
+		goto(url);
 	}
 </script>
 
-<div class="wrapper global-tabs-wrapper">
+<div class="wrapper global-tabs-wrapper {classes}">
 	{#each entries as entry, index}
 		{#if index === current}
 			<div
 				class="entry active"
 				on:click={() => {
-					setActive(index);
+					setActive(index, entry.url);
 				}}
 				role="presentation"
 			>
@@ -30,18 +29,18 @@
 					class="button"
 					use:typeWorkaround={'button'}
 					on:click={() => {
-						setActive(index);
+						setActive(index, entry.url);
 					}}
-					aria-label="Klicke um zu {entry.entry} zu navigieren"
+					aria-label={entry.description}
 				>
-					<TextLine classes="entry-text">{entry.entry}</TextLine>
+					<TextLine classes="entry-text">{entry.name}</TextLine>
 				</button>
 			</div>
 		{:else}
 			<div
 				class="entry inactive"
 				on:click={() => {
-					setActive(index);
+					setActive(index, entry.url);
 				}}
 				role="presentation"
 			>
@@ -49,11 +48,11 @@
 					class="button"
 					use:typeWorkaround={'button'}
 					on:click={() => {
-						setActive(index);
+						setActive(index, entry.url);
 					}}
-					aria-label="Klicke um zu {entry.entry} zu navigieren"
+					aria-label={entry.description}
 				>
-					<TextLine classes="entry-text">{entry.entry}</TextLine>
+					<TextLine classes="entry-text">{entry.name}</TextLine>
 				</button>
 			</div>
 		{/if}

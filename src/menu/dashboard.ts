@@ -1,10 +1,8 @@
 import type { Menu, Roles } from "types/provideTypes";
 import * as Item from './menuItems'
 
-export function headerIn(roles: Roles): Menu {
-    let menu: Menu = [
-        Item.mainPage,
-    ];
+export function SectionIn(roles: Roles) {
+    let menu: Menu = [];
 
     if (roles.is_admin) {
         menu.push(Item.admin);
@@ -17,9 +15,13 @@ export function headerIn(roles: Roles): Menu {
     }
     menu.push(Item.user);
 
-    menu.push(Item.logout);
     return menu;
 }
+
+export const headerIn: Menu = [
+    Item.mainPage,
+    Item.logout,
+]
 
 export const footerIn: Menu = [
     Item.imprint,

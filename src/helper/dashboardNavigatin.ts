@@ -23,12 +23,12 @@ export async function defaultPermissionCheck(fetch: Function): Promise<Roles> {
 
 export function defaultNavigation(roles: Roles): void {
     if (roles.is_admin) {
-        throw redirect(302, '/dashboard/admin');
+        throw redirect(302, '/dashboard/admin/globals');
     } else if (roles.is_team_member) {
-        throw redirect(302, '/dashboard/team-member');
+        throw redirect(302, '/dashboard/team-member/test');
     } else if (roles.is_speaker) {
-        throw redirect(302, '/dashboard/speaker');
+        throw redirect(302, '/dashboard/speaker/test');
     } else {
-        throw redirect(302, '/dashboard/user');
+        throw redirect(302, '/dashboard/user/test');
     }
 }
