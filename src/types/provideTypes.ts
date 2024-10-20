@@ -1,5 +1,11 @@
 import { z } from 'zod';
 
+export const adminScheme = z.object({
+    default_year: z.number(),
+    footer_text: z.string(),
+})
+export type Admin = z.infer<typeof adminScheme>;
+
 export const rolesScheme = z.object({
     user_id: z.number(),
     email: z.string(),
