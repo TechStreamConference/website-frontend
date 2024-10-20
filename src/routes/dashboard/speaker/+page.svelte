@@ -1,9 +1,10 @@
 <script lang="ts">
-	import * as Menu from 'menu/dashboard';
-	import Header from 'elements/navigation/header.svelte';
-
 	import type { LoadSpeaker } from 'types/loadTypes';
 	export let data: LoadSpeaker; // data from database
+
+	import * as Menu from 'menu/dashboard';
+	import Header from 'elements/navigation/header.svelte';
+	import Footer from 'elements/navigation/footer.svelte';
 
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
@@ -11,8 +12,13 @@
 
 <Header menu={Menu.headerIn(data.roles)} />
 <div class="wrapper page-dashboard-speaker">
-	<HeadlinePage classes="headline">Speaker</HeadlinePage>
-	<TextLine classes="text" --text-align="center">TODO: Hier kommt das Beste Speaker hin.</TextLine>
+	<div class="content">
+		<HeadlinePage classes="headline">Speaker</HeadlinePage>
+		<TextLine classes="text" --text-align="center">TODO: Hier kommt das Beste Speaker hin.</TextLine
+		>
+	</div>
+
+	<Footer menu={Menu.footerIn} globals={data.globals} />
 </div>
 
 <style>
@@ -22,6 +28,12 @@
 		justify-content: center;
 		margin: 0 auto;
 		min-height: 100vh;
+	}
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
 	}
 
 	.page-dashboard-speaker :global(.headline) {
