@@ -7,7 +7,7 @@
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import LogoBig from 'elements/image/logoBig.svelte';
 
-	export let globals: Globals = { default_year: 0, footer_text: 'some text' }; // default values so that numbers can not fail because of undefiend
+	export let globals: Globals = { default_year: 0, footer_text: 'default text' }; // default values so that numbers can not fail because of undefined
 	export let menu: MenuItem[];
 
 	const currentYear: number = new Date().getFullYear();
