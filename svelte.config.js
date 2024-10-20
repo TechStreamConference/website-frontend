@@ -20,6 +20,7 @@ const config = {
 			'delete': 'src/toDelete',
 			'lookup': 'src/lookup',
 			'menu': 'src/menu',
+			'dashboard': 'src/dashboard',
 		}
 	}
 };
