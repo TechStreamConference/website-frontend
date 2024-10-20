@@ -3,7 +3,7 @@ import type { Year, Globals } from "types/provideTypes";
 import { yearScheme } from "types/provideTypes";
 
 
-import { checkAndParseGlobals, checkAndParseInputDataAsync } from "helper/parseJson";
+import { checkAndParseGlobalsAsync, checkAndParseInputDataAsync } from "helper/parseJson";
 import { apiUrl } from "helper/links";
 import { getLoginStatusAsync } from "helper/loggedIn";
 
@@ -26,7 +26,7 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
         `Serveranfrage für das Jahr ${year} nicht erfolgreich. throw error(404)`,
         `Unerwartete Daten für das Jahr ${year}. throw error(404)`
     );
-    const globalsData: Globals = await checkAndParseGlobals(await globalsPromise);
+    const globalsData: Globals = await checkAndParseGlobalsAsync(await globalsPromise);
 
     return {
         loggedIn,

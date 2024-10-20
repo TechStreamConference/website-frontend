@@ -35,7 +35,7 @@ export async function checkAndParseInputDataAsync<T>(response: Response, scheme:
     return data;
 }
 
-export async function checkAndParseGlobals(response: Response): Promise<Globals> {
+export async function checkAndParseGlobalsAsync(response: Response): Promise<Globals> {
     return await checkAndParseInputDataAsync<Globals>(
         response,
         globalsScheme,

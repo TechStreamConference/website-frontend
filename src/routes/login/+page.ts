@@ -2,7 +2,7 @@ import type { LoadLogin } from "types/loadTypes";
 import type { Globals } from "types/provideTypes";
 import { apiUrl } from "helper/links";
 import { getLoginStatusAsync } from "helper/loggedIn";
-import { checkAndParseGlobals } from "helper/parseJson";
+import { checkAndParseGlobalsAsync } from "helper/parseJson";
 
 export async function load({ fetch, url }: { fetch: typeof globalThis.fetch, url: URL }): Promise<LoadLogin> {
     // call
@@ -12,7 +12,7 @@ export async function load({ fetch, url }: { fetch: typeof globalThis.fetch, url
     // data
     const showLoginMessage: boolean = url.searchParams.get('showLoginMessage') === 'true';
     const loggedIn: boolean = await loggedInPromise;
-    const globalsData: Globals = await checkAndParseGlobals(await globalsPromise);
+    const globalsData: Globals = await checkAndParseGlobalsAsync(await globalsPromise);
 
     return {
         loggedIn,

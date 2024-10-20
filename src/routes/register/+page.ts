@@ -2,7 +2,7 @@ import type { LoadRegister } from 'types/loadTypes';
 import type { Globals } from 'types/provideTypes';
 
 import { getLoginStatusAsync } from 'helper/loggedIn';
-import { checkAndParseGlobals } from 'helper/parseJson';
+import { checkAndParseGlobalsAsync } from 'helper/parseJson';
 import { apiUrl } from 'helper/links';
 
 export async function load({ fetch }: { fetch: typeof globalThis.fetch }): Promise<LoadRegister> {
@@ -12,7 +12,7 @@ export async function load({ fetch }: { fetch: typeof globalThis.fetch }): Promi
 
     // data
     const loggedIn: boolean = await loggedInPromise;
-    const globalsData: Globals = await checkAndParseGlobals(await globalsPromise);
+    const globalsData: Globals = await checkAndParseGlobalsAsync(await globalsPromise);
 
     return {
         loggedIn,

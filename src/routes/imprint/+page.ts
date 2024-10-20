@@ -2,7 +2,7 @@ import type { LoadImprint } from "types/loadTypes";
 import type { Globals } from "types/provideTypes";
 import { apiUrl } from "helper/links";
 import { getLoginStatusAsync } from "helper/loggedIn";
-import { checkAndParseGlobals } from "helper/parseJson";
+import { checkAndParseGlobalsAsync } from "helper/parseJson";
 
 export async function load({ fetch }: { fetch: typeof globalThis.fetch }): Promise<LoadImprint> {
     // call
@@ -11,7 +11,7 @@ export async function load({ fetch }: { fetch: typeof globalThis.fetch }): Promi
 
     // data
     const loggedIn: boolean = await loggedInPromise;
-    const globalsData: Globals = await checkAndParseGlobals(await globalsPromise);
+    const globalsData: Globals = await checkAndParseGlobalsAsync(await globalsPromise);
 
     return {
         loggedIn,
