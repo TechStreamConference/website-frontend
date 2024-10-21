@@ -7,6 +7,9 @@
 
 <style>
 	.section {
-		margin: 0 auto 5rem;
+		margin-bottom: 5rem;
+		padding: 0 3rem;
+		width: 100%;
+		align-self: center;
 	}
 </style>

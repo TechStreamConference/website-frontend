@@ -74,7 +74,7 @@
 
 <style>
 	:global(.dashboard-admin-global-section) {
-		width: 50rem;
+		max-width: 70rem;
 	}
 	:global(.global-admin-form-headline) {
 		margin-bottom: 1rem;
