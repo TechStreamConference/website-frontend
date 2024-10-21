@@ -9,6 +9,7 @@
 	import Button from 'elements/input/button.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Message from 'elements/text/message.svelte';
+	import TextArea from 'elements/input/textArea.svelte';
 
 	let errorMessage: string = '';
 	let successMessage: string = '';
@@ -56,7 +57,7 @@
 			ariaLabel="Gib das aktuelle Jahr der Internetseite ein"
 			bind:value={data.admin.default_year}
 		/>
-		<Input
+		<TextArea
 			classes="admin-footer-description input"
 			id="admin-footer-description"
 			type="text"
@@ -74,7 +75,7 @@
 
 <style>
 	:global(.dashboard-admin-global-section) {
-		width: 50rem;
+		max-width: 70rem;
 	}
 	:global(.global-admin-form-headline) {
 		margin-bottom: 1rem;
