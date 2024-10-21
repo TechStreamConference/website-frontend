@@ -16,6 +16,7 @@
 		text-wrap: wrap;
 		text-align: var(--text-align);
 		width: var(--width);
+		white-space: pre-wrap;
 	}
 
 	.white {
