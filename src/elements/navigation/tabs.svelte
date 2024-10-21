@@ -66,7 +66,7 @@
 		justify-content: center;
 		border-bottom: 1px solid var(--line-color);
 		padding: 0 3rem;
-		margin: 2rem auto 0;
+		margin: 2rem auto 1rem;
 	}
 
 	.entry {
