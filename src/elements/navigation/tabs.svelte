@@ -110,4 +110,17 @@
 		border: none;
 		background-color: transparent;
 	}
+
+	@media (max-width: 600px) {
+		.entry {
+			margin: 0.5rem;
+			margin-bottom: 0;
+			padding: 0.5rem;
+			padding-bottom: 0.6rem;
+		}
+
+		.global-tabs-wrapper :global(.entry-text) {
+			font-size: 1rem;
+		}
+	}
 </style>
