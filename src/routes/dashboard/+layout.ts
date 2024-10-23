@@ -1,4 +1,4 @@
-import { defaultNavigation, defaultPermissionCheck } from "helper/dashboardNavigatin";
+import { defaultNavigation, defaultPermissionCheck } from "helper/dashboardNavigation";
 import { apiUrl } from "helper/links";
 import { checkAndParseGlobalsAsync } from "helper/parseJson";
 import type { LoadDashboard } from "types/loadTypes";
