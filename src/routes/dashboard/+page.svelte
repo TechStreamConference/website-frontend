@@ -2,4 +2,4 @@
 	import TextLine from 'elements/text/textLine.svelte';
 </script>
 
-<TextLine>redirect in dashboard...</TextLine>
+<TextLine>Weiterleitung im Dashboard...</TextLine>

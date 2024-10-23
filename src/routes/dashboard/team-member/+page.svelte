@@ -2,4 +2,4 @@
 	import TextLine from 'elements/text/textLine.svelte';
 </script>
 
-<TextLine>redirect in team member...</TextLine>
+<TextLine>Weiterleitung im Team-Member-Dashboard...</TextLine>

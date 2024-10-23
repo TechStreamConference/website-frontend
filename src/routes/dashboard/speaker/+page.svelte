@@ -2,4 +2,4 @@
 	import TextLine from 'elements/text/textLine.svelte';
 </script>
 
-<TextLine>redirect in speaker...</TextLine>
+<TextLine>Weiterleitung im Speaker-Dashboard...</TextLine>
