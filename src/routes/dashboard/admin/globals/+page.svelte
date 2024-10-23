@@ -4,7 +4,7 @@
 
 	import { apiUrl } from 'helper/links';
 
-	import SectionBackend from 'elements/section/sectionBackend.svelte';
+	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 
 	import Button from 'elements/input/button.svelte';
 	import Input from 'elements/input/input.svelte';
@@ -44,7 +44,7 @@
 	}
 </script>
 
-<SectionBackend classes="dashboard-admin-global-section">
+<SectionDashboard classes="dashboard-admin-global-section">
 	<Message message={errorMessage} />
 	<Message classes="success-color" message={successMessage} />
 	<form class="width-wrapper global-admin-form" on:submit|preventDefault={trySaveAsync}>
@@ -71,7 +71,7 @@
 			Speichern
 		</Button>
 	</form>
-</SectionBackend>
+</SectionDashboard>
 
 <style>
 	:global(.dashboard-admin-global-section) {
