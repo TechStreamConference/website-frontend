@@ -11,8 +11,11 @@
 <Header menu={Menu.headerIn} />
 <div class="wrapper page-dashboard-user">
 	<div class="section-wrapper">
-		<div class="section-spacer" />
-		<Tabs classes="page-dashboard-admin-section-navigation" entries={Menu.SectionIn(data.roles)} />
+		<Tabs
+			classes="page-dashboard-admin-section-navigation"
+			alignment="end"
+			entries={Menu.SectionIn(data.roles)}
+		/>
 	</div>
 	<div class="content">
 		<slot />
@@ -27,10 +30,6 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: end;
-	}
-
-	.section-spacer {
-		flex-grow: 1;
 	}
 
 	.wrapper {

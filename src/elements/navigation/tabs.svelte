@@ -6,6 +6,7 @@
 
 	export let entries: Menu;
 	export let classes: string = '';
+	export let alignment: string = 'center';
 
 	let current: number = 0;
 
@@ -15,7 +16,7 @@
 	}
 </script>
 
-<div class="wrapper global-tabs-wrapper {classes}">
+<div class="wrapper global-tabs-wrapper {classes} {alignment}">
 	{#each entries as entry, index}
 		{#if index === current}
 			<div
@@ -63,10 +64,18 @@
 	.wrapper {
 		display: flex;
 		flex-direction: row;
-		justify-content: center;
 		border-bottom: 1px solid var(--line-color);
 		padding: 0 3rem;
-		margin: 2rem auto 1rem;
+		margin: 2rem 0 1rem;
+		width: 100%;
+	}
+
+	.center {
+		justify-content: center;
+	}
+
+	.end {
+		justify-content: end;
 	}
 
 	.entry {
