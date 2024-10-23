@@ -5,7 +5,9 @@
 	export let ariaLabel: string;
 </script>
 
-<button class="hover-move {classes}" use:typeWorkaround={type} on:click aria-label={ariaLabel}><slot /></button>
+<button class="hover-move {classes}" use:typeWorkaround={type} on:click aria-label={ariaLabel}>
+	<slot />
+</button>
 
 <style>
 	button {

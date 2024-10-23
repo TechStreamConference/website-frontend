@@ -64,6 +64,7 @@
 			placeholderText="Footer Beschreibung"
 			ariaLabel="Gib den Text ein, der im Footer der Internetseite angezeigt werden soll"
 			bind:value={data.admin.footer_text}
+			on:submit={trySaveAsync}
 		/>
 
 		<Button classes="text submit-button" type={'submit'} ariaLabel="Klicke zum Speichern">

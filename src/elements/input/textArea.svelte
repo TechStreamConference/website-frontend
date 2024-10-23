@@ -1,6 +1,9 @@
 <script lang="ts">
 	import Label from 'elements/text/label.svelte';
 	import { typeWorkaround } from 'types/workaround';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
 
 	export let classes: string = '';
 	export let id: string;
@@ -11,6 +14,12 @@
 	export let value: string | number = '';
 	export let ariaLabel: string;
 	export let rows: number = 10;
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.ctrlKey && event.key === 'Enter') {
+			dispatch('submit');
+		}
+	}
 </script>
 
 <div class="wrapper text-area {classes}">
@@ -24,6 +33,7 @@
 		on:input
 		aria-label={ariaLabel}
 		{rows}
+		on:keydown={handleKeydown}
 	/>
 </div>
 
