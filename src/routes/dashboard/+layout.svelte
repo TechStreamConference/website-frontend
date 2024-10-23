@@ -15,6 +15,7 @@
 			classes="page-dashboard-admin-section-navigation"
 			alignment="end"
 			entries={Menu.SectionIn(data.roles)}
+			background="purple"
 		/>
 	</div>
 	<div class="content">

@@ -7,6 +7,7 @@
 	export let entries: Menu;
 	export let classes: string = '';
 	export let alignment: string = 'center';
+	export let background: string = 'background';
 
 	let current: number = 0;
 
@@ -16,11 +17,11 @@
 	}
 </script>
 
-<div class="wrapper global-tabs-wrapper {classes} {alignment}">
+<div class="wrapper global-tabs-wrapper {classes} {alignment} {background}">
 	{#each entries as entry, index}
 		{#if index === current}
 			<div
-				class="entry active"
+				class="entry active background"
 				on:click={() => {
 					setActive(index, entry.url);
 				}}
@@ -39,7 +40,7 @@
 			</div>
 		{:else}
 			<div
-				class="entry inactive"
+				class="entry inactive {background}"
 				on:click={() => {
 					setActive(index, entry.url);
 				}}
@@ -78,9 +79,16 @@
 		justify-content: end;
 	}
 
+	.purple {
+		background-color: var(--primary-color-dark);
+	}
+
+	.background {
+		background-color: var(--background-color);
+	}
+
 	.entry {
 		transform: translateY(1px);
-		background-color: var(--background-color);
 		transition: background-color var(--transition-duration);
 
 		margin: 1rem;
