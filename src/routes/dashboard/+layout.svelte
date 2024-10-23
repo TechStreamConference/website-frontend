@@ -16,6 +16,7 @@
 			alignment="end"
 			entries={Menu.SectionIn(data.roles)}
 			background="purple"
+			color="white"
 		/>
 	</div>
 	<div class="content">

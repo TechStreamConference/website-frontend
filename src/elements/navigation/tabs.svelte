@@ -8,6 +8,7 @@
 	export let classes: string = '';
 	export let alignment: string = 'center';
 	export let background: string = 'background';
+	export let color: string = '';
 
 	let current: number = 0;
 
@@ -54,7 +55,7 @@
 					}}
 					aria-label={entry.description}
 				>
-					<TextLine classes="entry-text">{entry.name}</TextLine>
+					<TextLine classes="entry-text {color}">{entry.name}</TextLine>
 				</button>
 			</div>
 		{/if}
