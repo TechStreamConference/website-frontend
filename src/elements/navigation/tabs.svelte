@@ -83,6 +83,8 @@
 		border-top-right-radius: var(--border-radius);
 		border-top-left-radius: var(--border-radius);
 		transition: border-color var(--transition-duration);
+
+		cursor: pointer;
 	}
 
 	.entry:hover {
@@ -109,6 +111,7 @@
 	.button {
 		border: none;
 		background-color: transparent;
+		cursor: pointer;
 	}
 
 	@media (max-width: 600px) {
