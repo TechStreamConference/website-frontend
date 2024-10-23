@@ -40,23 +40,23 @@ export const imprint: MenuItem = {
 export const admin: MenuItem = {
     name: 'Admin',
     url: '/dashboard/admin/globals',
-    description: 'Klicke, um zum Admin Dashboard zu gelangen',
+    description: 'Klicke, um zum Admin-Dashboard zu gelangen',
 }
 
 export const teamMember: MenuItem = {
     name: 'Team Member',
     url: '/dashboard/team-member/test',
-    description: 'Klicke, um zum Team Member Dashboard zu gelangen',
+    description: 'Klicke, um zum Team-Member-Dashboard zu gelangen',
 }
 
 export const speaker: MenuItem = {
     name: 'Speaker',
     url: '/dashboard/speaker/test',
-    description: 'Klicke, um zum Speaker Dashboard zu gelangen',
+    description: 'Klicke, um zum Speaker-Dashboard zu gelangen',
 }
 
 export const user: MenuItem = {
     name: 'User',
     url: '/dashboard/user/test',
-    description: 'Klicke, um zum User Dashboard zu gelangen',
+    description: 'Klicke, um zum User-Dashboard zu gelangen',
 }
