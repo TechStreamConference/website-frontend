@@ -7,12 +7,12 @@
 		{
 			name: 'Globals',
 			url: '/dashboard/admin/globals',
-			description: 'Klicke hier um zu den globalen Einstellungen im Admin Bereich zu gelangen.'
+			description: 'Klicke hier, um zu den globalen Einstellungen im Admin-Dashboard zu gelangen.'
 		},
 		{
 			name: 'entry 2',
 			url: '/dashboard/admin/test',
-			description: 'Klicke hier um zu TEST zu gelangen.'
+			description: 'Klicke hier, um zu TEST zu gelangen.'
 		}
 	];
 </script>
