@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type { LoadAdmin } from 'types/loadTypes';
-	export let data: LoadAdmin; // data from database
+	export let data; // data from database -- no typehint here because svelte provides data from both layout load functions is this valiable
 
 	import { apiUrl } from 'helper/links';
 

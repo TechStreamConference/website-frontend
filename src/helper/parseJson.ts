@@ -5,6 +5,9 @@ import type { ZodType } from "zod";
 export async function parseProvidedJsonAsync<T>(response: Response, scheme: ZodType<T>): Promise<T | undefined> {
     try {
         const type: T = await response.json();
+        if (import.meta.env.DEV) {
+            console.log(type);
+        }
         const validated = scheme.safeParse(type);
 
         if (validated.success) {
