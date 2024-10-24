@@ -30,7 +30,7 @@
 			<div class="column-wrapper align-center line">
 				<PersonImage classes="picture" {data} />
 				<SubHeadline classes="one-line-spacer">{data.name}</SubHeadline>
-				<Paragraph classes="paragraph">{data.short_bio}</Paragraph>
+				<Paragraph classes="paragraph prewrap">{data.short_bio}</Paragraph>
 				<PersonLinkGrid person={data.name} links={data.social_media_links} />
 			</div>
 			<div class="column-wrapper">

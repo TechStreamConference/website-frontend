@@ -51,7 +51,7 @@
 		</nav>
 
 		<div class="nav-element">
-			<Paragraph classes={'white'}>
+			<Paragraph classes={'white prewrap'}>
 				{globals.footer_text}
 			</Paragraph>
 		</div>
