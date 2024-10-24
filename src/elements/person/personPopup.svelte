@@ -10,18 +10,15 @@
 	export let data: Person;
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- No a11y correctness here because the "close-button" already does the same. -->
 <div
 	class="page-wrapper person-popup"
 	transition:fade={{ duration: 300 }}
-	aria-hidden="true"
+	role="presentation"
 	on:click
 >
 	<div
 		class="popup-wrapper"
-		aria-hidden="true"
+		role="presentation"
 		on:click={(event) => {
 			event.stopPropagation();
 		}}
