@@ -1,7 +1,7 @@
 import { apiUrl } from "helper/links";
 import { checkAndParseInputDataAsync } from "helper/parseJson";
 import type { LoadAdmin } from "types/loadTypes";
-import { adminScheme, type Admin, type Globals, type Roles } from "types/provideTypes";
+import { adminScheme, type Admin } from "types/provideTypes";
 
 export async function load({ fetch }: { fetch: typeof globalThis.fetch }): Promise<LoadAdmin> {
     // call
