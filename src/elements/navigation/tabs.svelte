@@ -2,7 +2,7 @@
 	import TextLine from 'elements/text/textLine.svelte';
 	import { typeWorkaround } from 'types/workaround';
 	import type { Menu } from 'types/provideTypes';
-	import { goto } from '$app/navigation';
+	import { goto, onNavigate } from '$app/navigation';
 
 	export let entries: Menu;
 	export let classes: string = '';
@@ -11,9 +11,14 @@
 	export let color: string = '';
 
 	let current: number = 0;
+	let next: number = 0;
+
+	onNavigate(() => {
+		current = next;
+	});
 
 	function setActive(index: number, url: string): void {
-		current = index;
+		next = index;
 		goto(url);
 	}
 </script>
