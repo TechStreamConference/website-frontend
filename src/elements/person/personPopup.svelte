@@ -10,7 +10,7 @@
 	export let data: Person;
 </script>
 
-<div
+<dialog
 	class="page-wrapper person-popup"
 	transition:fade={{ duration: 300 }}
 	role="presentation"
@@ -38,7 +38,7 @@
 	<Button classes="close-button picture" ariaLabel="close popup" on:click>
 		<img class="close-picture" src="/cross.png" alt="cross" />
 	</Button>
-</div>
+</dialog>
 
 <style>
 	.page-wrapper {
