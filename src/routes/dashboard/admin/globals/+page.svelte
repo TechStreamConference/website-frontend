@@ -10,6 +10,7 @@
 	import Input from 'elements/input/input.svelte';
 	import Message from 'elements/text/message.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
+	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
 
 	let errorMessage: string = '';
 	let successMessage: string = '';
@@ -30,6 +31,7 @@
 			setTimeout(() => {
 				resetSuccessMessage();
 			}, 3000);
+			resetUnsavedChanges();
 			return;
 		}
 
@@ -54,6 +56,7 @@
 			placeholderText="Aktuelles Jahr"
 			ariaLabel="Gib das aktuelle Jahr der Internetseite ein"
 			bind:value={data.admin.default_year}
+			on:input={setUnsavedChanges}
 		/>
 		<TextArea
 			classes="admin-footer-description input"
@@ -63,6 +66,7 @@
 			ariaLabel="Gib den Text ein, der im Footer der Internetseite angezeigt werden soll"
 			bind:value={data.admin.footer_text}
 			on:submit={trySaveAsync}
+			on:input={setUnsavedChanges}
 		/>
 
 		<Button classes="text submit-button" type={'submit'} ariaLabel="Klicke zum Speichern">
