@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Label from 'elements/text/label.svelte';
-	import { typeWorkaround } from 'types/workaround';
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
@@ -9,7 +8,6 @@
 	export let id: string;
 	export let labelText: string;
 
-	export let type: string;
 	export let placeholderText: string;
 	export let value: string | number = '';
 	export let ariaLabel: string;
@@ -26,7 +24,6 @@
 	<Label {id}>{labelText}</Label>
 	<textarea
 		{id}
-		use:typeWorkaround={type}
 		name={id}
 		placeholder={placeholderText}
 		bind:value
