@@ -1,34 +1,25 @@
 import { redirect } from '@sveltejs/kit';
-import { loginStatus } from 'stores/auth';
 import { apiUrl } from './links';
+import { checkAndParseInputDataAsync } from './parseJson';
+import { rolesScheme, type Roles } from 'types/provideTypes';
 
-async function fetchLoginStatusAsync(fetch: Function): Promise<boolean> {
+export async function fetchLoginStatusAsync(fetch: Function): Promise<boolean> {
     const response: Response = await fetch(apiUrl('/api/account/roles'));
     return response.ok;
 }
 
-export async function getLoginStatusAsync(fetch: Function): Promise<boolean> {
-    let status: boolean | null = null;
-    loginStatus.update(value => { status = value; return value; });
-
-    if (status === null) {
-        const fetchedStatus = await fetchLoginStatusAsync(fetch);
-        loginStatus.set(fetchedStatus);
-        return fetchedStatus;
+export async function redirectIfUnauthorizedOrReteturnRolesAsync(fetch: Function): Promise<Roles> {
+    const response: Response = await fetch(apiUrl('/api/account/roles'));
+    if (!response.ok) {
+        throw redirect(302, '/login?showLoginMessage=true');
     }
 
-    return status;
-}
+    const roles: Roles = await checkAndParseInputDataAsync<Roles>(
+        response,
+        rolesScheme,
+        `Serveranfrage für roles nicht erfolgreich. throw error(404)`,
+        `Unerwartete Daten für roles. throw error(404)`
+    );
 
-export async function redirectIfUnauthorizedAsync(fetch: Function) {
-    const status: boolean = await getLoginStatusAsync(fetch);
-    if (!status) {
-        redirect(302, '/login?showLoginMessage=true');
-    }
-    return status;
-}
-
-export async function udpateLoginStatusAsync(fetch: Function): Promise<void> {
-    const response: boolean = await fetchLoginStatusAsync(fetch);
-    loginStatus.set(response);
+    return roles;
 }
