@@ -11,6 +11,7 @@
 	import Message from 'elements/text/message.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
 	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
+	import DataResetter from 'elements/resetters/dataResetter.svelte';
 
 	let errorMessage: string = '';
 	let successMessage: string = '';
@@ -44,6 +45,7 @@
 	}
 </script>
 
+<DataResetter bind:data />
 <SectionDashboard classes="dashboard-admin-global-section">
 	<Message message={errorMessage} />
 	<Message classes="success-color" message={successMessage} />
