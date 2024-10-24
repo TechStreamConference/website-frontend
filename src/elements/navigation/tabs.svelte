@@ -20,45 +20,24 @@
 
 <div class="wrapper global-tabs-wrapper {classes} {alignment} {background}">
 	{#each entries as entry, index}
-		{#if index === current}
-			<div
-				class="entry active background"
+		<div
+			class="entry {index === current ? 'active background' : 'inactive ' + background}"
+			on:click={() => {
+				setActive(index, entry.url);
+			}}
+			role="presentation"
+		>
+			<button
+				class="button"
+				use:typeWorkaround={'button'}
 				on:click={() => {
 					setActive(index, entry.url);
 				}}
-				role="presentation"
+				aria-label={entry.description}
 			>
-				<button
-					class="button"
-					use:typeWorkaround={'button'}
-					on:click={() => {
-						setActive(index, entry.url);
-					}}
-					aria-label={entry.description}
-				>
-					<TextLine classes="entry-text">{entry.name}</TextLine>
-				</button>
-			</div>
-		{:else}
-			<div
-				class="entry inactive {background}"
-				on:click={() => {
-					setActive(index, entry.url);
-				}}
-				role="presentation"
-			>
-				<button
-					class="button"
-					use:typeWorkaround={'button'}
-					on:click={() => {
-						setActive(index, entry.url);
-					}}
-					aria-label={entry.description}
-				>
-					<TextLine classes="entry-text {color}">{entry.name}</TextLine>
-				</button>
-			</div>
-		{/if}
+				<TextLine classes="entry-text {index === current ? '' : color}">{entry.name}</TextLine>
+			</button>
+		</div>
 	{/each}
 </div>
 
