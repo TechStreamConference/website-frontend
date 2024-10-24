@@ -81,6 +81,9 @@
 		padding-bottom: 1.2rem;
 
 		cursor: pointer;
+
+		border-top-left-radius: var(--border-radius);
+		border-top-right-radius: var(--border-radius);
 	}
 
 	.entry:hover {
