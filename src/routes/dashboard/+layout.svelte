@@ -28,7 +28,6 @@
 
 <style>
 	.section-wrapper {
-		margin-top: 4rem;
 		display: flex;
 		flex-direction: row;
 		justify-content: end;

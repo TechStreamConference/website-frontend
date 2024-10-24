@@ -15,14 +15,14 @@
 
 	.text-headline-page :global(.headline) {
 		padding: 0 3rem;
-		margin-top: 9rem;
+		margin-top: 2rem;
 		width: fit-content;
 	}
 
 	@media (max-width: 1280px) {
 		.text-headline-page :global(.headline) {
 			padding: 0 2rem;
-			margin-top: 6rem;
+			margin-top: 1rem;
 			width: fit-content;
 		}
 	}
