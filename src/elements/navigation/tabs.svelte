@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div class="wrapper global-tabs-wrapper {classes} {alignment} {background}">
+<div class="global-tabs-wrapper {classes} {alignment} {background}">
 	{#each entries as entry, index}
 		<div
 			class="entry {index === current ? 'active background' : background}"
@@ -42,12 +42,12 @@
 </div>
 
 <style>
-	.wrapper {
+	.global-tabs-wrapper {
 		display: flex;
 		flex-direction: row;
 		border-bottom: 1px solid var(--line-color);
 		padding: 0 3rem;
-		margin: 2rem 0 1rem;
+		margin-bottom: 1rem;
 		width: 100%;
 	}
 
