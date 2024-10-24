@@ -1,5 +1,6 @@
 <script lang="ts">
-	export let data; // data from database -- no typehint here because svelte provides data from both layout load functions is this valiable
+	import type { LoadDashboard, LoadAdmin } from 'types/loadTypes.js';
+	export let data: LoadDashboard & LoadAdmin; // data from database
 
 	import { apiUrl } from 'helper/links';
 
@@ -22,8 +23,6 @@
 			method: 'PUT',
 			body: JSON.stringify(data.admin)
 		});
-
-		console.log(response);
 
 		if (response.ok) {
 			successMessage = 'Gespeichert';
