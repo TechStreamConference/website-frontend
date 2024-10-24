@@ -21,7 +21,7 @@
 <div class="wrapper global-tabs-wrapper {classes} {alignment} {background}">
 	{#each entries as entry, index}
 		<div
-			class="entry {index === current ? 'active background' : 'inactive ' + background}"
+			class="entry {index === current ? 'active background' : background}"
 			on:click={() => {
 				setActive(index, entry.url);
 			}}
@@ -68,18 +68,12 @@
 	}
 
 	.entry {
-		transform: translateY(1px);
 		transition: background-color var(--transition-duration);
 
 		margin: 1rem;
 		margin-bottom: 0;
 		padding: 1rem;
 		padding-bottom: 1.2rem;
-
-		border: 1px solid;
-		border-top-right-radius: var(--border-radius);
-		border-top-left-radius: var(--border-radius);
-		transition: border-color var(--transition-duration);
 
 		cursor: pointer;
 	}
@@ -90,15 +84,11 @@
 	}
 
 	.active {
-		border-color: var(--line-color);
+		transform: translateY(1px);
+		border: 1px solid var(--line-color);
+		border-top-right-radius: var(--border-radius);
+		border-top-left-radius: var(--border-radius);
 		border-bottom-color: transparent;
-		transition: border-color var(--transition-duration);
-	}
-
-	.inactive {
-		border-color: transparent;
-		border-bottom-color: var(--line-color);
-		transition: border-color var(--transition-duration);
 	}
 
 	.global-tabs-wrapper :global(.entry-text) {
