@@ -17,7 +17,8 @@
 	import { parseProvidedJsonAsync } from 'helper/parseJson';
 
 	onMount(async (): Promise<void> => {
-		const handleFail = () => {
+		const handleFail = async (response: Response) => {
+			console.error(await response.text());
 			data = {
 				default_year: 0,
 				footer_text: ''
@@ -28,19 +29,22 @@
 			// don't use `checkAndParseInputDataAsync<T>()` here because that could cause an `throw error(404)` loop
 			const response: Response = await fetch(apiUrl('/api/globals'));
 			if (!response.ok) {
-				handleFail();
+				handleFail(response);
 				return;
 			}
 
 			const provided = await parseProvidedJsonAsync<Globals>(response, globalsScheme);
 			if (!provided) {
-				handleFail();
+				handleFail(response);
 				return;
 			}
 
 			data = provided;
 		} catch (error) {
-			handleFail();
+			data = {
+				default_year: 0,
+				footer_text: ''
+			};
 			return;
 		}
 	});
