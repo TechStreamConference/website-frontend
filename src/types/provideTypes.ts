@@ -18,6 +18,7 @@ export type Roles = z.infer<typeof rolesScheme>;
 export const globalsScheme = z.object({
     default_year: z.number(),
     footer_text: z.string(),
+    years_with_events: z.array(z.number()),
 })
 export type Globals = z.infer<typeof globalsScheme>;
 
