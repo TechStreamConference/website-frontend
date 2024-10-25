@@ -12,6 +12,7 @@
 	import Input from 'elements/input/input.svelte';
 	import Message from 'elements/text/message.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
+	import DropDown from 'elements/input/dropDown.svelte';
 	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
 
 	let errorMessage: string = '';
@@ -52,14 +53,12 @@
 	<Message message={errorMessage} />
 	<Message classes="success-color" message={successMessage} />
 	<form class="width-wrapper global-admin-form" on:submit|preventDefault={trySaveAsync}>
-		<Input
-			classes="admin-default-year input"
-			id="admin-default-year"
-			type="number"
+		<DropDown
+			id="admin-default-year2"
 			labelText="Aktuelles Jahr:"
-			placeholderText="Aktuelles Jahr"
-			ariaLabel="Gib das aktuelle Jahr der Internetseite ein"
-			bind:value={copiedData.admin.default_year}
+			data={copiedData.globals.years_with_events}
+			bind:selected={copiedData.admin.default_year}
+			on:submit={trySaveAsync}
 			on:input={setUnsavedChanges}
 		/>
 		<TextArea
