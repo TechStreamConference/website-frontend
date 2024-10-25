@@ -4,14 +4,13 @@
 	import * as Menu from 'menu/login';
 
 	import { goto } from '$app/navigation';
-	import { udpateLoginStatusAsync } from 'helper/loggedIn';
 	import { apiUrl } from 'helper/links';
 
 	import Header from 'elements/navigation/header.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 
-	import ErrorMessage from 'elements/text/errorMessage.svelte';
+	import ErrorMessage from 'elements/text/message.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
 	import Link from 'elements/text/link.svelte';
@@ -37,8 +36,7 @@
 		});
 
 		if (response.ok) {
-			await udpateLoginStatusAsync(fetch);
-			goto('/backend');
+			goto('/dashboard');
 			return;
 		}
 

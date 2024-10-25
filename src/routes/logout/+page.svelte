@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { udpateLoginStatusAsync } from 'helper/loggedIn';
 	import { apiUrl } from 'helper/links';
 	import { onMount } from 'svelte';
 	import TextLine from 'elements/text/textLine.svelte';
@@ -10,7 +9,6 @@
 		if (!response.ok) {
 			return;
 		}
-		await udpateLoginStatusAsync(fetch);
 		goto('/');
 	}
 

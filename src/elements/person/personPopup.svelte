@@ -13,7 +13,12 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- No a11y correctness here because the "close-button" already does the same. -->
-<div class="page-wrapper person-popup" transition:fade={{ duration: 300 }} aria-hidden="true" on:click>
+<div
+	class="page-wrapper person-popup"
+	transition:fade={{ duration: 300 }}
+	aria-hidden="true"
+	on:click
+>
 	<div
 		class="popup-wrapper"
 		aria-hidden="true"
@@ -46,7 +51,7 @@
 		left: 0;
 		justify-content: center;
 		align-items: center;
-		background-color: var(--background-color-light);
+		background-color: var(--background-color-transparent);
 		width: 100%;
 		height: 100%;
 		z-index: 1000;
