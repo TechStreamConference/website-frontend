@@ -6,16 +6,12 @@
 	import Link from 'elements/text/link.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import LogoBig from 'elements/image/logoBig.svelte';
+	import { date } from 'zod';
 
-	export let globals: Globals = { default_year: 0, footer_text: 'default text' }; // default values so that numbers can not fail because of undefined
+	export let globals: Globals = { default_year: 0, footer_text: 'default text', years_with_events: [] }; // default values so that numbers can not fail because of undefined
 	export let menu: MenuItem[];
 
 	const currentYear: number = new Date().getFullYear();
-	const startYear: number = 2024;
-	$: numbers = Array.from(
-		{ length: globals.default_year + 1 - startYear },
-		(_, i) => startYear + i
-	);
 </script>
 
 <footer class="navigation-footer">
@@ -36,7 +32,7 @@
 		<nav class="nav-element">
 			<TextLine classes={'white'}>Alle Events:</TextLine>
 			<List classes="list">
-				{#each numbers as number}
+				{#each globals.years_with_events as number}
 					<ListElement>
 						<Link
 							classes={'standard white'}
