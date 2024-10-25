@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { LoadDashboard, LoadAdmin } from 'types/loadTypes.js';
+
 	export let data: LoadDashboard & LoadAdmin; // data from database
+	let copiedData: LoadDashboard & LoadAdmin = structuredClone(data); // copied data from database to not save original data until save
 
 	import { apiUrl } from 'helper/links';
 
@@ -11,11 +13,11 @@
 	import Message from 'elements/text/message.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
 	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
-	import DataResetter from 'elements/resetters/dataResetter.svelte';
 
 	let errorMessage: string = '';
 	let successMessage: string = '';
 	let successTimer: number | null = null;
+
 
 	async function trySaveAsync(): Promise<void> {
 		if (successTimer) {
@@ -23,7 +25,7 @@
 		}
 		const response: Response = await fetch(apiUrl('/api/dashboard/admin/globals'), {
 			method: 'PUT',
-			body: JSON.stringify(data.admin)
+			body: JSON.stringify(copiedData.admin)
 		});
 
 		if (response.ok) {
@@ -32,6 +34,7 @@
 			setTimeout(() => {
 				resetSuccessMessage();
 			}, 3000);
+			data = structuredClone(copiedData);
 			resetUnsavedChanges();
 			return;
 		}
@@ -45,7 +48,6 @@
 	}
 </script>
 
-<DataResetter bind:data />
 <SectionDashboard classes="dashboard-admin-global-section">
 	<Message message={errorMessage} />
 	<Message classes="success-color" message={successMessage} />
@@ -57,7 +59,7 @@
 			labelText="Aktuelles Jahr:"
 			placeholderText="Aktuelles Jahr"
 			ariaLabel="Gib das aktuelle Jahr der Internetseite ein"
-			bind:value={data.admin.default_year}
+			bind:value={copiedData.admin.default_year}
 			on:input={setUnsavedChanges}
 		/>
 		<TextArea
@@ -66,7 +68,7 @@
 			labelText="Footer Beschreibung:"
 			placeholderText="Footer Beschreibung"
 			ariaLabel="Gib den Text ein, der im Footer der Internetseite angezeigt werden soll"
-			bind:value={data.admin.footer_text}
+			bind:value={copiedData.admin.footer_text}
 			on:submit={trySaveAsync}
 			on:input={setUnsavedChanges}
 		/>
@@ -78,21 +80,25 @@
 </SectionDashboard>
 
 <style>
-	:global(.dashboard-admin-global-section) {
-		max-width: 70rem;
-	}
-	:global(.global-admin-form-headline) {
-		margin-bottom: 1rem;
-	}
-	.global-admin-form {
-		display: flex;
-		flex-direction: column;
-	}
-	.global-admin-form :global(.input) {
-		margin-top: 1rem;
-	}
-	.global-admin-form :global(.submit-button) {
-		margin-top: 3rem;
-		align-self: center;
-	}
+    :global(.dashboard-admin-global-section) {
+        max-width: 70rem;
+    }
+
+    :global(.global-admin-form-headline) {
+        margin-bottom: 1rem;
+    }
+
+    .global-admin-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .global-admin-form :global(.input) {
+        margin-top: 1rem;
+    }
+
+    .global-admin-form :global(.submit-button) {
+        margin-top: 3rem;
+        align-self: center;
+    }
 </style>
