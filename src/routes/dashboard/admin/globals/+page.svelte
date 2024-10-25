@@ -5,20 +5,18 @@
 	let copiedData: LoadDashboard & LoadAdmin = structuredClone(data); // copied data from database to not save original data until save
 
 	import { apiUrl } from 'helper/links';
+	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
+
 
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
-
 	import Button from 'elements/input/button.svelte';
-	import Input from 'elements/input/input.svelte';
 	import Message from 'elements/text/message.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
 	import DropDown from 'elements/input/dropDown.svelte';
-	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
 
 	let errorMessage: string = '';
 	let successMessage: string = '';
 	let successTimer: number | null = null;
-
 
 	async function trySaveAsync(): Promise<void> {
 		if (successTimer) {
