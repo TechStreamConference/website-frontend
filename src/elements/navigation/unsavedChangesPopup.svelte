@@ -28,22 +28,24 @@
 >
 	<div class="modal" on:click={(e) => e.stopPropagation()} role="presentation">
 		<SubHeadline>Es gibt ungespeicherte Änderungen</SubHeadline>
-		<Button
-			on:click={() => (intercepted = null)}
-			ariaLabel="Klicke hier, um auf der Seite zu bleiben"
-		>
-			Auf Seite bleiben
-		</Button>
-		<Button
-			on:click={() => {
+		<div class="button-wrapper">
+			<Button
+				on:click={() => (intercepted = null)}
+				ariaLabel="Klicke hier, um auf der Seite zu bleiben"
+			>
+				Auf Seite bleiben
+			</Button>
+			<Button
+				on:click={() => {
 				intercepted = null;
 				resetUnsavedChanges();
 				goto(url);
 			}}
-			ariaLabel="Klicke hier, um die Seite zu verlassen"
-		>
-			Seite verlassen
-		</Button>
+				ariaLabel="Klicke hier, um die Seite zu verlassen"
+			>
+				Seite verlassen
+			</Button>
+		</div>
 	</div>
 </dialog>
 
@@ -61,5 +63,22 @@
 
     dialog[open] {
         display: flex;
+    }
+
+    .modal {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--background-color-light);
+        padding: 3rem;
+        border: 1px solid var(--line-color);
+        border-radius: var(--border-radius);
+				gap: 1rem;
+				align-items: center;
+    }
+
+    .button-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
     }
 </style>
