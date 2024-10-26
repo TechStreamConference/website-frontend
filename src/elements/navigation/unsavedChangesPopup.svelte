@@ -27,7 +27,7 @@
 	transition:fade={{ duration: 300 }}
 >
 	<div class="modal" on:click={(e) => e.stopPropagation()} role="presentation">
-		<SubHeadline>Du hast ungespeicherte Nachrichten:</SubHeadline>
+		<SubHeadline>Es gibt ungespeicherte Änderungen</SubHeadline>
 		<Button
 			on:click={() => (intercepted = null)}
 			ariaLabel="Klicke hier, um auf der Seite zu bleiben">Auf Seite bleiben</Button
