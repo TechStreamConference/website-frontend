@@ -2,7 +2,7 @@
 	export let for_: string = '';
 </script>
 
-<label for={for_}><slot /></label>
+<label class= "normal-font" for={for_}><slot /></label>
 
 <style>
 	label {
