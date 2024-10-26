@@ -2,17 +2,12 @@
 	export let classes: string = '';
 </script>
 
-<p class={classes}><slot /></p>
+<p class="normal-font {classes}"><slot /></p>
 
 <style>
 	p {
 		font-size: 1rem;
-		letter-spacing: 1px;
 		line-height: 1.5rem;
-		font-family: gnuolane, sans-serif;
-		font-weight: 300;
-		font-style: normal;
-		color: var(--text-color);
 		text-wrap: wrap;
 		text-align: var(--text-align);
 		width: var(--width);
@@ -22,7 +17,7 @@
 		color: var(--white-color);
 	}
 
-	.prewrap {
+	.pre-wrap {
 		white-space: pre-wrap;
 	}
 </style>

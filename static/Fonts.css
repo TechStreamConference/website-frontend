@@ -1,0 +1,24 @@
+.headline-font{
+    letter-spacing: 1px;
+    font-family: proxima-nova, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: normal;
+    color: var(--text-color);
+}
+
+.sub-headline-font {
+    letter-spacing: 1px;
+    font-family: gnuolane, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: var(--text-color);
+}
+
+.normal-font {
+    letter-spacing: 1px;
+    font-family: gnuolane, sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    color: var(--text-color);
+}

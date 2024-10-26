@@ -3,17 +3,12 @@
 	export let id :string = "";
 </script>
 
-<p {id} class={classes}><slot /></p>
+<p {id} class="normal-font {classes}"><slot /></p>
 
 <style>
 	p {
 		font-size: 1rem;
-		letter-spacing: 1px;
 		line-height: 1.5rem;
-		font-family: gnuolane, sans-serif;
-		font-weight: 300;
-		font-style: normal;
-		color: var(--text-color);
 		text-align: var(--text-align);
 	}
 

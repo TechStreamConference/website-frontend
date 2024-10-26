@@ -1,26 +1,23 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
+	import TextLine from './textLine.svelte';
 	export let message: string = '';
 	export let classes: string = 'error-color';
 </script>
 
 {#if message !== ''}
-	<p class={classes} transition:fade={{ duration: 300 }}>{message}</p>
+	<p class="normal-font {classes}" transition:fade={{ duration: 300 }}>
+		<TextLine --text-align="center">
+			{message}
+		</TextLine>
+	</p>
 {/if}
 
 <style>
 	p {
-		color: var(--text-color);
 		padding: 0.5rem 1rem;
-		font-size: 1rem;
-		line-height: 1.5rem;
-		letter-spacing: 1px;
-		font-family: gnuolane, sans-serif;
-		font-weight: 500;
-		font-style: normal;
 		border-radius: var(--border-radius);
 		margin: 2px 0;
-		text-align: center;
 	}
 
 	.error-color {

@@ -3,16 +3,10 @@
 	export let classes: string = '';
 </script>
 
-<h2 class="{size} {classes}"><slot /></h2>
+<h2 class="headline-font {size} {classes}"><slot /></h2>
 
 <style>
 	h2 {
-		letter-spacing: 1px;
-		font-family: proxima-nova, sans-serif;
-		font-weight: 900;
-		text-transform: uppercase;
-		font-style: normal;
-		color: var(--text-color);
 		text-align: center;
 	}
 	.big {

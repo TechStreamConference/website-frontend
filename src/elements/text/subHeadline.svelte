@@ -3,16 +3,9 @@
 	export let size: string = 'big';
 </script>
 
-<h3 class="{classes} {size}"><slot /></h3>
+<h3 class="sub-headline-font {classes} {size}"><slot /></h3>
 
 <style>
-	h3 {
-		letter-spacing: 1px;
-		font-family: gnuolane, sans-serif;
-		font-weight: 500;
-		font-style: normal;
-		color: var(--text-color);
-	}
 	.big {
 		font-size: 1.5rem;
 		line-height: 2rem;

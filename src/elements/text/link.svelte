@@ -5,24 +5,19 @@
 	export let title: string;
 </script>
 
-<a {href} class={classes} target={newTab ? '_blank' : ''} rel="noopener noreferrer" {title}>
+<a {href} class="normal-font {classes}" target={newTab ? '_blank' : ''} rel="noopener noreferrer" {title}>
 	<slot />
 </a>
 
 <style>
 	a {
 		font-size: 1rem;
-		letter-spacing: 1px;
 		line-height: 1.5rem;
-		font-family: gnuolane, sans-serif;
-		font-weight: 300;
-		font-style: normal;
-		color: var(--text-color);
 		text-align: var(--text-align);
 		align-self: center;
 		padding: 3px;
 		border-radius: 5px;
-		background-color: none;
+		background-color: transparent;
 		text-decoration: none;
 		transition: var(--transition-duration);
 	}

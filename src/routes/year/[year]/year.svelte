@@ -92,7 +92,7 @@
 			<HeadlineH2 classes="border">{data.year.event.description_headline}</HeadlineH2>
 			<div class="discription-wrapper">
 				<div class="discription-text-wrapper">
-					<Paragraph classes="discription-paragraph prewrap"
+					<Paragraph classes="discription-paragraph pre-wrap"
 						>{data.year.event.description}</Paragraph
 					>
 					<YearEventLinks {data} />
