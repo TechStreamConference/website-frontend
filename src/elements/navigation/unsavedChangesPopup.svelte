@@ -30,8 +30,10 @@
 		<SubHeadline>Es gibt ungespeicherte Änderungen</SubHeadline>
 		<Button
 			on:click={() => (intercepted = null)}
-			ariaLabel="Klicke hier, um auf der Seite zu bleiben">Auf Seite bleiben</Button
+			ariaLabel="Klicke hier, um auf der Seite zu bleiben"
 		>
+			Auf Seite bleiben
+		</Button>
 		<Button
 			on:click={() => {
 				intercepted = null;
@@ -46,18 +48,18 @@
 </dialog>
 
 <style>
-	dialog {
-		top: 0;
-		left: 0;
-		height: 100vh;
-		width: 100vw;
-		background-color: var(--background-color-transparent);
-		z-index: 20;
-		justify-content: center;
-		align-items: center;
-	}
+    dialog {
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: var(--background-color-transparent);
+        z-index: 20;
+        justify-content: center;
+        align-items: center;
+    }
 
-	dialog[open] {
-		display: flex;
-	}
+    dialog[open] {
+        display: flex;
+    }
 </style>
