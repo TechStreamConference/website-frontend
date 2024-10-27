@@ -172,7 +172,7 @@
 
 	.header-content {
 		justify-content: center;
-		margin: 11rem 3rem;
+		margin: var(--8x-margin) var(--4x-margin);
 		display: flex;
 	}
 
@@ -181,47 +181,47 @@
 	}
 
 	.header-text-wrapper {
-		margin-left: 3rem;
+		margin-left: var(--2x-margin);
 	}
 
 	.page-year :global(.subheadline) {
-		padding-bottom: 1rem;
+		padding-bottom: var(--full-padding);
 		border-bottom: 1px solid var(--secondary-color);
 	}
 
 	.page-year :global(.subtitle) {
-		margin: 2rem 0 1rem;
+		margin: var(--2x-margin) 0 var(--full-margin);
 	}
 
 	.discription-wrapper {
 		display: flex;
 		flex-direction: row;
-		margin-top: 2rem;
+		margin-top: var(--2x-margin);
 	}
 
 	.discription-text-wrapper {
 		display: flex;
 		flex-direction: column;
-		margin-right: 3rem;
+		margin-right: var(--2x-margin);
 	}
 
 	.page-year :global(.discription-paragraph) {
-		margin: 2rem 0;
+		margin: var(--2x-margin) 0;
 	}
 
 	.content-wrapper {
 		flex-grow: 1;
 		max-width: 100rem;
 		margin: 0 auto 10rem;
-		padding: 0 3rem;
+		padding: 0 var(--2x-padding);
 	}
 
 	.section-inner {
-		margin-top: 3rem;
+		margin-top: var(--2x-margin);
 	}
 
 	.video-wrapper {
-		margin: 2rem;
+		margin: var(--2x-margin);
 		width: calc(100% - 4rem);
 		height: auto;
 	}
@@ -240,7 +240,7 @@
 		}
 
 		.video-wrapper {
-			margin: 1rem;
+			margin: var(--full-margin);
 			width: calc(100% - 2rem);
 		}
 	}

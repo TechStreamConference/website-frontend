@@ -244,7 +244,7 @@
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
-		margin: 0 3rem;
+		margin: 0 var(--2x-margin);
 	}
 
 	a {
@@ -254,7 +254,7 @@
 	.width-wrapper {
 		width: 100%;
 		max-width: 50rem;
-		margin: 0 auto 5rem;
+		margin: 0 auto var(--4x-margin);
 		display: flex;
 		flex-direction: column;
 	}
@@ -262,19 +262,19 @@
 	.message-wrapper {
 		display: flex;
 		flex-direction: column;
-		margin: 3rem auto 2rem;
+		margin: var(--2x-margin) auto;
 	}
 
 	.page-register :global(.input-line) {
-		margin-bottom: 1rem;
+		margin-bottom: var(--full-margin);
 	}
 
 	.page-register :global(.submit-button) {
-		margin: 3rem auto 0;
+		margin: var(--2x-margin) auto 0;
 	}
 
 	.page-register :global(.password-text-line) {
-		margin: 3rem 0 1.5rem;
+		margin: var(--2x-margin) 0 var(--full-margin);
 	}
 
 	.password-list-wrapper {
@@ -285,7 +285,7 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-evenly;
-		margin-top: 6rem;
+		margin-top: var(--4x-margin);
 	}
 
 	@media (max-width: 1280px) {
@@ -295,6 +295,6 @@
 	}
 
 	.page-register :global(.registered-text-line) {
-		margin: 7rem 0 2rem;
+		margin: var(--4x-margin) 0 var(--2x-margin);
 	}
 </style>

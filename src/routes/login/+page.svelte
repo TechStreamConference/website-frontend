@@ -99,7 +99,7 @@
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
-		margin: 0 3rem;
+		margin: 0 var(--2x-margin);
 	}
 
 	.width-wrapper {
@@ -113,19 +113,19 @@
 	.message-wrapper {
 		display: flex;
 		flex-direction: column;
-		margin: 3rem auto 2rem;
+		margin: var(--2x-margin) auto;
 	}
 
 	.page-login :global(.username-mail) {
-		margin-bottom: 1rem;
+		margin-bottom: var(--full-margin);
 	}
 
 	.page-login :global(.password) {
-		margin-bottom: 1.5rem;
+		margin-bottom: var(--full-margin);
 	}
 
 	.page-login :global(.button) {
-		margin: 3rem auto 5rem;
+		margin: var(--2x-margin) auto var(--4x-margin);
 	}
 
 	@media (max-width: 1280px) {
