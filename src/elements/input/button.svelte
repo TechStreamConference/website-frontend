@@ -1,9 +1,12 @@
 <script lang="ts">
-	import { typeWorkaround } from 'types/workaround';
 	import TextLine from 'elements/text/textLine.svelte';
-	export let type: string = 'button';
-	export let classes: string = 'text';
+
+	import { typeWorkaround } from 'types/workaround';
+
 	export let ariaLabel: string;
+
+	export let classes: string = 'text';
+	export let type: string = 'button';
 </script>
 
 <button class="hover-move {classes}" use:typeWorkaround={type} on:click aria-label={ariaLabel}>
@@ -19,6 +22,6 @@
 	}
 
 	.text {
-		padding: var(--full-padding) var(--2x-padding);
+		padding: var(--2x-padding) var(--4x-padding);
 	}
 </style>

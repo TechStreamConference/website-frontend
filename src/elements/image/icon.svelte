@@ -1,8 +1,9 @@
 <script lang="ts">
 	import '@fortawesome/fontawesome-free/css/all.min.css';
 
-	export let classes:string = "";
 	export let type: string;
+
+	export let classes:string = "";
 
 	import { iconLookup } from 'lookup/iconLookup';
 </script>

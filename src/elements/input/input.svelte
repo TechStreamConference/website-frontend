@@ -1,17 +1,20 @@
 <script lang="ts">
 	import { typeWorkaround } from 'types/workaround';
+
 	import Label from 'elements/text/label.svelte';
+
+	export let ariaLabel: string;
 
 	export let classes: string = '';
 	export let type: string = '';
 	export let id: string = '';
 	export let labelText: string = '';
 	export let placeholderText: string = '';
+
 	export let value: string | number = '';
-	export let ariaLabel: string;
 </script>
 
-<div class="wrapper input-line {classes}">
+<div class="{classes}">
 	<Label for_={id}>{labelText}</Label>
 	<input
 		class="normal-font"
@@ -26,7 +29,7 @@
 </div>
 
 <style>
-	.wrapper {
+	div {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
@@ -39,5 +42,6 @@
 		border: none;
 		padding: var(--half-padding);
 		width: 100%;
+		font-size: var(--full-font-size);
 	}
 </style>

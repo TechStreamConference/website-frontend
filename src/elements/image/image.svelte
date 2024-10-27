@@ -1,7 +1,8 @@
 <script lang="ts">
-	export let classes: string = 'image-default';
 	export let alt: string;
 	export let src: string;
+
+	export let classes: string = 'image-default';
 </script>
 
 <img class={classes} {src} {alt} />

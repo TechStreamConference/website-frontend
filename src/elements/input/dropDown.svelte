@@ -1,14 +1,16 @@
 <script lang="ts">
 	import Label from 'elements/text/label.svelte';
+
 	import { createEventDispatcher } from 'svelte';
 
-	const dispatch = createEventDispatcher();
-
+	export let classes:string = "";
 	export let id: string;
 	export let labelText: string;
 
 	export let data: unknown[];
 	export let selected: unknown;
+
+	const dispatch = createEventDispatcher();
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.ctrlKey && event.key === 'Enter') {
@@ -17,7 +19,7 @@
 	}
 </script>
 
-<div class="drop-down-wrapper">
+<div class="{classes}">
 	<Label for_={id}>{labelText}</Label>
 	<select class="normal-font" {id} bind:value={selected} on:input on:keydown={handleKeydown}>
 		{#each data as entry}
@@ -27,7 +29,7 @@
 </div>
 
 <style>
-    .drop-down-wrapper {
+    div {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -39,5 +41,6 @@
         border-radius: var(--border-radius);
         padding: var(--half-padding);
         width: 100%;
+				font-size: var(--full-font-size);
     }
 </style>

@@ -1,9 +1,12 @@
 <script lang="ts">
 	import type { SocialMediaLink } from 'types/provideTypes';
+
 	import Icon from './icon.svelte';
 
-	export let classes :string = "";
 	export let title: string;
+
+	export let classes :string = "";
+
 	export let linkType: SocialMediaLink;
 </script>
 

@@ -4,17 +4,19 @@
 	import Link from 'elements/text/link.svelte';
 	import Icon from 'elements/image/icon.svelte';
 
+	export let classes:string="";
+
 	export let data: LoadYear;
 </script>
 
-<div class="wrapper">
+<div class="year-event-links-wrapper {classes}">
 	<Link
 		href={data.year.event.discord_url}
 		classes="hover-move white"
 		newTab={true}
 		title="Klicke hier, um auf den Discord-Server der Tech Stream Conference zu gelangen"
 	>
-		<div class="entry-wrapper">
+		<div class="year-event-links-entry-wrapper">
 			<Icon type="Discord" />
 			Sei dabei
 		</div>
@@ -25,7 +27,7 @@
 		newTab={true}
 		title="Klicke hier, um auf die Twitch-Seite der Tech Stream Conference zu gelangen"
 	>
-		<div class="entry-wrapper">
+		<div class="year-event-links-entry-wrapper">
 			<Icon type="Twitch" />
 			Schau zu
 		</div>
@@ -36,7 +38,7 @@
 		newTab={true}
 		title="Klicke hier, um das Presskit der Tech Stream Conference herunterzuladen"
 	>
-		<div class="entry-wrapper">
+		<div class="year-event-links-entry-wrapper">
 			<Icon type="Download" />
 			Presskit
 		</div>
@@ -44,13 +46,13 @@
 </div>
 
 <style>
-    .wrapper {
+    .year-event-links-wrapper {
         display: flex;
         gap: var(--full-gap);
         flex-wrap: wrap;
     }
 
-    .entry-wrapper {
+    .year-event-links-entry-wrapper {
         display: flex;
         align-items: center;
         gap: var(--half-gap);
