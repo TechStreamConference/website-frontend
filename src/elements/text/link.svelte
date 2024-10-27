@@ -15,8 +15,8 @@
 		line-height: 1.5rem;
 		text-align: var(--text-align);
 		align-self: center;
-		padding: 3px;
-		border-radius: 5px;
+		padding: var(--quad-padding);
+		border-radius: var(--border-radius);
 		background-color: transparent;
 		text-decoration: none;
 		transition: var(--transition-duration);

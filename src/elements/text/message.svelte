@@ -15,9 +15,9 @@
 
 <style>
 	p {
-		padding: 0.5rem 1rem;
+		padding: var(--half-padding) var(--full-padding);
 		border-radius: var(--border-radius);
-		margin: 2px 0;
+		margin: var(--quad-margin) 0;
 	}
 
 	.error-color {
