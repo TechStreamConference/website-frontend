@@ -1,6 +1,7 @@
 <script lang="ts">
-	export let classes: string = '';
 	import Image from "./image.svelte";
+
+	export let classes: string = '';
 </script>
 
 <Image

@@ -1,9 +1,10 @@
 <script lang="ts">
+	export let classes:string = "";
 	export let title: string;
 	export let id: string;
 </script>
 
-<div class="video-wrapper">
+<div class="{classes}">
 	<iframe
 		width="100%"
 		height="100%"
@@ -16,13 +17,13 @@
 </div>
 
 <style>
-	.video-wrapper {
+	div {
 		position: relative;
 		height: 0;
 		padding-bottom: 56.25%;
 	}
 
-	.video-wrapper iframe {
+	iframe {
 		position: absolute;
 		top: 0;
 		left: 0;
