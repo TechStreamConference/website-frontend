@@ -27,7 +27,7 @@
 	transition:fade={{ duration: 300 }}
 >
 	<div class="modal" on:click={(e) => e.stopPropagation()} role="presentation">
-		<SubHeadline>Es gibt ungespeicherte Änderungen</SubHeadline>
+		<SubHeadline classes="white">Es gibt ungespeicherte Änderungen</SubHeadline>
 		<div class="button-wrapper">
 			<Button
 				on:click={() => (intercepted = null)}
