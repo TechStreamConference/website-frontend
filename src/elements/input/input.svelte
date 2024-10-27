@@ -14,6 +14,7 @@
 <div class="wrapper input-line {classes}">
 	<Label for_={id}>{labelText}</Label>
 	<input
+		class="normal-font"
 		{id}
 		use:typeWorkaround={type}
 		name={id}
@@ -32,17 +33,11 @@
 	}
 
 	input {
-		font-size: 1rem;
-		line-height: 1.5rem;
-		letter-spacing: 1px;
-		font-family: gnuolane, sans-serif;
-		font-weight: 500;
-		font-style: normal;
 		color: var(--white-color);
 		background-color: var(--primary-color-light);
 		border-radius: var(--border-radius);
 		border: none;
-		padding: 0.5rem;
+		padding: var(--half-padding);
 		width: 100%;
 	}
 </style>

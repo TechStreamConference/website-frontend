@@ -19,7 +19,7 @@
 
 <div class="drop-down-wrapper">
 	<Label for_={id}>{labelText}</Label>
-	<select {id} bind:value={selected} on:input on:keydown={handleKeydown}>
+	<select class="normal-font" {id} bind:value={selected} on:input on:keydown={handleKeydown}>
 		{#each data as entry}
 			<option value={entry}>{entry}</option>
 		{/each}
@@ -34,16 +34,10 @@
     }
 
     select {
-        font-size: 1rem;
-        line-height: 1.5rem;
-        letter-spacing: 1px;
-        font-family: gnuolane, sans-serif;
-        font-weight: 500;
-        font-style: normal;
         color: var(--white-color);
         background-color: var(--primary-color-light);
         border-radius: var(--border-radius);
-        padding: 0.5rem;
+        padding: var(--half-padding);
         width: 100%;
     }
 </style>

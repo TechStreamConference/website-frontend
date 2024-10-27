@@ -23,6 +23,7 @@
 <div class="wrapper text-area {classes}">
 	<Label for_={id}>{labelText}</Label>
 	<textarea
+		class="normal-font"
 		{id}
 		name={id}
 		placeholder={placeholderText}
@@ -43,17 +44,11 @@
 	}
 
 	.text-area :global(textarea) {
-		font-size: 1rem;
-		line-height: 1.5rem;
-		letter-spacing: 1px;
-		font-family: gnuolane, sans-serif;
-		font-weight: 500;
-		font-style: normal;
 		color: var(--white-color);
 		background-color: var(--primary-color-light);
 		border-radius: var(--border-radius);
 		border: none;
-		padding: 0.5rem;
+		padding: var(--half-padding);
 		width: 100%;
 		height: 100%;
 		overflow: auto;
