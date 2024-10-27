@@ -1,14 +1,16 @@
 <script lang="ts">
 	import type { LoadDashboard } from 'types/loadTypes';
-	export let data: LoadDashboard; // data from database
-	import { unsavedChanges, resetUnsavedChanges } from 'stores/saved';
 
 	import * as Menu from 'menu/dashboard';
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 	import Tabs from 'elements/navigation/tabs.svelte';
-	import { onMount } from 'svelte';
 	import UnsavedChangesPopup from 'elements/navigation/unsavedChangesPopup.svelte';
+
+	import { onMount } from 'svelte';
+	import { unsavedChanges, resetUnsavedChanges } from 'stores/saved';
+
+	export let data: LoadDashboard; // data from database
 
 	onMount(() => {
 		resetUnsavedChanges();
@@ -22,17 +24,16 @@
 
 <UnsavedChangesPopup />
 <Header menu={Menu.headerIn} />
-<div class="wrapper page-dashboard-user">
-	<div class="section-wrapper">
+<div class="dashboard-wrapper">
+	<div class="dashboard-section-wrapper">
 		<Tabs
-			classes="page-dashboard-admin-section-navigation"
-			alignment="end"
+			alignment="navigation-tabs-end"
 			entries={Menu.SectionIn(data.roles)}
-			background="purple"
-			color="white"
+			background="navigation-tabs-purple"
+			color="navigation-tabs-white"
 		/>
 	</div>
-	<div class="content">
+	<div class="dashboard-content">
 		<slot />
 	</div>
 
@@ -40,35 +41,23 @@
 </div>
 
 <style>
-	.section-wrapper {
+    .dashboard-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 auto;
+        min-height: 100vh;
+    }
+
+	.dashboard-section-wrapper {
 		display: flex;
 		flex-direction: row;
 		justify-content: end;
 	}
 
-	.wrapper {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		margin: 0 auto;
-		min-height: 100vh;
-	}
-
-	.content {
+	.dashboard-content {
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
-	}
-
-	.page-dashboard-user :global(.headline) {
-		margin-bottom: var(--2x-margin);
-	}
-
-	.page-dashboard-user :global(.text) {
-		margin-bottom: var(--4x-margin);
-	}
-
-	.page-dashboard-user :global(.button) {
-		margin: 0 auto;
 	}
 </style>

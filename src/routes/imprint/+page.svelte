@@ -15,7 +15,7 @@
 
 <Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
 
-<div class="page page-imprint">
+<div class="page-imprint">
 	<div class="content-wrapper">
 		<HeadlinePage classes="headline">Impressum</HeadlinePage>
 
