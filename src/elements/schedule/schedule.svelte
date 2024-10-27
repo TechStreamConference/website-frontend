@@ -26,11 +26,11 @@
 {#if schedule[0]}
 	<div class="schedule-element">
 		{#if schedule[0].is_special}
-			<!-- only using first element here because all elemenets schould be the same by now -->
+			<!-- only using first element here because all elements should be the same by now -->
 			<SubHeadline>Bonusinhalte auf Youtube:</SubHeadline>
 		{/if}
 		<SubHeadline classes="subheadline-schedule">
-			<!-- only using first element here because all elemenets schould be the same by now -->
+			<!-- only using first element here because all elements should be the same by now -->
 			{formatDate(schedule[0].starts_at, '%d, %DD.%MM.%YYYY')}
 		</SubHeadline>
 		<div class="day">
@@ -43,19 +43,19 @@
 
 <style>
 	.schedule-element {
-		margin-bottom: 3rem;
+		margin-bottom: var(--2x-margin);
 	}
 
 	.schedule-element :global(.subheadline-schedule) {
 		border-bottom: 1px solid var(--text-color);
-		margin-bottom: 2rem;
-		padding-bottom: 0.2rem;
+		margin-bottom: var(--2x-margin);
+		padding-bottom: var(--quad-padding);
 	}
 
 	.day {
 		display: grid;
 		grid-template-columns: 10rem 1fr;
-		row-gap: 2rem;
-		margin: 0 2rem;
+		row-gap: var(--2x-gap);
+		margin: 0 var(--2x-margin);
 	}
 </style>

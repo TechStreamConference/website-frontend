@@ -25,7 +25,7 @@
 <style>
 	.schedule-entry :global(.tag) {
 		border-radius: var(--border-radius);
-		padding: 0.1rem 0.3rem 0.1rem 0.3rem;
-		margin: 0.2rem 0.3rem 0.2rem 0.3rem;
+		padding: var(--quad-padding);
+		margin: var(--quad-padding);
 	}
 </style>

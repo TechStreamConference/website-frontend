@@ -34,7 +34,7 @@
 <style>
 	.horizontal-line {
 		border-bottom: 1px solid var(--text-color);
-		padding-bottom: 2rem;
+		padding-bottom: var(--2x-padding);
 	}
 	.entry-wrapper {
 		display: flex;
@@ -48,10 +48,10 @@
 	}
 
 	.schedule-entry :global(.subheadline-entry) {
-		margin-right: 1rem;
+		margin-right: var(--full-margin);
 	}
 
 	.horizontal-line :global(.time) {
-		margin-left: 1rem;
+		margin-left: var(--full-margin);
 	}
 </style>
