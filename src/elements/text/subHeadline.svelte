@@ -7,12 +7,12 @@
 
 <style>
 	.big {
-		font-size: 1.5rem;
-		line-height: 2rem;
+		font-size: var(--1-5x-font-size);
+		line-height: var(--1-5x-line-height);
 	}
 	.small {
-		font-size: 1.2rem;
-		line-height: 1.7rem;
+		font-size: var(--full-font-size);
+		line-height: var(--full-line-height);
 	}
 
 	.white {

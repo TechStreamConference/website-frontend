@@ -6,8 +6,8 @@
 
 <style>
 	p {
-		font-size: 1rem;
-		line-height: 1.5rem;
+		font-size: var(--full-font-size);
+		line-height: var(--full-line-height);
 		text-wrap: wrap;
 		text-align: var(--text-align);
 		width: var(--width);

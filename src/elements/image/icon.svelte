@@ -7,19 +7,19 @@
 </script>
 
 <div class="icon">
-	<i class="fa {iconLookup(type)}" aria-hidden="true"/>
+	<i class="fa {iconLookup(type)}" aria-hidden="true" />
 </div>
 
 <style>
-	.icon {
-		display: inline-block;
-		color: var(--secondary-color);
-		font-size: 1.6rem;
-		line-height: 2.3rem;
-		text-align: center;
-		padding: 0.2rem;
-		border-radius: var(--border-radius);
-		height: 2.5rem;
-		width: 2.5rem;
-	}
+    .icon {
+        display: inline-block;
+        color: var(--secondary-color);
+        font-size: var(--1-5x-font-size);
+        line-height: var(--1-5x-line-height);
+        text-align: center;
+        padding: var(--quad-padding);
+        border-radius: var(--border-radius);
+        height: 2.5rem;
+        width: 2.5rem;
+    }
 </style>

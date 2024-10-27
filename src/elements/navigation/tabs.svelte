@@ -75,10 +75,10 @@
 	.entry {
 		transition: background-color var(--transition-duration);
 
-      margin: var(--full-margin) var(--full-margin) 0;
-      padding: var(--full-padding);
+    margin: var(--full-margin) var(--full-margin) 0;
+    padding: var(--full-padding);
 
-      cursor: pointer;
+    cursor: pointer;
 
 		border-top-left-radius: var(--border-radius);
 		border-top-right-radius: var(--border-radius);
@@ -98,7 +98,7 @@
 	}
 
 	.global-tabs-wrapper :global(.entry-text) {
-		font-size: 1.5rem;
+		font-size: var(--1-5x-font-size);
 	}
 
 	.button {
@@ -114,7 +114,7 @@
     }
 
 		.global-tabs-wrapper :global(.entry-text) {
-			font-size: 1rem;
+			font-size: var(--full-font-size);
 		}
 	}
 </style>

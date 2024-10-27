@@ -9,26 +9,26 @@
 	h2 {
 		text-align: center;
 	}
-	.big {
-		font-size: 3rem;
-		line-height: 4rem;
-	}
-	.small {
-		font-size: 2rem;
-		line-height: 3rem;
-	}
+  .big {
+      font-size: var(--4x-font-size);
+      line-height: var(--4x-line-height);
+  }
+  .small {
+      font-size: var(--2x-font-size);
+      line-height: var(--2x-line-height);
+  }
 	.border {
 		border-bottom: 1px solid var(--line-color);
 	}
 
-	@media (max-width: 600px) {
-		.big {
-			font-size: 2rem;
-			line-height: 3rem;
-		}
-		.small {
-			font-size: 1rem;
-			line-height: 1.5rem;
-		}
-	}
+  @media (max-width: 600px) {
+      .big {
+          font-size: var(--2x-font-size);
+          line-height: var(--2x-line-height);
+      }
+      .small {
+          font-size: var(--full-font-size);
+          line-height: var(--full-line-height);
+      }
+  }
 </style>

@@ -10,12 +10,12 @@
 		text-align: center;
 	}
 	.big {
-		font-size: 3rem;
-		line-height: 4rem;
+		font-size: var(--4x-font-size);
+		line-height: var(--4x-line-height);
 	}
 	.small {
-		font-size: 2rem;
-		line-height: 3rem;
+		font-size: var(--2x-font-size);
+		line-height: var(--2x-line-height);
 	}
 
 	.border {
@@ -32,12 +32,12 @@
 
 	@media (max-width: 600px) {
 		.big {
-			font-size: 2rem;
-			line-height: 3rem;
+			font-size: var(--2x-font-size);
+			line-height: var(--2x-line-height);
 		}
 		.small {
-			font-size: 1rem;
-			line-height: 1.5rem;
+			font-size: var(--full-font-size);
+			line-height: var(--full-line-height);
 		}
 	}
 </style>
