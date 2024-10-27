@@ -6,9 +6,8 @@
 	import Link from 'elements/text/link.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import LogoBig from 'elements/image/logoBig.svelte';
-	import { date } from 'zod';
 
-	export let globals: Globals = { default_year: 0, footer_text: 'default text', years_with_events: [] }; // default values so that numbers can not fail because of undefined
+	export let globals: Globals;
 	export let menu: MenuItem[];
 
 	const currentYear: number = new Date().getFullYear();
