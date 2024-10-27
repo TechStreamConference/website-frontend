@@ -5,7 +5,6 @@
     --2x-margin: 2rem;
     --4x-margin: 4rem;
     --8x-margin: 8rem;
-    --16x-margin: 16rem;
 
     --quad-padding: 0.25rem;
     --half-padding: 0.5rem;
@@ -13,7 +12,6 @@
     --2x-padding: 2rem;
     --4x-padding: 4rem;
     --8x-padding: 8rem;
-    --16x-padding: 16rem;
 
     --quad-gap: 0.25rem;
     --half-gap: 0.5rem;
@@ -21,5 +19,4 @@
     --2x-gap: 2rem;
     --4x-gap: 4rem;
     --8x-gap: 8rem;
-    --16x-gap: 16rem;
 }
