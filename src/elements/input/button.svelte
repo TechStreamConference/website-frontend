@@ -5,7 +5,7 @@
 
 	export let ariaLabel: string;
 
-	export let classes: string = 'text';
+	export let classes: string = 'button-text';
 	export let type: string = 'button';
 </script>
 
@@ -21,7 +21,7 @@
 		justify-self: center;
 	}
 
-	.text {
+	.button-text {
 		padding: var(--2x-padding) var(--4x-padding);
 	}
 </style>

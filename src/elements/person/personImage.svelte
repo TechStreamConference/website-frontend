@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { imageUrl } from 'helper/links';
 	import type { Person } from 'types/provideTypes';
 
+	import { imageUrl } from 'helper/links';
+
 	export let classes: string = '';
+
 	export let data: Person;
 </script>
 

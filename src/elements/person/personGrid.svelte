@@ -1,13 +1,15 @@
 <script lang="ts">
 	import type { Person } from 'types/provideTypes';
+
 	import PersonRectangle from './personRectangle.svelte';
 
-	export let personData: Person[];
-
 	export let personPopupCallback: (event: Event, person: Person) => void;
+
+	export let classes: string="";
+	export let personData: Person[];
 </script>
 
-<div class="person-wrapper">
+<div class={classes}>
 	{#each personData as person}
 		<PersonRectangle
 			data={person}
@@ -19,7 +21,7 @@
 </div>
 
 <style>
-    .person-wrapper {
+    div {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: var(--2x-gap);
@@ -27,14 +29,14 @@
     }
 
     @media (max-width: 1280px) {
-        .person-wrapper {
+        div {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 
 
     @media (max-width: 960px) {
-        .person-wrapper {
+        div {
             grid-template-columns: repeat(2, 1fr);
         }
     }

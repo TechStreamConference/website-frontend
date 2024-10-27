@@ -1,47 +1,51 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	import type { Person } from 'types/provideTypes';
+
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import PersonLinkGrid from './personLinkGrid.svelte';
-	import type { Person } from 'types/provideTypes';
 	import PersonImage from './personImage.svelte';
 	import Button from 'elements/input/button.svelte';
+
+	import { fade } from 'svelte/transition';
+
+	export let classes:string = "";
 
 	export let data: Person;
 </script>
 
 <dialog
-	class="page-wrapper person-popup"
+	class={classes}
 	transition:fade={{ duration: 300 }}
 	role="presentation"
 	on:click
 >
 	<div
-		class="popup-wrapper"
+		class="person-popup-wrapper"
 		role="presentation"
 		on:click={(event) => {
 			event.stopPropagation();
 		}}
 	>
-		<div class="content-wrapper">
-			<div class="column-wrapper align-center line">
-				<PersonImage classes="picture" {data} />
-				<SubHeadline classes="one-line-spacer">{data.name}</SubHeadline>
-				<Paragraph classes="paragraph pre-wrap">{data.short_bio}</Paragraph>
+		<div class="person-popup-content-wrapper">
+			<div class="person-popup-column-wrapper person-popup-align-center person-popup-line">
+				<PersonImage classes="person-popup-picture" {data} />
+				<SubHeadline classes="person-popup-one-line-spacer">{data.name}</SubHeadline>
+				<Paragraph classes="person-popup-short-bio-paragraph paragraph-pre-wrap">{data.short_bio}</Paragraph>
 				<PersonLinkGrid person={data.name} links={data.social_media_links} />
 			</div>
-			<div class="column-wrapper">
-				<Paragraph classes="one-line-spacer">{data.bio}</Paragraph>
+			<div class="person-popup-column-wrapper">
+				<Paragraph classes="person-popup-one-line-spacer">{data.bio}</Paragraph>
 			</div>
 		</div>
 	</div>
-	<Button classes="close-button picture" ariaLabel="close popup" on:click>
-		<img class="close-picture" src="/cross.png" alt="cross" />
+	<Button classes="person-popup-close-button" ariaLabel="close popup" on:click>
+		<img class="person-popup-close-picture" src="/cross.png" alt="cross" />
 	</Button>
 </dialog>
 
 <style>
-    .page-wrapper {
+    dialog {
         display: flex;
         position: fixed;
         top: 0;
@@ -54,24 +58,24 @@
         z-index: 1000;
     }
 
-    .popup-wrapper {
+    .person-popup-wrapper {
         background-color: var(--background-color);
         border: 1px solid var(--primary-color-light);
-        width: 60rem;
-        height: 50rem;
+        width: 90rem;
+        height: 75rem;
     }
 
-    .content-wrapper {
+    .person-popup-content-wrapper {
         margin: var(--full-margin);
         display: flex;
         height: calc(100% - 2rem);
     }
 
-    .align-center {
+    .person-popup-align-center {
         text-align: center;
     }
 
-    .column-wrapper {
+    .person-popup-column-wrapper {
         width: 50%;
         height: fit-content;
         display: flex;
@@ -79,88 +83,88 @@
         padding: var(--2x-margin);
     }
 
-    .person-popup :global(.one-line-spacer) {
+    :global(.person-popup-one-line-spacer) {
         margin-top: var(--full-margin);
     }
 
-    .person-popup :global(.paragraph) {
+    :global(.person-popup-short-bio-paragraph) {
         flex-grow: 1;
     }
 
-    .line {
+    .person-popup-line {
         border-right: 1px solid var(--line-color);
     }
 
-    .person-popup :global(.picture) {
+    :global(.person-popup-picture) {
         width: auto;
         height: auto;
         border: 1px solid var(--primary-color-light);
     }
 
-    .person-popup :global(.close-button) {
+    :global(.person-popup-close-button) {
         position: fixed;
-        top: calc(50% - 25rem);
-        left: calc(50% + 30rem);
+        top: calc(50% - 37.5rem);
+        left: calc(50% + 45rem);
         margin-left: var(--half-margin);
     }
 
-    .close-picture {
-        height: 1.5rem;
-        width: 1.5rem;
+    .person-popup-close-picture {
+        height: 2.5rem;
+        width: 2.5rem;
         margin: var(--quad-margin);
     }
 
     @media (max-width: 1280px) {
-        .popup-wrapper {
+        .person-popup-wrapper {
             width: calc(100vw - 8rem);
             height: calc(100vh - 12rem);
         }
 
-        .person-popup :global(.close-button) {
+        :global(.person-popup-close-button) {
             top: calc(100vh - 6rem);
             left: calc(100vw - 50% - 1rem);
             margin-left: 0;
             margin-top: var(--full-margin);
         }
 
-        .person-popup :global(.paragraph) {
+        :global(.person-popup-short-bio-paragraph) {
             flex-grow: unset;
         }
     }
 
     @media (max-width: 700px) {
-        .popup-wrapper {
+        .person-popup-wrapper {
             width: calc(100vw - 2rem);
             height: calc(100vh - 10rem);
         }
 
-        .content-wrapper {
+        .person-popup-content-wrapper {
             flex-direction: column;
             overflow: scroll;
         }
 
-        .column-wrapper {
+        .person-popup-column-wrapper {
             width: 100%;
             height: auto;
         }
 
-        .person-popup :global(.picture) {
+        :global(.person-popup-picture) {
             max-width: 20rem;
             align-self: center;
         }
 
-        .person-popup :global(.close-button) {
+        :global(.person-popup-close-button) {
             top: calc(100vh - 5rem);
         }
 
-        .line {
+        .person-popup-line {
             border-bottom: 1px solid var(--line-color);
             border-right: none;
         }
     }
 
     @media (max-width: 380px) {
-        .person-popup :global(.picture) {
+        :global(.person-popup-picture) {
             max-width: 20rem;
             align-self: normal;
         }
