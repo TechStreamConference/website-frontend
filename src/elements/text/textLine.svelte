@@ -11,7 +11,7 @@
 		text-align: var(--text-align);
 	}
 
-	.white {
+	.text-line-white {
 		color: var(--white-color);
 	}
 </style>

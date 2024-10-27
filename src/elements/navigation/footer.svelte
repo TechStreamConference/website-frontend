@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Globals, MenuItem } from 'types/provideTypes';
+
 	import TextLine from 'elements/text/textLine.svelte';
 	import List from 'elements/list/list.svelte';
 	import ListElement from 'elements/list/listElement.svelte';
@@ -7,20 +8,22 @@
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import LogoBig from 'elements/image/logoBig.svelte';
 
+	export let classes:string= "";
+
 	export let globals: Globals;
 	export let menu: MenuItem[];
 
 	const currentYear: number = new Date().getFullYear();
 </script>
 
-<footer class="navigation-footer">
-	<div class="nav-wrapper">
-		<nav class="nav-element">
-			<TextLine classes={'white'}>Menu:</TextLine>
-			<List classes="list">
+<footer class={classes}>
+	<div class="navigation-footer-wrapper">
+		<nav class="navigation-footer-element">
+			<TextLine classes={'text-line-white navigation-footer-font-size'}>Menu:</TextLine>
+			<List classes="navigation-footer-list">
 				{#each menu as entry}
 					<ListElement>
-						<Link classes={'standard white'} href={entry.url} title={entry.description}>
+						<Link classes={'standard white navigation-footer-font-size'} href={entry.url} title={entry.description}>
 							{entry.name}
 						</Link>
 					</ListElement>
@@ -28,13 +31,13 @@
 			</List>
 		</nav>
 
-		<nav class="nav-element">
-			<TextLine classes={'white'}>Alle Events:</TextLine>
-			<List classes="list">
+		<nav class="navigation-footer-element">
+			<TextLine classes={'text-line-white navigation-footer-font-size'}>Alle Events:</TextLine>
+			<List classes="navigation-footer-list">
 				{#each globals.years_with_events as number}
 					<ListElement>
 						<Link
-							classes={'standard white'}
+							classes={'link-standard link-white navigation-footer-font-size'}
 							href="/year/{number}"
 							title="Tech Stream Conference Seite des Jahres {number} anschauen"
 						>
@@ -45,18 +48,18 @@
 			</List>
 		</nav>
 
-		<div class="nav-element">
-			<Paragraph classes={'white pre-wrap'}>
+		<div class="navigation-footer-element">
+			<Paragraph classes={'paragraph-white paragraph-pre-wrap navigation-footer-font-size'}>
 				{globals.footer_text}
 			</Paragraph>
 		</div>
 
-		<div class="nav-element">
-			<LogoBig classes="logo" />
+		<div class="navigation-footer-element">
+			<LogoBig classes="navigation-footer-logo" />
 		</div>
 	</div>
-	<div class="copyright">
-		<TextLine classes={'white'}>&copy; Tech Stream Conference {currentYear}</TextLine>
+	<div class="navigation-footer-copyright">
+		<TextLine classes={'text-line-white navigation-footer-font-size'}>&copy; Tech Stream Conference {currentYear}</TextLine>
 	</div>
 </footer>
 
@@ -68,7 +71,7 @@
 		padding: var(--2x-padding) 0;
 	}
 
-	.nav-wrapper {
+	.navigation-footer-wrapper {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
@@ -77,25 +80,29 @@
 		padding: 0 var(--4x-padding);
 	}
 
-	.nav-element {
+	.navigation-footer-element {
 		flex: 1;
 		min-width: 14rem;
 		text-align: center;
 	}
 
-	.navigation-footer :global(.list) {
+	:global(.navigation-footer-list) {
 		margin-top: var(--full-margin);
 	}
 
-	.navigation-footer :global(.logo) {
-		height: 10rem;
+	:global(.navigation-footer-logo) {
+		height: 16rem;
 		object-fit: contain;
-		max-height: 12rem;
+		max-height: 20rem;
 	}
 
-	.copyright {
+	.navigation-footer-copyright {
 		margin-top: var(--2x-margin);
 		display: flex;
 		justify-content: center;
+	}
+
+	:global(.navigation-footer-font-size) {
+			font-size: var(--half-font-size) !important;
 	}
 </style>
