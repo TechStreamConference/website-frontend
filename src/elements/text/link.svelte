@@ -4,9 +4,10 @@
 	export let classes: string = 'link-standard';
 	export let href: string = '';
 	export let newTab: boolean = false;
+	export let font :string = "normal-font"
 </script>
 
-<a {href} class="normal-font {classes}" target={newTab ? '_blank' : ''} rel="noopener noreferrer" {title}>
+<a {href} class="{font} {classes}" target={newTab ? '_blank' : ''} rel="noopener noreferrer" {title}>
 	<slot />
 </a>
 

@@ -19,9 +19,11 @@
 <div class="schedule-entry-entry-wrapper schedule-entry-horizontal-line">
 	<div class="schedule-entry-title-wrapper">
 		<SubHeadline>{talk.title}</SubHeadline>
-		{#each talk.tags as tag}
-			<ScheduleTag {tag} />
-		{/each}
+		<div class="schedule-entry-tag-wrapper">
+			{#each talk.tags as tag}
+				<ScheduleTag {tag} />
+			{/each}
+		</div>
 	</div>
 	<ScheduleSpeaker
 		{speaker}
@@ -47,9 +49,29 @@
 		display: flex;
 		flex-direction: row;
 			gap: var(--full-gap);
+
+	}
+
+  .schedule-entry-tag-wrapper{
+			display: flex;
+      flex-direction: row;
+			gap: var(--full-gap);
 	}
 
 	:global(.schedule-entry-time) {
 		margin-left: var(--full-margin);
 	}
+
+	@media (max-width: 1280px){
+			.schedule-entry-title-wrapper {
+					flex-direction: column;
+					margin-bottom: var(--2x-margin);
+			}
+	}
+
+	@media (max-width: 600px) {
+			.schedule-entry-tag-wrapper{
+					flex-direction: column;
+			}
+  }
 </style>

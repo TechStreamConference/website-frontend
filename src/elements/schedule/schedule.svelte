@@ -58,4 +58,10 @@
 		row-gap: var(--2x-gap);
 		margin: 0 var(--2x-margin) var(--4x-margin);
 	}
+
+	@media (max-width: 600px) {
+			.schedule-element-day {
+					grid-template-columns: 13rem 1fr;
+			}
+  }
 </style>

@@ -18,4 +18,16 @@
 	.white {
 		color: var(--white-color);
 	}
+
+	@media (max-width: 600px){
+			.big {
+					font-size: var(--full-font-size);
+					line-height: var(--full-line-height);
+			}
+
+			.small {
+					font-size: var(--half-font-size);
+					line-height: var(--half-line-height);
+      }
+	}
 </style>

@@ -20,4 +20,10 @@
 	.paragraph-pre-wrap {
 		white-space: pre-wrap;
 	}
+
+	@media (max-width: 600px){
+			p {
+					font-size: var(--half-font-size);
+			}
+	}
 </style>

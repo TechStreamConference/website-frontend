@@ -42,7 +42,7 @@
     }
 
     @media (max-width: 600px) {
-        .person-wrapper {
+        div {
             grid-template-columns: repeat(1, 1fr);
         }
     }
