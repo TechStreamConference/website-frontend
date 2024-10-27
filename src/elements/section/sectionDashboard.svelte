@@ -7,8 +7,8 @@
 
 <style>
 	.section {
-		margin-bottom: 5rem;
-		padding: 0 3rem;
+		margin-bottom: var(--4x-margin);
+		padding: 0 var(--4x-padding);
 		width: 100%;
 		align-self: center;
 	}
