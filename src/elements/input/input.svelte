@@ -12,7 +12,7 @@
 </script>
 
 <div class="wrapper input-line {classes}">
-	<Label {id}>{labelText}</Label>
+	<Label for_={id}>{labelText}</Label>
 	<input
 		{id}
 		use:typeWorkaround={type}

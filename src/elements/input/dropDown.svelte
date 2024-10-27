@@ -18,7 +18,7 @@
 </script>
 
 <div class="drop-down-wrapper">
-	<Label {id}>{labelText}</Label>
+	<Label for_={id}>{labelText}</Label>
 	<select {id} bind:value={selected} on:input on:keydown={handleKeydown}>
 		{#each data as entry}
 			<option value={entry}>{entry}</option>
