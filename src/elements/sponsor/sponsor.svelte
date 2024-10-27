@@ -33,7 +33,7 @@
 	}
 
 	.sponsor-link :global(.hover) {
-		padding: 0.3rem;
+		padding: var(--quad-padding);
 		transition: padding var(--transition-duration);
 	}
 
@@ -43,21 +43,21 @@
 	}
 
 	.sponsor-link :global(.hover:active) {
-		padding: 0.2rem;
+		padding: var(--quad-padding);
 		transition: padding var(--transition-duration);
 	}
 
 	@media (max-width: 1280px) {
 		.sponsor-link :global(.hover) {
-			padding: 0.3rem;
+			padding: var(--quad-padding);
 		}
 
 		.sponsor-link :global(.hover:hover) {
-			padding: 0.3rem;
+			padding: var(--quad-padding);
 		}
 
 		.sponsor-link :global(.hover:active) {
-			padding: 0.3rem;
+			padding: var(--quad-padding);
 		}
 	}
 </style>

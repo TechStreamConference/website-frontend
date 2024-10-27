@@ -5,7 +5,7 @@
 	import TextLine from 'elements/text/textLine.svelte';
 </script>
 
-<div class="image-grid sponsor-arrray">
+<div class="image-grid sponsor-array">
 	{#each logos as logo}
 		<div class="image-container">
 			<Sponsor link={logo} classes={'link'} />
@@ -20,7 +20,7 @@
 	.image-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
-		gap: 3rem;
+		gap: var(--2x-gap);
 	}
 
 	.image-container {
@@ -30,13 +30,7 @@
 		justify-content: center;
 	}
 
-	.sponsor-arrray :global(.link) {
+	.sponsor-array :global(.link) {
 		height: 10rem;
-	}
-
-	@media (max-width: 600px) {
-		.image-grid {
-			gap: 2rem;
-		}
 	}
 </style>
