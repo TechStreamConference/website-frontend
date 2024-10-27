@@ -13,11 +13,11 @@
 </div>
 
 <style>
-	.link-wrapper {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
-		gap: 1rem 0;
-		margin: 2rem 0;
-		justify-items: center;
-	}
+    .link-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+        gap: var(--full-gap) 0;
+        margin: var(--2x-margin) 0;
+        justify-items: center;
+    }
 </style>
