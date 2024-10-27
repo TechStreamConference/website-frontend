@@ -1,8 +1,9 @@
 <script lang="ts">
-	export let classes: string = 'standard';
+	export let title: string;
+
+	export let classes: string = 'link-standard';
 	export let href: string = '';
 	export let newTab: boolean = false;
-	export let title: string;
 </script>
 
 <a {href} class="normal-font {classes}" target={newTab ? '_blank' : ''} rel="noopener noreferrer" {title}>
@@ -19,37 +20,36 @@
 		border-radius: var(--border-radius);
 		background-color: transparent;
 		text-decoration: none;
-		transition: var(--transition-duration);
 	}
 
-	.standard {
+	.link-standard {
 		transition: background-color var(--transition-duration);
 	}
 
-	.standard:hover {
+	.link-standard:hover {
 		background-color: var(--primary-color-dark);
 		transition: background-color var(--transition-duration);
 	}
 
-	.inline {
-		transition: color var(--transition-duration);
-		transition: text-decoration-color var(--transition-duration);
+	.link-inline {
+		transition: color var(--transition-duration)
+								text-decoration-color var(--transition-duration);
 		border-radius: 0;
 		text-decoration: underline;
 		text-decoration-color: var(--primary-color-light);
 	}
 
-	.inline:hover {
+	.link-inline:hover {
 		color: var(--primary-color-dark);
 		transition: color var(--transition-duration);
 	}
 
-	.inline:active {
+	.link-inline:active {
 		text-decoration-color: var(--line-color);
 		transition: text-decoration-color var(--transition-duration);
 	}
 
-	.white {
+	.link-white {
 		color: var(--white-color);
 	}
 </style>

@@ -13,11 +13,11 @@
 		width: var(--width);
 	}
 
-	.white {
+	.paragraph-white {
 		color: var(--white-color);
 	}
 
-	.pre-wrap {
+	.paragraph-pre-wrap {
 		white-space: pre-wrap;
 	}
 </style>

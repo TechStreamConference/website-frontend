@@ -1,6 +1,7 @@
 <script lang="ts">
-	export let size: string = 'big';
 	export let classes: string = '';
+
+	export let size: string = 'big';
 </script>
 
 <h2 class="headline-font {size} {classes}"><slot /></h2>

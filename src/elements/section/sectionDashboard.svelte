@@ -1,12 +1,11 @@
 <script lang="ts">
-	export let id: string = '';
 	export let classes: string = '';
 </script>
 
-<section {id} class="section {classes}"><slot /></section>
+<section class="{classes}"><slot /></section>
 
 <style>
-	.section {
+	section {
 		margin-bottom: var(--4x-margin);
 		padding: 0 var(--4x-padding);
 		width: 100%;

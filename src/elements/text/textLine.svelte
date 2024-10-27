@@ -1,9 +1,8 @@
 <script lang="ts">
 	export let classes: string = '';
-	export let id :string = "";
 </script>
 
-<p {id} class="normal-font {classes}"><slot /></p>
+<p class="normal-font {classes}"><slot /></p>
 
 <style>
 	p {

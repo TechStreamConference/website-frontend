@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
 	import TextLine from './textLine.svelte';
+
+	import { fade } from 'svelte/transition';
+
 	export let message: string = '';
-	export let classes: string = 'error-color';
+	export let classes: string = 'message-error-color';
 </script>
 
 {#if message !== ''}
@@ -20,11 +22,11 @@
 		margin: var(--quad-margin) 0;
 	}
 
-	.error-color {
+	.message-error-color {
 		background-color: var(--error-color);
 	}
 
-	.success-color {
+	.message-success-color {
 		background-color: var(--success-color);
 	}
 </style>

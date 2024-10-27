@@ -3,22 +3,22 @@
 	export let classes: string = '';
 </script>
 
-<section {id} class="section {classes}"><slot /></section>
+<section {id} class="{classes}"><slot /></section>
 
 <style>
-	.section {
+	section {
 		scroll-margin-top: var(--8x-margin);
 		margin: var(--8x-margin) auto;
 	}
 
 	@media (max-width: 1280px) {
-		.section {
+		section {
 			margin: var(--8x-margin) auto;
 		}
 	}
 
 	@media (max-width: 600px) {
-		.section {
+		section {
 			margin: var(--4x-margin) auto;
 		}
 	}
