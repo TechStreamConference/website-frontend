@@ -137,37 +137,37 @@
 
 	.content-wrapper {
 		flex-grow: 1;
-		padding: 0 3rem;
+		padding: 0 var(--2x-padding);
 		max-width: 100rem;
 		margin: 0 auto;
 	}
 
 	.page-imprint :global(.headline) {
-		margin-bottom: 5rem;
+		margin-bottom: var(--4x-margin);
 	}
 
 	.page-imprint :global(.one-line-margin) {
-		margin-bottom: 1rem;
+		margin-bottom: var(--full-margin);
 	}
 
 	.page-imprint :global(.subheadline) {
-		margin-top: 5rem;
-		margin-bottom: 2rem;
+		margin-top: var(--4x-margin);
+		margin-bottom: var(--2x-margin);
 	}
 
 	.page-imprint :global(.last-paragraph) {
-		margin-bottom: 7rem;
+		margin-bottom: var(--8x-margin);
 	}
 
 	@media (max-width: 1280px) {
 		.content-wrapper {
-			padding: 0 2rem;
+			padding: 0 var(--2x-padding);
 		}
 	}
 
 	@media (max-width: 600px) {
 		.content-wrapper {
-			padding: 0 1.5rem;
+			padding: 0 var(--full-padding);
 		}
 	}
 </style>
