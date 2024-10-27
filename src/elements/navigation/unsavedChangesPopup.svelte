@@ -69,16 +69,16 @@
         display: flex;
         flex-direction: column;
         background-color: var(--background-color-light);
-        padding: 3rem;
+        padding: var(--2x-padding);
         border: 1px solid var(--line-color);
         border-radius: var(--border-radius);
-				gap: 1rem;
+				gap: var(--full-gap);
 				align-items: center;
     }
 
     .button-wrapper {
         display: flex;
         flex-direction: row;
-        gap: 1rem;
+        gap: var(--full-gap);
     }
 </style>

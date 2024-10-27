@@ -65,13 +65,7 @@
 		display: flex;
 		flex-direction: column;
 		background-color: var(--primary-color-light);
-		padding: 2rem 0;
-		color: var(--white-color);
-		font-family: 'Gnuolane Extra Light', sans-serif;
-		font-weight: 500;
-		font-style: normal;
-		letter-spacing: 2px;
-		font-size: 1rem;
+		padding: var(--2x-padding) 0;
 	}
 
 	.nav-wrapper {
@@ -79,8 +73,8 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: space-evenly;
-		gap: 5rem;
-		padding: 0 5rem;
+		gap: var(--4x-gap);
+		padding: 0 var(--4x-padding);
 	}
 
 	.nav-element {
@@ -90,7 +84,7 @@
 	}
 
 	.navigation-footer :global(.list) {
-		margin-top: 1rem;
+		margin-top: var(--full-margin);
 	}
 
 	.navigation-footer :global(.logo) {
@@ -100,7 +94,7 @@
 	}
 
 	.copyright {
-		margin-top: 2rem;
+		margin-top: var(--2x-margin);
 		display: flex;
 		justify-content: center;
 	}

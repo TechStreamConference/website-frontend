@@ -51,8 +51,8 @@
 		display: flex;
 		flex-direction: row;
 		border-bottom: 1px solid var(--line-color);
-		padding: 0 3rem;
-		margin-bottom: 1rem;
+		padding: 0 var(--2x-padding);
+		margin-bottom: var(--full-margin);
 		width: 100%;
 	}
 
@@ -75,12 +75,10 @@
 	.entry {
 		transition: background-color var(--transition-duration);
 
-		margin: 1rem;
-		margin-bottom: 0;
-		padding: 1rem;
-		padding-bottom: 1.2rem;
+      margin: var(--full-margin) var(--full-margin) 0;
+      padding: var(--full-padding);
 
-		cursor: pointer;
+      cursor: pointer;
 
 		border-top-left-radius: var(--border-radius);
 		border-top-right-radius: var(--border-radius);
@@ -111,11 +109,9 @@
 
 	@media (max-width: 600px) {
 		.entry {
-			margin: 0.5rem;
-			margin-bottom: 0;
-			padding: 0.5rem;
-			padding-bottom: 0.6rem;
-		}
+        margin: var(--half-margin) var(--half-margin) 0;
+        padding: var(--half-padding);
+    }
 
 		.global-tabs-wrapper :global(.entry-text) {
 			font-size: 1rem;
