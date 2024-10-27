@@ -7,15 +7,10 @@
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import LogoBig from 'elements/image/logoBig.svelte';
 
-	export let globals: Globals = { default_year: 0, footer_text: 'default text' }; // default values so that numbers can not fail because of undefined
+	export let globals: Globals;
 	export let menu: MenuItem[];
 
 	const currentYear: number = new Date().getFullYear();
-	const startYear: number = 2024;
-	$: numbers = Array.from(
-		{ length: globals.default_year + 1 - startYear },
-		(_, i) => startYear + i
-	);
 </script>
 
 <footer class="navigation-footer">
@@ -36,7 +31,7 @@
 		<nav class="nav-element">
 			<TextLine classes={'white'}>Alle Events:</TextLine>
 			<List classes="list">
-				{#each numbers as number}
+				{#each globals.years_with_events as number}
 					<ListElement>
 						<Link
 							classes={'standard white'}
@@ -51,7 +46,7 @@
 		</nav>
 
 		<div class="nav-element">
-			<Paragraph classes={'white'}>
+			<Paragraph classes={'white prewrap'}>
 				{globals.footer_text}
 			</Paragraph>
 		</div>

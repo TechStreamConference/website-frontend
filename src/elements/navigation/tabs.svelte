@@ -2,7 +2,7 @@
 	import TextLine from 'elements/text/textLine.svelte';
 	import { typeWorkaround } from 'types/workaround';
 	import type { Menu } from 'types/provideTypes';
-	import { goto } from '$app/navigation';
+	import { goto, onNavigate } from '$app/navigation';
 
 	export let entries: Menu;
 	export let classes: string = '';
@@ -11,14 +11,19 @@
 	export let color: string = '';
 
 	let current: number = 0;
+	let next: number = 0;
+
+	onNavigate(() => {
+		current = next;
+	});
 
 	function setActive(index: number, url: string): void {
-		current = index;
+		next = index;
 		goto(url);
 	}
 </script>
 
-<div class="wrapper global-tabs-wrapper {classes} {alignment} {background}">
+<div class="global-tabs-wrapper {classes} {alignment} {background}">
 	{#each entries as entry, index}
 		<div
 			class="entry {index === current ? 'active background' : background}"
@@ -42,12 +47,12 @@
 </div>
 
 <style>
-	.wrapper {
+	.global-tabs-wrapper {
 		display: flex;
 		flex-direction: row;
 		border-bottom: 1px solid var(--line-color);
 		padding: 0 3rem;
-		margin: 2rem 0 1rem;
+		margin-bottom: 1rem;
 		width: 100%;
 	}
 
@@ -76,6 +81,9 @@
 		padding-bottom: 1.2rem;
 
 		cursor: pointer;
+
+		border-top-left-radius: var(--border-radius);
+		border-top-right-radius: var(--border-radius);
 	}
 
 	.entry:hover {

@@ -21,7 +21,7 @@
 </script>
 
 <div class="wrapper text-area {classes}">
-	<Label {id}>{labelText}</Label>
+	<Label for_={id}>{labelText}</Label>
 	<textarea
 		{id}
 		name={id}

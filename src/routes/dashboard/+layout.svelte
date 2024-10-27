@@ -1,13 +1,26 @@
 <script lang="ts">
 	import type { LoadDashboard } from 'types/loadTypes';
 	export let data: LoadDashboard; // data from database
+	import { unsavedChanges, resetUnsavedChanges } from 'stores/saved';
 
 	import * as Menu from 'menu/dashboard';
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
 	import Tabs from 'elements/navigation/tabs.svelte';
+	import { onMount } from 'svelte';
+	import UnsavedChangesPopup from 'elements/navigation/unsavedChangesPopup.svelte';
+
+	onMount(() => {
+		resetUnsavedChanges();
+		window.addEventListener('beforeunload', (event) => {
+			if (unsavedChanges()) {
+				event.preventDefault();
+			}
+		});
+	});
 </script>
 
+<UnsavedChangesPopup />
 <Header menu={Menu.headerIn} />
 <div class="wrapper page-dashboard-user">
 	<div class="section-wrapper">
@@ -28,7 +41,6 @@
 
 <style>
 	.section-wrapper {
-		margin-top: 4rem;
 		display: flex;
 		flex-direction: row;
 		justify-content: end;

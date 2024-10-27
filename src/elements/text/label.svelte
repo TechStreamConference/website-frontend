@@ -1,8 +1,8 @@
 <script lang="ts">
-	export let id: string = '';
+	export let for_: string = '';
 </script>
 
-<label for={id}><slot /></label>
+<label for={for_}><slot /></label>
 
 <style>
 	label {

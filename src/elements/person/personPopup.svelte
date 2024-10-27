@@ -10,18 +10,15 @@
 	export let data: Person;
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- No a11y correctness here because the "close-button" already does the same. -->
-<div
+<dialog
 	class="page-wrapper person-popup"
 	transition:fade={{ duration: 300 }}
-	aria-hidden="true"
+	role="presentation"
 	on:click
 >
 	<div
 		class="popup-wrapper"
-		aria-hidden="true"
+		role="presentation"
 		on:click={(event) => {
 			event.stopPropagation();
 		}}
@@ -30,7 +27,7 @@
 			<div class="column-wrapper align-center line">
 				<PersonImage classes="picture" {data} />
 				<SubHeadline classes="one-line-spacer">{data.name}</SubHeadline>
-				<Paragraph classes="paragraph">{data.short_bio}</Paragraph>
+				<Paragraph classes="paragraph prewrap">{data.short_bio}</Paragraph>
 				<PersonLinkGrid person={data.name} links={data.social_media_links} />
 			</div>
 			<div class="column-wrapper">
@@ -41,7 +38,7 @@
 	<Button classes="close-button picture" ariaLabel="close popup" on:click>
 		<img class="close-picture" src="/cross.png" alt="cross" />
 	</Button>
-</div>
+</dialog>
 
 <style>
 	.page-wrapper {

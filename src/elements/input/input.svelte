@@ -12,7 +12,7 @@
 </script>
 
 <div class="wrapper input-line {classes}">
-	<Label {id}>{labelText}</Label>
+	<Label for_={id}>{labelText}</Label>
 	<input
 		{id}
 		use:typeWorkaround={type}
@@ -31,7 +31,7 @@
 		width: 100%;
 	}
 
-	.input-line :global(input) {
+	input {
 		font-size: 1rem;
 		line-height: 1.5rem;
 		letter-spacing: 1px;
