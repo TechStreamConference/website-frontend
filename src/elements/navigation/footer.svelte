@@ -23,7 +23,7 @@
 			<List classes="navigation-footer-list">
 				{#each menu as entry}
 					<ListElement>
-						<Link classes={'standard white navigation-footer-font-size'} href={entry.url} title={entry.description}>
+						<Link classes={'link-standard link-white navigation-footer-font-size'} href={entry.url} title={entry.description}>
 							{entry.name}
 						</Link>
 					</ListElement>

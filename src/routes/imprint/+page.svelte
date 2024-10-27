@@ -15,25 +15,25 @@
 
 <Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
 
-<div class="page-imprint">
-	<div class="content-wrapper">
-		<HeadlinePage classes="headline">Impressum</HeadlinePage>
+<div class="imprint">
+	<div class="imprint-content-wrapper">
+		<HeadlinePage classes="imprint-headline">Impressum</HeadlinePage>
 
 		<TextLine>Michael Gerhold</TextLine>
 		<TextLine>c/o LEADERLY UG (haftungsbeschränkt)</TextLine>
 		<TextLine>Carl-Zeiss-Str. 4</TextLine>
-		<TextLine classes="one-line-margin">14727 Premnitz OT Mögelin</TextLine>
+		<TextLine classes="imprint-one-line-margin">14727 Premnitz OT Mögelin</TextLine>
 		<TextLine>
 			E-Mail:
 			<Link
-				classes="inline"
+				classes="link-inline"
 				href="mailto:info@test-conf.de"
 				newTab={true}
 				title="Klicke, um uns eine Mail zu schreiben">info@test-conf.de</Link
 			>
 		</TextLine>
 
-		<SubHeadline classes="subheadline">Hinweis gemäß Online-Streitbeilegungs-Verordnung</SubHeadline
+		<SubHeadline classes="imprint-sub-headline">Hinweis gemäß Online-Streitbeilegungs-Verordnung</SubHeadline
 		>
 
 		<Paragraph
@@ -43,7 +43,7 @@
 			Plattform ist die Europäische Kommission zuständig. Die Europäische
 			Online-Streitbeilegungs-Plattform ist hier zu finden:
 			<Link
-				classes="inline"
+				classes="link-inline"
 				href="http://ec.europa.eu/odr"
 				newTab={true}
 				title="Klicke, um dich über die Europäische Online-Streitbeilegungs-Plattform zu informieren"
@@ -52,7 +52,7 @@
 			</Link>
 			. Unsere E-Mail lautet:
 			<Link
-				classes="inline one-line-margin"
+				classes="link-inline imprint-one-line-margin"
 				href="mailto:info@test-conf.de"
 				newTab={true}
 				title="Klicke, um uns eine Mail zu schreiben"
@@ -66,10 +66,10 @@
 			Kontaktaufnahme bitte unsere obige E-Mail und Telefonnummer.
 		</Paragraph>
 
-		<SubHeadline classes="subheadline">Disclaimer – rechtliche Hinweise</SubHeadline>
+		<SubHeadline classes="imprint-sub-headline">Disclaimer – rechtliche Hinweise</SubHeadline>
 
 		<TextLine>§ 1 Warnhinweis zu Inhalten:</TextLine>
-		<Paragraph classes="one-line-margin">
+		<Paragraph classes="imprint-one-line-margin">
 			Die kostenlosen und frei zugänglichen Inhalte dieser Webseite wurden mit größtmöglicher
 			Sorgfalt erstellt. Der Anbieter dieser Webseite übernimmt jedoch keine Gewähr für die
 			Richtigkeit und Aktualität der bereitgestellten kostenlosen und frei zugänglichen
@@ -81,7 +81,7 @@
 		</Paragraph>
 
 		<TextLine>§ 2 Externe Links:</TextLine>
-		<Paragraph classes="one-line-margin">
+		<Paragraph classes="imprint-one-line-margin">
 			Diese Website enthält Verknüpfungen zu Websites Dritter ("externe Links"). Diese Websites
 			unterliegen der Haftung der jeweiligen Betreiber. Der Anbieter hat bei der erstmaligen
 			Verknüpfung der externen Links die fremden Inhalte daraufhin überprüft, ob etwaige
@@ -94,7 +94,7 @@
 		</Paragraph>
 
 		<TextLine>§ 3 Urheber- und Leistungsschutzrechte:</TextLine>
-		<Paragraph classes="one-line-margin">
+		<Paragraph classes="imprint-one-line-margin">
 			Die auf dieser Website veröffentlichten Inhalte unterliegen dem deutschen Urheber- und
 			Leistungsschutzrecht. Jede vom deutschen Urheber- und Leistungsschutzrecht nicht zugelassene
 			Verwertung bedarf der vorherigen schriftlichen Zustimmung des Anbieters oder jeweiligen
@@ -105,17 +105,17 @@
 			kompletter Seiten ist nicht gestattet und strafbar. Lediglich die Herstellung von Kopien und
 			Downloads für den persönlichen, privaten und nicht kommerziellen Gebrauch ist erlaubt.
 		</Paragraph>
-		<TextLine classes="one-line-margin">
+		<TextLine classes="imprint-one-line-margin">
 			Die Darstellung dieser Website in fremden Frames ist nur mit schriftlicher Erlaubnis zulässig.
 		</TextLine>
 
 		<TextLine>§ 4 Besondere Nutzungsbedingungen:</TextLine>
-		<Paragraph classes="last-paragraph">
+		<Paragraph classes="imprint-last-paragraph">
 			Soweit besondere Bedingungen für einzelne Nutzungen dieser Website von den vorgenannten
 			Paragraphen abweichen, wird an entsprechender Stelle ausdrücklich darauf hingewiesen. In
 			diesem Falle gelten im jeweiligen Einzelfall die besonderen Nutzungsbedingungen. Quelle:
 			<Link
-				classes="inline"
+				classes="link-inline"
 				href="https://www.juraforum.de/"
 				newTab={true}
 				title="Klicke hier, um zur Quelle dieses Online-Impressums zu gelangen"
@@ -129,44 +129,44 @@
 </div>
 
 <style>
-	.page {
+	.imprint {
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
 	}
 
-	.content-wrapper {
+	.imprint-content-wrapper {
 		flex-grow: 1;
 		padding: 0 var(--2x-padding);
-		max-width: 100rem;
+		max-width: 150rem;
 		margin: 0 auto;
 	}
 
-	.page-imprint :global(.headline) {
+	:global(.imprint-headline) {
 		margin-bottom: var(--4x-margin);
 	}
 
-	.page-imprint :global(.one-line-margin) {
-		margin-bottom: var(--full-margin);
+	:global(.imprint-one-line-margin) {
+		margin-bottom: var(--2x-margin);
 	}
 
-	.page-imprint :global(.subheadline) {
+	:global(.imprint-sub-headline) {
 		margin-top: var(--4x-margin);
 		margin-bottom: var(--2x-margin);
 	}
 
-	.page-imprint :global(.last-paragraph) {
+	:global(.imprint-last-paragraph) {
 		margin-bottom: var(--8x-margin);
 	}
 
 	@media (max-width: 1280px) {
-		.content-wrapper {
+		.imprint-content-wrapper {
 			padding: 0 var(--2x-padding);
 		}
 	}
 
 	@media (max-width: 600px) {
-		.content-wrapper {
+		.imprint-content-wrapper {
 			padding: 0 var(--full-padding);
 		}
 	}
