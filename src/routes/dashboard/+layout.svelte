@@ -61,11 +61,11 @@
 	}
 
 	.page-dashboard-user :global(.headline) {
-		margin-bottom: 3rem;
+		margin-bottom: var(--2x-margin);
 	}
 
 	.page-dashboard-user :global(.text) {
-		margin-bottom: 5rem;
+		margin-bottom: var(--4x-margin);
 	}
 
 	.page-dashboard-user :global(.button) {

@@ -91,11 +91,11 @@
     }
 
     .global-admin-form :global(.input) {
-        margin-top: 1rem;
+        margin-top: var(--full-margin);
     }
 
     .global-admin-form :global(.submit-button) {
-        margin-top: 3rem;
+        margin-top: var(--2x-margin);
         align-self: center;
     }
 </style>

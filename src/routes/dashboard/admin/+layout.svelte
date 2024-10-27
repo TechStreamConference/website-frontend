@@ -26,6 +26,6 @@
 <style>
 	.headline-wrapper {
 		max-width: 70rem;
-		margin: 2rem auto 0;
+		margin: var(--2x-margin) auto 0;
 	}
 </style>
