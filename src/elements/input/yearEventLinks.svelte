@@ -57,7 +57,7 @@
         align-items: center;
         gap: var(--half-gap);
         background-color: var(--primary-color-light);
-        padding: 0 var(--half-padding) 0 var(--quad-padding);
+        padding: var(--quad-padding) var(--full-padding) var(--quad-padding) var(--half-padding);
         border-radius: var(--border-radius);
     }
 </style>

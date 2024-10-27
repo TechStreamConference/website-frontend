@@ -211,7 +211,7 @@
 
 	.content-wrapper {
 		flex-grow: 1;
-		max-width: 100rem;
+		max-width: 150rem;
 		margin: 0 auto 10rem;
 		padding: 0 var(--2x-padding);
 	}
