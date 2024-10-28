@@ -129,7 +129,7 @@
 
 	@media (max-width: 1280px) {
 		.login-form-width-wrapper {
-			max-width: 30rem;
+			max-width: 50rem;
 		}
 	}
 </style>

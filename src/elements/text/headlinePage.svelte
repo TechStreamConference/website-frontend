@@ -4,7 +4,7 @@
 </script>
 
 <div>
-	<Headline classes="headline-page-headline border {classes}"><slot /></Headline>
+	<Headline classes="headline-page-headline headline-border {classes}"><slot /></Headline>
 </div>
 
 <style>
