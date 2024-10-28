@@ -25,10 +25,10 @@ const team: MenuItem = {
     description: 'Klicke, um zum Tech Stream Conference Team zu navigieren'
 }
 
-const shedule: MenuItem = {
+const schedule: MenuItem = {
     name: 'Ablaufplan',
-    url: '#Shedule',
-    description: 'Klicke, um zum Ablaufplan der Koferenz zu navigieren'
+    url: '#Schedule',
+    description: 'Klicke, um zum Ablaufplan der Konferenz zu navigieren'
 }
 
 
@@ -37,7 +37,7 @@ export const headerIn: Menu = [
     speaker,
     sponsors,
     team,
-    shedule,
+    schedule,
     Item.intern,
     Item.logout,
 ];
@@ -47,7 +47,7 @@ export const headerOut: Menu = [
     speaker,
     sponsors,
     team,
-    shedule,
+    schedule,
     Item.login,
 ];
 

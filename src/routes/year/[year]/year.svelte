@@ -88,7 +88,7 @@
 			</div>
 		</Section>
 
-		<Section id="Discription">
+		<Section id="Description">
 			<HeadlineH2 classes="border">{data.year.event.description_headline}</HeadlineH2>
 			<div class="year-description-wrapper">
 				<div class="year-discription-text-wrapper">
@@ -129,7 +129,7 @@
 			</div>
 		</Section>
 
-		<Section id="Shedule">
+		<Section id="Schedule">
 			<HeadlineH2 classes="border">Plan</HeadlineH2>
 			<div class="year-section-inner">
 				{#each splitTalks() as days}
