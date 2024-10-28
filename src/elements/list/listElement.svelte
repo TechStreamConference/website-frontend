@@ -8,6 +8,7 @@
 
 <style>
 	li {
+		font-size: var(--full-font-size);
 		list-style-type: none;
 	}
 

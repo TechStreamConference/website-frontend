@@ -38,7 +38,7 @@
 	let passwordMessage: string = '';
 	let errorMessages: string[] = [''];
 
-	let registered: boolean = true;
+	let registered: boolean = false;
 
 	function startTimer(timer: { current: number | null }, callback: Function, time: number): void {
 		if (timer.current !== null) {
@@ -148,6 +148,7 @@
 					{/each}
 				</div>
 				<Input
+					classes="register-input-line"
 					id="register-username"
 					type="text"
 					labelText="Name:"
@@ -159,6 +160,7 @@
 					}}
 				/>
 				<Input
+					classes="register-input-line"
 					id="register-email"
 					type="email"
 					labelText="E-Mail:"
@@ -170,6 +172,7 @@
 					}}
 				/>
 				<Input
+					classes="register-input-line"
 					id="register-password"
 					type="password"
 					labelText="Passwort:"
@@ -179,6 +182,7 @@
 					on:input={startPasswordTimer}
 				/>
 				<Input
+					classes="register-input-line"
 					id="register-password-repeat"
 					type="password"
 					labelText="Passwort wiederholen:"
@@ -194,12 +198,12 @@
 					<TextLine classes="password-text-line">
 						Dein Passwort sollte folgendes enthalten:
 					</TextLine>
-					<List classes="padding-left">
-						<ListElement classes="dot">mind. 8 Zeichen</ListElement>
-						<ListElement classes="dot">mind. 1 Kleinbuchstaben</ListElement>
-						<ListElement classes="dot">mind. 1 Großbuchstaben</ListElement>
-						<ListElement classes="dot">mind. 1 Zahl</ListElement>
-						<ListElement classes="dot">mind. 1 Sonderzeichen</ListElement>
+					<List classes="list-padding-left">
+						<ListElement classes="list-element-dot">mind. 8 Zeichen</ListElement>
+						<ListElement classes="list-element-dot">mind. 1 Kleinbuchstaben</ListElement>
+						<ListElement classes="list-element-dot">mind. 1 Großbuchstaben</ListElement>
+						<ListElement classes="list-element-dot">mind. 1 Zahl</ListElement>
+						<ListElement classes="list-element-dot">mind. 1 Sonderzeichen</ListElement>
 					</List>
 				</div>
 			</form>
@@ -260,12 +264,16 @@
 		margin: var(--2x-margin) auto;
 	}
 
+	:global(.register-input-line){
+			margin-bottom: var(--full-margin);
+	}
+
 	:global(.register-submit-button) {
 		margin: var(--2x-margin) auto 0;
 	}
 
 	.password-list-wrapper {
-		margin: 0 auto;
+		margin: var(--2x-margin) auto 0;
 	}
 
 	.button-wrapper {
@@ -277,7 +285,7 @@
 
 	@media (max-width: 1280px) {
 		.register-width-wrapper {
-			max-width: 30rem;
+			max-width: 50rem;
 		}
 	}
 
