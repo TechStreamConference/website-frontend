@@ -61,7 +61,7 @@
 
 	@media (max-width: 600px) {
 			.schedule-element-day {
-					grid-template-columns: 13rem 1fr;
+					grid-template-columns: 8rem 1fr;
 			}
   }
 </style>

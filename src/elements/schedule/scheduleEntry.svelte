@@ -73,5 +73,9 @@
 			.schedule-entry-tag-wrapper{
 					flex-direction: column;
 			}
+
+      :global(.schedule-entry-time) {
+          margin-left: 0;
+      }
   }
 </style>

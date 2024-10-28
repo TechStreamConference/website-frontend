@@ -68,12 +68,12 @@
 			<LogoBig classes="year-logo-big" />
 
 			<div class="year-header-text-wrapper">
-				<Headline classes="green left">{data.year.event.title}</Headline>
-				<SubHeadline classes="year-header-sub-headline white">
+				<Headline classes="headline-green headline-left">{data.year.event.title}</Headline>
+				<SubHeadline classes="year-header-sub-headline sub-headline-white">
 					Online-Konferenz {formatDate(data.year.event.start_date, '%DD.%MM.')}
 					- {formatDate(data.year.event.end_date, '%DD.%MM.%YYYY')}
 				</SubHeadline>
-				<SubHeadline classes="year-header-subtitle white">{data.year.event.subtitle}</SubHeadline>
+				<SubHeadline classes="year-header-subtitle sub-headline-white">{data.year.event.subtitle}</SubHeadline>
 				<YearEventLinks {data} />
 			</div>
 		</div>
@@ -89,7 +89,7 @@
 		</Section>
 
 		<Section id="Description">
-			<HeadlineH2 classes="border">{data.year.event.description_headline}</HeadlineH2>
+			<HeadlineH2 classes="headline-h2-border">{data.year.event.description_headline}</HeadlineH2>
 			<div class="year-description-wrapper">
 				<div class="year-discription-text-wrapper">
 					<Paragraph classes="year-discription-paragraph paragraph-pre-wrap"
@@ -102,35 +102,35 @@
 		</Section>
 
 		<Section id="Speaker">
-			<HeadlineH2 classes="border">Vortragende</HeadlineH2>
+			<HeadlineH2 classes="headline-h2-border">Vortragende</HeadlineH2>
 			<div class="year-section-inner">
 				<PersonArray personData={data.year.speakers} personPopupCallback={openPersonPopup} />
 			</div>
 		</Section>
 
 		<Section id="Sponsors">
-			<HeadlineH2 classes="border">Sponsoren</HeadlineH2>
+			<HeadlineH2 classes="headline-h2-border">Sponsoren</HeadlineH2>
 			<div class="year-section-inner">
 				<SponsorArray logos={data.year.sponsors} />
 			</div>
 		</Section>
 
 		<Section>
-			<HeadlineH2 classes="border">Medienpartner</HeadlineH2>
+			<HeadlineH2 classes="headline-h2-border">Medienpartner</HeadlineH2>
 			<div class="year-section-inner">
 				<SponsorArray logos={data.year.media_partners} />
 			</div>
 		</Section>
 
 		<Section id="Team">
-			<HeadlineH2 classes="border">Team</HeadlineH2>
+			<HeadlineH2 classes="headline-h2-border">Team</HeadlineH2>
 			<div class="year-section-inner">
 				<PersonArray personData={data.year.team_members} personPopupCallback={openPersonPopup} />
 			</div>
 		</Section>
 
 		<Section id="Schedule">
-			<HeadlineH2 classes="border">Plan</HeadlineH2>
+			<HeadlineH2 classes="headline-h2-border">Plan</HeadlineH2>
 			<div class="year-section-inner">
 				{#each splitTalks() as days}
 					<Schedule

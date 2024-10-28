@@ -116,12 +116,12 @@
 
     @media (max-width: 1280px) {
         .person-popup-wrapper {
-            width: calc(100vw - 8rem);
-            height: calc(100vh - 12rem);
+            width: calc(100vw - 12rem);
+            height: calc(100vh - 20rem);
         }
 
         :global(.person-popup-close-button) {
-            top: calc(100vh - 6rem);
+            top: calc(100vh - 10rem);
             left: calc(100vw - 50% - 1rem);
             margin-left: 0;
             margin-top: var(--full-margin);
@@ -130,12 +130,17 @@
         :global(.person-popup-short-bio-paragraph) {
             flex-grow: unset;
         }
+
+        :global(.person-popup-picture) {
+            max-width: 20rem;
+            align-self: center;
+        }
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 900px) {
         .person-popup-wrapper {
-            width: calc(100vw - 2rem);
-            height: calc(100vh - 10rem);
+            width: calc(100vw - 3rem);
+            height: calc(100vh - 16rem);
         }
 
         .person-popup-content-wrapper {
@@ -154,7 +159,7 @@
         }
 
         :global(.person-popup-close-button) {
-            top: calc(100vh - 5rem);
+            top: calc(100vh - 8rem);
         }
 
         .person-popup-line {
@@ -166,7 +171,7 @@
     @media (max-width: 380px) {
         :global(.person-popup-picture) {
             max-width: 20rem;
-            align-self: normal;
+            align-self: center;
         }
     }
 </style>

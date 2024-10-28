@@ -10,7 +10,7 @@
 </script>
 
 <button class="hover-move {classes}" use:typeWorkaround={type} on:click aria-label={ariaLabel}>
-	<TextLine classes="white"><slot /></TextLine>
+	<TextLine classes="text-line-white"><slot /></TextLine>
 </button>
 
 <style>

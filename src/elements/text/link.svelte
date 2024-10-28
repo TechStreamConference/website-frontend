@@ -7,7 +7,7 @@
 	export let font :string = "normal-font"
 </script>
 
-<a {href} class="{font} {classes}" target={newTab ? '_blank' : ''} rel="noopener noreferrer" {title}>
+<a {href} class="{font} {classes}" target={newTab ? '_blank' : ''} rel="noopener noreferrer" {title} on:click>
 	<slot />
 </a>
 

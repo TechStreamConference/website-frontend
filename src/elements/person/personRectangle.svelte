@@ -45,7 +45,7 @@
     }
 
     .person-rectangle:hover {
-        outline: 1px solid var(--white-color);
+        outline: 1px solid var(--outline-hover-color);
         transition: var(--transition-duration);
     }
 

@@ -82,7 +82,7 @@
 
 	.navigation-footer-element {
 		flex: 1;
-		min-width: 14rem;
+		min-width: 18rem;
 		text-align: center;
 	}
 
