@@ -19,7 +19,7 @@
 </script>
 
 <div class="dashboard-admin">
-	<Headline classes="border">Admin</Headline>
+	<Headline classes="headline-border">Admin</Headline>
 	<Tabs entries={tabsEntries} />
 </div>
 <slot />

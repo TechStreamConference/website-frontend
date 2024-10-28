@@ -12,7 +12,7 @@
 </script>
 
 <div class="dashboard-user">
-	<Headline classes="headline border">User</Headline>
+	<Headline classes="headline-border">User</Headline>
 	<Tabs entries={tabsEntries} />
 </div>
 <slot />

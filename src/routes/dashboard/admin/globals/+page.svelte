@@ -48,7 +48,7 @@
 
 <SectionDashboard classes="dashboard-admin-global-section">
 	<Message message={errorMessage} />
-	<Message classes="success-color" message={successMessage} />
+	<Message classes="message-success-color" message={successMessage} />
 	<form class="dashboard-admin-global-form" on:submit|preventDefault={trySaveAsync}>
 		<DropDown
 			id="admin-default-year"

@@ -30,7 +30,7 @@
 			alignment="navigation-tabs-end"
 			entries={Menu.SectionIn(data.roles)}
 			background="navigation-tabs-purple"
-			color="navigation-tabs-white"
+			color="white"
 		/>
 	</div>
 	<div class="dashboard-content">

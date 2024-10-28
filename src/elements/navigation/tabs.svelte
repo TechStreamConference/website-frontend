@@ -43,7 +43,7 @@
 				}}
 				aria-label={entry.description}
 			>
-				<TextLine classes="navigation-tabs-entry-text {index === current ? '' : color}">{entry.name}</TextLine>
+				<TextLine classes='navigation-tabs-entry-text {index === current ? "" : `text-line-${color}`}'>{entry.name}</TextLine>
 			</button>
 		</div>
 	{/each}

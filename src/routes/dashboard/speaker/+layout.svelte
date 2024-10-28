@@ -12,7 +12,7 @@
 </script>
 
 <div class="dashboard-speaker">
-	<Headline classes="border">Speaker</Headline>
+	<Headline classes="headline-border">Speaker</Headline>
 	<Tabs entries={tabsEntries} />
 </div>
 <slot />

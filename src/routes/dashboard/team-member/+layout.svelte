@@ -12,7 +12,7 @@
 </script>
 
 <div class="dashboard-team-member">
-	<Headline classes="headline border">Team Member</Headline>
+	<Headline classes="headline-border">Team Member</Headline>
 	<Tabs entries={tabsEntries} />
 </div>
 <slot />
