@@ -7,7 +7,7 @@
 </ul>
 
 <style>
-	.padding-left {
+	.list-padding-left {
 		padding-left: var(--2x-padding);
 	}
 </style>

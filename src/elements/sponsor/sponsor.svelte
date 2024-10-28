@@ -7,7 +7,7 @@
 
 	export let link: SponsorLink;
 
-	export let classes: string = 'size-default';
+	export let classes: string = 'sponsor-size-default';
 </script>
 
 <a
@@ -28,7 +28,7 @@
 		align-items: center;
 	}
 
-	.size-default {
+	.sponsor-size-default {
 		max-height: 100%;
 		max-width: 100%;
 		height: auto;

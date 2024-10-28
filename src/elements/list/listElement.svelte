@@ -11,7 +11,7 @@
 		list-style-type: none;
 	}
 
-	.dot {
+	.list-element-dot {
 		list-style-type: disc;
 	}
 </style>

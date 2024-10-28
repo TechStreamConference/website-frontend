@@ -12,7 +12,7 @@
 <div class="year-event-links-wrapper {classes}">
 	<Link
 		href={data.year.event.discord_url}
-		classes="hover-move white"
+		classes="hover-move link-white"
 		newTab={true}
 		title="Klicke hier, um auf den Discord-Server der Tech Stream Conference zu gelangen"
 	>
@@ -23,7 +23,7 @@
 	</Link>
 	<Link
 		href={data.year.event.twitch_url}
-		classes="hover-move white"
+		classes="hover-move link-white"
 		newTab={true}
 		title="Klicke hier, um auf die Twitch-Seite der Tech Stream Conference zu gelangen"
 	>
@@ -34,7 +34,7 @@
 	</Link>
 	<Link
 		href={data.year.event.presskit_url}
-		classes="hover-move white"
+		classes="hover-move link-white"
 		newTab={true}
 		title="Klicke hier, um das Presskit der Tech Stream Conference herunterzuladen"
 	>

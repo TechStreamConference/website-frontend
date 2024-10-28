@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let classes: string = '';
 
-	export let size: string = 'big';
+	export let size: string = 'headline-h2-big';
 </script>
 
 <h2 class="headline-font {size} {classes}"><slot /></h2>
@@ -10,24 +10,24 @@
 	h2 {
 		text-align: center;
 	}
-  .big {
+  .headline-h2-big {
       font-size: var(--4x-font-size);
       line-height: var(--4x-line-height);
   }
-  .small {
+  .headline-h2-small {
       font-size: var(--2x-font-size);
       line-height: var(--2x-line-height);
   }
-	.border {
+	.headline-h2-border {
 		border-bottom: 1px solid var(--line-color);
 	}
 
   @media (max-width: 600px) {
-      .big {
+      .headline-h2-big {
           font-size: var(--2x-font-size);
           line-height: var(--2x-line-height);
       }
-      .small {
+      .headline-h2-small {
           font-size: var(--full-font-size);
           line-height: var(--full-line-height);
       }
