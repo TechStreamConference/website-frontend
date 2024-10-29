@@ -61,8 +61,8 @@
     .person-popup-wrapper {
         background-color: var(--background-color);
         border: 1px solid var(--primary-color-light);
-        width: 90rem;
-        height: 75rem;
+        width: calc(100vw - 40%);
+        height: calc(100vh - 20%);
     }
 
     .person-popup-content-wrapper {
@@ -98,13 +98,15 @@
     :global(.person-popup-picture) {
         width: auto;
         height: auto;
+				max-width: 30rem;
         border: 1px solid var(--primary-color-light);
+        align-self: center;
     }
 
     :global(.person-popup-close-button) {
         position: fixed;
-        top: calc(50% - 37.5rem);
-        left: calc(50% + 45rem);
+        top: calc(100vh - 93%);
+        left: calc(100vw - 20%);
         margin-left: var(--half-margin);
     }
 
@@ -133,7 +135,6 @@
 
         :global(.person-popup-picture) {
             max-width: 20rem;
-            align-self: center;
         }
     }
 
