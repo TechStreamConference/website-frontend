@@ -31,7 +31,7 @@
 			<ul>
 				{#each menu as entry}
 					<li>
-						<Link font="subheadline-font" classes="link-standard navigation-header-link" href={entry.url} title={entry.description}>{entry.name}</Link>
+						<Link font="sub-headline-font" classes="link-standard navigation-header-link" href={entry.url} title={entry.description}>{entry.name}</Link>
 					</li>
 				{/each}
 			</ul>
@@ -58,7 +58,7 @@
 		{#if isOpen}
 			<div class="navigation-header-mobile-menu" transition:fade={{ duration: 300 }}>
 				{#each menu as entry}
-					<Link font = "subheadeline-font" classes="link-standard navigation-header-link" href={entry.url} title={entry.description}
+					<Link font = "sub-headeline-font" classes="link-standard navigation-header-link" href={entry.url} title={entry.description}
 								on:click={collapse}>{entry.name}</Link>
 				{/each}
 			</div>
