@@ -1,18 +1,17 @@
 <script lang="ts">
 	import type { LoadDashboard, LoadAdmin } from 'types/loadTypes.js';
 
-	export let data: LoadDashboard & LoadAdmin; // data from database
-	let copiedData: LoadDashboard & LoadAdmin = structuredClone(data); // copied data from database to not save original data until save
-
-	import { apiUrl } from 'helper/links';
-	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
-
-
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 	import Button from 'elements/input/button.svelte';
 	import Message from 'elements/text/message.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
 	import DropDown from 'elements/input/dropDown.svelte';
+
+	import { apiUrl } from 'helper/links';
+	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
+
+	export let data: LoadDashboard & LoadAdmin; // data from database
+	let copiedData: LoadDashboard & LoadAdmin = structuredClone(data); // copied data from database to not save original data until save
 
 	let errorMessage: string = '';
 	let successMessage: string = '';
@@ -49,10 +48,10 @@
 
 <SectionDashboard classes="dashboard-admin-global-section">
 	<Message message={errorMessage} />
-	<Message classes="success-color" message={successMessage} />
-	<form class="width-wrapper global-admin-form" on:submit|preventDefault={trySaveAsync}>
+	<Message classes="message-success-color" message={successMessage} />
+	<form class="dashboard-admin-global-form" on:submit|preventDefault={trySaveAsync}>
 		<DropDown
-			id="admin-default-year2"
+			id="admin-default-year"
 			labelText="Aktuelles Jahr:"
 			data={copiedData.globals.years_with_events}
 			bind:selected={copiedData.admin.default_year}
@@ -70,7 +69,7 @@
 			on:input={setUnsavedChanges}
 		/>
 
-		<Button classes="text submit-button" type={'submit'} ariaLabel="Klicke zum Speichern">
+		<Button classes="button-text dashboard-admin-global-submit-button" type={'submit'} ariaLabel="Klicke zum Speichern">
 			Speichern
 		</Button>
 	</form>
@@ -78,24 +77,16 @@
 
 <style>
     :global(.dashboard-admin-global-section) {
-        max-width: 70rem;
+        max-width: 100rem;
     }
 
-    :global(.global-admin-form-headline) {
-        margin-bottom: 1rem;
-    }
-
-    .global-admin-form {
+    .dashboard-admin-global-form {
         display: flex;
         flex-direction: column;
     }
 
-    .global-admin-form :global(.input) {
-        margin-top: 1rem;
-    }
-
-    .global-admin-form :global(.submit-button) {
-        margin-top: 3rem;
+    :global(.dashboard-admin-global-submit-button) {
+        margin-top: var(--2x-margin);
         align-self: center;
     }
 </style>

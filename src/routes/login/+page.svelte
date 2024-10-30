@@ -1,21 +1,20 @@
 <script lang="ts">
 	import type { LoadLogin } from 'types/loadTypes';
-	export let data: LoadLogin; // data from database
+
 	import * as Menu from 'menu/login';
-
-	import { goto } from '$app/navigation';
-	import { apiUrl } from 'helper/links';
-
 	import Header from 'elements/navigation/header.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
-
 	import ErrorMessage from 'elements/text/message.svelte';
 	import Input from 'elements/input/input.svelte';
 	import Button from 'elements/input/button.svelte';
 	import Link from 'elements/text/link.svelte';
 
+	import { goto } from '$app/navigation';
+	import { apiUrl } from 'helper/links';
 	import { loginLookup } from 'lookup/loginLookup';
+
+	export let data: LoadLogin; // data from database
 
 	let usernameOrEmail: string = '';
 	let password: string = '';
@@ -51,17 +50,17 @@
 
 <Header menu={Menu.headerOut} />
 
-<div class="page page-login">
-	<div class="content">
-		<form class="width-wrapper" on:submit|preventDefault={loginAsync}>
+<div class="login">
+	<div class="login-content">
+		<form class="login-form-width-wrapper" on:submit|preventDefault={loginAsync}>
 			<HeadlinePage>Anmelden</HeadlinePage>
-			<div class="message-wrapper">
+			<div class="login-message-wrapper">
 				<ErrorMessage message={loggedInMessage} />
 				<ErrorMessage message={displayLoginMessage} />
 				<ErrorMessage message={errorMessage} />
 			</div>
 			<Input
-				classes="username-mail"
+				classes="login-username-mail"
 				id="login-username-or-email"
 				type="text"
 				labelText="Nutzername oder E-Mail:"
@@ -70,7 +69,7 @@
 				bind:value={usernameOrEmail}
 			/>
 			<Input
-				classes="password"
+				classes="login-password"
 				id="login-password"
 				type="password"
 				labelText="Passwort:"
@@ -81,7 +80,7 @@
 			<Link href="/register" title="Klicke, um einen neuen Account anzulegen">
 				Noch keinen Account?
 			</Link>
-			<Button classes="text button" type="submit" ariaLabel="Klicke zum Anmelden">Anmelden</Button>
+			<Button classes="button-text login-button" type="submit" ariaLabel="Klicke zum Anmelden">Anmelden</Button>
 		</form>
 	</div>
 
@@ -89,20 +88,20 @@
 </div>
 
 <style>
-	.page {
+	.login {
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
 	}
 
-	.content {
+	.login-content {
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
-		margin: 0 3rem;
+		margin: 0 var(--2x-margin);
 	}
 
-	.width-wrapper {
+	.login-form-width-wrapper {
 		width: 100%;
 		max-width: 50rem;
 		margin: 0 auto;
@@ -110,27 +109,27 @@
 		flex-direction: column;
 	}
 
-	.message-wrapper {
+	.login-message-wrapper {
 		display: flex;
 		flex-direction: column;
-		margin: 3rem auto 2rem;
+		margin: var(--2x-margin) auto;
 	}
 
-	.page-login :global(.username-mail) {
-		margin-bottom: 1rem;
+	:global(.login-username-mail) {
+		margin-bottom: var(--full-margin);
 	}
 
-	.page-login :global(.password) {
-		margin-bottom: 1.5rem;
+	:global(.login-password) {
+		margin-bottom: var(--full-margin);
 	}
 
-	.page-login :global(.button) {
-		margin: 3rem auto 5rem;
+	:global(.login-button) {
+		margin: var(--2x-margin) auto var(--4x-margin);
 	}
 
 	@media (max-width: 1280px) {
-		.width-wrapper {
-			max-width: 30rem;
+		.login-form-width-wrapper {
+			max-width: 50rem;
 		}
 	}
 </style>

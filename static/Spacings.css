@@ -1,0 +1,35 @@
+:root {
+    --quad-margin: 0.25rem;
+    --half-margin: 0.5rem;
+    --full-margin: 1rem;
+    --2x-margin: 2rem;
+    --4x-margin: 4rem;
+    --8x-margin: 8rem;
+    --16x-margin: 16rem;
+
+    --quad-padding: 0.25rem;
+    --half-padding: 0.5rem;
+    --full-padding: 1rem;
+    --2x-padding: 2rem;
+    --4x-padding: 4rem;
+    --8x-padding: 8rem;
+
+    --quad-gap: 0.25rem;
+    --half-gap: 0.5rem;
+    --full-gap: 1rem;
+    --2x-gap: 2rem;
+    --4x-gap: 4rem;
+    --8x-gap: 8rem;
+
+    --half-font-size: 1.5rem;
+    --full-font-size: 2rem;
+    --1-5x-font-size: 2.5rem;
+    --2x-font-size: 3.2rem;
+    --4x-font-size: 6.4rem;
+
+    --half-line-height: calc(var(--half-font-size) + 0.5rem);
+    --full-line-height: calc(var(--full-font-size) + 0.5rem);
+    --1-5x-line-height: calc(var(--1-5x-font-size) + 0.5rem);
+    --2x-line-height: calc(var(--2x-font-size) + 0.5rem);
+    --4x-line-height: calc(var(--4x-font-size) + 0.5rem);
+}

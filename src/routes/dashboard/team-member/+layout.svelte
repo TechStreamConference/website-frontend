@@ -11,15 +11,15 @@
 	];
 </script>
 
-<div class="headline-wrapper dashboard-admin">
-	<Headline classes="headline border">Team Member</Headline>
+<div class="dashboard-team-member">
+	<Headline classes="headline-border">Team Member</Headline>
 	<Tabs entries={tabsEntries} />
 </div>
 <slot />
 
 <style>
-	.headline-wrapper {
-		max-width: 70rem;
-		margin: 2rem auto 0;
+	.dashboard-team-member {
+		max-width: 100rem;
+		margin: var(--2x-margin) auto 0;
 	}
 </style>

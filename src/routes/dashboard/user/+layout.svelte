@@ -11,15 +11,15 @@
 	];
 </script>
 
-<div class="headline-wrapper dashboard-admin">
-	<Headline classes="headline border">User</Headline>
+<div class="dashboard-user">
+	<Headline classes="headline-border">User</Headline>
 	<Tabs entries={tabsEntries} />
 </div>
 <slot />
 
 <style>
-	.headline-wrapper {
-		max-width: 70rem;
-		margin: 2rem auto 0;
+	.dashboard-user {
+		max-width: 100rem;
+		margin: var(--2x-margin) auto 0;
 	}
 </style>

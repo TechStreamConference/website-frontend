@@ -2,16 +2,17 @@
 	import Label from 'elements/text/label.svelte';
 	import { createEventDispatcher } from 'svelte';
 
-	const dispatch = createEventDispatcher();
-
-	export let classes: string = '';
+	export let ariaLabel: string;
 	export let id: string;
 	export let labelText: string;
 
-	export let placeholderText: string;
-	export let value: string | number = '';
-	export let ariaLabel: string;
+	export let classes: string = '';
+	export let placeholderText: string ="";
 	export let rows: number = 10;
+
+	export let value: string | number = '';
+
+	const dispatch = createEventDispatcher();
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.ctrlKey && event.key === 'Enter') {
@@ -20,9 +21,10 @@
 	}
 </script>
 
-<div class="wrapper text-area {classes}">
+<div class="{classes}">
 	<Label for_={id}>{labelText}</Label>
 	<textarea
+		class="normal-font"
 		{id}
 		name={id}
 		placeholder={placeholderText}
@@ -35,28 +37,23 @@
 </div>
 
 <style>
-	.wrapper {
+	div {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
 		height: 100%;
 	}
 
-	.text-area :global(textarea) {
-		font-size: 1rem;
-		line-height: 1.5rem;
-		letter-spacing: 1px;
-		font-family: gnuolane, sans-serif;
-		font-weight: 500;
-		font-style: normal;
+	textarea {
 		color: var(--white-color);
 		background-color: var(--primary-color-light);
 		border-radius: var(--border-radius);
 		border: none;
-		padding: 0.5rem;
+		padding: var(--half-padding);
 		width: 100%;
 		height: 100%;
 		overflow: auto;
 		resize: vertical;
+		font-size: var(--full-font-size);
 	}
 </style>

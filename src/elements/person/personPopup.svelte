@@ -1,168 +1,178 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	import type { Person } from 'types/provideTypes';
+
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import PersonLinkGrid from './personLinkGrid.svelte';
-	import type { Person } from 'types/provideTypes';
 	import PersonImage from './personImage.svelte';
 	import Button from 'elements/input/button.svelte';
+
+	import { fade } from 'svelte/transition';
+
+	export let classes:string = "";
 
 	export let data: Person;
 </script>
 
 <dialog
-	class="page-wrapper person-popup"
+	class={classes}
 	transition:fade={{ duration: 300 }}
 	role="presentation"
 	on:click
 >
 	<div
-		class="popup-wrapper"
+		class="person-popup-wrapper"
 		role="presentation"
 		on:click={(event) => {
 			event.stopPropagation();
 		}}
 	>
-		<div class="content-wrapper">
-			<div class="column-wrapper align-center line">
-				<PersonImage classes="picture" {data} />
-				<SubHeadline classes="one-line-spacer">{data.name}</SubHeadline>
-				<Paragraph classes="paragraph prewrap">{data.short_bio}</Paragraph>
+		<div class="person-popup-content-wrapper">
+			<div class="person-popup-column-wrapper person-popup-align-center person-popup-line">
+				<PersonImage classes="person-popup-picture" {data} />
+				<SubHeadline classes="person-popup-one-line-spacer">{data.name}</SubHeadline>
+				<Paragraph classes="person-popup-short-bio-paragraph paragraph-pre-wrap">{data.short_bio}</Paragraph>
 				<PersonLinkGrid person={data.name} links={data.social_media_links} />
 			</div>
-			<div class="column-wrapper">
-				<Paragraph classes="one-line-spacer">{data.bio}</Paragraph>
+			<div class="person-popup-column-wrapper">
+				<Paragraph classes="person-popup-one-line-spacer">{data.bio}</Paragraph>
 			</div>
 		</div>
 	</div>
-	<Button classes="close-button picture" ariaLabel="close popup" on:click>
-		<img class="close-picture" src="/cross.png" alt="cross" />
+	<Button classes="person-popup-close-button" ariaLabel="close popup" on:click>
+		<img class="person-popup-close-picture" src="/cross.png" alt="cross" />
 	</Button>
 </dialog>
 
 <style>
-	.page-wrapper {
-		display: flex;
-		position: fixed;
-		top: 0;
-		left: 0;
-		justify-content: center;
-		align-items: center;
-		background-color: var(--background-color-transparent);
-		width: 100%;
-		height: 100%;
-		z-index: 1000;
-	}
+    dialog {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--background-color-transparent);
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+    }
 
-	.popup-wrapper {
-		background-color: var(--background-color);
-		border: 1px solid var(--primary-color-light);
-		width: 60rem;
-		height: 50rem;
-	}
+    .person-popup-wrapper {
+        background-color: var(--background-color);
+        border: 1px solid var(--primary-color-light);
+        width: calc(100vw - 40%);
+        height: calc(100vh - 20%);
+    }
 
-	.content-wrapper {
-		margin: 1rem;
-		display: flex;
-		height: calc(100% - 2rem);
-	}
+    .person-popup-content-wrapper {
+        margin: var(--full-margin);
+        display: flex;
+        height: calc(100% - 2rem);
+    }
 
-	.align-center {
-		text-align: center;
-	}
+    .person-popup-align-center {
+        text-align: center;
+    }
 
-	.column-wrapper {
-		width: 50%;
-		height: fit-content;
-		display: flex;
-		flex-direction: column;
-		padding: 2rem;
-	}
+    .person-popup-column-wrapper {
+        width: 50%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        padding: var(--2x-margin);
+    }
 
-	.person-popup :global(.one-line-spacer) {
-		margin-top: 1rem;
-	}
+    :global(.person-popup-one-line-spacer) {
+        margin-top: var(--full-margin);
+    }
 
-	.person-popup :global(.paragraph) {
-		flex-grow: 1;
-	}
+    :global(.person-popup-short-bio-paragraph) {
+        flex-grow: 1;
+    }
 
-	.line {
-		border-right: 1px solid var(--line-color);
-	}
+    .person-popup-line {
+        border-right: 1px solid var(--line-color);
+    }
 
-	.person-popup :global(.picture) {
-		width: auto;
-		height: auto;
-		border: 1px solid var(--primary-color-light);
-	}
+    :global(.person-popup-picture) {
+        width: auto;
+        height: auto;
+				max-width: 30rem;
+        border: 1px solid var(--primary-color-light);
+        align-self: center;
+    }
 
-	.person-popup :global(.close-button) {
-		position: fixed;
-		top: calc(50% - 25rem);
-		left: calc(50% + 30rem);
-		margin-left: 0.5rem;
-	}
+    :global(.person-popup-close-button) {
+        position: fixed;
+        top: calc(100vh - 93%);
+        left: calc(100vw - 20%);
+        margin-left: var(--half-margin);
+    }
 
-	.close-picture {
-		height: 1.5rem;
-		width: 1.5rem;
-		margin: 0.25rem;
-	}
+    .person-popup-close-picture {
+        height: 2.5rem;
+        width: 2.5rem;
+        margin: var(--quad-margin);
+    }
 
-	@media (max-width: 1280px) {
-		.popup-wrapper {
-			width: calc(100vw - 8rem);
-			height: calc(100vh - 12rem);
-		}
+    @media (max-width: 1280px) {
+        .person-popup-wrapper {
+            width: calc(100vw - 12rem);
+            height: calc(100vh - 20rem);
+        }
 
-		.person-popup :global(.close-button) {
-			top: calc(100vh - 6rem);
-			left: calc(100vw - 50% - 1rem);
-			margin-left: 0;
-			margin-top: 1rem;
-		}
+        :global(.person-popup-close-button) {
+            top: calc(100vh - 10rem);
+            left: calc(100vw - 50% - 1rem);
+            margin-left: 0;
+            margin-top: var(--full-margin);
+        }
 
-		.person-popup :global(.paragraph) {
-			flex-grow: unset;
-		}
-	}
+        :global(.person-popup-short-bio-paragraph) {
+            flex-grow: unset;
+        }
 
-	@media (max-width: 700px) {
-		.popup-wrapper {
-			width: calc(100vw - 2rem);
-			height: calc(100vh - 10rem);
-		}
+        :global(.person-popup-picture) {
+            max-width: 20rem;
+        }
+    }
 
-		.content-wrapper {
-			flex-direction: column;
-			overflow: scroll;
-		}
+    @media (max-width: 900px) {
+        .person-popup-wrapper {
+            width: calc(100vw - 3rem);
+            height: calc(100vh - 16rem);
+        }
 
-		.column-wrapper {
-			width: 100%;
-			height: auto;
-		}
+        .person-popup-content-wrapper {
+            flex-direction: column;
+            overflow: scroll;
+        }
 
-		.person-popup :global(.picture) {
-			max-width: 20rem;
-			align-self: center;
-		}
+        .person-popup-column-wrapper {
+            width: 100%;
+            height: auto;
+        }
 
-		.person-popup :global(.close-button) {
-			top: calc(100vh - 5rem);
-		}
+        :global(.person-popup-picture) {
+            max-width: 20rem;
+            align-self: center;
+        }
 
-		.line {
-			border-bottom: 1px solid var(--line-color);
-			border-right: none;
-		}
-	}
+        :global(.person-popup-close-button) {
+            top: calc(100vh - 8rem);
+        }
 
-	@media (max-width: 380px) {
-		.person-popup :global(.picture) {
-			max-width: 20rem;
-			align-self: normal;
-		}
-	}
+        .person-popup-line {
+            border-bottom: 1px solid var(--line-color);
+            border-right: none;
+        }
+    }
+
+    @media (max-width: 380px) {
+        :global(.person-popup-picture) {
+            max-width: 20rem;
+            align-self: center;
+        }
+    }
 </style>

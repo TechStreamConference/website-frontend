@@ -3,23 +3,24 @@
 	export let classes: string = '';
 </script>
 
-<section {id} class="section {classes}"><slot /></section>
+<section {id} class="{classes}"><slot /></section>
 
 <style>
-	.section {
-		scroll-margin-top: 7rem;
-		margin: 10rem auto;
+	section {
+		scroll-margin-top: var(--16x-margin);
+		margin: var(--8x-margin) auto;
 	}
 
 	@media (max-width: 1280px) {
-		.section {
-			margin: 7rem auto;
+		section {
+				scroll-margin-top: var(--8x-margin);
+			margin: var(--8x-margin) auto;
 		}
 	}
 
 	@media (max-width: 600px) {
-		.section {
-			margin: 5rem auto;
+		section {
+			margin: var(--4x-margin) auto;
 		}
 	}
 </style>

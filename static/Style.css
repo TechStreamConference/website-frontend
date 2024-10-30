@@ -15,6 +15,7 @@
     --text-color: black;
     --line-color: var(--primary-color-light);
     --icon-color: var(--secondary-color);
+    --outline-hover-color: var(--secondary-color);
     --error-color: orange;
     --success-color: green;
 
@@ -34,7 +35,7 @@
 }
 
 html {
-    font-size: 16px;
+    font-size: 62.5%;
     scroll-behavior: smooth;
 }
 
@@ -56,5 +57,6 @@ body {
         --text-color: white;
         --line-color: var(--secondary-color);
         --icon-color: var(--primary-color-light);
+        --outline-hover-color: white;
     }
 }

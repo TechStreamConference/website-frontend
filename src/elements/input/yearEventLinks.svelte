@@ -4,49 +4,60 @@
 	import Link from 'elements/text/link.svelte';
 	import Icon from 'elements/image/icon.svelte';
 
+	export let classes:string="";
+
 	export let data: LoadYear;
 </script>
 
-<div class="wrapper">
+<div class="year-event-links-wrapper {classes}">
 	<Link
 		href={data.year.event.discord_url}
-		classes="hover-move white"
+		classes="hover-move link-white"
 		newTab={true}
 		title="Klicke hier, um auf den Discord-Server der Tech Stream Conference zu gelangen"
 	>
-		<div class="entry-wrapper"><Icon type="Discord" />Sei dabei</div>
+		<div class="year-event-links-entry-wrapper">
+			<Icon type="Discord" />
+			Sei dabei
+		</div>
 	</Link>
 	<Link
 		href={data.year.event.twitch_url}
-		classes="hover-move white"
+		classes="hover-move link-white"
 		newTab={true}
 		title="Klicke hier, um auf die Twitch-Seite der Tech Stream Conference zu gelangen"
 	>
-		<div class="entry-wrapper"><Icon type="Twitch" />Schau zu</div>
+		<div class="year-event-links-entry-wrapper">
+			<Icon type="Twitch" />
+			Schau zu
+		</div>
 	</Link>
 	<Link
 		href={data.year.event.presskit_url}
-		classes="hover-move white"
+		classes="hover-move link-white"
 		newTab={true}
 		title="Klicke hier, um das Presskit der Tech Stream Conference herunterzuladen"
 	>
-		<div class="entry-wrapper"><Icon type="Download" />Presskit</div>
+		<div class="year-event-links-entry-wrapper">
+			<Icon type="Download" />
+			Presskit
+		</div>
 	</Link>
 </div>
 
 <style>
-	.wrapper {
-		display: flex;
-		gap: 1rem;
-		flex-wrap: wrap;
-	}
+    .year-event-links-wrapper {
+        display: flex;
+        gap: var(--full-gap);
+        flex-wrap: wrap;
+    }
 
-	.entry-wrapper {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		background-color: var(--primary-color-light);
-		padding: 0.1rem 0.5rem 0.1rem 0.3rem;
-		border-radius: var(--border-radius);
-	}
+    .year-event-links-entry-wrapper {
+        display: flex;
+        align-items: center;
+        gap: var(--half-gap);
+        background-color: var(--primary-color-light);
+        padding: var(--quad-padding) var(--full-padding) var(--quad-padding) var(--half-padding);
+        border-radius: var(--border-radius);
+    }
 </style>

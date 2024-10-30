@@ -2,16 +2,11 @@
 	export let for_: string = '';
 </script>
 
-<label for={for_}><slot /></label>
+<label class= "normal-font" for={for_}><slot /></label>
 
 <style>
 	label {
-		font-size: 1rem;
-		line-height: 1.5rem;
-		letter-spacing: 1px;
-		font-family: gnuolane, sans-serif;
-		font-weight: 500;
-		font-style: normal;
-		color: var(--text-color);
+		font-size: var(--full-font-size);
+		line-height: var(--full-line-height);
 	}
 </style>

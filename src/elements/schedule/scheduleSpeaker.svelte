@@ -2,41 +2,34 @@
 	import type { Person } from 'types/provideTypes';
 
 	export let speaker: Person;
+
+	export let classes: string="";
 </script>
 
-<button class="button text" on:click aria-label="Mehr Informationen zu {speaker.name}"
+<button class="normal-font {classes}" on:click aria-label="Mehr Informationen zu {speaker.name}"
 	>{speaker.name}</button
 >
 
 <style>
-	.button {
+	button {
 		transform: translate(-2px);
-		padding: 4px;
+		padding: var(--quad-padding);
 		background: none;
 		border: none;
 		transition: background-color var(--transition-duration);
 		border-radius: var(--border-radius);
-		margin-bottom: 2rem;
+		margin-bottom: var(--2x-margin);
 		cursor: pointer;
+		font-size: var(--full-font-size);
 	}
 
-	.button:hover {
+	button:hover {
 		background-color: var(--primary-color-dark);
 		transition: background-color var(--transition-duration);
 	}
 
-	.button:active {
+	button:active {
 		background-color: var(--primary-color-light);
 		transition: text-decoration-color var(--transition-duration);
-	}
-
-	.text {
-		font-size: 1rem;
-		line-height: 1.5rem;
-		letter-spacing: 1px;
-		font-family: gnuolane, sans-serif;
-		font-weight: 500;
-		font-style: normal;
-		color: var(--text-color);
 	}
 </style>

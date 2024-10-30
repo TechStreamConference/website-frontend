@@ -1,28 +1,33 @@
 <script lang="ts">
 	export let classes: string = '';
-	export let size: string = 'big';
+	export let size: string = 'sub-headline-big';
 </script>
 
-<h3 class="{classes} {size}"><slot /></h3>
+<h3 class="sub-headline-font {classes} {size}"><slot /></h3>
 
 <style>
-	h3 {
-		letter-spacing: 1px;
-		font-family: gnuolane, sans-serif;
-		font-weight: 500;
-		font-style: normal;
-		color: var(--text-color);
+	.sub-headline-big {
+		font-size: var(--1-5x-font-size);
+		line-height: var(--1-5x-line-height);
 	}
-	.big {
-		font-size: 1.5rem;
-		line-height: 2rem;
-	}
-	.small {
-		font-size: 1.2rem;
-		line-height: 1.7rem;
+	.sub-headline-small {
+		font-size: var(--full-font-size);
+		line-height: var(--full-line-height);
 	}
 
-	.white {
+	.sub-headline-white {
 		color: var(--white-color);
+	}
+
+	@media (max-width: 600px){
+			.sub-headline-big {
+					font-size: var(--full-font-size);
+					line-height: var(--full-line-height);
+			}
+
+			.sub-headline-small {
+					font-size: var(--half-font-size);
+					line-height: var(--half-line-height);
+      }
 	}
 </style>

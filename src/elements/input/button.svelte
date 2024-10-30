@@ -1,12 +1,16 @@
 <script lang="ts">
+	import TextLine from 'elements/text/textLine.svelte';
+
 	import { typeWorkaround } from 'types/workaround';
-	export let type: string = 'button';
-	export let classes: string = 'text';
+
 	export let ariaLabel: string;
+
+	export let classes: string = 'button-text';
+	export let type: string = 'button';
 </script>
 
 <button class="hover-move {classes}" use:typeWorkaround={type} on:click aria-label={ariaLabel}>
-	<slot />
+	<TextLine classes="text-line-white"><slot /></TextLine>
 </button>
 
 <style>
@@ -17,14 +21,7 @@
 		justify-self: center;
 	}
 
-	.text {
-		padding: 1rem 2rem;
-		font-size: 1rem;
-		line-height: 1.5rem;
-		letter-spacing: 1px;
-		font-family: gnuolane, sans-serif;
-		font-weight: 500;
-		font-style: normal;
-		color: var(--white-color);
+	.button-text {
+		padding: var(--2x-padding) var(--4x-padding);
 	}
 </style>

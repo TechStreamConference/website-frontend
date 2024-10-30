@@ -1,15 +1,11 @@
 <script lang="ts">
 	import type { LoadRegister } from 'types/loadTypes';
-	export let data: LoadRegister; // data from database
-	import { apiUrl } from 'helper/links';
 
 	import * as Validators from './validation';
 	import * as Menu from 'menu/register';
-
 	import Header from 'elements/navigation/header.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
-
 	import ErrorMessage from 'elements/text/message.svelte';
 	import Input from 'elements/input/input.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
@@ -18,7 +14,10 @@
 	import Button from 'elements/input/button.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
 
+	import { apiUrl } from 'helper/links';
 	import { registerLookup } from 'lookup/registerLookup';
+
+	export let data: LoadRegister; // data from database
 
 	let timerUsername: number | null = null;
 	let timerEmail: number | null = null;
@@ -134,12 +133,12 @@
 
 <Header menu={Menu.headerOut} />
 
-<div class="page page-register">
-	<div class="content">
+<div class="register">
+	<div class="register-content">
 		{#if !registered}
-			<form class="width-wrapper" on:submit|preventDefault={tryRegisterAsync}>
+			<form class="register-width-wrapper" on:submit|preventDefault={tryRegisterAsync}>
 				<HeadlinePage>Registrieren</HeadlinePage>
-				<div class="message-wrapper">
+				<div class="register-message-wrapper">
 					<ErrorMessage message={loggedInMessage} />
 					<ErrorMessage message={usernameMessage} />
 					<ErrorMessage message={emailMessage} />
@@ -149,7 +148,7 @@
 					{/each}
 				</div>
 				<Input
-					classes="register-basic-input-line"
+					classes="register-input-line"
 					id="register-username"
 					type="text"
 					labelText="Name:"
@@ -161,7 +160,7 @@
 					}}
 				/>
 				<Input
-					classes="register-basic-input-line"
+					classes="register-input-line"
 					id="register-email"
 					type="email"
 					labelText="E-Mail:"
@@ -173,7 +172,7 @@
 					}}
 				/>
 				<Input
-					classes="register-basic-input-line"
+					classes="register-input-line"
 					id="register-password"
 					type="password"
 					labelText="Passwort:"
@@ -183,7 +182,7 @@
 					on:input={startPasswordTimer}
 				/>
 				<Input
-					classes="input-line"
+					classes="register-input-line"
 					id="register-password-repeat"
 					type="password"
 					labelText="Passwort wiederholen:"
@@ -192,26 +191,26 @@
 					ariaLabel="Wiederhole das Passwort"
 					on:input={startPasswordTimer}
 				/>
-				<Button classes="text submit-button" type={'submit'} ariaLabel="Klicke zum Registrieren">
+				<Button classes="button-text register-submit-button" type={'submit'} ariaLabel="Klicke zum Registrieren">
 					Registrieren
 				</Button>
 				<div class="password-list-wrapper">
 					<TextLine classes="password-text-line">
 						Dein Passwort sollte folgendes enthalten:
 					</TextLine>
-					<List classes="padding-left">
-						<ListElement classes="dot">mind. 8 Zeichen</ListElement>
-						<ListElement classes="dot">mind. 1 Kleinbuchstaben</ListElement>
-						<ListElement classes="dot">mind. 1 Großbuchstaben</ListElement>
-						<ListElement classes="dot">mind. 1 Zahl</ListElement>
-						<ListElement classes="dot">mind. 1 Sonderzeichen</ListElement>
+					<List classes="list-padding-left">
+						<ListElement classes="list-element-dot">mind. 8 Zeichen</ListElement>
+						<ListElement classes="list-element-dot">mind. 1 Kleinbuchstaben</ListElement>
+						<ListElement classes="list-element-dot">mind. 1 Großbuchstaben</ListElement>
+						<ListElement classes="list-element-dot">mind. 1 Zahl</ListElement>
+						<ListElement classes="list-element-dot">mind. 1 Sonderzeichen</ListElement>
 					</List>
 				</div>
 			</form>
 		{:else}
-			<div class="width-wrapper">
+			<div class="register-width-wrapper">
 				<HeadlinePage>Registriert</HeadlinePage>
-				<TextLine classes="registered-text-line" --text-align="center">
+				<TextLine classes="register-registered-text-line" --text-align="center">
 					Deine Registrierung war erfolgreich.
 				</TextLine>
 				<Paragraph --text-align="center">
@@ -234,67 +233,63 @@
 </div>
 
 <style>
-	.page {
+	.register {
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
 	}
 
-	.content {
+	.register-content {
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
-		margin: 0 3rem;
+		margin: 0 var(--2x-margin);
 	}
 
 	a {
 		align-self: center;
 	}
 
-	.width-wrapper {
+	.register-width-wrapper {
 		width: 100%;
 		max-width: 50rem;
-		margin: 0 auto 5rem;
+		margin: 0 auto var(--4x-margin);
 		display: flex;
 		flex-direction: column;
 	}
 
-	.message-wrapper {
+	.register-message-wrapper {
 		display: flex;
 		flex-direction: column;
-		margin: 3rem auto 2rem;
+		margin: var(--2x-margin) auto;
 	}
 
-	.page-register :global(.input-line) {
-		margin-bottom: 1rem;
+	:global(.register-input-line){
+			margin-bottom: var(--full-margin);
 	}
 
-	.page-register :global(.submit-button) {
-		margin: 3rem auto 0;
-	}
-
-	.page-register :global(.password-text-line) {
-		margin: 3rem 0 1.5rem;
+	:global(.register-submit-button) {
+		margin: var(--2x-margin) auto 0;
 	}
 
 	.password-list-wrapper {
-		margin: 0 auto;
+		margin: var(--2x-margin) auto 0;
 	}
 
 	.button-wrapper {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-evenly;
-		margin-top: 6rem;
+		margin-top: var(--4x-margin);
 	}
 
 	@media (max-width: 1280px) {
-		.width-wrapper {
-			max-width: 30rem;
+		.register-width-wrapper {
+			max-width: 50rem;
 		}
 	}
 
-	.page-register :global(.registered-text-line) {
-		margin: 7rem 0 2rem;
+	:global(.register-registered-text-line) {
+		margin: var(--4x-margin) 0 var(--2x-margin);
 	}
 </style>

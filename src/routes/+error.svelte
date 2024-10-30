@@ -21,7 +21,8 @@
 			console.error(await response.text());
 			data = {
 				default_year: 0,
-				footer_text: ''
+				footer_text: '',
+				years_with_events: []
 			};
 		};
 
@@ -43,7 +44,8 @@
 		} catch (error) {
 			data = {
 				default_year: 0,
-				footer_text: ''
+				footer_text: '',
+				years_with_events: []
 			};
 			return;
 		}
@@ -97,11 +99,11 @@
 	}
 
 	.page-404 :global(.subheadline) {
-		margin-top: 2rem;
+		margin-top: var(--2x-margin);
 	}
 
 	.page-404 :global(.button) {
-		margin-top: 5rem;
-		margin-bottom: 5rem;
+		margin-top: var(--4x-margin);
+		margin-bottom: var(--4x-margin);
 	}
 </style>

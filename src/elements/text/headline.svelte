@@ -1,49 +1,44 @@
 <script lang="ts">
-	export let size: string = 'big';
 	export let classes: string = '';
+
+	export let size: string = 'headline-big';
 </script>
 
-<h1 class="{size} {classes}"><slot /></h1>
+<h1 class="headline-font {size} {classes}"><slot /></h1>
 
 <style>
 	h1 {
-		letter-spacing: 1px;
-		font-family: proxima-nova, sans-serif;
-		font-weight: 900;
-		text-transform: uppercase;
-		font-style: normal;
-		color: var(--text-color);
 		text-align: center;
 	}
-	.big {
-		font-size: 3rem;
-		line-height: 4rem;
+	.headline-big {
+		font-size: var(--4x-font-size);
+		line-height: var(--4x-line-height);
 	}
-	.small {
-		font-size: 2rem;
-		line-height: 3rem;
+	.headline-small {
+		font-size: var(--2x-font-size);
+		line-height: var(--2x-line-height);
 	}
 
-	.border {
+	.headline-border {
 		border-bottom: 1px solid var(--line-color);
 	}
 
-	.green {
+	.headline-green {
 		color: var(--secondary-color);
 	}
 
-	.left {
+	.headline-left {
 		text-align: left;
 	}
 
 	@media (max-width: 600px) {
-		.big {
-			font-size: 2rem;
-			line-height: 3rem;
+		.headline-big {
+			font-size: var(--2x-font-size);
+			line-height: var(--2x-line-height);
 		}
-		.small {
-			font-size: 1rem;
-			line-height: 1.5rem;
+		.headline-small {
+			font-size: var(--full-font-size);
+			line-height: var(--full-line-height);
 		}
 	}
 </style>

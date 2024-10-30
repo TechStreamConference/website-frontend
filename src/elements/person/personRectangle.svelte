@@ -3,10 +3,11 @@
 
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import Paragraph from 'elements/text/paragraph.svelte';
-
 	import LinkArray from './personLinkGrid.svelte';
 	import Button from 'elements/input/button.svelte';
 	import PersonImage from './personImage.svelte';
+
+	export let classes:string="";
 
 	export let data: Person;
 
@@ -15,77 +16,74 @@
 	}
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- No a11y correctness here because the "person-button" already does the same. -->
-<div class="person person-rectangle" on:click>
-	<PersonImage classes="picture" {data} />
-	<div class="text-wrapper">
+<div class="person-rectangle {classes}" on:click role="presentation">
+	<PersonImage classes="person-rectangle-picture" {data} />
+	<div class="person-rectangle-text-wrapper">
 		<SubHeadline>{data.name}</SubHeadline>
-		<Paragraph classes="paragraph">{data.short_bio}</Paragraph>
+		<Paragraph classes="person-rectangle-paragraph">{data.short_bio}</Paragraph>
 	</div>
-	<div class="flex-groth" />
-	<div class="bottom-wrapper">
+	<div class="person-rectangle-flex-growth" />
+	<div class="person-rectangle-bottom-wrapper">
 		<LinkArray on:click={onLinkClicked} person={data.name} links={data.social_media_links} />
 	</div>
-	<Button classes="button text" on:click ariaLabel="Mehr Informationen zu {data.name}">
+	<Button classes="person-rectangle-button button-text" on:click ariaLabel="Mehr Informationen zu {data.name}">
 		Info
 	</Button>
 </div>
 
 <style>
-	.person {
-		display: flex;
-		flex-direction: column;
-		min-width: 15rem;
-		border: none;
-		background-color: transparent;
-		outline: 1px solid var(--primary-color-light);
-		border-radius: var(--border-radius);
-		transition: var(--transition-duration);
-		text-align: center;
-	}
+    .person-rectangle {
+        display: flex;
+        flex-direction: column;
+        min-width: 15rem;
+        border: none;
+        background-color: transparent;
+        outline: 1px solid var(--primary-color-light);
+        border-radius: var(--border-radius);
+        transition: var(--transition-duration);
+        text-align: center;
+    }
 
-	.person:hover {
-		outline: 1px solid var(--white-color);
-		transition: var(--transition-duration);
-	}
+    .person-rectangle:hover {
+        outline: 1px solid var(--outline-hover-color);
+        transition: var(--transition-duration);
+    }
 
-	.person-rectangle :global(.picture) {
-		width: 100%;
-		height: auto;
-		background-color: var(--primary-color-light);
-		border-top-left-radius: var(--border-radius);
-		border-top-right-radius: var(--border-radius);
-		margin-bottom: 1rem;
-	}
+    :global(.person-rectangle-picture) {
+        width: 100%;
+        height: auto;
+        background-color: var(--primary-color-light);
+        border-top-left-radius: var(--border-radius);
+        border-top-right-radius: var(--border-radius);
+        margin-bottom: var(--full-margin);
+    }
 
-	.text-wrapper {
-		height: 7rem;
-		margin: 0 0.5rem;
-	}
+    .person-rectangle-text-wrapper {
+        height: 11rem;
+        margin: 0 var(--half-margin);
+    }
 
-	.person-rectangle :global(.paragraph) {
-		margin-top: 0.5rem;
-		display: -webkit-box;
-		-webkit-line-clamp: 3;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-	}
+    :global(.person-rectangle-paragraph) {
+        margin-top: var(--half-margin);
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 
-	.flex-groth {
-		flex-grow: 1;
-		margin: 2rem 2rem 0 2rem;
-		border-top: 1px solid var(--line-color);
-	}
+    .person-rectangle-flex-growth {
+        flex-grow: 1;
+        margin: var(--2x-margin) var(--2x-margin) 0;
+        border-top: 1px solid var(--line-color);
+    }
 
-	.bottom-wrapper {
-		margin: 2rem 2rem 0 2rem;
-	}
+    .person-rectangle-bottom-wrapper {
+        margin: var(--2x-margin) var(--2x-margin) 0;
+    }
 
-	.person-rectangle :global(.button) {
-		display: block;
-		padding: 0.2rem 2rem !important;
-		margin: 0 2rem 2rem 2rem !important;
-	}
+    :global(.person-rectangle-button) {
+        display: block;
+        padding: var(--quad-padding) var(--2x-padding) !important;
+        margin: 0 var(--2x-margin) var(--2x-margin) var(--2x-margin) !important;
+    }
 </style>

@@ -1,23 +1,17 @@
 <script lang="ts">
 	export let classes: string = '';
-	export let id :string = "";
 </script>
 
-<p {id} class={classes}><slot /></p>
+<p class="normal-font {classes}"><slot /></p>
 
 <style>
 	p {
-		font-size: 1rem;
-		letter-spacing: 1px;
-		line-height: 1.5rem;
-		font-family: gnuolane, sans-serif;
-		font-weight: 300;
-		font-style: normal;
-		color: var(--text-color);
+		font-size: var(--full-font-size);
+		line-height: var(--full-line-height);
 		text-align: var(--text-align);
 	}
 
-	.white {
+	.text-line-white {
 		color: var(--white-color);
 	}
 </style>

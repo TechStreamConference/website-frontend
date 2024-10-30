@@ -5,7 +5,7 @@
 	import { fade } from 'svelte/transition';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 
-	let intercepted: Record<string, any> | null = null;
+	let intercepted: Record<string, unknown> | null = null;
 	let url: URL;
 
 	beforeNavigate(({ to, cancel }) => {
@@ -26,9 +26,9 @@
 	role="presentation"
 	transition:fade={{ duration: 300 }}
 >
-	<div class="modal" on:click={(e) => e.stopPropagation()} role="presentation">
-		<SubHeadline>Es gibt ungespeicherte Änderungen</SubHeadline>
-		<div class="button-wrapper">
+	<div class="unsaved-changes-modal" on:click={(e) => e.stopPropagation()} role="presentation">
+		<SubHeadline classes="white">Es gibt ungespeicherte Änderungen</SubHeadline>
+		<div class="unsaved-changes-button-wrapper">
 			<Button
 				on:click={() => (intercepted = null)}
 				ariaLabel="Klicke hier, um auf der Seite zu bleiben"
@@ -65,20 +65,20 @@
         display: flex;
     }
 
-    .modal {
+    .unsaved-changes-modal {
         display: flex;
         flex-direction: column;
         background-color: var(--background-color-light);
-        padding: 3rem;
+        padding: var(--2x-padding);
         border: 1px solid var(--line-color);
         border-radius: var(--border-radius);
-				gap: 1rem;
+				gap: var(--full-gap);
 				align-items: center;
     }
 
-    .button-wrapper {
+    .unsaved-changes-button-wrapper {
         display: flex;
         flex-direction: row;
-        gap: 1rem;
+        gap: var(--full-gap);
     }
 </style>

@@ -1,14 +1,14 @@
 <script lang="ts">
 	import type { Person, Talk } from 'types/provideTypes';
-	export let speakers: Person[];
-	export let schedule: Talk[];
 
 	import ScheduleEntry from './scheduleEntry.svelte';
-	import { formatDate } from 'helper/dates';
-
-	import { error } from '@sveltejs/kit';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 
+	import { error } from '@sveltejs/kit';
+	import { formatDate } from 'helper/dates';
+
+	export let speakers: Person[];
+	export let schedule: Talk[];
 	export let personPopupCallback: (event: Event, person: Person) => void;
 
 	function getSpeakerById(id: number): Person {
@@ -26,14 +26,14 @@
 {#if schedule[0]}
 	<div class="schedule-element">
 		{#if schedule[0].is_special}
-			<!-- only using first element here because all elemenets schould be the same by now -->
+			<!-- only using first element here because all elements should be the same by now -->
 			<SubHeadline>Bonusinhalte auf Youtube:</SubHeadline>
 		{/if}
-		<SubHeadline classes="subheadline-schedule">
-			<!-- only using first element here because all elemenets schould be the same by now -->
+		<SubHeadline classes="schedule-element-sub-headline-schedule">
+			<!-- only using first element here because all elements should be the same by now -->
 			{formatDate(schedule[0].starts_at, '%d, %DD.%MM.%YYYY')}
 		</SubHeadline>
-		<div class="day">
+		<div class="schedule-element-day">
 			{#each schedule as talk}
 				<ScheduleEntry speaker={getSpeakerById(talk.speaker_id)} {talk} {personPopupCallback} />
 			{/each}
@@ -43,19 +43,25 @@
 
 <style>
 	.schedule-element {
-		margin-bottom: 3rem;
+		margin-bottom: var(--2x-margin);
 	}
 
-	.schedule-element :global(.subheadline-schedule) {
+	:global(.schedule-element-sub-headline-schedule) {
 		border-bottom: 1px solid var(--text-color);
-		margin-bottom: 2rem;
-		padding-bottom: 0.2rem;
+		margin-bottom: var(--2x-margin);
+		padding-bottom: var(--quad-padding);
 	}
 
-	.day {
+	.schedule-element-day {
 		display: grid;
-		grid-template-columns: 10rem 1fr;
-		row-gap: 2rem;
-		margin: 0 2rem;
+		grid-template-columns: 16rem 1fr;
+		row-gap: var(--2x-gap);
+		margin: 0 var(--2x-margin) var(--4x-margin);
 	}
+
+	@media (max-width: 600px) {
+			.schedule-element-day {
+					grid-template-columns: 8rem 1fr;
+			}
+  }
 </style>

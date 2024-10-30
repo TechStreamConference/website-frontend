@@ -1,60 +1,56 @@
 <script lang="ts">
-	export let classes: string = 'standard';
+	export let title: string;
+
+	export let classes: string = 'link-standard';
 	export let href: string = '';
 	export let newTab: boolean = false;
-	export let title: string;
+	export let font :string = "normal-font"
 </script>
 
-<a {href} class={classes} target={newTab ? '_blank' : ''} rel="noopener noreferrer" {title}>
+<a {href} class="{font} {classes}" target={newTab ? '_blank' : ''} rel="noopener noreferrer" {title} on:click>
 	<slot />
 </a>
 
 <style>
 	a {
-		font-size: 1rem;
-		letter-spacing: 1px;
-		line-height: 1.5rem;
-		font-family: gnuolane, sans-serif;
-		font-weight: 300;
-		font-style: normal;
-		color: var(--text-color);
+		font-size: var(--full-font-size);
+		line-height: var(--full-line-height);
 		text-align: var(--text-align);
 		align-self: center;
-		padding: 3px;
-		border-radius: 5px;
-		background-color: none;
+		padding: var(--quad-padding);
+		border-radius: var(--border-radius);
+		background-color: transparent;
 		text-decoration: none;
-		transition: var(--transition-duration);
 	}
 
-	.standard {
+	.link-standard {
 		transition: background-color var(--transition-duration);
 	}
 
-	.standard:hover {
+	.link-standard:hover {
 		background-color: var(--primary-color-dark);
 		transition: background-color var(--transition-duration);
 	}
 
-	.inline {
-		transition: color var(--transition-duration);
-		transition: text-decoration-color var(--transition-duration);
+	.link-inline {
+		transition: color var(--transition-duration)
+								text-decoration-color var(--transition-duration);
 		border-radius: 0;
 		text-decoration: underline;
 		text-decoration-color: var(--primary-color-light);
 	}
 
-	.inline:hover {
+	.link-inline:hover {
 		color: var(--primary-color-dark);
 		transition: color var(--transition-duration);
 	}
 
-	.inline:active {
+	.link-inline:active {
 		text-decoration-color: var(--line-color);
 		transition: text-decoration-color var(--transition-duration);
 	}
 
-	.white {
+	.link-white {
 		color: var(--white-color);
 	}
 </style>

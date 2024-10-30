@@ -1,13 +1,16 @@
 <script lang="ts">
-	import TextLine from 'elements/text/textLine.svelte';
-	import { typeWorkaround } from 'types/workaround';
 	import type { Menu } from 'types/provideTypes';
+
+	import TextLine from 'elements/text/textLine.svelte';
+
+	import { typeWorkaround } from 'types/workaround';
 	import { goto, onNavigate } from '$app/navigation';
+
+	export let alignment: string = 'navigation-tabs-center';
+	export let background: string = 'navigation-tabs-default-background';
 
 	export let entries: Menu;
 	export let classes: string = '';
-	export let alignment: string = 'center';
-	export let background: string = 'background';
 	export let color: string = '';
 
 	let current: number = 0;
@@ -23,75 +26,73 @@
 	}
 </script>
 
-<div class="global-tabs-wrapper {classes} {alignment} {background}">
+<div class="navigation-tabs {classes} {alignment} {background}">
 	{#each entries as entry, index}
 		<div
-			class="entry {index === current ? 'active background' : background}"
+			class="navigation-tabs-entry {index === current ? 'navigation-tabs-active navigation-tabs-default-background' : background}"
 			on:click={() => {
 				setActive(index, entry.url);
 			}}
 			role="presentation"
 		>
 			<button
-				class="button"
+				class="navigation-tabs-button"
 				use:typeWorkaround={'button'}
 				on:click={() => {
 					setActive(index, entry.url);
 				}}
 				aria-label={entry.description}
 			>
-				<TextLine classes="entry-text {index === current ? '' : color}">{entry.name}</TextLine>
+				<TextLine classes='navigation-tabs-entry-text {index === current ? "" : `text-line-${color}`}'>{entry.name}</TextLine>
 			</button>
 		</div>
 	{/each}
 </div>
 
 <style>
-	.global-tabs-wrapper {
+	.navigation-tabs {
 		display: flex;
 		flex-direction: row;
 		border-bottom: 1px solid var(--line-color);
-		padding: 0 3rem;
-		margin-bottom: 1rem;
+		padding: 0 var(--2x-padding);
+		margin-bottom: var(--full-margin);
 		width: 100%;
 	}
 
-	.center {
+	.navigation-tabs-center {
 		justify-content: center;
 	}
 
-	.end {
+	.navigation-tabs-end {
 		justify-content: end;
 	}
 
-	.purple {
+	.navigation-tabs-purple {
 		background-color: var(--primary-color-dark);
 	}
 
-	.background {
+	.navigation-tabs-default-background {
 		background-color: var(--background-color);
 	}
 
-	.entry {
+	.navigation-tabs-entry {
 		transition: background-color var(--transition-duration);
 
-		margin: 1rem;
-		margin-bottom: 0;
-		padding: 1rem;
-		padding-bottom: 1.2rem;
+    margin: var(--full-margin) var(--full-margin) 0;
+    padding: var(--full-padding);
 
-		cursor: pointer;
+    cursor: pointer;
 
 		border-top-left-radius: var(--border-radius);
 		border-top-right-radius: var(--border-radius);
 	}
 
-	.entry:hover {
+	.navigation-tabs-entry:hover {
 		background-color: var(--background-color-light);
 		transition: background-color var(--transition-duration);
 	}
 
-	.active {
+	.navigation-tabs-active {
 		transform: translateY(1px);
 		border: 1px solid var(--line-color);
 		border-top-right-radius: var(--border-radius);
@@ -99,26 +100,24 @@
 		border-bottom-color: transparent;
 	}
 
-	.global-tabs-wrapper :global(.entry-text) {
-		font-size: 1.5rem;
+	:global(.navigation-tabs-entry-text) {
+		font-size: var(--1-5x-font-size);
 	}
 
-	.button {
+	.navigation-tabs-button {
 		border: none;
 		background-color: transparent;
 		cursor: pointer;
 	}
 
 	@media (max-width: 600px) {
-		.entry {
-			margin: 0.5rem;
-			margin-bottom: 0;
-			padding: 0.5rem;
-			padding-bottom: 0.6rem;
-		}
+		.navigation-tabs-entry {
+        margin: var(--half-margin) var(--half-margin) 0;
+        padding: var(--half-padding);
+    }
 
-		.global-tabs-wrapper :global(.entry-text) {
-			font-size: 1rem;
+		:global(.navigation-tabs-entry-text) {
+			font-size: var(--full-font-size);
 		}
 	}
 </style>

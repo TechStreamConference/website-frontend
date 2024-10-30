@@ -1,7 +1,8 @@
 <script lang="ts">
+	import type { Menu } from 'types/provideTypes';
+
 	import Tabs from 'elements/navigation/tabs.svelte';
 	import Headline from 'elements/text/headline.svelte';
-	import type { Menu } from 'types/provideTypes';
 
 	const tabsEntries: Menu = [
 		{
@@ -17,15 +18,15 @@
 	];
 </script>
 
-<div class="headline-wrapper dashboard-admin">
-	<Headline classes="headline border">Admin</Headline>
+<div class="dashboard-admin">
+	<Headline classes="headline-border">Admin</Headline>
 	<Tabs entries={tabsEntries} />
 </div>
 <slot />
 
 <style>
-	.headline-wrapper {
-		max-width: 70rem;
-		margin: 2rem auto 0;
+	.dashboard-admin {
+		max-width: 100rem;
+		margin: var(--2x-margin) auto 0;
 	}
 </style>
