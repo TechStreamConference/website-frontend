@@ -17,8 +17,10 @@
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import SponsorArray from 'elements/sponsor/sponsorArray.svelte';
 	import Schedule from 'elements/schedule/schedule.svelte';
+	import LinkWithIcon from 'elements/input/linkWithIcon.svelte';
 
 	import { formatDate } from 'helper/dates';
+	import { apiUrl } from 'helper/links';
 
 	export let data: LoadYear;
 
@@ -73,7 +75,9 @@
 					Online-Konferenz {formatDate(data.year.event.start_date, '%DD.%MM.')}
 					- {formatDate(data.year.event.end_date, '%DD.%MM.%YYYY')}
 				</SubHeadline>
-				<SubHeadline classes="year-header-subtitle sub-headline-white">{data.year.event.subtitle}</SubHeadline>
+				<SubHeadline classes="year-header-subtitle sub-headline-white">
+					{data.year.event.subtitle}
+				</SubHeadline>
 				<YearEventLinks {data} />
 			</div>
 		</div>
@@ -131,6 +135,14 @@
 
 		<Section id="Schedule">
 			<HeadlineH2 classes="headline-h2-border">Plan</HeadlineH2>
+			<LinkWithIcon
+				href={apiUrl(`/api/events/${data.year.event.year}/ics`)}
+				title="Klicke um den Ablaufplan als ICS-Datei herunter zu laden"
+				icon="Calender"
+				newTab={false}
+			>
+				Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalendar. Klick hier
+			</LinkWithIcon>
 			<div class="year-section-inner">
 				{#each splitTalks() as days}
 					<Schedule
