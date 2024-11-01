@@ -11,8 +11,8 @@
 		text-align: center;
 	}
 	.headline-big {
-		font-size: var(--4x-font-size);
-		line-height: var(--4x-line-height);
+		font-size: var(--3x-font-size);
+		line-height: var(--3x-line-height);
 	}
 	.headline-small {
 		font-size: var(--2x-font-size);

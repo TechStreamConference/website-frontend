@@ -25,11 +25,13 @@
     --full-font-size: 2rem;
     --1-5x-font-size: 2.5rem;
     --2x-font-size: 3.2rem;
+    --3x-font-size: 5.5rem;
     --4x-font-size: 6.4rem;
 
     --half-line-height: calc(var(--half-font-size) + 0.5rem);
     --full-line-height: calc(var(--full-font-size) + 0.5rem);
     --1-5x-line-height: calc(var(--1-5x-font-size) + 0.5rem);
     --2x-line-height: calc(var(--2x-font-size) + 0.5rem);
+    --3x-line-height: calc(var(--3x-font-size) + 0.5rem);
     --4x-line-height: calc(var(--4x-font-size) + 0.5rem);
 }
