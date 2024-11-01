@@ -5,6 +5,9 @@
 
 	import { typeWorkaround } from 'types/workaround';
 	import { goto, onNavigate } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
+	import { get } from 'svelte/store';
 
 	export let alignment: string = 'navigation-tabs-center';
 	export let background: string = 'navigation-tabs-default-background';
@@ -20,6 +23,22 @@
 		current = next;
 	});
 
+	onMount(() => {
+		const currentPath = get(page).url.pathname;
+
+		for (let i = 0; i < entries.length; ++i) {
+			console.log(
+				`currentPath: ${currentPath}; entry: ${entries[i].url}; same: ${entries[i].url === currentPath}`
+			);
+			if (entries[i].url === currentPath) {
+				current = i;
+				return;
+			}
+		}
+
+		console.error('tabs could not find the current path inside the provided data.');
+	});
+
 	function setActive(index: number, url: string): void {
 		next = index;
 		goto(url);
@@ -29,7 +48,9 @@
 <div class="navigation-tabs {classes} {alignment} {background}">
 	{#each entries as entry, index}
 		<div
-			class="navigation-tabs-entry {index === current ? 'navigation-tabs-active navigation-tabs-default-background' : background}"
+			class="navigation-tabs-entry {index === current
+				? 'navigation-tabs-active navigation-tabs-default-background'
+				: background}"
 			on:click={() => {
 				setActive(index, entry.url);
 			}}
@@ -43,7 +64,11 @@
 				}}
 				aria-label={entry.description}
 			>
-				<TextLine classes='navigation-tabs-entry-text {index === current ? "" : `text-line-${color}`}'>{entry.name}</TextLine>
+				<TextLine
+					classes="navigation-tabs-entry-text {index === current ? '' : `text-line-${color}`}"
+				>
+					{entry.name}
+				</TextLine>
 			</button>
 		</div>
 	{/each}
@@ -78,10 +103,10 @@
 	.navigation-tabs-entry {
 		transition: background-color var(--transition-duration);
 
-    margin: var(--full-margin) var(--full-margin) 0;
-    padding: var(--full-padding);
+		margin: var(--full-margin) var(--full-margin) 0;
+		padding: var(--full-padding);
 
-    cursor: pointer;
+		cursor: pointer;
 
 		border-top-left-radius: var(--border-radius);
 		border-top-right-radius: var(--border-radius);
@@ -112,9 +137,9 @@
 
 	@media (max-width: 600px) {
 		.navigation-tabs-entry {
-        margin: var(--half-margin) var(--half-margin) 0;
-        padding: var(--half-padding);
-    }
+			margin: var(--half-margin) var(--half-margin) 0;
+			padding: var(--half-padding);
+		}
 
 		:global(.navigation-tabs-entry-text) {
 			font-size: var(--full-font-size);
