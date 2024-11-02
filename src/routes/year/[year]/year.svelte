@@ -141,7 +141,7 @@
 				icon="Calender"
 				newTab={false}
 			>
-				Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalendar. Klick hier
+				Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!
 			</LinkWithIcon>
 			<div class="year-section-inner">
 				{#each splitTalks() as days}
