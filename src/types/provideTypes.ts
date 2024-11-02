@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 export const adminScheme = z.object({
-    default_year: z.number(),
     footer_text: z.string(),
 })
 export type Admin = z.infer<typeof adminScheme>;
@@ -16,11 +15,12 @@ export const rolesScheme = z.object({
 export type Roles = z.infer<typeof rolesScheme>;
 
 export const globalsScheme = z.object({
-    default_year: z.number(),
     footer_text: z.string(),
     years_with_events: z.array(z.number()),
 })
 export type Globals = z.infer<typeof globalsScheme>;
+export const globalsDefault: Globals = { footer_text: "", years_with_events: [] };
+
 
 export const talkTagScheme = z.object({
     color_index: z.number(),
