@@ -11,9 +11,9 @@
 			description: 'Klicke hier, um zu den globalen Einstellungen im Admin-Dashboard zu gelangen.'
 		},
 		{
-			name: 'entry 2',
-			url: '/dashboard/admin/test',
-			description: 'Klicke hier, um zu TEST zu gelangen.'
+			name: 'Events',
+			url: '/dashboard/admin/events',
+			description: 'Klicke hier, um zu den Event Einstellungen zu gelangen.'
 		}
 	];
 </script>

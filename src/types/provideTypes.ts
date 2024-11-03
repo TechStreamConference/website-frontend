@@ -1,26 +1,16 @@
 import { z } from 'zod';
 
-export const adminScheme = z.object({
-    default_year: z.number(),
-    footer_text: z.string(),
-})
-export type Admin = z.infer<typeof adminScheme>;
 
-export const rolesScheme = z.object({
-    user_id: z.number(),
-    email: z.string(),
-    is_speaker: z.boolean(),
-    is_team_member: z.boolean(),
-    is_admin: z.boolean(),
-})
-export type Roles = z.infer<typeof rolesScheme>;
+
+
 
 export const globalsScheme = z.object({
-    default_year: z.number(),
     footer_text: z.string(),
     years_with_events: z.array(z.number()),
 })
 export type Globals = z.infer<typeof globalsScheme>;
+export const globalsDefault: Globals = { footer_text: "", years_with_events: [] };
+
 
 export const talkTagScheme = z.object({
     color_index: z.number(),

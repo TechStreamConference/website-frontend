@@ -1,52 +1,43 @@
 <script lang="ts">
+	import type { Globals } from 'types/provideTypes';
+
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import * as Menu from 'menu/404';
-
 	import { onMount } from 'svelte';
-	let data: Globals;
+	import { apiUrl } from 'helper/links';
+	import { globalsDefault, globalsScheme } from 'types/provideTypes';
+	import { parseProvidedJsonAsync } from 'helper/parseJson';
+	import * as Menu from 'menu/404';
 
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
-
 	import Button from 'elements/input/button.svelte';
 	import HeadlinePage from 'elements/text/headlinePage.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
-	import { apiUrl } from 'helper/links';
-	import { globalsScheme, type Globals } from 'types/provideTypes';
-	import { parseProvidedJsonAsync } from 'helper/parseJson';
+
+	let data: Globals = globalsDefault;
 
 	onMount(async (): Promise<void> => {
 		const handleFail = async (response: Response) => {
 			console.error(await response.text());
-			data = {
-				default_year: 0,
-				footer_text: '',
-				years_with_events: []
-			};
 		};
 
 		try {
 			// don't use `checkAndParseInputDataAsync<T>()` here because that could cause an `throw error(404)` loop
 			const response: Response = await fetch(apiUrl('/api/globals'));
 			if (!response.ok) {
-				handleFail(response);
+				await handleFail(response);
 				return;
 			}
 
 			const provided = await parseProvidedJsonAsync<Globals>(response, globalsScheme);
 			if (!provided) {
-				handleFail(response);
+				await handleFail(response);
 				return;
 			}
 
 			data = provided;
 		} catch (error) {
-			data = {
-				default_year: 0,
-				footer_text: '',
-				years_with_events: []
-			};
 			return;
 		}
 	});
@@ -73,7 +64,7 @@
 		{/if}
 
 		<Button
-			classes="text button"
+			classes="button-text button"
 			ariaLabel="Klicke um zur Hauptseite zu navigieren"
 			on:click={onClick}
 		>
