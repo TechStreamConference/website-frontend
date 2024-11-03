@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LoadDashboard, LoadAdminGlobal } from 'types/loadTypes.js';
+	import type { LoadDashboard, LoadAdminGlobal } from 'types/dashboardLoadTypes';
 
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 	import Button from 'elements/input/button.svelte';

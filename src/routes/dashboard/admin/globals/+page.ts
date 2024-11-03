@@ -1,9 +1,9 @@
-import type { LoadAdminGlobal } from "types/loadTypes";
-import type { AdminGlobal } from "types/provideTypes";
+import type { LoadAdminGlobal } from "types/dashboardLoadTypes";
+import type { AdminGlobal } from "types/dashboardProvideTypes";
 
 import { apiUrl } from "helper/links";
 import { checkAndParseInputDataAsync } from "helper/parseJson";
-import { adminGlobalScheme } from "types/provideTypes";
+import { adminGlobalScheme } from "types/dashboardProvideTypes";
 
 export async function load({ fetch }: { fetch: typeof globalThis.fetch }): Promise<LoadAdminGlobal> {
     // call

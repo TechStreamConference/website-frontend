@@ -1,18 +1,8 @@
 import { z } from 'zod';
 
-export const adminGlobalScheme = z.object({
-    footer_text: z.string(),
-})
-export type AdminGlobal = z.infer<typeof adminGlobalScheme>;
 
-export const rolesScheme = z.object({
-    user_id: z.number(),
-    email: z.string(),
-    is_speaker: z.boolean(),
-    is_team_member: z.boolean(),
-    is_admin: z.boolean(),
-})
-export type Roles = z.infer<typeof rolesScheme>;
+
+
 
 export const globalsScheme = z.object({
     footer_text: z.string(),
