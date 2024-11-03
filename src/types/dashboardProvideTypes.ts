@@ -8,9 +8,3 @@ export const dashboardRolesScheme = z.object({
     is_admin: z.boolean(),
 })
 export type DashboardRoles = z.infer<typeof dashboardRolesScheme>;
-
-export const adminAllEventsScheme = z.array(z.number());
-export type AdminAllEvents = z.infer<typeof adminAllEventsScheme>;
-
-export const adminEventScheme = z.object({});
-export type AdminEvent = z.infer<typeof adminEventScheme>;
