@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { LoadDashboard, LoadAdminGlobal } from 'types/dashboardLoadTypes';
+	import { Clone } from 'helper/clone';
 
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 	import Button from 'elements/input/button.svelte';
@@ -10,7 +11,7 @@
 	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
 
 	export let data: LoadDashboard & LoadAdminGlobal; // data from database
-	let copiedData: LoadDashboard & LoadAdminGlobal = structuredClone(data); // copied data from database to not save original data until save
+	let copiedData = new Clone<LoadDashboard & LoadAdminGlobal>(data); // copied data from database to not save original data until save
 
 	let errorMessage: string = '';
 	let successMessage: string = '';
@@ -22,7 +23,7 @@
 		}
 		const response: Response = await fetch(apiUrl('/api/dashboard/admin/globals'), {
 			method: 'PUT',
-			body: JSON.stringify(copiedData.admin)
+			body: JSON.stringify(copiedData.value.admin)
 		});
 
 		if (response.ok) {
@@ -31,7 +32,7 @@
 			setTimeout(() => {
 				resetSuccessMessage();
 			}, 3000);
-			data = structuredClone(copiedData);
+			data = copiedData.get();
 			resetUnsavedChanges();
 			return;
 		}
@@ -55,7 +56,7 @@
 			labelText="Footer Beschreibung:"
 			placeholderText="Footer Beschreibung"
 			ariaLabel="Gib den Text ein, der im Footer der Internetseite angezeigt werden soll"
-			bind:value={copiedData.admin.footer_text}
+			bind:value={copiedData.value.admin.footer_text}
 			on:submit={trySaveAsync}
 			on:input={setUnsavedChanges}
 		/>
