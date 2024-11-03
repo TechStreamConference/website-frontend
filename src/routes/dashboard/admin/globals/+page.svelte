@@ -1,16 +1,16 @@
 <script lang="ts">
 	import type { LoadDashboard } from 'types/dashboardLoadTypes';
+	import type { SetAdminGlobals } from 'types/dashboardSetTypes';
 
 	import { Clone } from 'helper/clone';
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 	import Button from 'elements/input/button.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
-	import { SaveMessageType } from 'elements/text/saveMessage.svelte';
+	import { isSaveType, SaveMessageType } from 'types/saveMessageType';
 
-	import { apiUrl } from 'helper/links';
-	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
-	import type { SetAdminGlobals } from 'types/dashboardSetTypes';
+	import { setUnsavedChanges } from 'stores/saved';
+	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 
 	export let data: LoadDashboard; // data from database
 	let copiedData = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
@@ -20,19 +20,16 @@
 		const adminGlobals: SetAdminGlobals = {
 			footer_text: copiedData.value.globals.footer_text
 		};
-		const response: Response = await fetch(apiUrl('/api/dashboard/admin/globals'), {
-			method: 'PUT',
-			body: JSON.stringify(adminGlobals)
-		});
 
-		if (response.ok) {
-			message.setSaveMessage(SaveMessageType.Save);
+		const saveType: SaveMessageType = await trySaveDashboardDataAsync<SetAdminGlobals>(
+			adminGlobals,
+			'/api/dashboard/admin/globals'
+		);
+
+		message.setSaveMessage(saveType);
+		if (isSaveType(saveType)) {
 			data = copiedData.get();
-			resetUnsavedChanges();
-			return;
 		}
-
-		message.setSaveMessage(SaveMessageType.Error);
 	}
 </script>
 

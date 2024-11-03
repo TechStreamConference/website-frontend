@@ -1,13 +1,6 @@
-<script lang="ts" context="module">
-	export enum SaveMessageType {
-		None,
-		Error,
-		Save
-	}
-</script>
-
 <script lang="ts">
 	import Message from './message.svelte';
+	import { SaveMessageType } from 'types/saveMessageType';
 
 	let type = SaveMessageType.None;
 	let timer: number | null = null;
