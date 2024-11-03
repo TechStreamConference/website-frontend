@@ -4,8 +4,9 @@
 	import { Clone } from 'helper/clone';
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 	import Button from 'elements/input/button.svelte';
-	import Message from 'elements/text/message.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
+	import SaveMessage from 'elements/text/saveMessage.svelte';
+	import { SaveMessageType } from 'elements/text/saveMessage.svelte';
 
 	import { apiUrl } from 'helper/links';
 	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
@@ -13,15 +14,9 @@
 
 	export let data: LoadDashboard; // data from database
 	let copiedData = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
-
-	let errorMessage: string = '';
-	let successMessage: string = '';
-	let successTimer: number | null = null;
+	let message: SaveMessage;
 
 	async function trySaveAsync(): Promise<void> {
-		if (successTimer) {
-			clearTimeout(successTimer);
-		}
 		const adminGlobals: SetAdminGlobals = {
 			footer_text: copiedData.value.globals.footer_text
 		};
@@ -31,28 +26,18 @@
 		});
 
 		if (response.ok) {
-			successMessage = 'Gespeichert';
-			errorMessage = '';
-			setTimeout(() => {
-				resetSuccessMessage();
-			}, 3000);
+			message.setSaveMessage(SaveMessageType.Save);
 			data = copiedData.get();
 			resetUnsavedChanges();
 			return;
 		}
 
-		successMessage = '';
-		errorMessage = 'Fehler beim Speichern';
-	}
-
-	function resetSuccessMessage(): void {
-		successMessage = '';
+		message.setSaveMessage(SaveMessageType.Error);
 	}
 </script>
 
 <SectionDashboard classes="dashboard-admin-global-section">
-	<Message message={errorMessage} />
-	<Message classes="message-success-color" message={successMessage} />
+	<SaveMessage bind:this={message} />
 	<form class="dashboard-admin-global-form" on:submit|preventDefault={trySaveAsync}>
 		<TextArea
 			classes="admin-footer-description input"
