@@ -27,9 +27,6 @@
 		const currentPath = get(page).url.pathname;
 
 		for (let i = 0; i < entries.length; ++i) {
-			console.log(
-				`currentPath: ${currentPath}; entry: ${entries[i].url}; same: ${entries[i].url === currentPath}`
-			);
 			if (entries[i].url === currentPath) {
 				current = i;
 				return;
