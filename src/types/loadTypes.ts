@@ -1,4 +1,4 @@
-import type { Year, Globals, Roles, Admin } from "./provideTypes";
+import type { Year, Globals, Roles, AdminGlobal } from "./provideTypes";
 
 export type LoadYear = { loggedIn: boolean; globals: Globals; year: Year };
 
@@ -10,4 +10,4 @@ export type LoadImprint = { loggedIn: boolean; globals: Globals; };
 
 export type LoadDashboard = { roles: Roles, globals: Globals }
 
-export type LoadAdmin = { admin: Admin };
+export type LoadAdminGlobal = { admin: AdminGlobal };

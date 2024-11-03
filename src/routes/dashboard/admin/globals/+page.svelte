@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LoadDashboard, LoadAdmin } from 'types/loadTypes.js';
+	import type { LoadDashboard, LoadAdminGlobal } from 'types/loadTypes.js';
 
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 	import Button from 'elements/input/button.svelte';
@@ -9,8 +9,8 @@
 	import { apiUrl } from 'helper/links';
 	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
 
-	export let data: LoadDashboard & LoadAdmin; // data from database
-	let copiedData: LoadDashboard & LoadAdmin = structuredClone(data); // copied data from database to not save original data until save
+	export let data: LoadDashboard & LoadAdminGlobal; // data from database
+	let copiedData: LoadDashboard & LoadAdminGlobal = structuredClone(data); // copied data from database to not save original data until save
 
 	let errorMessage: string = '';
 	let successMessage: string = '';
