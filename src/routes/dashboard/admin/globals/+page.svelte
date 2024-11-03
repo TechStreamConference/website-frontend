@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { LoadDashboard, LoadAdminGlobal } from 'types/dashboardLoadTypes';
-	import { Clone } from 'helper/clone';
+	import type { LoadDashboard } from 'types/dashboardLoadTypes';
 
+	import { Clone } from 'helper/clone';
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 	import Button from 'elements/input/button.svelte';
 	import Message from 'elements/text/message.svelte';
@@ -9,9 +9,10 @@
 
 	import { apiUrl } from 'helper/links';
 	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
+	import type { SetAdminGlobals } from 'types/dashboardSetTypes';
 
-	export let data: LoadDashboard & LoadAdminGlobal; // data from database
-	let copiedData = new Clone<LoadDashboard & LoadAdminGlobal>(data); // copied data from database to not save original data until save
+	export let data: LoadDashboard; // data from database
+	let copiedData = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
 
 	let errorMessage: string = '';
 	let successMessage: string = '';
@@ -21,9 +22,12 @@
 		if (successTimer) {
 			clearTimeout(successTimer);
 		}
+		const adminGlobals: SetAdminGlobals = {
+			footer_text: copiedData.value.globals.footer_text
+		};
 		const response: Response = await fetch(apiUrl('/api/dashboard/admin/globals'), {
 			method: 'PUT',
-			body: JSON.stringify(copiedData.value.admin)
+			body: JSON.stringify(adminGlobals)
 		});
 
 		if (response.ok) {
@@ -56,7 +60,7 @@
 			labelText="Footer Beschreibung:"
 			placeholderText="Footer Beschreibung"
 			ariaLabel="Gib den Text ein, der im Footer der Internetseite angezeigt werden soll"
-			bind:value={copiedData.value.admin.footer_text}
+			bind:value={copiedData.value.globals.footer_text}
 			on:submit={trySaveAsync}
 			on:input={setUnsavedChanges}
 		/>

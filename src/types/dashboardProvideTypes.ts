@@ -9,7 +9,8 @@ export const dashboardRolesScheme = z.object({
 })
 export type DashboardRoles = z.infer<typeof dashboardRolesScheme>;
 
-export const adminGlobalScheme = z.object({
-    footer_text: z.string(),
-})
-export type AdminGlobal = z.infer<typeof adminGlobalScheme>;
+export const adminAllEventsScheme = z.array(z.number());
+export type AdminAllEvents = z.infer<typeof adminAllEventsScheme>;
+
+export const adminEventScheme = z.object({});
+export type AdminEvent = z.infer<typeof adminEventScheme>;
