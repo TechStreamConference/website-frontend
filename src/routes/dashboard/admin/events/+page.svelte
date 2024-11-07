@@ -13,6 +13,7 @@
 	import DropDown from 'elements/input/dropDown.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import Input from 'elements/input/input.svelte';
+	import TextArea from 'elements/input/textArea.svelte';
 
 	export let data: LoadDashboard & LoadAdminEvents;
 	let copiedData = new Clone<LoadDashboard & LoadAdminEvents>(data);
@@ -27,7 +28,9 @@
 
 	$: if (selected) {
 		// when selected changes this gets called
-		updateDisplayed();
+		if (displayed !== selected) {
+			updateDisplayed();
+		}
 	}
 
 	function updateDisplayed(): void {
@@ -72,6 +75,76 @@
 					placeholderText="Titel"
 					ariaLabel="Gib den Titel des ausgewählten Events ein."
 					bind:value={currentEvent.title}
+					on:submit={trySaveAsync}
+					on:input={setUnsavedChanges}
+				/>
+				<Input
+					classes="dashboard-admin-event-sub-title input"
+					id="dashboard-admin-event-sub-title"
+					labelText="Untertitel:"
+					placeholderText="Untertitel"
+					ariaLabel="Gib den Untertitel des ausgewählten Events ein."
+					bind:value={currentEvent.subtitle}
+					on:submit={trySaveAsync}
+					on:input={setUnsavedChanges}
+				/>
+				<Input
+					classes="dashboard-admin-event-description-headline input"
+					id="dashboard-admin-event-description-headline"
+					labelText="Überschrift Beschreibung:"
+					placeholderText="Überschrift Beschreibung:"
+					ariaLabel="Gib die Überschrift der Eventbeschreibung des ausgewählten Events ein."
+					bind:value={currentEvent.description_headline}
+					on:submit={trySaveAsync}
+					on:input={setUnsavedChanges}
+				/>
+				<TextArea
+					classes="dashboard-admin-event-description input"
+					id="dashboard-admin-event-description"
+					labelText="Beschreibung:"
+					placeholderText="Beschreibung"
+					ariaLabel="Gib den Eventbeschreibungstext des ausgewählten Events ein."
+					bind:value={currentEvent.description}
+					on:submit={trySaveAsync}
+					on:input={setUnsavedChanges}
+				/>
+				<Input
+					classes="dashboard-admin-event-twitch-url input"
+					id="dashboard-admin-event-twitch-url"
+					labelText="Twitch URL:"
+					placeholderText="Twitch URL:"
+					ariaLabel="Gib die URL der Twitchseite des ausgewählten Events ein."
+					bind:value={currentEvent.twitch_url}
+					on:submit={trySaveAsync}
+					on:input={setUnsavedChanges}
+				/>
+				<Input
+					classes="dashboard-admin-event-discord-url input"
+					id="dashboard-admin-event-discord-url"
+					labelText="Discord URL:"
+					placeholderText="Discord URL:"
+					ariaLabel="Gib die URL des Discordservers des ausgewählten Events ein."
+					bind:value={currentEvent.discord_url}
+					on:submit={trySaveAsync}
+					on:input={setUnsavedChanges}
+				/>
+				<Input
+					classes="dashboard-admin-event-presskit-url input"
+					id="dashboard-admin-event-presskit-url"
+					labelText="Presskit URL:"
+					placeholderText="Presskit URL:"
+					ariaLabel="Gib die URL des Presskits des ausgewählten Events ein."
+					bind:value={currentEvent.presskit_url}
+					on:submit={trySaveAsync}
+					on:input={setUnsavedChanges}
+				/>
+				<Input
+					classes="dashboard-admin-event-youtube-trailer-id input"
+					id="dashboard-admin-event-youtube-trailer-id"
+					labelText="YouTube Trailer ID:"
+					placeholderText="YouTube Trailer ID:"
+					ariaLabel="Gib die ID des YouTube Trailer des ausgewählten Events ein."
+					bind:value={currentEvent.trailer_youtube_id}
 					on:submit={trySaveAsync}
 					on:input={setUnsavedChanges}
 				/>
