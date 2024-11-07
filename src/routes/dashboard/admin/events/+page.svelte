@@ -4,7 +4,7 @@
 
 	import { Clone } from 'helper/clone';
 	import { getAllEventTitle, getEventByTitle } from './eventsHelper';
-	import { unsavedChanges } from 'stores/saved';
+	import { unsavedChanges, setUnsavedChanges } from 'stores/saved';
 	import { onMount } from 'svelte';
 
 	import TextLine from 'elements/text/textLine.svelte';
@@ -12,6 +12,7 @@
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 	import DropDown from 'elements/input/dropDown.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
+	import Input from 'elements/input/input.svelte';
 
 	export let data: LoadDashboard & LoadAdminEvents;
 	let copiedData = new Clone<LoadDashboard & LoadAdminEvents>(data);
@@ -24,15 +25,29 @@
 		updateDisplayed();
 	});
 
+	$: if (selected) {
+		// when selected changes this gets called
+		updateDisplayed();
+	}
+
 	function updateDisplayed(): void {
 		if (unsavedChanges()) {
 			console.log('unsaved changes');
+			resetSelected();
 			selected = displayed;
 			return;
 		}
 
 		displayed = selected;
 		currentEvent = getEventByTitle(copiedData.value.allEvents, displayed);
+	}
+
+	function resetSelected(): void {
+		selected = displayed;
+	}
+
+	async function trySaveAsync(): Promise<void> {
+		console.log('todo: save data');
 	}
 </script>
 
@@ -44,12 +59,23 @@
 			bind:selected
 			id={'dashboard-admin-event-drop-down'}
 			labelText="Aktuelles Event:"
-			on:input={updateDisplayed}
 		/>
 		{#if displayed && currentEvent}
 			<SubHeadline classes="dashboard-admin-event-event-subheadline"
 				>{currentEvent.title}</SubHeadline
 			>
+			<form class="dashboard-admin-event-form" on:submit|preventDefault={trySaveAsync}>
+				<Input
+					classes="dashboard-admin-event-title input"
+					id="dashboard-admin-event-title"
+					labelText="Titel:"
+					placeholderText="Titel"
+					ariaLabel="Gib den Titel des ausgewählten Events ein."
+					bind:value={currentEvent.title}
+					on:submit={trySaveAsync}
+					on:input={setUnsavedChanges}
+				/>
+			</form>
 		{:else}
 			<TextLine>Kein aktuelles Event</TextLine>
 		{/if}
