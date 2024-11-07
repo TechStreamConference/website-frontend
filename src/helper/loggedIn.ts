@@ -19,8 +19,8 @@ export async function redirectIfUnauthorizedOrReteturnRolesAsync(fetch: Function
     const roles: DashboardRoles = await checkAndParseInputDataAsync<DashboardRoles>(
         response,
         dashboardRolesScheme,
-        `Serveranfrage für roles nicht erfolgreich. throw error(404)`,
-        `Unerwartete Daten für roles. throw error(404)`
+        `Serveranfrage für roles nicht erfolgreich. throw error(406)`,
+        `Unerwartete Daten für roles. throw error(406)`
     );
 
     return roles;

@@ -11,8 +11,8 @@ export async function load({ fetch }: { fetch: typeof globalThis.fetch }): Promi
     const allEvents = await checkAndParseInputDataAsync<DashboardAllEvents>(
         await allEventsPromise,
         dashboardAllEventsScheme,
-        `Serveranfrage für alle Events nicht erfolgreich. throw error(404)`,
-        `Unerwartete Daten für alle Events. throw error(404)`
+        `Serveranfrage für alle Events nicht erfolgreich. throw error(406)`,
+        `Unerwartete Daten für alle Events. throw error(406)`
     )
 
     return {
