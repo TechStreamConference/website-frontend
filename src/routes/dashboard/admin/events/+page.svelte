@@ -14,6 +14,7 @@
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 	import Input from 'elements/input/input.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
+	import Button from 'elements/input/button.svelte';
 
 	export let data: LoadDashboard & LoadAdminEvents;
 	let copiedData = new Clone<LoadDashboard & LoadAdminEvents>(data);
@@ -148,6 +149,14 @@
 					on:submit={trySaveAsync}
 					on:input={setUnsavedChanges}
 				/>
+
+				<Button
+					classes="button-text dashboard-admin-event-submit-button"
+					type={'submit'}
+					ariaLabel="Klicke zum Speichern"
+				>
+					Speichern
+				</Button>
 			</form>
 		{:else}
 			<TextLine>Kein aktuelles Event</TextLine>
