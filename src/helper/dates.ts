@@ -1,3 +1,8 @@
+export type TimeDate = {
+    date: string;
+    time: string;
+};
+
 const lookup: string[] = [
     'Sonntag',
     'Montag',
@@ -26,4 +31,24 @@ export function formatDate(provided: string, format: string): string {
     };
 
     return format.replace(/%YYYY|%MM|%M|%DD|%D|%d|%hh|%h|%mm|%m/g, matched => map[matched]);
+}
+
+
+export function splitTimeAndDate(timeAndDate: string): TimeDate {
+    const split = timeAndDate.split(' ');
+    if (split.length !== 2) {
+        console.log('not able to split date and time properly');
+        return {
+            date: "",
+            time: "",
+        }
+    }
+    return {
+        date: split[0],
+        time: split[1],
+    }
+}
+
+export function combineTimeAndDate(timeAndDate: TimeDate): string {
+    return `${timeAndDate.date} ${timeAndDate.time}`;
 }
