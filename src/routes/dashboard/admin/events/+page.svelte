@@ -1,11 +1,13 @@
 <script lang="ts">
 	import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
 	import type { DashboardEvent } from 'types/dashboardProvideTypes';
+	import type { TimeDate } from 'helper/dates';
 
+	import { onMount } from 'svelte';
 	import { Clone } from 'helper/clone';
 	import { getAllEventTitle, getEventByTitle } from './eventsHelper';
 	import { unsavedChanges, setUnsavedChanges } from 'stores/saved';
-	import { onMount } from 'svelte';
+	import { splitTimeAndDate } from 'helper/dates';
 
 	import TextLine from 'elements/text/textLine.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
@@ -18,17 +20,20 @@
 
 	export let data: LoadDashboard & LoadAdminEvents;
 	let copiedData = new Clone<LoadDashboard & LoadAdminEvents>(data);
+
 	let message: SaveMessage;
 	let selected: string;
 	let displayed: string;
+
 	let currentEvent: DashboardEvent;
+	let currentPublishShaduleDate: TimeDate;
+	let currentPublishEventDate: TimeDate;
 
 	onMount(() => {
 		updateDisplayed();
 	});
 
 	$: if (selected) {
-		// when selected changes this gets called
 		if (displayed !== selected) {
 			updateDisplayed();
 		}
@@ -44,6 +49,8 @@
 
 		displayed = selected;
 		currentEvent = getEventByTitle(copiedData.value.allEvents, displayed);
+		currentPublishEventDate = splitTimeAndDate(currentEvent.publish_date);
+		currentPublishShaduleDate = splitTimeAndDate(currentEvent.schedule_visible_from);
 	}
 
 	function resetSelected(): void {
@@ -181,7 +188,7 @@
 						placeholderText="Veröffentlichungsdatum Event:"
 						type="date"
 						ariaLabel="Gib das Veröffentlichungsdatum des ausgewählten Events ein."
-						bind:value={currentEvent.publish_date}
+						bind:value={currentPublishEventDate.date}
 						on:submit={trySaveAsync}
 						on:input={setUnsavedChanges}
 					/>
@@ -192,7 +199,7 @@
 						placeholderText="Veröffentlichungsuhrzeit Event:"
 						type="time"
 						ariaLabel="Gib das Veröffentlichungsuhrzeit des ausgewählten Events ein."
-						bind:value={currentEvent.publish_date}
+						bind:value={currentPublishEventDate.time}
 						on:submit={trySaveAsync}
 						on:input={setUnsavedChanges}
 					/>
@@ -205,7 +212,7 @@
 						placeholderText="Veröffentlichungsuhrzeit Ablaufplan:"
 						type="date"
 						ariaLabel="Gib das Veröffentlichungsuhrzeit des Ablaufplanes des ausgewählten Events ein."
-						bind:value={currentEvent.schedule_visible_from}
+						bind:value={currentPublishShaduleDate.date}
 						on:submit={trySaveAsync}
 						on:input={setUnsavedChanges}
 					/>
@@ -216,7 +223,7 @@
 						placeholderText="Veröffentlichungsuhrzeit Event:"
 						type="time"
 						ariaLabel="Gib das Veröffentlichungsuhrzeit des ausgewählten Events ein."
-						bind:value={currentEvent.schedule_visible_from}
+						bind:value={currentPublishShaduleDate.time}
 						on:submit={trySaveAsync}
 						on:input={setUnsavedChanges}
 					/>
