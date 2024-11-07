@@ -1,9 +1,22 @@
-import type { DashboardAllEvents } from "types/dashboardProvideTypes";
+import type { DashboardAllEvents, DashboardEvent } from "types/dashboardProvideTypes";
 
-export function getDropDownKeys(events: DashboardAllEvents): string[] {
-    const keys: string[] = [];
+import { error } from "@sveltejs/kit";
+
+export function getAllEventTitle(events: DashboardAllEvents): string[] {
+    const title: string[] = [];
     for (var event of events) {
-        keys.push(event.title);
+        title.push(event.title);
     }
-    return keys;
+    return title;
+}
+
+export function getEventByTitle(events: DashboardAllEvents, title: string): DashboardEvent {
+    for (var event of events) {
+        if (event.title === title) {
+            return event;
+        }
+    }
+
+    console.error(`error while looking up event by title: ${title}`);
+    throw error(500);
 }
