@@ -149,6 +149,78 @@
 					on:submit={trySaveAsync}
 					on:input={setUnsavedChanges}
 				/>
+				<div class="dashboard-admin-event-time-date-wrapper">
+					<Input
+						classes="dashboard-admin-event-start-date input"
+						id="dashboard-admin-event-start-date"
+						labelText="Start Datum:"
+						placeholderText="Start Datum:"
+						type="date"
+						ariaLabel="Gib das Start Datum des ausgewählten Events ein."
+						bind:value={currentEvent.start_date}
+						on:submit={trySaveAsync}
+						on:input={setUnsavedChanges}
+					/>
+					<Input
+						classes="dashboard-admin-event-end-date input"
+						id="dashboard-admin-event-end-date"
+						labelText="End Datum:"
+						placeholderText="End Datum:"
+						type="date"
+						ariaLabel="Gib das End Datum des ausgewählten Events ein."
+						bind:value={currentEvent.end_date}
+						on:submit={trySaveAsync}
+						on:input={setUnsavedChanges}
+					/>
+				</div>
+				<div class="dashboard-admin-event-time-date-wrapper">
+					<Input
+						classes="dashboard-admin-event-publish-event-date input"
+						id="dashboard-admin-event-publish-event-date"
+						labelText="Veröffentlichungsdatum Event:"
+						placeholderText="Veröffentlichungsdatum Event:"
+						type="date"
+						ariaLabel="Gib das Veröffentlichungsdatum des ausgewählten Events ein."
+						bind:value={currentEvent.publish_date}
+						on:submit={trySaveAsync}
+						on:input={setUnsavedChanges}
+					/>
+					<Input
+						classes="dashboard-admin-event-publish-event-time input"
+						id="dashboard-admin-event-publish-event-time"
+						labelText="Veröffentlichungsuhrzeit Event:"
+						placeholderText="Veröffentlichungsuhrzeit Event:"
+						type="time"
+						ariaLabel="Gib das Veröffentlichungsuhrzeit des ausgewählten Events ein."
+						bind:value={currentEvent.publish_date}
+						on:submit={trySaveAsync}
+						on:input={setUnsavedChanges}
+					/>
+				</div>
+				<div class="dashboard-admin-event-time-date-wrapper">
+					<Input
+						classes="dashboard-admin-event-publish-shedule-date input"
+						id="dashboard-admin-event-publish-shedule-date"
+						labelText="Veröffentlichungsuhrzeit Ablaufplan:"
+						placeholderText="Veröffentlichungsuhrzeit Ablaufplan:"
+						type="date"
+						ariaLabel="Gib das Veröffentlichungsuhrzeit des Ablaufplanes des ausgewählten Events ein."
+						bind:value={currentEvent.schedule_visible_from}
+						on:submit={trySaveAsync}
+						on:input={setUnsavedChanges}
+					/>
+					<Input
+						classes="dashboard-admin-event-publish-shedule-time input"
+						id="dashboard-admin-event-publish-shedule-time"
+						labelText="Veröffentlichungsuhrzeit Event:"
+						placeholderText="Veröffentlichungsuhrzeit Event:"
+						type="time"
+						ariaLabel="Gib das Veröffentlichungsuhrzeit des ausgewählten Events ein."
+						bind:value={currentEvent.schedule_visible_from}
+						on:submit={trySaveAsync}
+						on:input={setUnsavedChanges}
+					/>
+				</div>
 
 				<Button
 					classes="button-text dashboard-admin-event-submit-button"
@@ -173,6 +245,23 @@
 
 	:global(.dashboard-admin-event-event-subheadline) {
 		justify-self: center;
+		margin-top: var(--4x-margin);
+	}
+
+	.dashboard-admin-event-form {
+		display: flex;
+		flex-direction: column;
+		gap: var(--full-gap);
+	}
+
+	.dashboard-admin-event-time-date-wrapper {
+		display: flex;
+		flex-direction: row;
+		gap: var(--full-gap);
+	}
+
+	:global(.dashboard-admin-event-submit-button) {
 		margin-top: var(--2x-margin);
+		align-self: center;
 	}
 </style>
