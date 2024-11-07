@@ -15,14 +15,14 @@ export const dashboardEventScheme = z.object({
     subtitle: z.string(),
     start_date: z.string(),
     end_date: z.string(),
-    discord_url: z.string().nullable(),
-    twitch_url: z.string().nullable(),
-    presskit_url: z.string().nullable(),
-    trailer_youtube_id: z.string().nullable(),
+    discord_url: z.string().nullable().transform((val) => val ?? ""),
+    twitch_url: z.string().nullable().transform((val) => val ?? ""),
+    presskit_url: z.string().nullable().transform((val) => val ?? ""),
+    trailer_youtube_id: z.string().nullable().transform((val) => val ?? ""),
     description_headline: z.string(),
     description: z.string(),
-    schedule_visible_from: z.string().nullable(),
-    publish_date: z.string().nullable(),
+    schedule_visible_from: z.string().nullable().transform((val) => val ?? ""),
+    publish_date: z.string().nullable().transform((val) => val ?? ""),
 })
 export type DashboardEvent = z.infer<typeof dashboardEventScheme>;
 
