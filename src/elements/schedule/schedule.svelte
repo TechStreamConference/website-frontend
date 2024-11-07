@@ -19,7 +19,7 @@
 		}
 
 		console.error(`error while looking up speaker with ID ${id}.`);
-		throw error(404);
+		throw error(500);
 	}
 </script>
 
@@ -60,8 +60,8 @@
 	}
 
 	@media (max-width: 600px) {
-			.schedule-element-day {
-					grid-template-columns: 8rem 1fr;
-			}
-  }
+		.schedule-element-day {
+			grid-template-columns: 8rem 1fr;
+		}
+	}
 </style>
