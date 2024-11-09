@@ -27,9 +27,6 @@
 		);
 
 		message.setSaveMessage(saveType);
-		if (isSaveType(saveType)) {
-			data = copiedData.get();
-		}
 	}
 </script>
 

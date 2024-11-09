@@ -2,12 +2,14 @@
 	import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
 	import type { DashboardEvent } from 'types/dashboardProvideTypes';
 	import type { TimeDate } from 'helper/dates';
+	import type { SaveMessageType } from 'types/saveMessageType';
 
 	import { onMount } from 'svelte';
 	import { Clone } from 'helper/clone';
 	import { getAllEventTitle, getEventByTitle } from './eventsHelper';
 	import { unsavedChanges, setUnsavedChanges } from 'stores/saved';
-	import { splitTimeAndDate } from 'helper/dates';
+	import { convertTimeAndDateToHTML, convertTimeAndDateToSQL } from 'helper/dates';
+	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 
 	import TextLine from 'elements/text/textLine.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
@@ -17,6 +19,7 @@
 	import Input from 'elements/input/input.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
 	import Button from 'elements/input/button.svelte';
+	import type { SetAdminEvent } from 'types/dashboardSetTypes';
 
 	export let data: LoadDashboard & LoadAdminEvents;
 	let copiedData = new Clone<LoadDashboard & LoadAdminEvents>(data);
@@ -26,8 +29,8 @@
 	let displayed: string;
 
 	let currentEvent: DashboardEvent;
-	let currentPublishShaduleDate: TimeDate;
-	let currentPublishEventDate: TimeDate;
+	let currentPublishShaduleDate: string;
+	let currentPublishEventDate: string;
 
 	onMount(() => {
 		updateDisplayed();
@@ -49,8 +52,8 @@
 
 		displayed = selected;
 		currentEvent = getEventByTitle(copiedData.value.allEvents, displayed);
-		currentPublishEventDate = splitTimeAndDate(currentEvent.publish_date);
-		currentPublishShaduleDate = splitTimeAndDate(currentEvent.schedule_visible_from);
+		currentPublishEventDate = convertTimeAndDateToHTML(currentEvent.publish_date);
+		currentPublishShaduleDate = convertTimeAndDateToHTML(currentEvent.schedule_visible_from);
 	}
 
 	function resetSelected(): void {
@@ -58,7 +61,18 @@
 	}
 
 	async function trySaveAsync(): Promise<void> {
-		console.log('todo: save data');
+		const toSave: SetAdminEvent = structuredClone(currentEvent);
+		toSave.publish_date = convertTimeAndDateToSQL(currentPublishEventDate);
+		toSave.schedule_visible_from = convertTimeAndDateToSQL(currentPublishShaduleDate);
+		toSave.start_date = toSave.start_date;
+		toSave.end_date = toSave.end_date;
+
+		const saveType: SaveMessageType = await trySaveDashboardDataAsync<DashboardEvent>(
+			currentEvent,
+			`/api/dashboard/admin/event/${currentEvent.id}`
+		);
+
+		message.setSaveMessage(saveType);
 	}
 </script>
 
@@ -186,44 +200,20 @@
 						id="dashboard-admin-event-publish-event-date"
 						labelText="Veröffentlichungsdatum Event:"
 						placeholderText="Veröffentlichungsdatum Event:"
-						type="date"
+						type="datetime-local"
 						ariaLabel="Gib das Veröffentlichungsdatum des ausgewählten Events ein."
-						bind:value={currentPublishEventDate.date}
+						bind:value={currentPublishEventDate}
 						on:submit={trySaveAsync}
 						on:input={setUnsavedChanges}
 					/>
-					<Input
-						classes="dashboard-admin-event-publish-event-time input"
-						id="dashboard-admin-event-publish-event-time"
-						labelText="Veröffentlichungsuhrzeit Event:"
-						placeholderText="Veröffentlichungsuhrzeit Event:"
-						type="time"
-						ariaLabel="Gib das Veröffentlichungsuhrzeit des ausgewählten Events ein."
-						bind:value={currentPublishEventDate.time}
-						on:submit={trySaveAsync}
-						on:input={setUnsavedChanges}
-					/>
-				</div>
-				<div class="dashboard-admin-event-time-date-wrapper">
 					<Input
 						classes="dashboard-admin-event-publish-shedule-date input"
 						id="dashboard-admin-event-publish-shedule-date"
 						labelText="Veröffentlichungsuhrzeit Ablaufplan:"
 						placeholderText="Veröffentlichungsuhrzeit Ablaufplan:"
-						type="date"
+						type="datetime-local"
 						ariaLabel="Gib das Veröffentlichungsuhrzeit des Ablaufplanes des ausgewählten Events ein."
-						bind:value={currentPublishShaduleDate.date}
-						on:submit={trySaveAsync}
-						on:input={setUnsavedChanges}
-					/>
-					<Input
-						classes="dashboard-admin-event-publish-shedule-time input"
-						id="dashboard-admin-event-publish-shedule-time"
-						labelText="Veröffentlichungsuhrzeit Event:"
-						placeholderText="Veröffentlichungsuhrzeit Event:"
-						type="time"
-						ariaLabel="Gib das Veröffentlichungsuhrzeit des ausgewählten Events ein."
-						bind:value={currentPublishShaduleDate.time}
+						bind:value={currentPublishShaduleDate}
 						on:submit={trySaveAsync}
 						on:input={setUnsavedChanges}
 					/>

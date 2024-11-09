@@ -14,7 +14,7 @@
 	export let value: string | number = '';
 </script>
 
-<div class="{classes}">
+<div class={classes}>
 	<Label for_={id}>{labelText}</Label>
 	<input
 		class="normal-font"
@@ -25,6 +25,7 @@
 		bind:value
 		on:input
 		aria-label={ariaLabel}
+		step="1"
 	/>
 </div>
 

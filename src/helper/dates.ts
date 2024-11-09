@@ -34,21 +34,10 @@ export function formatDate(provided: string, format: string): string {
 }
 
 
-export function splitTimeAndDate(timeAndDate: string): TimeDate {
-    const split = timeAndDate.split(' ');
-    if (split.length !== 2) {
-        console.log('not able to split date and time properly');
-        return {
-            date: "",
-            time: "",
-        }
-    }
-    return {
-        date: split[0],
-        time: split[1],
-    }
+export function convertTimeAndDateToHTML(timeAndDate: string): string {
+    return timeAndDate.replace(' ', 'T');
 }
 
-export function combineTimeAndDate(timeAndDate: TimeDate): string {
-    return `${timeAndDate.date} ${timeAndDate.time}`;
+export function convertTimeAndDateToSQL(timeAndDate: string): string {
+    return timeAndDate.replace('T', ' ');
 }

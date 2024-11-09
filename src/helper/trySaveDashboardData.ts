@@ -13,5 +13,9 @@ export async function trySaveDashboardDataAsync<T>(data: T, url: string): Promis
         return SaveMessageType.Save;
     }
 
+    if (import.meta.env.DEV) {
+        console.log(await response.json());
+    }
+
     return SaveMessageType.Error;
 }
