@@ -1,8 +1,3 @@
-export type TimeDate = {
-    date: string;
-    time: string;
-};
-
 const lookup: string[] = [
     'Sonntag',
     'Montag',
@@ -38,6 +33,9 @@ export function convertTimeAndDateToHTML(timeAndDate: string): string {
     return timeAndDate.replace(' ', 'T');
 }
 
-export function convertTimeAndDateToSQL(timeAndDate: string): string {
+export function convertTimeAndDateToSQL(timeAndDate: string | null): string | null {
+    if (!timeAndDate) {
+        return null;
+    }
     return timeAndDate.replace('T', ' ');
 }

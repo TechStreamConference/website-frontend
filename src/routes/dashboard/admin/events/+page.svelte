@@ -1,12 +1,11 @@
 <script lang="ts">
 	import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
 	import type { DashboardEvent } from 'types/dashboardProvideTypes';
-	import type { TimeDate } from 'helper/dates';
 	import type { SaveMessageType } from 'types/saveMessageType';
 
 	import { onMount } from 'svelte';
 	import { Clone } from 'helper/clone';
-	import { getAllEventTitle, getEventByTitle } from './eventsHelper';
+	import { getAllEventTitle, getEventByTitle, validateData } from './eventsHelper';
 	import { unsavedChanges, setUnsavedChanges } from 'stores/saved';
 	import { convertTimeAndDateToHTML, convertTimeAndDateToSQL } from 'helper/dates';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
@@ -29,8 +28,6 @@
 	let displayed: string;
 
 	let currentEvent: DashboardEvent;
-	let currentPublishShaduleDate: string;
-	let currentPublishEventDate: string;
 
 	onMount(() => {
 		updateDisplayed();
@@ -52,8 +49,10 @@
 
 		displayed = selected;
 		currentEvent = getEventByTitle(copiedData.value.allEvents, displayed);
-		currentPublishEventDate = convertTimeAndDateToHTML(currentEvent.publish_date);
-		currentPublishShaduleDate = convertTimeAndDateToHTML(currentEvent.schedule_visible_from);
+		currentEvent.publish_date = convertTimeAndDateToHTML(currentEvent.publish_date);
+		currentEvent.schedule_visible_from = convertTimeAndDateToHTML(
+			currentEvent.schedule_visible_from
+		);
 	}
 
 	function resetSelected(): void {
@@ -62,10 +61,14 @@
 
 	async function trySaveAsync(): Promise<void> {
 		const toSave: SetAdminEvent = structuredClone(currentEvent);
-		toSave.publish_date = convertTimeAndDateToSQL(currentPublishEventDate);
-		toSave.schedule_visible_from = convertTimeAndDateToSQL(currentPublishShaduleDate);
+		toSave.publish_date = convertTimeAndDateToSQL(toSave.publish_date);
+		toSave.schedule_visible_from = convertTimeAndDateToSQL(toSave.schedule_visible_from);
 		toSave.start_date = toSave.start_date;
 		toSave.end_date = toSave.end_date;
+
+		console.log(toSave);
+
+		validateData(toSave);
 
 		const saveType: SaveMessageType = await trySaveDashboardDataAsync<DashboardEvent>(
 			currentEvent,
@@ -202,7 +205,7 @@
 						placeholderText="Veröffentlichungsdatum Event:"
 						type="datetime-local"
 						ariaLabel="Gib das Veröffentlichungsdatum des ausgewählten Events ein."
-						bind:value={currentPublishEventDate}
+						bind:value={currentEvent.publish_date}
 						on:submit={trySaveAsync}
 						on:input={setUnsavedChanges}
 					/>
@@ -213,7 +216,7 @@
 						placeholderText="Veröffentlichungsuhrzeit Ablaufplan:"
 						type="datetime-local"
 						ariaLabel="Gib das Veröffentlichungsuhrzeit des Ablaufplanes des ausgewählten Events ein."
-						bind:value={currentPublishShaduleDate}
+						bind:value={currentEvent.schedule_visible_from}
 						on:submit={trySaveAsync}
 						on:input={setUnsavedChanges}
 					/>
