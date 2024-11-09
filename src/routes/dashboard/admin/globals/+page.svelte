@@ -13,10 +13,11 @@
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 
 	export let data: LoadDashboard; // data from database
+
 	let copiedData = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
 	let message: SaveMessage;
 
-	async function trySaveAsync(): Promise<void> {
+	async function trySaveAsync(): Promise<boolean> {
 		const adminGlobals: SetAdminGlobals = {
 			footer_text: copiedData.value.globals.footer_text
 		};
@@ -27,6 +28,7 @@
 		);
 
 		message.setSaveMessage(saveType);
+		return isSaveType(saveType);
 	}
 </script>
 

@@ -3,6 +3,9 @@
 
 	import Tabs from 'elements/navigation/tabs.svelte';
 	import Headline from 'elements/text/headline.svelte';
+	import UnsavedChangesPopup from 'elements/navigation/unsavedChangesPopup.svelte';
+
+	export let unsavedChangesPopup: UnsavedChangesPopup;
 
 	const tabsEntries: Menu = [
 		{
@@ -22,7 +25,7 @@
 	<Headline classes="headline-border">Admin</Headline>
 	<Tabs entries={tabsEntries} />
 </div>
-<slot />
+<slot {unsavedChangesPopup} />
 
 <style>
 	.dashboard-admin {

@@ -37,10 +37,10 @@
 			</Button>
 			<Button
 				on:click={() => {
-				intercepted = null;
-				resetUnsavedChanges();
-				goto(url);
-			}}
+					intercepted = null;
+					resetUnsavedChanges();
+					goto(url);
+				}}
 				ariaLabel="Klicke hier, um die Seite zu verlassen"
 			>
 				Seite verlassen
@@ -50,35 +50,35 @@
 </dialog>
 
 <style>
-    dialog {
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 100vw;
-        background-color: var(--background-color-transparent);
-        z-index: 20;
-        justify-content: center;
-        align-items: center;
-    }
+	dialog {
+		top: 0;
+		left: 0;
+		height: 100vh;
+		width: 100vw;
+		background-color: var(--background-color-transparent);
+		z-index: 20;
+		justify-content: center;
+		align-items: center;
+	}
 
-    dialog[open] {
-        display: flex;
-    }
+	dialog[open] {
+		display: flex;
+	}
 
-    .unsaved-changes-modal {
-        display: flex;
-        flex-direction: column;
-        background-color: var(--background-color-light);
-        padding: var(--2x-padding);
-        border: 1px solid var(--line-color);
-        border-radius: var(--border-radius);
-				gap: var(--full-gap);
-				align-items: center;
-    }
+	.unsaved-changes-modal {
+		display: flex;
+		flex-direction: column;
+		background-color: var(--background-color-light);
+		padding: var(--2x-padding);
+		border: 1px solid var(--line-color);
+		border-radius: var(--border-radius);
+		gap: var(--full-gap);
+		align-items: center;
+	}
 
-    .unsaved-changes-button-wrapper {
-        display: flex;
-        flex-direction: row;
-        gap: var(--full-gap);
-    }
+	.unsaved-changes-button-wrapper {
+		display: flex;
+		flex-direction: row;
+		gap: var(--full-gap);
+	}
 </style>
