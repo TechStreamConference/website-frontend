@@ -11,11 +11,9 @@
 
 	import { setUnsavedChanges } from 'stores/saved';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
-	import UnsavedChangesPopup from 'elements/navigation/unsavedChangesPopup.svelte';
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 
 	export let data: LoadDashboard; // data from database
-	export let unsavedChangesPopup: UnsavedChangesPopup;
 
 	let copiedData = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
 	let message: SaveMessage;
@@ -35,7 +33,7 @@
 	}
 </script>
 
-<UnsavedChangesCallbackWrapper component={unsavedChangesPopup} callback={trySaveAsync} />
+<UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 <SectionDashboard classes="dashboard-admin-global-section">
 	<SaveMessage bind:this={message} />
 	<form class="dashboard-admin-global-form" on:submit|preventDefault={trySaveAsync}>

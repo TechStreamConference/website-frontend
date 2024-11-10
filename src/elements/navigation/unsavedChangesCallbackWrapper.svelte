@@ -2,16 +2,15 @@
 	type AsyncCallback = () => Promise<boolean>;
 
 	import { onDestroy, onMount } from 'svelte';
-	import UnsavedChangesPopup from './unsavedChangesPopup.svelte';
+	import { setSaveCallback, resetSaveCallback } from 'stores/saveCallback';
 
-	export let component: UnsavedChangesPopup;
 	export let callback: AsyncCallback;
 
 	onMount(() => {
-		component.callback = callback;
+		setSaveCallback(callback);
 	});
 
 	onDestroy(() => {
-		component.callback = undefined;
+		resetSaveCallback();
 	});
 </script>

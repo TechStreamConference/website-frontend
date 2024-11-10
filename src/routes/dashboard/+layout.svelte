@@ -11,7 +11,6 @@
 	import { unsavedChanges, resetUnsavedChanges } from 'stores/saved';
 
 	export let data: LoadDashboard; // data from database
-	let unsavedChangesPopup: UnsavedChangesPopup;
 
 	onMount(() => {
 		resetUnsavedChanges();
@@ -23,7 +22,7 @@
 	});
 </script>
 
-<UnsavedChangesPopup bind:this={unsavedChangesPopup} />
+<UnsavedChangesPopup />
 <Header menu={Menu.headerIn} />
 <div class="dashboard-wrapper">
 	<div class="dashboard-section-wrapper">
@@ -35,7 +34,7 @@
 		/>
 	</div>
 	<div class="dashboard-content">
-		<slot {unsavedChangesPopup} />
+		<slot />
 	</div>
 
 	<Footer menu={Menu.footerIn} globals={data.globals} />
