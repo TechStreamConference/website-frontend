@@ -1,10 +1,12 @@
 <script lang="ts">
 	import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
 	import type { DashboardEvent } from 'types/dashboardProvideTypes';
+	import type { SetAdminEvent } from 'types/dashboardSetTypes';
 	import type { SaveMessageType } from 'types/saveMessageType';
 
 	import { onMount } from 'svelte';
 	import { Clone } from 'helper/clone';
+	import { isSaveType } from 'types/saveMessageType';
 	import { getAllEventTitle, getEventByTitle, validateData } from './eventsHelper';
 	import { unsavedChanges, setUnsavedChanges } from 'stores/saved';
 	import { convertTimeAndDateToHTML, convertTimeAndDateToSQL } from 'helper/dates';
@@ -18,7 +20,7 @@
 	import Input from 'elements/input/input.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
 	import Button from 'elements/input/button.svelte';
-	import type { SetAdminEvent } from 'types/dashboardSetTypes';
+	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 
 	export let data: LoadDashboard & LoadAdminEvents;
 	let copiedData = new Clone<LoadDashboard & LoadAdminEvents>(data);
@@ -59,7 +61,7 @@
 		selected = displayed;
 	}
 
-	async function trySaveAsync(): Promise<void> {
+	async function trySaveAsync(): Promise<boolean> {
 		const toSave: SetAdminEvent = structuredClone(currentEvent);
 		toSave.publish_date = convertTimeAndDateToSQL(toSave.publish_date);
 		toSave.schedule_visible_from = convertTimeAndDateToSQL(toSave.schedule_visible_from);
@@ -76,9 +78,11 @@
 		);
 
 		message.setSaveMessage(saveType);
+		return isSaveType(saveType);
 	}
 </script>
 
+<UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 <SectionDashboard classes="dashboard-admin-event-section">
 	<SaveMessage bind:this={message} />
 	{#if copiedData.value.allEvents}
