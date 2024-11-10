@@ -58,7 +58,7 @@
 
 <dialog
 	open={intercepted !== null}
-	on:click={() => (intercepted = null)}
+	on:click={stay}
 	role="presentation"
 	transition:fade={{ duration: 300 }}
 >
