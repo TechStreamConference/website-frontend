@@ -21,8 +21,11 @@
 	import TextArea from 'elements/input/textArea.svelte';
 	import Button from 'elements/input/button.svelte';
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
+	import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
 
 	export let data: LoadDashboard & LoadAdminEvents;
+	let manualPopup: ManualUnsavedChangesPopup;
+
 	let copiedData = new Clone<LoadDashboard & LoadAdminEvents>(data);
 
 	let message: SaveMessage;
@@ -30,6 +33,14 @@
 	let displayed: string;
 
 	let currentEvent: DashboardEvent;
+
+	function navigate(): void {
+		updateDisplayed();
+	}
+	function stay(): void {
+		resetSelected();
+		selected = displayed;
+	}
 
 	onMount(() => {
 		updateDisplayed();
@@ -43,9 +54,7 @@
 
 	function updateDisplayed(): void {
 		if (unsavedChanges()) {
-			console.log('unsaved changes');
-			resetSelected();
-			selected = displayed;
+			manualPopup.show();
 			return;
 		}
 
@@ -83,6 +92,11 @@
 </script>
 
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
+<ManualUnsavedChangesPopup
+	bind:this={manualPopup}
+	navigateCallback={navigate}
+	stayCallback={stay}
+/>
 <SectionDashboard classes="dashboard-admin-event-section">
 	<SaveMessage bind:this={message} />
 	{#if copiedData.value.allEvents}
