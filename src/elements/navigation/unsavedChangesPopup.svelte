@@ -1,3 +1,8 @@
+<script lang="ts" context="module">
+	type AsyncCallback = () => Promise<boolean>;
+	export let callback: AsyncCallback | undefined = undefined;
+</script>
+
 <script lang="ts">
 	import { resetUnsavedChanges, unsavedChanges } from 'stores/saved';
 	import { beforeNavigate, goto } from '$app/navigation';
