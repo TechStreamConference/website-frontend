@@ -23,6 +23,7 @@
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 	import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
 	import type { boolean } from 'zod';
+	import { scrollToTop } from 'helper/scroll';
 
 	export let data: LoadDashboard & LoadAdminEvents;
 	let manualPopup: ManualUnsavedChangesPopup;
@@ -127,6 +128,8 @@
 				);
 			}
 		})(toSave);
+
+		scrollToTop();
 
 		message.setSaveMessage(saveType);
 		return isSaveType(saveType);
