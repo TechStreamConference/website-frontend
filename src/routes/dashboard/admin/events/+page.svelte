@@ -81,9 +81,9 @@
 
 		validateData(toSave);
 
-		const saveType: SaveMessageType = await trySaveDashboardDataAsync<DashboardEvent>(
-			currentEvent,
-			`/api/dashboard/admin/event/${currentEvent.id}`
+		const saveType: SaveMessageType = await trySaveDashboardDataAsync<SetAdminEvent>(
+			toSave,
+			`/api/dashboard/admin/event/${toSave.id}`
 		);
 
 		message.setSaveMessage(saveType);
