@@ -11,6 +11,7 @@
 	import { unsavedChanges, setUnsavedChanges } from 'stores/saved';
 	import { convertTimeAndDateToHTML, convertTimeAndDateToSQL, formatDate } from 'helper/dates';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+	import { scrollToTop } from 'helper/scroll';
 
 	import TextLine from 'elements/text/textLine.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
@@ -22,8 +23,6 @@
 	import Button from 'elements/input/button.svelte';
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 	import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
-	import type { boolean } from 'zod';
-	import { scrollToTop } from 'helper/scroll';
 
 	export let data: LoadDashboard & LoadAdminEvents;
 	let manualPopup: ManualUnsavedChangesPopup;
