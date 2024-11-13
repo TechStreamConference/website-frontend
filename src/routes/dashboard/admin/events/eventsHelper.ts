@@ -24,7 +24,7 @@ export function getEventByTitle(events: DashboardAllEvents, title: string): Dash
 
 
 
-export function validateData(data: SetAdminEvent): string[] {
+export function validateData(data: SetAdminEvent, allEvents: DashboardAllEvents): string[] {
     console.error("validation not implemented");
     return [];
 }

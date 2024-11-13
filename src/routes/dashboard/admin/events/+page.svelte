@@ -2,14 +2,14 @@
 	import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
 	import type { DashboardEvent } from 'types/dashboardProvideTypes';
 	import type { SetAdminEvent } from 'types/dashboardSetTypes';
-	import type { SaveMessageType } from 'types/saveMessageType';
+	import { SaveMessageType } from 'types/saveMessageType';
 
 	import { onMount } from 'svelte';
 	import { Clone } from 'helper/clone';
 	import { isSaveType } from 'types/saveMessageType';
 	import { getAllEventTitle, getEventByTitle, validateData } from './eventsHelper';
 	import { unsavedChanges, setUnsavedChanges } from 'stores/saved';
-	import { convertTimeAndDateToHTML, convertTimeAndDateToSQL } from 'helper/dates';
+	import { convertTimeAndDateToHTML, convertTimeAndDateToSQL, formatDate } from 'helper/dates';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 
 	import TextLine from 'elements/text/textLine.svelte';
@@ -22,6 +22,7 @@
 	import Button from 'elements/input/button.svelte';
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 	import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
+	import type { boolean } from 'zod';
 
 	export let data: LoadDashboard & LoadAdminEvents;
 	let manualPopup: ManualUnsavedChangesPopup;
@@ -70,6 +71,39 @@
 		selected = displayed;
 	}
 
+	function newEvent(): void {
+		const contains: boolean = (() => {
+			for (var event of copiedData.value.allEvents) {
+				if (event.id === 0) {
+					selected = event.title;
+					return true;
+				}
+			}
+			return false;
+		})();
+		if (!contains) {
+			const event: DashboardEvent = {
+				id: 0,
+				title: 'New Event',
+				subtitle: '',
+				start_date: formatDate(String(new Date()), '%YYYY-%MM-%DD'),
+				end_date: formatDate(String(new Date()), '%YYYY-%MM-%DD'),
+				discord_url: '',
+				twitch_url: '',
+				presskit_url: '',
+				trailer_youtube_id: '',
+				description_headline: '',
+				description: '',
+				schedule_visible_from: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:%mm'),
+				publish_date: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:%mm')
+			};
+			copiedData.value.allEvents.push(event);
+			selected = event.title;
+		}
+
+		updateDisplayed();
+	}
+
 	async function trySaveAsync(): Promise<boolean> {
 		const toSave: SetAdminEvent = structuredClone(currentEvent);
 		toSave.publish_date = convertTimeAndDateToSQL(toSave.publish_date);
@@ -77,12 +111,22 @@
 		toSave.start_date = toSave.start_date;
 		toSave.end_date = toSave.end_date;
 
-		validateData(toSave);
+		validateData(toSave, copiedData.value.allEvents);
 
-		const saveType: SaveMessageType = await trySaveDashboardDataAsync<SetAdminEvent>(
-			toSave,
-			`/api/dashboard/admin/event/${toSave.id}`
-		);
+		const saveType: SaveMessageType = await (async (toSave: SetAdminEvent) => {
+			if (toSave.id === 0) {
+				return await trySaveDashboardDataAsync<SetAdminEvent>(
+					toSave,
+					`/api/dashboard/admin/event/new`,
+					'POST'
+				);
+			} else {
+				return await trySaveDashboardDataAsync<SetAdminEvent>(
+					toSave,
+					`/api/dashboard/admin/event/${toSave.id}`
+				);
+			}
+		})(toSave);
 
 		message.setSaveMessage(saveType);
 		return isSaveType(saveType);
@@ -96,6 +140,13 @@
 	stayCallback={stay}
 />
 <SectionDashboard classes="dashboard-admin-event-section">
+	<Button
+		classes="button-text dashboard-admin-event-new-event-button"
+		ariaLabel="Klicke hier um ein neues Event anzulegen."
+		on:click={newEvent}
+	>
+		Neues Event
+	</Button>
 	<SaveMessage bind:this={message} />
 	{#if copiedData.value.allEvents}
 		<DropDown
@@ -257,6 +308,13 @@
 <style>
 	:global(.dashboard-admin-event-section) {
 		max-width: 100rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	:global(.dashboard-admin-event-new-event-button) {
+		align-self: center;
+		margin-top: var(--2x-margin);
 	}
 
 	:global(.dashboard-admin-event-event-subheadline) {
