@@ -3,6 +3,10 @@ import { apiUrl } from "./links";
 import { SaveMessageType } from "types/saveMessageType";
 
 export async function trySaveDashboardDataAsync<T>(data: T, url: string): Promise<SaveMessageType> {
+    if (import.meta.env.DEV) {
+        console.log(data);
+    }
+
     const response: Response = await fetch(apiUrl(url), {
         method: 'PUT',
         body: JSON.stringify(data),

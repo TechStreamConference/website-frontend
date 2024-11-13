@@ -77,8 +77,6 @@
 		toSave.start_date = toSave.start_date;
 		toSave.end_date = toSave.end_date;
 
-		console.log(toSave);
-
 		validateData(toSave);
 
 		const saveType: SaveMessageType = await trySaveDashboardDataAsync<SetAdminEvent>(
