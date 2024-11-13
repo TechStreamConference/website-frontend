@@ -25,6 +25,14 @@ export function getEventByTitle(events: DashboardAllEvents, title: string): Dash
 
 
 export function validateData(data: SetAdminEvent, allEvents: DashboardAllEvents): string[] {
-    console.error("validation not implemented");
-    return [];
+    const errorQue: string[] = [];
+    for (var event of allEvents) {
+
+        if (event.id == data.id) { continue; }
+
+        if (event.title.trim() === data.title.trim()) {
+            errorQue.push(`Event mit dem Titel ${data.title} existiert bereits.`)
+        }
+    }
+    return errorQue;
 }

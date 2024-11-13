@@ -23,6 +23,7 @@
 	import Button from 'elements/input/button.svelte';
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 	import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
+	import Message from 'elements/text/message.svelte';
 
 	export let data: LoadDashboard & LoadAdminEvents;
 	let manualPopup: ManualUnsavedChangesPopup;
@@ -34,6 +35,7 @@
 	let displayed: string;
 
 	let currentEvent: DashboardEvent;
+	let errorQue: string[] = ['test1', 'test2', 'test3'];
 
 	function navigate(): void {
 		updateDisplayed();
@@ -111,7 +113,12 @@
 		toSave.start_date = toSave.start_date;
 		toSave.end_date = toSave.end_date;
 
-		validateData(toSave, copiedData.value.allEvents);
+		scrollToTop(); // scroll here already so that all error messages can be seen.
+
+		errorQue = validateData(toSave, copiedData.value.allEvents);
+		if (errorQue.length > 0) {
+			return false;
+		}
 
 		const saveType: SaveMessageType = await (async (toSave: SetAdminEvent) => {
 			if (toSave.id === 0) {
@@ -127,8 +134,6 @@
 				);
 			}
 		})(toSave);
-
-		scrollToTop();
 
 		message.setSaveMessage(saveType);
 		return isSaveType(saveType);
@@ -149,7 +154,12 @@
 	>
 		Neues Event
 	</Button>
-	<SaveMessage bind:this={message} />
+	<div class="dashboard-admin-event-message-wrapper">
+		<SaveMessage bind:this={message} />
+		{#each errorQue as error}
+			<Message message={error} />
+		{/each}
+	</div>
 	{#if copiedData.value.allEvents}
 		<DropDown
 			data={getAllEventTitle(copiedData.value.allEvents)}
@@ -312,6 +322,12 @@
 		max-width: 100rem;
 		display: flex;
 		flex-direction: column;
+	}
+
+	.dashboard-admin-event-message-wrapper {
+		display: flex;
+		flex-direction: column;
+		margin: var(--2x-margin) 0;
 	}
 
 	:global(.dashboard-admin-event-new-event-button) {
