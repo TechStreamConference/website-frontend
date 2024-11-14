@@ -96,8 +96,8 @@
 				trailer_youtube_id: '',
 				description_headline: '',
 				description: '',
-				schedule_visible_from: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:%mm'),
-				publish_date: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:%mm')
+				schedule_visible_from: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
+				publish_date: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00')
 			};
 			copiedData.value.allEvents.push(event);
 			selected = event.title;

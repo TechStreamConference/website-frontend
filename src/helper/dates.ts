@@ -23,9 +23,11 @@ export function formatDate(provided: string, format: string): string {
         '%hh': String(date.getHours()).padStart(2, '0'),
         '%m': String(date.getMinutes()),
         '%mm': String(date.getMinutes()).padStart(2, '0'),
+        '%s': String(date.getSeconds()),
+        '%ss': String(date.getSeconds()).padStart(2, '0'),
     };
 
-    return format.replace(/%YYYY|%MM|%M|%DD|%D|%d|%hh|%h|%mm|%m/g, matched => map[matched]);
+    return format.replace(/%YYYY|%MM|%M|%DD|%D|%d|%hh|%h|%mm|%m|%ss|%s/g, matched => map[matched]);
 }
 
 
