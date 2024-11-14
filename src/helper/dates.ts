@@ -41,3 +41,16 @@ export function convertTimeAndDateToSQL(timeAndDate: string | null): string | nu
     }
     return timeAndDate.replace('T', ' ');
 }
+
+export function checkSQLTimeAndDate(timeAndDate: string | null): string | null {
+    if (!timeAndDate) {
+        return null;
+    }
+
+    const reference: string = 'YYYY-MM-DDThh:mm:ss';
+    if (timeAndDate.length < reference.length) {
+        timeAndDate += ":00";
+    }
+
+    return timeAndDate;
+}

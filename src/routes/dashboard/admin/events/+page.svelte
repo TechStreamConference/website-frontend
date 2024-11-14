@@ -9,7 +9,12 @@
 	import { isSaveType } from 'types/saveMessageType';
 	import { getAllEventTitle, getEventByTitle, validateData } from './eventsHelper';
 	import { unsavedChanges, setUnsavedChanges } from 'stores/saved';
-	import { convertTimeAndDateToHTML, convertTimeAndDateToSQL, formatDate } from 'helper/dates';
+	import {
+		checkSQLTimeAndDate,
+		convertTimeAndDateToHTML,
+		convertTimeAndDateToSQL,
+		formatDate
+	} from 'helper/dates';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 	import { scrollToTop } from 'helper/scroll';
 
@@ -108,8 +113,10 @@
 
 	async function trySaveAsync(): Promise<boolean> {
 		const toSave: SetAdminEvent = structuredClone(currentEvent);
-		toSave.publish_date = convertTimeAndDateToSQL(toSave.publish_date);
-		toSave.schedule_visible_from = convertTimeAndDateToSQL(toSave.schedule_visible_from);
+		toSave.publish_date = checkSQLTimeAndDate(convertTimeAndDateToSQL(toSave.publish_date));
+		toSave.schedule_visible_from = checkSQLTimeAndDate(
+			convertTimeAndDateToSQL(toSave.schedule_visible_from)
+		);
 		toSave.start_date = toSave.start_date;
 		toSave.end_date = toSave.end_date;
 
