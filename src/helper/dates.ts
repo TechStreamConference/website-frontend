@@ -54,3 +54,11 @@ export function checkSQLTimeAndDate(timeAndDate: string | null): string | null {
 
     return timeAndDate;
 }
+
+export function isBeforeOrSameDatesString(lhs: string, rhs: string): boolean {
+    return isBeforeOrSameDates(new Date(lhs), new Date(rhs));
+}
+
+export function isBeforeOrSameDates(lhs: Date, rhs: Date): boolean {
+    return lhs.getTime() <= rhs.getTime();
+}
