@@ -122,11 +122,17 @@
 
 		const saveType: SaveMessageType = await (async (toSave: SetAdminEvent) => {
 			if (toSave.id === 0) {
-				return await trySaveDashboardDataAsync<SetAdminEvent>(
+				const saveType = await trySaveDashboardDataAsync<SetAdminEvent>(
 					toSave,
 					`/api/dashboard/admin/event/new`,
 					'POST'
 				);
+
+				if (isSaveType(saveType)) {
+					location.reload(); // reload page to fetch new data from database
+				}
+
+				return saveType;
 			} else {
 				return await trySaveDashboardDataAsync<SetAdminEvent>(
 					toSave,
