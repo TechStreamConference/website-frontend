@@ -40,7 +40,7 @@
 	let displayed: string;
 
 	let currentEvent: DashboardEvent;
-	let errorQue: string[] = ['test1', 'test2', 'test3'];
+	let errorQue: string[] = [];
 
 	function navigate(): void {
 		updateDisplayed();
