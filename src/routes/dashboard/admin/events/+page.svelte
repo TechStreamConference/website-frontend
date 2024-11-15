@@ -9,12 +9,7 @@
 	import { isSaveType } from 'types/saveMessageType';
 	import { convertSaveData, getAllEventTitle, getEventByTitle, validateData } from './eventsHelper';
 	import { unsavedChanges, setUnsavedChanges } from 'stores/saved';
-	import {
-		checkSQLTimeAndDate,
-		convertTimeAndDateToHTML,
-		convertTimeAndDateToSQL,
-		formatDate
-	} from 'helper/dates';
+	import { convertTimeAndDateToHTML, formatDate } from 'helper/dates';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 	import { scrollToTop } from 'helper/scroll';
 
