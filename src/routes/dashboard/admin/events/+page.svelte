@@ -162,7 +162,7 @@
 <SectionDashboard classes="dashboard-admin-event-section">
 	<Button
 		classes="button-text dashboard-admin-event-new-event-button"
-		ariaLabel="Klicke hier um ein neues Event anzulegen."
+		ariaLabel="Klicke hier, um ein neues Event anzulegen."
 		on:click={newEvent}
 	>
 		Neues Event
