@@ -62,7 +62,7 @@
 			{#if saveButton}
 				<Button
 					on:click={saveAsync}
-					ariaLabel="Klicke hier, um die Änderungen zu Speichern und die Seite zu verlassen"
+					ariaLabel="Klicke hier, um die Änderungen zu speichern und die Seite zu verlassen"
 				>
 					Speichern und Verlassen
 				</Button>
