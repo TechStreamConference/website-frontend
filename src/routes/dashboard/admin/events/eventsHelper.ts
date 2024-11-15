@@ -2,8 +2,8 @@ import type { DashboardAllEvents, DashboardEvent } from "types/dashboardProvideT
 
 import { error } from "@sveltejs/kit";
 import type { SetAdminEvent } from "types/dashboardSetTypes";
-import { isBeforeOrSameDatesString } from "helper/dates";
-import { z } from "zod";
+import { checkSQLTimeAndDate, convertTimeAndDateToSQL, isBeforeOrSameDatesString } from "helper/dates";
+import { Schema, z } from "zod";
 
 export function getAllEventTitle(events: DashboardAllEvents): string[] {
     const title: string[] = [];
@@ -24,7 +24,33 @@ export function getEventByTitle(events: DashboardAllEvents, title: string): Dash
     throw error(500);
 }
 
+export function convertSaveData(data: SetAdminEvent): SetAdminEvent {
+    const trimOrNull: Function = (entry: string): string | null => {
+        if (entry.trim().length === 0) {
+            return null;
+        }
+        return entry.trim();
+    }
+    const trim: Function = (entry: string): string => {
+        return entry.trim();
+    }
 
+    return {
+        id: data.id,
+        title: trim(data.title),
+        subtitle: trim(data.title),
+        start_date: data.start_date,
+        end_date: data.end_date,
+        discord_url: trimOrNull(data.discord_url),
+        twitch_url: trimOrNull(data.twitch_url),
+        presskit_url: trimOrNull(data.presskit_url),
+        trailer_youtube_id: trimOrNull(data.trailer_youtube_id),
+        description_headline: trim(data.description_headline),
+        description: trim(data.description),
+        schedule_visible_from: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.schedule_visible_from)),
+        publish_date: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.publish_date)),
+    }
+}
 
 export function validateData(data: SetAdminEvent, allEvents: DashboardAllEvents): string[] {
     const errorQueue: string[] = [];
@@ -64,13 +90,13 @@ export function validateData(data: SetAdminEvent, allEvents: DashboardAllEvents)
     // url
     const urlScheme = z.string().url().nullable();
     if (!urlScheme.safeParse(data.discord_url).success) {
-        errorQueue.push('Das Discord URL ist nicht valide.');
+        errorQueue.push('Die Discord-URL ist nicht valide.');
     }
     if (!urlScheme.safeParse(data.presskit_url).success) {
-        errorQueue.push('Das Presskit URL ist nicht valide.');
+        errorQueue.push('Die Presskit-URL ist nicht valide.');
     }
     if (!urlScheme.safeParse(data.twitch_url).success) {
-        errorQueue.push('Das Twitch URL ist nicht valide.');
+        errorQueue.push('Die Twitch-URL ist nicht valide.');
     }
 
     return errorQueue;

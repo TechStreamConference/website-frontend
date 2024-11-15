@@ -7,7 +7,7 @@
 	import { onMount } from 'svelte';
 	import { Clone } from 'helper/clone';
 	import { isSaveType } from 'types/saveMessageType';
-	import { getAllEventTitle, getEventByTitle, validateData } from './eventsHelper';
+	import { convertSaveData, getAllEventTitle, getEventByTitle, validateData } from './eventsHelper';
 	import { unsavedChanges, setUnsavedChanges } from 'stores/saved';
 	import {
 		checkSQLTimeAndDate,
@@ -112,13 +112,7 @@
 	}
 
 	async function trySaveAsync(): Promise<boolean> {
-		const toSave: SetAdminEvent = structuredClone(currentEvent);
-		toSave.publish_date = checkSQLTimeAndDate(convertTimeAndDateToSQL(toSave.publish_date));
-		toSave.schedule_visible_from = checkSQLTimeAndDate(
-			convertTimeAndDateToSQL(toSave.schedule_visible_from)
-		);
-		toSave.start_date = toSave.start_date;
-		toSave.end_date = toSave.end_date;
+		const toSave: SetAdminEvent = convertSaveData(structuredClone(currentEvent));
 
 		scrollToTop(); // scroll here already so that all error messages can be seen.
 
