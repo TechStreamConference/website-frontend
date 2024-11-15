@@ -40,7 +40,7 @@
 	let displayed: string;
 
 	let currentEvent: DashboardEvent;
-	let errorQue: string[] = [];
+	let errorQueue: string[] = [];
 
 	function navigate(): void {
 		updateDisplayed();
@@ -122,8 +122,8 @@
 
 		scrollToTop(); // scroll here already so that all error messages can be seen.
 
-		errorQue = validateData(toSave, copiedData.value.allEvents);
-		if (errorQue.length > 0) {
+		errorQueue = validateData(toSave, copiedData.value.allEvents);
+		if (errorQueue.length > 0) {
 			return false;
 		}
 
@@ -169,7 +169,7 @@
 	</Button>
 	<div class="dashboard-admin-event-message-wrapper">
 		<SaveMessage bind:this={message} />
-		{#each errorQue as error}
+		{#each errorQueue as error}
 			<Message message={error} />
 		{/each}
 	</div>

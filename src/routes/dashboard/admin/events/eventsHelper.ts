@@ -27,51 +27,51 @@ export function getEventByTitle(events: DashboardAllEvents, title: string): Dash
 
 
 export function validateData(data: SetAdminEvent, allEvents: DashboardAllEvents): string[] {
-    const errorQue: string[] = [];
+    const errorQueue: string[] = [];
 
     // name
     for (var event of allEvents) {
         if (event.id == data.id) { continue; }
         if (event.title.trim() === data.title.trim()) {
-            errorQue.push(`Event mit dem Titel ${data.title} existiert bereits.`)
+            errorQueue.push(`Event mit dem Titel ${data.title} existiert bereits.`)
         }
     }
 
     // text
     if (data.title.trim().length === 0) {
-        errorQue.push('Das Feld "Titel" muss angegeben werden.');
+        errorQueue.push('Das Feld "Titel" muss angegeben werden.');
     }
     if (data.subtitle.trim().length === 0) {
-        errorQue.push('Das Feld "Untertitel" muss angegeben werden.');
+        errorQueue.push('Das Feld "Untertitel" muss angegeben werden.');
     }
     if (data.description_headline.trim().length === 0) {
-        errorQue.push('Das Feld "Überschrift Beschreibung" muss angegeben werden.');
+        errorQueue.push('Das Feld "Überschrift Beschreibung" muss angegeben werden.');
     }
     if (data.description.trim().length === 0) {
-        errorQue.push('Das Feld "Beschreibung" muss angegeben werden.');
+        errorQueue.push('Das Feld "Beschreibung" muss angegeben werden.');
     }
 
     // dates
     if (!isBeforeOrSameDatesString(data.start_date, data.end_date)) {
-        errorQue.push('Das Start-Datum liegt nach dem End-Datum.');
+        errorQueue.push('Das Start-Datum liegt nach dem End-Datum.');
     }
     if (data.publish_date && data.schedule_visible_from) {
         if (!isBeforeOrSameDatesString(data.publish_date, data.schedule_visible_from)) {
-            errorQue.push('Der Ablaufplan ist vor dem Event sichtbar.');
+            errorQueue.push('Der Ablaufplan ist vor dem Event sichtbar.');
         }
     }
 
     // url
     const urlScheme = z.string().url().nullable();
     if (!urlScheme.safeParse(data.discord_url).success) {
-        errorQue.push('Das Discord URL ist nicht valide.');
+        errorQueue.push('Das Discord URL ist nicht valide.');
     }
     if (!urlScheme.safeParse(data.presskit_url).success) {
-        errorQue.push('Das Presskit URL ist nicht valide.');
+        errorQueue.push('Das Presskit URL ist nicht valide.');
     }
     if (!urlScheme.safeParse(data.twitch_url).success) {
-        errorQue.push('Das Twitch URL ist nicht valide.');
+        errorQueue.push('Das Twitch URL ist nicht valide.');
     }
 
-    return errorQue;
+    return errorQueue;
 }
