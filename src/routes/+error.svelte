@@ -23,7 +23,7 @@
 		};
 
 		try {
-			// don't use `checkAndParseInputDataAsync<T>()` here because that could cause an `throw error(404)` loop
+			// don't use `checkAndParseInputDataAsync<T>()` here because that could cause an `throw error(406)` loop
 			const response: Response = await fetch(apiUrl('/api/globals'));
 			if (!response.ok) {
 				await handleFail(response);

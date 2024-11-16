@@ -11,12 +11,14 @@
 
 	import { setUnsavedChanges } from 'stores/saved';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 
 	export let data: LoadDashboard; // data from database
+
 	let copiedData = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
 	let message: SaveMessage;
 
-	async function trySaveAsync(): Promise<void> {
+	async function trySaveAsync(): Promise<boolean> {
 		const adminGlobals: SetAdminGlobals = {
 			footer_text: copiedData.value.globals.footer_text
 		};
@@ -27,12 +29,11 @@
 		);
 
 		message.setSaveMessage(saveType);
-		if (isSaveType(saveType)) {
-			data = copiedData.get();
-		}
+		return isSaveType(saveType);
 	}
 </script>
 
+<UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 <SectionDashboard classes="dashboard-admin-global-section">
 	<SaveMessage bind:this={message} />
 	<form class="dashboard-admin-global-form" on:submit|preventDefault={trySaveAsync}>

@@ -23,8 +23,8 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
     const yearData: Year = await checkAndParseInputDataAsync<Year>(
         await yearDataPromise,
         yearScheme,
-        `Serveranfrage für das Jahr ${year} nicht erfolgreich. throw error(404)`,
-        `Unerwartete Daten für das Jahr ${year}. throw error(404)`
+        `Serveranfrage für das Jahr ${year} nicht erfolgreich. throw error(406)`,
+        `Unerwartete Daten für das Jahr ${year}. throw error(406)`
     );
     const globalsData: Globals = await checkAndParseGlobalsAsync(await globalsPromise);
 

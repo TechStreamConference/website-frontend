@@ -1,29 +1,38 @@
 <script lang="ts">
-	import { resetUnsavedChanges, unsavedChanges } from 'stores/saved';
-	import { beforeNavigate, goto } from '$app/navigation';
-	import { saveCallback } from 'stores/saveCallback';
-	import Button from 'elements/input/button.svelte';
 	import { fade } from 'svelte/transition';
+	import { saveCallback } from 'stores/saveCallback';
+	import { resetUnsavedChanges } from 'stores/saved';
+
+	import Button from 'elements/input/button.svelte';
 	import SubHeadline from 'elements/text/subHeadline.svelte';
 
-	let intercepted: Record<string, unknown> | null = null;
-	let url: URL;
+	export let stayCallback: () => void;
+	export let navigateCallback: () => void;
 
+	let _show: boolean = false;
 	let saveButton: boolean = false;
+
+	export function show(): void {
+		saveButton = checkSaveButton();
+		_show = true;
+	}
+	export function hide(): void {
+		_show = false;
+	}
 
 	function checkSaveButton(): boolean {
 		const returnValue = saveCallback();
 		return typeof returnValue === 'function';
 	}
 
-	function navigate(): void {
-		intercepted = null;
-		resetUnsavedChanges();
-		goto(url);
-	}
-
 	function stay(): void {
-		intercepted = null;
+		hide();
+		stayCallback();
+	}
+	function navigate(): void {
+		resetUnsavedChanges();
+		hide();
+		navigateCallback();
 	}
 
 	async function saveAsync(): Promise<void> {
@@ -41,27 +50,9 @@
 		console.error('not able to call callback in unsaved changes popup');
 		stay();
 	}
-
-	beforeNavigate(({ to, cancel }) => {
-		saveButton = checkSaveButton();
-
-		if (!unsavedChanges()) return;
-
-		cancel();
-
-		if (to) {
-			intercepted = { url: to.url };
-			url = to.url;
-		}
-	});
 </script>
 
-<dialog
-	open={intercepted !== null}
-	on:click={stay}
-	role="presentation"
-	transition:fade={{ duration: 300 }}
->
+<dialog open={_show} on:click={stay} role="presentation" transition:fade={{ duration: 300 }}>
 	<div class="unsaved-changes-modal" on:click={(e) => e.stopPropagation()} role="presentation">
 		<SubHeadline classes="white">Es gibt ungespeicherte Änderungen</SubHeadline>
 		<div class="unsaved-changes-button-wrapper">

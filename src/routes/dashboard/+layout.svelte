@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LoadDashboard } from 'types/loadTypes';
+	import type { LoadDashboard } from 'types/dashboardLoadTypes';
 
 	import * as Menu from 'menu/dashboard';
 	import Header from 'elements/navigation/header.svelte';
@@ -41,13 +41,13 @@
 </div>
 
 <style>
-    .dashboard-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 0 auto;
-        min-height: 100vh;
-    }
+	.dashboard-wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin: 0 auto;
+		min-height: 100vh;
+	}
 
 	.dashboard-section-wrapper {
 		display: flex;
