@@ -169,7 +169,7 @@
 			id={'dashboard-admin-event-drop-down'}
 			labelText="Aktuelles Event:"
 		/>
-		{#if displayed && currentEvent}
+		{#if currentEvent}
 			<SubHeadline classes="dashboard-admin-event-event-subheadline"
 				>{currentEvent.title}</SubHeadline
 			>
