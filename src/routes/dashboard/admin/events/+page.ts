@@ -17,5 +17,6 @@ export async function load({ fetch }: { fetch: typeof globalThis.fetch }): Promi
 
     return {
         allEvents,
+        allSpeaker: [] // upcomming route '/api/dashboard/admin/all-events/{eventid}/speaker'
     }
 }

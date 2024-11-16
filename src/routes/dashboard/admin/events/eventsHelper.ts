@@ -1,9 +1,21 @@
-import type { DashboardAllEvents, DashboardEvent } from "types/dashboardProvideTypes";
+import { dashboardAllEventSpeakerScheme, type DashboardAllEvents, type DashboardAllEventSpeaker, type DashboardEvent } from "types/dashboardProvideTypes";
 
 import { error } from "@sveltejs/kit";
-import type { SetAdminEvent } from "types/dashboardSetTypes";
+import type { SetAdminEvent, SetAllAdminEventSpeaker } from "types/dashboardSetTypes";
 import { checkSQLTimeAndDate, convertTimeAndDateToSQL, isBeforeOrSameDatesString } from "helper/dates";
-import { Schema, z } from "zod";
+import { z } from "zod";
+import { apiUrl } from "helper/links";
+import { checkAndParseInputDataAsync } from "helper/parseJson";
+
+function trimOrNull(entry: string): string | null {
+    if (entry.trim().length === 0) {
+        return null;
+    }
+    return entry.trim();
+}
+function trim(entry: string): string {
+    return entry.trim();
+}
 
 export function getAllEventTitle(events: DashboardAllEvents): string[] {
     const title: string[] = [];
@@ -24,17 +36,7 @@ export function getEventByTitle(events: DashboardAllEvents, title: string): Dash
     throw error(500);
 }
 
-export function convertSaveData(data: SetAdminEvent): SetAdminEvent {
-    const trimOrNull: Function = (entry: string): string | null => {
-        if (entry.trim().length === 0) {
-            return null;
-        }
-        return entry.trim();
-    }
-    const trim: Function = (entry: string): string => {
-        return entry.trim();
-    }
-
+export function convertSaveEventData(data: DashboardEvent): SetAdminEvent {
     return {
         id: data.id,
         title: trim(data.title),
@@ -50,6 +52,31 @@ export function convertSaveData(data: SetAdminEvent): SetAdminEvent {
         schedule_visible_from: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.schedule_visible_from)),
         publish_date: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.publish_date)),
     }
+}
+
+export function convertSaveSpeakerData(allSpeaker: DashboardAllEventSpeaker): SetAllAdminEventSpeaker {
+    const result: SetAllAdminEventSpeaker = [];
+    for (let speaker of allSpeaker) {
+        result.push({
+            id: speaker.id,
+            name: speaker.name,
+            date: checkSQLTimeAndDate(convertTimeAndDateToSQL(speaker.date)),
+        });
+    }
+    return result;
+}
+
+export async function loadSpeaker(fetch: Function, eventId: number): Promise<DashboardAllEventSpeaker> {
+    const allSpeakerPromise = fetch(apiUrl(`/api/dashboard/admin/all-events/${eventId}/speaker`));
+
+    const allSpeaker = await checkAndParseInputDataAsync<DashboardAllEventSpeaker>(
+        await allSpeakerPromise,
+        dashboardAllEventSpeakerScheme,
+        `Serveranfrage für alle Speaker im event ${eventId} nicht erfolgreich. throw error(406)`,
+        `Unerwartete Daten für alle Speker im Event ${eventId}. throw error(406)`
+    )
+
+    return allSpeaker;
 }
 
 export function validateData(data: SetAdminEvent, allEvents: DashboardAllEvents): string[] {
