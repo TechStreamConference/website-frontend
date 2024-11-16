@@ -86,7 +86,7 @@
 		if (!contains) {
 			const event: DashboardEvent = {
 				id: 0,
-				title: 'New Event',
+				title: '',
 				subtitle: '',
 				start_date: formatDate(String(new Date()), '%YYYY-%MM-%DD'),
 				end_date: formatDate(String(new Date()), '%YYYY-%MM-%DD'),
