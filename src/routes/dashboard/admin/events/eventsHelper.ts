@@ -79,7 +79,7 @@ export async function loadSpeaker(fetch: Function, eventId: number): Promise<Das
     return allSpeaker;
 }
 
-export function validateData(data: SetAdminEvent, allEvents: DashboardAllEvents): string[] {
+export function validateData(data: SetAdminEvent, allSpeaker: SetAllAdminEventSpeaker, allEvents: DashboardAllEvents): string[] {
     const errorQueue: string[] = [];
 
     // name
@@ -113,6 +113,16 @@ export function validateData(data: SetAdminEvent, allEvents: DashboardAllEvents)
             errorQueue.push('Der Ablaufplan ist vor dem Event sichtbar.');
         }
     }
+    if (data.publish_date) {
+        if (!isBeforeOrSameDatesString(data.publish_date, data.start_date)) {
+            errorQueue.push("Das Event wird erst nach dem Event-Start veröffentlicht.");
+        }
+    }
+    if (data.schedule_visible_from) {
+        if (!isBeforeOrSameDatesString(data.schedule_visible_from, data.start_date)) {
+            errorQueue.push("Der Ablaufplan ist erst nach dem Event-Start sichtbar.")
+        }
+    }
 
     // url
     const urlScheme = z.string().url().nullable();
@@ -124,6 +134,15 @@ export function validateData(data: SetAdminEvent, allEvents: DashboardAllEvents)
     }
     if (!urlScheme.safeParse(data.twitch_url).success) {
         errorQueue.push('Die Twitch-URL ist nicht valide.');
+    }
+
+    // speaker
+    for (let speaker of allSpeaker) {
+        if (speaker.date) {
+            if (!isBeforeOrSameDatesString(speaker.date, data.start_date)) {
+                errorQueue.push(`Speaker ${speaker.name} ist erst nach dem Event-Start sichtbar.`);
+            }
+        }
     }
 
     return errorQueue;

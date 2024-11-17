@@ -82,7 +82,7 @@
 			() => {
 				/**
 				 * This is tradeoff here.
-				 * By using then and providing this lambda i dont need to make this function async.
+				 * By using then and providing this lambda I dont need to make this function async.
 				 * To have this function not async makes this component may more easy.
 				 * So I catch the trow(406) and just display an error in the console.
 				 */
@@ -137,7 +137,7 @@
 
 		scrollToTop(); // scroll here already so that all error messages can be seen.
 
-		errorQueue = validateData(toSaveEvent, copiedData.value.allEvents);
+		errorQueue = validateData(toSaveEvent, toSaveSpeaker, copiedData.value.allEvents);
 		if (errorQueue.length > 0) {
 			return false;
 		}
