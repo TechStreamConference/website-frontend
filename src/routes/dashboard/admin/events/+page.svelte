@@ -97,7 +97,7 @@
 	}
 
 	function newEvent(): void {
-		const contains: boolean = (() => {
+		const containsNewEvent: boolean = (() => {
 			for (var event of copiedData.value.allEvents) {
 				if (event.id === 0) {
 					selected = event.title;
@@ -106,7 +106,7 @@
 			}
 			return false;
 		})();
-		if (!contains) {
+		if (!containsNewEvent) {
 			const event: DashboardEvent = {
 				id: 0,
 				title: '',
