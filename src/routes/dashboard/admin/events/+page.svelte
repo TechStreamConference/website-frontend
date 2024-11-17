@@ -77,10 +77,17 @@
 
 		loadSpeaker(fetch, currentEvent.id).then(
 			(newData: DashboardAllEventSpeaker) => {
-				data.allSpeaker = newData;
+				copiedData.value.allSpeaker = newData;
 			},
 			() => {
-				// Im not able to get this Promise to work. Sad me.
+				/**
+				 * This is tradeoff here.
+				 * By using then and providing this lambda i dont need to make this function async.
+				 * To have this function not async makes this component may more easy.
+				 * So I catch the trow(406) and just display an error in the console.
+				 */
+				copiedData.value.allSpeaker = [];
+				console.error(`not able to load speaker data from evennt ${currentEvent.id}`);
 			}
 		);
 	}
