@@ -81,10 +81,10 @@
 			},
 			() => {
 				/**
-				 * This is tradeoff here.
+				 * This is a tradeoff here.
 				 * By using then and providing this lambda I dont need to make this function async.
-				 * To have this function not async makes this component may more easy.
-				 * So I catch the trow(406) and just display an error in the console.
+				 * To have this function not async makes this component way easier.
+				 * So I catch the throw(406) and just display an error in the console.
 				 */
 				copiedData.value.allSpeaker = [];
 				console.error(`not able to load speaker data from event ${currentEvent.id}`);

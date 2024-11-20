@@ -73,7 +73,7 @@ export async function loadSpeaker(fetch: Function, eventId: number): Promise<Das
         await allSpeakerPromise,
         dashboardAllEventSpeakerScheme,
         `Serveranfrage für alle Speaker im event ${eventId} nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Speker im Event ${eventId}. throw error(406)`
+        `Unerwartete Daten für alle Speaker im Event ${eventId}. throw error(406)`
     )
 
     return allSpeaker;
