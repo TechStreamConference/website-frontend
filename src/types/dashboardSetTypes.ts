@@ -21,6 +21,6 @@ export type SetAdminEvent = {
 export type SetAdminEventSpeaker = {
     id: number,
     name: string,
-    date: string | null,
+    visible_from: string | null,
 }
 export type SetAllAdminEventSpeaker = SetAdminEventSpeaker[];

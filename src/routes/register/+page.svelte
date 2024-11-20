@@ -120,7 +120,7 @@
 				let toReturn: string[] = [];
 				for (const value of values) {
 					toReturn.push(registerLookup(value));
-					console.log('error while register from dashboard: ' + value);
+					console.error('error while register from dashboard: ' + value);
 				}
 				return toReturn;
 			};
@@ -191,7 +191,11 @@
 					ariaLabel="Wiederhole das Passwort"
 					on:input={startPasswordTimer}
 				/>
-				<Button classes="button-text register-submit-button" type={'submit'} ariaLabel="Klicke zum Registrieren">
+				<Button
+					classes="button-text register-submit-button"
+					type={'submit'}
+					ariaLabel="Klicke zum Registrieren"
+				>
 					Registrieren
 				</Button>
 				<div class="password-list-wrapper">
@@ -264,8 +268,8 @@
 		margin: var(--2x-margin) auto;
 	}
 
-	:global(.register-input-line){
-			margin-bottom: var(--full-margin);
+	:global(.register-input-line) {
+		margin-bottom: var(--full-margin);
 	}
 
 	:global(.register-submit-button) {

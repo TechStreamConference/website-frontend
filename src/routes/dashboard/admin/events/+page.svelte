@@ -87,7 +87,7 @@
 				 * So I catch the trow(406) and just display an error in the console.
 				 */
 				copiedData.value.allSpeaker = [];
-				console.error(`not able to load speaker data from evennt ${currentEvent.id}`);
+				console.error(`not able to load speaker data from event ${currentEvent.id}`);
 			}
 		);
 	}
@@ -132,7 +132,7 @@
 	async function trySaveAsync(): Promise<boolean> {
 		const toSaveEvent: SetAdminEvent = convertSaveEventData(structuredClone(currentEvent));
 		const toSaveSpeaker: SetAllAdminEventSpeaker = convertSaveSpeakerData(
-			structuredClone(data.allSpeaker)
+			structuredClone(copiedData.value.allSpeaker)
 		);
 
 		scrollToTop(); // scroll here already so that all error messages can be seen.
@@ -165,7 +165,7 @@
 				);
 				const saveTypeSpeaker = await trySaveDashboardDataAsync<SetAllAdminEventSpeaker>(
 					toSaveSpeaker,
-					`/api/dashboard/adin/event/${toSaveEvent.id}/speaker`
+					`/api/dashboard/admin/event/${toSaveEvent.id}/speaker`
 				);
 				return combineSaveType(saveTypeEvent, saveTypeSpeaker);
 			}
@@ -349,7 +349,7 @@
 								placeholderText="{speaker.name}:"
 								type="datetime-local"
 								ariaLabel="Gib die Veröffentlichungsuhrzeit von {speaker.name} für das ausgewählte Event an."
-								bind:value={speaker.date}
+								bind:value={speaker.visible_from}
 								on:submit={trySaveAsync}
 								on:input={setUnsavedChanges}
 							/>

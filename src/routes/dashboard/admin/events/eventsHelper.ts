@@ -60,14 +60,14 @@ export function convertSaveSpeakerData(allSpeaker: DashboardAllEventSpeaker): Se
         result.push({
             id: speaker.id,
             name: speaker.name,
-            date: checkSQLTimeAndDate(convertTimeAndDateToSQL(speaker.date)),
+            visible_from: checkSQLTimeAndDate(convertTimeAndDateToSQL(speaker.visible_from)),
         });
     }
     return result;
 }
 
 export async function loadSpeaker(fetch: Function, eventId: number): Promise<DashboardAllEventSpeaker> {
-    const allSpeakerPromise = fetch(apiUrl(`/api/dashboard/admin/all-events/${eventId}/speaker`));
+    const allSpeakerPromise = fetch(apiUrl(`/api/dashboard/admin/event/${eventId}/speaker`));
 
     const allSpeaker = await checkAndParseInputDataAsync<DashboardAllEventSpeaker>(
         await allSpeakerPromise,
@@ -138,8 +138,8 @@ export function validateData(data: SetAdminEvent, allSpeaker: SetAllAdminEventSp
 
     // speaker
     for (let speaker of allSpeaker) {
-        if (speaker.date) {
-            if (!isBeforeOrSameDatesString(speaker.date, data.start_date)) {
+        if (speaker.visible_from) {
+            if (!isBeforeOrSameDatesString(speaker.visible_from, data.start_date)) {
                 errorQueue.push(`Speaker ${speaker.name} ist erst nach dem Event-Start sichtbar.`);
             }
         }

@@ -33,7 +33,7 @@ export type DashboardAllEvents = z.infer<typeof dashboardAllEventsScheme>;
 export const dashboardEventSpeakerScheme = z.object({
     id: z.number(),
     name: z.string(),
-    date: z.string().nullable().transform((val) => val ?? ""),
+    visible_from: z.string().nullable().transform((val) => val ?? ""),
 })
 export type DashboardEventSpeaker = z.infer<typeof dashboardEventSpeakerScheme>;
 
