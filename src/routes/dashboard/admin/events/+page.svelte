@@ -259,7 +259,7 @@
 						labelText="Veröffentlichungsdatum Event:"
 						placeholderText="Veröffentlichungsdatum Event:"
 						type="datetime-local"
-						ariaLabel="Gib die Veröffentlichungsdatum des ausgewählten Events ein."
+						ariaLabel="Gib das Veröffentlichungsdatum des ausgewählten Events ein."
 						bind:value={currentEvent.publish_date}
 						on:submit={trySaveAsync}
 						on:input={setUnsavedChanges}
@@ -270,7 +270,7 @@
 						labelText="Veröffentlichungsuhrzeit Ablaufplan:"
 						placeholderText="Veröffentlichungsuhrzeit Ablaufplan:"
 						type="datetime-local"
-						ariaLabel="Gib die Veröffentlichungsuhrzeit des Ablaufplanes des ausgewählten Events ein."
+						ariaLabel="Gib das Veröffentlichungsdatum des Ablaufplanes des ausgewählten Events ein."
 						bind:value={currentEvent.schedule_visible_from}
 						on:submit={trySaveAsync}
 						on:input={setUnsavedChanges}
@@ -348,7 +348,7 @@
 								labelText="{speaker.name}:"
 								placeholderText="{speaker.name}:"
 								type="datetime-local"
-								ariaLabel="Gib die Veröffentlichungsuhrzeit von {speaker.name} für das ausgewählte Event an."
+								ariaLabel="Gib das Veröffentlichungsdatum von {speaker.name} für das ausgewählte Event an."
 								bind:value={speaker.visible_from}
 								on:submit={trySaveAsync}
 								on:input={setUnsavedChanges}
