@@ -48,6 +48,8 @@ export function convertSaveEventData(data: DashboardEvent): SetAdminEvent {
         description: data.description.trim(),
         schedule_visible_from: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.schedule_visible_from)),
         publish_date: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.publish_date)),
+        call_for_papers_start: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.call_for_papers_start)),
+        call_for_papers_end: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.call_for_papers_end)),
     }
 }
 
