@@ -1,13 +1,20 @@
 <script lang="ts">
 	import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
-	import type { DashboardEvent } from 'types/dashboardProvideTypes';
-	import type { SetAdminEvent } from 'types/dashboardSetTypes';
-	import { SaveMessageType } from 'types/saveMessageType';
+	import type { DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
+	import type { SetAdminEvent, SetAllAdminEventSpeaker } from 'types/dashboardSetTypes';
+	import { combineSaveType, SaveMessageType } from 'types/saveMessageType';
 
 	import { onMount } from 'svelte';
 	import { Clone } from 'helper/clone';
 	import { isSaveType } from 'types/saveMessageType';
-	import { convertSaveData, getAllEventTitle, getEventByTitle, validateData } from './eventsHelper';
+	import {
+		convertSaveEventData,
+		convertSaveSpeakerData,
+		getAllEventTitle,
+		getEventByTitle,
+		loadSpeaker,
+		validateData
+	} from './eventsHelper';
 	import { unsavedChanges, setUnsavedChanges } from 'stores/saved';
 	import { convertTimeAndDateToHTML, formatDate } from 'helper/dates';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
@@ -67,6 +74,22 @@
 		currentEvent.schedule_visible_from = convertTimeAndDateToHTML(
 			currentEvent.schedule_visible_from
 		);
+
+		loadSpeaker(fetch, currentEvent.id).then(
+			(newData: DashboardAllEventSpeaker) => {
+				copiedData.value.allSpeaker = newData;
+			},
+			() => {
+				/**
+				 * This is a tradeoff here.
+				 * By using then and providing this lambda I dont need to make this function async.
+				 * To have this function not async makes this component way easier.
+				 * So I catch the throw(406) and just display an error in the console.
+				 */
+				copiedData.value.allSpeaker = [];
+				console.error(`not able to load speaker data from event ${currentEvent.id}`);
+			}
+		);
 	}
 
 	function resetSelected(): void {
@@ -74,7 +97,7 @@
 	}
 
 	function newEvent(): void {
-		const contains: boolean = (() => {
+		const containsNewEvent: boolean = (() => {
 			for (var event of copiedData.value.allEvents) {
 				if (event.id === 0) {
 					selected = event.title;
@@ -83,7 +106,7 @@
 			}
 			return false;
 		})();
-		if (!contains) {
+		if (!containsNewEvent) {
 			const event: DashboardEvent = {
 				id: 0,
 				title: '',
@@ -107,19 +130,25 @@
 	}
 
 	async function trySaveAsync(): Promise<boolean> {
-		const toSave: SetAdminEvent = convertSaveData(structuredClone(currentEvent));
+		const toSaveEvent: SetAdminEvent = convertSaveEventData(structuredClone(currentEvent));
+		const toSaveSpeaker: SetAllAdminEventSpeaker = convertSaveSpeakerData(
+			structuredClone(copiedData.value.allSpeaker)
+		);
 
 		scrollToTop(); // scroll here already so that all error messages can be seen.
 
-		errorQueue = validateData(toSave, copiedData.value.allEvents);
+		errorQueue = validateData(toSaveEvent, toSaveSpeaker, copiedData.value.allEvents);
 		if (errorQueue.length > 0) {
 			return false;
 		}
 
-		const saveType: SaveMessageType = await (async (toSave: SetAdminEvent) => {
-			if (toSave.id === 0) {
+		const saveType: SaveMessageType = await (async (
+			toSaveEvent: SetAdminEvent,
+			toSaveSpeaker: SetAllAdminEventSpeaker
+		) => {
+			if (toSaveEvent.id === 0) {
 				const saveType = await trySaveDashboardDataAsync<SetAdminEvent>(
-					toSave,
+					toSaveEvent,
 					`/api/dashboard/admin/event/new`,
 					'POST'
 				);
@@ -130,12 +159,17 @@
 
 				return saveType;
 			} else {
-				return await trySaveDashboardDataAsync<SetAdminEvent>(
-					toSave,
-					`/api/dashboard/admin/event/${toSave.id}`
+				const saveTypeEvent = await trySaveDashboardDataAsync<SetAdminEvent>(
+					toSaveEvent,
+					`/api/dashboard/admin/event/${toSaveEvent.id}`
 				);
+				const saveTypeSpeaker = await trySaveDashboardDataAsync<SetAllAdminEventSpeaker>(
+					toSaveSpeaker,
+					`/api/dashboard/admin/event/${toSaveEvent.id}/speaker`
+				);
+				return combineSaveType(saveTypeEvent, saveTypeSpeaker);
 			}
-		})(toSave);
+		})(toSaveEvent, toSaveSpeaker);
 
 		message.setSaveMessage(saveType);
 		return isSaveType(saveType);
@@ -236,7 +270,7 @@
 						labelText="Veröffentlichungsuhrzeit Ablaufplan:"
 						placeholderText="Veröffentlichungsuhrzeit Ablaufplan:"
 						type="datetime-local"
-						ariaLabel="Gib das Veröffentlichungsuhrzeit des Ablaufplanes des ausgewählten Events ein."
+						ariaLabel="Gib das Veröffentlichungsdatum des Ablaufplanes des ausgewählten Events ein."
 						bind:value={currentEvent.schedule_visible_from}
 						on:submit={trySaveAsync}
 						on:input={setUnsavedChanges}
@@ -303,6 +337,28 @@
 					on:input={setUnsavedChanges}
 				/>
 
+				<SubHeadline classes="dashboard-admin-event-event-subheadline">Speaker</SubHeadline>
+
+				{#if copiedData.value.allSpeaker.length > 0}
+					<div class="dashboard-admin-event-speaker-wrapper">
+						{#each copiedData.value.allSpeaker as speaker}
+							<Input
+								classes="dashboard-admin-event-speaker-date input"
+								id="dashboard-admin-event-speaker-date-{speaker.id}"
+								labelText="{speaker.name}:"
+								placeholderText="{speaker.name}:"
+								type="datetime-local"
+								ariaLabel="Gib das Veröffentlichungsdatum von {speaker.name} für das ausgewählte Event an."
+								bind:value={speaker.visible_from}
+								on:submit={trySaveAsync}
+								on:input={setUnsavedChanges}
+							/>
+						{/each}
+					</div>
+				{:else}
+					<TextLine>Keine Speaker bei diesem Event registriert.</TextLine>
+				{/if}
+
 				<Button
 					classes="button-text dashboard-admin-event-submit-button"
 					type={'submit'}
@@ -352,6 +408,17 @@
 		display: flex;
 		flex-direction: row;
 		gap: var(--full-gap);
+	}
+
+	.dashboard-admin-event-speaker-wrapper {
+		display: flex;
+		width: 100%;
+		gap: var(--full-gap);
+		flex-wrap: wrap;
+	}
+
+	:global(.dashboard-admin-event-speaker-date) {
+		flex: 0;
 	}
 
 	:global(.dashboard-admin-event-submit-button) {

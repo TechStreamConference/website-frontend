@@ -17,3 +17,10 @@ export type SetAdminEvent = {
     schedule_visible_from: string | null,
     publish_date: string | null,
 }
+
+export type SetAdminEventSpeaker = {
+    id: number,
+    name: string,
+    visible_from: string | null,
+}
+export type SetAllAdminEventSpeaker = SetAdminEventSpeaker[];

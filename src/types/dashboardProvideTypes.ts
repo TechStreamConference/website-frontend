@@ -28,3 +28,14 @@ export type DashboardEvent = z.infer<typeof dashboardEventScheme>;
 
 export const dashboardAllEventsScheme = z.array(dashboardEventScheme);
 export type DashboardAllEvents = z.infer<typeof dashboardAllEventsScheme>;
+
+
+export const dashboardEventSpeakerScheme = z.object({
+    id: z.number(),
+    name: z.string(),
+    visible_from: z.string().nullable().transform((val) => val ?? ""),
+})
+export type DashboardEventSpeaker = z.infer<typeof dashboardEventSpeakerScheme>;
+
+export const dashboardAllEventSpeakerScheme = z.array(dashboardEventSpeakerScheme);
+export type DashboardAllEventSpeaker = z.infer<typeof dashboardAllEventSpeakerScheme>;

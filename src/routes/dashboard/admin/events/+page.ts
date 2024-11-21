@@ -17,5 +17,6 @@ export async function load({ fetch }: { fetch: typeof globalThis.fetch }): Promi
 
     return {
         allEvents,
+        allSpeaker: [] // will be filled inside the component
     }
 }
