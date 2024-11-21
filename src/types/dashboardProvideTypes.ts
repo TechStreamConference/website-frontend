@@ -23,6 +23,9 @@ export const dashboardEventScheme = z.object({
     description: z.string(),
     schedule_visible_from: z.string().nullable().transform((val) => val ?? ""),
     publish_date: z.string().nullable().transform((val) => val ?? ""),
+    call_for_papers_start: z.string().nullable().transform((val) => val ?? ""),
+    call_for_papers_end: z.string().nullable().transform((val) => val ?? ""),
+
 })
 export type DashboardEvent = z.infer<typeof dashboardEventScheme>;
 
