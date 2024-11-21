@@ -13,9 +13,6 @@ function trimOrNull(entry: string): string | null {
     }
     return entry.trim();
 }
-function trim(entry: string): string {
-    return entry.trim();
-}
 
 export function getAllEventTitle(events: DashboardAllEvents): string[] {
     const title: string[] = [];
@@ -39,16 +36,16 @@ export function getEventByTitle(events: DashboardAllEvents, title: string): Dash
 export function convertSaveEventData(data: DashboardEvent): SetAdminEvent {
     return {
         id: data.id,
-        title: trim(data.title),
-        subtitle: trim(data.title),
+        title: data.title.trim(),
+        subtitle: data.title.trim(),
         start_date: data.start_date,
         end_date: data.end_date,
         discord_url: trimOrNull(data.discord_url),
         twitch_url: trimOrNull(data.twitch_url),
         presskit_url: trimOrNull(data.presskit_url),
         trailer_youtube_id: trimOrNull(data.trailer_youtube_id),
-        description_headline: trim(data.description_headline),
-        description: trim(data.description),
+        description_headline: data.description_headline.trim(),
+        description: data.description.trim(),
         schedule_visible_from: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.schedule_visible_from)),
         publish_date: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.publish_date)),
     }
