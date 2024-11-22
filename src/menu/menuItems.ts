@@ -45,7 +45,7 @@ export const admin: MenuItem = {
 
 export const teamMember: MenuItem = {
     name: 'Team Member',
-    url: '/dashboard/team-member/test',
+    url: '/dashboard/team-member/event',
     description: 'Klicke, um zum Team-Member-Dashboard zu gelangen',
 }
 

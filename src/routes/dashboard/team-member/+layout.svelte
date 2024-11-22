@@ -4,9 +4,14 @@
 	import type { Menu } from 'types/provideTypes';
 	const tabsEntries: Menu = [
 		{
-			name: 'entry',
-			url: '/dashboard/team-member/test',
-			description: 'Klicke hier um zu TEST zu gelangen.'
+			name: 'Event',
+			url: '/dashboard/team-member/event',
+			description: 'Klicke hier um zu den Event spezifischen Einstellungen zugelangen.'
+		},
+		{
+			name: 'Social Media',
+			url: '/dashboard/team-member/social-media',
+			description: 'Klicke hier um zu den Social Media Einstellungen zugelangen.'
 		}
 	];
 </script>

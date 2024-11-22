@@ -1,9 +1,5 @@
 import { z } from 'zod';
 
-
-
-
-
 export const globalsScheme = z.object({
     footer_text: z.string(),
     years_with_events: z.array(z.number()),
