@@ -16,6 +16,8 @@ export type SetAdminEvent = {
     description: string,
     schedule_visible_from: string | null,
     publish_date: string | null,
+    call_for_papers_start: string | null,
+    call_for_papers_end: string | null,
 }
 
 export type SetAdminEventSpeaker = {

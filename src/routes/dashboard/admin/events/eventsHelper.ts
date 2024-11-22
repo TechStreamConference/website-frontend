@@ -48,6 +48,8 @@ export function convertSaveEventData(data: DashboardEvent): SetAdminEvent {
         description: data.description.trim(),
         schedule_visible_from: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.schedule_visible_from)),
         publish_date: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.publish_date)),
+        call_for_papers_start: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.call_for_papers_start)),
+        call_for_papers_end: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.call_for_papers_end)),
     }
 }
 
@@ -105,6 +107,7 @@ export function validateData(data: SetAdminEvent, allSpeaker: SetAllAdminEventSp
     if (!isBeforeOrSameDatesString(data.start_date, data.end_date)) {
         errorQueue.push('Das Start-Datum liegt nach dem End-Datum.');
     }
+
     if (data.publish_date && data.schedule_visible_from) {
         if (!isBeforeOrSameDatesString(data.publish_date, data.schedule_visible_from)) {
             errorQueue.push('Der Ablaufplan ist vor dem Event sichtbar.');
@@ -120,6 +123,13 @@ export function validateData(data: SetAdminEvent, allSpeaker: SetAllAdminEventSp
             errorQueue.push("Der Ablaufplan ist erst nach dem Event-Start sichtbar.")
         }
     }
+
+    if (data.call_for_papers_start && data.call_for_papers_end) {
+        if (!isBeforeOrSameDatesString(data.call_for_papers_start, data.call_for_papers_end)) {
+            errorQueue.push("Das Anmeldeende liegt vor dem Anmeldestart.");
+        }
+    }
+
 
     // url
     const urlScheme = z.string().url().nullable();

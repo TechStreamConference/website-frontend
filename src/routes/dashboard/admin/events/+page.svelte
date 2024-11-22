@@ -74,6 +74,10 @@
 		currentEvent.schedule_visible_from = convertTimeAndDateToHTML(
 			currentEvent.schedule_visible_from
 		);
+		currentEvent.call_for_papers_start = convertTimeAndDateToHTML(
+			currentEvent.call_for_papers_start
+		);
+		currentEvent.call_for_papers_end = convertTimeAndDateToHTML(currentEvent.call_for_papers_end);
 
 		loadSpeaker(fetch, currentEvent.id).then(
 			(newData: DashboardAllEventSpeaker) => {
@@ -120,7 +124,9 @@
 				description_headline: '',
 				description: '',
 				schedule_visible_from: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
-				publish_date: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00')
+				publish_date: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
+				call_for_papers_start: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
+				call_for_papers_end: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00')
 			};
 			copiedData.value.allEvents.push(event);
 			selected = event.title;
@@ -230,10 +236,8 @@
 				/>
 				<div class="dashboard-admin-event-time-date-wrapper">
 					<Input
-						classes="dashboard-admin-event-start-date input"
 						id="dashboard-admin-event-start-date"
 						labelText="Start Datum:"
-						placeholderText="Start Datum:"
 						type="date"
 						ariaLabel="Gib das Start Datum des ausgewählten Events ein."
 						bind:value={currentEvent.start_date}
@@ -241,10 +245,8 @@
 						on:input={setUnsavedChanges}
 					/>
 					<Input
-						classes="dashboard-admin-event-end-date input"
 						id="dashboard-admin-event-end-date"
 						labelText="End Datum:"
-						placeholderText="End Datum:"
 						type="date"
 						ariaLabel="Gib das End Datum des ausgewählten Events ein."
 						bind:value={currentEvent.end_date}
@@ -254,10 +256,8 @@
 				</div>
 				<div class="dashboard-admin-event-time-date-wrapper">
 					<Input
-						classes="dashboard-admin-event-publish-event-date input"
 						id="dashboard-admin-event-publish-event-date"
 						labelText="Veröffentlichungsdatum Event:"
-						placeholderText="Veröffentlichungsdatum Event:"
 						type="datetime-local"
 						ariaLabel="Gib das Veröffentlichungsdatum des ausgewählten Events ein."
 						bind:value={currentEvent.publish_date}
@@ -265,13 +265,31 @@
 						on:input={setUnsavedChanges}
 					/>
 					<Input
-						classes="dashboard-admin-event-publish-shedule-date input"
 						id="dashboard-admin-event-publish-shedule-date"
 						labelText="Veröffentlichungsuhrzeit Ablaufplan:"
-						placeholderText="Veröffentlichungsuhrzeit Ablaufplan:"
 						type="datetime-local"
 						ariaLabel="Gib das Veröffentlichungsdatum des Ablaufplanes des ausgewählten Events ein."
 						bind:value={currentEvent.schedule_visible_from}
+						on:submit={trySaveAsync}
+						on:input={setUnsavedChanges}
+					/>
+				</div>
+				<div class="dashboard-admin-event-time-date-wrapper">
+					<Input
+						id="dashboard-admin-event-call-for-papers-start-date"
+						labelText="Anmeldestart:"
+						type="datetime-local"
+						ariaLabel="Gib den Start der Anmeldefrist des ausgewählten Events ein."
+						bind:value={currentEvent.call_for_papers_start}
+						on:submit={trySaveAsync}
+						on:input={setUnsavedChanges}
+					/>
+					<Input
+						id="dashboard-admin-event-call-for-papers-end-date"
+						labelText="Anmeldeende:"
+						type="datetime-local"
+						ariaLabel="Gib das Ende der Anmeldefrist des ausgewählten Events ein."
+						bind:value={currentEvent.call_for_papers_end}
 						on:submit={trySaveAsync}
 						on:input={setUnsavedChanges}
 					/>
