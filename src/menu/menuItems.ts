@@ -51,7 +51,7 @@ export const teamMember: MenuItem = {
 
 export const speaker: MenuItem = {
     name: 'Speaker',
-    url: '/dashboard/speaker/test',
+    url: '/dashboard/speaker/event',
     description: 'Klicke, um zum Speaker-Dashboard zu gelangen',
 }
 

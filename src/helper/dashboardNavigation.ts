@@ -14,7 +14,7 @@ export function defaultNavigation(roles: DashboardRoles): void {
     } else if (roles.is_team_member) {
         throw redirect(302, '/dashboard/team-member/event');
     } else if (roles.is_speaker) {
-        throw redirect(302, '/dashboard/speaker/test');
+        throw redirect(302, '/dashboard/speaker/event');
     } else {
         throw redirect(302, '/dashboard/user/test');
     }
