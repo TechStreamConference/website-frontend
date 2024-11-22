@@ -57,6 +57,6 @@ export const speaker: MenuItem = {
 
 export const user: MenuItem = {
     name: 'User',
-    url: '/dashboard/user/test',
+    url: '/dashboard/user/newsletter',
     description: 'Klicke, um zum User-Dashboard zu gelangen',
 }

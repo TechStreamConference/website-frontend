@@ -4,9 +4,9 @@
 	import type { Menu } from 'types/provideTypes';
 	const tabsEntries: Menu = [
 		{
-			name: 'entry',
-			url: '/dashboard/user/test',
-			description: 'Klicke hier um zu TEST zu gelangen.'
+			name: 'Newsletter',
+			url: '/dashboard/user/newsletter',
+			description: 'Klicke hier um die Newsletter abonieren zu können.'
 		}
 	];
 </script>
