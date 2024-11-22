@@ -17,7 +17,7 @@
 		},
 		{
 			name: 'Validierung',
-			url: '/dashboard/admin/validierung',
+			url: '/dashboard/admin/validation',
 			description: 'Klicke hier, um Daten von Speaker zu validiren.'
 		}
 	];
