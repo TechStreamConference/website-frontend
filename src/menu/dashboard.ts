@@ -1,7 +1,8 @@
-import type { Menu, Roles } from "types/provideTypes";
+import type { Menu } from "types/provideTypes";
+import type { DashboardRoles } from "types/dashboardProvideTypes";
 import * as Item from './menuItems'
 
-export function SectionIn(roles: Roles) {
+export function SectionIn(roles: DashboardRoles) {
     let menu: Menu = [];
 
     if (roles.is_admin) {

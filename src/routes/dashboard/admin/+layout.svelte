@@ -14,6 +14,11 @@
 			name: 'Events',
 			url: '/dashboard/admin/events',
 			description: 'Klicke hier, um zu den Event Einstellungen zu gelangen.'
+		},
+		{
+			name: 'Validierung',
+			url: '/dashboard/admin/validation',
+			description: 'Klicke hier, um Daten von Speaker zu validiren.'
 		}
 	];
 </script>
