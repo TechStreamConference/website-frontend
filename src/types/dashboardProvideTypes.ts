@@ -42,3 +42,37 @@ export type DashboardEventSpeaker = z.infer<typeof dashboardEventSpeakerScheme>;
 
 export const dashboardAllEventSpeakerScheme = z.array(dashboardEventSpeakerScheme);
 export type DashboardAllEventSpeaker = z.infer<typeof dashboardAllEventSpeakerScheme>;
+
+export const dashboardApprovalSpeakerTeamMemberScheme = z.object({
+    id: z.number(),
+    name: z.string(),
+    short_bio: z.string(),
+    bio: z.string(),
+    photo: z.string(),
+    requested_changes: z.string().nullable(),
+    account: z.object({
+        username: z.string(),
+    }),
+    event: z.object({
+        title: z.string(),
+    }),
+    diff: z.array(z.string()).nullable(),
+});
+export type DashboardApprovalSpeakerTeamMember = z.infer<typeof dashboardApprovalSpeakerTeamMemberScheme>;
+
+export const dashboardAllApprovalSpeakerTeamMemberScheme = z.array(dashboardApprovalSpeakerTeamMemberScheme);
+export type DashboardAllApprovalSpeakerTeamMember = z.infer<typeof dashboardAllApprovalSpeakerTeamMemberScheme>;
+
+export const dashboardApprovalSocialMediaLinkScheme = z.object({
+    id: z.number(),
+    name: z.string(),
+    url: z.string(),
+    requested_changes: z.string().nullable(),
+    account: z.object({
+        username: z.string(),
+    }),
+});
+export type DashboardApprovalSocialMediaLink = z.infer<typeof dashboardApprovalSocialMediaLinkScheme>;
+
+export const dashboardAllApprovalSocialMediaLinkScheme = z.array(dashboardApprovalSocialMediaLinkScheme);
+export type DashboardAllApprovalSocialMediaLink = z.infer<typeof dashboardAllApprovalSocialMediaLinkScheme>;

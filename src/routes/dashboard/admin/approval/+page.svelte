@@ -4,8 +4,8 @@
 	import TextLine from 'elements/text/textLine.svelte';
 </script>
 
-<TextLine>Entries for spaker approval</TextLine>
-<TextLine>Entries for spaker socials approval</TextLine>
+<TextLine>Entries for speaker approval</TextLine>
+<TextLine>Entries for speaker socials approval</TextLine>
 <br />
 <TextLine>Needed routes:</TextLine>
 <List classes="list-padding-left">
@@ -22,8 +22,3 @@
 		PUT /api/dashboard/admin/approval/socials (provides id and year)
 	</ListElement>
 </List>
-<br />
-<TextLine>
-	Do we need extra routes for Team etc or should they just be in the speaker route. But if so scale
-	this to the team to.
-</TextLine>

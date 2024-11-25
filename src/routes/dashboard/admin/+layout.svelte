@@ -16,9 +16,9 @@
 			description: 'Klicke hier, um zu den Event Einstellungen zu gelangen.'
 		},
 		{
-			name: 'Validierung',
-			url: '/dashboard/admin/validation',
-			description: 'Klicke hier, um Daten von Speaker zu validiren.'
+			name: 'Freigabe',
+			url: '/dashboard/admin/approval',
+			description: 'Klicke hier, um Daten von Speaker zu validieren.'
 		}
 	];
 </script>
