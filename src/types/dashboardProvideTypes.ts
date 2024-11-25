@@ -49,7 +49,7 @@ export const dashboardApprovalSpeakerTeamMemberScheme = z.object({
     short_bio: z.string(),
     bio: z.string(),
     photo: z.string(),
-    requested_changes: z.string().nullable(),
+    requested_changes: z.string().nullable().transform((val) => val ?? ""),
     account: z.object({
         username: z.string(),
     }),
@@ -67,7 +67,7 @@ export const dashboardApprovalSocialMediaLinkScheme = z.object({
     id: z.number(),
     name: z.string(),
     url: z.string(),
-    requested_changes: z.string().nullable(),
+    requested_changes: z.string().nullable().transform((val) => val ?? ""),
     account: z.object({
         username: z.string(),
     }),
