@@ -12,15 +12,42 @@
 
 	import { apiUrl } from 'helper/links';
 	import { setUnsavedChanges } from 'stores/saved';
+	import type { DashboardApprovalSpeakerTeamMember } from 'types/dashboardProvideTypes';
+	import { validateRequestedChanges } from './approvalValidation';
 
 	export let data: LoadAdminApproval;
 
-	function SpeakerTeamMemberRequestChanges(): void {
-		console.log('TODO: changes to request');
+	function RequestChangesSpeaker(speaker: DashboardApprovalSpeakerTeamMember): void {
+		if (validateRequestedChanges(speaker.requested_changes)) {
+			SaveRequestedChanges('speaker', speaker.id, speaker.requested_changes);
+			return;
+		}
+		// error
 	}
 
-	function SpeakerTeamMemberValidate(): void {
-		console.log('TODO: validate');
+	function RequestChangesTeamMember(member: DashboardApprovalSpeakerTeamMember): void {
+		if (validateRequestedChanges(member.requested_changes)) {
+			// call save;
+			return;
+		}
+		// error
+	}
+
+	async function SaveRequestedChanges(
+		routePart: string,
+		id: number,
+		change: string
+	): Promise<void> {
+		const route: string = apiUrl(`/api/admin/approval/${routePart}/${id}/requested-changes`);
+
+		const response: Response = await fetch(route, {
+			method: 'PUT',
+			body: JSON.stringify(change)
+		});
+
+		if (!response.ok) {
+			return;
+		}
 	}
 
 	function GetBackgroundClass(diff: string[] | null, reference: string): string {
@@ -67,17 +94,17 @@
 					ariaLabel="Trage hier die Änderungswünsche den aktuellen Datensatzes ein."
 					labelText="Änderungswünsche:"
 					bind:value={speaker.requested_changes}
-					on:submit={SpeakerTeamMemberRequestChanges}
+					on:submit={() => RequestChangesSpeaker(speaker)}
 					on:input={setUnsavedChanges}
 				/>
 				<div class="dashboard-admin-approval-button-array">
 					<Button
 						ariaLabel="Klicke hier, um Änderungswünsche zu stellen"
-						on:click={SpeakerTeamMemberRequestChanges}>Änderungswünsche</Button
+						on:click={() => RequestChangesSpeaker(speaker)}>Änderungswünsche</Button
 					>
 					<Button
 						ariaLabel="Klicke hier, um den Datensatz freizugeben"
-						on:click={SpeakerTeamMemberValidate}>Freigeben</Button
+						on:click={() => console.log('Missing save call.')}>Freigeben</Button
 					>
 				</div>
 			</div>
