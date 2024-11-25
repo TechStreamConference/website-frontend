@@ -27,7 +27,9 @@
 		if (!diff) {
 			return '';
 		}
-		return diff.includes(reference) ? 'dashboard-admin-approval-has-changed-background' : '';
+		return diff.includes(reference)
+			? 'dashboard-admin-approval-has-changed-background text-line-white'
+			: '';
 	}
 </script>
 
@@ -126,10 +128,11 @@
 	:global(.dashboard-admin-approval-has-changed-background) {
 		background-color: var(--primary-color-light);
 		border-radius: var(--border-radius);
+		padding: var(--half-padding);
 	}
 
 	.dashboard-admin-approval {
-		margin: var(--full-margin) 0;
+		margin: var(--4x-margin) 0;
 	}
 
 	.dashboard-admin-approval-grid {
