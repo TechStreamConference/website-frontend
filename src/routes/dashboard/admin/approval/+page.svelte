@@ -11,52 +11,157 @@
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
 
 	import { apiUrl } from 'helper/links';
-	import { setUnsavedChanges } from 'stores/saved';
-	import type { DashboardApprovalSpeakerTeamMember } from 'types/dashboardProvideTypes';
-	import { validateRequestedChanges } from './approvalValidation';
+	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
+	import type {
+		DashboardApprovalSocialMediaLink,
+		DashboardApprovalSpeakerTeamMember
+	} from 'types/dashboardProvideTypes';
+	import { validateApproval, validateRequestedChanges } from './approvalValidation';
+	import SaveMessage from 'elements/text/saveMessage.svelte';
+	import { SaveMessageType } from 'types/saveMessageType';
+	import Message from 'elements/text/message.svelte';
+	import {
+		GetBackgroundClass,
+		getSocialMediaHash,
+		getSpeakerHash,
+		getTeamMemberHash
+	} from './approvalHelper';
+	import { scrollToAnchor } from 'helper/scroll';
 
 	export let data: LoadAdminApproval;
+	enum DashboardSection {
+		Speaker = 0,
+		TeamMember = 1,
+		SocialMedia = 2
+	}
+	const saveMessages: { [key in DashboardSection]: { [key: number]: SaveMessage } } = {
+		0: {},
+		1: {},
+		2: {}
+	};
+	const specificErrors: { [key in DashboardSection]: { [key: number]: string[] } } = {
+		0: {},
+		1: {},
+		2: {}
+	};
+	const routePartLookup: { [key in DashboardSection]: string } = {
+		0: 'speaker',
+		1: 'team-member',
+		2: 'social-media'
+	};
 
-	function RequestChangesSpeaker(speaker: DashboardApprovalSpeakerTeamMember): void {
-		if (validateRequestedChanges(speaker.requested_changes)) {
-			SaveRequestedChanges('speaker', speaker.id, speaker.requested_changes);
+	async function RequestChangesSpeaker(speaker: DashboardApprovalSpeakerTeamMember): Promise<void> {
+		const messages: string[] = validateRequestedChanges(speaker.requested_changes);
+		specificErrors[DashboardSection.Speaker][speaker.id] = messages;
+		scrollToAnchor(getSpeakerHash(speaker.id));
+
+		if (messages.length > 0) {
 			return;
 		}
-		// error
+
+		await SaveRequestedChanges(DashboardSection.Speaker, speaker.id, speaker.requested_changes);
 	}
 
-	function RequestChangesTeamMember(member: DashboardApprovalSpeakerTeamMember): void {
-		if (validateRequestedChanges(member.requested_changes)) {
-			// call save;
+	async function RequestChangesTeamMember(
+		member: DashboardApprovalSpeakerTeamMember
+	): Promise<void> {
+		const messages: string[] = validateRequestedChanges(member.requested_changes);
+		specificErrors[DashboardSection.TeamMember][member.id] = messages;
+		scrollToAnchor(getTeamMemberHash(member.id));
+
+		if (messages.length > 0) {
 			return;
 		}
-		// error
+
+		await SaveRequestedChanges(DashboardSection.TeamMember, member.id, member.requested_changes);
+	}
+
+	async function RequestedChangesSocialMedia(
+		social: DashboardApprovalSocialMediaLink
+	): Promise<void> {
+		const messages: string[] = validateRequestedChanges(social.requested_changes);
+		specificErrors[DashboardSection.SocialMedia][social.id] = messages;
+		scrollToAnchor(getSocialMediaHash(social.id));
+
+		if (messages.length > 0) {
+			return;
+		}
+
+		await SaveRequestedChanges(DashboardSection.TeamMember, social.id, social.requested_changes);
 	}
 
 	async function SaveRequestedChanges(
-		routePart: string,
+		section: DashboardSection,
 		id: number,
 		change: string
 	): Promise<void> {
-		const route: string = apiUrl(`/api/admin/approval/${routePart}/${id}/requested-changes`);
-
+		const route: string = apiUrl(
+			`/api/dashboard/admin/approval/${routePartLookup[section]}/${id}/request-changes`
+		);
 		const response: Response = await fetch(route, {
 			method: 'PUT',
-			body: JSON.stringify(change)
+			body: JSON.stringify({ message: change })
 		});
 
 		if (!response.ok) {
+			saveMessages[section][id].setSaveMessage(SaveMessageType.Error);
 			return;
 		}
+
+		resetUnsavedChanges();
+		saveMessages[section][id].setSaveMessage(SaveMessageType.Save);
 	}
 
-	function GetBackgroundClass(diff: string[] | null, reference: string): string {
-		if (!diff) {
-			return '';
+	async function ApprovalSpeaker(speaker: DashboardApprovalSpeakerTeamMember): Promise<void> {
+		const messages: string[] = validateApproval();
+		specificErrors[DashboardSection.Speaker][speaker.id] = messages;
+		scrollToAnchor(getSpeakerHash(speaker.id));
+
+		if (messages.length > 0) {
+			return;
 		}
-		return diff.includes(reference)
-			? 'dashboard-admin-approval-has-changed-background text-line-white'
-			: '';
+
+		await SaveApproval(DashboardSection.Speaker, speaker.id);
+	}
+
+	async function ApprovalTeamMember(member: DashboardApprovalSpeakerTeamMember): Promise<void> {
+		const messages: string[] = validateApproval();
+		specificErrors[DashboardSection.TeamMember][member.id] = messages;
+		scrollToAnchor(getTeamMemberHash(member.id));
+
+		if (messages.length > 0) {
+			return;
+		}
+
+		await SaveApproval(DashboardSection.TeamMember, member.id);
+	}
+
+	async function ApprovalSocialMedia(
+		socialMedia: DashboardApprovalSpeakerTeamMember
+	): Promise<void> {
+		const messages: string[] = validateApproval();
+		specificErrors[DashboardSection.SocialMedia][socialMedia.id] = messages;
+		scrollToAnchor(getSocialMediaHash(socialMedia.id));
+
+		if (messages.length > 0) {
+			return;
+		}
+
+		await SaveApproval(DashboardSection.SocialMedia, socialMedia.id);
+	}
+
+	async function SaveApproval(section: DashboardSection, id: number) {
+		const route: string = apiUrl(`/api/dashboard/admin/approval/${routePartLookup[section]}/${id}`);
+		const response: Response = await fetch(route, {
+			method: 'PUT'
+		});
+
+		if (!response.ok) {
+			saveMessages[section][id].setSaveMessage(SaveMessageType.Error);
+		}
+
+		resetUnsavedChanges();
+		saveMessages[section][id].setSaveMessage(SaveMessageType.Save);
 	}
 </script>
 
@@ -65,9 +170,15 @@
 	{#if data.speaker.length > 0}
 		{#each data.speaker as speaker}
 			<div class="dashboard-admin-approval">
-				<SubHeadline classes="dashboard-admin-approval-subheading"
+				<SubHeadline id={getSpeakerHash(speaker.id)} classes="dashboard-admin-approval-subheading"
 					>{speaker.account.username}</SubHeadline
 				>
+				<SaveMessage bind:this={saveMessages[DashboardSection.Speaker][speaker.id]} />
+				{#if specificErrors[DashboardSection.Speaker][speaker.id]}
+					{#each specificErrors[DashboardSection.Speaker][speaker.id] as error}
+						<Message message={error} />
+					{/each}
+				{/if}
 				<div class="dashboard-admin-approval-grid">
 					<TextLine>Event:</TextLine>
 					<TextLine>{speaker.event.title}</TextLine>
@@ -104,7 +215,7 @@
 					>
 					<Button
 						ariaLabel="Klicke hier, um den Datensatz freizugeben"
-						on:click={() => console.log('Missing save call.')}>Freigeben</Button
+						on:click={() => ApprovalSpeaker(speaker)}>Freigeben</Button
 					>
 				</div>
 			</div>
@@ -115,6 +226,7 @@
 		>
 	{/if}
 </SectionDashboard>
+
 <SectionDashboard classes="dashboard-admin-approval-section">
 	<HeadlineH2 classes="dashboard-admin-approval-headline-h2">Team Member</HeadlineH2>
 	{#if data.teamMember.length > 0}
@@ -125,6 +237,7 @@
 		>
 	{/if}
 </SectionDashboard>
+
 <SectionDashboard classes="dashboard-admin-approval-section">
 	<HeadlineH2 classes="dashboard-admin-approval-headline-h2">Social Media</HeadlineH2>
 	{#if data.socialMedia.length > 0}
@@ -149,6 +262,7 @@
 	}
 
 	:global(.dashboard-admin-approval-subheading) {
+		scroll-margin-top: var(--16x-margin);
 		justify-self: center;
 	}
 
