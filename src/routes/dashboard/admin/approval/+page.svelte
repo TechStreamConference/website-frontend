@@ -11,6 +11,7 @@
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
 	import Message from 'elements/text/message.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
+	import LinkWithIcon from 'elements/input/linkWithIcon.svelte';
 
 	import { apiUrl } from 'helper/links';
 	import { scrollToAnchor } from 'helper/scroll';
@@ -35,7 +36,7 @@
 	const routePartLookup: { [key in ApprovalSection]: string } = {
 		0: 'speaker',
 		1: 'team-member',
-		2: 'social-media'
+		2: 'social-media-link'
 	};
 
 	async function RequestChanges(
@@ -242,7 +243,53 @@
 <SectionDashboard classes="dashboard-admin-approval-section">
 	<HeadlineH2 classes="dashboard-admin-approval-headline-h2">Social Media</HeadlineH2>
 	{#if data.socialMedia.length > 0}
-		<TextLine>TODO: Hier Social Media Links anzeigen.</TextLine>
+		{#each data.socialMedia as media}
+			<div class="dashboard-admin-approval">
+				<SubHeadline
+					id={getSectionHash(ApprovalSection.SocialMedia, media.id)}
+					classes="dashboard-admin-approval-subheading">{media.account.username}</SubHeadline
+				>
+				<SaveMessage bind:this={saveMessages[ApprovalSection.SocialMedia][media.id]} />
+				{#if specificErrors[ApprovalSection.SocialMedia][media.id]}
+					{#each specificErrors[ApprovalSection.SocialMedia][media.id] as error}
+						<Message message={error} />
+					{/each}
+				{/if}
+				<div class="dashboard-admin-approval-grid-big">
+					<LinkWithIcon
+						icon={media.name}
+						href={media.url}
+						title={`${media.name} Link von ${media.account.username}`}
+					/>
+					<TextLine classes="dashboard-admin-approval-social-media-text">{media.name}</TextLine>
+					<TextLine classes="dashboard-admin-approval-social-media-text">{media.url}</TextLine>
+				</div>
+				<TextArea
+					rows={5}
+					id={'dashboard-admin-approval-social-media-changes-' + media.id}
+					ariaLabel="Trage hier die Änderungswünsche den aktuellen Datensatzes ein."
+					labelText="Änderungswünsche:"
+					bind:value={media.requested_changes}
+					on:submit={() =>
+						RequestChanges(ApprovalSection.SocialMedia, media.id, media.requested_changes)}
+					on:input={setUnsavedChanges}
+				/>
+				<div class="dashboard-admin-approval-button-array">
+					<Button
+						ariaLabel="Klicke hier, um Änderungswünsche zu stellen"
+						on:click={() =>
+							RequestChanges(ApprovalSection.SocialMedia, media.id, media.requested_changes)}
+						>Änderungswünsche</Button
+					>
+					<Button
+						ariaLabel="Klicke hier, um den Datensatz freizugeben"
+						on:click={() =>
+							Approval(ApprovalSection.SocialMedia, media.id, media.requested_changes)}
+						>Freigeben</Button
+					>
+				</div>
+			</div>
+		{/each}
 	{:else}
 		<TextLine classes="dashboard-admin-approval-no-data-message"
 			>Keine Freigaben für Social Media Links verfügbar.</TextLine
@@ -283,6 +330,18 @@
 		grid-template-columns: 20rem 1fr;
 		gap: var(--quad-gap);
 		margin: var(--2x-margin) 0;
+	}
+
+	.dashboard-admin-approval-grid-big {
+		justify-self: center;
+		display: grid;
+		grid-template-columns: 10rem 10rem 1fr;
+		gap: var(--quad-gap);
+		margin: var(--2x-margin) 0;
+	}
+
+	:global(.dashboard-admin-approval-social-media-text) {
+		align-self: center;
 	}
 
 	.dashboard-admin-approval-button-array {
