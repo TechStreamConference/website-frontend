@@ -161,7 +161,7 @@
 		}
 
 		resetUnsavedChanges();
-		saveMessages[section][id].setSaveMessage(SaveMessageType.Save);
+		saveMessages[section][id].setSaveMessage(SaveMessageType.Approved);
 	}
 </script>
 
