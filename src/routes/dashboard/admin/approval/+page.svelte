@@ -174,7 +174,64 @@
 <SectionDashboard classes="dashboard-admin-approval-section">
 	<HeadlineH2 classes="dashboard-admin-approval-headline-h2">Team Member</HeadlineH2>
 	{#if data.teamMember.length > 0}
-		<TextLine>TODO: Hier Team Member anzeigen.</TextLine>
+		{#each data.teamMember as member}
+			<div class="dashboard-admin-approval">
+				<SubHeadline
+					id={getSectionHash(ApprovalSection.TeamMember, member.id)}
+					classes="dashboard-admin-approval-subheading">{member.account.username}</SubHeadline
+				>
+				<SaveMessage bind:this={saveMessages[ApprovalSection.TeamMember][member.id]} />
+				{#if specificErrors[ApprovalSection.TeamMember][member.id]}
+					{#each specificErrors[ApprovalSection.TeamMember][member.id] as error}
+						<Message message={error} />
+					{/each}
+				{/if}
+				<div class="dashboard-admin-approval-grid">
+					<TextLine>Event:</TextLine>
+					<TextLine>{member.event.title}</TextLine>
+					<TextLine classes={GetBackgroundClass(member.diff, 'name')}>Name:</TextLine>
+					<TextLine classes={GetBackgroundClass(member.diff, 'name')}>{member.name}</TextLine>
+					<TextLine classes={GetBackgroundClass(member.diff, 'short_bio')}
+						>Kurzbeschreibung:</TextLine
+					>
+					<TextLine classes={GetBackgroundClass(member.diff, 'short_bio')}
+						>{member.short_bio}</TextLine
+					>
+					<TextLine classes={GetBackgroundClass(member.diff, 'bio')}>Beschreibung:</TextLine>
+					<Paragraph classes={GetBackgroundClass(member.diff, 'bio')}>{member.bio}</Paragraph>
+					<TextLine classes={GetBackgroundClass(member.diff, 'photo')}>Foto:</TextLine>
+					<Image
+						classes={GetBackgroundClass(member.diff, 'photo')}
+						alt={'Speakerbild von ' + member.name}
+						src={apiUrl(`/api/${member.photo}`)}
+					/>
+				</div>
+				<TextArea
+					rows={5}
+					id={'dashboard-admin-approval-team-member-changes-' + member.id}
+					ariaLabel="Trage hier die Änderungswünsche den aktuellen Datensatzes ein."
+					labelText="Änderungswünsche:"
+					bind:value={member.requested_changes}
+					on:submit={() =>
+						RequestChanges(ApprovalSection.TeamMember, member.id, member.requested_changes)}
+					on:input={setUnsavedChanges}
+				/>
+				<div class="dashboard-admin-approval-button-array">
+					<Button
+						ariaLabel="Klicke hier, um Änderungswünsche zu stellen"
+						on:click={() =>
+							RequestChanges(ApprovalSection.TeamMember, member.id, member.requested_changes)}
+						>Änderungswünsche</Button
+					>
+					<Button
+						ariaLabel="Klicke hier, um den Datensatz freizugeben"
+						on:click={() =>
+							Approval(ApprovalSection.TeamMember, member.id, member.requested_changes)}
+						>Freigeben</Button
+					>
+				</div>
+			</div>
+		{/each}
 	{:else}
 		<TextLine classes="dashboard-admin-approval-no-data-message"
 			>Keine Freigaben für Team Member verfügbar.</TextLine
