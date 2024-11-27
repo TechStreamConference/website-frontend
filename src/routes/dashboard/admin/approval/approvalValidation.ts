@@ -9,7 +9,12 @@ export function validateRequestedChanges(changes: string): string[] {
 }
 
 
-export function validateApproval(): string[] {
+export function validateApproval(changes: string): string[] {
     const messages: string[] = [];
+
+    if (changes.trim().length > 0) {
+        messages.push("Nicht möglich den Datensatz freizugeben solange Änderungswünsche eingetragen sind.");
+    }
+
     return messages;
 }

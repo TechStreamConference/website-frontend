@@ -9,89 +9,53 @@
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import Image from 'elements/image/image.svelte';
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
+	import Message from 'elements/text/message.svelte';
+	import SaveMessage from 'elements/text/saveMessage.svelte';
 
 	import { apiUrl } from 'helper/links';
-	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
-	import type {
-		DashboardApprovalSocialMediaLink,
-		DashboardApprovalSpeakerTeamMember
-	} from 'types/dashboardProvideTypes';
-	import { validateApproval, validateRequestedChanges } from './approvalValidation';
-	import SaveMessage from 'elements/text/saveMessage.svelte';
-	import { SaveMessageType } from 'types/saveMessageType';
-	import Message from 'elements/text/message.svelte';
-	import {
-		GetBackgroundClass,
-		getSocialMediaHash,
-		getSpeakerHash,
-		getTeamMemberHash
-	} from './approvalHelper';
 	import { scrollToAnchor } from 'helper/scroll';
+	import { GetBackgroundClass } from './approvalHelper';
+	import { SaveMessageType } from 'types/saveMessageType';
+	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
+	import { ApprovalSection, getSectionHash } from 'types/approvalSection';
+	import { validateApproval, validateRequestedChanges } from './approvalValidation';
 
 	export let data: LoadAdminApproval;
-	enum DashboardSection {
-		Speaker = 0,
-		TeamMember = 1,
-		SocialMedia = 2
-	}
-	const saveMessages: { [key in DashboardSection]: { [key: number]: SaveMessage } } = {
+
+	const saveMessages: { [key in ApprovalSection]: { [key: number]: SaveMessage } } = {
 		0: {},
 		1: {},
 		2: {}
 	};
-	const specificErrors: { [key in DashboardSection]: { [key: number]: string[] } } = {
+	const specificErrors: { [key in ApprovalSection]: { [key: number]: string[] } } = {
 		0: {},
 		1: {},
 		2: {}
 	};
-	const routePartLookup: { [key in DashboardSection]: string } = {
+	const routePartLookup: { [key in ApprovalSection]: string } = {
 		0: 'speaker',
 		1: 'team-member',
 		2: 'social-media'
 	};
 
-	async function RequestChangesSpeaker(speaker: DashboardApprovalSpeakerTeamMember): Promise<void> {
-		const messages: string[] = validateRequestedChanges(speaker.requested_changes);
-		specificErrors[DashboardSection.Speaker][speaker.id] = messages;
-		scrollToAnchor(getSpeakerHash(speaker.id));
-
-		if (messages.length > 0) {
-			return;
-		}
-
-		await SaveRequestedChanges(DashboardSection.Speaker, speaker.id, speaker.requested_changes);
-	}
-
-	async function RequestChangesTeamMember(
-		member: DashboardApprovalSpeakerTeamMember
+	async function RequestChanges(
+		section: ApprovalSection,
+		id: number,
+		changes: string
 	): Promise<void> {
-		const messages: string[] = validateRequestedChanges(member.requested_changes);
-		specificErrors[DashboardSection.TeamMember][member.id] = messages;
-		scrollToAnchor(getTeamMemberHash(member.id));
+		const messages: string[] = validateRequestedChanges(changes);
+		specificErrors[section][id] = messages;
+		scrollToAnchor(getSectionHash(section, id));
 
 		if (messages.length > 0) {
 			return;
 		}
 
-		await SaveRequestedChanges(DashboardSection.TeamMember, member.id, member.requested_changes);
-	}
-
-	async function RequestedChangesSocialMedia(
-		social: DashboardApprovalSocialMediaLink
-	): Promise<void> {
-		const messages: string[] = validateRequestedChanges(social.requested_changes);
-		specificErrors[DashboardSection.SocialMedia][social.id] = messages;
-		scrollToAnchor(getSocialMediaHash(social.id));
-
-		if (messages.length > 0) {
-			return;
-		}
-
-		await SaveRequestedChanges(DashboardSection.TeamMember, social.id, social.requested_changes);
+		await SaveRequestedChanges(section, id, changes);
 	}
 
 	async function SaveRequestedChanges(
-		section: DashboardSection,
+		section: ApprovalSection,
 		id: number,
 		change: string
 	): Promise<void> {
@@ -112,45 +76,19 @@
 		saveMessages[section][id].setSaveMessage(SaveMessageType.Save);
 	}
 
-	async function ApprovalSpeaker(speaker: DashboardApprovalSpeakerTeamMember): Promise<void> {
-		const messages: string[] = validateApproval();
-		specificErrors[DashboardSection.Speaker][speaker.id] = messages;
-		scrollToAnchor(getSpeakerHash(speaker.id));
+	async function Approval(section: ApprovalSection, id: number, changes: string): Promise<void> {
+		const messages: string[] = validateApproval(changes);
+		specificErrors[section][id] = messages;
+		scrollToAnchor(getSectionHash(section, id));
 
 		if (messages.length > 0) {
 			return;
 		}
 
-		await SaveApproval(DashboardSection.Speaker, speaker.id);
+		await SaveApproval(section, id);
 	}
 
-	async function ApprovalTeamMember(member: DashboardApprovalSpeakerTeamMember): Promise<void> {
-		const messages: string[] = validateApproval();
-		specificErrors[DashboardSection.TeamMember][member.id] = messages;
-		scrollToAnchor(getTeamMemberHash(member.id));
-
-		if (messages.length > 0) {
-			return;
-		}
-
-		await SaveApproval(DashboardSection.TeamMember, member.id);
-	}
-
-	async function ApprovalSocialMedia(
-		socialMedia: DashboardApprovalSpeakerTeamMember
-	): Promise<void> {
-		const messages: string[] = validateApproval();
-		specificErrors[DashboardSection.SocialMedia][socialMedia.id] = messages;
-		scrollToAnchor(getSocialMediaHash(socialMedia.id));
-
-		if (messages.length > 0) {
-			return;
-		}
-
-		await SaveApproval(DashboardSection.SocialMedia, socialMedia.id);
-	}
-
-	async function SaveApproval(section: DashboardSection, id: number) {
+	async function SaveApproval(section: ApprovalSection, id: number) {
 		const route: string = apiUrl(`/api/dashboard/admin/approval/${routePartLookup[section]}/${id}`);
 		const response: Response = await fetch(route, {
 			method: 'PUT'
@@ -170,12 +108,13 @@
 	{#if data.speaker.length > 0}
 		{#each data.speaker as speaker}
 			<div class="dashboard-admin-approval">
-				<SubHeadline id={getSpeakerHash(speaker.id)} classes="dashboard-admin-approval-subheading"
-					>{speaker.account.username}</SubHeadline
+				<SubHeadline
+					id={getSectionHash(ApprovalSection.Speaker, speaker.id)}
+					classes="dashboard-admin-approval-subheading">{speaker.account.username}</SubHeadline
 				>
-				<SaveMessage bind:this={saveMessages[DashboardSection.Speaker][speaker.id]} />
-				{#if specificErrors[DashboardSection.Speaker][speaker.id]}
-					{#each specificErrors[DashboardSection.Speaker][speaker.id] as error}
+				<SaveMessage bind:this={saveMessages[ApprovalSection.Speaker][speaker.id]} />
+				{#if specificErrors[ApprovalSection.Speaker][speaker.id]}
+					{#each specificErrors[ApprovalSection.Speaker][speaker.id] as error}
 						<Message message={error} />
 					{/each}
 				{/if}
@@ -205,17 +144,22 @@
 					ariaLabel="Trage hier die Änderungswünsche den aktuellen Datensatzes ein."
 					labelText="Änderungswünsche:"
 					bind:value={speaker.requested_changes}
-					on:submit={() => RequestChangesSpeaker(speaker)}
+					on:submit={() =>
+						RequestChanges(ApprovalSection.Speaker, speaker.id, speaker.requested_changes)}
 					on:input={setUnsavedChanges}
 				/>
 				<div class="dashboard-admin-approval-button-array">
 					<Button
 						ariaLabel="Klicke hier, um Änderungswünsche zu stellen"
-						on:click={() => RequestChangesSpeaker(speaker)}>Änderungswünsche</Button
+						on:click={() =>
+							RequestChanges(ApprovalSection.Speaker, speaker.id, speaker.requested_changes)}
+						>Änderungswünsche</Button
 					>
 					<Button
 						ariaLabel="Klicke hier, um den Datensatz freizugeben"
-						on:click={() => ApprovalSpeaker(speaker)}>Freigeben</Button
+						on:click={() =>
+							Approval(ApprovalSection.Speaker, speaker.id, speaker.requested_changes)}
+						>Freigeben</Button
 					>
 				</div>
 			</div>
