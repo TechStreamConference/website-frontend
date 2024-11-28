@@ -1,4 +1,7 @@
 <script lang="ts">
+	import * as Menu from 'menu/dashboard';
+	import * as MenuItem from 'menu/menuItems';
+
 	import type { LoadAdminApproval } from 'types/dashboardLoadTypes';
 
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -20,6 +23,7 @@
 	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
 	import { ApprovalSection, getSectionHash } from 'types/approvalSection';
 	import { validateApproval, validateRequestedChanges } from './approvalValidation';
+	import Tabs from 'elements/navigation/tabs.svelte';
 
 	export let data: LoadAdminApproval;
 
@@ -108,6 +112,7 @@
 	}
 </script>
 
+<Tabs entries={Menu.admin} entryName={MenuItem.adminApproval.name} />
 <SectionDashboard classes="dashboard-admin-approval-section">
 	<HeadlineH2 classes="dashboard-admin-approval-headline-h2">Speaker</HeadlineH2>
 	{#if data.speaker.length > 0}

@@ -1,4 +1,7 @@
 <script lang="ts">
+	import * as Menu from 'menu/dashboard';
+	import * as MenuItem from 'menu/menuItems';
+
 	import type { LoadDashboard } from 'types/dashboardLoadTypes';
 	import type { SetAdminGlobals } from 'types/dashboardSetTypes';
 
@@ -12,6 +15,7 @@
 	import { setUnsavedChanges } from 'stores/saved';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
+	import Tabs from 'elements/navigation/tabs.svelte';
 
 	export let data: LoadDashboard; // data from database
 
@@ -33,6 +37,7 @@
 	}
 </script>
 
+<Tabs entries={Menu.admin} entryName={MenuItem.adminGlobals.name} />
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 <SectionDashboard classes="dashboard-admin-global-section">
 	<SaveMessage bind:this={message} />

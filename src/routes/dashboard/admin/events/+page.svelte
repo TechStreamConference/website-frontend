@@ -1,4 +1,7 @@
 <script lang="ts">
+	import * as Menu from 'menu/dashboard';
+	import * as MenuItem from 'menu/menuItems';
+
 	import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
 	import type { DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
 	import type { SetAdminEvent, SetAllAdminEventSpeaker } from 'types/dashboardSetTypes';
@@ -31,6 +34,7 @@
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 	import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
 	import Message from 'elements/text/message.svelte';
+	import Tabs from 'elements/navigation/tabs.svelte';
 
 	export let data: LoadDashboard & LoadAdminEvents;
 	let manualPopup: ManualUnsavedChangesPopup;
@@ -86,7 +90,7 @@
 			() => {
 				/**
 				 * This is a tradeoff here.
-				 * By using then and providing this lambda I dont need to make this function async.
+				 * By using then and providing this lambda I do not need to make this function async.
 				 * To have this function not async makes this component way easier.
 				 * So I catch the throw(406) and just display an error in the console.
 				 */
@@ -182,6 +186,7 @@
 	}
 </script>
 
+<Tabs entries={Menu.admin} entryName={MenuItem.adminEvents.name} />
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 <ManualUnsavedChangesPopup
 	bind:this={manualPopup}
