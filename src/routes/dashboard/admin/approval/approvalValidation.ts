@@ -13,7 +13,7 @@ export function validateApproval(changes: string): string[] {
     const messages: string[] = [];
 
     if (changes.trim().length > 0) {
-        messages.push("Nicht möglich den Datensatz freizugeben solange Änderungswünsche eingetragen sind.");
+        messages.push("Es ist nicht möglich, den Datensatz freizugeben, solange Änderungswünsche eingetragen sind.");
     }
 
     return messages;
