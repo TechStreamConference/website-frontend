@@ -1,4 +1,4 @@
-import type { Menu, MenuItem } from "types/provideTypes";
+import type { MenuItem } from "types/provideTypes";
 
 export const mainPage: MenuItem =
 {
