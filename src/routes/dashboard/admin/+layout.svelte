@@ -18,7 +18,7 @@
 		{
 			name: 'Freigabe',
 			url: '/dashboard/admin/approval',
-			description: 'Klicke hier, um Daten von Speaker zu validieren.'
+			description: 'Klicke hier, um ausstehende Freigaben zu bearbeiten.'
 		}
 	];
 </script>
