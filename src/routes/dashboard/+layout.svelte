@@ -4,7 +4,6 @@
 	import * as Menu from 'menu/dashboard';
 	import Header from 'elements/navigation/header.svelte';
 	import Footer from 'elements/navigation/footer.svelte';
-	import Tabs from 'elements/navigation/tabs.svelte';
 	import UnsavedChangesPopup from 'elements/navigation/unsavedChangesPopup.svelte';
 
 	import { onMount } from 'svelte';
@@ -25,14 +24,7 @@
 <UnsavedChangesPopup />
 <Header menu={Menu.headerIn} />
 <div class="dashboard-wrapper">
-	<div class="dashboard-section-wrapper">
-		<Tabs
-			alignment="navigation-tabs-end"
-			entries={Menu.SectionIn(data.roles)}
-			background="navigation-tabs-purple"
-			color="white"
-		/>
-	</div>
+	<div class="dashboard-section-wrapper"></div>
 	<div class="dashboard-content">
 		<slot />
 	</div>
