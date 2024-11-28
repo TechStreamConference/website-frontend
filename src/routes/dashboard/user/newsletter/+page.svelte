@@ -8,7 +8,11 @@
 	import Tabs from 'elements/navigation/tabs.svelte';
 </script>
 
-<Tabs entries={Menu.user} entryName={MenuItem.userNewsletter.name} />
+<Tabs
+	entries={Menu.user}
+	entryName={MenuItem.userNewsletter.name}
+	classes="navigation-tabs-dashboard-subpage"
+/>
 <TextLine>add or remove users email to newsletter</TextLine>
 <br />
 <TextLine>Needed routes:</TextLine>

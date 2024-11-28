@@ -112,7 +112,11 @@
 	}
 </script>
 
-<Tabs entries={Menu.admin} entryName={MenuItem.adminApproval.name} />
+<Tabs
+	entries={Menu.admin}
+	entryName={MenuItem.adminApproval.name}
+	classes="navigation-tabs-dashboard-subpage"
+/>
 <SectionDashboard classes="dashboard-admin-approval-section">
 	<HeadlineH2 classes="dashboard-admin-approval-headline-h2">Speaker</HeadlineH2>
 	{#if data.speaker.length > 0}

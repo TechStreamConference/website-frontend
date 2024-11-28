@@ -8,7 +8,11 @@
 	import Tabs from 'elements/navigation/tabs.svelte';
 </script>
 
-<Tabs entries={Menu.speaker} entryName={MenuItem.speakerEvents.name} />
+<Tabs
+	entries={Menu.speaker}
+	entryName={MenuItem.speakerEvents.name}
+	classes="navigation-tabs-dashboard-subpage"
+/>
 <TextLine>Drop Down with available Events</TextLine>
 <TextLine>Event Data from Speaker</TextLine>
 <br />

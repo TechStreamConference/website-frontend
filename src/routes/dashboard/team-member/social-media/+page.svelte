@@ -8,7 +8,11 @@
 	import Tabs from 'elements/navigation/tabs.svelte';
 </script>
 
-<Tabs entries={Menu.teamMember} entryName={MenuItem.teamMemberSocialMedia.name} />
+<Tabs
+	entries={Menu.teamMember}
+	entryName={MenuItem.teamMemberSocialMedia.name}
+	classes="navigation-tabs-dashboard-subpage"
+/>
 <TextLine>Social Media Data from Team Member</TextLine>
 <br />
 <TextLine>Needed routes:</TextLine>

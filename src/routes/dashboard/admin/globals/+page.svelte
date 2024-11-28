@@ -37,7 +37,11 @@
 	}
 </script>
 
-<Tabs entries={Menu.admin} entryName={MenuItem.adminGlobals.name} />
+<Tabs
+	entries={Menu.admin}
+	entryName={MenuItem.adminGlobals.name}
+	classes="navigation-tabs-dashboard-subpage"
+/>
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 <SectionDashboard classes="dashboard-admin-global-section">
 	<SaveMessage bind:this={message} />

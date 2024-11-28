@@ -8,7 +8,11 @@
 	import Tabs from 'elements/navigation/tabs.svelte';
 </script>
 
-<Tabs entries={Menu.speaker} entryName={MenuItem.speakerCallForPapers.name} />
+<Tabs
+	entries={Menu.speaker}
+	entryName={MenuItem.speakerCallForPapers.name}
+	classes="navigation-tabs-dashboard-subpage"
+/>
 <TextLine>Standart Values for call for papers</TextLine>
 <TextLine></TextLine>
 <br />

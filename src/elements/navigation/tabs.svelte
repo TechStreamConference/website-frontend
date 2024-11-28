@@ -83,6 +83,12 @@
 		background-color: var(--background-color);
 	}
 
+	.navigation-tabs-dashboard-subpage {
+		max-width: 100rem;
+		align-self: center;
+		margin-top: var(--2x-margin);
+	}
+
 	.navigation-tabs-entry {
 		transition: background-color var(--transition-duration);
 

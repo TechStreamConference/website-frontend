@@ -186,7 +186,11 @@
 	}
 </script>
 
-<Tabs entries={Menu.admin} entryName={MenuItem.adminEvents.name} />
+<Tabs
+	entries={Menu.admin}
+	entryName={MenuItem.adminEvents.name}
+	classes="navigation-tabs-dashboard-subpage"
+/>
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 <ManualUnsavedChangesPopup
 	bind:this={manualPopup}

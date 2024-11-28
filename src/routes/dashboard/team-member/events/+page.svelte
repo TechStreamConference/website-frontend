@@ -8,7 +8,11 @@
 	import Tabs from 'elements/navigation/tabs.svelte';
 </script>
 
-<Tabs entries={Menu.teamMember} entryName={MenuItem.teamMemberEvents.name} />
+<Tabs
+	entries={Menu.teamMember}
+	entryName={MenuItem.teamMemberEvents.name}
+	classes="navigation-tabs-dashboard-subpage"
+/>
 <TextLine>Drop Down with awailable Events</TextLine>
 <TextLine>Event Data from Team Member</TextLine>
 <br />
