@@ -45,13 +45,13 @@ export const admin: MenuItem = {
 
 export const teamMember: MenuItem = {
     name: 'Team Member',
-    url: '/dashboard/team-member/event',
+    url: '/dashboard/team-member/events',
     description: 'Klicke, um zum Team-Member-Dashboard zu gelangen',
 }
 
 export const speaker: MenuItem = {
     name: 'Speaker',
-    url: '/dashboard/speaker/event',
+    url: '/dashboard/speaker/events',
     description: 'Klicke, um zum Speaker-Dashboard zu gelangen',
 }
 

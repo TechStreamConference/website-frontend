@@ -24,7 +24,6 @@
 <UnsavedChangesPopup />
 <Header menu={Menu.headerIn} />
 <div class="dashboard-wrapper">
-	<div class="dashboard-section-wrapper"></div>
 	<div class="dashboard-content">
 		<slot />
 	</div>
@@ -39,12 +38,6 @@
 		justify-content: center;
 		margin: 0 auto;
 		min-height: 100vh;
-	}
-
-	.dashboard-section-wrapper {
-		display: flex;
-		flex-direction: row;
-		justify-content: end;
 	}
 
 	.dashboard-content {
