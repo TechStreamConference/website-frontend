@@ -15,7 +15,7 @@
 
 	import { apiUrl } from 'helper/links';
 	import { scrollToAnchor } from 'helper/scroll';
-	import { GetBackgroundClass } from './approvalHelper';
+	import { getBackgroundClass } from './approvalHelper';
 	import { SaveMessageType } from 'types/saveMessageType';
 	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
 	import { ApprovalSection, getSectionHash } from 'types/approvalSection';
@@ -39,7 +39,7 @@
 		2: 'social-media-link'
 	};
 
-	async function RequestChanges(
+	async function requestChangesAsync(
 		section: ApprovalSection,
 		id: number,
 		changes: string
@@ -52,10 +52,10 @@
 			return;
 		}
 
-		await SaveRequestedChanges(section, id, changes);
+		await saveRequestedChangesAsync(section, id, changes);
 	}
 
-	async function SaveRequestedChanges(
+	async function saveRequestedChangesAsync(
 		section: ApprovalSection,
 		id: number,
 		change: string
@@ -77,7 +77,11 @@
 		saveMessages[section][id].setSaveMessage(SaveMessageType.Save);
 	}
 
-	async function Approval(section: ApprovalSection, id: number, changes: string): Promise<void> {
+	async function approvalAsync(
+		section: ApprovalSection,
+		id: number,
+		changes: string
+	): Promise<void> {
 		const messages: string[] = validateApproval(changes);
 		specificErrors[section][id] = messages;
 		scrollToAnchor(getSectionHash(section, id));
@@ -86,10 +90,10 @@
 			return;
 		}
 
-		await SaveApproval(section, id);
+		await saveApprovalAsync(section, id);
 	}
 
-	async function SaveApproval(section: ApprovalSection, id: number) {
+	async function saveApprovalAsync(section: ApprovalSection, id: number) {
 		const route: string = apiUrl(`/api/dashboard/admin/approval/${routePartLookup[section]}/${id}`);
 		const response: Response = await fetch(route, {
 			method: 'PUT'
@@ -122,19 +126,19 @@
 				<div class="dashboard-admin-approval-grid">
 					<TextLine>Event:</TextLine>
 					<TextLine>{speaker.event.title}</TextLine>
-					<TextLine classes={GetBackgroundClass(speaker.diff, 'name')}>Name:</TextLine>
-					<TextLine classes={GetBackgroundClass(speaker.diff, 'name')}>{speaker.name}</TextLine>
-					<TextLine classes={GetBackgroundClass(speaker.diff, 'short_bio')}
+					<TextLine classes={getBackgroundClass(speaker.diff, 'name')}>Name:</TextLine>
+					<TextLine classes={getBackgroundClass(speaker.diff, 'name')}>{speaker.name}</TextLine>
+					<TextLine classes={getBackgroundClass(speaker.diff, 'short_bio')}
 						>Kurzbeschreibung:</TextLine
 					>
-					<TextLine classes={GetBackgroundClass(speaker.diff, 'short_bio')}
+					<TextLine classes={getBackgroundClass(speaker.diff, 'short_bio')}
 						>{speaker.short_bio}</TextLine
 					>
-					<TextLine classes={GetBackgroundClass(speaker.diff, 'bio')}>Beschreibung:</TextLine>
-					<Paragraph classes={GetBackgroundClass(speaker.diff, 'bio')}>{speaker.bio}</Paragraph>
-					<TextLine classes={GetBackgroundClass(speaker.diff, 'photo')}>Foto:</TextLine>
+					<TextLine classes={getBackgroundClass(speaker.diff, 'bio')}>Beschreibung:</TextLine>
+					<Paragraph classes={getBackgroundClass(speaker.diff, 'bio')}>{speaker.bio}</Paragraph>
+					<TextLine classes={getBackgroundClass(speaker.diff, 'photo')}>Foto:</TextLine>
 					<Image
-						classes={GetBackgroundClass(speaker.diff, 'photo')}
+						classes={getBackgroundClass(speaker.diff, 'photo')}
 						alt={'Speakerbild von ' + speaker.name}
 						src={apiUrl(`/api/${speaker.photo}`)}
 					/>
@@ -146,20 +150,20 @@
 					labelText="Änderungswünsche:"
 					bind:value={speaker.requested_changes}
 					on:submit={() =>
-						RequestChanges(ApprovalSection.Speaker, speaker.id, speaker.requested_changes)}
+						requestChangesAsync(ApprovalSection.Speaker, speaker.id, speaker.requested_changes)}
 					on:input={setUnsavedChanges}
 				/>
 				<div class="dashboard-admin-approval-button-array">
 					<Button
 						ariaLabel="Klicke hier, um Änderungswünsche zu stellen"
 						on:click={() =>
-							RequestChanges(ApprovalSection.Speaker, speaker.id, speaker.requested_changes)}
+							requestChangesAsync(ApprovalSection.Speaker, speaker.id, speaker.requested_changes)}
 						>Änderungswünsche</Button
 					>
 					<Button
 						ariaLabel="Klicke hier, um den Datensatz freizugeben"
 						on:click={() =>
-							Approval(ApprovalSection.Speaker, speaker.id, speaker.requested_changes)}
+							approvalAsync(ApprovalSection.Speaker, speaker.id, speaker.requested_changes)}
 						>Freigeben</Button
 					>
 				</div>
@@ -190,19 +194,19 @@
 				<div class="dashboard-admin-approval-grid">
 					<TextLine>Event:</TextLine>
 					<TextLine>{member.event.title}</TextLine>
-					<TextLine classes={GetBackgroundClass(member.diff, 'name')}>Name:</TextLine>
-					<TextLine classes={GetBackgroundClass(member.diff, 'name')}>{member.name}</TextLine>
-					<TextLine classes={GetBackgroundClass(member.diff, 'short_bio')}
+					<TextLine classes={getBackgroundClass(member.diff, 'name')}>Name:</TextLine>
+					<TextLine classes={getBackgroundClass(member.diff, 'name')}>{member.name}</TextLine>
+					<TextLine classes={getBackgroundClass(member.diff, 'short_bio')}
 						>Kurzbeschreibung:</TextLine
 					>
-					<TextLine classes={GetBackgroundClass(member.diff, 'short_bio')}
+					<TextLine classes={getBackgroundClass(member.diff, 'short_bio')}
 						>{member.short_bio}</TextLine
 					>
-					<TextLine classes={GetBackgroundClass(member.diff, 'bio')}>Beschreibung:</TextLine>
-					<Paragraph classes={GetBackgroundClass(member.diff, 'bio')}>{member.bio}</Paragraph>
-					<TextLine classes={GetBackgroundClass(member.diff, 'photo')}>Foto:</TextLine>
+					<TextLine classes={getBackgroundClass(member.diff, 'bio')}>Beschreibung:</TextLine>
+					<Paragraph classes={getBackgroundClass(member.diff, 'bio')}>{member.bio}</Paragraph>
+					<TextLine classes={getBackgroundClass(member.diff, 'photo')}>Foto:</TextLine>
 					<Image
-						classes={GetBackgroundClass(member.diff, 'photo')}
+						classes={getBackgroundClass(member.diff, 'photo')}
 						alt={'Speakerbild von ' + member.name}
 						src={apiUrl(`/api/${member.photo}`)}
 					/>
@@ -214,20 +218,20 @@
 					labelText="Änderungswünsche:"
 					bind:value={member.requested_changes}
 					on:submit={() =>
-						RequestChanges(ApprovalSection.TeamMember, member.id, member.requested_changes)}
+						requestChangesAsync(ApprovalSection.TeamMember, member.id, member.requested_changes)}
 					on:input={setUnsavedChanges}
 				/>
 				<div class="dashboard-admin-approval-button-array">
 					<Button
 						ariaLabel="Klicke hier, um Änderungswünsche zu stellen"
 						on:click={() =>
-							RequestChanges(ApprovalSection.TeamMember, member.id, member.requested_changes)}
+							requestChangesAsync(ApprovalSection.TeamMember, member.id, member.requested_changes)}
 						>Änderungswünsche</Button
 					>
 					<Button
 						ariaLabel="Klicke hier, um den Datensatz freizugeben"
 						on:click={() =>
-							Approval(ApprovalSection.TeamMember, member.id, member.requested_changes)}
+							approvalAsync(ApprovalSection.TeamMember, member.id, member.requested_changes)}
 						>Freigeben</Button
 					>
 				</div>
@@ -271,20 +275,20 @@
 					labelText="Änderungswünsche:"
 					bind:value={media.requested_changes}
 					on:submit={() =>
-						RequestChanges(ApprovalSection.SocialMedia, media.id, media.requested_changes)}
+						requestChangesAsync(ApprovalSection.SocialMedia, media.id, media.requested_changes)}
 					on:input={setUnsavedChanges}
 				/>
 				<div class="dashboard-admin-approval-button-array">
 					<Button
 						ariaLabel="Klicke hier, um Änderungswünsche zu stellen"
 						on:click={() =>
-							RequestChanges(ApprovalSection.SocialMedia, media.id, media.requested_changes)}
+							requestChangesAsync(ApprovalSection.SocialMedia, media.id, media.requested_changes)}
 						>Änderungswünsche</Button
 					>
 					<Button
 						ariaLabel="Klicke hier, um den Datensatz freizugeben"
 						on:click={() =>
-							Approval(ApprovalSection.SocialMedia, media.id, media.requested_changes)}
+							approvalAsync(ApprovalSection.SocialMedia, media.id, media.requested_changes)}
 						>Freigeben</Button
 					>
 				</div>

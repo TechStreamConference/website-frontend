@@ -1,4 +1,4 @@
-export function GetBackgroundClass(diff: string[] | null, reference: string): string {
+export function getBackgroundClass(diff: string[] | null, reference: string): string {
     if (!diff) {
         return '';
     }
