@@ -6,14 +6,14 @@
 	import type { SetAdminGlobals } from 'types/dashboardSetTypes';
 
 	import { Clone } from 'helper/clone';
+	import { isSaveType, SaveMessageType } from 'types/saveMessageType';
+	import { setUnsavedChanges } from 'stores/saved';
+	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 	import Button from 'elements/input/button.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
-	import { isSaveType, SaveMessageType } from 'types/saveMessageType';
-
-	import { setUnsavedChanges } from 'stores/saved';
-	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 	import Tabs from 'elements/navigation/tabs.svelte';
 

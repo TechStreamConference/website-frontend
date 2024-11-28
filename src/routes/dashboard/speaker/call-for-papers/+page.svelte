@@ -13,13 +13,13 @@
 	entryName={MenuItem.speakerCallForPapers.name}
 	classes="navigation-tabs-dashboard-subpage"
 />
-<TextLine>Standart Values for call for papers</TextLine>
+<TextLine>Standard Values for call for papers</TextLine>
 <TextLine></TextLine>
 <br />
 <TextLine>Needed routes:</TextLine>
 <List classes="list-padding-left">
 	<ListElement classes="list-element-dot">
-		GET /api/dashboard/event/new/awailable (checks if the current user is already speaker of the
+		GET /api/dashboard/event/new/available (checks if the current user is already speaker of the
 		current event and if the current is open for call-for-papers)
 	</ListElement>
 	<ListElement classes="list-element-dot">

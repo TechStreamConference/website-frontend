@@ -13,7 +13,7 @@
 	entryName={MenuItem.teamMemberEvents.name}
 	classes="navigation-tabs-dashboard-subpage"
 />
-<TextLine>Drop Down with awailable Events</TextLine>
+<TextLine>Drop Down with available Events</TextLine>
 <TextLine>Event Data from Team Member</TextLine>
 <br />
 <TextLine>Needed routes:</TextLine>

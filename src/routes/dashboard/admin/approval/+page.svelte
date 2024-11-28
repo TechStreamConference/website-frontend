@@ -15,6 +15,7 @@
 	import Message from 'elements/text/message.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
 	import LinkWithIcon from 'elements/input/linkWithIcon.svelte';
+	import Tabs from 'elements/navigation/tabs.svelte';
 
 	import { apiUrl } from 'helper/links';
 	import { scrollToAnchor } from 'helper/scroll';
@@ -23,7 +24,6 @@
 	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
 	import { ApprovalSection, getSectionHash } from 'types/approvalSection';
 	import { validateApproval, validateRequestedChanges } from './approvalValidation';
-	import Tabs from 'elements/navigation/tabs.svelte';
 
 	export let data: LoadAdminApproval;
 
