@@ -115,16 +115,9 @@
 	}
 
 	@media (max-width: 1280px) {
-		.person-popup-wrapper {
-			width: calc(100vw - 12rem);
-			height: calc(100vh - 20rem);
-		}
-
 		:global(.person-popup-close-button) {
-			top: calc(100vh - 10rem);
-			left: calc(100vw - 50% - 1rem);
-			margin-left: 0;
-			margin-top: var(--full-margin);
+			top: 100%;
+			right: 50%;
 		}
 
 		:global(.person-popup-short-bio-paragraph) {
@@ -138,13 +131,13 @@
 
 	@media (max-width: 900px) {
 		.person-popup-wrapper {
-			width: calc(100vw - 3rem);
-			height: calc(100vh - 16rem);
+			height: calc(100vh - 8rem);
 		}
 
 		.person-popup-content-wrapper {
 			flex-direction: column;
 			overflow: scroll;
+			height: 95%;
 		}
 
 		.person-popup-column-wrapper {
@@ -158,19 +151,12 @@
 		}
 
 		:global(.person-popup-close-button) {
-			top: calc(100vh - 8rem);
+			top: 102%;
 		}
 
 		.person-popup-line {
 			border-bottom: 1px solid var(--line-color);
 			border-right: none;
-		}
-	}
-
-	@media (max-width: 380px) {
-		:global(.person-popup-picture) {
-			max-width: 20rem;
-			align-self: center;
 		}
 	}
 </style>
