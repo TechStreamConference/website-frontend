@@ -22,9 +22,9 @@
 			event.stopPropagation();
 		}}
 	>
-		<Button classes="person-popup-close-button" ariaLabel="close popup" on:click>
-			<img class="person-popup-close-picture" src="/cross.png" alt="cross" />
-		</Button>
+		<Button fontSize="large" classes="person-popup-close-button" ariaLabel="close popup" on:click
+			>&times;</Button
+		>
 		<div class="person-popup-content-wrapper">
 			<div class="person-popup-column-wrapper person-popup-align-center person-popup-line">
 				<PersonImage classes="person-popup-picture" {data} />
@@ -106,6 +106,8 @@
 		top: 0;
 		right: 0;
 		translate: 50% -50%;
+		line-height: var(--2x-font-size);
+		padding: var(--half-padding);
 	}
 
 	.person-popup-close-picture {
