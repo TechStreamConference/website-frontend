@@ -1,24 +1,23 @@
 <script lang="ts">
+	import * as Menu from 'menu/dashboard';
+	import * as MenuItem from 'menu/menuItems';
+
+	import type { LoadDashboard } from 'types/dashboardLoadTypes';
+
 	import Tabs from 'elements/navigation/tabs.svelte';
 	import Headline from 'elements/text/headline.svelte';
-	import type { Menu } from 'types/provideTypes';
-	const tabsEntries: Menu = [
-		{
-			name: 'Event',
-			url: '/dashboard/team-member/event',
-			description: 'Klicke hier um zu den Event spezifischen Einstellungen zugelangen.'
-		},
-		{
-			name: 'Social Media',
-			url: '/dashboard/team-member/social-media',
-			description: 'Klicke hier um zu den Social Media Einstellungen zugelangen.'
-		}
-	];
+
+	export let data: LoadDashboard;
 </script>
 
+<Tabs
+	entries={Menu.SectionIn(data.roles)}
+	entryName={MenuItem.teamMember.name}
+	alignment="navigation-tabs-end"
+	background="navigation-tabs-purple"
+/>
 <div class="dashboard-team-member">
 	<Headline classes="headline-border">Team Member</Headline>
-	<Tabs entries={tabsEntries} />
 </div>
 <slot />
 

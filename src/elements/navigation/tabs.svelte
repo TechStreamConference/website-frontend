@@ -4,42 +4,28 @@
 	import TextLine from 'elements/text/textLine.svelte';
 
 	import { typeWorkaround } from 'types/workaround';
-	import { goto, onNavigate } from '$app/navigation';
-	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
-	import { get } from 'svelte/store';
+	import { goto } from '$app/navigation';
 
 	export let alignment: string = 'navigation-tabs-center';
 	export let background: string = 'navigation-tabs-default-background';
 
+	export let entryName: string;
 	export let entries: Menu;
 	export let classes: string = '';
 	export let color: string = '';
 
 	let current: number = 0;
-	let next: number = 0;
 
-	onNavigate(() => {
-		current = next;
-	});
-
-	onMount(() => {
-		const currentPath = get(page).url.pathname;
-
-		for (let i = 0; i < entries.length; ++i) {
-			if (entries[i].url === currentPath) {
+	function initial(): void {
+		for (var i = 0; i < entries.length; ++i) {
+			if (entries[i].name === entryName) {
 				current = i;
 				return;
 			}
 		}
-
-		console.error('tabs could not find the current path inside the provided data.');
-	});
-
-	function setActive(index: number, url: string): void {
-		next = index;
-		goto(url);
+		console.error(`not able to set navigation tab for entry ${entryName}`);
 	}
+	initial();
 </script>
 
 <div class="navigation-tabs {classes} {alignment} {background}">
@@ -49,7 +35,7 @@
 				? 'navigation-tabs-active navigation-tabs-default-background'
 				: background}"
 			on:click={() => {
-				setActive(index, entry.url);
+				goto(entry.url);
 			}}
 			role="presentation"
 		>
@@ -57,7 +43,7 @@
 				class="navigation-tabs-button"
 				use:typeWorkaround={'button'}
 				on:click={() => {
-					setActive(index, entry.url);
+					goto(entry.url);
 				}}
 				aria-label={entry.description}
 			>
@@ -95,6 +81,12 @@
 
 	.navigation-tabs-default-background {
 		background-color: var(--background-color);
+	}
+
+	.navigation-tabs-dashboard-subpage {
+		max-width: 100rem;
+		align-self: center;
+		margin-top: var(--2x-margin);
 	}
 
 	.navigation-tabs-entry {

@@ -1,19 +1,23 @@
 <script lang="ts">
+	import * as Menu from 'menu/dashboard';
+	import * as MenuItem from 'menu/menuItems';
+
+	import type { LoadDashboard } from 'types/dashboardLoadTypes';
+
 	import Tabs from 'elements/navigation/tabs.svelte';
 	import Headline from 'elements/text/headline.svelte';
-	import type { Menu } from 'types/provideTypes';
-	const tabsEntries: Menu = [
-		{
-			name: 'Newsletter',
-			url: '/dashboard/user/newsletter',
-			description: 'Klicke hier um die Newsletter abonieren zu können.'
-		}
-	];
+
+	export let data: LoadDashboard;
 </script>
 
+<Tabs
+	entries={Menu.SectionIn(data.roles)}
+	entryName={MenuItem.user.name}
+	alignment="navigation-tabs-end"
+	background="navigation-tabs-purple"
+/>
 <div class="dashboard-user">
 	<Headline classes="headline-border">User</Headline>
-	<Tabs entries={tabsEntries} />
 </div>
 <slot />
 

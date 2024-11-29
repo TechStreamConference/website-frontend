@@ -1,4 +1,7 @@
 <script lang="ts">
+	import * as Menu from 'menu/dashboard';
+	import * as MenuItem from 'menu/menuItems';
+
 	import type { LoadAdminApproval } from 'types/dashboardLoadTypes';
 
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -12,6 +15,7 @@
 	import Message from 'elements/text/message.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
 	import LinkWithIcon from 'elements/input/linkWithIcon.svelte';
+	import Tabs from 'elements/navigation/tabs.svelte';
 
 	import { apiUrl } from 'helper/links';
 	import { scrollToAnchor } from 'helper/scroll';
@@ -108,6 +112,11 @@
 	}
 </script>
 
+<Tabs
+	entries={Menu.admin}
+	entryName={MenuItem.adminApproval.name}
+	classes="navigation-tabs-dashboard-subpage"
+/>
 <SectionDashboard classes="dashboard-admin-approval-section">
 	<HeadlineH2 classes="dashboard-admin-approval-headline-h2">Speaker</HeadlineH2>
 	{#if data.speaker.length > 0}

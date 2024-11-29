@@ -27,3 +27,21 @@ export const headerIn: Menu = [
 export const footerIn: Menu = [
     Item.imprint,
 ];
+
+export const admin: Menu = [
+    Item.adminGlobals,
+    Item.adminEvents,
+    Item.adminApproval,
+]
+export const speaker: Menu = [
+    Item.speakerEvents,
+    Item.speakerSocialMedia,
+    Item.speakerCallForPapers,
+]
+export const teamMember: Menu = [
+    Item.teamMemberEvents,
+    Item.teamMemberSocialMedia,
+]
+export const user: Menu = [
+    Item.userNewsletter,
+]

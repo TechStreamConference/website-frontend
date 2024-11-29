@@ -1,31 +1,23 @@
 <script lang="ts">
-	import type { Menu } from 'types/provideTypes';
+	import * as Menu from 'menu/dashboard';
+	import * as MenuItem from 'menu/menuItems';
+
+	import type { LoadDashboard } from 'types/dashboardLoadTypes';
 
 	import Tabs from 'elements/navigation/tabs.svelte';
 	import Headline from 'elements/text/headline.svelte';
 
-	const tabsEntries: Menu = [
-		{
-			name: 'Globals',
-			url: '/dashboard/admin/globals',
-			description: 'Klicke hier, um zu den globalen Einstellungen im Admin-Dashboard zu gelangen.'
-		},
-		{
-			name: 'Events',
-			url: '/dashboard/admin/events',
-			description: 'Klicke hier, um zu den Event Einstellungen zu gelangen.'
-		},
-		{
-			name: 'Freigabe',
-			url: '/dashboard/admin/approval',
-			description: 'Klicke hier, um ausstehende Freigaben zu bearbeiten.'
-		}
-	];
+	export let data: LoadDashboard;
 </script>
 
+<Tabs
+	entries={Menu.SectionIn(data.roles)}
+	entryName={MenuItem.admin.name}
+	alignment="navigation-tabs-end"
+	background="navigation-tabs-purple"
+/>
 <div class="dashboard-admin">
 	<Headline classes="headline-border">Admin</Headline>
-	<Tabs entries={tabsEntries} />
 </div>
 <slot />
 
