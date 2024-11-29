@@ -6,7 +6,7 @@
 
 	export let logos: SponsorLinks;
 
-	export let classes: string= "";
+	export let classes: string = '';
 </script>
 
 <div class="sponsor-array-image-grid {classes}">
@@ -31,14 +31,15 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: space-between;
+		text-align: center;
 	}
 
 	:global(.sponsor-array-link) {
 		height: 16rem;
 	}
 
-	:global(.sponsor-array-text-line){
-			margin-top: var(--full-margin);
+	:global(.sponsor-array-text-line) {
+		margin-top: var(--full-margin);
 	}
 </style>
