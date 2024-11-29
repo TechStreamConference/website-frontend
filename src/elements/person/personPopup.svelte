@@ -9,17 +9,12 @@
 
 	import { fade } from 'svelte/transition';
 
-	export let classes:string = "";
+	export let classes: string = '';
 
 	export let data: Person;
 </script>
 
-<dialog
-	class={classes}
-	transition:fade={{ duration: 300 }}
-	role="presentation"
-	on:click
->
+<dialog class={classes} transition:fade={{ duration: 300 }} role="presentation" on:click>
 	<div
 		class="person-popup-wrapper"
 		role="presentation"
@@ -27,11 +22,16 @@
 			event.stopPropagation();
 		}}
 	>
+		<Button classes="person-popup-close-button" ariaLabel="close popup" on:click>
+			<img class="person-popup-close-picture" src="/cross.png" alt="cross" />
+		</Button>
 		<div class="person-popup-content-wrapper">
 			<div class="person-popup-column-wrapper person-popup-align-center person-popup-line">
 				<PersonImage classes="person-popup-picture" {data} />
 				<SubHeadline classes="person-popup-one-line-spacer">{data.name}</SubHeadline>
-				<Paragraph classes="person-popup-short-bio-paragraph paragraph-pre-wrap">{data.short_bio}</Paragraph>
+				<Paragraph classes="person-popup-short-bio-paragraph paragraph-pre-wrap"
+					>{data.short_bio}</Paragraph
+				>
 				<PersonLinkGrid person={data.name} links={data.social_media_links} />
 			</div>
 			<div class="person-popup-column-wrapper">
@@ -39,140 +39,138 @@
 			</div>
 		</div>
 	</div>
-	<Button classes="person-popup-close-button" ariaLabel="close popup" on:click>
-		<img class="person-popup-close-picture" src="/cross.png" alt="cross" />
-	</Button>
 </dialog>
 
 <style>
-    dialog {
-        display: flex;
-        position: fixed;
-        top: 0;
-        left: 0;
-        justify-content: center;
-        align-items: center;
-        background-color: var(--background-color-transparent);
-        width: 100%;
-        height: 100%;
-        z-index: 1000;
-    }
+	dialog {
+		display: flex;
+		position: fixed;
+		top: 0;
+		left: 0;
+		justify-content: center;
+		align-items: center;
+		background-color: var(--background-color-transparent);
+		width: 100%;
+		height: 100%;
+		z-index: 1000;
+	}
 
-    .person-popup-wrapper {
-        background-color: var(--background-color);
-        border: 1px solid var(--primary-color-light);
-        width: calc(100vw - 40%);
-        height: calc(100vh - 20%);
-    }
+	.person-popup-wrapper {
+		background-color: var(--background-color);
+		border: 1px solid var(--primary-color-light);
+		width: 90%;
+		max-width: calc(100rem - 2 * var(--4x-margin));
+		position: relative;
+		border-radius: var(--border-radius);
+	}
 
-    .person-popup-content-wrapper {
-        margin: var(--full-margin);
-        display: flex;
-        height: calc(100% - 2rem);
-    }
+	.person-popup-content-wrapper {
+		margin: var(--full-margin);
+		display: flex;
+	}
 
-    .person-popup-align-center {
-        text-align: center;
-    }
+	.person-popup-align-center {
+		text-align: center;
+	}
 
-    .person-popup-column-wrapper {
-        width: 50%;
-        height: fit-content;
-        display: flex;
-        flex-direction: column;
-        padding: var(--2x-margin);
-    }
+	.person-popup-column-wrapper {
+		width: 50%;
+		height: fit-content;
+		display: flex;
+		flex-direction: column;
+		padding: var(--2x-margin);
+	}
 
-    :global(.person-popup-one-line-spacer) {
-        margin-top: var(--full-margin);
-    }
+	:global(.person-popup-one-line-spacer) {
+		margin-top: var(--full-margin);
+	}
 
-    :global(.person-popup-short-bio-paragraph) {
-        flex-grow: 1;
-    }
+	:global(.person-popup-short-bio-paragraph) {
+		flex-grow: 1;
+	}
 
-    .person-popup-line {
-        border-right: 1px solid var(--line-color);
-    }
+	.person-popup-line {
+		border-right: 1px solid var(--line-color);
+	}
 
-    :global(.person-popup-picture) {
-        width: auto;
-        height: auto;
-				max-width: 30rem;
-        border: 1px solid var(--primary-color-light);
-        align-self: center;
-    }
+	:global(.person-popup-picture) {
+		width: auto;
+		height: auto;
+		max-width: 30rem;
+		border: 1px solid var(--primary-color-light);
+		align-self: center;
+	}
 
-    :global(.person-popup-close-button) {
-        position: fixed;
-        top: calc(100vh - 93%);
-        left: calc(100vw - 20%);
-        margin-left: var(--half-margin);
-    }
+	:global(.person-popup-close-button) {
+		position: absolute;
+		top: 0;
+		right: 0;
+		translate: 50% -50%;
+	}
 
-    .person-popup-close-picture {
-        height: 2.5rem;
-        width: 2.5rem;
-        margin: var(--quad-margin);
-    }
+	.person-popup-close-picture {
+		height: 2.5rem;
+		width: 2.5rem;
+		margin: var(--quad-margin);
+	}
 
-    @media (max-width: 1280px) {
-        .person-popup-wrapper {
-            width: calc(100vw - 12rem);
-            height: calc(100vh - 20rem);
-        }
+	@media (max-width: 1280px) {
+		.person-popup-wrapper {
+			width: calc(100vw - 12rem);
+			height: calc(100vh - 20rem);
+		}
 
-        :global(.person-popup-close-button) {
-            top: calc(100vh - 10rem);
-            left: calc(100vw - 50% - 1rem);
-            margin-left: 0;
-            margin-top: var(--full-margin);
-        }
+		:global(.person-popup-close-button) {
+			top: calc(100vh - 10rem);
+			left: calc(100vw - 50% - 1rem);
+			margin-left: 0;
+			margin-top: var(--full-margin);
+		}
 
-        :global(.person-popup-short-bio-paragraph) {
-            flex-grow: unset;
-        }
+		:global(.person-popup-short-bio-paragraph) {
+			flex-grow: unset;
+		}
 
-        :global(.person-popup-picture) {
-            max-width: 20rem;
-        }
-    }
+		:global(.person-popup-picture) {
+			max-width: 20rem;
+		}
+	}
 
-    @media (max-width: 900px) {
-        .person-popup-wrapper {
-            width: calc(100vw - 3rem);
-            height: calc(100vh - 16rem);
-        }
+	@media (max-width: 900px) {
+		.person-popup-wrapper {
+			width: calc(100vw - 3rem);
+			height: calc(100vh - 16rem);
+		}
 
-        .person-popup-content-wrapper {
-            flex-direction: column;
-            overflow: scroll;
-        }
+		.person-popup-content-wrapper {
+			flex-direction: column;
+			overflow: scroll;
+		}
 
-        .person-popup-column-wrapper {
-            width: 100%;
-            height: auto;
-        }
+		.person-popup-column-wrapper {
+			width: 100%;
+			height: auto;
+		}
 
-        :global(.person-popup-picture) {
-            max-width: 20rem;
-            align-self: center;
-        }
+		:global(.person-popup-picture) {
+			max-width: 20rem;
+			align-self: center;
+		}
 
-        :global(.person-popup-close-button) {
-            top: calc(100vh - 8rem);
-        }
+		:global(.person-popup-close-button) {
+			top: calc(100vh - 8rem);
+		}
 
-        .person-popup-line {
-            border-bottom: 1px solid var(--line-color);
-            border-right: none;
-        }
-    }
+		.person-popup-line {
+			border-bottom: 1px solid var(--line-color);
+			border-right: none;
+		}
+	}
 
-    @media (max-width: 380px) {
-        :global(.person-popup-picture) {
-            max-width: 20rem;
-            align-self: center;
-        }
-    }
+	@media (max-width: 380px) {
+		:global(.person-popup-picture) {
+			max-width: 20rem;
+			align-self: center;
+		}
+	}
 </style>
