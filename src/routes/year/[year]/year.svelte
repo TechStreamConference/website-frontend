@@ -17,7 +17,7 @@
 	import Paragraph from 'elements/text/paragraph.svelte';
 	import SponsorArray from 'elements/sponsor/sponsorArray.svelte';
 	import Schedule from 'elements/schedule/schedule.svelte';
-	import LinkWithIcon from 'elements/input/linkWithIcon.svelte';
+	import StyledLink from 'elements/input/styledLink.svelte';
 
 	import { formatDate } from 'helper/dates';
 	import { apiUrl } from 'helper/links';
@@ -135,14 +135,15 @@
 
 		<Section id="Schedule">
 			<HeadlineH2 classes="headline-h2-border">Plan</HeadlineH2>
-			<LinkWithIcon
-				href={apiUrl(`/api/events/${data.year.event.year}/ics`)}
-				title="Klicke um den Ablaufplan als ICS-Datei herunter zu laden"
-				icon="Calender"
-				newTab={false}
-			>
-				Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!
-			</LinkWithIcon>
+			<div class="center-styled-link">
+				<StyledLink
+					href={apiUrl(`/api/events/${data.year.event.year}/ics`)}
+					title="Klicke um den Ablaufplan als ICS-Datei herunter zu laden"
+					icon="Calender"
+					newTab={false}
+					text="Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!"
+				/>
+			</div>
 			<div class="year-section-inner">
 				{#each splitTalks() as days}
 					<Schedule
@@ -236,6 +237,11 @@
 		margin: var(--2x-margin);
 		width: calc(100% - 4rem);
 		height: auto;
+	}
+
+	.center-styled-link {
+		text-align: center;
+		margin-top: var(--2x-margin);
 	}
 
 	@media (max-width: 1280px) {

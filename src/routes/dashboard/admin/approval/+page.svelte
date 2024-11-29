@@ -14,7 +14,7 @@
 	import HeadlineH2 from 'elements/text/headlineH2.svelte';
 	import Message from 'elements/text/message.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
-	import LinkWithIcon from 'elements/input/linkWithIcon.svelte';
+	import StyledLink from 'elements/input/styledLink.svelte';
 	import Tabs from 'elements/navigation/tabs.svelte';
 
 	import { apiUrl } from 'helper/links';
@@ -269,12 +269,12 @@
 					{/each}
 				{/if}
 				<div class="dashboard-admin-approval-grid-big">
-					<LinkWithIcon
+					<StyledLink
 						icon={media.name}
 						href={media.url}
 						title={`${media.name} Link von ${media.account.username}`}
+						text={media.name}
 					/>
-					<TextLine classes="dashboard-admin-approval-social-media-text">{media.name}</TextLine>
 					<TextLine classes="dashboard-admin-approval-social-media-text">{media.url}</TextLine>
 				</div>
 				<TextArea
@@ -346,10 +346,9 @@
 	}
 
 	.dashboard-admin-approval-grid-big {
+		display: flex;
+		gap: var(--full-gap);
 		justify-self: center;
-		display: grid;
-		grid-template-columns: 10rem 10rem 1fr;
-		gap: var(--quad-gap);
 		margin: var(--2x-margin) 0;
 	}
 
