@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { LoadYear } from 'types/loadTypes';
 
-	import LinkWithIcon from './linkWithIcon.svelte';
+	import StyledLink from './styledLink.svelte';
 
 	export let classes: string = '';
 
@@ -9,27 +9,24 @@
 </script>
 
 <div class="year-event-links-wrapper {classes}">
-	<LinkWithIcon
+	<StyledLink
 		href={data.year.event.discord_url}
 		title="Klicke hier, um auf den Discord-Server der Tech Stream Conference zu gelangen"
 		icon="Discord"
-	>
-		Sei dabei
-	</LinkWithIcon>
-	<LinkWithIcon
+		text="Sei dabei"
+	/>
+	<StyledLink
 		href={data.year.event.twitch_url}
 		title="Klicke hier, um auf die Twitch-Seite der Tech Stream Conference zu gelangen"
 		icon="Twitch"
-	>
-		Schau zu
-	</LinkWithIcon>
-	<LinkWithIcon
+		text="Schau zu"
+	/>
+	<StyledLink
 		href={data.year.event.presskit_url}
 		title="Klicke hier, um das Presskit der Tech Stream Conference herunterzuladen"
 		icon="Download"
-	>
-		Presskit
-	</LinkWithIcon>
+		text="Presskit"
+	/>
 </div>
 
 <style>
