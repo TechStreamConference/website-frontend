@@ -199,7 +199,7 @@
 />
 <SectionDashboard classes="dashboard-admin-event-section">
 	<Button
-		classes="button-text dashboard-admin-event-new-event-button"
+		classes="dashboard-admin-event-new-event-button"
 		ariaLabel="Klicke hier, um ein neues Event anzulegen."
 		on:click={newEvent}
 	>
@@ -387,7 +387,7 @@
 				{/if}
 
 				<Button
-					classes="button-text dashboard-admin-event-submit-button"
+					classes="dashboard-admin-event-submit-button"
 					type={'submit'}
 					ariaLabel="Klicke zum Speichern"
 				>

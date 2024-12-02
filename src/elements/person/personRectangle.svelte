@@ -26,7 +26,7 @@
 	<div class="person-rectangle-bottom-wrapper">
 		<LinkArray on:click={onLinkClicked} person={data.name} links={data.social_media_links} />
 	</div>
-	<Button classes="person-rectangle-button button-text" on:click ariaLabel="Mehr Informationen zu {data.name}">
+	<Button classes="person-rectangle-button" on:click ariaLabel="Mehr Informationen zu {data.name}">
 		Info
 	</Button>
 </div>

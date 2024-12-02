@@ -192,7 +192,7 @@
 					on:input={startPasswordTimer}
 				/>
 				<Button
-					classes="button-text register-submit-button"
+					classes="register-submit-button"
 					type={'submit'}
 					ariaLabel="Klicke zum Registrieren"
 				>
