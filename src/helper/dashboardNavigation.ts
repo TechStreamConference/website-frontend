@@ -1,21 +1,21 @@
 import { redirect } from "@sveltejs/kit";
 import type { DashboardRoles } from "types/dashboardProvideTypes";
-import { redirectIfUnauthorizedOrReteturnRolesAsync } from "./loggedIn";
+import { redirectIfUnauthorizedOrReturnRolesAsync } from "./loggedIn";
+import * as MenuItems from "menu/menuItems";
 
 export async function defaultPermissionCheck(fetch: Function): Promise<DashboardRoles> {
-    const roles: DashboardRoles = await redirectIfUnauthorizedOrReteturnRolesAsync(fetch);
-
+    const roles: DashboardRoles = await redirectIfUnauthorizedOrReturnRolesAsync(fetch);
     return roles;
 }
 
 export function defaultNavigation(roles: DashboardRoles): void {
     if (roles.is_admin) {
-        throw redirect(302, '/dashboard/admin/globals');
+        throw redirect(302, MenuItems.admin.url);
     } else if (roles.is_team_member) {
-        throw redirect(302, '/dashboard/team-member/event');
+        throw redirect(302, MenuItems.teamMember.url);
     } else if (roles.is_speaker) {
-        throw redirect(302, '/dashboard/speaker/event');
+        throw redirect(302, MenuItems.speaker.url);
     } else {
-        throw redirect(302, '/dashboard/user/newsletter');
+        throw redirect(302, MenuItems.user.url);
     }
 }

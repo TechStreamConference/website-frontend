@@ -10,7 +10,7 @@ export async function fetchLoginStatusAsync(fetch: Function): Promise<boolean> {
     return response.ok;
 }
 
-export async function redirectIfUnauthorizedOrReteturnRolesAsync(fetch: Function): Promise<DashboardRoles> {
+export async function redirectIfUnauthorizedOrReturnRolesAsync(fetch: Function): Promise<DashboardRoles> {
     const response: Response = await fetch(apiUrl('/api/account/roles'));
     if (!response.ok) {
         throw redirect(302, '/login?showLoginMessage=true');
