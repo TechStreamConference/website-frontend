@@ -37,30 +37,6 @@ export const imprint: MenuItem = {
     description: 'Klicke, um zum Impressum zu gelangen'
 }
 
-export const admin: MenuItem = {
-    name: 'Admin',
-    url: '/dashboard/admin/globals',
-    description: 'Klicke, um zum Admin-Dashboard zu gelangen',
-}
-
-export const teamMember: MenuItem = {
-    name: 'Team Member',
-    url: '/dashboard/team-member/events',
-    description: 'Klicke, um zum Team-Member-Dashboard zu gelangen',
-}
-
-export const speaker: MenuItem = {
-    name: 'Speaker',
-    url: '/dashboard/speaker/events',
-    description: 'Klicke, um zum Speaker-Dashboard zu gelangen',
-}
-
-export const user: MenuItem = {
-    name: 'User',
-    url: '/dashboard/user/newsletter',
-    description: 'Klicke, um zum User-Dashboard zu gelangen',
-}
-
 export const adminGlobals: MenuItem = {
     name: 'Globals',
     url: '/dashboard/admin/globals',
@@ -109,3 +85,8 @@ export const userNewsletter: MenuItem = {
     url: '/dashboard/user/newsletter',
     description: 'Klicke hier um die Newsletter abonnieren zu können.'
 }
+
+export const admin: MenuItem = adminGlobals;
+export const teamMember: MenuItem = teamMemberEvents;
+export const speaker: MenuItem = speakerEvents;
+export const user: MenuItem = userNewsletter;
