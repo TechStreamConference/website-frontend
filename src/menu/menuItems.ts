@@ -63,11 +63,6 @@ export const speakerSocialMedia: MenuItem = {
     url: '/dashboard/speaker/socials',
     description: 'Klicke hier um zu den Social Media Einstellungen zu gelangen.'
 };
-export const speakerCallForPapers: MenuItem = {
-    name: 'Bewerbung',
-    url: '/dashboard/speaker/call-for-papers',
-    description: 'Klicke hier um dich als Speaker für das aktuelle Event zu bewerben.'
-};
 
 export const teamMemberEvents: MenuItem = {
     name: 'Events',
@@ -85,6 +80,11 @@ export const userNewsletter: MenuItem = {
     url: '/dashboard/user/newsletter',
     description: 'Klicke hier um die Newsletter abonnieren zu können.'
 }
+export const userCallForPapers: MenuItem = {
+    name: 'Bewerbung',
+    url: '/dashboard/user/call-for-papers',
+    description: 'Klicke hier um dich als Speaker für das aktuelle Event zu bewerben.'
+};
 
 export const admin: MenuItem = adminGlobals;
 export const teamMember: MenuItem = teamMemberEvents;
