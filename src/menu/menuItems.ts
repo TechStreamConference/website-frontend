@@ -86,7 +86,23 @@ export const userCallForPapers: MenuItem = {
     description: 'Klicke hier um dich als Speaker für das aktuelle Event zu bewerben.'
 };
 
-export const admin: MenuItem = adminGlobals;
-export const teamMember: MenuItem = teamMemberEvents;
-export const speaker: MenuItem = speakerEvents;
-export const user: MenuItem = userProfile;
+export const admin: MenuItem = {
+    name: "Admin",
+    url: adminGlobals.url,
+    description: "Klicke hier, um zum Admin Dashboard zu gelangen"
+}
+export const teamMember: MenuItem = {
+    name: "Team Member",
+    url: teamMemberEvents.url,
+    description: "Klicke hier, um zum Team Member Dashboard zu gelangen",
+}
+export const speaker: MenuItem = {
+    name: "Speaker",
+    url: speakerEvents.url,
+    description: "Klicke hier, um zum Speaker Dashboard zu gelangen",
+}
+export const user: MenuItem = {
+    name: "User",
+    url: userProfile.url,
+    description: "Klicke hier, um zum user Dashboard zu gelangen",
+}
