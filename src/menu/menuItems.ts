@@ -75,10 +75,10 @@ export const teamMemberSocialMedia: MenuItem = {
     description: 'Klicke hier um zu den Social Media Einstellungen zu gelangen.'
 };
 
-export const userNewsletter: MenuItem = {
-    name: 'Newsletter',
-    url: '/dashboard/user/newsletter',
-    description: 'Klicke hier um die Newsletter abonnieren zu können.'
+export const userProfile: MenuItem = {
+    name: 'Profil',
+    url: '/dashboard/user/profile',
+    description: 'Klicke hier um das Profil zu bearbeiten.'
 }
 export const userCallForPapers: MenuItem = {
     name: 'Bewerbung',
@@ -89,4 +89,4 @@ export const userCallForPapers: MenuItem = {
 export const admin: MenuItem = adminGlobals;
 export const teamMember: MenuItem = teamMemberEvents;
 export const speaker: MenuItem = speakerEvents;
-export const user: MenuItem = userNewsletter;
+export const user: MenuItem = userProfile;

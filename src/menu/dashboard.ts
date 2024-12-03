@@ -42,6 +42,6 @@ export const teamMember: Menu = [
     Item.teamMemberSocialMedia,
 ]
 export const user: Menu = [
-    Item.userNewsletter,
+    Item.userProfile,
     Item.userCallForPapers,
 ]
