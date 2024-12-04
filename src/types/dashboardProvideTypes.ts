@@ -26,6 +26,7 @@ export const dashboardSpeakerTeamMemberScheme = z.object({
     bio: z.string(),
     photo: z.string(),
     visible_from: z.string().nullable(),
+    is_approved: z.boolean(),
     requested_changes: z.string().nullable(),
 });
 export type DashboardSpeakerTeamMemberScheme = z.infer<typeof dashboardSpeakerTeamMemberScheme>;
