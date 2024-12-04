@@ -9,6 +9,30 @@ export const dashboardRolesScheme = z.object({
 })
 export type DashboardRoles = z.infer<typeof dashboardRolesScheme>;
 
+export const dashboardEventIDScheme = z.object({
+    event_id: z.number(),
+    title: z.string(),
+})
+export type DashboardEventID = z.infer<typeof dashboardEventIDScheme>;
+
+export const dashboardAllEventIDScheme = z.array(dashboardEventIDScheme);
+export type DashboardAllEventID = z.infer<typeof dashboardAllEventIDScheme>;
+
+export const dashboardSpeakerTeamMemberScheme = z.object({
+    id: z.number(),
+    user_id: z.number(),
+    name: z.string(),
+    short_bio: z.string(),
+    bio: z.string(),
+    photo: z.string(),
+    visible_from: z.string().nullable(),
+    requested_changes: z.string().nullable(),
+});
+export type DashboardSpeakerTeamMemberScheme = z.infer<typeof dashboardSpeakerTeamMemberScheme>;
+
+export const dashboardAllSpeakerTeamMemberScheme = z.array(dashboardSpeakerTeamMemberScheme);
+export type DashboardAllSpeakerTeamMember = z.infer<typeof dashboardAllSpeakerTeamMemberScheme>;
+
 export const dashboardEventScheme = z.object({
     id: z.number(),
     title: z.string(),
