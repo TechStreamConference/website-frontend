@@ -1,5 +1,14 @@
 import type { Globals } from "./provideTypes";
-import type { DashboardRoles, DashboardAllEvents, DashboardAllEventSpeaker, DashboardAllApprovalSpeakerTeamMember, DashboardAllApprovalSocialMediaLink } from "./dashboardProvideTypes";
+import type {
+    DashboardRoles,
+    DashboardAllEvents,
+    DashboardAllApprovalSpeakerTeamMember,
+    DashboardAllApprovalSocialMediaLink,
+    DashboardSpeakerTeamMemberScheme,
+    DashboardAllEventID,
+    DashboardEventID,
+    DashboardAllEventSpeaker,
+} from "./dashboardProvideTypes";
 
 export type LoadDashboard = { roles: DashboardRoles, globals: Globals }
 
@@ -10,3 +19,9 @@ export type LoadAdminApproval = {
     teamMember: DashboardAllApprovalSpeakerTeamMember,
     socialMedia: DashboardAllApprovalSocialMediaLink
 };
+
+export type LoadSpeakerTeamMemberEvent = {
+    allEvents: DashboardAllEventID,
+    current: DashboardEventID,
+    event: DashboardSpeakerTeamMemberScheme,
+}
