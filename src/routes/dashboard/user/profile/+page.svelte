@@ -10,7 +10,7 @@
 
 <Tabs
 	entries={Menu.user}
-	entryName={MenuItem.userNewsletter.name}
+	entryName={MenuItem.userProfile.name}
 	classes="navigation-tabs-dashboard-subpage"
 />
 <TextLine>add or remove users email to newsletter</TextLine>
