@@ -26,9 +26,9 @@
 </script>
 
 {#if type === SaveMessageType.Save}
-	<Message classes="message-success-color" message="Gespeichert" />
+	<Message color="success" message="Gespeichert" />
 {:else if type === SaveMessageType.Approved}
-	<Message classes="message-success-color" message="Freigegeben" />
+	<Message color="success" message="Freigegeben" />
 {:else if type === SaveMessageType.Error}
 	<Message message="Fehler beim Speichern." />
 {/if}
