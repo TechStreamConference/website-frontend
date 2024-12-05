@@ -29,7 +29,7 @@ export const dashboardSpeakerTeamMemberScheme = z.object({
     is_approved: z.boolean(),
     requested_changes: z.string().nullable(),
 });
-export type DashboardSpeakerTeamMemberScheme = z.infer<typeof dashboardSpeakerTeamMemberScheme>;
+export type DashboardSpeakerTeamMember = z.infer<typeof dashboardSpeakerTeamMemberScheme>;
 
 export const dashboardAllSpeakerTeamMemberScheme = z.array(dashboardSpeakerTeamMemberScheme);
 export type DashboardAllSpeakerTeamMember = z.infer<typeof dashboardAllSpeakerTeamMemberScheme>;

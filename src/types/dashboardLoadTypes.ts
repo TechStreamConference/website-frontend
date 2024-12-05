@@ -4,7 +4,7 @@ import type {
     DashboardAllEvents,
     DashboardAllApprovalSpeakerTeamMember,
     DashboardAllApprovalSocialMediaLink,
-    DashboardSpeakerTeamMemberScheme,
+    DashboardSpeakerTeamMember,
     DashboardAllEventID,
     DashboardEventID,
     DashboardAllEventSpeaker,
@@ -23,5 +23,5 @@ export type LoadAdminApproval = {
 export type LoadSpeakerTeamMemberEvent = {
     allEvents: DashboardAllEventID,
     current: DashboardEventID,
-    event: DashboardSpeakerTeamMemberScheme,
+    event: DashboardSpeakerTeamMember,
 }
