@@ -15,14 +15,63 @@
 
 	import { apiUrl } from 'helper/links';
 	import { setUnsavedChanges } from 'stores/saved';
+	import { onDestroy } from 'svelte';
 
 	export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
 	let selected: string = data.current.title;
 	let displayed: string = data.current.title;
 
+	let imageFile: File | undefined = undefined;
+	let imagePreviewURL: string | undefined = undefined;
+
 	function save(): void {
 		console.log('here needs to be a save function implemented');
 	}
+
+	function ChangeImage(event: Event): void {
+		const previewCleanup: Function = () => {
+			if (imagePreviewURL) {
+				URL.revokeObjectURL(imagePreviewURL);
+				imagePreviewURL = undefined;
+			}
+		};
+		const cleanup: Function = () => {
+			previewCleanup();
+			imageFile = undefined;
+		};
+
+		if (!event.target) {
+			cleanup();
+			return;
+		}
+		const input = event.target as HTMLInputElement;
+
+		if (!input.files || !input.files[0]) {
+			cleanup();
+			return;
+		}
+
+		imageFile = input.files[0];
+		previewCleanup();
+		if (imageFile) {
+			imagePreviewURL = URL.createObjectURL(imageFile);
+		}
+	}
+
+	function ClearImage(): void {
+		imageFile = undefined;
+		if (imagePreviewURL) {
+			URL.revokeObjectURL(imagePreviewURL);
+			imagePreviewURL = undefined;
+		}
+	}
+
+	onDestroy(() => {
+		if (imagePreviewURL) {
+			URL.revokeObjectURL(imagePreviewURL);
+			imagePreviewURL = undefined;
+		}
+	});
 </script>
 
 <Tabs
@@ -51,11 +100,31 @@
 			/>
 		{/if}
 	</div>
-	<form class="dashboard-speaker-event-form" on:submit={save}>
-		<Image
-			alt="Dein aktuelles Profilbild"
-			src={apiUrl(`/api/${data.event.photo}`)}
-			classes="dashboard-speaker-events-image"
+	<form class="dashboard-speaker-event-form" on:submit|preventDefault={save}>
+		{#if imagePreviewURL}
+			<Image
+				alt="Dein neues Speaker-Bild für das Event {data.current.title}"
+				src={imagePreviewURL}
+				classes="dashboard-speaker-events-image"
+			/>
+		{:else}
+			<Image
+				alt="Dein aktuelles Speaker-Bild für das Event {data.current.title}"
+				src={apiUrl(`/api/${data.event.photo}`)}
+				classes="dashboard-speaker-events-image"
+			/>
+		{/if}
+		<Input
+			id="dashboard-speaker-event-image-input"
+			labelText="Bild:"
+			placeholderText="Bild"
+			ariaLabel="Lade hier dein Bild für das Event {data.current.title} hoch"
+			type="file"
+			on:input={(event) => {
+				setUnsavedChanges();
+				ChangeImage(event);
+			}}
+			value={imageFile}
 		/>
 		<Input
 			id="dashboard-speaker-event-name-input"
@@ -107,8 +176,14 @@
 		margin: var(--full-margin) 0;
 	}
 
+	.dashboard-speaker-event-image-input-wrapper {
+		display: flex;
+		flex-direction: row;
+		gap: var(--full-gap);
+	}
+
 	:global(.dashboard-speaker-events-image) {
-		max-width: 30rem;
+		max-height: 30rem;
 		align-self: center;
 	}
 
