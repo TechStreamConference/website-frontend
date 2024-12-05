@@ -12,12 +12,19 @@
 	export let placeholderText: string = '';
 
 	export let value: string | number | File = '';
+
+	let input: HTMLInputElement;
+
+	export function clear(): void {
+		input.value = '';
+	}
 </script>
 
 <div class={classes}>
 	<Label for_={id}>{labelText}</Label>
 	{#if type === 'file'}
 		<input
+			bind:this={input}
 			class="normal-font"
 			{id}
 			type="file"
@@ -31,6 +38,7 @@
 		/>
 	{:else}
 		<input
+			bind:this={input}
 			class="normal-font"
 			{id}
 			use:typeWorkaround={type}
