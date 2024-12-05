@@ -176,12 +176,6 @@
 		margin: var(--full-margin) 0;
 	}
 
-	.dashboard-speaker-event-image-input-wrapper {
-		display: flex;
-		flex-direction: row;
-		gap: var(--full-gap);
-	}
-
 	:global(.dashboard-speaker-events-image) {
 		max-height: 30rem;
 		align-self: center;
