@@ -12,23 +12,62 @@
 	import Input from 'elements/input/input.svelte';
 	import TextArea from 'elements/input/textArea.svelte';
 	import Button from 'elements/input/button.svelte';
+	import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
 
 	import { apiUrl } from 'helper/links';
-	import { setUnsavedChanges } from 'stores/saved';
+	import { setUnsavedChanges, unsavedChanges } from 'stores/saved';
 	import { onDestroy } from 'svelte';
+	import { loadSpecificEvent } from './loads';
 
 	export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
 	let selected: string = data.current.title;
 	let displayed: string = data.current.title;
 
+	let manualPopup: ManualUnsavedChangesPopup;
+	let imageInput: Input;
+
 	let imageFile: File | undefined = undefined;
 	let imagePreviewURL: string | undefined = undefined;
+
+	$: {
+		if (selected) {
+			if (selected !== displayed) {
+				updateDisplayed();
+			}
+		}
+	}
+
+	function navigate(): void {
+		updateDisplayed();
+	}
+	function stay(): void {
+		selected = displayed;
+	}
+
+	async function updateDisplayed(): Promise<void> {
+		if (unsavedChanges()) {
+			manualPopup.show();
+			return;
+		}
+
+		for (var entry of data.allEvents) {
+			if (entry.title === selected) {
+				data.current = entry;
+				break;
+			}
+		}
+
+		displayed = data.current.title;
+
+		data.event = await loadSpecificEvent(fetch, data.current.event_id);
+		resetImage();
+	}
 
 	function save(): void {
 		console.log('here needs to be a save function implemented');
 	}
 
-	function ChangeImage(event: Event): void {
+	function changeImage(event: Event): void {
 		const previewCleanup: Function = () => {
 			if (imagePreviewURL) {
 				URL.revokeObjectURL(imagePreviewURL);
@@ -58,12 +97,13 @@
 		}
 	}
 
-	function ClearImage(): void {
+	function resetImage(): void {
 		imageFile = undefined;
 		if (imagePreviewURL) {
 			URL.revokeObjectURL(imagePreviewURL);
 			imagePreviewURL = undefined;
 		}
+		imageInput.clear();
 	}
 
 	onDestroy(() => {
@@ -79,7 +119,11 @@
 	entryName={MenuItem.speakerEvents.name}
 	classes="navigation-tabs-dashboard-subpage"
 />
-
+<ManualUnsavedChangesPopup
+	bind:this={manualPopup}
+	navigateCallback={navigate}
+	stayCallback={stay}
+/>
 <SectionDashboard classes="dashboard-speaker-event-section">
 	<DropDown
 		id="dashboard-speaker-event-drop-down"
@@ -115,6 +159,7 @@
 			/>
 		{/if}
 		<Input
+			bind:this={imageInput}
 			id="dashboard-speaker-event-image-input"
 			labelText="Bild:"
 			placeholderText="Bild"
@@ -122,7 +167,7 @@
 			type="file"
 			on:input={(event) => {
 				setUnsavedChanges();
-				ChangeImage(event);
+				changeImage(event);
 			}}
 			value={imageFile}
 		/>
