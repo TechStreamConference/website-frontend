@@ -13,6 +13,7 @@
 	import TextArea from 'elements/input/textArea.svelte';
 	import Button from 'elements/input/button.svelte';
 	import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
+	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 
 	import { apiUrl } from 'helper/links';
 	import { setUnsavedChanges, unsavedChanges } from 'stores/saved';
@@ -32,19 +33,19 @@
 	$: {
 		if (selected) {
 			if (selected !== displayed) {
-				updateDisplayed();
+				updateDisplayedAsync();
 			}
 		}
 	}
 
 	function navigate(): void {
-		updateDisplayed();
+		updateDisplayedAsync();
 	}
 	function stay(): void {
 		selected = displayed;
 	}
 
-	async function updateDisplayed(): Promise<void> {
+	async function updateDisplayedAsync(): Promise<void> {
 		if (unsavedChanges()) {
 			manualPopup.show();
 			return;
@@ -63,8 +64,9 @@
 		resetImage();
 	}
 
-	function save(): void {
+	async function trySaveAsync(): Promise<boolean> {
 		console.log('here needs to be a save function implemented');
+		return false;
 	}
 
 	function changeImage(event: Event): void {
@@ -119,6 +121,7 @@
 	entryName={MenuItem.speakerEvents.name}
 	classes="navigation-tabs-dashboard-subpage"
 />
+<UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 <ManualUnsavedChangesPopup
 	bind:this={manualPopup}
 	navigateCallback={navigate}
@@ -144,7 +147,7 @@
 			/>
 		{/if}
 	</div>
-	<form class="dashboard-speaker-event-form" on:submit|preventDefault={save}>
+	<form class="dashboard-speaker-event-form" on:submit|preventDefault={trySaveAsync}>
 		{#if imagePreviewURL}
 			<Image
 				alt="Dein neues Speaker-Bild für das Event {data.current.title}"
