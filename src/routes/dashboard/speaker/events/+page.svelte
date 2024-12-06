@@ -3,6 +3,7 @@
 	import * as MenuItem from 'menu/menuItems';
 
 	import type { LoadDashboard, LoadSpeakerTeamMemberEvent } from 'types/dashboardLoadTypes';
+	import type { SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
 
 	import Tabs from 'elements/navigation/tabs.svelte';
 	import Image from 'elements/image/image.svelte';
@@ -14,11 +15,13 @@
 	import Button from 'elements/input/button.svelte';
 	import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
+	import SaveMessage from 'elements/text/saveMessage.svelte';
 
 	import { apiUrl } from 'helper/links';
-	import { setUnsavedChanges, unsavedChanges } from 'stores/saved';
+	import { resetUnsavedChanges, setUnsavedChanges, unsavedChanges } from 'stores/saved';
 	import { onDestroy } from 'svelte';
 	import { loadSpecificEvent } from './loads';
+	import { SaveMessageType } from 'types/saveMessageType';
 
 	export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
 	let selected: string = data.current.title;
@@ -26,6 +29,7 @@
 
 	let manualPopup: ManualUnsavedChangesPopup;
 	let imageInput: Input;
+	let saveMessage: SaveMessage;
 
 	let imageFile: File | undefined = undefined;
 	let imagePreviewURL: string | undefined = undefined;
@@ -65,7 +69,38 @@
 	}
 
 	async function trySaveAsync(): Promise<boolean> {
-		console.log('here needs to be a save function implemented');
+		const toSave: SetSpeakerTeamMemberEvent = {
+			name: data.event.name,
+			short_bio: data.event.short_bio,
+			bio: data.event.bio
+		};
+
+		if (import.meta.env.DEV) {
+			console.log(toSave);
+		}
+
+		const response: Response = await fetch(
+			apiUrl(`/api/dashboard/speaker/event/${data.current.event_id}`),
+			{
+				method: 'POST',
+				body: JSON.stringify(toSave)
+			}
+		);
+		console.log(response);
+		/*
+
+		if (response.ok) {
+			resetUnsavedChanges();
+			saveMessage.setSaveMessage(SaveMessageType.Save);
+			return true;
+		}
+
+		if (import.meta.env.DEV) {
+			console.error(await response.json());
+		}
+
+		saveMessage.setSaveMessage(SaveMessageType.Error);
+		*/
 		return false;
 	}
 
@@ -146,6 +181,7 @@
 				classes="message-pre-wrap"
 			/>
 		{/if}
+		<SaveMessage bind:this={saveMessage} />
 	</div>
 	<form class="dashboard-speaker-event-form" on:submit|preventDefault={trySaveAsync}>
 		{#if imagePreviewURL}
