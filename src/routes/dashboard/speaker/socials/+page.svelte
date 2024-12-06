@@ -2,10 +2,24 @@
 	import * as Menu from 'menu/dashboard';
 	import * as MenuItem from 'menu/menuItems';
 
-	import List from 'elements/list/list.svelte';
-	import ListElement from 'elements/list/listElement.svelte';
-	import TextLine from 'elements/text/textLine.svelte';
+	import type { LoadDashboard, LoadUserSocials } from 'types/dashboardLoadTypes';
+
 	import Tabs from 'elements/navigation/tabs.svelte';
+	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
+	import Message from 'elements/text/message.svelte';
+	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
+	import EditSocialMedia from 'elements/input/editSocialMedia.svelte';
+
+	export let data: LoadDashboard & LoadUserSocials;
+
+	async function trySaveAsync(): Promise<boolean> {
+		console.log('try save socials');
+		return false;
+	}
+
+	function deleteLink(index: number): void {}
+
+	function addLink(): void {}
 </script>
 
 <Tabs
@@ -13,10 +27,15 @@
 	entryName={MenuItem.speakerSocialMedia.name}
 	classes="navigation-tabs-dashboard-subpage"
 />
-<TextLine>Social Media Data from Speaker</TextLine>
-<br />
-<TextLine>Needed routes:</TextLine>
-<List classes="list-padding-left">
-	<ListElement classes="list-element-dot">GET /api/dashboard/speaker/socials</ListElement>
-	<ListElement classes="list-element-dot">PUT /api/dashboard/speaker/socials</ListElement>
-</List>
+<UnsavedChangesCallbackWrapper callback={trySaveAsync} />
+
+<SectionDashboard classes="standard-dashboard-section">
+	{#if data.roles.is_speaker && data.roles.is_team_member}
+		<Message
+			classes="message-pre-wrap"
+			message={'Hinweis:\nDie Social Media Links sind Account gebunden.\nDaher sind dies die gleichen Links wie im Team Member Tab.'}
+		/>
+	{/if}
+
+	<EditSocialMedia links={data.socials} deleteCallback={deleteLink} />
+</SectionDashboard>
