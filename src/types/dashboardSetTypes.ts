@@ -26,3 +26,9 @@ export type SetAdminEventSpeaker = {
     visible_from: string | null,
 }
 export type SetAllAdminEventSpeaker = SetAdminEventSpeaker[];
+
+export type SetSpeakerTeamMemberEvent = {
+    name: string,
+    short_bio: string,
+    bio: string,
+}
