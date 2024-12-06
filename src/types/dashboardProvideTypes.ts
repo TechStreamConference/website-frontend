@@ -101,3 +101,17 @@ export type DashboardApprovalSocialMediaLink = z.infer<typeof dashboardApprovalS
 
 export const dashboardAllApprovalSocialMediaLinkScheme = z.array(dashboardApprovalSocialMediaLinkScheme);
 export type DashboardAllApprovalSocialMediaLink = z.infer<typeof dashboardAllApprovalSocialMediaLinkScheme>;
+
+export const dashboardSocialMediaLinkScheme = z.object({
+    id: z.number(),
+    user_id: z.number(),
+    social_media_type_id: z.number(),
+    name: z.string(),
+    url: z.string(),
+    approved: z.boolean(),
+    requested_changes: z.string().nullable(),
+});
+export type DashboardSocialMediaLink = z.infer<typeof dashboardSocialMediaLinkScheme>;
+
+export const dashboardAllSocialMediaLinkScheme = z.array(dashboardSocialMediaLinkScheme);
+export type DashboardAllSocialMediaLink = z.infer<typeof dashboardAllSocialMediaLinkScheme>;
