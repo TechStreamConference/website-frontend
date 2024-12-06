@@ -8,6 +8,7 @@ import type {
     DashboardAllEventID,
     DashboardEventID,
     DashboardAllEventSpeaker,
+    DashboardAllSocialMediaLink,
 } from "./dashboardProvideTypes";
 
 export type LoadDashboard = { roles: DashboardRoles, globals: Globals }
@@ -24,4 +25,8 @@ export type LoadSpeakerTeamMemberEvent = {
     allEvents: DashboardAllEventID,
     current: DashboardEventID,
     event: DashboardSpeakerTeamMember,
+}
+
+export type LoadUserSocials = {
+    socials: DashboardAllSocialMediaLink,
 }
