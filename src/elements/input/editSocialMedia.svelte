@@ -1,17 +1,23 @@
 <script lang="ts">
-	import type { SocialMediaLinks } from 'types/provideTypes';
+	import type { DashboardAllSocialMediaLink } from 'types/dashboardProvideTypes';
+
 	import DropDown from './dropDown.svelte';
-	import { socialMediaIconNames } from 'lookup/iconLookup';
 	import Input from './input.svelte';
 	import StyledLink from './styledLink.svelte';
 	import Button from './button.svelte';
+	import Message from 'elements/text/message.svelte';
 
-	export let links: SocialMediaLinks;
+	import { socialMediaIconNames } from 'lookup/iconLookup';
+
+	export let links: DashboardAllSocialMediaLink;
 	export let deleteCallback: (id: number) => void;
 </script>
 
 <div class="edit-social-media-links-wrapper">
 	{#each links as link, index}
+		{#if link.requested_changes}
+			<Message classes="edit-social-media-link-entry-message" message={link.requested_changes} />
+		{/if}
 		<StyledLink
 			href={link.url}
 			icon={link.name}
@@ -50,6 +56,10 @@
 		display: grid;
 		grid-template-columns: 5rem 1fr 1fr 11rem;
 		gap: var(--2x-gap);
+	}
+
+	:global(.edit-social-media-link-entry-message) {
+		grid-column: 1 / -1;
 	}
 
 	:global(.edit-social-media-links-link) {
