@@ -31,9 +31,6 @@ export const dashboardSpeakerTeamMemberScheme = z.object({
 });
 export type DashboardSpeakerTeamMember = z.infer<typeof dashboardSpeakerTeamMemberScheme>;
 
-export const dashboardAllSpeakerTeamMemberScheme = z.array(dashboardSpeakerTeamMemberScheme);
-export type DashboardAllSpeakerTeamMember = z.infer<typeof dashboardAllSpeakerTeamMemberScheme>;
-
 export const dashboardEventScheme = z.object({
     id: z.number(),
     title: z.string(),
