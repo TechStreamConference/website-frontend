@@ -144,7 +144,9 @@
 						>{speaker.short_bio}</TextLine
 					>
 					<TextLine classes={getBackgroundClass(speaker.diff, 'bio')}>Beschreibung:</TextLine>
-					<Paragraph classes={getBackgroundClass(speaker.diff, 'bio')}>{speaker.bio}</Paragraph>
+					<Paragraph classes="{getBackgroundClass(speaker.diff, 'bio')} paragraph-pre-wrap"
+						>{speaker.bio}</Paragraph
+					>
 					<TextLine classes={getBackgroundClass(speaker.diff, 'photo')}>Foto:</TextLine>
 					<Image
 						classes={getBackgroundClass(speaker.diff, 'photo')}
