@@ -75,6 +75,12 @@
 			bio: data.event.bio
 		};
 
+		const formData = new FormData();
+		formData.append('json', JSON.stringify(toSave));
+		if (imageFile) {
+			formData.append('photo', imageFile);
+		}
+
 		if (import.meta.env.DEV) {
 			console.log(toSave);
 		}
@@ -83,7 +89,7 @@
 			apiUrl(`/api/dashboard/speaker/event/${data.current.event_id}`),
 			{
 				method: 'POST',
-				body: JSON.stringify(toSave)
+				body: formData
 			}
 		);
 
