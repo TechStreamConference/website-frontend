@@ -86,8 +86,6 @@
 				body: JSON.stringify(toSave)
 			}
 		);
-		console.log(response);
-		/*
 
 		if (response.ok) {
 			resetUnsavedChanges();
@@ -100,7 +98,7 @@
 		}
 
 		saveMessage.setSaveMessage(SaveMessageType.Error);
-		*/
+
 		return false;
 	}
 
