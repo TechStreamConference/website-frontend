@@ -112,3 +112,12 @@ export type DashboardSocialMediaLink = z.infer<typeof dashboardSocialMediaLinkSc
 
 export const dashboardAllSocialMediaLinkScheme = z.array(dashboardSocialMediaLinkScheme);
 export type DashboardAllSocialMediaLink = z.infer<typeof dashboardAllSocialMediaLinkScheme>;
+
+export const dashboardSocialMediaLinkTypeScheme = z.object({
+    id: z.number(),
+    name: z.string(),
+})
+export type DashboardSocialMediaLinkType = z.infer<typeof dashboardSocialMediaLinkTypeScheme>;
+
+export const dashboardAllSocialMediaLinkTypeScheme = z.array(dashboardSocialMediaLinkTypeScheme);
+export type DashboardAllSocialMediaLinkType = z.infer<typeof dashboardAllSocialMediaLinkTypeScheme>;
