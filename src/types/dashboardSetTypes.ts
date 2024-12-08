@@ -32,3 +32,16 @@ export type SetSpeakerTeamMemberEvent = {
     short_bio: string,
     bio: string,
 }
+
+export type SetUpdateSocialMediaLink = {
+    id: number,
+    url: string,
+}
+export type SetAllUpdateSocialMediaLink = {
+    social_media_links: SetUpdateSocialMediaLink[],
+};
+
+export type SetCreateSocialMediaLink = {
+    social_media_type_id: number,
+    url: string,
+}
