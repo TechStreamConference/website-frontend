@@ -108,8 +108,23 @@
 			deleteCallback={deleteLink}
 			on:input={setUnsavedChanges}
 		/>
-		<Button ariaLabel="Klicke hier, um einen neuen Link hinzuzufügen" on:click={addLink}>Neu</Button
-		>
-		<Button ariaLabel="Klicke hier, um die Eingaben zu speichern" type={'submit'}>Speichern</Button>
+		<div class="dashboard-social-media-links-button-wrapper">
+			<Button ariaLabel="Klicke hier, um einen neuen Link hinzuzufügen" on:click={addLink}
+				>Neu</Button
+			>
+			<Button ariaLabel="Klicke hier, um die Eingaben zu speichern" type={'submit'}
+				>Speichern</Button
+			>
+		</div>
 	</form>
 </SectionDashboard>
+
+<style>
+	.dashboard-social-media-links-button-wrapper {
+		display: flex;
+		flex-direction: row;
+		gap: var(--full-gap);
+		margin-top: var(--4x-gap);
+		justify-content: center;
+	}
+</style>
