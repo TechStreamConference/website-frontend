@@ -7,10 +7,9 @@
 	import Button from './button.svelte';
 	import Message from 'elements/text/message.svelte';
 
-	import { socialMediaIconNames } from 'lookup/iconLookup';
-
 	export let links: DashboardAllSocialMediaLink;
 	export let deleteCallback: (id: number) => void;
+	export let socialMediaTypes: string[];
 </script>
 
 <div class="edit-social-media-links-wrapper">
@@ -27,7 +26,7 @@
 		<DropDown
 			id="edit-social-media-links-icon-{index}"
 			labelText="Link-Art:"
-			data={socialMediaIconNames}
+			data={socialMediaTypes}
 			bind:selected={link.name}
 			on:input
 			on:submit

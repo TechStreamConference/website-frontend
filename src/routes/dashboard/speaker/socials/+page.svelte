@@ -9,6 +9,7 @@
 	import Message from 'elements/text/message.svelte';
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 	import EditSocialMedia from 'elements/input/editSocialMedia.svelte';
+	import Button from 'elements/input/button.svelte';
 
 	export let data: LoadDashboard & LoadUserSocials;
 
@@ -37,5 +38,10 @@
 		/>
 	{/if}
 
-	<EditSocialMedia links={data.socials} deleteCallback={deleteLink} />
+	<EditSocialMedia
+		links={data.socials}
+		socialMediaTypes={data.socialTypes.map((x) => x.name)}
+		deleteCallback={deleteLink}
+	/>
+	<Button ariaLabel="Klicke hier, um einen neuen Link hinzuzufügen" on:click={addLink}>Neu</Button>
 </SectionDashboard>
