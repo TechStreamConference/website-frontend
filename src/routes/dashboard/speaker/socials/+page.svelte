@@ -3,6 +3,11 @@
 	import * as MenuItem from 'menu/menuItems';
 
 	import type { LoadDashboard, LoadUserSocials } from 'types/dashboardLoadTypes';
+	import type { DashboardSocialMediaLink } from 'types/dashboardProvideTypes';
+	import type {
+		SetAllUpdateSocialMediaLink,
+		SetCreateSocialMediaLink
+	} from 'types/dashboardSetTypes';
 
 	import Tabs from 'elements/navigation/tabs.svelte';
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
@@ -11,16 +16,74 @@
 	import EditSocialMedia from 'elements/input/editSocialMedia.svelte';
 	import Button from 'elements/input/button.svelte';
 
+	import { error } from '@sveltejs/kit';
+	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+	import { isSaveType } from 'types/saveMessageType';
+	import { setUnsavedChanges } from 'stores/saved';
+
 	export let data: LoadDashboard & LoadUserSocials;
 
-	async function trySaveAsync(): Promise<boolean> {
-		console.log('try save socials');
-		return false;
+	function getIDFromSocialMediaType(type: string): number {
+		for (var element of data.socialTypes) {
+			if (type === element.name) {
+				return element.id;
+			}
+		}
+		console.log(`not able to look up requested social media link type ID: ${type}`);
+		throw error(500);
 	}
 
 	function deleteLink(index: number): void {}
 
-	function addLink(): void {}
+	function addLink(): void {
+		const newLink: DashboardSocialMediaLink = {
+			approved: false,
+			id: 0,
+			name: 'Web',
+			url: '',
+			user_id: data.roles.user_id,
+			requested_changes: null,
+			social_media_type_id: getIDFromSocialMediaType('Web')
+		};
+		data.socials = [...data.socials, newLink];
+	}
+
+	async function trySaveAsync(): Promise<boolean> {
+		const toSave: SetAllUpdateSocialMediaLink = { social_media_links: [] };
+		for (var link of data.socials) {
+			if (link.id === 0) {
+				await tryCreateAsync(link);
+				continue;
+			}
+
+			toSave.social_media_links.push({
+				id: link.id,
+				url: link.url
+			});
+		}
+
+		const messageType = await trySaveDashboardDataAsync<SetAllUpdateSocialMediaLink>(
+			toSave,
+			'/api/dashboard/user/social-media-link'
+		);
+
+		return isSaveType(messageType);
+	}
+
+	async function tryCreateAsync(link: DashboardSocialMediaLink): Promise<boolean> {
+		const toSave: SetCreateSocialMediaLink = {
+			social_media_type_id: getIDFromSocialMediaType(link.name),
+			url: link.url
+		};
+
+		const messageType = await trySaveDashboardDataAsync<SetCreateSocialMediaLink>(
+			toSave,
+			'/api/dashboard/user/social-media-link',
+			'POST'
+		);
+
+		return isSaveType(messageType);
+	}
 </script>
 
 <Tabs
@@ -38,10 +101,15 @@
 		/>
 	{/if}
 
-	<EditSocialMedia
-		links={data.socials}
-		socialMediaTypes={data.socialTypes.map((x) => x.name)}
-		deleteCallback={deleteLink}
-	/>
-	<Button ariaLabel="Klicke hier, um einen neuen Link hinzuzufügen" on:click={addLink}>Neu</Button>
+	<form on:submit|preventDefault={trySaveAsync}>
+		<EditSocialMedia
+			links={data.socials}
+			socialMediaTypes={data.socialTypes.map((x) => x.name)}
+			deleteCallback={deleteLink}
+			on:input={setUnsavedChanges}
+		/>
+		<Button ariaLabel="Klicke hier, um einen neuen Link hinzuzufügen" on:click={addLink}>Neu</Button
+		>
+		<Button ariaLabel="Klicke hier, um die Eingaben zu speichern" type={'submit'}>Speichern</Button>
+	</form>
 </SectionDashboard>
