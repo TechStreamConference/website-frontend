@@ -16,12 +16,14 @@
 	import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
+	import ErrorMessage from 'elements/text/message.svelte';
 
 	import { apiUrl } from 'helper/links';
 	import { resetUnsavedChanges, setUnsavedChanges, unsavedChanges } from 'stores/saved';
 	import { onDestroy } from 'svelte';
 	import { loadSpecificEvent } from './loads';
 	import { SaveMessageType } from 'types/saveMessageType';
+	import { validateSpeaker } from './validation';
 
 	export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
 	let selected: string = data.current.title;
@@ -30,6 +32,7 @@
 	let manualPopup: ManualUnsavedChangesPopup;
 	let imageInput: Input;
 	let saveMessage: SaveMessage;
+	let errorMessages: string[] = [];
 
 	let imageFile: File | undefined = undefined;
 	let imagePreviewURL: string | undefined = undefined;
@@ -70,10 +73,18 @@
 
 	async function trySaveAsync(): Promise<boolean> {
 		const toSave: SetSpeakerTeamMemberEvent = {
-			name: data.event.name,
-			short_bio: data.event.short_bio,
-			bio: data.event.bio
+			name: data.event.name.trim(),
+			short_bio: data.event.short_bio.trim(),
+			bio: data.event.bio.trim()
 		};
+
+		const messages = validateSpeaker(toSave);
+		if (messages.length > 0) {
+			errorMessages = messages;
+			return false;
+		} else {
+			errorMessages = [];
+		}
 
 		const formData = new FormData();
 		formData.append('json', JSON.stringify(toSave));
@@ -185,6 +196,9 @@
 				classes="message-pre-wrap"
 			/>
 		{/if}
+		{#each errorMessages as message}
+			<ErrorMessage {message} />
+		{/each}
 		<SaveMessage bind:this={saveMessage} />
 	</div>
 	<form class="dashboard-speaker-event-form" on:submit|preventDefault={trySaveAsync}>
