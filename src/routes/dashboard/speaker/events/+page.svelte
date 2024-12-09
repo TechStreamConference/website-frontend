@@ -17,6 +17,7 @@
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
 	import ErrorMessage from 'elements/text/message.svelte';
+	import MyCropper from 'elements/MyCropper/myCropper.svelte';
 
 	import { apiUrl } from 'helper/links';
 	import { resetUnsavedChanges, setUnsavedChanges, unsavedChanges } from 'stores/saved';
@@ -36,6 +37,10 @@
 
 	let imageFile: File | undefined = undefined;
 	let imagePreviewURL: string | undefined = undefined;
+	let lastPhotoX: number;
+	let lastPhotoY: number;
+	let lastPhotoSize: number;
+	let showCropperPopup: boolean = false;
 
 	$: {
 		if (selected) {
@@ -75,7 +80,10 @@
 		const toSave: SetSpeakerTeamMemberEvent = {
 			name: data.event.name.trim(),
 			short_bio: data.event.short_bio.trim(),
-			bio: data.event.bio.trim()
+			bio: data.event.bio.trim(),
+			photo_x: lastPhotoX,
+			photo_y: lastPhotoY,
+			photo_size: lastPhotoSize
 		};
 
 		const messages = validateSpeaker(toSave);
@@ -147,6 +155,7 @@
 		previewCleanup();
 		if (imageFile) {
 			imagePreviewURL = URL.createObjectURL(imageFile);
+			showCropperPopup = true;
 		}
 	}
 
@@ -157,6 +166,13 @@
 			imagePreviewURL = undefined;
 		}
 		imageInput.clear();
+	}
+
+	function updateCropperData(e: any): void {
+		lastPhotoX = e.detail.pixels.x;
+		lastPhotoY = e.detail.pixels.y;
+		lastPhotoSize = e.detail.pixels.height;
+		console.log(e.detail);
 	}
 
 	onDestroy(() => {
@@ -178,6 +194,17 @@
 	navigateCallback={navigate}
 	stayCallback={stay}
 />
+{#if showCropperPopup && imagePreviewURL}
+	<MyCropper
+		image={imagePreviewURL}
+		on:cropcomplete={(e) => {
+			updateCropperData(e);
+		}}
+		on:click={() => {
+			showCropperPopup = false;
+		}}
+	/>
+{/if}
 <SectionDashboard classes="dashboard-speaker-event-section">
 	<DropDown
 		id="dashboard-speaker-event-drop-down"

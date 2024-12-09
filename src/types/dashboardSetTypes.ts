@@ -31,6 +31,9 @@ export type SetSpeakerTeamMemberEvent = {
     name: string,
     short_bio: string,
     bio: string,
+    photo_x: number,
+    photo_y: number,
+    photo_size: number,
 }
 
 export type SetUpdateSocialMediaLink = {
