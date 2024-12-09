@@ -107,6 +107,7 @@
 		if (response.ok) {
 			resetUnsavedChanges();
 			saveMessage.setSaveMessage(SaveMessageType.Save);
+			data.event.is_approved = false;
 			return true;
 		}
 
