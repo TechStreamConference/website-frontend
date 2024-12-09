@@ -2,26 +2,16 @@
 	import * as Menu from 'menu/dashboard';
 	import * as MenuItem from 'menu/menuItems';
 
-	import List from 'elements/list/list.svelte';
-	import ListElement from 'elements/list/listElement.svelte';
-	import TextLine from 'elements/text/textLine.svelte';
-	import Tabs from 'elements/navigation/tabs.svelte';
+	import type { LoadDashboard, LoadSpeakerTeamMemberEvent } from 'types/dashboardLoadTypes';
+
+	import SpeakerTeamMemberEvent from 'pages/speakerTeamMemberEvent.svelte';
+
+	export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
 </script>
 
-<Tabs
-	entries={Menu.teamMember}
-	entryName={MenuItem.teamMemberEvents.name}
-	classes="navigation-tabs-dashboard-subpage"
+<SpeakerTeamMemberEvent
+	{data}
+	menu={Menu.teamMember}
+	menuItem={MenuItem.teamMemberEvents}
+	type="team-member"
 />
-<TextLine>Drop Down with available Events</TextLine>
-<TextLine>Event Data from Team Member</TextLine>
-<br />
-<TextLine>Needed routes:</TextLine>
-<List classes="list-padding-left">
-	<ListElement classes="list-element-dot">
-		GET /api/dashboard/team-member/event/[:num] (all event specific data)
-	</ListElement>
-	<ListElement classes="list-element-dot">
-		PUT /api/dashboard/team-member/event/[:num] (all event specific data)
-	</ListElement>
-</List>
