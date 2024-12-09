@@ -337,6 +337,9 @@
 
 	.dashboard-admin-approval {
 		margin: var(--4x-margin) 0;
+		border: 1px solid var(--primary-color-dark);
+		border-radius: var(--border-radius);
+		padding: var(--full-padding) var(--2x-padding);
 	}
 
 	.dashboard-admin-approval-grid {
