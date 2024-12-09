@@ -25,6 +25,7 @@
 	import { loadSpecificEvent } from './loads';
 	import { SaveMessageType } from 'types/saveMessageType';
 	import { validateSpeaker } from './validation';
+	import CroppedImage from 'elements/image/croppedImage.svelte';
 
 	export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
 	let selected: string = data.current.title;
@@ -129,6 +130,7 @@
 	}
 
 	function changeImage(event: Event): void {
+		console.log('image');
 		const previewCleanup: Function = () => {
 			if (imagePreviewURL) {
 				URL.revokeObjectURL(imagePreviewURL);
@@ -172,7 +174,6 @@
 		lastPhotoX = e.detail.pixels.x;
 		lastPhotoY = e.detail.pixels.y;
 		lastPhotoSize = e.detail.pixels.height;
-		console.log(e.detail);
 	}
 
 	onDestroy(() => {
@@ -231,10 +232,12 @@
 	</div>
 	<form class="dashboard-speaker-event-form" on:submit|preventDefault={trySaveAsync}>
 		{#if imagePreviewURL}
-			<Image
-				alt="Dein neues Speaker-Bild für das Event {data.current.title}"
+			<CroppedImage
+				alt="Dein aktuelles Speaker-Bild für das Event {data.current.title}"
 				src={imagePreviewURL}
-				classes="dashboard-speaker-events-image"
+				x={lastPhotoX}
+				y={lastPhotoY}
+				size={lastPhotoSize}
 			/>
 		{:else}
 			<Image
