@@ -15,6 +15,7 @@
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 	import EditSocialMedia from 'elements/input/editSocialMedia.svelte';
 	import Button from 'elements/input/button.svelte';
+	import GeneralPopup from 'elements/navigation/generalPopup.svelte';
 
 	import { error } from '@sveltejs/kit';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
@@ -22,6 +23,8 @@
 	import { setUnsavedChanges } from 'stores/saved';
 
 	export let data: LoadDashboard & LoadUserSocials;
+
+	let deletePopup: GeneralPopup;
 
 	function getIDFromSocialMediaType(type: string): number {
 		for (var element of data.socialTypes) {
@@ -33,7 +36,9 @@
 		throw error(500);
 	}
 
-	function deleteLink(index: number): void {}
+	function deleteLinkAsync(index: number): void {
+		console.log(index);
+	}
 
 	function addLink(): void {
 		const newLink: DashboardSocialMediaLink = {
@@ -92,6 +97,22 @@
 	classes="navigation-tabs-dashboard-subpage"
 />
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
+<GeneralPopup
+	bind:this={deletePopup}
+	headline="Link löschen?"
+	text="Gelöschte Links können nicht wieder hergestellt werden."
+	acceptButtonText="Löschen"
+	denyButtonText="Abbrechen"
+	acceptCallback={(value) => {
+		if (typeof value === 'number') {
+			deleteLinkAsync(value);
+			return;
+		}
+
+		console.error('provided entry index from generic popup is not number');
+	}}
+	denyCallback={(e) => {}}
+></GeneralPopup>
 
 <SectionDashboard classes="standard-dashboard-section">
 	{#if data.roles.is_speaker && data.roles.is_team_member}
@@ -105,7 +126,9 @@
 		<EditSocialMedia
 			links={data.socials}
 			socialMediaTypes={data.socialTypes.map((x) => x.name)}
-			deleteCallback={deleteLink}
+			deleteCallback={(e) => {
+				deletePopup.show(e);
+			}}
 			on:input={setUnsavedChanges}
 		/>
 		<div class="dashboard-social-media-links-button-wrapper">
