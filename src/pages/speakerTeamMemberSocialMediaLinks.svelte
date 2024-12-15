@@ -21,6 +21,7 @@
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 	import { isSaveType } from 'types/saveMessageType';
 	import { setUnsavedChanges } from 'stores/saved';
+	import { apiUrl } from 'helper/links';
 
 	export let data: LoadDashboard & LoadUserSocials;
 
@@ -36,8 +37,18 @@
 		throw error(500);
 	}
 
-	function deleteLinkAsync(index: number): void {
-		console.log(index);
+	async function deleteLinkAsync(index: number): Promise<void> {
+		const id = data.socials[index].id;
+		const deleteResponse: Response = await fetch(
+			apiUrl(`/api/dashboard/user/social-media-link/${id}`),
+			{ method: 'DELETE' }
+		);
+		if (!deleteResponse.ok) {
+			console.error(`Deleting Link: Bad Backend response: ${deleteResponse.status}`);
+			return;
+		}
+
+		data.socials = data.socials.filter((item) => item.id !== id);
 	}
 
 	function addLink(): void {
