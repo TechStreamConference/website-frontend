@@ -59,6 +59,8 @@
 
 	:global(.edit-social-media-link-entry-message) {
 		grid-column: 1 / -1;
+		margin-top: var(--2x-margin) !important;
+		margin-bottom: calc(calc(var(--2x-gap) - 0.2rem) * -1) !important;
 	}
 
 	:global(.edit-social-media-links-link) {
