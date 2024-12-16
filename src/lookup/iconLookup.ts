@@ -18,20 +18,6 @@ const lookup: IconDict = {
     "Calender": "fa-solid fa-calendar-days",
 }
 
-export const socialMediaIconNames: string[] = [
-    "Web",
-    "Twitch",
-    "Discord",
-    "LinkedIn",
-    "YouTube",
-    "Instagram",
-    "X",
-    "Git",
-    "GitHub",
-    "GitLab",
-    "Mail",
-]
-
 export function iconLookup(type: string): string {
     if (type in lookup) {
         return lookup[type];
