@@ -16,16 +16,18 @@
 	import EditSocialMedia from 'elements/input/editSocialMedia.svelte';
 	import Button from 'elements/input/button.svelte';
 	import GeneralPopup from 'elements/navigation/generalPopup.svelte';
+	import SaveMessage from 'elements/text/saveMessage.svelte';
 
 	import { error } from '@sveltejs/kit';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
-	import { isSaveType } from 'types/saveMessageType';
+	import { isSaveType, SaveMessageType } from 'types/saveMessageType';
 	import { setUnsavedChanges } from 'stores/saved';
 	import { apiUrl } from 'helper/links';
 
 	export let data: LoadDashboard & LoadUserSocials;
 
 	let deletePopup: GeneralPopup;
+	let saveMessage: SaveMessage;
 
 	function getIDFromSocialMediaType(type: string): number {
 		for (var element of data.socialTypes) {
@@ -44,11 +46,13 @@
 			{ method: 'DELETE' }
 		);
 		if (!deleteResponse.ok) {
+			saveMessage.setSaveMessage(SaveMessageType.DeleteError);
 			console.error(`Deleting Link: Bad Backend response: ${deleteResponse.status}`);
 			return;
 		}
 
 		data.socials = data.socials.filter((item) => item.id !== id);
+		saveMessage.setSaveMessage(SaveMessageType.Delete);
 	}
 
 	function addLink(): void {
@@ -66,9 +70,12 @@
 
 	async function trySaveAsync(): Promise<boolean> {
 		const toSave: SetAllUpdateSocialMediaLink = { social_media_links: [] };
+		let createFail: boolean = false;
 		for (var link of data.socials) {
 			if (link.id === 0) {
-				await tryCreateAsync(link);
+				if (!(await tryCreateAsync(link))) {
+					createFail = true;
+				}
 				continue;
 			}
 
@@ -83,7 +90,15 @@
 			'/api/dashboard/user/social-media-link'
 		);
 
-		return isSaveType(messageType);
+		const success: boolean = isSaveType(messageType);
+
+		if (!success || createFail) {
+			saveMessage.setSaveMessage(SaveMessageType.Error);
+		} else {
+			saveMessage.setSaveMessage(SaveMessageType.Save);
+		}
+
+		return success;
 	}
 
 	async function tryCreateAsync(link: DashboardSocialMediaLink): Promise<boolean> {
@@ -132,6 +147,7 @@
 			message={'Hinweis:\nDie Social Media Links sind Account gebunden.\nDaher sind dies die gleichen Links wie im Team Member Tab.'}
 		/>
 	{/if}
+	<SaveMessage bind:this={saveMessage} />
 
 	<form on:submit|preventDefault={trySaveAsync}>
 		<EditSocialMedia
