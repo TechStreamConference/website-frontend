@@ -23,11 +23,13 @@
 	import { isSaveType, SaveMessageType } from 'types/saveMessageType';
 	import { setUnsavedChanges } from 'stores/saved';
 	import { apiUrl } from 'helper/links';
+	import { z } from 'zod';
 
 	export let data: LoadDashboard & LoadUserSocials;
 
 	let deletePopup: GeneralPopup;
 	let saveMessage: SaveMessage;
+	let messages: string[] = [];
 
 	function getIDFromSocialMediaType(type: string): number {
 		for (var element of data.socialTypes) {
@@ -37,6 +39,23 @@
 		}
 		console.log(`not able to look up requested social media link type ID: ${type}`);
 		throw error(500);
+	}
+
+	function validate(): string[] {
+		const messages: string[] = [];
+		for (var entry of data.socials) {
+			if (entry.url.trim().length === 0) {
+				messages.push(`Ein ${entry.name} - Eintrag ist leer`);
+				continue;
+			}
+
+			const validated = z.string().url().safeParse(entry.url.trim());
+			if (!validated.success) {
+				messages.push(`${entry.url} ist keine valide URL.`);
+				continue;
+			}
+		}
+		return messages;
 	}
 
 	async function deleteLinkAsync(index: number): Promise<void> {
@@ -69,6 +88,11 @@
 	}
 
 	async function trySaveAsync(): Promise<boolean> {
+		messages = validate();
+		if (messages.length > 0) {
+			return false;
+		}
+
 		const toSave: SetAllUpdateSocialMediaLink = { social_media_links: [] };
 		let createFail: boolean = false;
 		for (var link of data.socials) {
@@ -148,6 +172,9 @@
 		/>
 	{/if}
 	<SaveMessage bind:this={saveMessage} />
+	{#each messages as message}
+		<Message color="error" {message} />
+	{/each}
 
 	<form on:submit|preventDefault={trySaveAsync}>
 		<EditSocialMedia
