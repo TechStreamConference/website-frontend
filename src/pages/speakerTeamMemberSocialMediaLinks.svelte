@@ -108,6 +108,7 @@
 
 			toSave.social_media_links.push({
 				id: link.id,
+				social_media_type_id: getIDFromSocialMediaType(link.name),
 				url: link.url
 			});
 		}

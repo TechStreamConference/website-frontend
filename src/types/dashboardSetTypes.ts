@@ -38,6 +38,7 @@ export type SetSpeakerTeamMemberEvent = {
 
 export type SetUpdateSocialMediaLink = {
     id: number,
+    social_media_type_id: number,
     url: string,
 }
 export type SetAllUpdateSocialMediaLink = {
