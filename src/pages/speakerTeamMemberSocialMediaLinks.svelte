@@ -24,6 +24,7 @@
 	import { setUnsavedChanges } from 'stores/saved';
 	import { apiUrl } from 'helper/links';
 	import { z } from 'zod';
+	import { loadSocials } from 'pageHelper/loadSocials';
 
 	export let data: LoadDashboard & LoadUserSocials;
 
@@ -122,6 +123,9 @@
 			saveMessage.setSaveMessage(SaveMessageType.Error);
 		} else {
 			saveMessage.setSaveMessage(SaveMessageType.Save);
+			if (data.socials.length !== toSave.social_media_links.length) {
+				data.socials = await loadSocials(fetch);
+			}
 		}
 
 		return success;

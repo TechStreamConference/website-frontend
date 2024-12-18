@@ -27,3 +27,16 @@ export async function loadDataAsync(fetch: Function): Promise<LoadUserSocials> {
         socialTypes
     }
 }
+
+export async function loadSocials(fetch: Function): Promise<DashboardAllSocialMediaLink> {
+    const socialsPromise = fetch(apiUrl("/api/dashboard/user/social-media-link"));
+
+    const socials = await checkAndParseInputDataAsync<DashboardAllSocialMediaLink>(
+        await socialsPromise,
+        dashboardAllSocialMediaLinkScheme,
+        `Serveranfrage für alle Social Media Links nicht erfolgreich. throw error(406)`,
+        `Unerwartete Daten für alle Social Media Links. throw error(406)`
+    )
+
+    return socials;
+}
