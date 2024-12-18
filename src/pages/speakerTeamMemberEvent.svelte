@@ -231,9 +231,9 @@
 	/>
 	<div class="dashboard-speaker-event-message-wrapper">
 		{#if data.event.is_approved}
-			<Message message="Dieser Datensatz ist freigegeben" color="success" />
+			<Message message="Dieser Datensatz ist freigegeben." color="success" />
 		{:else}
-			<Message message="Dieser Datensatz muss noch freigegeben werden" />
+			<Message message="Dieser Datensatz muss noch freigegeben werden." />
 		{/if}
 		{#if data.event.requested_changes}
 			<Message
@@ -302,7 +302,7 @@
 		/>
 		<Button
 			type="submit"
-			ariaLabel="Klicke zum speichern"
+			ariaLabel="Klicke zum Speichern"
 			classes="button-text dashboard-speaker-event-submit-button">Speichern</Button
 		>
 	</form>

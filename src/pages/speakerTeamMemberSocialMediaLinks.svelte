@@ -150,7 +150,7 @@
 <GeneralPopup
 	bind:this={deletePopup}
 	headline="Link löschen?"
-	text="Gelöschte Links können nicht wieder hergestellt werden."
+	text="Gelöschte Links können nicht wiederhergestellt werden."
 	acceptButtonText="Löschen"
 	denyButtonText="Abbrechen"
 	acceptCallback={(value) => {
@@ -168,7 +168,7 @@
 	{#if data.roles.is_speaker && data.roles.is_team_member}
 		<Message
 			classes="message-pre-wrap"
-			message={'Hinweis:\nDie Social Media Links sind Account gebunden.\nDaher sind dies die gleichen Links wie im Team Member Tab.'}
+			message={'Hinweis:\nDie Social-Media-Links sind an den Account gebunden.\nÄnderungen an den Links wirken sich daher sowohl auf dein Speaker- als auch dein Team-Member-Profil aus.'}
 		/>
 	{/if}
 	<SaveMessage bind:this={saveMessage} />
