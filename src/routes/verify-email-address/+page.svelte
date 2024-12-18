@@ -1,45 +1,34 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import Footer from 'elements/navigation/footer.svelte';
+	import Header from 'elements/navigation/header.svelte';
 	import TextLine from 'elements/text/textLine.svelte';
-	import { apiUrl } from 'helper/links';
+	import * as Menu from 'menu/verify.js';
 
-	let token: string | null = null;
-	let success: boolean | undefined = undefined;
-
-	verify();
-
-	async function verify(): Promise<void> {
-		token = $page.url.searchParams.get('token');
-		if (!token) {
-			console.error('no token in URL');
-			success = false;
-			return;
-		}
-
-		const toSave = { token };
-		const response = await fetch(apiUrl('/api/account/verify'), {
-			method: 'POST',
-			body: JSON.stringify(toSave)
-		});
-
-		if (!response.ok) {
-			if (response.status === 400) {
-				console.error(await response.json());
-			}
-
-			// error message
-			success = false;
-			return;
-		}
-
-		success = true;
-	}
+	export let data;
 </script>
 
-{#if success === undefined}
-	<TextLine>E-Mail-Adresse wird verifiziert...</TextLine>
-{:else if success}
-	<TextLine>E-Mail-Adresse wurde verifiziert.</TextLine>
-{:else}
-	<TextLine>Token ist ungültig.</TextLine>
-{/if}
+<div class="verify-email-page-wrapper">
+	<Header menu={Menu.header} />
+	<div class="verify-email-content-wrapper">
+		{#if data.success === undefined}
+			<TextLine>E-Mail-Adresse wird verifiziert...</TextLine>
+		{:else if data.success}
+			<TextLine>E-Mail-Adresse wurde verifiziert.</TextLine>
+		{:else}
+			<TextLine>Token ist ungültig.</TextLine>
+		{/if}
+	</div>
+	<Footer globals={data.globals} menu={Menu.footer} />
+</div>
+
+<style>
+	.verify-email-page-wrapper {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+
+	.verify-email-content-wrapper {
+		flex-grow: 1;
+	}
+</style>
