@@ -39,20 +39,13 @@
 			}}
 			role="presentation"
 		>
-			<button
-				class="navigation-tabs-button"
-				use:typeWorkaround={'button'}
-				on:click={() => {
-					goto(entry.url);
-				}}
-				aria-label={entry.description}
-			>
+			<a class="navigation-tabs-button" href={entry.url} aria-label={entry.description}>
 				<TextLine
 					classes="navigation-tabs-entry-text {index === current ? '' : `text-line-${color}`}"
 				>
 					{entry.name}
 				</TextLine>
-			</button>
+			</a>
 		</div>
 	{/each}
 </div>
@@ -122,6 +115,7 @@
 		border: none;
 		background-color: transparent;
 		cursor: pointer;
+		text-decoration: none;
 	}
 
 	@media (max-width: 600px) {
