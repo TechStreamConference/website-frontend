@@ -10,7 +10,7 @@
 
 {#if message !== ''}
 	<p class="normal-font {classes} {color}" transition:fade={{ duration: 300 }}>
-		<TextLine --text-align="center">
+		<TextLine --text-align="center" classes={color === 'error' ? 'text-line-black' : ''}>
 			{message}
 		</TextLine>
 	</p>
