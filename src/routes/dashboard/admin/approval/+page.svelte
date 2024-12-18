@@ -144,7 +144,9 @@
 						>{speaker.short_bio}</TextLine
 					>
 					<TextLine classes={getBackgroundClass(speaker.diff, 'bio')}>Beschreibung:</TextLine>
-					<Paragraph classes={getBackgroundClass(speaker.diff, 'bio')}>{speaker.bio}</Paragraph>
+					<Paragraph classes="{getBackgroundClass(speaker.diff, 'bio')} paragraph-pre-wrap"
+						>{speaker.bio}</Paragraph
+					>
 					<TextLine classes={getBackgroundClass(speaker.diff, 'photo')}>Foto:</TextLine>
 					<Image
 						classes={getBackgroundClass(speaker.diff, 'photo')}
@@ -335,6 +337,9 @@
 
 	.dashboard-admin-approval {
 		margin: var(--4x-margin) 0;
+		border: 1px solid var(--primary-color-dark);
+		border-radius: var(--border-radius);
+		padding: var(--full-padding) var(--2x-padding);
 	}
 
 	.dashboard-admin-approval-grid {

@@ -5,11 +5,12 @@
 
 	export let message: string = '';
 	export let classes: string = 'message-error-color';
+	export let color: 'error' | 'success' = 'error';
 </script>
 
 {#if message !== ''}
-	<p class="normal-font {classes}" transition:fade={{ duration: 300 }}>
-		<TextLine --text-align="center">
+	<p class="normal-font {classes} {color}" transition:fade={{ duration: 300 }}>
+		<TextLine --text-align="center" classes={color === 'error' ? 'text-line-black' : ''}>
 			{message}
 		</TextLine>
 	</p>
@@ -22,11 +23,15 @@
 		margin: var(--quad-margin) 0;
 	}
 
-	.message-error-color {
+	.error {
 		background-color: var(--error-color);
 	}
 
-	.message-success-color {
+	.success {
 		background-color: var(--success-color);
+	}
+
+	.message-pre-wrap {
+		white-space: pre-wrap;
 	}
 </style>

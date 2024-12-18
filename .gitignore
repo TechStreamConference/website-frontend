@@ -22,3 +22,7 @@ vite.config.ts.timestamp-*
 
 # JetBrains IDEs
 .idea/
+
+
+# testing
+src/routes/test/

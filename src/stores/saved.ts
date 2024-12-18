@@ -1,5 +1,5 @@
 import { writable, get, type Writable } from "svelte/store";
-const _unsavedChanges: Writable<boolean> = writable(false);
+export const _unsavedChanges: Writable<boolean> = writable(false);
 
 export function unsavedChanges(): boolean {
     return get(_unsavedChanges);

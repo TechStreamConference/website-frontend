@@ -58,7 +58,7 @@
 		/>
 
 		<Button
-			classes="button-text dashboard-admin-global-submit-button"
+			classes="dashboard-admin-global-submit-button"
 			type={'submit'}
 			ariaLabel="Klicke zum Speichern"
 		>

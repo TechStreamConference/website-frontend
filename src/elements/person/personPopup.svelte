@@ -22,8 +22,11 @@
 			event.stopPropagation();
 		}}
 	>
-		<Button fontSize="large" classes="person-popup-close-button" ariaLabel="close popup" on:click
-			>&times;</Button
+		<Button
+			fontSize="large-text"
+			classes="person-popup-close-button"
+			ariaLabel="close popup"
+			on:click>&times;</Button
 		>
 		<div class="person-popup-content-wrapper">
 			<div class="person-popup-column-wrapper person-popup-align-center person-popup-line">
@@ -35,7 +38,7 @@
 				<PersonLinkGrid person={data.name} links={data.social_media_links} />
 			</div>
 			<div class="person-popup-column-wrapper">
-				<Paragraph classes="person-popup-one-line-spacer">{data.bio}</Paragraph>
+				<Paragraph classes="person-popup-one-line-spacer paragraph-pre-wrap">{data.bio}</Paragraph>
 			</div>
 		</div>
 	</div>

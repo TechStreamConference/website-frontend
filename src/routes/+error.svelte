@@ -63,11 +63,7 @@
 			{/if}
 		{/if}
 
-		<Button
-			classes="button-text button"
-			ariaLabel="Klicke um zur Hauptseite zu navigieren"
-			on:click={onClick}
-		>
+		<Button classes="button" ariaLabel="Klicke um zur Hauptseite zu navigieren" on:click={onClick}>
 			Hauptseite
 		</Button>
 	</div>

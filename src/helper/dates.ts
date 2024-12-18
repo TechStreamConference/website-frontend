@@ -62,3 +62,11 @@ export function isBeforeOrSameDatesString(lhs: string, rhs: string): boolean {
 export function isBeforeOrSameDates(lhs: Date, rhs: Date): boolean {
     return lhs.getTime() <= rhs.getTime();
 }
+
+export function isPassedNowString(date: string): boolean {
+    return isPassedNow(new Date(date));
+}
+
+export function isPassedNow(date: Date): boolean {
+    return isBeforeOrSameDates(new Date(), date);
+}

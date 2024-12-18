@@ -14,4 +14,8 @@
 	.text-line-white {
 		color: var(--white-color);
 	}
+
+	.text-line-black {
+		color: var(--black-color);
+	}
 </style>

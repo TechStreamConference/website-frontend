@@ -19,7 +19,7 @@ const lookup: IconDict = {
 }
 
 export function iconLookup(type: string): string {
-    if (type in lookup){
+    if (type in lookup) {
         return lookup[type];
     }
 
