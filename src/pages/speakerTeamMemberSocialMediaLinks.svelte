@@ -60,14 +60,16 @@
 
 	async function deleteLinkAsync(index: number): Promise<void> {
 		const id = data.socials[index].id;
-		const deleteResponse: Response = await fetch(
-			apiUrl(`/api/dashboard/user/social-media-link/${id}`),
-			{ method: 'DELETE' }
-		);
-		if (!deleteResponse.ok) {
-			saveMessage.setSaveMessage(SaveMessageType.DeleteError);
-			console.error(`Deleting Link: Bad Backend response: ${deleteResponse.status}`);
-			return;
+		if (id !== 0) {
+			const deleteResponse: Response = await fetch(
+				apiUrl(`/api/dashboard/user/social-media-link/${id}`),
+				{ method: 'DELETE' }
+			);
+			if (!deleteResponse.ok) {
+				saveMessage.setSaveMessage(SaveMessageType.DeleteError);
+				console.error(`Deleting Link: Bad Backend response: ${deleteResponse.status}`);
+				return;
+			}
 		}
 
 		data.socials = data.socials.filter((item) => item.id !== id);
