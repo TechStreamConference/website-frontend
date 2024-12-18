@@ -4,7 +4,12 @@
 	import type { Menu, MenuItem } from 'types/provideTypes';
 
 	import { apiUrl } from 'helper/links';
-	import { resetUnsavedChanges, setUnsavedChanges, unsavedChanges } from 'stores/saved';
+	import {
+		_unsavedChanges,
+		resetUnsavedChanges,
+		setUnsavedChanges,
+		unsavedChanges
+	} from 'stores/saved';
 	import { SaveMessageType } from 'types/saveMessageType';
 	import { loadSpeakerTeamMemberAsync } from 'pageHelper/loadSpeakerTeamMember';
 	import { onDestroy } from 'svelte';
@@ -230,7 +235,9 @@
 		bind:selected
 	/>
 	<div class="dashboard-speaker-event-message-wrapper">
-		{#if data.event.is_approved}
+		{#if $_unsavedChanges}
+			<Message message="Es gibt ungesicherte Änderungen." />
+		{:else if data.event.is_approved}
 			<Message message="Dieser Datensatz ist freigegeben." color="success" />
 		{:else}
 			<Message message="Dieser Datensatz muss noch freigegeben werden." />
