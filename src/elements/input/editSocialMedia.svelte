@@ -5,7 +5,6 @@
 	import Input from './input.svelte';
 	import StyledLink from './styledLink.svelte';
 	import Button from './button.svelte';
-	import Message from 'elements/text/message.svelte';
 
 	export let links: DashboardAllSocialMediaLink;
 	export let deleteCallback: (id: number) => void;
@@ -14,9 +13,6 @@
 
 <div class="edit-social-media-links-wrapper">
 	{#each links as link, index}
-		{#if link.requested_changes}
-			<Message classes="edit-social-media-link-entry-message" message={link.requested_changes} />
-		{/if}
 		<StyledLink
 			href={link.url}
 			icon={link.name}
@@ -55,12 +51,6 @@
 		display: grid;
 		grid-template-columns: 5rem 1fr 1fr 11rem;
 		gap: var(--2x-gap);
-	}
-
-	:global(.edit-social-media-link-entry-message) {
-		grid-column: 1 / -1;
-		margin-top: var(--2x-margin) !important;
-		margin-bottom: calc(calc(var(--2x-gap) - 0.2rem) * -1) !important;
 	}
 
 	:global(.edit-social-media-links-link) {
