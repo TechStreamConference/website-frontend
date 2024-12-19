@@ -224,6 +224,7 @@
 			updateCropperData(e);
 		}}
 		on:click={() => {
+			setUnsavedChanges();
 			showCropperPopup = false;
 		}}
 	/>
@@ -278,7 +279,7 @@
 			ariaLabel="Lade hier dein Bild für das Event {data.current.title} hoch"
 			type="file"
 			on:input={(event) => {
-				setUnsavedChanges();
+				// no setUnsavedChanges here because the cropper already does that.
 				changeImage(event);
 			}}
 			value={imageFile}
