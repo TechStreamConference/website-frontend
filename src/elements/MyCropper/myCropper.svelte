@@ -3,6 +3,7 @@
 	import Cropper from 'svelte-easy-crop';
 
 	export let image: string;
+	export let discardCallback: Function;
 </script>
 
 <div class="cropper-popup-wrapper" role="presentation" on:click>
@@ -13,11 +14,13 @@
 			event.stopPropagation();
 		}}
 	>
+		<Button classes="cropper-popup-submit-button" ariaLabel="close popup" on:click>Okay</Button>
 		<Button
-			fontSize="large-text"
 			classes="cropper-popup-close-button"
 			ariaLabel="close popup"
-			on:click>&times;</Button
+			on:click={() => {
+				discardCallback();
+			}}>Löschen</Button
 		>
 		<Cropper {image} aspect={1 / 1} on:cropcomplete />
 	</div>
@@ -42,11 +45,20 @@
 		background-color: var(--background-color);
 		border: solid 1px var(--primary-color-dark);
 	}
-	:global(.cropper-popup-close-button) {
+	:global(.cropper-popup-submit-button) {
 		position: absolute;
 		top: 0;
 		right: 0;
 		translate: 50% -50%;
+		line-height: var(--2x-font-size);
+		padding: var(--half-padding);
+		z-index: 20;
+	}
+	:global(.cropper-popup-close-button) {
+		position: absolute;
+		top: 0;
+		right: 0;
+		translate: 50% 70%;
 		line-height: var(--2x-font-size);
 		padding: var(--half-padding);
 		z-index: 20;

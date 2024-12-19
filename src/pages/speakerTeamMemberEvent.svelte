@@ -218,6 +218,7 @@
 />
 {#if showCropperPopup && imagePreviewURL}
 	<MyCropper
+		discardCallback={resetImage}
 		image={imagePreviewURL}
 		on:cropcomplete={(e) => {
 			updateCropperData(e);
