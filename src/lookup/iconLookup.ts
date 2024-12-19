@@ -16,6 +16,7 @@ const lookup: IconDict = {
     "Mail": "fa-solid fa-envelope",
     "Download": "fa-solid fa-download",
     "Calender": "fa-solid fa-calendar-days",
+    "Circle": "fa-solid fa-circle",
 }
 
 export function iconLookup(type: string): string {

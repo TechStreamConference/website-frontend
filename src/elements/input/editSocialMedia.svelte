@@ -5,6 +5,7 @@
 	import Input from './input.svelte';
 	import StyledLink from './styledLink.svelte';
 	import Button from './button.svelte';
+	import Icon from 'elements/image/icon.svelte';
 
 	export let links: DashboardAllSocialMediaLink;
 	export let deleteCallback: (id: number) => void;
@@ -35,6 +36,11 @@
 			ariaLabel="Trage die URL für {link.name} ein"
 			on:input
 		/>
+		<Icon
+			type="Circle"
+			color={link.approved ? 'red' : 'green'}
+			classes="edit-social-media-links-approval-icon"
+		/>
 		<Button
 			buttonSize="small-button"
 			ariaLabel="Klicke hier um diesen Eintrag zu löschen."
@@ -49,11 +55,14 @@
 <style>
 	.edit-social-media-links-wrapper {
 		display: grid;
-		grid-template-columns: 5rem 1fr 1fr 11rem;
+		grid-template-columns: 5rem 1fr 1fr 2rem 11rem;
 		gap: var(--2x-gap);
 	}
 
 	:global(.edit-social-media-links-link) {
 		margin: auto auto 0 auto;
+	}
+	:global(.edit-social-media-links-approval-icon) {
+		margin: auto auto 0.8rem auto;
 	}
 </style>
