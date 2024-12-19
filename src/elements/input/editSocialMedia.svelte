@@ -6,6 +6,7 @@
 	import StyledLink from './styledLink.svelte';
 	import Button from './button.svelte';
 	import Icon from 'elements/image/icon.svelte';
+	import Tooltip from 'elements/text/tooltip.svelte';
 
 	export let links: DashboardAllSocialMediaLink;
 	export let deleteCallback: (id: number) => void;
@@ -36,11 +37,15 @@
 			ariaLabel="Trage die URL für {link.name} ein"
 			on:input
 		/>
-		<Icon
-			type="Circle"
-			color={link.approved ? 'red' : 'green'}
+		<Tooltip
 			classes="edit-social-media-links-approval-icon"
-		/>
+			tooltip={link.approved
+				? 'Dieser Link ist freigegeben.'
+				: link.requested_changes
+					? `Änderungswünsche:\n${link.requested_changes}`
+					: 'Dieser Link muss noch Freigegeben werden.\nDerzeit gibt es keine Änderungswünsche.'}
+			><Icon type="Circle" color={link.approved ? 'green' : 'red'} /></Tooltip
+		>
 		<Button
 			buttonSize="small-button"
 			ariaLabel="Klicke hier um diesen Eintrag zu löschen."
@@ -55,7 +60,7 @@
 <style>
 	.edit-social-media-links-wrapper {
 		display: grid;
-		grid-template-columns: 5rem 1fr 1fr 2rem 11rem;
+		grid-template-columns: 5rem 1fr 1fr 3rem 11rem;
 		gap: var(--2x-gap);
 	}
 
