@@ -37,15 +37,24 @@
 			ariaLabel="Trage die URL für {link.name} ein"
 			on:input
 		/>
-		<Tooltip
-			classes="edit-social-media-links-approval-icon"
-			tooltip={link.approved
-				? 'Dieser Link ist freigegeben.'
-				: link.requested_changes
-					? `Änderungswünsche:\n${link.requested_changes}`
-					: 'Dieser Link muss noch Freigegeben werden.\nDerzeit gibt es keine Änderungswünsche.'}
-			><Icon type="Circle" color={link.approved ? 'green' : 'red'} /></Tooltip
-		>
+		{#if link.approved}
+			<Tooltip
+				classes="edit-social-media-links-approval-icon"
+				tooltip="Dieser Link ist freigegeben."><Icon type="CircleCheck" color="green" /></Tooltip
+			>
+		{:else if link.requested_changes}
+			<Tooltip
+				classes="edit-social-media-links-approval-icon"
+				tooltip={`Änderungswünsche:\n${link.requested_changes}`}
+				><Icon type="CircleCross" color="red" /></Tooltip
+			>
+		{:else}
+			<Tooltip
+				classes="edit-social-media-links-approval-icon"
+				tooltip={'Dieser Link muss noch Freigegeben werden.\nDerzeit gibt es keine Änderungswünsche.'}
+				><Icon type="Clock" color="orange" /></Tooltip
+			>
+		{/if}
 		<Button
 			buttonSize="small-button"
 			ariaLabel="Klicke hier um diesen Eintrag zu löschen."

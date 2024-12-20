@@ -4,7 +4,7 @@
 	export let type: string;
 
 	export let classes: string = '';
-	export let color: 'standard-color' | 'red' | 'green' = 'standard-color';
+	export let color: 'standard-color' | 'red' | 'green' | 'orange' = 'standard-color';
 
 	import { iconLookup } from 'lookup/iconLookup';
 </script>
@@ -25,5 +25,8 @@
 	}
 	.green {
 		color: green;
+	}
+	.orange {
+		color: orange;
 	}
 </style>
