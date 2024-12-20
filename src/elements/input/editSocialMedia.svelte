@@ -1,5 +1,8 @@
 <script lang="ts">
-	import type { DashboardAllSocialMediaLink } from 'types/dashboardProvideTypes';
+	import type {
+		DashboardAllSocialMediaLink,
+		DashboardSocialMediaLink
+	} from 'types/dashboardProvideTypes';
 
 	import DropDown from './dropDown.svelte';
 	import Input from './input.svelte';
@@ -11,6 +14,10 @@
 	export let links: DashboardAllSocialMediaLink;
 	export let deleteCallback: (id: number) => void;
 	export let socialMediaTypes: string[];
+
+	function onInput(link: DashboardSocialMediaLink) {
+		link.approved = false;
+	}
 </script>
 
 <div class="edit-social-media-links-wrapper">
@@ -26,7 +33,9 @@
 			labelText="Link-Art:"
 			data={socialMediaTypes}
 			bind:selected={link.name}
-			on:input
+			on:input={() => {
+				onInput(link);
+			}}
 			on:submit
 		/>
 		<Input
@@ -35,7 +44,9 @@
 			placeholderText="Link-URL"
 			bind:value={link.url}
 			ariaLabel="Trage die URL für {link.name} ein"
-			on:input
+			on:input={() => {
+				onInput(link);
+			}}
 		/>
 		{#if link.approved}
 			<Tooltip
