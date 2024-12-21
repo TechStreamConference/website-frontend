@@ -20,6 +20,8 @@ const config = {
 			'lookup': 'src/lookup',
 			'menu': 'src/menu',
 			'dashboard': 'src/dashboard',
+			'pages': 'src/pages',
+			'pageHelper': `src/pageHelper`,
 		}
 	}
 };

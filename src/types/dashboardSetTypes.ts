@@ -26,3 +26,26 @@ export type SetAdminEventSpeaker = {
     visible_from: string | null,
 }
 export type SetAllAdminEventSpeaker = SetAdminEventSpeaker[];
+
+export type SetSpeakerTeamMemberEvent = {
+    name: string,
+    short_bio: string,
+    bio: string,
+    photo_x: number,
+    photo_y: number,
+    photo_size: number,
+}
+
+export type SetUpdateSocialMediaLink = {
+    id: number,
+    social_media_type_id: number,
+    url: string,
+}
+export type SetAllUpdateSocialMediaLink = {
+    social_media_links: SetUpdateSocialMediaLink[],
+};
+
+export type SetCreateSocialMediaLink = {
+    social_media_type_id: number,
+    url: string,
+}

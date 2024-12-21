@@ -107,6 +107,11 @@
 			email: email.trim(),
 			password: password_1.trim()
 		};
+
+		if (import.meta.env.DEV) {
+			console.log(data);
+		}
+
 		const response: Response = await fetch(apiUrl('/api/account/register'), {
 			method: 'POST',
 			body: JSON.stringify(data)
@@ -192,7 +197,7 @@
 					on:input={startPasswordTimer}
 				/>
 				<Button
-					classes="button-text register-submit-button"
+					classes="register-submit-button"
 					type={'submit'}
 					ariaLabel="Klicke zum Registrieren"
 				>

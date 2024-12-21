@@ -9,6 +9,28 @@ export const dashboardRolesScheme = z.object({
 })
 export type DashboardRoles = z.infer<typeof dashboardRolesScheme>;
 
+export const dashboardEventIDScheme = z.object({
+    event_id: z.number(),
+    title: z.string(),
+})
+export type DashboardEventID = z.infer<typeof dashboardEventIDScheme>;
+
+export const dashboardAllEventIDScheme = z.array(dashboardEventIDScheme);
+export type DashboardAllEventID = z.infer<typeof dashboardAllEventIDScheme>;
+
+export const dashboardSpeakerTeamMemberScheme = z.object({
+    id: z.number(),
+    user_id: z.number(),
+    name: z.string(),
+    short_bio: z.string(),
+    bio: z.string(),
+    photo: z.string(),
+    visible_from: z.string().nullable(),
+    is_approved: z.boolean(),
+    requested_changes: z.string().nullable(),
+});
+export type DashboardSpeakerTeamMember = z.infer<typeof dashboardSpeakerTeamMemberScheme>;
+
 export const dashboardEventScheme = z.object({
     id: z.number(),
     title: z.string(),
@@ -76,3 +98,26 @@ export type DashboardApprovalSocialMediaLink = z.infer<typeof dashboardApprovalS
 
 export const dashboardAllApprovalSocialMediaLinkScheme = z.array(dashboardApprovalSocialMediaLinkScheme);
 export type DashboardAllApprovalSocialMediaLink = z.infer<typeof dashboardAllApprovalSocialMediaLinkScheme>;
+
+export const dashboardSocialMediaLinkScheme = z.object({
+    id: z.number(),
+    user_id: z.number(),
+    social_media_type_id: z.number(),
+    name: z.string(),
+    url: z.string(),
+    approved: z.boolean(),
+    requested_changes: z.string().nullable(),
+});
+export type DashboardSocialMediaLink = z.infer<typeof dashboardSocialMediaLinkScheme>;
+
+export const dashboardAllSocialMediaLinkScheme = z.array(dashboardSocialMediaLinkScheme);
+export type DashboardAllSocialMediaLink = z.infer<typeof dashboardAllSocialMediaLinkScheme>;
+
+export const dashboardSocialMediaLinkTypeScheme = z.object({
+    id: z.number(),
+    name: z.string(),
+})
+export type DashboardSocialMediaLinkType = z.infer<typeof dashboardSocialMediaLinkTypeScheme>;
+
+export const dashboardAllSocialMediaLinkTypeScheme = z.array(dashboardSocialMediaLinkTypeScheme);
+export type DashboardAllSocialMediaLinkType = z.infer<typeof dashboardAllSocialMediaLinkTypeScheme>;
