@@ -1,29 +1,47 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	export let x: number;
 	export let y: number;
 	export let size: number;
-	export let src: string;
+	export let file: Blob;
 	export let alt: string;
+	export let classes: string = '';
+
+	let mounted: boolean = false;
+	let canvas: HTMLCanvasElement;
+
+	onMount(() => {
+		mounted = true;
+		updateCrop();
+	});
+
+	$: if (file || x || y || size) {
+		updateCrop();
+	}
+
+	function updateCrop(): void {
+		if (!mounted) {
+			return;
+		}
+
+		const context = canvas.getContext('2d');
+
+		const reader = new FileReader();
+		reader.onload = (e) => {
+			const image = new Image();
+			image.onload = () => {
+				canvas.height = size;
+				canvas.width = size;
+				context?.drawImage(image, x, y, size, size, 0, 0, size, size);
+			};
+
+			if (e.target?.result) {
+				image.src = e.target.result as string;
+			}
+		};
+		reader.readAsDataURL(file);
+	}
 </script>
 
-<div class="cropped-image-wrapper" style="--x: {x}px; --y: {y}px; --size: {size}px">
-	<img {alt} {src} class="image-cropped" />
-</div>
-
-<style>
-	.cropped-image-wrapper {
-		position: relative;
-		width: var(--size);
-		height: var(--size);
-		overflow: hidden;
-		align-self: center;
-		border: 1px solid var(--primary-color-dark);
-		border-radius: var(--border-radius);
-	}
-
-	.image-cropped {
-		position: absolute;
-		top: calc(-1 * var(--y));
-		left: calc(-1 * var(--x));
-	}
-</style>
+<canvas bind:this={canvas} class={classes} aria-label={alt} />

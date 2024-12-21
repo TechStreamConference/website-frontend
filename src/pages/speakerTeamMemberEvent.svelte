@@ -256,13 +256,14 @@
 		<SaveMessage bind:this={saveMessage} />
 	</div>
 	<form class="dashboard-speaker-event-form" on:submit|preventDefault={trySaveAsync}>
-		{#if imagePreviewURL}
+		{#if imagePreviewURL && imageFile}
 			<CroppedImage
 				alt="Dein aktuelles Speaker-Bild für das Event {data.current.title}"
-				src={imagePreviewURL}
 				x={lastPhotoX}
 				y={lastPhotoY}
 				size={lastPhotoSize}
+				file={imageFile}
+				classes="dashboard-speaker-events-image"
 			/>
 		{:else}
 			<Image
