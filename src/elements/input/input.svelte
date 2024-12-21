@@ -10,6 +10,7 @@
 	export let id: string = '';
 	export let labelText: string = '';
 	export let placeholderText: string = '';
+	export let fileAccept: string = '';
 
 	export let value: string | number | File = '';
 
@@ -28,6 +29,7 @@
 			class="normal-font"
 			{id}
 			type="file"
+			accept={fileAccept}
 			name={id}
 			placeholder={placeholderText}
 			bind:value

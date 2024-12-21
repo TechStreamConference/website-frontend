@@ -278,6 +278,7 @@
 			placeholderText="Bild"
 			ariaLabel="Lade hier dein Bild für das Event {data.current.title} hoch"
 			type="file"
+			fileAccept=".jpg, .jpeg, .png"
 			on:input={(event) => {
 				// no setUnsavedChanges here because the cropper already does that.
 				changeImage(event);
