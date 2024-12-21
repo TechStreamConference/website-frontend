@@ -347,6 +347,8 @@
 
 	:global(.dashboard-speaker-events-image) {
 		max-height: 30rem;
+		max-width: 30rem;
+		align-self: center;
 		border: 1px solid var(--primary-color-dark);
 		border-radius: var(--border-radius);
 	}
