@@ -257,14 +257,23 @@
 	</div>
 	<form class="dashboard-speaker-event-form" on:submit|preventDefault={trySaveAsync}>
 		{#if imagePreviewURL && imageFile}
-			<CroppedImage
-				alt="Dein aktuelles Speaker-Bild für das Event {data.current.title}"
-				x={lastPhotoX}
-				y={lastPhotoY}
-				size={lastPhotoSize}
-				file={imageFile}
-				classes="dashboard-speaker-events-image"
-			/>
+			<div class="dashboard-speaker-event-cropped-image-wrapper">
+				<CroppedImage
+					alt="Dein aktuelles Speaker-Bild für das Event {data.current.title}"
+					x={lastPhotoX}
+					y={lastPhotoY}
+					size={lastPhotoSize}
+					file={imageFile}
+					classes="dashboard-speaker-events-image"
+				/>
+				<Button
+					classes="dashboard-speaker-event-cropped-image-delete-button"
+					ariaLabel="Klicke hier, um das aktuelle Bild zu löschen"
+					buttonSize="small-button"
+					on:click={resetImage}
+					type="button">X</Button
+				>
+			</div>
 		{:else}
 			<Image
 				alt="Dein aktuelles Speaker-Bild für das Event {data.current.title}"
@@ -338,10 +347,24 @@
 
 	:global(.dashboard-speaker-events-image) {
 		max-height: 30rem;
-		align-self: center;
+		border: 1px solid var(--primary-color-dark);
+		border-radius: var(--border-radius);
 	}
 
 	:global(.dashboard-speaker-event-submit-button) {
 		margin: auto;
+	}
+
+	.dashboard-speaker-event-cropped-image-wrapper {
+		position: relative;
+		width: fit-content;
+		align-self: center;
+	}
+
+	:global(.dashboard-speaker-event-cropped-image-delete-button) {
+		position: absolute;
+		top: -5%;
+		right: -7%;
+		z-index: 1;
 	}
 </style>
