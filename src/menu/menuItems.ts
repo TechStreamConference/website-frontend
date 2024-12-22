@@ -88,7 +88,7 @@ export const userCallForPapers: MenuItem = {
 
 export const admin: MenuItem = {
     name: "Admin",
-    url: adminGlobals.url,
+    url: adminApproval.url,
     description: "Klicke hier, um zum Admin Dashboard zu gelangen"
 }
 export const teamMember: MenuItem = {
