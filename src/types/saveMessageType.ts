@@ -2,12 +2,13 @@ export enum SaveMessageType {
     None,
     DeleteError,
     Error,
+    Approved,
     Delete,
     Save
 }
 
 export function isSaveType(type: SaveMessageType): boolean {
-    return type === SaveMessageType.Save || type === SaveMessageType.Delete;
+    return type === SaveMessageType.Save || type === SaveMessageType.Delete || type == SaveMessageType.Approved;
 }
 
 export function combineSaveType(lhs: SaveMessageType, rhs: SaveMessageType): SaveMessageType {
@@ -20,6 +21,10 @@ export function combineSaveType(lhs: SaveMessageType, rhs: SaveMessageType): Sav
 
     if (lhs === SaveMessageType.None || rhs === SaveMessageType.None) {
         return SaveMessageType.None;
+    }
+
+    if (lhs == SaveMessageType.Approved || rhs == SaveMessageType.Approved) {
+        return SaveMessageType.Approved;
     }
 
     if (lhs === SaveMessageType.Delete || rhs === SaveMessageType.Delete) {

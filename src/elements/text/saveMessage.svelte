@@ -27,6 +27,8 @@
 
 {#if type === SaveMessageType.Save}
 	<Message color="success" message="Gespeichert" />
+{:else if type === SaveMessageType.Approved}
+	<Message color="success" message="Freigegeben" />
 {:else if type === SaveMessageType.Delete}
 	<Message color="success" message="Gelöscht" />
 {:else if type === SaveMessageType.Error}
