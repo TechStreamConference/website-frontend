@@ -1,3 +1,4 @@
+import { replaceState } from "$app/navigation";
 
 export function scrollToTop(): void {
     scrollToAnchor('top');
@@ -5,6 +6,6 @@ export function scrollToTop(): void {
 
 
 export function scrollToAnchor(hash: string): void {
-    window.location.hash = ""; // this is needed to get a reaction if the hash was alredy applied
+    window.location.hash = ""; // this is needed to get a reaction if the hash was already applied
     window.location.hash = hash;
 }
