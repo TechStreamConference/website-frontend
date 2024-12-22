@@ -5,9 +5,6 @@ import type { ZodType } from "zod";
 export async function parseProvidedJsonAsync<T>(response: Response, scheme: ZodType<T>): Promise<T | undefined> {
     try {
         const type: T = await response.json();
-        if (import.meta.env.DEV) {
-            console.log(type);
-        }
         const validated = scheme.safeParse(type);
 
         if (validated.success) {
@@ -15,7 +12,6 @@ export async function parseProvidedJsonAsync<T>(response: Response, scheme: ZodT
         }
 
         console.error(validated.error.errors);
-        console.log("Validation-Original:", type);
 
     } catch (error) {
         console.error('Error occurred during parse or validation:', error);
