@@ -20,7 +20,7 @@
 
 	import { error } from '@sveltejs/kit';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
-	import { isSaveType, SaveMessageType } from 'types/saveMessageType';
+	import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
 	import { setUnsavedChanges } from 'stores/saved';
 	import { apiUrl } from 'helper/links';
 	import { z } from 'zod';
@@ -118,7 +118,7 @@
 			'/api/dashboard/user/social-media-link'
 		);
 
-		const success: boolean = isSaveType(messageType);
+		const success: boolean = isSuccessType(messageType);
 
 		if (!success || createFail) {
 			saveMessage.setSaveMessage(SaveMessageType.Error);
@@ -144,7 +144,7 @@
 			'POST'
 		);
 
-		return isSaveType(messageType);
+		return isSuccessType(messageType);
 	}
 </script>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Message from './message.svelte';
-	import { isSaveType, SaveMessageType } from 'types/saveMessageType';
+	import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
 
 	let type = SaveMessageType.None;
 	let timer: number | null = null;
@@ -12,7 +12,7 @@
 
 		type = value;
 
-		if (isSaveType(type)) {
+		if (isSuccessType(type)) {
 			setTimeout(() => {
 				reset();
 			}, 3000);

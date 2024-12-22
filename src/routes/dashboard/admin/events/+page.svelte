@@ -9,7 +9,7 @@
 
 	import { onMount } from 'svelte';
 	import { Clone } from 'helper/clone';
-	import { isSaveType } from 'types/saveMessageType';
+	import { isSuccessType } from 'types/saveMessageType';
 	import {
 		convertSaveEventData,
 		convertSaveSpeakerData,
@@ -163,7 +163,7 @@
 					'POST'
 				);
 
-				if (isSaveType(saveType)) {
+				if (isSuccessType(saveType)) {
 					location.reload(); // reload page to fetch new data from database
 				}
 
@@ -182,7 +182,7 @@
 		})(toSaveEvent, toSaveSpeaker);
 
 		message.setSaveMessage(saveType);
-		return isSaveType(saveType);
+		return isSuccessType(saveType);
 	}
 </script>
 

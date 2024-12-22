@@ -20,7 +20,7 @@
 	import { apiUrl } from 'helper/links';
 	import { scrollToAnchor } from 'helper/scroll';
 	import { getBackgroundClass } from './approvalHelper';
-	import { isSaveType, SaveMessageType } from 'types/saveMessageType';
+	import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
 	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
 	import { ApprovalSection, getSectionHash } from 'types/approvalSection';
 	import { validateApproval, validateRequestedChanges } from './approvalValidation';
@@ -95,7 +95,7 @@
 		}
 
 		const result: SaveMessageType = await saveApprovalAsync(section, id);
-		if (isSaveType(result)) {
+		if (isSuccessType(result)) {
 			deleteEntry(section, id);
 		}
 	}

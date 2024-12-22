@@ -1,5 +1,3 @@
-import { replaceState } from "$app/navigation";
-
 export function scrollToTop(): void {
     scrollToAnchor('top');
 }

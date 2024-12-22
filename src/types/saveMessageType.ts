@@ -7,7 +7,7 @@ export enum SaveMessageType {
     Save
 }
 
-export function isSaveType(type: SaveMessageType): boolean {
+export function isSuccessType(type: SaveMessageType): boolean {
     return type === SaveMessageType.Save || type === SaveMessageType.Delete || type == SaveMessageType.Approved;
 }
 
