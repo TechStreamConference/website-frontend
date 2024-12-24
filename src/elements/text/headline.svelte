@@ -1,44 +1,49 @@
 <script lang="ts">
-	export let classes: string = '';
+    export let classes: string = '';
 
-	export let size: string = 'headline-big';
+    export let size: string = 'headline-big';
 </script>
 
-<h1 class="headline-font {size} {classes}"><slot /></h1>
+<h1 class="headline-font {size} {classes}">
+    <slot/>
+</h1>
 
 <style>
-	h1 {
-		text-align: center;
-	}
-	.headline-big {
-		font-size: var(--3x-font-size);
-		line-height: var(--3x-line-height);
-	}
-	.headline-small {
-		font-size: var(--2x-font-size);
-		line-height: var(--2x-line-height);
-	}
+    h1 {
+        text-align: center;
+    }
 
-	.headline-border {
-		border-bottom: 1px solid var(--line-color);
-	}
+    .headline-big {
+        font-size:   var(--3x-font-size);
+        line-height: var(--3x-line-height);
+    }
 
-	.headline-green {
-		color: var(--secondary-color);
-	}
+    .headline-small {
+        font-size:   var(--2x-font-size);
+        line-height: var(--2x-line-height);
+    }
 
-	.headline-left {
-		text-align: left;
-	}
+    .headline-border {
+        border-bottom: 1px solid var(--line-color);
+    }
 
-	@media (max-width: 600px) {
-		.headline-big {
-			font-size: var(--2x-font-size);
-			line-height: var(--2x-line-height);
-		}
-		.headline-small {
-			font-size: var(--full-font-size);
-			line-height: var(--full-line-height);
-		}
-	}
+    .headline-green {
+        color: var(--secondary-color);
+    }
+
+    .headline-left {
+        text-align: left;
+    }
+
+    @media (max-width: 600px) {
+        .headline-big {
+            font-size:   var(--2x-font-size);
+            line-height: var(--2x-line-height);
+        }
+
+        .headline-small {
+            font-size:   var(--full-font-size);
+            line-height: var(--full-line-height);
+        }
+    }
 </style>
