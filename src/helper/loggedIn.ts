@@ -6,24 +6,22 @@ import { checkAndParseInputDataAsync } from './parseJson';
 import { dashboardRolesScheme } from 'types/dashboardProvideTypes';
 
 export async function fetchLoginStatusAsync(fetch: Function): Promise<boolean> {
-	const response: Response = await fetch(apiUrl('/api/account/roles'));
-	return response.ok;
+    const response: Response = await fetch(apiUrl('/api/account/roles'));
+    return response.ok;
 }
 
-export async function redirectIfUnauthorizedOrReturnRolesAsync(
-	fetch: Function
-): Promise<DashboardRoles> {
-	const response: Response = await fetch(apiUrl('/api/account/roles'));
-	if (!response.ok) {
-		throw redirect(302, '/login?showLoginMessage=true');
-	}
+export async function redirectIfUnauthorizedOrReturnRolesAsync(fetch: Function): Promise<DashboardRoles> {
+    const response: Response = await fetch(apiUrl('/api/account/roles'));
+    if (!response.ok) {
+        throw redirect(302, '/login?showLoginMessage=true');
+    }
 
-	const roles: DashboardRoles = await checkAndParseInputDataAsync<DashboardRoles>(
-		response,
-		dashboardRolesScheme,
-		`Serveranfrage für roles nicht erfolgreich. throw error(406)`,
-		`Unerwartete Daten für roles. throw error(406)`
-	);
+    const roles: DashboardRoles = await checkAndParseInputDataAsync<DashboardRoles>(
+        response,
+        dashboardRolesScheme,
+        `Serveranfrage für roles nicht erfolgreich. throw error(406)`,
+        `Unerwartete Daten für roles. throw error(406)`
+    );
 
-	return roles;
+    return roles;
 }
