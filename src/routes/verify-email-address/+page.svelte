@@ -17,11 +17,11 @@
 		<HeadlinePage>E-Mail Verifizierung</HeadlinePage>
 		{#if data.success === undefined}
 			<div class="verify-email-text-wrapper">
-				<TextLine>👻 Wir versuchen gerade deine E-Mail zu verifizieren. 👻</TextLine>
-				<TextLine>Offenbar dauert das alles ein bisschen länger als wir erwartet haben.</TextLine>
+				<TextLine>👻 Wir versuchen gerade, deine E-Mail zu verifizieren... 👻</TextLine>
+				<TextLine>Offenbar dauert das alles ein bisschen länger, als wir erwartet haben.</TextLine>
 				<TextLine>Bitte hab etwas Geduld</TextLine>
 			</div>
-			<TextLine>Falls sich hier länger nix tun sollte melde dich gerne bei uns.</TextLine>
+			<TextLine>Falls sich hier länger nix tun sollte, melde dich gerne bei uns.</TextLine>
 			<StyledLink
 				text={MenuItem.imprint.name}
 				href={MenuItem.imprint.url}
@@ -31,7 +31,7 @@
 		{:else if data.success}
 			<div class="verify-email-text-wrapper">
 				<TextLine>Deine E-Mail wurde erfolgreich verifiziert.</TextLine>
-				<TextLine>Du kannst dich ab jetzt anmelden.</TextLine>
+				<TextLine>Du kannst dich jetzt anmelden.</TextLine>
 			</div>
 			<StyledLink
 				text={MenuItem.login.name}
