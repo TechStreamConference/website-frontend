@@ -1,12 +1,12 @@
 <script lang="ts">
     export let classes: string = '';
-    export let size: string = 'sub-headline-big';
-    export let id: string = '';
+    export let size: string    = 'sub-headline-big';
+    export let id: string      = '';
 </script>
 
 <h3 id={id || undefined}
     class="sub-headline-font {classes} {size}">
-    <slot/>
+    <slot />
 </h3>
 
 <style>

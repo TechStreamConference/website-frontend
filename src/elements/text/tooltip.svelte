@@ -1,7 +1,7 @@
 <script lang="ts">
     import Paragraph from './paragraph.svelte';
 
-    export let classes: string = '';
+    export let classes: string        = '';
     export let tooltipClasses: string = '';
     export let tooltip: string;
 
@@ -33,7 +33,7 @@
       on:mouseleave={leave}
       on:mousemove={move}
 >
-    <slot/>
+    <slot />
 </button>
 
 {#if hovered}

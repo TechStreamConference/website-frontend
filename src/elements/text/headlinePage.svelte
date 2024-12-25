@@ -6,7 +6,7 @@
 
 <div>
     <Headline classes="headline-page-headline headline-border {classes}">
-        <slot/>
+        <slot />
     </Headline>
 </div>
 

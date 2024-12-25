@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {Globals, MenuItem} from 'types/provideTypes';
+    import type { Globals, MenuItem } from 'types/provideTypes';
 
     import TextLine from 'elements/text/textLine.svelte';
     import List from 'elements/list/list.svelte';
@@ -8,7 +8,7 @@
     import Paragraph from 'elements/text/paragraph.svelte';
     import LogoBig from 'elements/image/logoBig.svelte';
 
-    export let classes: string = "";
+    export let classes: string = '';
 
     export let globals: Globals;
     export let menu: MenuItem[];
@@ -57,7 +57,7 @@
         </div>
 
         <div class="navigation-footer-element">
-            <LogoBig classes="navigation-footer-logo"/>
+            <LogoBig classes="navigation-footer-logo" />
         </div>
     </div>
     <div class="navigation-footer-copyright">

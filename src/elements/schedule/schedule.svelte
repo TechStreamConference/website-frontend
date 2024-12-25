@@ -1,11 +1,11 @@
 <script lang="ts">
-    import type {Person, Talk} from 'types/provideTypes';
+    import type { Person, Talk } from 'types/provideTypes';
 
     import ScheduleEntry from './scheduleEntry.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
 
-    import {error} from '@sveltejs/kit';
-    import {formatDate} from 'helper/dates';
+    import { error } from '@sveltejs/kit';
+    import { formatDate } from 'helper/dates';
 
     export let speakers: Person[];
     export let schedule: Talk[];
@@ -37,7 +37,7 @@
             {#each schedule as talk}
                 <ScheduleEntry speaker={getSpeakerById(talk.speaker_id)}
                                {talk}
-                               {personPopupCallback}/>
+                               {personPopupCallback} />
             {/each}
         </div>
     </div>

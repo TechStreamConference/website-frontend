@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {SocialMediaLinks} from 'types/provideTypes';
+    import type { SocialMediaLinks } from 'types/provideTypes';
 
     import StyledLink from 'elements/input/styledLink.svelte';
 

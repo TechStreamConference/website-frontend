@@ -3,7 +3,7 @@
 </script>
 
 <p class="normal-font {classes}">
-    <slot/>
+    <slot />
 </p>
 
 <style>

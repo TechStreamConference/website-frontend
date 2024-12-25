@@ -1,11 +1,11 @@
 <script lang="ts">
-    import type {Person} from 'types/provideTypes';
+    import type { Person } from 'types/provideTypes';
 
     import PersonRectangle from './personRectangle.svelte';
 
     export let personPopupCallback: (event: Event, person: Person) => void;
 
-    export let classes: string = "";
+    export let classes: string = '';
     export let personData: Person[];
 </script>
 

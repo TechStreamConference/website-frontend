@@ -1,10 +1,10 @@
 <script lang="ts">
     import TextLine from './textLine.svelte';
 
-    import {fade} from 'svelte/transition';
+    import { fade } from 'svelte/transition';
 
-    export let message: string = '';
-    export let classes: string = 'message-error-color';
+    export let message: string            = '';
+    export let classes: string            = 'message-error-color';
     export let color: 'error' | 'success' = 'error';
 </script>
 

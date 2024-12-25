@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type {SponsorLink} from 'types/provideTypes';
+    import type { SponsorLink } from 'types/provideTypes';
 
     import Image from 'elements/image/image.svelte';
 
-    import {imageUrl} from 'helper/links';
+    import { imageUrl } from 'helper/links';
 
     export let link: SponsorLink;
 
@@ -20,7 +20,7 @@
 >
     <Image classes="image-default sponsor-link-hover"
            src={imageUrl(link.logo)}
-           alt={link.alt_text}/>
+           alt={link.alt_text} />
 </a>
 
 <style>

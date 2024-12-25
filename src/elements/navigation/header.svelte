@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type {MenuItem} from 'types/provideTypes';
+    import type { MenuItem } from 'types/provideTypes';
     import LogoSmall from 'elements/image/logoSmall.svelte';
-    import {fade} from 'svelte/transition';
+    import { fade } from 'svelte/transition';
     import Link from 'elements/text/link.svelte';
 
     export let menu: MenuItem[];
@@ -25,7 +25,7 @@
               class="navigation-header-logo-wrapper"
               title="Tech Stream Conference Seite des aktuellen Jahres anschauen"
         >
-            <LogoSmall classes={'navigation-header-logo'}/>
+            <LogoSmall classes={'navigation-header-logo'} />
         </a>
         <nav>
             <ul>
@@ -51,7 +51,7 @@
                   class="navigation-header-logo-wrapper"
                   title="Tech Stream Conference Seite des aktuellen Jahres anschauen"
             >
-                <LogoSmall classes={'navigation-header-logo'}/>
+                <LogoSmall classes={'navigation-header-logo'} />
             </a>
 
             <button

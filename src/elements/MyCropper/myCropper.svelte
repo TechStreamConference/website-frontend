@@ -30,7 +30,7 @@
         >
         <Cropper {image}
                  aspect={1 / 1}
-                 on:cropcomplete/>
+                 on:cropcomplete />
     </div>
 </div>
 

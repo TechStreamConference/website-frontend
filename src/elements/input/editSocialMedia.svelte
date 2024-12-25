@@ -1,7 +1,6 @@
 <script lang="ts">
     import type {
-        DashboardAllSocialMediaLink,
-        DashboardSocialMediaLink
+        DashboardAllSocialMediaLink, DashboardSocialMediaLink
     } from 'types/dashboardProvideTypes';
 
     import DropDown from './dropDown.svelte';
@@ -53,7 +52,7 @@
                   classes="edit-social-media-links-approval-icon"
                   tooltip="Dieser Link ist freigegeben.">
                 <Icon type="CircleCheck"
-                      color="green"/>
+                      color="green" />
             </Tooltip
             >
         {:else if link.requested_changes}
@@ -62,7 +61,7 @@
                   tooltip={`Änderungswünsche:\n${link.requested_changes}`}
             >
                 <Icon type="CircleCross"
-                      color="red"/>
+                      color="red" />
             </Tooltip
             >
         {:else}
@@ -71,7 +70,7 @@
                   tooltip={'Dieser Link muss noch Freigegeben werden.\nDerzeit gibt es keine Änderungswünsche.'}
             >
                 <Icon type="Clock"
-                      color="orange"/>
+                      color="orange" />
             </Tooltip
             >
         {/if}

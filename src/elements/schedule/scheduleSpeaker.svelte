@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type {Person} from 'types/provideTypes';
+    import type { Person } from 'types/provideTypes';
 
     export let speaker: Person;
 
-    export let classes: string = "";
+    export let classes: string = '';
 </script>
 
 <button class="normal-font {classes}"

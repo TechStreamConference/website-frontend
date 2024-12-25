@@ -5,8 +5,8 @@
     export let href: string;
     export let newTab: boolean = true;
     export let title: string;
-    export let icon: string = '';
-    export let text: string = '';
+    export let icon: string    = '';
+    export let text: string    = '';
 </script>
 
 <a
@@ -18,7 +18,7 @@
       on:click
 >
     {#if icon}
-        <Icon type={icon}/>
+        <Icon type={icon} />
     {/if}
     {#if text}
         {text}

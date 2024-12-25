@@ -117,7 +117,6 @@
         border:           none;
         background-color: transparent;
         cursor:           pointer;
-        text-decoration:  none;
     }
 
     @media (max-width: 600px) {

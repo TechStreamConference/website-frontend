@@ -1,7 +1,7 @@
 <script lang="ts">
-    import {fade} from 'svelte/transition';
-    import {saveCallback} from 'stores/saveCallback';
-    import {resetUnsavedChanges} from 'stores/saved';
+    import { fade } from 'svelte/transition';
+    import { saveCallback } from 'stores/saveCallback';
+    import { resetUnsavedChanges } from 'stores/saved';
 
     import Button from 'elements/input/button.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
@@ -9,12 +9,12 @@
     export let stayCallback: () => void;
     export let navigateCallback: () => void;
 
-    let _show: boolean = false;
+    let _show: boolean      = false;
     let saveButton: boolean = false;
 
     export function show(): void {
         saveButton = checkSaveButton();
-        _show = true;
+        _show      = true;
     }
 
     export function hide(): void {

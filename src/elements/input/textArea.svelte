@@ -1,14 +1,14 @@
 <script lang="ts">
     import Label from 'elements/text/label.svelte';
-    import {createEventDispatcher} from 'svelte';
+    import { createEventDispatcher } from 'svelte';
 
     export let ariaLabel: string;
     export let id: string;
     export let labelText: string;
 
-    export let classes: string = '';
-    export let placeholderText: string = "";
-    export let rows: number = 10;
+    export let classes: string         = '';
+    export let placeholderText: string = '';
+    export let rows: number            = 10;
 
     export let value: string | number = '';
 

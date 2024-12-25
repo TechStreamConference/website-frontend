@@ -1,7 +1,8 @@
+
 <script lang="ts">
     import Label from 'elements/text/label.svelte';
 
-    import {createEventDispatcher} from 'svelte';
+    import { createEventDispatcher } from 'svelte';
 
     export let classes: string = '';
     export let id: string;
@@ -35,17 +36,17 @@
 
 <style>
     div {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        width:          100%;
+        width: 100%;
     }
 
     select {
-        color:            var(--white-color);
+        color: var(--white-color);
         background-color: var(--primary-color-light);
-        border-radius:    var(--border-radius);
-        padding:          var(--half-padding);
-        width:            100%;
-        font-size:        var(--full-font-size);
+        border-radius: var(--border-radius);
+        padding: var(--half-padding);
+        width: 100%;
+        font-size: var(--full-font-size);
     }
 </style>

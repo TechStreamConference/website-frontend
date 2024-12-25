@@ -2,9 +2,9 @@
     export let title: string;
 
     export let classes: string = 'link-standard';
-    export let href: string = '';
+    export let href: string    = '';
     export let newTab: boolean = false;
-    export let font: string = "normal-font"
+    export let font: string    = 'normal-font';
 </script>
 
 <a {href}
@@ -13,7 +13,7 @@
    rel="noopener noreferrer"
    {title}
    on:click>
-    <slot/>
+    <slot />
 </a>
 
 <style>

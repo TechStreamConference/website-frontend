@@ -1,9 +1,9 @@
 <script lang="ts">
-    import {resetUnsavedChanges, unsavedChanges} from 'stores/saved';
-    import {beforeNavigate, goto} from '$app/navigation';
-    import {saveCallback} from 'stores/saveCallback';
+    import { resetUnsavedChanges, unsavedChanges } from 'stores/saved';
+    import { beforeNavigate, goto } from '$app/navigation';
+    import { saveCallback } from 'stores/saveCallback';
     import Button from 'elements/input/button.svelte';
-    import {fade} from 'svelte/transition';
+    import { fade } from 'svelte/transition';
     import SubHeadline from 'elements/text/subHeadline.svelte';
 
     let intercepted: Record<string, unknown> | null = null;
@@ -42,16 +42,18 @@
         stay();
     }
 
-    beforeNavigate(({to, cancel}) => {
+    beforeNavigate(({ to, cancel }) => {
         saveButton = checkSaveButton();
 
-        if (!unsavedChanges()) return;
+        if (!unsavedChanges()) {
+            return;
+        }
 
         cancel();
 
         if (to) {
-            intercepted = {url: to.url};
-            url = to.url;
+            intercepted = { url: to.url };
+            url         = to.url;
         }
     });
 </script>

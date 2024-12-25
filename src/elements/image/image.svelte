@@ -7,7 +7,7 @@
 
 <img class={classes}
      {src}
-     {alt}/>
+     {alt} />
 
 <style>
     .image-default {

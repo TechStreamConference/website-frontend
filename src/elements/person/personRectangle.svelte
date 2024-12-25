@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {Person} from 'types/provideTypes';
+    import type { Person } from 'types/provideTypes';
 
     import SubHeadline from 'elements/text/subHeadline.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
@@ -20,16 +20,16 @@
      on:click
      role="presentation">
     <PersonImage classes="person-rectangle-picture"
-                 {data}/>
+                 {data} />
     <div class="person-rectangle-text-wrapper">
         <SubHeadline>{data.name}</SubHeadline>
         <Paragraph classes="person-rectangle-paragraph">{data.short_bio}</Paragraph>
     </div>
-    <div class="person-rectangle-flex-growth"/>
+    <div class="person-rectangle-flex-growth" />
     <div class="person-rectangle-bottom-wrapper">
         <LinkArray on:click={onLinkClicked}
                    person={data.name}
-                   links={data.social_media_links}/>
+                   links={data.social_media_links} />
     </div>
     <Button classes="person-rectangle-button"
             on:click

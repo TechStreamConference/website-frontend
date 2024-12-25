@@ -2,7 +2,7 @@
     import Button from 'elements/input/button.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
-    import {fade} from 'svelte/transition';
+    import { fade } from 'svelte/transition';
 
     export let acceptCallback: <T>(content: T) => void;
     export let denyCallback: <T>(content: T) => void;
@@ -13,16 +13,16 @@
     export let denyButtonText: string;
 
     let _show: boolean = false;
-    let content: any = undefined;
+    let content: any   = undefined;
 
     export function show<T>(value: T) {
         content = value;
-        _show = true;
+        _show   = true;
     }
 
     function reset() {
         content = undefined;
-        _show = false;
+        _show   = false;
     }
 
     function accept() {

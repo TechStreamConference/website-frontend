@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {LoadYear} from 'types/loadTypes';
+    import type { LoadYear } from 'types/loadTypes';
 
     import StyledLink from './styledLink.svelte';
 

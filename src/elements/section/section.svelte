@@ -1,11 +1,11 @@
 <script lang="ts">
-    export let id: string = '';
+    export let id: string      = '';
     export let classes: string = '';
 </script>
 
 <section {id}
          class={classes}>
-    <slot/>
+    <slot />
 </section>
 
 <style>

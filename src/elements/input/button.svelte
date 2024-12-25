@@ -1,12 +1,13 @@
 <script lang="ts">
-    import {typeWorkaround} from 'types/workaround';
+    import { typeWorkaround } from 'types/workaround';
 
     export let ariaLabel: string;
 
     export let classes: string = '';
-    export let fontSize: 'small-text' | 'medium-text' | 'large-text' = 'medium-text';
+    export let type: string    = 'button';
+
+    export let fontSize: 'small-text' | 'medium-text' | 'large-text'         = 'medium-text';
     export let buttonSize: 'small-button' | 'medium-button' | 'large-button' = 'medium-button';
-    export let type: string = 'button';
 </script>
 
 <button
@@ -16,7 +17,7 @@
       aria-label={ariaLabel}
 >
     <p class="normal-font">
-        <slot/>
+        <slot />
     </p>
 </button>
 

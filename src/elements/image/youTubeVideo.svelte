@@ -2,7 +2,7 @@
     export let title: string;
     export let id: string;
 
-    export let classes: string = "";
+    export let classes: string = '';
 </script>
 
 <div class="{classes}">

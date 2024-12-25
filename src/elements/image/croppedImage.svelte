@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {onMount} from 'svelte';
+    import { onMount } from 'svelte';
 
     export let x: number;
     export let y: number;
@@ -27,12 +27,12 @@
 
         const context = canvas.getContext('2d');
 
-        const reader = new FileReader();
+        const reader  = new FileReader();
         reader.onload = (e) => {
-            const image = new Image();
+            const image  = new Image();
             image.onload = () => {
                 canvas.height = size;
-                canvas.width = size;
+                canvas.width  = size;
                 context?.drawImage(image, x, y, size, size, 0, 0, size, size);
             };
 
@@ -46,4 +46,4 @@
 
 <canvas bind:this={canvas}
         class={classes}
-        aria-label={alt}/>
+        aria-label={alt} />

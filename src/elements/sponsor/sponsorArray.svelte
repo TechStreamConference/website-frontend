@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {SponsorLinks} from 'types/provideTypes';
+    import type { SponsorLinks } from 'types/provideTypes';
 
     import Sponsor from 'elements/sponsor/sponsor.svelte';
     import TextLine from 'elements/text/textLine.svelte';
@@ -13,7 +13,7 @@
     {#each logos as logo}
         <div class="sponsor-array-image-container">
             <Sponsor link={logo}
-                     classes={'sponsor-array-link'}/>
+                     classes={'sponsor-array-link'} />
             {#if logo.copyright}
                 <TextLine classes="sponsor-array-text-line">{logo.copyright}</TextLine>
             {/if}

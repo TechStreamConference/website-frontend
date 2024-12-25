@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {Person} from 'types/provideTypes';
+    import type { Person } from 'types/provideTypes';
 
     import Paragraph from 'elements/text/paragraph.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
@@ -7,7 +7,7 @@
     import PersonImage from './personImage.svelte';
     import Button from 'elements/input/button.svelte';
 
-    import {fade} from 'svelte/transition';
+    import { fade } from 'svelte/transition';
 
     export let classes: string = '';
 
@@ -35,13 +35,13 @@
         <div class="person-popup-content-wrapper">
             <div class="person-popup-column-wrapper person-popup-align-center person-popup-line">
                 <PersonImage classes="person-popup-picture"
-                             {data}/>
+                             {data} />
                 <SubHeadline classes="person-popup-one-line-spacer">{data.name}</SubHeadline>
                 <Paragraph classes="person-popup-short-bio-paragraph paragraph-pre-wrap"
                 >{data.short_bio}</Paragraph
                 >
                 <PersonLinkGrid person={data.name}
-                                links={data.social_media_links}/>
+                                links={data.social_media_links} />
             </div>
             <div class="person-popup-column-wrapper">
                 <Paragraph classes="person-popup-one-line-spacer paragraph-pre-wrap">{data.bio}</Paragraph>

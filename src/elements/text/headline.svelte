@@ -5,7 +5,7 @@
 </script>
 
 <h1 class="headline-font {size} {classes}">
-    <slot/>
+    <slot />
 </h1>
 
 <style>

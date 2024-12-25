@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type {Person, Talk} from 'types/provideTypes';
+    import type { Person, Talk } from 'types/provideTypes';
 
     import ScheduleTag from './scheduleTag.svelte';
     import ScheduleSpeaker from './scheduleSpeaker.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
 
-    import {formatDate} from 'helper/dates';
+    import { formatDate } from 'helper/dates';
 
     export let personPopupCallback: (event: Event, person: Person) => void;
     export let speaker: Person;
@@ -21,7 +21,7 @@
         <SubHeadline>{talk.title}</SubHeadline>
         <div class="schedule-entry-tag-wrapper">
             {#each talk.tags as tag}
-                <ScheduleTag {tag}/>
+                <ScheduleTag {tag} />
             {/each}
         </div>
     </div>

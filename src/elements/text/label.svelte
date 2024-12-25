@@ -4,7 +4,7 @@
 
 <label class="normal-font"
        for={for_}>
-    <slot/>
+    <slot />
 </label>
 
 <style>

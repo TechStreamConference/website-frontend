@@ -3,7 +3,7 @@
 </script>
 
 <section class={classes}>
-    <slot/>
+    <slot />
 </section>
 
 <style>

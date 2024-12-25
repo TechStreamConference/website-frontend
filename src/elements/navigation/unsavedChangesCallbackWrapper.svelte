@@ -1,8 +1,8 @@
 <script lang="ts">
     type AsyncCallback = () => Promise<boolean>;
 
-    import {onDestroy, onMount} from 'svelte';
-    import {setSaveCallback, resetSaveCallback} from 'stores/saveCallback';
+    import { onDestroy, onMount } from 'svelte';
+    import { setSaveCallback, resetSaveCallback } from 'stores/saveCallback';
 
     export let callback: AsyncCallback;
 

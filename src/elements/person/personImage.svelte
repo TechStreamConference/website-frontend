@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type {Person} from 'types/provideTypes';
+    import type { Person } from 'types/provideTypes';
 
-    import {imageUrl} from 'helper/links';
+    import { imageUrl } from 'helper/links';
 
     export let classes: string = '';
 
@@ -10,4 +10,4 @@
 
 <img class={classes}
      src={imageUrl(data.photo)}
-     alt={'Profilbild von ' + data.name}/>
+     alt={'Profilbild von ' + data.name} />
