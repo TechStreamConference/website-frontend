@@ -3,7 +3,7 @@ import { checkAndParseGlobalsAsync } from "helper/parseJson";
 import type { LoadVerifyEmail } from "types/loadTypes";
 import type { Globals } from "types/provideTypes";
 
-export const ssr = false;
+export const ssr = false; // Disable Server Side Rendering to make sure the provided data gets only send once.
 
 export async function load({ fetch, url }: { fetch: typeof globalThis.fetch, url: URL }): Promise<LoadVerifyEmail> {
     const globalsPromise: Promise<Response> = fetch(apiUrl('/api/globals'));
