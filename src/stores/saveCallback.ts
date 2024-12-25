@@ -1,5 +1,8 @@
-import { writable, get, type Writable } from "svelte/store";
-type ValueType = (() => Promise<boolean>) | undefined;
+import { writable, get, type Writable } from 'svelte/store';
+
+type ValueType =
+    (() => Promise<boolean>)
+    | undefined;
 const _callback: Writable<ValueType> = writable(undefined);
 
 export function saveCallback(): ValueType {
