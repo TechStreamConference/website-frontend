@@ -1,35 +1,38 @@
-import type { Menu, MenuItem } from "types/provideTypes";
-import * as Item from './menuItems'
+import type {
+    Menu,
+    MenuItem,
+} from 'types/provideTypes';
+import * as Item from './menuItems';
 
 const top: MenuItem = {
-    name: 'Top',
-    url: '#top',
-    description: 'Klicke, um zur aktuellen Hauptseite zurückzukehren'
-}
+    name:        'Top',
+    url:         '#top',
+    description: 'Klicke, um zur aktuellen Hauptseite zurückzukehren',
+};
 
 const speaker: MenuItem = {
-    name: 'Vortragende',
-    url: '#Speaker',
-    description: 'Klicke, um zu den Vortragenden zu navigieren'
-}
+    name:        'Vortragende',
+    url:         '#Speaker',
+    description: 'Klicke, um zu den Vortragenden zu navigieren',
+};
 
 const sponsors: MenuItem = {
-    name: 'Partner',
-    url: '#Sponsors',
-    description: 'Klicke, um zu den Sponsoren und Partnern zu navigieren'
-}
+    name:        'Partner',
+    url:         '#Sponsors',
+    description: 'Klicke, um zu den Sponsoren und Partnern zu navigieren',
+};
 
 const team: MenuItem = {
-    name: 'Team',
-    url: '#Team',
-    description: 'Klicke, um zum Tech Stream Conference Team zu navigieren'
-}
+    name:        'Team',
+    url:         '#Team',
+    description: 'Klicke, um zum Tech Stream Conference Team zu navigieren',
+};
 
 const schedule: MenuItem = {
-    name: 'Ablaufplan',
-    url: '#Schedule',
-    description: 'Klicke, um zum Ablaufplan der Konferenz zu navigieren'
-}
+    name:        'Ablaufplan',
+    url:         '#Schedule',
+    description: 'Klicke, um zum Ablaufplan der Konferenz zu navigieren',
+};
 
 
 export const headerIn: Menu = [
