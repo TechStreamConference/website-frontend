@@ -5,7 +5,6 @@
     import SubHeadline from 'elements/text/subHeadline.svelte';
     import PersonLinkGrid from './personLinkGrid.svelte';
     import PersonImage from './personImage.svelte';
-    import Button from 'elements/input/button.svelte';
     import BasePopup from 'elements/popups/basePopup.svelte';
 
     export let data: Person;
@@ -28,7 +27,7 @@
                 <PersonImage classes="person-popup-picture"
                              {data} />
                 <SubHeadline classes="person-popup-one-line-spacer">{data.name}</SubHeadline>
-                <Paragraph classes="person-popup-short-bio-paragraph paragraph-pre-wrap"
+                <Paragraph classes="paragraph-pre-wrap"
                 >{data.short_bio}</Paragraph
                 >
                 <PersonLinkGrid person={data.name}
@@ -63,10 +62,6 @@
         margin-top: var(--full-margin);
     }
 
-    :global(.person-popup-short-bio-paragraph) {
-        flex-grow: 1;
-    }
-
     .person-popup-line {
         border-right: 1px solid var(--line-color);
     }
@@ -77,12 +72,10 @@
         max-width:  30rem;
         border:     1px solid var(--primary-color-light);
         align-self: center;
+        border-radius: var(--border-radius);
     }
 
     @media (max-width: 1280px) {
-        :global(.person-popup-short-bio-paragraph) {
-            flex-grow: unset;
-        }
 
         :global(.person-popup-picture) {
             max-width: 20rem;
