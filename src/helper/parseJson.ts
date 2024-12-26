@@ -1,8 +1,8 @@
 import { error } from "@sveltejs/kit";
 import { globalsScheme, type Globals } from "types/provideTypes";
-import type { ZodType } from "zod";
+import { z, ZodSchema } from 'zod';
 
-export async function parseProvidedJsonAsync<T>(response: Response, scheme: ZodType<T>): Promise<T | undefined> {
+export async function parseProvidedJsonAsync<T extends ZodSchema>(response: Response, scheme: T): Promise<z.infer<T> | undefined> {
     try {
         const type: T = await response.json();
         const validated = scheme.safeParse(type);
@@ -18,7 +18,7 @@ export async function parseProvidedJsonAsync<T>(response: Response, scheme: ZodT
     }
 }
 
-export async function checkAndParseInputDataAsync<T>(response: Response, scheme: ZodType<T>, messageOK: string, messageData: string): Promise<T> {
+export async function checkAndParseInputDataAsync<T extends ZodSchema>(response: Response, scheme: T, messageOK: string, messageData: string): Promise<z.infer<T>> {
     if (!response.ok) {
         console.error(messageOK);
         throw error(406);
@@ -35,7 +35,7 @@ export async function checkAndParseInputDataAsync<T>(response: Response, scheme:
 }
 
 export async function checkAndParseGlobalsAsync(response: Response): Promise<Globals> {
-    return await checkAndParseInputDataAsync<Globals>(
+    return await checkAndParseInputDataAsync(
         response,
         globalsScheme,
         `Serveranfrage für globals nicht erfolgreich. throw error(406)`,

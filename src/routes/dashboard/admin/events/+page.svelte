@@ -118,7 +118,7 @@
 
     function newEvent(): void {
         const containsNewEvent: boolean = (() => {
-            for (var event of copiedData.value.allEvents) {
+            for (let event of copiedData.value.allEvents) {
                 if (event.id === 0) {
                     selected = event.title;
                     return true;

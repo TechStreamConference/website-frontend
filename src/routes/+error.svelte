@@ -33,14 +33,14 @@
                 return;
             }
 
-            const provided = await parseProvidedJsonAsync<Globals>(response, globalsScheme);
+            const provided = await parseProvidedJsonAsync(response, globalsScheme);
             if (!provided) {
                 await handleFail(response);
                 return;
             }
 
             data = provided;
-        } catch (error) {
+        } catch {
             return;
         }
     });
@@ -56,11 +56,11 @@
         <HeadlinePage classes="border">{$page.status}</HeadlinePage>
         {#if $page.error}
             {#if $page.status === 404}
-                <SubHeadline classes="subheadline">
+                <SubHeadline classes="sub-headline">
                     Uuups! Die Seite konnte nicht gefunden werden 👻
                 </SubHeadline>
             {:else}
-                <SubHeadline classes="subheadline">
+                <SubHeadline classes="sub-headline">
                     Uuuups, irgendwas ist mächtig schief gelaufen, sorry! 🫨
                 </SubHeadline>
             {/if}
@@ -91,7 +91,7 @@
         flex-grow:       1;
     }
 
-    .page-404 :global(.subheadline) {
+    .page-404 :global(.sub-headline) {
         margin-top: var(--2x-margin);
     }
 

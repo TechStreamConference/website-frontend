@@ -34,7 +34,7 @@
 
     let personPopup: Person | undefined = undefined;
 
-    function openPersonPopup(event: Event, person: Person) {
+    function openPersonPopup(_: Event, person: Person) {
         personPopup = person;
     }
 

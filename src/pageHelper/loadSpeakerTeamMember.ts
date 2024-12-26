@@ -1,6 +1,4 @@
-import type {
-    DashboardAllEventID, DashboardSpeakerTeamMember,
-} from 'types/dashboardProvideTypes';
+import type {DashboardSpeakerTeamMember} from 'types/dashboardProvideTypes';
 import type { LoadSpeakerTeamMemberEvent } from 'types/dashboardLoadTypes';
 
 import {
@@ -16,7 +14,7 @@ export async function loadDataAsync(
     type: 'speaker' | 'team-member',
 ): Promise<LoadSpeakerTeamMemberEvent> {
     const allEventResponse: Promise<Response> = fetch(apiUrl(`/api/dashboard/${type}/all-events`));
-    const allEvents                           = await checkAndParseInputDataAsync<DashboardAllEventID>(
+    const allEvents                           = await checkAndParseInputDataAsync(
         await allEventResponse,
         dashboardAllEventIDScheme,
         `Serveranfrage für alle Event IDs im ${type} nicht erfolgreich. throw error(406)`,
@@ -44,7 +42,7 @@ export async function loadSpeakerTeamMemberAsync(
     type: string,
 ): Promise<DashboardSpeakerTeamMember> {
     const eventResponse: Promise<Response> = fetch(apiUrl(`/api/dashboard/${type}/event/${eventID}`));
-    return await checkAndParseInputDataAsync<DashboardSpeakerTeamMember>(
+    return await checkAndParseInputDataAsync(
         await eventResponse,
         dashboardSpeakerTeamMemberScheme,
         `Serveranfrage für den ${type}-Eintrag für Event ${eventID} nicht erfolgreich. throw error(406)`,
