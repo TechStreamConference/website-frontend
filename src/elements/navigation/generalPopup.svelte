@@ -13,7 +13,7 @@
     export let denyButtonText: string;
 
     let _show: boolean = false;
-    let content: any   = undefined;
+    let content: unknown   = undefined;
 
     export function show<T>(value: T) {
         content = value;
