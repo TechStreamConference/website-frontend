@@ -16,7 +16,7 @@
     let current: number = 0;
 
     function initial(): void {
-        for (var i = 0; i < entries.length; ++i) {
+        for (let i = 0; i < entries.length; ++i) {
             if (entries[i].name === entryName) {
                 current = i;
                 return;
@@ -117,6 +117,7 @@
         border:           none;
         background-color: transparent;
         cursor:           pointer;
+        text-decoration:  none;
     }
 
     @media (max-width: 600px) {
