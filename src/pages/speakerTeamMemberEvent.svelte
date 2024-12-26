@@ -84,7 +84,6 @@
 	}
 
 	function changeImage(event: Event): void {
-		console.log('image');
 		const previewCleanup: Function = () => {
 			if (imagePreviewURL) {
 				URL.revokeObjectURL(imagePreviewURL);
@@ -178,10 +177,6 @@
 		formData.append('json', JSON.stringify(toSave));
 		if (imageFile) {
 			formData.append('photo', imageFile);
-		}
-
-		if (import.meta.env.DEV) {
-			console.log(toSave);
 		}
 
 		const response: Response = await fetch(

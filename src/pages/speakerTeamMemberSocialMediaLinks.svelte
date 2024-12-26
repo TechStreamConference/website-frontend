@@ -38,7 +38,7 @@
 				return element.id;
 			}
 		}
-		console.log(`not able to look up requested social media link type ID: ${type}`);
+		console.error(`not able to look up requested social media link type ID: ${type}`);
 		throw error(500);
 	}
 

@@ -108,10 +108,6 @@
 			password: password_1.trim()
 		};
 
-		if (import.meta.env.DEV) {
-			console.log(data);
-		}
-
 		const response: Response = await fetch(apiUrl('/api/account/register'), {
 			method: 'POST',
 			body: JSON.stringify(data)
