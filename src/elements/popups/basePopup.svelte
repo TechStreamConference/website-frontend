@@ -97,6 +97,11 @@
         translate:   50% -50%;
         line-height: var(--2x-font-size);
         padding:     var(--half-padding);
+
+        @media (max-width: 1280px) {
+            right: 50%;
+            top: 101%;
+        }
     }
 
     @keyframes fade-in {
