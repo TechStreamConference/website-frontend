@@ -92,8 +92,8 @@
     @media (max-width: 900px) {
         .person-popup-content-wrapper {
             flex-direction: column;
-            overflow:       scroll;
-            height:         95%;
+            height:         75vh;
+            overflow-y:     auto;
         }
 
         .person-popup-column-wrapper {
