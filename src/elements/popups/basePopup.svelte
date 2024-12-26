@@ -17,10 +17,29 @@
     function dispatchClose() {
         eventDispatcher('close');
     }
+
+    function checkClickOutside(event: MouseEvent): void {
+        const rect      = dialog.getBoundingClientRect();
+        const isOutside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top
+                          || event.clientY > rect.bottom;
+
+        // @ts-expect-error somehow the IDE thinks this in an error. However, the value is provided.
+        if (!event.target.tagName) {
+            console.error('event.target.tagName is undefined');
+            return;
+        }
+
+        // @ts-expect-error somehow the IDE thinks this in an error. However, the value is provided.
+        if (isOutside && event.target.tagName === 'DIALOG') {
+            hide();
+        }
+    }
 </script>
 
-<dialog bind:this={dialog}
-        role="alertdialog">
+<dialog on:click={checkClickOutside}
+        bind:this={dialog}
+        role="alertdialog"
+>
     <div class="content-wrapper">
 
         <Button
