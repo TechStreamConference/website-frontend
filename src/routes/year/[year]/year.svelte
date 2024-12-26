@@ -1,8 +1,7 @@
 <script lang="ts">
     import type { LoadYear } from 'types/loadTypes';
     import type {
-        Person,
-        Talk,
+        Person, Talk,
     } from 'types/provideTypes';
 
     import * as Menu from 'menu/year';
@@ -32,14 +31,14 @@
         special: Talk[];
     };
 
-    let personPopup: Person | undefined = undefined;
+    let personPopup: PersonPopup;
 
     function openPersonPopup(_: Event, person: Person) {
-        personPopup = person;
+        personPopup.show(person);
     }
 
     function closePersonPopup(): void {
-        personPopup = undefined;
+        personPopup.hide();
     }
 
     function splitTalks(): ScheduleDay[] {
@@ -175,10 +174,8 @@
             menu={data.loggedIn ? Menu.footerIn : Menu.footerOut} />
 </div>
 
-{#if personPopup}
-    <PersonPopup data={personPopup}
-                 on:click={closePersonPopup} />
-{/if}
+<PersonPopup bind:this={personPopup}
+             on:click={closePersonPopup} />
 
 <style>
     .year {
