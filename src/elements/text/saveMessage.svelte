@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Message from './message.svelte';
-	import { isSaveType, SaveMessageType } from 'types/saveMessageType';
+	import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
 
 	let type = SaveMessageType.None;
 	let timer: number | null = null;
@@ -12,7 +12,7 @@
 
 		type = value;
 
-		if (isSaveType(type)) {
+		if (isSuccessType(type)) {
 			setTimeout(() => {
 				reset();
 			}, 3000);
@@ -27,6 +27,8 @@
 
 {#if type === SaveMessageType.Save}
 	<Message color="success" message="Gespeichert" />
+{:else if type === SaveMessageType.Approved}
+	<Message color="success" message="Freigegeben" />
 {:else if type === SaveMessageType.Delete}
 	<Message color="success" message="Gelöscht" />
 {:else if type === SaveMessageType.Error}

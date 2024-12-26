@@ -6,7 +6,7 @@
 	import type { SetAdminGlobals } from 'types/dashboardSetTypes';
 
 	import { Clone } from 'helper/clone';
-	import { isSaveType, SaveMessageType } from 'types/saveMessageType';
+	import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
 	import { setUnsavedChanges } from 'stores/saved';
 	import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 
@@ -33,7 +33,7 @@
 		);
 
 		message.setSaveMessage(saveType);
-		return isSaveType(saveType);
+		return isSuccessType(saveType);
 	}
 </script>
 

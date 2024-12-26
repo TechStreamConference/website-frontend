@@ -20,7 +20,7 @@
 	import { apiUrl } from 'helper/links';
 	import { scrollToAnchor } from 'helper/scroll';
 	import { getBackgroundClass } from './approvalHelper';
-	import { SaveMessageType } from 'types/saveMessageType';
+	import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
 	import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
 	import { ApprovalSection, getSectionHash } from 'types/approvalSection';
 	import { validateApproval, validateRequestedChanges } from './approvalValidation';
@@ -94,10 +94,13 @@
 			return;
 		}
 
-		await saveApprovalAsync(section, id);
+		const result: SaveMessageType = await saveApprovalAsync(section, id);
+		if (isSuccessType(result)) {
+			deleteEntry(section, id);
+		}
 	}
 
-	async function saveApprovalAsync(section: ApprovalSection, id: number) {
+	async function saveApprovalAsync(section: ApprovalSection, id: number): Promise<SaveMessageType> {
 		const route: string = apiUrl(`/api/dashboard/admin/approval/${routePartLookup[section]}/${id}`);
 		const response: Response = await fetch(route, {
 			method: 'PUT'
@@ -105,10 +108,33 @@
 
 		if (!response.ok) {
 			saveMessages[section][id].setSaveMessage(SaveMessageType.Error);
+			return SaveMessageType.Error;
 		}
 
 		resetUnsavedChanges();
 		saveMessages[section][id].setSaveMessage(SaveMessageType.Approved);
+		return SaveMessageType.Approved;
+	}
+
+	function deleteEntry(section: ApprovalSection, id: number): void {
+		setTimeout(() => {
+			delete saveMessages[section][id];
+			delete specificErrors[section][id];
+			// use assignments here because of reactivity
+			if (section === ApprovalSection.Speaker) {
+				data.speaker = data.speaker.filter((item) => {
+					return item.id !== id;
+				});
+			} else if (section === ApprovalSection.TeamMember) {
+				data.teamMember = data.teamMember.filter((item) => {
+					return item.id !== id;
+				});
+			} else {
+				data.socialMedia = data.socialMedia.filter((item) => {
+					return item.id !== id;
+				});
+			}
+		}, 3005);
 	}
 </script>
 

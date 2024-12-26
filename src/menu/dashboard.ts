@@ -29,9 +29,9 @@ export const footerIn: Menu = [
 ];
 
 export const admin: Menu = [
-    Item.adminGlobals,
-    Item.adminEvents,
     Item.adminApproval,
+    Item.adminEvents,
+    Item.adminGlobals,
 ]
 export const speaker: Menu = [
     Item.speakerEvents,
