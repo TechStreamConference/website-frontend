@@ -15,7 +15,7 @@
 	import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 	import EditSocialMedia from 'elements/input/editSocialMedia.svelte';
 	import Button from 'elements/input/button.svelte';
-	import GeneralPopup from 'elements/navigation/generalPopup.svelte';
+	import GeneralPopup from 'elements/popups/generalPopup.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
 
 	import { error } from '@sveltejs/kit';

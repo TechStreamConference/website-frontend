@@ -16,14 +16,9 @@
 
 <dialog class={classes}
         transition:fade={{ duration: 300 }}
-        role="presentation"
-        on:click>
+        role="alertdialog">
     <div
           class="person-popup-wrapper"
-          role="presentation"
-          on:click={(event) => {
-			event.stopPropagation();
-		}}
     >
         <Button
               fontSize="large-text"
