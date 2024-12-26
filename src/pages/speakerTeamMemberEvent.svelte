@@ -15,7 +15,7 @@
 	import { loadSpeakerTeamMemberAsync } from 'pageHelper/loadSpeakerTeamMember';
 	import { onDestroy } from 'svelte';
 
-	import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
+	import ManualUnsavedChangesPopup from 'elements/popups/manualUnsavedChangesPopup.svelte';
 	import Tabs from 'elements/navigation/tabs.svelte';
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';

@@ -3,40 +3,29 @@
     import * as MenuItem from 'menu/menuItems';
 
     import type {
-        LoadAdminEvents,
-        LoadDashboard,
+        LoadAdminEvents, LoadDashboard,
     } from 'types/dashboardLoadTypes';
     import type {
-        DashboardAllEventSpeaker,
-        DashboardEvent,
+        DashboardAllEventSpeaker, DashboardEvent,
     } from 'types/dashboardProvideTypes';
     import type {
-        SetAdminEvent,
-        SetAllAdminEventSpeaker,
+        SetAdminEvent, SetAllAdminEventSpeaker,
     } from 'types/dashboardSetTypes';
     import {
-        combineSaveType,
-        SaveMessageType,
+        combineSaveType, SaveMessageType,
     } from 'types/saveMessageType';
 
     import { onMount } from 'svelte';
     import { Clone } from 'helper/clone';
     import { isSuccessType } from 'types/saveMessageType';
     import {
-        convertSaveEventData,
-        convertSaveSpeakerData,
-        getAllEventTitle,
-        getEventByTitle,
-        loadSpeaker,
-        validateData,
+        convertSaveEventData, convertSaveSpeakerData, getAllEventTitle, getEventByTitle, loadSpeaker, validateData,
     } from './eventsHelper';
     import {
-        unsavedChanges,
-        setUnsavedChanges,
+        unsavedChanges, setUnsavedChanges,
     } from 'stores/saved';
     import {
-        convertTimeAndDateToHTML,
-        formatDate,
+        convertTimeAndDateToHTML, formatDate,
     } from 'helper/dates';
     import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
     import { scrollToTop } from 'helper/scroll';
@@ -50,7 +39,7 @@
     import TextArea from 'elements/input/textArea.svelte';
     import Button from 'elements/input/button.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
-    import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
+    import ManualUnsavedChangesPopup from 'elements/popups/manualUnsavedChangesPopup.svelte';
     import Message from 'elements/text/message.svelte';
     import Tabs from 'elements/navigation/tabs.svelte';
 
