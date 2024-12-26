@@ -3,7 +3,7 @@
     import Cropper from 'svelte-easy-crop';
 
     export let image: string;
-    export let discardCallback: Function;
+    export let discardCallback: () => void;
 </script>
 
 <div class="cropper-popup-wrapper"
@@ -29,7 +29,7 @@
         </Button
         >
         <Cropper {image}
-                 aspect={1 / 1}
+                 aspect={1}
                  on:cropcomplete />
     </div>
 </div>
