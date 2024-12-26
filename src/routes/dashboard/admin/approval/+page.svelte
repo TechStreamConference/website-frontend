@@ -120,7 +120,7 @@
 		setTimeout(() => {
 			delete saveMessages[section][id];
 			delete specificErrors[section][id];
-			// use assignments here because of reaktives
+			// use assignments here because of reactivity
 			if (section === ApprovalSection.Speaker) {
 				data.speaker = data.speaker.filter((item) => {
 					return item.id !== id;
