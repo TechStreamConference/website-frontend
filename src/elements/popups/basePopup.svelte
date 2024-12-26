@@ -1,18 +1,17 @@
 <script lang="ts">
 
-    import { fade } from 'svelte/transition';
     import Button from 'elements/input/button.svelte';
     import { createEventDispatcher } from 'svelte';
 
-    let _show           = false;
     let eventDispatcher = createEventDispatcher();
+    let dialog: HTMLDialogElement;
 
     export function show() {
-        _show = true;
+        dialog.showModal();
     }
 
     export function hide() {
-        _show = false;
+        dialog.close();
     }
 
     function dispatchClose() {
@@ -20,64 +19,56 @@
     }
 </script>
 
+<dialog bind:this={dialog}
+        role="alertdialog">
+    <div class="content-wrapper">
 
-<dialog open={_show}
-        role="alertdialog"
-        transition:fade={{ duration: 300 }}>
-    <button class="general-popup-close"
-            on:click={() => { hide(); dispatchClose(); }}>
-
-        <span class="general-popup-modal"
-              on:click={e => e.stopPropagation()}
-              role="presentation">
-
-              <Button
-                    fontSize="large-text"
-                    classes="general-popup-close-button"
-                    ariaLabel="close popup"
-                    buttonSize="small-button"
-                    on:click={() => { hide(); dispatchClose(); }}>&times;
-              </Button>
-              <slot />
-        </span>
-    </button>
+        <Button
+              fontSize="large-text"
+              classes="general-popup-close-button"
+              ariaLabel="close popup"
+              buttonSize="small-button"
+              on:click={() => { hide(); dispatchClose(); }}>&times;
+        </Button>
+        <slot />
+    </div>
 </dialog>
 
 <style>
     dialog {
-        top:              0;
-        left:             0;
-        height:           100vh;
-        width:            100vw;
-        background-color: var(--background-color-transparent);
         z-index:          20;
+        left:             50%;
+        top:              50%;
+        translate:        -50% -50%;
+        position:         fixed;
+        overflow:         visible;
+        background-color: var(--background-color-light);
+        border:           1px solid var(--line-color);
+        border-radius:    var(--border-radius);
+        height:           fit-content;
+        width:            fit-content;
+        animation:        fade-out 0.3s ease-out;
     }
 
     dialog[open] {
-        display: flex;
+        animation: fade-in 0.3s ease-out;
     }
 
-    .general-popup-close {
-        all:             unset;
-        height:          100%;
-        width:           100%;
+    dialog[open]::backdrop {
+        background-color: var(--background-color-transparent);
+        animation:        backdrop-fade-in 0.3s ease-out forwards;
+    }
+
+    .content-wrapper {
+        padding:         var(--2x-padding);
+        position:        relative;
+        width:           fit-content;
+        height:          fit-content;
         display:         flex;
+        flex-direction:  column;
         justify-content: center;
         align-items:     center;
-    }
-
-    .general-popup-modal {
-        position:         relative;
-        display:          flex;
-        flex-direction:   column;
-        background-color: var(--background-color-light);
-        padding:          var(--2x-padding);
-        border:           1px solid var(--line-color);
-        border-radius:    var(--border-radius);
-        gap:              var(--full-gap);
-        align-items:      center;
-        height:           fit-content;
-        width:            fit-content;
+        gap:             var(--full-gap);
     }
 
     :global(.general-popup-close-button) {
@@ -87,5 +78,43 @@
         translate:   50% -50%;
         line-height: var(--2x-font-size);
         padding:     var(--half-padding);
+    }
+
+    @keyframes fade-in {
+        0% {
+            opacity:   0;
+            transform: scaley(0);
+            display:   none;
+        }
+
+        100% {
+            opacity:   1;
+            transform: scaley(1);
+            display:   block;
+        }
+    }
+
+    @keyframes fade-out {
+        0% {
+            opacity:   1;
+            transform: scaleY(1);
+            display:   block;
+        }
+
+        100% {
+            opacity:   0;
+            transform: scaleY(0);
+            display:   none;
+        }
+    }
+
+    @keyframes backdrop-fade-in {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
     }
 </style>
