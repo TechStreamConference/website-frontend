@@ -1,12 +1,10 @@
 import type {
-    DashboardAllEventID,
-    DashboardSpeakerTeamMember,
+    DashboardAllEventID, DashboardSpeakerTeamMember,
 } from 'types/dashboardProvideTypes';
 import type { LoadSpeakerTeamMemberEvent } from 'types/dashboardLoadTypes';
 
 import {
-    dashboardAllEventIDScheme,
-    dashboardSpeakerTeamMemberScheme,
+    dashboardAllEventIDScheme, dashboardSpeakerTeamMemberScheme,
 } from 'types/dashboardProvideTypes';
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
@@ -14,7 +12,7 @@ import { error } from '@sveltejs/kit';
 
 
 export async function loadDataAsync(
-    fetch: Function,
+    fetch: typeof globalThis.fetch,
     type: 'speaker' | 'team-member',
 ): Promise<LoadSpeakerTeamMemberEvent> {
     const allEventResponse: Promise<Response> = fetch(apiUrl(`/api/dashboard/${type}/all-events`));
@@ -22,7 +20,7 @@ export async function loadDataAsync(
         await allEventResponse,
         dashboardAllEventIDScheme,
         `Serveranfrage für alle Event IDs im ${type} nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für Alle Event Ids der ${type}. throw error(406)`,
+        `Unerwartete Daten für alle Event Ids der ${type}. throw error(406)`,
     );
 
     if (allEvents.length == 0) {
@@ -41,17 +39,15 @@ export async function loadDataAsync(
 }
 
 export async function loadSpeakerTeamMemberAsync(
-    fetch: Function,
+    fetch: typeof globalThis.fetch,
     eventID: number,
     type: string,
 ): Promise<DashboardSpeakerTeamMember> {
     const eventResponse: Promise<Response> = fetch(apiUrl(`/api/dashboard/${type}/event/${eventID}`));
-    const event                            = await checkAndParseInputDataAsync<DashboardSpeakerTeamMember>(
+    return await checkAndParseInputDataAsync<DashboardSpeakerTeamMember>(
         await eventResponse,
         dashboardSpeakerTeamMemberScheme,
         `Serveranfrage für den ${type}-Eintrag für Event ${eventID} nicht erfolgreich. throw error(406)`,
         `Unerwartete Daten für den ${type}-Eintrag für das Event ${eventID}. throw error(406)`,
     );
-
-    return event;
 }

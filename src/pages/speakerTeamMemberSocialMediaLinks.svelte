@@ -33,7 +33,7 @@
 	let messages: string[] = [];
 
 	function getIDFromSocialMediaType(type: string): number {
-		for (var element of data.socialTypes) {
+		for (let element of data.socialTypes) {
 			if (type === element.name) {
 				return element.id;
 			}
@@ -44,7 +44,7 @@
 
 	function validate(): string[] {
 		const messages: string[] = [];
-		for (var entry of data.socials) {
+		for (let entry of data.socials) {
 			if (entry.url.trim().length === 0) {
 				messages.push(`Ein ${entry.name} - Eintrag ist leer`);
 				continue;
@@ -98,7 +98,7 @@
 
 		const toSave: SetAllUpdateSocialMediaLink = { social_media_links: [] };
 		let createFail: boolean = false;
-		for (var link of data.socials) {
+		for (let link of data.socials) {
 			if (link.id === 0) {
 				if (!(await tryCreateAsync(link))) {
 					createFail = true;
@@ -168,7 +168,7 @@
 
 		console.error('provided entry index from generic popup is not number');
 	}}
-	denyCallback={(e) => {}}
+	denyCallback={() => {}}
 ></GeneralPopup>
 
 <SectionDashboard classes="standard-dashboard-section">
