@@ -44,7 +44,7 @@ export const adminGlobals: MenuItem  = {
 export const adminEvents: MenuItem   = {
     name:        'Events',
     url:         '/dashboard/admin/events',
-    description: 'Klicke hier, um zu den Event Einstellungen zu gelangen',
+    description: 'Klicke hier, um zu den Event-Einstellungen zu gelangen',
 };
 export const adminApproval: MenuItem = {
     name:        'Freigabe',
@@ -55,23 +55,23 @@ export const adminApproval: MenuItem = {
 export const speakerEvents: MenuItem      = {
     name:        'Events',
     url:         '/dashboard/speaker/events',
-    description: 'Klicke hier, um zu den Event spezifischen Einstellungen zu gelangen',
+    description: 'Klicke hier, um zu den event-spezifischen Einstellungen zu gelangen',
 };
 export const speakerSocialMedia: MenuItem = {
     name:        'Social Media',
     url:         '/dashboard/speaker/socials',
-    description: 'Klicke hier, um zu den Social Media Einstellungen zu gelangen',
+    description: 'Klicke hier, um zu den Social-Media-Einstellungen zu gelangen',
 };
 
 export const teamMemberEvents: MenuItem      = {
     name:        'Events',
     url:         '/dashboard/team-member/events',
-    description: 'Klicke hier, um zu den Event spezifischen Einstellungen zu gelangen',
+    description: 'Klicke hier, um zu den event-spezifischen Einstellungen zu gelangen',
 };
 export const teamMemberSocialMedia: MenuItem = {
     name:        'Social Media',
     url:         '/dashboard/team-member/social-media',
-    description: 'Klicke hier, um zu den Social Media Einstellungen zu gelangen',
+    description: 'Klicke hier, um zu den Social-Media-Einstellungen zu gelangen',
 };
 
 export const userProfile: MenuItem       = {
@@ -88,20 +88,20 @@ export const userCallForPapers: MenuItem = {
 export const admin: MenuItem      = {
     name:        'Admin',
     url:         adminApproval.url,
-    description: 'Klicke hier, um zum Admin Dashboard zu gelangen',
+    description: 'Klicke hier, um zum Admin-Dashboard zu gelangen',
 };
 export const teamMember: MenuItem = {
     name:        'Team Member',
     url:         teamMemberEvents.url,
-    description: 'Klicke hier, um zum Team Member Dashboard zu gelangen',
+    description: 'Klicke hier, um zum Team-Member-Dashboard zu gelangen',
 };
 export const speaker: MenuItem    = {
     name:        'Speaker',
     url:         speakerEvents.url,
-    description: 'Klicke hier, um zum Speaker Dashboard zu gelangen',
+    description: 'Klicke hier, um zum Speaker-Dashboard zu gelangen',
 };
 export const user: MenuItem       = {
     name:        'User',
     url:         userProfile.url,
-    description: 'Klicke hier, um zum user Dashboard zu gelangen',
+    description: 'Klicke hier, um zum User-Dashboard zu gelangen',
 };

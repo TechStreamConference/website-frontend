@@ -3,7 +3,7 @@ import type { DashboardRoles } from 'types/dashboardProvideTypes';
 import * as Item from './menuItems';
 
 export function SectionIn(roles: DashboardRoles) {
-    let menu: Menu = [];
+    const menu: Menu = [];
 
     if (roles.is_admin) {
         menu.push(Item.admin);

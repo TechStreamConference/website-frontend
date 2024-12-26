@@ -25,7 +25,7 @@ const sponsors: MenuItem = {
 const team: MenuItem = {
     name:        'Team',
     url:         '#Team',
-    description: 'Klicke, um zum Tech Stream Conference Team zu navigieren',
+    description: 'Klicke, um zum Tech Stream Conference-Team zu navigieren',
 };
 
 const schedule: MenuItem = {
