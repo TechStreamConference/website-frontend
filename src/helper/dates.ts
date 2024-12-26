@@ -5,13 +5,15 @@ const lookup: string[] = [
     'Mittwoch',
     'Donnerstag',
     'Freitag',
-    'Samstag'
+    'Samstag',
 ];
 
 export function formatDate(provided: string, format: string): string {
     const date = new Date(provided);
 
-    const map: { [key: string]: string } = {
+    const map: {
+        [key: string]: string
+    } = {
         '%YYYY': String(date.getFullYear()),
         '%M':    String(date.getMonth() + 1),
         '%MM':   String(date.getMonth() + 1).padStart(2, '0'),
@@ -24,7 +26,7 @@ export function formatDate(provided: string, format: string): string {
         '%m':  String(date.getMinutes()),
         '%mm': String(date.getMinutes()).padStart(2, '0'),
         '%s':  String(date.getSeconds()),
-        '%ss': String(date.getSeconds()).padStart(2, '0')
+        '%ss': String(date.getSeconds()).padStart(2, '0'),
     };
 
     return format.replace(/%YYYY|%MM|%M|%DD|%D|%d|%hh|%h|%mm|%m|%ss|%s/g, (matched) => map[matched]);
@@ -62,10 +64,10 @@ export function isBeforeOrSameDates(lhs: Date, rhs: Date): boolean {
     return lhs.getTime() <= rhs.getTime();
 }
 
-export function isPassedNowString(date: string): boolean {
-    return isPassedNow(new Date(date));
+export function isPastNowString(date: string): boolean {
+    return isPastNow(new Date(date));
 }
 
-export function isPassedNow(date: Date): boolean {
+export function isPastNow(date: Date): boolean {
     return isBeforeOrSameDates(new Date(), date);
 }

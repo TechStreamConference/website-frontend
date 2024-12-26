@@ -3,9 +3,8 @@ import type { DashboardRoles } from 'types/dashboardProvideTypes';
 import { redirectIfUnauthorizedOrReturnRolesAsync } from './loggedIn';
 import * as MenuItems from 'menu/menuItems';
 
-export async function defaultPermissionCheck(fetch: Function): Promise<DashboardRoles> {
-    const roles: DashboardRoles = await redirectIfUnauthorizedOrReturnRolesAsync(fetch);
-    return roles;
+export async function defaultPermissionCheck(fetch: typeof globalThis.fetch): Promise<DashboardRoles> {
+    return await redirectIfUnauthorizedOrReturnRolesAsync(fetch);
 }
 
 export function defaultNavigation(roles: DashboardRoles): void {
