@@ -14,6 +14,11 @@
         dialog.close();
     }
 
+    function hideWithDispatch() {
+        hide();
+        dispatchClose()
+    }
+
     function dispatchClose() {
         eventDispatcher('close');
     }
@@ -31,11 +36,13 @@
 
         // @ts-expect-error somehow the IDE thinks this in an error. However, the value is provided.
         if (isOutside && event.target.tagName === 'DIALOG') {
-            hide();
+            hideWithDispatch();
         }
     }
 </script>
 
+<!--- not able to disable this A11y warning --->
+<!--- the provided Button is providing the same functionality --->
 <dialog on:click={checkClickOutside}
         bind:this={dialog}
         role="alertdialog"
@@ -47,7 +54,7 @@
               classes="general-popup-close-button"
               ariaLabel="close popup"
               buttonSize="small-button"
-              on:click={() => { hide(); dispatchClose(); }}>&times;
+              on:click={hideWithDispatch}>&times;
         </Button>
         <slot />
     </div>
