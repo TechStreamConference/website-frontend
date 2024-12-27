@@ -1,17 +1,20 @@
 <script lang="ts">
-	import * as Menu from 'menu/dashboard';
-	import * as MenuItem from 'menu/menuItems';
+    import * as Menu from 'menu/dashboard';
+    import * as MenuItem from 'menu/menuItems';
 
-	import type { LoadDashboard, LoadSpeakerTeamMemberEvent } from 'types/dashboardLoadTypes';
+    import type {
+        LoadDashboard,
+        LoadSpeakerTeamMemberEvent,
+    } from 'types/dashboardLoadTypes';
 
-	import SpeakerTeamMemberEvent from 'pages/speakerTeamMemberEvent.svelte';
+    import SpeakerTeamMemberEvent from 'pages/speakerTeamMemberEvent.svelte';
 
-	export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
+    export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
 </script>
 
 <SpeakerTeamMemberEvent
-	{data}
-	menu={Menu.speaker}
-	menuItem={MenuItem.speakerEvents}
-	type="speaker"
+      {data}
+      menu={Menu.speaker}
+      menuItem={MenuItem.speakerEvents}
+      type="speaker"
 />

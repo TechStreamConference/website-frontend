@@ -1,13 +1,13 @@
 <script lang="ts">
-	export let classes: string = '';
+    export let classes: string = '';
 </script>
 
 <ul class={classes}>
-	<slot />
+    <slot />
 </ul>
 
 <style>
-	.list-padding-left {
-		padding-left: var(--2x-padding);
-	}
+    .list-padding-left {
+        padding-left: var(--2x-padding);
+    }
 </style>

@@ -1,53 +1,60 @@
 <script lang="ts">
-	import { typeWorkaround } from 'types/workaround';
+    import { typeWorkaround } from 'types/workaround';
 
-	export let ariaLabel: string;
+    export let ariaLabel: string;
 
-	export let classes: string = '';
-	export let fontSize: 'small-text' | 'medium-text' | 'large-text' = 'medium-text';
-	export let buttonSize: 'small-button' | 'medium-button' | 'large-button' = 'medium-button';
-	export let type: string = 'button';
+    export let classes: string = '';
+    export let type: string    = 'button';
+
+    export let fontSize: 'small-text' | 'medium-text' | 'large-text'         = 'medium-text';
+    export let buttonSize: 'small-button' | 'medium-button' | 'large-button' = 'medium-button';
 </script>
 
 <button
-	class="hover-move {classes} {fontSize} {buttonSize}"
-	use:typeWorkaround={type}
-	on:click
-	aria-label={ariaLabel}
+      class="hover-move {classes} {fontSize} {buttonSize}"
+      use:typeWorkaround={type}
+      on:click
+      aria-label={ariaLabel}
 >
-	<p class="normal-font"><slot /></p>
+    <p class="normal-font">
+        <slot />
+    </p>
 </button>
 
 <style>
-	button {
-		background-color: var(--primary-color-light);
-		border: none;
-		border-radius: var(--border-radius);
-		justify-self: center;
-	}
+    button {
+        background-color: var(--primary-color-light);
+        border:           none;
+        border-radius:    var(--border-radius);
+        justify-self:     center;
+    }
 
-	p {
-		text-align: var(--text-align);
-		color: var(--white-color);
-	}
+    p {
+        text-align: var(--text-align);
+        color:      var(--white-color);
+    }
 
-	.small-text {
-		font-size: var(--half-font-size);
-	}
-	.medium-text {
-		font-size: var(--full-font-size);
-	}
-	.large-text {
-		font-size: var(--4x-font-size);
-	}
+    .small-text {
+        font-size: var(--half-font-size);
+    }
 
-	.small-button {
-		padding: var(--full-padding) var(--2x-padding);
-	}
-	.medium-button {
-		padding: var(--2x-padding) var(--4x-padding);
-	}
-	.big-button {
-		padding: var(--4x-padding) var(--8x-padding);
-	}
+    .medium-text {
+        font-size: var(--full-font-size);
+    }
+
+    .large-text {
+        font-size: var(--4x-font-size);
+    }
+
+    .small-button {
+        padding: var(--full-padding) var(--2x-padding);
+    }
+
+    .medium-button {
+        padding: var(--2x-padding) var(--4x-padding);
+    }
+
+    .big-button {
+        padding: var(--4x-padding) var(--8x-padding);
+    }
 </style>

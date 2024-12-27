@@ -1,4 +1,5 @@
-import { writable, get, type Writable } from "svelte/store";
+import { writable, get, type Writable } from 'svelte/store';
+
 export const _unsavedChanges: Writable<boolean> = writable(false);
 
 export function unsavedChanges(): boolean {
@@ -17,4 +18,3 @@ export function useUnsavedChanges(wrappedFunction: Function): Function {
     setUnsavedChanges();
     return wrappedFunction;
 }
-

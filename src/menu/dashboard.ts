@@ -1,6 +1,6 @@
-import type { Menu } from "types/provideTypes";
-import type { DashboardRoles } from "types/dashboardProvideTypes";
-import * as Item from './menuItems'
+import type { Menu } from 'types/provideTypes';
+import type { DashboardRoles } from 'types/dashboardProvideTypes';
+import * as Item from './menuItems';
 
 export function SectionIn(roles: DashboardRoles) {
     let menu: Menu = [];
@@ -22,26 +22,26 @@ export function SectionIn(roles: DashboardRoles) {
 export const headerIn: Menu = [
     Item.mainPage,
     Item.logout,
-]
+];
 
 export const footerIn: Menu = [
     Item.imprint,
 ];
 
-export const admin: Menu = [
+export const admin: Menu      = [
     Item.adminApproval,
     Item.adminEvents,
     Item.adminGlobals,
-]
-export const speaker: Menu = [
+];
+export const speaker: Menu    = [
     Item.speakerEvents,
     Item.speakerSocialMedia,
-]
+];
 export const teamMember: Menu = [
     Item.teamMemberEvents,
     Item.teamMemberSocialMedia,
-]
-export const user: Menu = [
+];
+export const user: Menu       = [
     Item.userProfile,
     Item.userCallForPapers,
-]
+];

@@ -1,18 +1,18 @@
 <script lang="ts">
-	export let classes: string = '';
+    export let classes: string = '';
 </script>
 
 <li class="normal-font {classes}">
-	<slot />
+    <slot />
 </li>
 
 <style>
-	li {
-		font-size: var(--full-font-size);
-		list-style-type: none;
-	}
+    li {
+        font-size:       var(--full-font-size);
+        list-style-type: none;
+    }
 
-	.list-element-dot {
-		list-style-type: disc;
-	}
+    .list-element-dot {
+        list-style-type: disc;
+    }
 </style>

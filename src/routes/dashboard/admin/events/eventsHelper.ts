@@ -1,11 +1,23 @@
-import { dashboardAllEventSpeakerScheme, type DashboardAllEvents, type DashboardAllEventSpeaker, type DashboardEvent } from "types/dashboardProvideTypes";
+import {
+    dashboardAllEventSpeakerScheme,
+    type DashboardAllEvents,
+    type DashboardAllEventSpeaker,
+    type DashboardEvent,
+} from 'types/dashboardProvideTypes';
 
-import { error } from "@sveltejs/kit";
-import type { SetAdminEvent, SetAllAdminEventSpeaker } from "types/dashboardSetTypes";
-import { checkSQLTimeAndDate, convertTimeAndDateToSQL, isBeforeOrSameDatesString } from "helper/dates";
-import { z } from "zod";
-import { apiUrl } from "helper/links";
-import { checkAndParseInputDataAsync } from "helper/parseJson";
+import { error } from '@sveltejs/kit';
+import type {
+    SetAdminEvent,
+    SetAllAdminEventSpeaker,
+} from 'types/dashboardSetTypes';
+import {
+    checkSQLTimeAndDate,
+    convertTimeAndDateToSQL,
+    isBeforeOrSameDatesString,
+} from 'helper/dates';
+import { z } from 'zod';
+import { apiUrl } from 'helper/links';
+import { checkAndParseInputDataAsync } from 'helper/parseJson';
 
 function trimOrNull(entry: string): string | null {
     if (entry.trim().length === 0) {
@@ -35,32 +47,32 @@ export function getEventByTitle(events: DashboardAllEvents, title: string): Dash
 
 export function convertSaveEventData(data: DashboardEvent): SetAdminEvent {
     return {
-        id: data.id,
-        title: data.title.trim(),
-        subtitle: data.title.trim(),
-        start_date: data.start_date,
-        end_date: data.end_date,
-        discord_url: trimOrNull(data.discord_url),
-        twitch_url: trimOrNull(data.twitch_url),
-        presskit_url: trimOrNull(data.presskit_url),
-        trailer_youtube_id: trimOrNull(data.trailer_youtube_id),
-        description_headline: data.description_headline.trim(),
-        description: data.description.trim(),
+        id:                    data.id,
+        title:                 data.title.trim(),
+        subtitle:              data.title.trim(),
+        start_date:            data.start_date,
+        end_date:              data.end_date,
+        discord_url:           trimOrNull(data.discord_url),
+        twitch_url:            trimOrNull(data.twitch_url),
+        presskit_url:          trimOrNull(data.presskit_url),
+        trailer_youtube_id:    trimOrNull(data.trailer_youtube_id),
+        description_headline:  data.description_headline.trim(),
+        description:           data.description.trim(),
         schedule_visible_from: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.schedule_visible_from)),
-        publish_date: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.publish_date)),
+        publish_date:          checkSQLTimeAndDate(convertTimeAndDateToSQL(data.publish_date)),
         call_for_papers_start: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.call_for_papers_start)),
-        call_for_papers_end: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.call_for_papers_end)),
-    }
+        call_for_papers_end:   checkSQLTimeAndDate(convertTimeAndDateToSQL(data.call_for_papers_end)),
+    };
 }
 
 export function convertSaveSpeakerData(allSpeaker: DashboardAllEventSpeaker): SetAllAdminEventSpeaker {
     const result: SetAllAdminEventSpeaker = [];
     for (let speaker of allSpeaker) {
         result.push({
-            id: speaker.id,
-            name: speaker.name,
-            visible_from: checkSQLTimeAndDate(convertTimeAndDateToSQL(speaker.visible_from)),
-        });
+                        id:           speaker.id,
+                        name:         speaker.name,
+                        visible_from: checkSQLTimeAndDate(convertTimeAndDateToSQL(speaker.visible_from)),
+                    });
     }
     return result;
 }
@@ -72,20 +84,26 @@ export async function loadSpeaker(fetch: Function, eventId: number): Promise<Das
         await allSpeakerPromise,
         dashboardAllEventSpeakerScheme,
         `Serveranfrage für alle Speaker im event ${eventId} nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Speaker im Event ${eventId}. throw error(406)`
-    )
+        `Unerwartete Daten für alle Speaker im Event ${eventId}. throw error(406)`,
+    );
 
     return allSpeaker;
 }
 
-export function validateData(data: SetAdminEvent, allSpeaker: SetAllAdminEventSpeaker, allEvents: DashboardAllEvents): string[] {
+export function validateData(
+    data: SetAdminEvent,
+    allSpeaker: SetAllAdminEventSpeaker,
+    allEvents: DashboardAllEvents,
+): string[] {
     const errorQueue: string[] = [];
 
     // name
     for (var event of allEvents) {
-        if (event.id == data.id) { continue; }
+        if (event.id == data.id) {
+            continue;
+        }
         if (event.title.trim() === data.title.trim()) {
-            errorQueue.push(`Event mit dem Titel ${data.title} existiert bereits.`)
+            errorQueue.push(`Event mit dem Titel ${data.title} existiert bereits.`);
         }
     }
 
@@ -115,18 +133,18 @@ export function validateData(data: SetAdminEvent, allSpeaker: SetAllAdminEventSp
     }
     if (data.publish_date) {
         if (!isBeforeOrSameDatesString(data.publish_date, data.start_date)) {
-            errorQueue.push("Das Event wird erst nach dem Event-Start veröffentlicht.");
+            errorQueue.push('Das Event wird erst nach dem Event-Start veröffentlicht.');
         }
     }
     if (data.schedule_visible_from) {
         if (!isBeforeOrSameDatesString(data.schedule_visible_from, data.start_date)) {
-            errorQueue.push("Der Ablaufplan ist erst nach dem Event-Start sichtbar.")
+            errorQueue.push('Der Ablaufplan ist erst nach dem Event-Start sichtbar.');
         }
     }
 
     if (data.call_for_papers_start && data.call_for_papers_end) {
         if (!isBeforeOrSameDatesString(data.call_for_papers_start, data.call_for_papers_end)) {
-            errorQueue.push("Das Anmeldeende liegt vor dem Anmeldestart.");
+            errorQueue.push('Das Anmeldeende liegt vor dem Anmeldestart.');
         }
     }
 

@@ -1,10 +1,10 @@
-import { apiUrl } from "helper/links";
+import { apiUrl } from 'helper/links';
 import { z } from 'zod';
-import { parseProvidedJsonAsync } from "helper/parseJson";
+import { parseProvidedJsonAsync } from 'helper/parseJson';
 
 const existsResponseDataScheme = z.object({
-    exists: z.boolean(),
-})
+                                              exists: z.boolean(),
+                                          });
 type ExistsResponseData = z.infer<typeof existsResponseDataScheme>;
 
 export async function onUsernameChangedAsync(username: string, fetch: Function): Promise<string | undefined> {
