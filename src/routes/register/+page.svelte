@@ -40,7 +40,7 @@
 
 	let registered: boolean = false;
 
-	function startTimer(timer: { current: number | null }, callback: Function, time: number): void {
+	function startTimer(timer: { current: number | null }, callback: () => void, time: number): void {
 		if (timer.current !== null) {
 			clearTimeout(timer.current);
 			timer.current = null;
@@ -98,7 +98,7 @@
 			return;
 		}
 
-		registerAsync();
+		await registerAsync();
 	}
 
 	async function registerAsync(): Promise<void> {

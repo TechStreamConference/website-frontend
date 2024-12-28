@@ -183,7 +183,7 @@
                     <TextLine classes={getBackgroundClass(speaker.diff, 'photo')}>Foto:</TextLine>
                     <Image
                           classes={getBackgroundClass(speaker.diff, 'photo')}
-                          alt={'Speakerbild von ' + speaker.name}
+                          alt={'Speaker-Bild von ' + speaker.name}
                           src={apiUrl(`/api/${speaker.photo}`)}
                     />
                 </div>
@@ -255,7 +255,7 @@
                     <TextLine classes={getBackgroundClass(member.diff, 'photo')}>Foto:</TextLine>
                     <Image
                           classes={getBackgroundClass(member.diff, 'photo')}
-                          alt={'Speakerbild von ' + member.name}
+                          alt={'Team-Member-Bild von ' + member.name}
                           src={apiUrl(`/api/${member.photo}`)}
                     />
                 </div>

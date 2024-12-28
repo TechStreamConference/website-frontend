@@ -28,14 +28,14 @@ function trimOrNull(entry: string): string | null {
 
 export function getAllEventTitle(events: DashboardAllEvents): string[] {
     const title: string[] = [];
-    for (var event of events) {
+    for (const event of events) {
         title.push(event.title);
     }
     return title;
 }
 
 export function getEventByTitle(events: DashboardAllEvents, title: string): DashboardEvent {
-    for (var event of events) {
+    for (const event of events) {
         if (event.title === title) {
             return event;
         }
@@ -67,7 +67,7 @@ export function convertSaveEventData(data: DashboardEvent): SetAdminEvent {
 
 export function convertSaveSpeakerData(allSpeaker: DashboardAllEventSpeaker): SetAllAdminEventSpeaker {
     const result: SetAllAdminEventSpeaker = [];
-    for (let speaker of allSpeaker) {
+    for (const speaker of allSpeaker) {
         result.push({
                         id:           speaker.id,
                         name:         speaker.name,
@@ -77,17 +77,15 @@ export function convertSaveSpeakerData(allSpeaker: DashboardAllEventSpeaker): Se
     return result;
 }
 
-export async function loadSpeaker(fetch: Function, eventId: number): Promise<DashboardAllEventSpeaker> {
+export async function loadSpeaker(fetch: typeof globalThis.fetch, eventId: number): Promise<DashboardAllEventSpeaker> {
     const allSpeakerPromise = fetch(apiUrl(`/api/dashboard/admin/event/${eventId}/speaker`));
 
-    const allSpeaker = await checkAndParseInputDataAsync<DashboardAllEventSpeaker>(
+    return await checkAndParseInputDataAsync(
         await allSpeakerPromise,
         dashboardAllEventSpeakerScheme,
         `Serveranfrage für alle Speaker im event ${eventId} nicht erfolgreich. throw error(406)`,
         `Unerwartete Daten für alle Speaker im Event ${eventId}. throw error(406)`,
     );
-
-    return allSpeaker;
 }
 
 export function validateData(
@@ -98,7 +96,7 @@ export function validateData(
     const errorQueue: string[] = [];
 
     // name
-    for (var event of allEvents) {
+    for (const event of allEvents) {
         if (event.id == data.id) {
             continue;
         }
@@ -162,7 +160,7 @@ export function validateData(
     }
 
     // speaker
-    for (let speaker of allSpeaker) {
+    for (const speaker of allSpeaker) {
         if (speaker.visible_from) {
             if (!isBeforeOrSameDatesString(speaker.visible_from, data.start_date)) {
                 errorQueue.push(`Speaker ${speaker.name} ist erst nach dem Event-Start sichtbar.`);

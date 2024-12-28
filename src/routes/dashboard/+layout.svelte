@@ -4,7 +4,7 @@
     import * as Menu from 'menu/dashboard';
     import Header from 'elements/navigation/header.svelte';
     import Footer from 'elements/navigation/footer.svelte';
-    import UnsavedChangesPopup from 'elements/navigation/unsavedChangesPopup.svelte';
+    import UnsavedChangesPopup from 'elements/popups/unsavedChangesPopup.svelte';
 
     import { onMount } from 'svelte';
     import {

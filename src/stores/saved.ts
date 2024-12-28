@@ -14,6 +14,7 @@ export function setUnsavedChanges(): void {
     _unsavedChanges.set(true);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function useUnsavedChanges(wrappedFunction: Function): Function {
     setUnsavedChanges();
     return wrappedFunction;

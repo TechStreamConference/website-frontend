@@ -47,11 +47,11 @@
          Online-Streitbeilegungs-Plattform ist hier zu finden:
             <Link
                   classes="link-inline"
-                  href="http://ec.europa.eu/odr"
+                  href="https://ec.europa.eu/odr"
                   newTab={true}
                   title="Klicke, um dich über die Europäische Online-Streitbeilegungs-Plattform zu informieren"
             >
-                http://ec.europa.eu/odr
+                https://ec.europa.eu/odr
             </Link>
          . Unsere E-Mail lautet:
             <Link

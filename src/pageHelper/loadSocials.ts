@@ -1,8 +1,5 @@
 import type { LoadUserSocials } from 'types/dashboardLoadTypes';
-import type {
-    DashboardAllSocialMediaLink,
-    DashboardAllSocialMediaLinkType,
-} from 'types/dashboardProvideTypes';
+import type {DashboardAllSocialMediaLink } from 'types/dashboardProvideTypes';
 
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
@@ -11,17 +8,17 @@ import {
     dashboardAllSocialMediaLinkTypeScheme,
 } from 'types/dashboardProvideTypes';
 
-export async function loadDataAsync(fetch: Function): Promise<LoadUserSocials> {
+export async function loadDataAsync(fetch: typeof globalThis.fetch): Promise<LoadUserSocials> {
     const socialsPromise    = fetch(apiUrl('/api/dashboard/user/social-media-link'));
     const socialTypePromise = fetch(apiUrl('/api/social-media-link-types'));
 
-    const socials     = await checkAndParseInputDataAsync<DashboardAllSocialMediaLink>(
+    const socials     = await checkAndParseInputDataAsync(
         await socialsPromise,
         dashboardAllSocialMediaLinkScheme,
         `Serveranfrage für alle Social Media Links nicht erfolgreich. throw error(406)`,
         `Unerwartete Daten für alle Social Media Links. throw error(406)`,
     );
-    const socialTypes = await checkAndParseInputDataAsync<DashboardAllSocialMediaLinkType>(
+    const socialTypes = await checkAndParseInputDataAsync(
         await socialTypePromise,
         dashboardAllSocialMediaLinkTypeScheme,
         `Serveranfrage für alle Social Media Links Types nicht erfolgreich. throw error(406)`,
@@ -34,15 +31,13 @@ export async function loadDataAsync(fetch: Function): Promise<LoadUserSocials> {
     };
 }
 
-export async function loadSocials(fetch: Function): Promise<DashboardAllSocialMediaLink> {
+export async function loadSocials(fetch: typeof globalThis.fetch): Promise<DashboardAllSocialMediaLink> {
     const socialsPromise = fetch(apiUrl('/api/dashboard/user/social-media-link'));
 
-    const socials = await checkAndParseInputDataAsync<DashboardAllSocialMediaLink>(
+    return await checkAndParseInputDataAsync(
         await socialsPromise,
         dashboardAllSocialMediaLinkScheme,
         `Serveranfrage für alle Social Media Links nicht erfolgreich. throw error(406)`,
         `Unerwartete Daten für alle Social Media Links. throw error(406)`,
     );
-
-    return socials;
 }

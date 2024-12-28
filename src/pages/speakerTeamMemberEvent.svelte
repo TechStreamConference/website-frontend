@@ -2,6 +2,7 @@
 	import type { LoadDashboard, LoadSpeakerTeamMemberEvent } from 'types/dashboardLoadTypes';
 	import type { SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
 	import type { Menu, MenuItem } from 'types/provideTypes';
+    import type Cropper from 'svelte-easy-crop';
 
 	import { apiUrl } from 'helper/links';
 	import {
@@ -14,7 +15,7 @@
 	import { loadSpeakerTeamMemberAsync } from 'pageHelper/loadSpeakerTeamMember';
 	import { onDestroy } from 'svelte';
 
-	import ManualUnsavedChangesPopup from 'elements/navigation/manualUnsavedChangesPopup.svelte';
+	import ManualUnsavedChangesPopup from 'elements/popups/manualUnsavedChangesPopup.svelte';
 	import Tabs from 'elements/navigation/tabs.svelte';
 	import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 	import SaveMessage from 'elements/text/saveMessage.svelte';
@@ -70,7 +71,7 @@
 			return;
 		}
 
-		for (var entry of data.allEvents) {
+		for (let entry of data.allEvents) {
 			if (entry.title === selected) {
 				data.current = entry;
 				break;
@@ -84,13 +85,13 @@
 	}
 
 	function changeImage(event: Event): void {
-		const previewCleanup: Function = () => {
+		const previewCleanup: () => void = () => {
 			if (imagePreviewURL) {
 				URL.revokeObjectURL(imagePreviewURL);
 				imagePreviewURL = undefined;
 			}
 		};
-		const cleanup: Function = () => {
+		const cleanup: () => void = () => {
 			previewCleanup();
 			imageFile = undefined;
 		};
@@ -130,7 +131,7 @@
 		}
 	});
 
-	function updateCropperData(e: any): void {
+	function updateCropperData(e: typeof Cropper.prototype.$$events_def.cropcomplete): void {
 		lastPhotoX = e.detail.pixels.x;
 		lastPhotoY = e.detail.pixels.y;
 		lastPhotoSize = e.detail.pixels.height;
@@ -146,7 +147,7 @@
 			'Die Beschreibung darf nicht leer sein.'
 		];
 
-		for (var i = 0; i < fields.length; ++i) {
+		for (let i = 0; i < fields.length; ++i) {
 			if (fields[i].trim().length === 0) {
 				messages.push(errors[i]);
 			}

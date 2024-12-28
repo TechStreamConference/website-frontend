@@ -9,7 +9,7 @@
         if (!response.ok) {
             return;
         }
-        goto('/');
+        await goto('/');
     }
 
     onMount(async () => {

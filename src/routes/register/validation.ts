@@ -5,9 +5,8 @@ import { parseProvidedJsonAsync } from 'helper/parseJson';
 const existsResponseDataScheme = z.object({
                                               exists: z.boolean(),
                                           });
-type ExistsResponseData = z.infer<typeof existsResponseDataScheme>;
 
-export async function onUsernameChangedAsync(username: string, fetch: Function): Promise<string | undefined> {
+export async function onUsernameChangedAsync(username: string, fetch: typeof globalThis.fetch): Promise<string | undefined> {
     const trimmed: string = username.trim();
 
     if (trimmed.length === 0) {
@@ -24,11 +23,11 @@ export async function onUsernameChangedAsync(username: string, fetch: Function):
 
     const response: Response = await fetch(apiUrl('/api/account/username/exists?username=' + trimmed));
     if (!response.ok) {
-        console.error('Fehler beim überprüfen des Namen. Fehlercode: ' + response.status);
+        console.error('Fehler beim Überprüfen des Namen. Fehlercode: ' + response.status);
         return;
     }
 
-    const data = await parseProvidedJsonAsync<ExistsResponseData>(response, existsResponseDataScheme);
+    const data = await parseProvidedJsonAsync(response, existsResponseDataScheme);
     if (!data) {
         console.error('Error while checking username');
         return;
@@ -39,7 +38,7 @@ export async function onUsernameChangedAsync(username: string, fetch: Function):
     }
 }
 
-export async function onMailChangedAsync(mail: string, fetch: Function): Promise<string | undefined> {
+export async function onMailChangedAsync(mail: string, fetch: typeof globalThis.fetch): Promise<string | undefined> {
     const trimmed: string = mail.trim();
 
     if (trimmed.length === 0) {
@@ -53,11 +52,11 @@ export async function onMailChangedAsync(mail: string, fetch: Function): Promise
 
     const response: Response = await fetch(apiUrl('/api/account/email/exists?email=' + trimmed));
     if (!response.ok) {
-        console.error('Fehler beim überprüfen der E-Mail. Fehlercode: ' + response.status);
+        console.error('Fehler beim Überprüfen der E-Mail. Fehlercode: ' + response.status);
         return;
     }
 
-    const data = await parseProvidedJsonAsync<ExistsResponseData>(response, existsResponseDataScheme);
+    const data = await parseProvidedJsonAsync(response, existsResponseDataScheme);
     if (!data) {
         console.error('Error while checking mail');
         return;
@@ -102,7 +101,7 @@ export function onPasswordChanged(password_1: string, password_2: string): strin
         return 'Das Passwort muss mindestens eine Ziffer enthalten.';
     }
 
-    const hasSpecialCharacter: boolean = /[!@#$%^&*()\-_+=\{};:,<.>§~ ]/.test(trimmed);
+    const hasSpecialCharacter: boolean = /[!@#$%^&*()\-_+={};:,<.>§~ ]/.test(trimmed);
     if (!hasSpecialCharacter) {
         return 'Das Passwort muss mindestens ein Sonderzeichen enthalten.';
     }

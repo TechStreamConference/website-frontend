@@ -13,7 +13,7 @@ import {
 import { apiUrl } from 'helper/links';
 import { fetchLoginStatusAsync } from 'helper/loggedIn';
 
-export async function loadYearAsync(fetch: Function, year: number | undefined = undefined): Promise<LoadYear> {
+export async function loadYearAsync(fetch: typeof globalThis.fetch, year: number | undefined = undefined): Promise<LoadYear> {
     let yearRoute: string = '/api/events';
     if (year) {
         yearRoute += '/' + year;
@@ -26,7 +26,7 @@ export async function loadYearAsync(fetch: Function, year: number | undefined = 
 
     // data
     const loggedIn: boolean    = await loggedInPromise;
-    const yearData: Year       = await checkAndParseInputDataAsync<Year>(
+    const yearData: Year       = await checkAndParseInputDataAsync(
         await yearDataPromise,
         yearScheme,
         `Serveranfrage für das Jahr ${year} nicht erfolgreich. throw error(406)`,

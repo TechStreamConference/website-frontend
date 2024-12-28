@@ -59,9 +59,9 @@
                   aria-label="Menü aufklappen"
                   on:click={toggleOpen}
             >
-                <div class={isOpen ? 'rotated' : 'normal'}></div>
-                <div class={isOpen ? 'rotated' : 'normal'}></div>
-                <div class={isOpen ? 'rotated' : 'normal'}></div>
+                <span class={isOpen ? 'rotated' : 'normal'}></span>
+                <span class={isOpen ? 'rotated' : 'normal'}></span>
+                <span class={isOpen ? 'rotated' : 'normal'}></span>
             </button>
         </div>
         {#if isOpen}
@@ -173,35 +173,36 @@
             border:     none;
         }
 
-        .navigation-header-hamburger div {
+        .navigation-header-hamburger span {
             width:            25px;
             height:           3px;
             background-color: white;
             margin:           5px 0;
             transition:       var(--transition-duration);
+            display:          block;
         }
 
-        .navigation-header-hamburger div:nth-child(1).normal {
+        .navigation-header-hamburger span:nth-child(1).normal {
             transform: translateX(0) rotate(0) translateY(0);
         }
 
-        .navigation-header-hamburger div:nth-child(1).rotated {
+        .navigation-header-hamburger span:nth-child(1).rotated {
             transform: translateX(7px) rotate(45deg) translateY(11px);
         }
 
-        .navigation-header-hamburger div:nth-child(2).normal {
+        .navigation-header-hamburger span:nth-child(2).normal {
             opacity: 1;
         }
 
-        .navigation-header-hamburger div:nth-child(2).rotated {
+        .navigation-header-hamburger span:nth-child(2).rotated {
             opacity: 0;
         }
 
-        .navigation-header-hamburger div:nth-child(3).normal {
+        .navigation-header-hamburger span:nth-child(3).normal {
             transform: translateX(0) rotate(0) translateY(0);
         }
 
-        .navigation-header-hamburger div:nth-child(3).rotated {
+        .navigation-header-hamburger span:nth-child(3).rotated {
             transform: translateX(7px) rotate(-45deg) translateY(-11px);
         }
 

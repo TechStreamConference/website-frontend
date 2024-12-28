@@ -5,39 +5,29 @@
     import SubHeadline from 'elements/text/subHeadline.svelte';
     import PersonLinkGrid from './personLinkGrid.svelte';
     import PersonImage from './personImage.svelte';
-    import Button from 'elements/input/button.svelte';
-
-    import { fade } from 'svelte/transition';
-
-    export let classes: string = '';
+    import BasePopup from 'elements/popups/basePopup.svelte';
 
     export let data: Person;
+    let basePopup: BasePopup;
+
+    export function show(person: Person): void {
+        data = person;
+        basePopup.show();
+    }
+
+    export function hide(): void {
+        basePopup.hide();
+    }
 </script>
 
-<dialog class={classes}
-        transition:fade={{ duration: 300 }}
-        role="presentation"
-        on:click>
-    <div
-          class="person-popup-wrapper"
-          role="presentation"
-          on:click={(event) => {
-			event.stopPropagation();
-		}}
-    >
-        <Button
-              fontSize="large-text"
-              classes="person-popup-close-button"
-              ariaLabel="close popup"
-              on:click>&times;
-        </Button
-        >
-        <div class="person-popup-content-wrapper">
+<BasePopup bind:this={basePopup}>
+    <div class="person-popup-content-wrapper">
+        {#if data}
             <div class="person-popup-column-wrapper person-popup-align-center person-popup-line">
                 <PersonImage classes="person-popup-picture"
                              {data} />
                 <SubHeadline classes="person-popup-one-line-spacer">{data.name}</SubHeadline>
-                <Paragraph classes="person-popup-short-bio-paragraph paragraph-pre-wrap"
+                <Paragraph classes="paragraph-pre-wrap"
                 >{data.short_bio}</Paragraph
                 >
                 <PersonLinkGrid person={data.name}
@@ -46,33 +36,11 @@
             <div class="person-popup-column-wrapper">
                 <Paragraph classes="person-popup-one-line-spacer paragraph-pre-wrap">{data.bio}</Paragraph>
             </div>
-        </div>
+        {/if}
     </div>
-</dialog>
+</BasePopup>
 
 <style>
-    dialog {
-        display:          flex;
-        position:         fixed;
-        top:              0;
-        left:             0;
-        justify-content:  center;
-        align-items:      center;
-        background-color: var(--background-color-transparent);
-        width:            100%;
-        height:           100%;
-        z-index:          1000;
-    }
-
-    .person-popup-wrapper {
-        background-color: var(--background-color);
-        border:           1px solid var(--primary-color-light);
-        width:            90%;
-        max-width:        calc(100rem - 2 * var(--4x-margin));
-        position:         relative;
-        border-radius:    var(--border-radius);
-    }
-
     .person-popup-content-wrapper {
         margin:  var(--full-margin);
         display: flex;
@@ -94,10 +62,6 @@
         margin-top: var(--full-margin);
     }
 
-    :global(.person-popup-short-bio-paragraph) {
-        flex-grow: 1;
-    }
-
     .person-popup-line {
         border-right: 1px solid var(--line-color);
     }
@@ -108,32 +72,10 @@
         max-width:  30rem;
         border:     1px solid var(--primary-color-light);
         align-self: center;
-    }
-
-    :global(.person-popup-close-button) {
-        position:    absolute;
-        top:         0;
-        right:       0;
-        translate:   50% -50%;
-        line-height: var(--2x-font-size);
-        padding:     var(--half-padding);
-    }
-
-    .person-popup-close-picture {
-        height: 2.5rem;
-        width:  2.5rem;
-        margin: var(--quad-margin);
+        border-radius: var(--border-radius);
     }
 
     @media (max-width: 1280px) {
-        :global(.person-popup-close-button) {
-            top:   100%;
-            right: 50%;
-        }
-
-        :global(.person-popup-short-bio-paragraph) {
-            flex-grow: unset;
-        }
 
         :global(.person-popup-picture) {
             max-width: 20rem;
@@ -141,14 +83,10 @@
     }
 
     @media (max-width: 900px) {
-        .person-popup-wrapper {
-            height: calc(100vh - 8rem);
-        }
-
         .person-popup-content-wrapper {
             flex-direction: column;
-            overflow:       scroll;
-            height:         95%;
+            height:         75vh;
+            overflow-y:     auto;
         }
 
         .person-popup-column-wrapper {
@@ -159,10 +97,6 @@
         :global(.person-popup-picture) {
             max-width:  20rem;
             align-self: center;
-        }
-
-        :global(.person-popup-close-button) {
-            top: 102%;
         }
 
         .person-popup-line {

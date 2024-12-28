@@ -35,7 +35,7 @@
         });
 
         if (response.ok) {
-            goto('/dashboard');
+            await goto('/dashboard');
             return;
         }
 

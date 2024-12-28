@@ -16,9 +16,9 @@
       on:click
       aria-label={ariaLabel}
 >
-    <p class="normal-font">
+    <span class="normal-font">
         <slot />
-    </p>
+    </span>
 </button>
 
 <style>
@@ -29,7 +29,7 @@
         justify-self:     center;
     }
 
-    p {
+    span {
         text-align: var(--text-align);
         color:      var(--white-color);
     }
