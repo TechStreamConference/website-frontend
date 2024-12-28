@@ -43,19 +43,28 @@
 	}
 
 	function validate(): string[] {
+		const https:string = 'https://';
+		const http:string = 'http://';
 		const messages: string[] = [];
 		for (let entry of data.socials) {
-			if (entry.url.trim().length === 0) {
+			entry.url = entry.url.trim();
+			if (entry.url.length === 0) {
 				messages.push(`Ein ${entry.name} - Eintrag ist leer`);
 				continue;
 			}
 
-			const validated = z.string().url().safeParse(entry.url.trim());
+			if (!entry.url.startsWith(https) && !entry.url.startsWith(http)) {
+				entry.url = https + entry.url;
+			}
+
+			const validated = z.string().url().safeParse(entry.url);
 			if (!validated.success) {
 				messages.push(`${entry.url} ist keine valide URL.`);
-				continue;
+				continue; // keep this continue here to prevent bugs when one adds code after this.
 			}
 		}
+
+		data.socials = data.socials; // reassign for reactivity
 		return messages;
 	}
 
