@@ -7,7 +7,7 @@
     import PersonImage from './personImage.svelte';
     import BasePopup from 'elements/popups/basePopup.svelte';
 
-    export let data: Person;
+    export let data: Person | undefined = undefined;
     let basePopup: BasePopup;
 
     export function show(person: Person): void {
@@ -67,11 +67,11 @@
     }
 
     :global(.person-popup-picture) {
-        width:      auto;
-        height:     auto;
-        max-width:  30rem;
-        border:     1px solid var(--primary-color-light);
-        align-self: center;
+        width:         auto;
+        height:        auto;
+        max-width:     30rem;
+        border:        1px solid var(--primary-color-light);
+        align-self:    center;
         border-radius: var(--border-radius);
     }
 

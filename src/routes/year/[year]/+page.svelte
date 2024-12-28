@@ -3,7 +3,7 @@
 
     export let data: LoadYear; // data from database
 
-    import Year from './year.svelte';
+    import Year from 'pages/year.svelte';
 </script>
 
 <Year {data} />

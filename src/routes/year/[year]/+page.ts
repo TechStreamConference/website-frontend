@@ -1,7 +1,7 @@
 import type { LoadYear } from 'types/loadTypes';
 import { error } from '@sveltejs/kit';
 
-import { loadYearAsync } from './year';
+import { loadYearAsync } from 'pageHelper/loadYear';
 
 export async function load({
                                fetch,
