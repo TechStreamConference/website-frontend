@@ -10,7 +10,7 @@
 
 <Tabs
       entries={Menu.user}
-      entryName={MenuItem.userCallForPapers.name}
+      entryName={MenuItem.application.name}
       classes="navigation-tabs-dashboard-subpage"
 />
 <TextLine>Standard Values for call for papers</TextLine>

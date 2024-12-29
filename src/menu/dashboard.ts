@@ -43,5 +43,5 @@ export const teamMember: Menu = [
 ];
 export const user: Menu       = [
     Item.userProfile,
-    Item.userCallForPapers,
+    Item.application,
 ];
