@@ -129,7 +129,7 @@
             </Button
             >
         </div>
-    {:else}
+    {:else if data.event.photo}
         <Image
               alt="Dein aktuelles Speaker-Bild für das Event {data.current.title}"
               src={apiUrl(`/api/${data.event.photo}`)}
