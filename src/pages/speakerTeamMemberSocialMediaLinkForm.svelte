@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type { LoadDashboard, LoadUserSocials } from 'types/dashboardLoadTypes';
-    import type { DashboardSocialMediaLink } from 'types/dashboardProvideTypes';
+    import type { LoadUserSocials } from 'types/dashboardLoadTypes';
+    import type { DashboardRoles, DashboardSocialMediaLink } from 'types/dashboardProvideTypes';
 
     import { setUnsavedChanges } from 'stores/saved';
     import { getIDFromSocialMediaType } from 'pageHelper/speakerTeamMemberSocials';
@@ -10,8 +10,9 @@
     import Button from 'elements/input/button.svelte';
     import GeneralPopup from 'elements/popups/generalPopup.svelte';
 
-    export let showSaveButton = true;
-    export let data: LoadDashboard & LoadUserSocials;
+    export let displaySaveButton = true;
+    export let data: LoadUserSocials;
+    export let roles: DashboardRoles;
 
     const dispatch = createEventDispatcher();
     let deletePopup: GeneralPopup;
@@ -22,7 +23,7 @@
             id:                   0,
             name:                 'Web',
             url:                  '',
-            user_id:              data.roles.user_id,
+            user_id:              roles.user_id,
             requested_changes:    null,
             social_media_type_id: getIDFromSocialMediaType(data.socialTypes, 'Web'),
         };
@@ -66,7 +67,7 @@
                 on:click={addLink}
         >Neu
         </Button>
-        {#if showSaveButton}
+        {#if displaySaveButton}
             <Button ariaLabel="Klicke hier, um die Eingaben zu speichern"
                     type={'submit'}
             >Speichern

@@ -116,6 +116,7 @@
     {/each}
 
     <SpeakerTeamMemberSocialMediaLinkForm bind:data={data}
+                                          bind:roles={data.roles}
                                           on:save={trySaveAsync}
                                           on:delete={tryDeleteAsync} />
 
