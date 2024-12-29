@@ -8,6 +8,7 @@ const lookup: IconDict = {
     Discord:     'fa-brands fa-discord',
     LinkedIn:    'fa-brands fa-linkedin',
     YouTube:     'fa-brands fa-youtube',
+    Facebook:    'fa-brands fa-facebook',
     Instagram:   'fa-brands fa-instagram',
     X:           'fa-brands fa-x-twitter',
     Git:         'fa-brands fa-git-alt',
@@ -18,7 +19,7 @@ const lookup: IconDict = {
     Calender:    'fa-solid fa-calendar-days',
     Clock:       'fa-solid fa-clock',
     CircleCross: 'fa-solid fa-circle-xmark',
-    CircleCheck: 'fa-solid fa-circle-check'
+    CircleCheck: 'fa-solid fa-circle-check',
 };
 
 export function iconLookup(type: string): string {
