@@ -2,10 +2,15 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/menuItems';
 
-    import List from 'elements/list/list.svelte';
-    import ListElement from 'elements/list/listElement.svelte';
-    import TextLine from 'elements/text/textLine.svelte';
     import Tabs from 'elements/navigation/tabs.svelte';
+    import SpeakerTeamMemberEventForm from 'pages/speakerTeamMemberEventForm.svelte';
+    import SpeakerTeamMemberSocialMediaLinkForm from 'pages/speakerTeamMemberSocialMediaLinkForm.svelte';
+    import Button from 'elements/input/button.svelte';
+    import SectionDashboard from 'elements/section/sectionDashboard.svelte';
+
+    async function save(): Promise<void> {
+        console.log('on submit');
+    }
 </script>
 
 <Tabs
@@ -13,16 +18,22 @@
       entryName={MenuItem.application.name}
       classes="navigation-tabs-dashboard-subpage"
 />
-<TextLine>Standard Values for call for papers</TextLine>
-<TextLine></TextLine>
-<br />
-<TextLine>Needed routes:</TextLine>
-<List classes="list-padding-left">
-    <ListElement classes="list-element-dot">
-        GET /api/dashboard/event/new/available (checks if the current user is already speaker of the
-        current event and if the current is open for call-for-papers)
-    </ListElement>
-    <ListElement classes="list-element-dot">
-        PUT /api/dashboard/speaker/new (all event specific data)
-    </ListElement>
-</List>
+
+<SectionDashboard classes="standard-dashboard-section">
+    <form class="dashboard-user-application-form"
+          on:submit|preventDefault={save}>
+        <SpeakerTeamMemberEventForm displaySaveButton={false} />
+        <SpeakerTeamMemberSocialMediaLinkForm showSaveButton={false} />
+        <Button type="submit"
+                ariaLabel="Klicke hier, um dich zu bewerben">Bewerben
+        </Button>
+    </form>
+</SectionDashboard>
+
+
+<style>
+    .dashboard-user-application-form {
+        display:         flex;
+        flex-direction:  column;
+    }
+</style>
