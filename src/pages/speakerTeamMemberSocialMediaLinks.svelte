@@ -23,7 +23,7 @@
     import { setUnsavedChanges } from 'stores/saved';
     import { apiUrl } from 'helper/links';
     import { z } from 'zod';
-    import { loadSocials } from 'pageHelper/loadSocials';
+    import { loadSocials } from 'pageHelper/speakerTeamMemberSocials';
 
     export let data: LoadDashboard & LoadUserSocials;
 
