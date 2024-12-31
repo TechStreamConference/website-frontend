@@ -44,7 +44,7 @@
         }
         data.data.socials.socials = socialResult.data;
 
-        return messages.length > 0;
+        return messages.length == 0;
     }
 
     async function trySave(): Promise<boolean> {
