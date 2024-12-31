@@ -9,7 +9,9 @@
     import EditSocialMedia from 'elements/input/editSocialMedia.svelte';
     import Button from 'elements/input/button.svelte';
     import GeneralPopup from 'elements/popups/generalPopup.svelte';
+    import FormWrapper from 'elements/wrapper/formWrapper.svelte';
 
+    // If the save button is not displayed, the form also gets removed. This the on:save will not be triggert is that case.
     export let displaySaveButton = true;
     export let data: LoadUserSocials;
     export let roles: DashboardRoles;
@@ -53,7 +55,8 @@
       denyCallback={() => {}}
 ></GeneralPopup>
 
-<form on:submit|preventDefault={() => dispatch('save')}>
+<FormWrapper submitCallback={() => dispatch('save')}
+             useForm={displaySaveButton}>
     <EditSocialMedia
           links={data.socials}
           socialMediaTypes={data.socialTypes.map((x) => x.name)}
@@ -74,7 +77,7 @@
             </Button>
         {/if}
     </div>
-</form>
+</FormWrapper>
 
 <style>
     .dashboard-social-media-links-button-wrapper {

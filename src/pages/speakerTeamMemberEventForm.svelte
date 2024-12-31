@@ -14,8 +14,10 @@
     import Input from 'elements/input/input.svelte';
     import TextArea from 'elements/input/textArea.svelte';
     import MyCropper from 'elements/MyCropper/myCropper.svelte';
+    import FormWrapper from 'elements/wrapper/formWrapper.svelte';
 
     export let data: LoadSpeakerTeamMemberEvent;
+    // If the save button is not displayed, the form also gets removed. This the on:save will not be triggert is that case.
     export let displaySaveButton: boolean = true;
     const dispatch                        = createEventDispatcher();
 
@@ -108,8 +110,10 @@
     />
 {/if}
 
-<form class="dashboard-speaker-event-form"
-      on:submit|preventDefault={() => {dispatch('save');}}>
+<FormWrapper classes="dashboard-speaker-event-form"
+             submitCallback={() => { dispatch('save'); }}
+             useForm={displaySaveButton}
+>
     {#if imagePreviewURL && newImage.imageFile}
         <div class="dashboard-speaker-event-cropped-image-wrapper">
             <CroppedImage
@@ -182,10 +186,10 @@
               classes="button-text dashboard-speaker-event-submit-button">Speichern
         </Button>
     {/if}
-</form>
+</FormWrapper>
 
 <style>
-    .dashboard-speaker-event-form {
+    :global(.dashboard-speaker-event-form) {
         display:        flex;
         flex-direction: column;
         gap:            var(--full-gap);
