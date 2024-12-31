@@ -1,8 +1,15 @@
 <script lang="ts">
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/menuItems';
+    import * as SocialHelper from 'pageHelper/speakerTeamMemberSocials';
+    import * as EventHelper from 'pageHelper/speakerTeamMemberEvent';
 
+    import type { NewImage } from 'pageHelper/speakerTeamMemberEvent';
     import type { LoadDashboard, LoadUserApplication } from 'types/dashboardLoadTypes';
+    import type { SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
+
+    import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
+    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SpeakerTeamMemberEventForm from 'pages/speakerTeamMemberEventForm.svelte';
@@ -12,11 +19,67 @@
     import Paragraph from 'elements/text/paragraph.svelte';
     import StyledLink from 'elements/input/styledLink.svelte';
     import HeadlineH2 from 'elements/text/headlineH2.svelte';
+    import Message from 'elements/text/message.svelte';
+    import SaveMessage from 'elements/text/saveMessage.svelte';
+    import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 
     export let data: LoadDashboard & LoadUserApplication;
 
-    async function save(): Promise<void> {
-        console.log('on submit');
+    let eventForm: SpeakerTeamMemberEventForm;
+    let messages: string[] = [];
+    let saveMessage: SaveMessage;
+
+    function validate(event: SetSpeakerTeamMemberEvent, image: NewImage): boolean {
+        if (!data.data) {
+            return false;
+        }
+        messages = [];
+
+        const socialResult: SocialHelper.ValidateReturn = SocialHelper.validate(data.data.socials.socials);
+        const eventResult: EventHelper.ValidateReturn   = EventHelper.validate(event);
+        messages                                        = socialResult.messages;
+        messages.push(...(eventResult.messages));
+        if (!image.imageFile) {
+            messages.push('Das Profilbild fehlt.');
+        }
+        data.data.socials.socials = socialResult.data;
+
+        return messages.length > 0;
+    }
+
+    async function trySave(): Promise<boolean> {
+        if (!data.data) {
+            console.error('data member is undefined.');
+            saveMessage.setSaveMessage(SaveMessageType.Error);
+            return false;
+        }
+        const image: EventHelper.NewImage      = eventForm.getNewImage();
+        const event: SetSpeakerTeamMemberEvent = {
+            bio:        data.data.speaker.event.bio,
+            short_bio:  data.data.speaker.event.short_bio,
+            name:       data.data.speaker.event.name,
+            photo_size: image.lastPhotoSize,
+            photo_x:    image.lastPhotoX,
+            photo_y:    image.lastPhotoY,
+        };
+
+        if (!validate(event, image)) {
+            saveMessage.setSaveMessage(SaveMessageType.Error);
+            return false;
+        }
+
+        const formData = new FormData();
+        formData.append('json', JSON.stringify({
+                                                   event:   JSON.stringify(event),
+                                                   socials: JSON.stringify(data.data.socials.socials),
+                                               }));
+        if (image.imageFile) {
+            formData.append('photo', image.imageFile);
+        }
+
+        const saveType = await trySaveDashboardDataAsync(formData, '/api/dashboard/user/apply-as-speaker', 'POST');
+        saveMessage.setSaveMessage(saveType);
+        return isSuccessType(saveType);
     }
 </script>
 
@@ -25,6 +88,7 @@
       entryName={MenuItem.application.name}
       classes="navigation-tabs-dashboard-subpage"
 />
+<UnsavedChangesCallbackWrapper callback={trySave} />
 
 <SectionDashboard classes="standard-dashboard-section">
     {#if data.error}
@@ -53,10 +117,17 @@
         </div>
     {:else if data.data}
         <form class="dashboard-user-application-form"
-              on:submit|preventDefault={save}>
+              on:submit|preventDefault={trySave}>
+            <div class="dashboard-user-application-form-messages-wrapper">
+                <SaveMessage bind:this={saveMessage} />
+                {#each messages as message}
+                    <Message {message} />
+                {/each}
+            </div>
             <div class="dashboard-user-application-section">
                 <HeadlineH2>Event-Daten</HeadlineH2>
-                <SpeakerTeamMemberEventForm bind:data={data.data.speaker}
+                <SpeakerTeamMemberEventForm bind:this={eventForm}
+                                            bind:data={data.data.speaker}
                                             displaySaveButton={false} />
             </div>
             <div class="dashboard-user-application-section">
