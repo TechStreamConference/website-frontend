@@ -22,10 +22,8 @@ export async function load({ fetch }: {
             return await eventResponse.json();
         } catch {
             throw error(406, 'not able to parse event json in application page');
-
         }
     })();
-    console.log(eventJson);
     const event = (() => {
         if ('event' in eventJson) {
             return dashboardEventPropagationScheme.safeParse(eventJson['event']);
