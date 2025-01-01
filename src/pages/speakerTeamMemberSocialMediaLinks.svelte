@@ -53,10 +53,15 @@
                                            });
         }
 
-        const messageType = await trySaveDashboardDataAsync<SetAllUpdateSocialMediaLink>(
-            toSave,
-            '/api/dashboard/user/social-media-link',
-        );
+        const messageType = await (async () => {
+            if (toSave.social_media_links.length === 0) {
+                return SaveMessageType.Save;
+            }
+            return await trySaveDashboardDataAsync<SetAllUpdateSocialMediaLink>(
+                toSave,
+                '/api/dashboard/user/social-media-link',
+            );
+        })();
 
         const success: boolean = isSuccessType(messageType);
 
