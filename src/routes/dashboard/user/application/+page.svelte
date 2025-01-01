@@ -8,8 +8,8 @@
     import type { LoadDashboard, LoadUserApplication } from 'types/dashboardLoadTypes';
     import type { SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
 
-    import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { SaveMessageType } from 'types/saveMessageType';
+    import { apiUrl } from 'helper/links';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SpeakerTeamMemberEventForm from 'pages/speakerTeamMemberEventForm.svelte';
@@ -69,17 +69,23 @@
         }
 
         const formData = new FormData();
-        formData.append('json', JSON.stringify({
-                                                   event:   JSON.stringify(event),
-                                                   socials: JSON.stringify(data.data.socials.socials),
-                                               }));
+        formData.append('json', JSON.stringify(event));
         if (image.imageFile) {
             formData.append('photo', image.imageFile);
         }
 
-        const saveType = await trySaveDashboardDataAsync(formData, '/api/dashboard/user/apply-as-speaker', 'POST');
-        saveMessage.setSaveMessage(saveType);
-        return isSuccessType(saveType);
+        const saveResponse: Response = await fetch(apiUrl('/api/dashboard/user/apply-as-speaker'), {
+            method: 'POST',
+            body:   formData,
+        });
+
+        if (saveResponse.ok) {
+            saveMessage.setSaveMessage(SaveMessageType.Save);
+            return true;
+        }
+
+        saveMessage.setSaveMessage(SaveMessageType.Error);
+        return false;
     }
 </script>
 
