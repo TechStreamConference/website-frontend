@@ -10,7 +10,7 @@ import type {
     DashboardAllEventSpeaker,
     DashboardAllSocialMediaLink,
     DashboardAllSocialMediaLinkType,
-    DashboardEventPropagation,
+    DashboardEventApplication,
 } from './dashboardProvideTypes';
 
 export type LoadDashboard = {
@@ -42,7 +42,7 @@ export type LoadUserSocials = {
 
 export type LoadUserApplication = {
     data: {
-              event: DashboardEventPropagation,
+              event: DashboardEventApplication,
               speaker: LoadSpeakerTeamMemberEvent,
               socials: LoadUserSocials,
           } | undefined,

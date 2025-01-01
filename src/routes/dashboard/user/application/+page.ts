@@ -1,7 +1,7 @@
 import type { LoadUserApplication } from 'types/dashboardLoadTypes';
 import {
     dashboardAllSocialMediaLinkTypeScheme,
-    dashboardEventPropagationScheme,
+    dashboardEventApplicationScheme,
 } from 'types/dashboardProvideTypes';
 import { simpleErrorScheme } from 'types/provideTypes';
 
@@ -26,7 +26,7 @@ export async function load({ fetch }: {
     })();
     const event = (() => {
         if ('event' in eventJson) {
-            return dashboardEventPropagationScheme.safeParse(eventJson['event']);
+            return dashboardEventApplicationScheme.safeParse(eventJson['event']);
         }
 
         return undefined;

@@ -144,7 +144,7 @@ export type DashboardSocialMediaLinkType = z.infer<typeof dashboardSocialMediaLi
 export const dashboardAllSocialMediaLinkTypeScheme = z.array(dashboardSocialMediaLinkTypeScheme);
 export type DashboardAllSocialMediaLinkType = z.infer<typeof dashboardAllSocialMediaLinkTypeScheme>;
 
-export const dashboardEventPropagationScheme = z.object({
+export const dashboardEventApplicationScheme = z.object({
                                                             id:                    z.number(),
                                                             title:                 z.string(),
                                                             subtitle:              z.string(),
@@ -153,4 +153,4 @@ export const dashboardEventPropagationScheme = z.object({
                                                             call_for_papers_start: z.string(),
                                                             call_for_papers_end:   z.string(),
                                                         });
-export type DashboardEventPropagation = z.infer<typeof dashboardEventPropagationScheme>;
+export type DashboardEventApplication = z.infer<typeof dashboardEventApplicationScheme>;
