@@ -7,7 +7,7 @@ import { simpleErrorScheme } from 'types/provideTypes';
 
 import { apiUrl } from 'helper/links';
 import { error } from '@sveltejs/kit';
-import { propagationLookup } from 'lookup/propagationLookup';
+import { applicationLookup } from 'lookup/applicationLookup';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { redirectIfUnauthorizedOrReturnRolesAsync } from 'helper/loggedIn';
 
@@ -40,7 +40,7 @@ export async function load({ fetch }: {
             throw error(406, 'not able to parse event data in application page');
         }
 
-        myError.data.error = propagationLookup(myError.data.error);
+        myError.data.error = applicationLookup(myError.data.error);
 
         return {
             data:  undefined,
