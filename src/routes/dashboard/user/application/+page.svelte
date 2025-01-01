@@ -10,6 +10,7 @@
 
     import { SaveMessageType } from 'types/saveMessageType';
     import { apiUrl } from 'helper/links';
+    import { resetUnsavedChanges } from 'stores/saved';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SpeakerTeamMemberEventForm from 'pages/speakerTeamMemberEventForm.svelte';
@@ -112,6 +113,7 @@
 
         if (saveResponse.ok) {
             saveMessage.setSaveMessage(SaveMessageType.Save);
+            resetUnsavedChanges();
             success = true;
             return true;
         }
