@@ -32,7 +32,7 @@
     };
 
 
-    $: if (data.event) {
+    $: if (data.event.photo) {
         resetImage();
     }
 
