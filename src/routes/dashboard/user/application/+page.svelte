@@ -15,7 +15,7 @@
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SpeakerTeamMemberEventForm from 'pages/speakerTeamMemberEventForm.svelte';
-    import SpeakerTeamMemberSocialMediaLinkForm from 'pages/speakerTeamMemberSocialMediaLinkForm.svelte';
+    import SpeakerTeamMemberSocialMediaLinkForm from 'pages/speakerTeamMemberSocialMediaLinksForm.svelte';
     import Button from 'elements/input/button.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';

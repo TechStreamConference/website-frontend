@@ -12,7 +12,7 @@
     import Message from 'elements/text/message.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
-    import SpeakerTeamMemberSocialMediaLinkForm from './speakerTeamMemberSocialMediaLinkForm.svelte';
+    import SpeakerTeamMemberSocialMediaLinkForm from './speakerTeamMemberSocialMediaLinksForm.svelte';
 
     import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
     import { isSuccessType, SaveMessageType } from 'types/saveMessageType';

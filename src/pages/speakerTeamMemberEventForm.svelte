@@ -17,7 +17,7 @@
     import FormWrapper from 'elements/wrapper/formWrapper.svelte';
 
     export let data: LoadSpeakerTeamMemberEvent;
-    // If the save button is not displayed, the form also gets removed. This the on:save will not be triggert is that case.
+    // If the save button is not displayed, the form also gets removed. This means on:save will not be triggert is that case.
     export let displaySaveButton: boolean = true;
     const dispatch                        = createEventDispatcher();
 

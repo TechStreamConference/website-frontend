@@ -11,7 +11,7 @@
     import GeneralPopup from 'elements/popups/generalPopup.svelte';
     import FormWrapper from 'elements/wrapper/formWrapper.svelte';
 
-    // If the save button is not displayed, the form also gets removed. This the on:save will not be triggert is that case.
+    // If the save button is not displayed, the form also gets removed. This means on:save will not be triggert is that case.
     export let displaySaveButton = true;
     export let data: LoadUserSocials;
     export let roles: DashboardRoles;
