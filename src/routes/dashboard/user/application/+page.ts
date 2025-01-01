@@ -40,8 +40,6 @@ export async function load({ fetch }: {
             throw error(406, 'not able to parse event data in application page');
         }
 
-        console.error(myError.data.error);
-
         myError.data.error = propagationLookup(myError.data.error);
 
         return {
