@@ -25,8 +25,9 @@
 
     export let data: LoadDashboard & LoadUserApplication;
 
-    let eventForm: SpeakerTeamMemberEventForm;
     let messages: string[] = [];
+    let success: boolean   = false;
+    let eventForm: SpeakerTeamMemberEventForm;
     let saveMessage: SaveMessage;
 
     function deleteLink(e: CustomEvent<number>) {
@@ -85,13 +86,10 @@
         }
 
         const formData = new FormData();
-        formData.append(
-            'json',
-            JSON.stringify({
-                               application:       event,
-                               social_media_links: data.data.socials.socials,
-                           }),
-        );
+        formData.append('json', JSON.stringify({
+                                                   application:        event,
+                                                   social_media_links: data.data.socials.socials,
+                                               }));
         if (image.imageFile) {
             formData.append('photo', image.imageFile);
         }
@@ -103,6 +101,7 @@
 
         if (saveResponse.ok) {
             saveMessage.setSaveMessage(SaveMessageType.Save);
+            success = true;
             return true;
         }
 
@@ -119,7 +118,21 @@
 <UnsavedChangesCallbackWrapper callback={trySave} />
 
 <SectionDashboard classes="standard-dashboard-section">
-    {#if data.error}
+    {#if success}
+        <div class="dashboard-user-application-error">
+            <Paragraph classes="paragraph-pre-wrap"
+                       --text-align="center">
+                {"Du hast dich erfolgreich beworben.\nWir werden nun deine Bewerbung kontrollieren.\nWenn wir dich annehmen kannst du deine Daten im Speaker Dashboard bearbeiten.\nDazu wird dann ein neuer Tab oben rechts erscheinen."}
+            </Paragraph>
+            <div class="dashboard-user-application-button-wrapper">
+                <StyledLink title="Klicke hier, um zur Hauptseite zurück zu kehren"
+                            text="Hauptseite"
+                            href="/"
+                            newTab={false}
+                />
+            </div>
+        </div>
+    {:else if data.error}
         <div class="dashboard-user-application-error">
             <Paragraph classes="paragraph-pre-wrap"
                        --text-align="center">{data.error.error}</Paragraph>
