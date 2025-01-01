@@ -10,6 +10,7 @@
 
     import { SaveMessageType } from 'types/saveMessageType';
     import { apiUrl } from 'helper/links';
+    import { formatDate } from 'helper/dates';
     import { resetUnsavedChanges } from 'stores/saved';
 
     import Tabs from 'elements/navigation/tabs.svelte';
@@ -23,6 +24,7 @@
     import Message from 'elements/text/message.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
+    import TextLine from 'elements/text/textLine.svelte';
 
     export let data: LoadDashboard & LoadUserApplication;
 
@@ -175,6 +177,12 @@
     {:else if data.data}
         <form class="dashboard-user-application-form"
               on:submit|preventDefault={trySave}>
+            <div class="dashboard-user-application-event-infos">
+                <HeadlineH2>{data.data.event.title}</HeadlineH2>
+                <TextLine>{formatDate(data.data.event.start_date, '%DD.%MM.')}
+                    - {formatDate(data.data.event.end_date, '%DD.%MM.%YYYY')}</TextLine>
+                <TextLine>Noch bis: {formatDate(data.data.event.call_for_papers_end, '%DD.%MM.%YYYY')}</TextLine>
+            </div>
             <div class="dashboard-user-application-form-messages-wrapper">
                 <SaveMessage bind:this={saveMessage} />
                 {#each messages as message}
@@ -182,7 +190,7 @@
                 {/each}
             </div>
             <div class="dashboard-user-application-section">
-                <HeadlineH2>Event-Daten</HeadlineH2>
+                <HeadlineH2>Deine Bewerbung</HeadlineH2>
                 <SpeakerTeamMemberEventForm bind:this={eventForm}
                                             bind:data={data.data.speaker}
                                             displaySaveButton={false} />
@@ -210,6 +218,13 @@
         flex-direction: column;
         gap:            var(--4x-gap);
         margin-top:     var(--8x-margin);
+    }
+
+    .dashboard-user-application-event-infos {
+        display:        flex;
+        flex-direction: column;
+        align-items:    center;
+        gap:            var(--full-gap);
     }
 
     .dashboard-user-application-form {
