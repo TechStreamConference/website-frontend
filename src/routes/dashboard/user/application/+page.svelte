@@ -6,7 +6,7 @@
 
     import type { NewImage } from 'pageHelper/speakerTeamMemberEvent';
     import type { LoadDashboard, LoadUserApplication } from 'types/dashboardLoadTypes';
-    import type { SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
+    import type { SetCreateSocialMediaLink, SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
 
     import { SaveMessageType } from 'types/saveMessageType';
     import { apiUrl } from 'helper/links';
@@ -85,10 +85,21 @@
             return false;
         }
 
+        const socials:SetCreateSocialMediaLink[] = (()=>{
+            let toReturn: SetCreateSocialMediaLink[] = [];
+            for (const entry of data.data.socials.socials) {
+                toReturn.push({
+                    url: entry.url,
+                    social_media_type_id: SocialHelper.getIDFromSocialMediaType(data.data.socials.socialTypes, entry.name)
+                              });
+            }
+            return toReturn;
+        })();
+
         const formData = new FormData();
         formData.append('json', JSON.stringify({
                                                    application:        event,
-                                                   social_media_links: data.data.socials.socials,
+                                                   social_media_links: socials,
                                                }));
         if (image.imageFile) {
             formData.append('photo', image.imageFile);
