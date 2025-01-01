@@ -29,6 +29,22 @@
     let messages: string[] = [];
     let saveMessage: SaveMessage;
 
+    function deleteLink(e: CustomEvent<number>) {
+        if (!data.data) {
+            console.error('data ist undefined');
+            return;
+        }
+
+        const index: number = e.detail;
+        if (index < 0 || index >= data.data.socials.socials.length) {
+            console.error('index out of range');
+            return;
+        }
+
+        data.data.socials.socials.splice(e.detail, 1);
+        data.data.socials.socials = data.data.socials.socials;
+    }
+
     function validate(event: SetSpeakerTeamMemberEvent, image: NewImage): boolean {
         if (!data.data) {
             return false;
@@ -140,7 +156,8 @@
                 <HeadlineH2>Social Media-Daten</HeadlineH2>
                 <SpeakerTeamMemberSocialMediaLinkForm bind:data={data.data.socials}
                                                       bind:roles={data.roles}
-                                                      displaySaveButton={false} />
+                                                      displaySaveButton={false}
+                                                      on:delete={deleteLink} />
             </div>
             <div class="dashboard-user-application-button-wrapper">
                 <Button type="submit"
