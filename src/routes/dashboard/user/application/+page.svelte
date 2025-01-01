@@ -86,12 +86,15 @@
             return false;
         }
 
-        const socials:SetCreateSocialMediaLink[] = (()=>{
+        const socials: SetCreateSocialMediaLink[] = (() => {
             let toReturn: SetCreateSocialMediaLink[] = [];
             for (const entry of data.data.socials.socials) {
                 toReturn.push({
-                    url: entry.url,
-                    social_media_type_id: SocialHelper.getIDFromSocialMediaType(data.data.socials.socialTypes, entry.name)
+                                  url:                  entry.url,
+                                  social_media_type_id: SocialHelper.getIDFromSocialMediaType(
+                                      data.data.socials.socialTypes,
+                                      entry.name,
+                                  ),
                               });
             }
             return toReturn;
