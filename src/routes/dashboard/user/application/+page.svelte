@@ -35,7 +35,7 @@
 
     function deleteLink(e: CustomEvent<number>) {
         if (!data.data) {
-            console.error('data ist undefined');
+            console.error('data is undefined');
             return;
         }
 
@@ -140,7 +140,7 @@
         <div class="dashboard-user-application-error">
             <Paragraph classes="paragraph-pre-wrap"
                        --text-align="center">
-                {"Du hast dich erfolgreich beworben.\nWir werden nun deine Bewerbung kontrollieren.\nWenn wir dich annehmen kannst du deine Daten im Speaker Dashboard bearbeiten.\nDazu wird dann ein neuer Tab oben rechts erscheinen."}
+                {"Du hast dich erfolgreich beworben.\nWir werden nun deine Bewerbung kontrollieren.\nWenn wir dich annehmen, kannst du deine Daten im Speaker-Dashboard bearbeiten.\nDazu wird dann ein neuer Tab oben rechts erscheinen."}
             </Paragraph>
             <div class="dashboard-user-application-button-wrapper">
                 <StyledLink title="Klicke hier, um zur Hauptseite zurück zu kehren"
@@ -196,7 +196,7 @@
                                             displaySaveButton={false} />
             </div>
             <div class="dashboard-user-application-section">
-                <HeadlineH2>Social Media-Daten</HeadlineH2>
+                <HeadlineH2>Social-Media-Daten</HeadlineH2>
                 <SpeakerTeamMemberSocialMediaLinkForm bind:data={data.data.socials}
                                                       bind:roles={data.roles}
                                                       displaySaveButton={false}
