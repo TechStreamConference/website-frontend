@@ -85,7 +85,13 @@
         }
 
         const formData = new FormData();
-        formData.append('json', JSON.stringify(event));
+        formData.append(
+            'json',
+            JSON.stringify({
+                               application:       event,
+                               social_media_links: data.data.socials.socials,
+                           }),
+        );
         if (image.imageFile) {
             formData.append('photo', image.imageFile);
         }
