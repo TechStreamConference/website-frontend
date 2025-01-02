@@ -24,7 +24,7 @@
             approved:             false,
             id:                   0,
             name:                 'Web',
-            url:                  '',
+            url:                  'https://',
             user_id:              roles.user_id,
             requested_changes:    null,
             social_media_type_id: getIDFromSocialMediaType(data.socialTypes, 'Web'),
