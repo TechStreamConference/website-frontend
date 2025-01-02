@@ -13,7 +13,7 @@ const lookup: RegisterDict = {
     'The email field must contain a valid email address.': 'Das E-Mail-Feld muss eine gültige E-Mail-Adresse enthalten',
 
     // username or mail
-    'Username or email already taken': 'Name oder E-Mail sind bereits vergeben',
+    USERNAME_OR_EMAIL_ALREADY_TAKEN: 'Name oder E-Mail sind bereits vergeben',
 
     // password
     'The password field is required.':  'Das Feld \'Passwort\' ist erforderlich.',
