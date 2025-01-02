@@ -74,14 +74,14 @@ export const teamMemberSocialMedia: MenuItem = {
     description: 'Klicke hier, um zu den Social-Media-Einstellungen zu gelangen',
 };
 
-export const userProfile: MenuItem       = {
+export const userProfile: MenuItem = {
     name:        'Profil',
     url:         '/dashboard/user/profile',
     description: 'Klicke hier, um das Profil zu bearbeiten',
 };
-export const userCallForPapers: MenuItem = {
+export const application: MenuItem = {
     name:        'Bewerbung',
-    url:         '/dashboard/user/call-for-papers',
+    url:         '/dashboard/user/application',
     description: 'Klicke hier, um dich als Speaker für das aktuelle Event zu bewerben',
 };
 

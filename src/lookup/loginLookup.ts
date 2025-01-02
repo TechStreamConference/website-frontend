@@ -3,9 +3,11 @@ type LoginDict = {
 };
 
 const lookup: LoginDict = {
-    'Username/email or password missing': 'Name/E-Mail oder Passwort fehlt.',
-    'Unknown username or email':          'Name oder E-Mail ungültig.',
-    'Invalid password':                   'Passwort ungültig.'
+    USERNAME_OR_EMAIL_FIELD_MISSING: 'Name/E-Mail oder Passwort fehlt.',
+    UNKNOWN_USERNAME_OR_EMAIL:          'Name oder E-Mail ungültig.',
+    WRONG_PASSWORD:                   'Passwort ungültig.',
+    NOT_LOGGED_IN:                      'Du bist aktuell nicht eingeloggt',
+    FORBIDDEN:                          'Du hast keine Berechtigung für diese Seite.',
 };
 
 export function loginLookup(key: string): string {

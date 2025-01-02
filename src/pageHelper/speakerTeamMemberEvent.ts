@@ -1,4 +1,4 @@
-import type {DashboardSpeakerTeamMember} from 'types/dashboardProvideTypes';
+import type { DashboardSpeakerTeamMember } from 'types/dashboardProvideTypes';
 import type { LoadSpeakerTeamMemberEvent } from 'types/dashboardLoadTypes';
 
 import {
@@ -7,7 +7,20 @@ import {
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { error } from '@sveltejs/kit';
+import type { SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
 
+
+export type NewImage = {
+    lastPhotoX: number;
+    lastPhotoY: number;
+    lastPhotoSize: number;
+    imageFile: File | undefined;
+}
+
+export type ValidateReturn = {
+    data: SetSpeakerTeamMemberEvent,
+    messages: string[],
+}
 
 export async function loadDataAsync(
     fetch: typeof globalThis.fetch,
@@ -48,4 +61,30 @@ export async function loadSpeakerTeamMemberAsync(
         `Serveranfrage für den ${type}-Eintrag für Event ${eventID} nicht erfolgreich. throw error(406)`,
         `Unerwartete Daten für den ${type}-Eintrag für das Event ${eventID}. throw error(406)`,
     );
+}
+
+export function validate(data: SetSpeakerTeamMemberEvent): ValidateReturn {
+    const messages: string[] = [];
+
+    const fields: string[] = [
+        data.name,
+        data.short_bio,
+        data.bio,
+    ];
+    const errors: string[] = [
+        'Der Name darf nicht leer sein.',
+        'Die Kurzbeschreibung darf nicht leer sein.',
+        'Die Beschreibung darf nicht leer sein.',
+    ];
+
+    for (let i = 0; i < fields.length; ++i) {
+        if (fields[i].trim().length === 0) {
+            messages.push(errors[i]);
+        }
+    }
+
+    return {
+        data,
+        messages,
+    };
 }

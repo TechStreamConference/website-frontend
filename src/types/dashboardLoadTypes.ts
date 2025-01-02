@@ -1,4 +1,4 @@
-import type { Globals } from './provideTypes';
+import type { Globals, SimpleError } from './provideTypes';
 import type {
     DashboardRoles,
     DashboardAllEvents,
@@ -10,6 +10,7 @@ import type {
     DashboardAllEventSpeaker,
     DashboardAllSocialMediaLink,
     DashboardAllSocialMediaLinkType,
+    DashboardEventApplication,
 } from './dashboardProvideTypes';
 
 export type LoadDashboard = {
@@ -37,4 +38,13 @@ export type LoadSpeakerTeamMemberEvent = {
 export type LoadUserSocials = {
     socials: DashboardAllSocialMediaLink,
     socialTypes: DashboardAllSocialMediaLinkType,
+}
+
+export type LoadUserApplication = {
+    data: {
+              event: DashboardEventApplication,
+              speaker: LoadSpeakerTeamMemberEvent,
+              socials: LoadUserSocials,
+          } | undefined,
+    error: SimpleError | undefined
 }
