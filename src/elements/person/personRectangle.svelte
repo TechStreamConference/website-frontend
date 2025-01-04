@@ -49,6 +49,7 @@
         border-radius:    var(--border-radius);
         transition:       var(--transition-duration);
         text-align:       center;
+        width:            100%;
     }
 
     .person-rectangle:hover {
