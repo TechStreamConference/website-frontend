@@ -94,3 +94,7 @@ export type MenuItem = z.infer<typeof menuItemScheme>;
 
 export const menuScheme = z.array(menuItemScheme);
 export type Menu = z.infer<typeof menuScheme>;
+
+
+export const simpleErrorScheme = z.object({ error: z.string() });
+export type SimpleError = z.infer<typeof simpleErrorScheme>;

@@ -16,7 +16,7 @@ export async function redirectIfUnauthorizedOrReturnRolesAsync(fetch: typeof glo
         throw redirect(302, '/login?showLoginMessage=true');
     }
 
-    return await checkAndParseInputDataAsync<DashboardRoles>(
+    return await checkAndParseInputDataAsync(
         response,
         dashboardRolesScheme,
         `Serveranfrage für roles nicht erfolgreich. throw error(406)`,
