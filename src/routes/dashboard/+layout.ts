@@ -3,11 +3,9 @@ import type { DashboardRoles } from 'types/dashboardProvideTypes';
 import type { Globals } from 'types/provideTypes';
 
 import {
-    defaultNavigation,
-    defaultPermissionCheck,
+    defaultNavigation, defaultPermissionCheck,
 } from 'helper/dashboardNavigation';
-import { apiUrl } from 'helper/links';
-import { checkAndParseGlobalsAsync } from 'helper/parseJson';
+import { getGlobalsAsync } from 'stores/globals';
 
 export async function load({
                                url,
@@ -18,11 +16,10 @@ export async function load({
 }): Promise<LoadDashboard> {
     // call
     const rolesPromise: Promise<DashboardRoles> = defaultPermissionCheck(fetch);
-    const globalsPromise: Promise<Response>     = fetch(apiUrl('/api/globals'));
+    const globalsPromise: Promise<Globals>      = getGlobalsAsync(fetch);
 
     // data
     const roles: DashboardRoles = await rolesPromise;
-    const globals: Globals      = await checkAndParseGlobalsAsync(await globalsPromise);
 
     const name: string = url.pathname.substring(url.pathname.lastIndexOf('/'));
     if ((name === '/dashboard') || (name === '/admin') || (name === '/team-member') || (name === '/speaker')) {
@@ -37,6 +34,6 @@ export async function load({
 
     return {
         roles,
-        globals,
+        globals: await globalsPromise,
     };
 }

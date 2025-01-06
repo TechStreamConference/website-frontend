@@ -1,8 +1,8 @@
 import type { LoadLogin } from 'types/loadTypes';
 import type { Globals } from 'types/provideTypes';
-import { apiUrl } from 'helper/links';
+
 import { fetchLoginStatusAsync } from 'helper/loggedIn';
-import { checkAndParseGlobalsAsync } from 'helper/parseJson';
+import { getGlobalsAsync } from 'stores/globals';
 
 export async function load({
                                fetch,
@@ -13,16 +13,15 @@ export async function load({
 }): Promise<LoadLogin> {
     // call
     const loggedInPromise: Promise<boolean> = fetchLoginStatusAsync(fetch);
-    const globalsPromise: Promise<Response> = fetch(apiUrl('/api/globals'));
+    const globalsPromise: Promise<Globals>  = getGlobalsAsync(fetch);
 
     // data
     const showLoginMessage: boolean = url.searchParams.get('showLoginMessage') === 'true';
     const loggedIn: boolean         = await loggedInPromise;
-    const globalsData: Globals      = await checkAndParseGlobalsAsync(await globalsPromise);
 
     return {
         loggedIn,
-        globals: globalsData,
+        globals: await globalsPromise,
         showLoginMessage,
     };
 }
