@@ -10,6 +10,7 @@
     import { SaveMessageType } from 'types/saveMessageType';
     import { loadSpeakerTeamMemberAsync, type NewImage, type ValidateReturn } from 'pageHelper/speakerTeamMemberEvent';
     import { validate } from 'pageHelper/speakerTeamMemberEvent';
+    import { scrollToTop } from 'helper/scroll';
 
     import ManualUnsavedChangesPopup from 'elements/popups/manualUnsavedChangesPopup.svelte';
     import Tabs from 'elements/navigation/tabs.svelte';
@@ -70,6 +71,7 @@
 
 
     async function trySaveAsync(): Promise<boolean> {
+        scrollToTop();
         const newImage: NewImage              = form.getNewImage();
         let toSave: SetSpeakerTeamMemberEvent = {
             name:       data.event.name.trim(),
