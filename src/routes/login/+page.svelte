@@ -11,9 +11,11 @@
     import Link from 'elements/text/link.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
 
+    import { z } from 'zod';
     import { goto } from '$app/navigation';
     import { apiUrl } from 'helper/links';
     import { loginLookup } from 'lookup/loginLookup';
+    import { parseProvidedJsonAsync } from 'helper/parseJson';
 
     export let data: LoadLogin; // data from database
 
@@ -64,7 +66,41 @@
     }
 
     async function resetPassword(): Promise<void> {
-        changeState(State.ResetPasswordSuccess);
+        const data = {
+            username_or_email: usernameOrEmail.trim(),
+        };
+
+        if (password.length === 0) {
+            errorMessage = 'Keine E-Mail oder Namen angegeben.';
+            return;
+        }
+
+        const response: Response = await fetch(apiUrl('/api/account/forgot-password'), {
+            method: 'POST',
+            body:   JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            changeState(State.ResetPasswordSuccess);
+            return;
+        }
+
+        console.log(response);
+
+        try {
+            const scheme = z.object({
+                                        error: z.string(),
+                                    });
+            const object = await parseProvidedJsonAsync(response, scheme);
+            if (object) {
+                errorMessage = loginLookup(object.error);
+                return;
+            }
+        } catch { /* empty */
+        }
+
+        errorMessage = 'Fehler beim Speichern';
+
     }
 </script>
 
