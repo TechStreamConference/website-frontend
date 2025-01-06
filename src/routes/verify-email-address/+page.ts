@@ -1,34 +1,48 @@
-import { apiUrl } from "helper/links";
-import { checkAndParseGlobalsAsync } from "helper/parseJson";
-import type { LoadVerifyEmail } from "types/loadTypes";
-import type { Globals } from "types/provideTypes";
+import type { LoadVerifyEmail } from 'types/loadTypes';
+import type { Globals } from 'types/provideTypes';
+
+import { apiUrl } from 'helper/links';
+import { getGlobalsAsync } from 'stores/globals';
 
 export const ssr = false; // Disable Server Side Rendering to make sure the provided data gets only send once.
 
-export async function load({ fetch, url }: { fetch: typeof globalThis.fetch, url: URL }): Promise<LoadVerifyEmail> {
-    const globalsPromise: Promise<Response> = fetch(apiUrl('/api/globals'));
+export async function load({
+                               fetch,
+                               url,
+                           }: {
+    fetch: typeof globalThis.fetch,
+    url: URL
+}): Promise<LoadVerifyEmail> {
+    const globalsPromise: Promise<Globals> = getGlobalsAsync(fetch);
 
     const token: string | null = url.searchParams.get('token');
     if (!token) {
         console.error('no token in URL');
-        const globalsData: Globals = await checkAndParseGlobalsAsync(await globalsPromise);
-        return { success: false, globals: globalsData };
+        return {
+            success: false,
+            globals: await globalsPromise,
+        };
     }
 
-    const toSave = { token };
+    const toSave   = { token };
     const response = await fetch(apiUrl('/api/account/verify'), {
         method: 'POST',
-        body: JSON.stringify(toSave)
+        body:   JSON.stringify(toSave),
     });
-    const globalsData: Globals = await checkAndParseGlobalsAsync(await globalsPromise);
 
     if (!response.ok) {
         if (response.status === 400) {
             console.error(await response.json());
         }
 
-        return { success: false, globals: globalsData };
+        return {
+            success: false,
+            globals: await globalsPromise,
+        };
     }
 
-    return { success: true, globals: globalsData };
+    return {
+        success: true,
+        globals: await globalsPromise,
+    };
 }
