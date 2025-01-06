@@ -6,12 +6,10 @@
     import type { SetAdminGlobals } from 'types/dashboardSetTypes';
 
     import { Clone } from 'helper/clone';
-    import {
-        isSuccessType,
-        SaveMessageType,
-    } from 'types/saveMessageType';
+    import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
     import { setUnsavedChanges } from 'stores/saved';
     import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { resetGlobals } from 'stores/globals';
 
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import Button from 'elements/input/button.svelte';
@@ -35,6 +33,7 @@
             '/api/dashboard/admin/globals',
         );
 
+        resetGlobals(); // reset cache to force a global fetch next time
         message.setSaveMessage(saveType);
         return isSuccessType(saveType);
     }
