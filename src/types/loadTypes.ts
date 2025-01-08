@@ -26,3 +26,8 @@ export type LoadVerifyEmail = {
     success: boolean | undefined,
     globals: Globals;
 };
+
+export type LoadResetPassword = {
+    globals: Globals;
+    token: string;
+}

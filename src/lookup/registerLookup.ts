@@ -22,7 +22,10 @@ const lookup: RegisterDict = {
     PASSWORD_MISSING_LOWERCASE_LETTER:  'Deinem Passwort fehlt ein Kleinbuchstabe.',
     PASSWORD_MISSING_UPPERCASE_LETTER:  'Deinem Passwort fehlt ein Großbuchstabe.',
     PASSWORD_MISSING_NUMBER:            'Deinem Passwort fehlt eine Ziffer.',
-    PASSWORD_MISSING_SPECIAL_CHARACTER: 'Deinem Passwort fehlt ein Sonderzeichen.'
+    PASSWORD_MISSING_SPECIAL_CHARACTER: 'Deinem Passwort fehlt ein Sonderzeichen.',
+
+    // token
+    TOKEN_EXPIRED_OR_DOES_NOT_EXIST: 'Der Link ist ungültig oder bereits abgelaufen.',
 };
 
 export function registerLookup(key: string): string {

@@ -1,20 +1,31 @@
 <script lang="ts">
+    import * as Menu from 'menu/login';
+
     import type { LoadLogin } from 'types/loadTypes';
 
-    import * as Menu from 'menu/login';
-    import Header from 'elements/navigation/header.svelte';
     import HeadlinePage from 'elements/text/headlinePage.svelte';
-    import Footer from 'elements/navigation/footer.svelte';
     import ErrorMessage from 'elements/text/message.svelte';
     import Input from 'elements/input/input.svelte';
     import Button from 'elements/input/button.svelte';
     import Link from 'elements/text/link.svelte';
+    import Paragraph from 'elements/text/paragraph.svelte';
+    import PageWrapper from 'elements/section/pageWrapper.svelte';
 
+    import { z } from 'zod';
     import { goto } from '$app/navigation';
     import { apiUrl } from 'helper/links';
     import { loginLookup } from 'lookup/loginLookup';
+    import { parseProvidedJsonAsync } from 'helper/parseJson';
 
     export let data: LoadLogin; // data from database
+
+    enum State {
+        Login,
+        ResetPasswordPending,
+        ResetPasswordSuccess,
+    }
+
+    let state: State = State.Login;
 
     let usernameOrEmail: string = '';
     let password: string        = '';
@@ -22,6 +33,11 @@
     const loggedInMessage     = data.loggedIn ? 'Du bist bereits angemeldet.' : '';
     const displayLoginMessage = data.showLoginMessage ? 'Du musst dich zunächst anmelden.' : '';
     let errorMessage: string  = '';
+
+    function changeState(_state: State): void {
+        errorMessage = '';
+        state        = _state;
+    }
 
     async function loginAsync(): Promise<void> {
         const data = {
@@ -48,12 +64,49 @@
         };
         errorMessage       = await entriesAsync(response);
     }
+
+    async function resetPassword(): Promise<void> {
+        const data = {
+            username_or_email: usernameOrEmail.trim(),
+        };
+
+        if (data.username_or_email.length === 0) {
+            errorMessage = 'Keine E-Mail-Adresse oder Name angegeben.';
+            return;
+        }
+
+        const response: Response = await fetch(apiUrl('/api/account/forgot-password'), {
+            method: 'POST',
+            body:   JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            changeState(State.ResetPasswordSuccess);
+            return;
+        }
+
+        try {
+            const scheme = z.object({
+                                        error: z.string(),
+                                    });
+            const object = await parseProvidedJsonAsync(response, scheme);
+            if (object) {
+                errorMessage = loginLookup(object.error);
+                return;
+            }
+        } catch { /* empty */
+        }
+
+        errorMessage = 'Fehler beim Speichern';
+
+    }
 </script>
 
-<Header menu={Menu.headerOut} />
 
-<div class="login">
-    <div class="login-content">
+<PageWrapper headerMenu={Menu.headerOut}
+             footerMenu={Menu.footerOut}
+             globals={data.globals}>
+    {#if state === State.Login}
         <form class="login-form-width-wrapper"
               on:submit|preventDefault={loginAsync}>
             <HeadlinePage>Anmelden</HeadlinePage>
@@ -84,37 +137,67 @@
                   title="Klicke, um einen neuen Account anzulegen">
                 Noch keinen Account?
             </Link>
+            <Link href="#"
+                  title="Klicke, um dein Passwort zurückzusetzen."
+                  on:click={() => {changeState(State.ResetPasswordPending)}}
+            >
+                Passwort vergessen?
+            </Link>
             <Button classes="login-button"
                     type="submit"
                     ariaLabel="Klicke zum Anmelden">Anmelden
             </Button>
         </form>
-    </div>
-
-    <Footer globals={data.globals}
-            menu={Menu.footerOut} />
-</div>
+    {:else if state === State.ResetPasswordPending}
+        <form class="login-form-width-wrapper"
+              on:submit|preventDefault={resetPassword}>
+            <HeadlinePage>Passwort zurücksetzen</HeadlinePage>
+            <ErrorMessage message={errorMessage} />
+            <Input
+                  classes="login-username-mail login-username-mail-reset-extra"
+                  id="login-username-or-email"
+                  type="text"
+                  labelText="Nutzername oder E-Mail:"
+                  placeholderText="Nutzername oder E-Mail"
+                  ariaLabel="Gib den Nutzernamen oder die E-Mail-Adresse ein"
+                  bind:value={usernameOrEmail}
+            />
+            <Button classes="login-button"
+                    type="submit"
+                    ariaLabel="Klicke, um dein Passwort zurückzusetzen">Passwort zurücksetzen
+            </Button>
+            <Link href="#"
+                  title="Klicke, um wieder zur Anmeldung zu kommen."
+                  on:click={() => {changeState(State.Login)}}
+            >
+                zurück
+            </Link>
+        </form>
+    {:else if state === State.ResetPasswordSuccess}
+        <form class="login-form-width-wrapper login-form-gap-wrapper"
+              on:submit|preventDefault={() => {changeState(State.Login);}}>
+            <HeadlinePage>Passwort zurückgesetzt</HeadlinePage>
+            <Paragraph classes="paragraph-pre-wrap"
+                       --text-align="center">{'Wir haben dir eine E-Mail gesendet. Darin findest du einen Link, mit dessen Hilfe du ein neues Passwort auswählen kannst.\nDanach kannst du dich mit deinem neuen Passwort wieder anmelden.'}</Paragraph>
+            <Button classes="login-button"
+                    type="submit"
+                    ariaLabel="Klicke, um dich anzumelden">Login
+            </Button>
+        </form>
+    {/if}
+</PageWrapper>
 
 <style>
-    .login {
-        display:        flex;
-        flex-direction: column;
-        min-height:     100vh;
-    }
-
-    .login-content {
-        flex-grow:      1;
-        display:        flex;
-        flex-direction: column;
-        margin:         0 var(--2x-margin);
-    }
-
     .login-form-width-wrapper {
         width:          100%;
         max-width:      50rem;
         margin:         0 auto;
         display:        flex;
         flex-direction: column;
+    }
+
+    .login-form-gap-wrapper {
+        gap: var(--4x-gap);
     }
 
     .login-message-wrapper {
@@ -125,6 +208,10 @@
 
     :global(.login-username-mail) {
         margin-bottom: var(--full-margin);
+    }
+
+    :global(.login-username-mail-reset-extra) {
+        margin-top: var(--4x-margin);
     }
 
     :global(.login-password) {
