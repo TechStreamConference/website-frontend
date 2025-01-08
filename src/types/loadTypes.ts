@@ -8,7 +8,8 @@ export type LoadYear = {
 
 export type LoadRegister = {
     loggedIn: boolean;
-    globals: Globals
+    globals: Globals;
+    token: string | null;
 };
 
 export type LoadLogin = {

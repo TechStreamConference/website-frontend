@@ -15,7 +15,7 @@
     import { goto } from '$app/navigation';
     import { apiUrl } from 'helper/links';
     import { loginLookup } from 'lookup/loginLookup';
-    import { parseProvidedJsonAsync } from 'helper/parseJson';
+    import { parseMultipleErrorsAsync, parseProvidedJsonAsync } from 'helper/parseJson';
 
     export let data: LoadLogin; // data from database
 
@@ -55,14 +55,12 @@
             return;
         }
 
-        const entriesAsync = async (response: Response): Promise<string> => {
-            const text: string = await response.text();
-            const json: {
-                [key: string]: string
-            }                  = JSON.parse(text);
-            return loginLookup(Object.values(json)[0]);
-        };
-        errorMessage       = await entriesAsync(response);
+        const result = await parseMultipleErrorsAsync(response);
+        if (result.length == 0) {
+            errorMessage = '';
+            return;
+        }
+        errorMessage = result[0];
     }
 
     async function resetPassword(): Promise<void> {

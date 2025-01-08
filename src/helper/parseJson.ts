@@ -1,10 +1,34 @@
-import { error } from "@sveltejs/kit";
-import { globalsScheme, type Globals } from "types/provideTypes";
+import { error } from '@sveltejs/kit';
+import { globalsScheme, type Globals } from 'types/provideTypes';
 import { z, ZodSchema } from 'zod';
+import { registerLookup } from 'lookup/registerLookup';
 
-export async function parseProvidedJsonAsync<T extends ZodSchema>(response: Response, scheme: T): Promise<z.infer<T> | undefined> {
+export async function parseMultipleErrorsAsync(response: Response): Promise<string[]> {
     try {
-        const type: T = await response.json();
+        const text: string       = await response.text();
+        const json: {
+            [key: string]: string
+        }                        = JSON.parse(text);
+        const values: string[]   = Object.values(json);
+        const toReturn: string[] = [];
+        for (const value of values) {
+            toReturn.push(registerLookup(value));
+        }
+        return toReturn;
+
+    } catch {
+        console.error('error while parsing error response');
+        console.log(response);
+        return [];
+    }
+}
+
+export async function parseProvidedJsonAsync<T extends ZodSchema>(
+    response: Response,
+    scheme: T,
+): Promise<z.infer<T> | undefined> {
+    try {
+        const type: T   = await response.json();
         const validated = scheme.safeParse(type);
 
         if (validated.success) {
@@ -18,7 +42,12 @@ export async function parseProvidedJsonAsync<T extends ZodSchema>(response: Resp
     }
 }
 
-export async function checkAndParseInputDataAsync<T extends ZodSchema>(response: Response, scheme: T, messageOK: string, messageData: string): Promise<z.infer<T>> {
+export async function checkAndParseInputDataAsync<T extends ZodSchema>(
+    response: Response,
+    scheme: T,
+    messageOK: string,
+    messageData: string,
+): Promise<z.infer<T>> {
     if (!response.ok) {
         console.error(messageOK);
         throw error(406);
@@ -39,6 +68,6 @@ export async function checkAndParseGlobalsAsync(response: Response): Promise<Glo
         response,
         globalsScheme,
         `Serveranfrage für globals nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für globals. throw error(406)`
+        `Unerwartete Daten für globals. throw error(406)`,
     );
 }
