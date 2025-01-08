@@ -5,6 +5,7 @@
     import type { LoadResetPassword } from 'types/loadTypes';
 
     import { apiUrl } from 'helper/links';
+    import { parseMultipleErrorsAsync } from 'helper/parseJson';
 
     import Input from 'elements/input/input.svelte';
     import Button from 'elements/input/button.svelte';
@@ -14,7 +15,6 @@
     import Paragraph from 'elements/text/paragraph.svelte';
     import StyledLink from 'elements/input/styledLink.svelte';
     import Message from 'elements/text/message.svelte';
-    import { registerLookup } from 'lookup/registerLookup.js';
 
     enum State {
         DidReset,
@@ -47,20 +47,7 @@
         });
 
         if (!response.ok) {
-            const entriesAsync = async (response: Response): Promise<string[]> => {
-                const text: string     = await response.text();
-                const json: {
-                    [key: string]: string
-                }                      = JSON.parse(text);
-                const values: string[] = Object.values(json);
-                let toReturn: string[] = [];
-                for (const value of values) {
-                    toReturn.push(registerLookup(value));
-                    console.error('error while register from dashboard: ' + value);
-                }
-                return toReturn;
-            };
-            errorMessages      = await entriesAsync(response);
+            errorMessages      = await parseMultipleErrorsAsync(response);
             return;
         }
 
