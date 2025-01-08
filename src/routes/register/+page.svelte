@@ -14,7 +14,7 @@
     import PasswordHints from 'elements/text/passwordHints.svelte';
 
     import { apiUrl } from 'helper/links';
-    import { registerLookup } from 'lookup/registerLookup';
+    import { parseMultipleErrorsAsync } from 'helper/parseJson';
 
     export let data: LoadRegister; // data from database
 
@@ -119,20 +119,7 @@
         });
 
         if (!response.ok) {
-            const entriesAsync = async (response: Response): Promise<string[]> => {
-                const text: string     = await response.text();
-                const json: {
-                    [key: string]: string
-                }                      = JSON.parse(text);
-                const values: string[] = Object.values(json);
-                let toReturn: string[] = [];
-                for (const value of values) {
-                    toReturn.push(registerLookup(value));
-                    console.error('error while register from dashboard: ' + value);
-                }
-                return toReturn;
-            };
-            errorMessages      = await entriesAsync(response);
+            errorMessages = await parseMultipleErrorsAsync(response);
             return;
         }
         registered = true;
@@ -207,7 +194,7 @@
                 >
                     Registrieren
                 </Button>
-                <PasswordHints/>
+                <PasswordHints />
             </form>
         {:else}
             <div class="register-width-wrapper">
