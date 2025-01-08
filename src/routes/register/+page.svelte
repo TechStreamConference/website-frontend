@@ -103,19 +103,21 @@
     }
 
     async function registerAsync(): Promise<void> {
-        const data: {
+        const toSave: {
             username: string;
             email: string;
-            password: string
+            password: string;
+            token: string | null;
         } = {
             username: username.trim(),
             email:    email.trim(),
             password: password_1.trim(),
+            token:    data.token,
         };
 
         const response: Response = await fetch(apiUrl('/api/account/register'), {
             method: 'POST',
-            body:   JSON.stringify(data),
+            body:   JSON.stringify(toSave),
         });
 
         if (!response.ok) {
