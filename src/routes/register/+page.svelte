@@ -8,11 +8,10 @@
     import ErrorMessage from 'elements/text/message.svelte';
     import Input from 'elements/input/input.svelte';
     import TextLine from 'elements/text/textLine.svelte';
-    import List from 'elements/list/list.svelte';
-    import ListElement from 'elements/list/listElement.svelte';
     import Button from 'elements/input/button.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
     import PageWrapper from 'elements/section/pageWrapper.svelte';
+    import PasswordHints from 'elements/text/passwordHints.svelte';
 
     import { apiUrl } from 'helper/links';
     import { registerLookup } from 'lookup/registerLookup';
@@ -208,18 +207,7 @@
                 >
                     Registrieren
                 </Button>
-                <div class="password-list-wrapper">
-                    <TextLine classes="password-text-line">
-                        Dein Passwort sollte folgendes enthalten:
-                    </TextLine>
-                    <List classes="list-padding-left">
-                        <ListElement classes="list-element-dot">mind. 8 Zeichen</ListElement>
-                        <ListElement classes="list-element-dot">mind. 1 Kleinbuchstaben</ListElement>
-                        <ListElement classes="list-element-dot">mind. 1 Großbuchstaben</ListElement>
-                        <ListElement classes="list-element-dot">mind. 1 Zahl</ListElement>
-                        <ListElement classes="list-element-dot">mind. 1 Sonderzeichen</ListElement>
-                    </List>
-                </div>
+                <PasswordHints/>
             </form>
         {:else}
             <div class="register-width-wrapper">
@@ -278,9 +266,6 @@
         margin: var(--2x-margin) auto 0;
     }
 
-    .password-list-wrapper {
-        margin: var(--2x-margin) auto 0;
-    }
 
     .button-wrapper {
         display:         flex;
