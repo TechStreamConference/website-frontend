@@ -29,6 +29,5 @@
         flex-grow:      1;
         display:        flex;
         flex-direction: column;
-        margin:         0 var(--2x-margin);
     }
 </style>
