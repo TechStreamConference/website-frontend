@@ -17,7 +17,7 @@
     import { registerLookup } from 'lookup/registerLookup.js';
 
     enum State {
-        Resettet,
+        DidReset,
         Default,
     }
 
@@ -64,7 +64,7 @@
             return;
         }
 
-        state        = State.Resettet;
+        state        = State.DidReset;
     }
 
 </script>
@@ -100,15 +100,15 @@
             <Button
                   classes="reset-password-submit-button"
                   type={'submit'}
-                  ariaLabel="Klicke hier, um dein Passwort zurück zu setzen"
+                  ariaLabel="Klicke hier, um dein Passwort zurückzusetzen"
             >
                 Passwort zurücksetzen
             </Button>
             <PasswordHints />
         </form>
-    {:else if state === State.Resettet}
+    {:else if state === State.DidReset}
         <div class="reset-password-wrapper">
-            <HeadlinePage>Passwort zurückgesetzt</HeadlinePage>
+            <HeadlinePage>Passwort geändert</HeadlinePage>
             <Paragraph classes="paragraph-pre-wrap"
                        --text-align="center">{"Dein Passwort wurde erfolgreich zurück gesetzt.\nDu kannst dich nun mit deinem neuen Passwort anmelden."}</Paragraph>
         </div>

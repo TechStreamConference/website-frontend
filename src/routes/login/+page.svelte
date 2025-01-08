@@ -71,7 +71,7 @@
         };
 
         if (data.username_or_email.length === 0) {
-            errorMessage = 'Keine E-Mail oder Namen angegeben.';
+            errorMessage = 'Keine E-Mail-Adresse oder Name angegeben.';
             return;
         }
 
@@ -84,8 +84,6 @@
             changeState(State.ResetPasswordSuccess);
             return;
         }
-
-        console.log(response);
 
         try {
             const scheme = z.object({
@@ -140,7 +138,7 @@
                 Noch keinen Account?
             </Link>
             <Link href="#"
-                  title="Klicke, um dein Passwort zurück zu setzen."
+                  title="Klicke, um dein Passwort zurückzusetzen."
                   on:click={() => {changeState(State.ResetPasswordPending)}}
             >
                 Passwort vergessen?
@@ -161,7 +159,7 @@
                   type="text"
                   labelText="Nutzername oder E-Mail:"
                   placeholderText="Nutzername oder E-Mail"
-                  ariaLabel="Gib den Nutzernamen oder die E-Mail ein"
+                  ariaLabel="Gib den Nutzernamen oder die E-Mail-Adresse ein"
                   bind:value={usernameOrEmail}
             />
             <Button classes="login-button"
@@ -169,7 +167,7 @@
                     ariaLabel="Klicke, um dein Passwort zurückzusetzen">Passwort zurücksetzen
             </Button>
             <Link href="#"
-                  title="Klicke, wieder zum login zu kommen."
+                  title="Klicke, um wieder zur Anmeldung zu kommen."
                   on:click={() => {changeState(State.Login)}}
             >
                 zurück
@@ -180,7 +178,7 @@
               on:submit|preventDefault={() => {changeState(State.Login);}}>
             <HeadlinePage>Passwort zurückgesetzt</HeadlinePage>
             <Paragraph classes="paragraph-pre-wrap"
-                       --text-align="center">{'Dein Passwort wurde erfolgreich zurück gesetzt.\nDu erhältst eine Mail mit einem Link.\nDort kannst du dein neues Passwort eingeben.\nDanach kannst du dich mit deinem neuen Passwort wieder anmelden.'}</Paragraph>
+                       --text-align="center">{'Wir haben dir eine E-Mail gesendet. Darin findest du einen Link, mit dessen Hilfe du ein neues Passwort auswählen kannst.\nDanach kannst du dich mit deinem neuen Passwort wieder anmelden.'}</Paragraph>
             <Button classes="login-button"
                     type="submit"
                     ariaLabel="Klicke, um dich anzumelden">Login

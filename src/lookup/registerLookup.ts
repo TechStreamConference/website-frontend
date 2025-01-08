@@ -25,7 +25,7 @@ const lookup: RegisterDict = {
     PASSWORD_MISSING_SPECIAL_CHARACTER: 'Deinem Passwort fehlt ein Sonderzeichen.',
 
     // token
-    TOKEN_EXPIRED_OR_DOES_NOT_EXIST : 'Der URL-Token existiert nicht oder ist abgelaufen.'
+    TOKEN_EXPIRED_OR_DOES_NOT_EXIST: 'Der Link ist ungültig oder bereits abgelaufen.',
 };
 
 export function registerLookup(key: string): string {
