@@ -1,14 +1,11 @@
 <script lang="ts">
-    import type { LoadYear } from 'types/loadTypes';
-    import type {
-        Person, Talk,
-    } from 'types/provideTypes';
-
     import * as Menu from 'menu/year';
+
+    import type { LoadYear } from 'types/loadTypes';
+    import type { Person, Talk } from 'types/provideTypes';
+
     import LogoBig from 'elements/image/logoBig.svelte';
     import YearEventLinks from 'elements/input/yearEventLinks.svelte';
-    import Header from 'elements/navigation/header.svelte';
-    import Footer from 'elements/navigation/footer.svelte';
     import PersonArray from 'elements/person/personGrid.svelte';
     import HeadlineH2 from 'elements/text/headlineH2.svelte';
     import Headline from 'elements/text/headline.svelte';
@@ -20,6 +17,7 @@
     import SponsorArray from 'elements/sponsor/sponsorArray.svelte';
     import Schedule from 'elements/schedule/schedule.svelte';
     import StyledLink from 'elements/input/styledLink.svelte';
+    import PageWrapper from 'elements/section/pageWrapper.svelte';
 
     import { formatDate } from 'helper/dates';
     import { apiUrl } from 'helper/links';
@@ -71,8 +69,10 @@
     }
 </script>
 
-<Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
-<div class="year">
+<PageWrapper headerMenu={data.loggedIn ? Menu.headerIn : Menu.headerOut}
+             footerMenu={data.loggedIn ? Menu.footerIn : Menu.footerOut}
+             globals={data.globals}>
+
     <div class="year-header">
         <div class="year-header-content">
             <LogoBig classes="year-logo-big" />
@@ -170,20 +170,12 @@
             </div>
         </Section>
     </div>
-    <Footer globals={data.globals}
-            menu={data.loggedIn ? Menu.footerIn : Menu.footerOut} />
-</div>
+</PageWrapper>
 
 <PersonPopup bind:this={personPopup}
              on:click={closePersonPopup} />
 
 <style>
-    .year {
-        display:        flex;
-        flex-direction: column;
-        min-height:     100vh;
-    }
-
     .year-header {
         width:               100vw;
         background-image:    url('/background.png');

@@ -1,22 +1,21 @@
 <script lang="ts">
-    import type { LoadImprint } from 'types/loadTypes';
-
-    export let data: LoadImprint; // data from database;
     import * as Menu from 'menu/imprint';
 
-    import Header from 'elements/navigation/header.svelte';
-    import HeadlinePage from 'elements/text/headlinePage.svelte';
-    import Footer from 'elements/navigation/footer.svelte';
+    import type { LoadImprint } from 'types/loadTypes';
 
+    import HeadlinePage from 'elements/text/headlinePage.svelte';
+    import PageWrapper from 'elements/section/pageWrapper.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
     import TextLine from 'elements/text/textLine.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
     import Link from 'elements/text/link.svelte';
+
+    export let data: LoadImprint; // data from database;
 </script>
 
-<Header menu={data.loggedIn ? Menu.headerIn : Menu.headerOut} />
-
-<div class="imprint">
+<PageWrapper headerMenu={data.loggedIn ? Menu.headerIn : Menu.headerOut}
+             footerMenu={data.loggedIn? Menu.footerIn : Menu.footerOut}
+             globals={data.globals}>
     <div class="imprint-content-wrapper">
         <HeadlinePage classes="imprint-headline">Impressum</HeadlinePage>
 
@@ -127,20 +126,10 @@
             </Link>
         </Paragraph>
     </div>
-
-    <Footer menu={data.loggedIn ? Menu.footerIn : Menu.footerOut}
-            globals={data.globals} />
-</div>
+</PageWrapper>
 
 <style>
-    .imprint {
-        display:        flex;
-        flex-direction: column;
-        min-height:     100vh;
-    }
-
     .imprint-content-wrapper {
-        flex-grow: 1;
         padding:   0 var(--2x-padding);
         max-width: 150rem;
         margin:    0 auto;
