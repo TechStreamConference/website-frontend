@@ -70,7 +70,7 @@
             username_or_email: usernameOrEmail.trim(),
         };
 
-        if (password.length === 0) {
+        if (data.username_or_email.length === 0) {
             errorMessage = 'Keine E-Mail oder Namen angegeben.';
             return;
         }
