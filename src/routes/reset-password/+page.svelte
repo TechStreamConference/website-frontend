@@ -110,7 +110,7 @@
         <div class="reset-password-wrapper">
             <HeadlinePage>Passwort geändert</HeadlinePage>
             <Paragraph classes="paragraph-pre-wrap"
-                       --text-align="center">{"Dein Passwort wurde erfolgreich zurück gesetzt.\nDu kannst dich nun mit deinem neuen Passwort anmelden."}</Paragraph>
+                       --text-align="center">{"Dein Passwort wurde erfolgreich geändert.\nDu kannst dich nun mit deinem neuen Passwort anmelden."}</Paragraph>
         </div>
         <StyledLink classes="reset-password-submit-button"
                     text={MenuItem.login.name}
