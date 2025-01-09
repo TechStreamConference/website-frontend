@@ -16,7 +16,8 @@
     import Button from 'elements/input/button.svelte';
     import Input from 'elements/input/input.svelte';
     import Icon from 'elements/image/icon.svelte';
-    import Toggle from 'elements/input/Toggle.svelte';
+    import Toggle from 'elements/input/toggle.svelte';
+    import SaveMessage from 'elements/text/saveMessage.svelte';
 
     export let data: LoadAdminTimeSlots;
 
