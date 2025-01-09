@@ -16,6 +16,7 @@
     import Button from 'elements/input/button.svelte';
     import Input from 'elements/input/input.svelte';
     import Icon from 'elements/image/icon.svelte';
+    import Toggle from 'elements/input/Toggle.svelte';
 
     export let data: LoadAdminTimeSlots;
 
@@ -96,11 +97,8 @@
                   bind:value={entry.duration}
                   on:input={setUnsavedChanges}
             />
-            <Button ariaLabel="Klicke, um den special-Status des Slots zu ändern"
-                    buttonSize="small-button">
-                <Icon type={entry.is_special ? "CircleCheck" : "CircleCross"}
-                      color={entry.is_special ? 'green' : 'red' } />
-            </Button>
+            <Toggle ariaLabel="Klicke, um den special-Status des Slots zu ändern"
+                    bind:toggle={entry.is_special} />
             <Button ariaLabel="Klicke, um den Slot nach oben zu verschieben"
                     buttonSize="small-button">
                 <Icon type="ArrowUp" />
