@@ -160,7 +160,7 @@ export const dashboardTimeSlotScheme = z.object({
                                                     id:         z.number(),
                                                     event_id:   z.number(),
                                                     time_start: z.string(),
-                                                    duration:   z.string(),
+                                                    duration:   z.number(),
                                                     is_special: z.boolean(),
                                                 });
 export type DashboardTimeSlot = z.infer<typeof dashboardTimeSlotScheme>;
