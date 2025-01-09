@@ -78,44 +78,51 @@
                         data={data.allEvents.map(x=>x.title)}
                         on:navigated={(e) => {updateDisplayed(e.detail);}} />
 
-    <form class="dashboard-admin-time-slots-grid"
-          on:submit|preventDefault={save}>
-        {#each data.currentSlots as entry, index}
-            <Input
-                  id="dashboard-admin-time-slot-start-date-{index}"
-                  labelText="Start:"
-                  type="datetime-local"
-                  ariaLabel="Gib den Start des ausgewählten Slots ein."
-                  bind:value={entry.time_start}
-                  on:input={setUnsavedChanges}
-            />
-            <Input
-                  id="dashboard-admin-time-slot-duration-{index}"
-                  labelText="Dauer:"
-                  type="number"
-                  ariaLabel="Gib die Dauer des ausgewählten Slots ein."
-                  bind:value={entry.duration}
-                  on:input={setUnsavedChanges}
-            />
-            <Toggle ariaLabel="Klicke, um den special-Status des Slots zu ändern"
-                    bind:toggle={entry.is_special} />
-            <Button ariaLabel="Klicke, um den Slot nach oben zu verschieben"
-                    buttonSize="small-button">
-                <Icon type="ArrowUp" />
+    <form on:submit|preventDefault={save}>
+        <div class="dashboard-admin-time-slots-grid">
+
+            {#each data.currentSlots as entry, index}
+                <Input
+                      id="dashboard-admin-time-slot-start-date-{index}"
+                      labelText="Start:"
+                      type="datetime-local"
+                      ariaLabel="Gib den Start des ausgewählten Slots ein."
+                      bind:value={entry.time_start}
+                      on:input={setUnsavedChanges}
+                />
+                <Input
+                      id="dashboard-admin-time-slot-duration-{index}"
+                      labelText="Dauer:"
+                      type="number"
+                      ariaLabel="Gib die Dauer des ausgewählten Slots ein."
+                      bind:value={entry.duration}
+                      on:input={setUnsavedChanges}
+                />
+                <Toggle ariaLabel="Klicke, um den special-Status des Slots zu ändern"
+                        bind:toggle={entry.is_special} />
+                <Button ariaLabel="Klicke, um den Slot nach oben zu verschieben"
+                        buttonSize="small-button">
+                    <Icon type="ArrowUp" />
+                </Button>
+                <Button ariaLabel="Klicke, um den Slot nach unten zu verschieben"
+                        buttonSize="small-button">
+                    <Icon type="ArrowDown" />
+                </Button>
+                <Button ariaLabel="Klicke, um den Slot zu löschen"
+                        buttonSize="small-button">
+                    Löschen
+                </Button>
+            {/each}
+        </div>
+        <div class="dashboard-admin-time-slots-button-wrapper">
+            <Button ariaLabel="Klicke, um einen neuen Time-Slot hinzuzufügen"
+                    on:click={addSlot}>Hinzufügen
             </Button>
-            <Button ariaLabel="Klicke, um den Slot nach unten zu verschieben"
-                    buttonSize="small-button">
-                <Icon type="ArrowDown" />
+            <Button ariaLabel="Klicke, um änderungen zu speichern"
+                    type="submit">Hinzufügen
             </Button>
-            <Button ariaLabel="Klicke, um den Slot zu löschen"
-                    buttonSize="small-button">
-                Löschen
-            </Button>
-        {/each}
+        </div>
     </form>
-    <Button ariaLabel="Klicke, um einen neuen Time-Slot hinzuzufügen"
-            on:click={addSlot}>Hinzufügen
-    </Button>
 
 </SectionDashboard>
 
@@ -124,6 +131,15 @@
         display:               grid;
         grid-template-columns: 1fr 1fr 7rem 7rem 7rem 11rem;
         gap:                   var(--full-gap);
+        margin:                var(--2x-margin) 0 var(--4x-margin);
 
+    }
+
+    .dashboard-admin-time-slots-button-wrapper {
+        display:         flex;
+        flex-direction:  row;
+        justify-content: center;
+        gap:             var(--full-gap);
+        margin:          0 auto;
     }
 </style>
