@@ -36,17 +36,22 @@ export const imprint: MenuItem = {
     description: 'Klicke hier, um zum Impressum zu gelangen',
 };
 
-export const adminGlobals: MenuItem  = {
+export const adminGlobals: MenuItem    = {
     name:        'Globals',
     url:         '/dashboard/admin/globals',
     description: 'Klicke hier, um zu den globalen Einstellungen im Admin-Dashboard zu gelangen',
 };
-export const adminEvents: MenuItem   = {
+export const adminEventSlots: MenuItem = {
+    name:        'Zeit-Slots',
+    url:         '/dashboard/admin/time-slots',
+    description: 'Klicke hier, um zu den Time-Slot-Einstellungen zu gelangen',
+};
+export const adminEvents: MenuItem     = {
     name:        'Events',
     url:         '/dashboard/admin/events',
     description: 'Klicke hier, um zu den Event-Einstellungen zu gelangen',
 };
-export const adminApproval: MenuItem = {
+export const adminApproval: MenuItem   = {
     name:        'Freigabe',
     url:         '/dashboard/admin/approval',
     description: 'Klicke hier, um ausstehende Freigaben zu bearbeiten',
