@@ -5,9 +5,12 @@
     import type { LoadAdminTimeSlots } from 'types/dashboardLoadTypes';
     import type { DashboardEvent, DashboardTimeSlot } from 'types/dashboardProvideTypes';
 
-    import { setUnsavedChanges } from 'stores/saved';
+    import { resetUnsavedChanges, setUnsavedChanges, unsavedChanges } from 'stores/saved';
     import { error } from '@sveltejs/kit';
     import { getTimeSlotsAsync } from './timeSlotHelper';
+    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { isSuccessType } from 'types/saveMessageType';
+    import { checkSQLTimeAndDate, convertTimeAndDateToSQL } from 'helper/dates';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -20,6 +23,8 @@
     import SaveMessage from 'elements/text/saveMessage.svelte';
 
     export let data: LoadAdminTimeSlots;
+
+    let saveMessage: SaveMessage;
 
     function getIDFromTitle(title: string): number {
         for (const entry of data.allEvents) {
@@ -64,9 +69,37 @@
     }
 
     async function save(): Promise<boolean> {
-        console.log('save');
-        return true;
+        const toSave = structuredClone(data.currentSlots);
+        for (let entry of toSave) {
+            console.log(entry.start_time);
+            const temp = checkSQLTimeAndDate(convertTimeAndDateToSQL(entry.start_time));
+            console.log(temp);
+            entry.start_time = temp ? temp : entry.start_time;
+        }
+        const result = await trySaveDashboardDataAsync(
+            { 'time_slots': toSave },
+            `/api/dashboard/admin/time-slots/${data.currentEventID}`,
+            'POST',
+        );
+
+        saveMessage.setSaveMessage(result);
+
+        if (isSuccessType(result)) {
+            resetUnsavedChanges();
+            return true;
+        }
+        return false;
     }
+
+    function moveUp() {
+    }
+
+    function moveDown() {
+    }
+
+    function deleteEntry() {
+    }
+
 </script>
 
 <UnsavedChangesCallbackWrapper callback={save} />
@@ -80,8 +113,8 @@
                         on:navigated={(e) => {updateDisplayed(e.detail);}} />
 
     <form on:submit|preventDefault={save}>
+        <SaveMessage bind:this={saveMessage} />
         <div class="dashboard-admin-time-slots-grid">
-
             {#each data.currentSlots as entry, index}
                 <Input
                       id="dashboard-admin-time-slot-start-date-{index}"
@@ -100,27 +133,32 @@
                       on:input={setUnsavedChanges}
                 />
                 <Toggle ariaLabel="Klicke, um den special-Status des Slots zu ändern"
-                        bind:toggle={entry.is_special} />
+                        bind:toggle={entry.is_special}
+                        on:click={unsavedChanges}
+                />
                 <Button ariaLabel="Klicke, um den Slot nach oben zu verschieben"
-                        buttonSize="small-button">
+                        buttonSize="small-button"
+                        on:click={()=> {setUnsavedChanges(); moveUp();}}>
                     <Icon type="ArrowUp" />
                 </Button>
                 <Button ariaLabel="Klicke, um den Slot nach unten zu verschieben"
-                        buttonSize="small-button">
+                        buttonSize="small-button"
+                        on:click={() => {setUnsavedChanges(); moveDown();}}>
                     <Icon type="ArrowDown" />
                 </Button>
                 <Button ariaLabel="Klicke, um den Slot zu löschen"
-                        buttonSize="small-button">
+                        buttonSize="small-button"
+                        on:click={() => {setUnsavedChanges(); deleteEntry()}}>
                     Löschen
                 </Button>
             {/each}
         </div>
         <div class="dashboard-admin-time-slots-button-wrapper">
             <Button ariaLabel="Klicke, um einen neuen Time-Slot hinzuzufügen"
-                    on:click={addSlot}>Hinzufügen
+                    on:click={() => {setUnsavedChanges(); addSlot(); }}>Hinzufügen
             </Button>
             <Button ariaLabel="Klicke, um änderungen zu speichern"
-                    type="submit">Hinzufügen
+                    type="submit">Speichern
             </Button>
         </div>
     </form>
