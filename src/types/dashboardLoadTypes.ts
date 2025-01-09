@@ -23,6 +23,10 @@ export type LoadAdminEvents = {
     allSpeaker: DashboardAllEventSpeaker
 };
 
+export type LoadAdminTimeSlots = {
+    allEvents: DashboardAllEvents,
+}
+
 export type LoadAdminApproval = {
     speaker: DashboardAllApprovalSpeakerTeamMember,
     teamMember: DashboardAllApprovalSpeakerTeamMember,
