@@ -47,7 +47,7 @@
         const newSlotsData: DashboardTimeSlot = {
             event_id:   data.currentEventID,
             id:         0,
-            time_start: getEventFromID(data.currentEventID).start_date + 'T00:00:00', // the start of the event is used here, as it should not be too far away from the actual date.
+            start_time: getEventFromID(data.currentEventID).start_date + 'T00:00:00', // the start of the event is used here, as it should not be too far away from the actual date.
             duration:   0,
             is_special: false,
         };
@@ -88,7 +88,7 @@
                       labelText="Start:"
                       type="datetime-local"
                       ariaLabel="Gib den Start des ausgewählten Slots ein."
-                      bind:value={entry.time_start}
+                      bind:value={entry.start_time}
                       on:input={setUnsavedChanges}
                 />
                 <Input

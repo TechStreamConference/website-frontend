@@ -159,7 +159,7 @@ export type DashboardEventApplication = z.infer<typeof dashboardEventApplication
 export const dashboardTimeSlotScheme = z.object({
                                                     id:         z.number(),
                                                     event_id:   z.number(),
-                                                    time_start: z.string(),
+                                                    start_time: z.string(),
                                                     duration:   z.number(),
                                                     is_special: z.boolean(),
                                                 });
