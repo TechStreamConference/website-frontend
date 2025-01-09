@@ -154,3 +154,15 @@ export const dashboardEventApplicationScheme = z.object({
                                                             call_for_papers_end:   z.string(),
                                                         });
 export type DashboardEventApplication = z.infer<typeof dashboardEventApplicationScheme>;
+
+
+export const dashboardTimeSlotScheme = z.object({
+                                                    id:         z.number(),
+                                                    event_id:   z.number(),
+                                                    time_start: z.string(),
+                                                    duration:   z.string(),
+                                                    is_special: z.boolean(),
+                                                });
+export type DashboardTimeSlot = z.infer<typeof dashboardTimeSlotScheme>;
+export const dashboardAllTimeSlotsScheme = z.array(dashboardTimeSlotScheme);
+export type DashboardAllTimeSlots = z.infer<typeof dashboardAllTimeSlotsScheme>;

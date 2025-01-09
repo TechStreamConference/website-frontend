@@ -12,27 +12,9 @@
     import NavigationDropDown from 'elements/navigation/NavigationDropDown.svelte';
     import Button from 'elements/input/button.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
-    import { onMount } from 'svelte';
+    import { getTimeSlotsAsync } from './timeSlotHelper';
 
     export let data: LoadAdminTimeSlots;
-
-    let currentEventID: number;
-
-    onMount(() => {
-        const callback = () => {
-            if (data === undefined) {
-                setTimeout(callback, 500);
-                return;
-            }
-            if (data.allEvents.length === 0) {
-                setTimeout(callback, 500);
-                return;
-            }
-            updateDisplayed(data.allEvents[0].title);
-        };
-
-        callback();
-    });
 
     function getIDFromTitle(title: string): number {
         for (const entry of data.allEvents) {
@@ -45,9 +27,9 @@
         throw error(404);
     }
 
-    function updateDisplayed(value: string) {
-        currentEventID = getIDFromTitle(value);
-        console.log(value);
+    async function updateDisplayed(value: string) {
+        data.currentEventID = getIDFromTitle(value);
+        data.currentSlots   = await getTimeSlotsAsync(fetch, data.currentEventID);
     }
 
     async function save(): Promise<boolean> {
