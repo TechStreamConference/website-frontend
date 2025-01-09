@@ -20,6 +20,8 @@ const lookup: IconDict = {
     Clock:       'fa-solid fa-clock',
     CircleCross: 'fa-solid fa-circle-xmark',
     CircleCheck: 'fa-solid fa-circle-check',
+    ArrowUp:     'fa-solid fa-arrow-up',
+    ArrowDown:   'fa-solid fa-arrow-down',
 };
 
 export function iconLookup(type: string): string {
