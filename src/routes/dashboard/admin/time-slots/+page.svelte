@@ -5,16 +5,48 @@
     import type { LoadAdminTimeSlots } from 'types/dashboardLoadTypes';
 
     import { setUnsavedChanges } from 'stores/saved';
+    import { error } from '@sveltejs/kit';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import NavigationDropDown from 'elements/navigation/NavigationDropDown.svelte';
     import Button from 'elements/input/button.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
+    import { onMount } from 'svelte';
 
     export let data: LoadAdminTimeSlots;
 
+    let currentEventID: number;
+
+    onMount(() => {
+        const callback = () => {
+            if (data === undefined) {
+                setTimeout(callback, 500);
+                return;
+            }
+            if (data.allEvents.length === 0) {
+                setTimeout(callback, 500);
+                return;
+            }
+            updateDisplayed(data.allEvents[0].title);
+        };
+
+        callback();
+    });
+
+    function getIDFromTitle(title: string): number {
+        for (const entry of data.allEvents) {
+            if (entry.title === title) {
+                return entry.id;
+            }
+        }
+
+        console.log(`not able to look up ID for ${title}`);
+        throw error(404);
+    }
+
     function updateDisplayed(value: string) {
+        currentEventID = getIDFromTitle(value);
         console.log(value);
     }
 
