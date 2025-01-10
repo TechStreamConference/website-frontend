@@ -22,6 +22,8 @@ const lookup: IconDict = {
     CircleCheck: 'fa-solid fa-circle-check',
     ArrowUp:     'fa-solid fa-arrow-up',
     ArrowDown:   'fa-solid fa-arrow-down',
+    Broadcast:   'fa-solid fa-tower-broadcast',
+    Video:         'fa-solid fa-video',
 };
 
 export function iconLookup(type: string): string {

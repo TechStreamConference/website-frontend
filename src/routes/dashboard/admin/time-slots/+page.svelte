@@ -22,6 +22,7 @@
     import Toggle from 'elements/input/toggle.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import Message from 'elements/text/message.svelte';
+    import Tooltip from 'elements/text/tooltip.svelte';
 
     export let data: LoadAdminTimeSlots;
 
@@ -181,10 +182,14 @@
                       bind:value={entry.duration}
                       on:input={setUnsavedChanges}
                 />
-                <Toggle ariaLabel="Klicke, um zwischen Live-Talk und Aufzeichnung zu wechseln"
-                        bind:toggle={entry.is_special}
-                        on:click={unsavedChanges}
-                />
+                <Tooltip tooltip={entry.is_special ? "Aufzeichnung" : "Live-Talk"}>
+                    <Toggle ariaLabel="Klicke, um zwischen Live-Talk und Aufzeichnung zu wechseln"
+                            bind:toggle={entry.is_special}
+                            on:click={unsavedChanges}
+                            iconTrue="Video"
+                            iconFalse="Broadcast"
+                    />
+                </Tooltip>
                 <Button ariaLabel="Klicke, um den Slot nach oben zu verschieben"
                         buttonSize="small-button"
                         on:click={()=> {setUnsavedChanges(); moveUp(index);}}>

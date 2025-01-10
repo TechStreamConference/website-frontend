@@ -3,6 +3,8 @@
 
     export let toggle: boolean;
     export let ariaLabel: string;
+    export let iconTrue: string;
+    export let iconFalse: string;
 
     function onToggle() {
         toggle = !toggle;
@@ -14,7 +16,7 @@
         aria-label="{ariaLabel}"
         on:click={onToggle}
 >
-    <Icon type={toggle ? "CircleCheck" : "CircleCross"}
+    <Icon type={toggle ? iconTrue : iconFalse}
           color={toggle ? "green" : "red" } />
 </button>
 
@@ -22,5 +24,6 @@
     .toggle-button {
         background: none;
         border:     none;
+        cursor:     pointer;
     }
 </style>
