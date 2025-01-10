@@ -14,7 +14,7 @@
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
-    import NavigationDropDown from 'elements/navigation/NavigationDropDown.svelte';
+    import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
     import Button from 'elements/input/button.svelte';
     import Input from 'elements/input/input.svelte';
