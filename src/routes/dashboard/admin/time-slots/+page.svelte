@@ -175,13 +175,13 @@
                 />
                 <Input
                       id="dashboard-admin-time-slot-duration-{index}"
-                      labelText="Dauer:"
+                      labelText="Dauer (Minuten):"
                       type="number"
                       ariaLabel="Gib die Dauer des ausgewählten Slots ein."
                       bind:value={entry.duration}
                       on:input={setUnsavedChanges}
                 />
-                <Toggle ariaLabel="Klicke, um den special-Status des Slots zu ändern"
+                <Toggle ariaLabel="Klicke, um zwischen Live-Talk und Aufzeichnung zu wechseln"
                         bind:toggle={entry.is_special}
                         on:click={unsavedChanges}
                 />
@@ -206,7 +206,7 @@
             <Button ariaLabel="Klicke, um einen neuen Time-Slot hinzuzufügen"
                     on:click={() => {setUnsavedChanges(); addSlot(); }}>Hinzufügen
             </Button>
-            <Button ariaLabel="Klicke, um änderungen zu speichern"
+            <Button ariaLabel="Klicke, um Änderungen zu speichern"
                     type="submit">Speichern
             </Button>
         </div>
