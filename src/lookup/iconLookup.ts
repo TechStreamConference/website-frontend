@@ -23,7 +23,7 @@ const lookup: IconDict = {
     ArrowUp:     'fa-solid fa-arrow-up',
     ArrowDown:   'fa-solid fa-arrow-down',
     Broadcast:   'fa-solid fa-tower-broadcast',
-    Video:         'fa-solid fa-video',
+    Video:       'fa-solid fa-video',
 };
 
 export function iconLookup(type: string): string {
