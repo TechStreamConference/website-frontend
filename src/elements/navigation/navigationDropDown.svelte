@@ -23,6 +23,10 @@
     });
 
     $: if (selected) {
+        checkSelected();
+    }
+
+    function checkSelected() {
         if (selected !== displayed) {
             if (unsavedChanges()) {
                 popup.show();
@@ -39,6 +43,18 @@
 
     function onStay(): void {
         selected = displayed;
+    }
+
+    export function trySetSelected(value: unknown): void {
+        if (data.includes(value)) {
+            selected = value;
+            checkSelected();
+            return;
+        }
+    }
+
+    export function getSelected(): unknown {
+        return selected;
     }
 
 </script>
