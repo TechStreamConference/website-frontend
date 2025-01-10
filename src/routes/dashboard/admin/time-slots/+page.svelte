@@ -101,7 +101,7 @@
         }
 
         if (index < 0 || index >= data.currentSlots.length) {
-            console.error(`index out of bounce | Index: ${index}`);
+            console.error(`index out of bounds | Index: ${index}`);
             return;
         }
 
@@ -122,7 +122,7 @@
         }
 
         if (index < 0 || index >= data.currentSlots.length) {
-            console.error(`index out of bounce | Index: ${index}`);
+            console.error(`index out of bounds | Index: ${index}`);
             return;
         }
 
@@ -137,7 +137,7 @@
 
     function deleteEntry(index: number) {
         if (index < 0 || index >= data.currentSlots.length) {
-            console.error(`index out of bounce | Index: ${index}`);
+            console.error(`index out of bounds | Index: ${index}`);
             return;
         }
 
