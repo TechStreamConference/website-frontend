@@ -179,7 +179,8 @@
                           labelText="Dauer (Minuten):"
                           data={data.talkDurationChoices}
                           bind:selected={entry.duration} />
-                <Tooltip tooltip={entry.is_special ? "Aufzeichnung" : "Live-Talk"}>
+                <Tooltip classes="dashboard-admin-time-slots-tooltip"
+                         tooltip={entry.is_special ? "Aufzeichnung" : "Live-Talk"}>
                     <Toggle ariaLabel="Klicke, um zwischen Live-Talk und Aufzeichnung zu wechseln"
                             bind:toggle={entry.is_special}
                             on:click={unsavedChanges}
@@ -231,5 +232,9 @@
         justify-content: center;
         gap:             var(--full-gap);
         margin:          0 auto;
+    }
+
+    :global(.dashboard-admin-time-slots-tooltip) {
+        cursor: default !important;
     }
 </style>
