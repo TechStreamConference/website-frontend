@@ -4,23 +4,20 @@
     import type { Menu, MenuItem } from 'types/provideTypes';
 
     import { apiUrl } from 'helper/links';
-    import {
-        _unsavedChanges, resetUnsavedChanges, unsavedChanges,
-    } from 'stores/saved';
+    import { _unsavedChanges, resetUnsavedChanges } from 'stores/saved';
     import { SaveMessageType } from 'types/saveMessageType';
     import { loadSpeakerTeamMemberAsync, type NewImage, type ValidateReturn } from 'pageHelper/speakerTeamMemberEvent';
     import { validate } from 'pageHelper/speakerTeamMemberEvent';
     import { scrollToTop } from 'helper/scroll';
 
-    import ManualUnsavedChangesPopup from 'elements/popups/manualUnsavedChangesPopup.svelte';
     import Tabs from 'elements/navigation/tabs.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
-    import DropDown from 'elements/input/dropDown.svelte';
     import Message from 'elements/text/message.svelte';
     import ErrorMessage from 'elements/text/message.svelte';
     import SpeakerTeamMemberEventForm from './speakerTeamMemberEventForm.svelte';
+    import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
 
     export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
     export let type: 'speaker' | 'team-member';
@@ -31,41 +28,14 @@
     let errorMessages: string[] = [];
 
     let form: SpeakerTeamMemberEventForm;
-    let manualPopup: ManualUnsavedChangesPopup;
 
-    let selected: string  = data.current.title;
-    let displayed: string = data.current.title;
-    $: {
-        if (selected) {
-            if (selected !== displayed) {
-                updateDisplayedAsync();
-            }
-        }
-    }
-
-    function navigate(): void {
-        updateDisplayedAsync();
-    }
-
-    function stay(): void {
-        selected = displayed;
-    }
-
-    async function updateDisplayedAsync(): Promise<void> {
-        if (unsavedChanges()) {
-            manualPopup.show();
-            return;
-        }
-
+    async function updateDisplayedAsync(selected: string): Promise<void> {
         for (let entry of data.allEvents) {
             if (entry.title === selected) {
                 data.current = entry;
                 break;
             }
         }
-
-        displayed = data.current.title;
-
         data.event = await loadSpeakerTeamMemberAsync(fetch, data.current.event_id, type);
     }
 
@@ -123,18 +93,13 @@
       entryName={menuItem.name}
       classes="navigation-tabs-dashboard-subpage" />
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
-<ManualUnsavedChangesPopup
-      bind:this={manualPopup}
-      navigateCallback={navigate}
-      stayCallback={stay}
-/>
 
 <SectionDashboard classes="dashboard-speaker-event-section">
-    <DropDown
+    <NavigationDropDown
           id="dashboard-speaker-event-drop-down"
           labelText="Event:"
           data={data.allEvents.map((x) => x.title)}
-          bind:selected
+          on:navigated={ (e) => { updateDisplayedAsync(e.detail); }}
     />
     <div class="dashboard-speaker-event-message-wrapper">
         {#if $_unsavedChanges}
