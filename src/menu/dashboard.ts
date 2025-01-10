@@ -30,6 +30,7 @@ export const footerIn: Menu = [
 
 export const admin: Menu      = [
     Item.adminApproval,
+    Item.adminEventSlots,
     Item.adminEvents,
     Item.adminGlobals,
 ];
