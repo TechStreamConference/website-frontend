@@ -66,6 +66,7 @@
     }
 
     async function updateDisplayed(value: string) {
+        errorMessage        = undefined;
         data.currentEventID = getIDFromTitle(value);
         data.currentSlots   = await getTimeSlotsAsync(fetch, data.currentEventID);
     }
