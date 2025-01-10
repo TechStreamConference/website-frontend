@@ -9,7 +9,7 @@ export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminTimeSlots> {
     const allEventPromise     = fetch(apiUrl('/api/dashboard/admin/all-events'));
-    const talkDurationPromise = await fetch(apiUrl('/api/talk-duration-choices'));
+    const talkDurationPromise = fetch(apiUrl('/api/talk-duration-choices'));
 
     const allEvents           = await checkAndParseInputDataAsync(await allEventPromise,
                                                                   dashboardAllEventsScheme,
@@ -17,7 +17,7 @@ export async function load({ fetch }: {
                                                                   `Unerwartete Daten für alle Events. throw error(406)`,
     );
     const talkDurationChoices = await checkAndParseInputDataAsync(
-        talkDurationPromise,
+        await talkDurationPromise,
         dashboardTalkDurationChoicesScheme,
         'not able to get talk duration choices',
         'unexpected data in talk duration choices',
