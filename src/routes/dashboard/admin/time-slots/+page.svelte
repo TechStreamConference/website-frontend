@@ -23,6 +23,7 @@
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import Message from 'elements/text/message.svelte';
     import Tooltip from 'elements/text/tooltip.svelte';
+    import DropDown from 'elements/input/dropDown.svelte';
 
     export let data: LoadAdminTimeSlots;
 
@@ -174,21 +175,17 @@
                       bind:value={entry.start_time}
                       on:input={setUnsavedChanges}
                 />
-                <Input
-                      id="dashboard-admin-time-slot-duration-{index}"
-                      labelText="Dauer (Minuten):"
-                      type="number"
-                      ariaLabel="Gib die Dauer des ausgewählten Slots ein."
-                      bind:value={entry.duration}
-                      on:input={setUnsavedChanges}
-                />
+                <DropDown id="dashboard-admin-time-slot-duration-{index}"
+                          labelText="Dauer (Minuten):"
+                          data={data.talkDurationChoices}
+                          bind:selected={entry.duration} />
                 <Tooltip tooltip={entry.is_special ? "Aufzeichnung" : "Live-Talk"}>
                     <Toggle ariaLabel="Klicke, um zwischen Live-Talk und Aufzeichnung zu wechseln"
                             bind:toggle={entry.is_special}
                             on:click={unsavedChanges}
                             iconTrue="Video"
                             iconFalse="Broadcast"
-                    />
+                            on:change={setUnsavedChanges} />
                 </Tooltip>
                 <Button ariaLabel="Klicke, um den Slot nach oben zu verschieben"
                         buttonSize="small-button"

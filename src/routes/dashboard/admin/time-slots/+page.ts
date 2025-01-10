@@ -1,23 +1,33 @@
 import type { LoadAdminTimeSlots } from 'types/dashboardLoadTypes';
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
-import { dashboardAllEventsScheme, dashboardAllTimeSlotsScheme } from 'types/dashboardProvideTypes';
+import {
+    dashboardAllEventsScheme, dashboardAllTimeSlotsScheme, dashboardTalkDurationChoicesScheme,
+} from 'types/dashboardProvideTypes';
 
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminTimeSlots> {
-    const allEventPromise = fetch(apiUrl('/api/dashboard/admin/all-events'));
-    const allEvents       = await checkAndParseInputDataAsync(
-        await allEventPromise,
-        dashboardAllEventsScheme,
-        `Serveranfrage für alle Events nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Events. throw error(406)`,
+    const allEventPromise     = fetch(apiUrl('/api/dashboard/admin/all-events'));
+    const talkDurationPromise = await fetch(apiUrl('/api/talk-duration-choices'));
+
+    const allEvents           = await checkAndParseInputDataAsync(await allEventPromise,
+                                                                  dashboardAllEventsScheme,
+                                                                  `Serveranfrage für alle Events nicht erfolgreich. throw error(406)`,
+                                                                  `Unerwartete Daten für alle Events. throw error(406)`,
+    );
+    const talkDurationChoices = await checkAndParseInputDataAsync(
+        talkDurationPromise,
+        dashboardTalkDurationChoicesScheme,
+        'not able to get talk duration choices',
+        'unexpected data in talk duration choices',
     );
 
     if (allEvents.length === 0) {
         return {
             allEvents,
             currentSlots:   [],
+            talkDurationChoices,
             currentEventID: 0,
         };
     }
@@ -34,6 +44,7 @@ export async function load({ fetch }: {
     return {
         allEvents,
         currentSlots:   timeSlots,
+        talkDurationChoices,
         currentEventID: id,
     };
 }

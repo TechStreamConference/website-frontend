@@ -166,3 +166,6 @@ export const dashboardTimeSlotScheme = z.object({
 export type DashboardTimeSlot = z.infer<typeof dashboardTimeSlotScheme>;
 export const dashboardAllTimeSlotsScheme = z.array(dashboardTimeSlotScheme);
 export type DashboardAllTimeSlots = z.infer<typeof dashboardAllTimeSlotsScheme>;
+
+export const dashboardTalkDurationChoicesScheme = z.array(z.number());
+export type DashboardTalkDurationChoices = z.infer<typeof dashboardTalkDurationChoicesScheme>

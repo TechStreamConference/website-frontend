@@ -12,6 +12,7 @@ import type {
     DashboardAllSocialMediaLinkType,
     DashboardEventApplication,
     DashboardAllTimeSlots,
+    DashboardTalkDurationChoices,
 } from './dashboardProvideTypes';
 
 export type LoadDashboard = {
@@ -27,6 +28,7 @@ export type LoadAdminEvents = {
 export type LoadAdminTimeSlots = {
     allEvents: DashboardAllEvents,
     currentSlots: DashboardAllTimeSlots,
+    talkDurationChoices: DashboardTalkDurationChoices,
     currentEventID: number;
 }
 
