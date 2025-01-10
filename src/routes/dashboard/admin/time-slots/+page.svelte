@@ -21,10 +21,12 @@
     import Icon from 'elements/image/icon.svelte';
     import Toggle from 'elements/input/toggle.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
+    import Message from 'elements/text/message.svelte';
 
     export let data: LoadAdminTimeSlots;
 
     let saveMessage: SaveMessage;
+    let errorMessage: string | undefined = undefined;
 
     function getIDFromTitle(title: string): number {
         for (const entry of data.allEvents) {
@@ -91,13 +93,56 @@
         return false;
     }
 
-    function moveUp() {
+    function moveUp(index: number) {
+        errorMessage = undefined;
+        if (index - 1 == -1) {
+            errorMessage = 'Es gibt keinen Slot vor diesem Slot.';
+            return;
+        }
+
+        if (index < 0 || index >= data.currentSlots.length) {
+            console.error(`index out of bounce | Index: ${index}`);
+            return;
+        }
+
+        [
+            data.currentSlots[index - 1],
+            data.currentSlots[index],
+        ] = [
+            data.currentSlots[index],
+            data.currentSlots[index - 1],
+        ];
     }
 
-    function moveDown() {
+    function moveDown(index: number) {
+        errorMessage = undefined;
+        if (index + 1 == data.currentSlots.length) {
+            errorMessage = 'Es gibt kein Slot hinter diesem Slot.';
+            return;
+        }
+
+        if (index < 0 || index >= data.currentSlots.length) {
+            console.error(`index out of bounce | Index: ${index}`);
+            return;
+        }
+
+        [
+            data.currentSlots[index],
+            data.currentSlots[index + 1],
+        ] = [
+            data.currentSlots[index + 1],
+            data.currentSlots[index],
+        ];
     }
 
-    function deleteEntry() {
+    function deleteEntry(index: number) {
+        if (index < 0 || index >= data.currentSlots.length) {
+            console.error(`index out of bounce | Index: ${index}`);
+            return;
+        }
+
+        data.currentSlots.splice(index, 1);
+        data.currentSlots = data.currentSlots; // assignment for reactivity
     }
 
 </script>
@@ -114,6 +159,9 @@
 
     <form on:submit|preventDefault={save}>
         <SaveMessage bind:this={saveMessage} />
+        {#if errorMessage !== undefined}
+            <Message message={errorMessage} />
+        {/if}
         <div class="dashboard-admin-time-slots-grid">
             {#each data.currentSlots as entry, index}
                 <Input
@@ -138,17 +186,17 @@
                 />
                 <Button ariaLabel="Klicke, um den Slot nach oben zu verschieben"
                         buttonSize="small-button"
-                        on:click={()=> {setUnsavedChanges(); moveUp();}}>
+                        on:click={()=> {setUnsavedChanges(); moveUp(index);}}>
                     <Icon type="ArrowUp" />
                 </Button>
                 <Button ariaLabel="Klicke, um den Slot nach unten zu verschieben"
                         buttonSize="small-button"
-                        on:click={() => {setUnsavedChanges(); moveDown();}}>
+                        on:click={() => {setUnsavedChanges(); moveDown(index);}}>
                     <Icon type="ArrowDown" />
                 </Button>
                 <Button ariaLabel="Klicke, um den Slot zu löschen"
                         buttonSize="small-button"
-                        on:click={() => {setUnsavedChanges(); deleteEntry()}}>
+                        on:click={() => {setUnsavedChanges(); deleteEntry(index)}}>
                     Löschen
                 </Button>
             {/each}
