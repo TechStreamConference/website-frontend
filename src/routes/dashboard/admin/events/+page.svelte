@@ -2,86 +2,56 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/menuItems';
 
-    import type {
-        LoadAdminEvents, LoadDashboard,
-    } from 'types/dashboardLoadTypes';
-    import type {
-        DashboardAllEventSpeaker, DashboardEvent,
-    } from 'types/dashboardProvideTypes';
-    import type {
-        SetAdminEvent, SetAllAdminEventSpeaker,
-    } from 'types/dashboardSetTypes';
-    import {
-        combineSaveType, SaveMessageType,
-    } from 'types/saveMessageType';
+    import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
+    import type { DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
+    import type { SetAdminEvent, SetAllAdminEventSpeaker } from 'types/dashboardSetTypes';
+    import { combineSaveType, SaveMessageType } from 'types/saveMessageType';
 
     import { onMount } from 'svelte';
     import { Clone } from 'helper/clone';
     import { isSuccessType } from 'types/saveMessageType';
     import {
-        convertSaveEventData, convertSaveSpeakerData, getAllEventTitle, getEventByTitle, loadSpeaker, validateData,
+        convertSaveEventData, convertSaveSpeakerData, getEventByTitle, loadSpeaker, validateData,
     } from './eventsHelper';
-    import {
-        unsavedChanges, setUnsavedChanges,
-    } from 'stores/saved';
-    import {
-        convertTimeAndDateToHTML, formatDate,
-    } from 'helper/dates';
+    import { setUnsavedChanges } from 'stores/saved';
+    import { convertTimeAndDateToHTML, formatDate } from 'helper/dates';
     import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
     import { scrollToTop } from 'helper/scroll';
 
     import TextLine from 'elements/text/textLine.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
-    import DropDown from 'elements/input/dropDown.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
     import Input from 'elements/input/input.svelte';
     import TextArea from 'elements/input/textArea.svelte';
     import Button from 'elements/input/button.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
-    import ManualUnsavedChangesPopup from 'elements/popups/manualUnsavedChangesPopup.svelte';
     import Message from 'elements/text/message.svelte';
     import Tabs from 'elements/navigation/tabs.svelte';
+    import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
 
     export let data: LoadDashboard & LoadAdminEvents;
-    let manualPopup: ManualUnsavedChangesPopup;
 
     let copiedData = new Clone<LoadDashboard & LoadAdminEvents>(data);
 
     let message: SaveMessage;
-    let selected: string;
-    let displayed: string;
+    let navigationDropDown: NavigationDropDown;
 
     let currentEvent: DashboardEvent;
     let errorQueue: string[] = [];
 
-    function navigate(): void {
-        updateDisplayed();
-    }
-
-    function stay(): void {
-        resetSelected();
-        selected = displayed;
-    }
 
     onMount(() => {
-        updateDisplayed();
-    });
-
-    $: if (selected) {
-        if (displayed !== selected) {
-            updateDisplayed();
-        }
-    }
-
-    function updateDisplayed(): void {
-        if (unsavedChanges()) {
-            manualPopup.show();
+        const selected = navigationDropDown.getSelected();
+        if (typeof selected !== 'string') {
+            console.error('selected has wrong type');
             return;
         }
+        updateDisplayed(selected);
+    });
 
-        displayed                          = selected;
-        currentEvent                       = getEventByTitle(copiedData.value.allEvents, displayed);
+    function updateDisplayed(title: string): void {
+        currentEvent                       = getEventByTitle(copiedData.value.allEvents, title);
         currentEvent.publish_date          = convertTimeAndDateToHTML(currentEvent.publish_date);
         currentEvent.schedule_visible_from = convertTimeAndDateToHTML(currentEvent.schedule_visible_from);
         currentEvent.call_for_papers_start = convertTimeAndDateToHTML(currentEvent.call_for_papers_start);
@@ -101,15 +71,17 @@
         });
     }
 
-    function resetSelected(): void {
-        selected = displayed;
-    }
-
     function newEvent(): void {
+        const setSelected               = (title: string) => {
+            setTimeout(() => {
+                navigationDropDown.trySetSelected(title);
+            }, 5);
+        };
         const containsNewEvent: boolean = (() => {
             for (let event of copiedData.value.allEvents) {
                 if (event.id === 0) {
-                    selected = event.title;
+                    setSelected(event.title);
+                    updateDisplayed(event.title);
                     return true;
                 }
             }
@@ -134,10 +106,9 @@
                 call_for_papers_end:   formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
             };
             copiedData.value.allEvents.push(event);
-            selected = event.title;
+            setSelected(event.title);
+            updateDisplayed(event.title);
         }
-
-        updateDisplayed();
     }
 
     async function trySaveAsync(): Promise<boolean> {
@@ -191,11 +162,6 @@
       classes="navigation-tabs-dashboard-subpage"
 />
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
-<ManualUnsavedChangesPopup
-      bind:this={manualPopup}
-      navigateCallback={navigate}
-      stayCallback={stay}
-/>
 <SectionDashboard classes="dashboard-admin-event-section">
     <Button
           classes="dashboard-admin-event-new-event-button"
@@ -211,11 +177,12 @@
         {/each}
     </div>
     {#if copiedData.value.allEvents}
-        <DropDown
-              data={getAllEventTitle(copiedData.value.allEvents)}
-              bind:selected
+        <NavigationDropDown
               id={'dashboard-admin-event-drop-down'}
+              data={copiedData.value.allEvents.map(x => x.title)}
               labelText="Aktuelles Event:"
+              on:navigated={ (e) => { updateDisplayed(e.detail); }}
+              bind:this={navigationDropDown}
         />
         {#if currentEvent}
             <SubHeadline classes="dashboard-admin-event-event-subheadline"

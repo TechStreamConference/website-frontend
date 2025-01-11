@@ -1,19 +1,13 @@
 import {
-    dashboardAllEventSpeakerScheme,
-    type DashboardAllEvents,
-    type DashboardAllEventSpeaker,
-    type DashboardEvent,
+    dashboardAllEventSpeakerScheme, type DashboardAllEvents, type DashboardAllEventSpeaker, type DashboardEvent,
 } from 'types/dashboardProvideTypes';
 
 import { error } from '@sveltejs/kit';
 import type {
-    SetAdminEvent,
-    SetAllAdminEventSpeaker,
+    SetAdminEvent, SetAllAdminEventSpeaker,
 } from 'types/dashboardSetTypes';
 import {
-    checkSQLTimeAndDate,
-    convertTimeAndDateToSQL,
-    isBeforeOrSameDatesString,
+    checkSQLTimeAndDate, convertTimeAndDateToSQL, isBeforeOrSameDatesString,
 } from 'helper/dates';
 import { z } from 'zod';
 import { apiUrl } from 'helper/links';
@@ -24,14 +18,6 @@ function trimOrNull(entry: string): string | null {
         return null;
     }
     return entry.trim();
-}
-
-export function getAllEventTitle(events: DashboardAllEvents): string[] {
-    const title: string[] = [];
-    for (const event of events) {
-        title.push(event.title);
-    }
-    return title;
 }
 
 export function getEventByTitle(events: DashboardAllEvents, title: string): DashboardEvent {
@@ -78,6 +64,10 @@ export function convertSaveSpeakerData(allSpeaker: DashboardAllEventSpeaker): Se
 }
 
 export async function loadSpeaker(fetch: typeof globalThis.fetch, eventId: number): Promise<DashboardAllEventSpeaker> {
+    if (eventId === 0) {
+        return [];
+    }
+
     const allSpeakerPromise = fetch(apiUrl(`/api/dashboard/admin/event/${eventId}/speaker`));
 
     return await checkAndParseInputDataAsync(
