@@ -130,7 +130,7 @@
 
 <Tabs
       entries={Menu.user}
-      entryName={MenuItem.application.name}
+      entryName={MenuItem.userApplication.name}
       classes="navigation-tabs-dashboard-subpage"
 />
 <UnsavedChangesCallbackWrapper callback={trySave} />
