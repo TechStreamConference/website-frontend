@@ -9,6 +9,7 @@
     import { loadTalkFromEventIDAsync } from './talkHelper';
     import { setUnsavedChanges } from 'stores/saved';
     import { SaveMessageType } from 'types/saveMessageType';
+    import { scrollToTop } from 'helper/scroll';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
@@ -28,6 +29,7 @@
 
     async function save(): Promise<boolean> {
         console.log(data.currentTalk?.value);
+        scrollToTop();
         if (!data.currentTalk) {
             saveMessage.setSaveMessage(SaveMessageType.Error);
             return false;
