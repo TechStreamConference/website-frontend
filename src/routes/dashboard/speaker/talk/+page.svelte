@@ -18,6 +18,7 @@
     import Button from 'elements/input/button.svelte';
     import Input from 'elements/input/input.svelte';
     import TextArea from 'elements/input/textArea.svelte';
+    import Message from 'elements/text/message.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
 
     export let data: LoadSpeakerTalk;
@@ -65,6 +66,10 @@
         <TextLine>Kein aktueller Talk ausgewählt.</TextLine>
     {:else }
         <form on:submit|preventDefault={save}>
+            {#if data.currentTalk.value.requested_changes}
+                <Message classes="message-pre-wrap"
+                         message={`Änderungswünsche\n${data.currentTalk.value.requested_changes}`} />
+            {/if}
             <Input id="dashboard-speaker-talk-input-title"
                    labelText="Titel:"
                    placeholderText="Titel"
