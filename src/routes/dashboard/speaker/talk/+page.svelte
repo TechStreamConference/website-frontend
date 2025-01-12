@@ -20,7 +20,8 @@
     import TextArea from 'elements/input/textArea.svelte';
     import Message from 'elements/text/message.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
-    import Tags from 'elements/input/tags.svelte';
+    import TagArray from 'elements/input/tagArray.svelte';
+    import DurationArray from 'elements/input/durationArray.svelte';
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;
@@ -86,9 +87,14 @@
                       bind:value={data.currentTalk.value.description}
                       on:input={setUnsavedChanges}
                       on:submit={save} />
-            <Tags data={data.tags}
-                  bind:selected={data.currentTalk.value.tags}
-                  on:toggle={setUnsavedChanges} />
+            <TagArray labelText="Tags:"
+                      data={data.tags}
+                      bind:selected={data.currentTalk.value.tags}
+                      on:toggle={setUnsavedChanges} />
+            <DurationArray labelText="Vortragslänge"
+                           data={data.talkDurations}
+                           bind:selected={data.currentTalk.value.possible_durations}
+                           on:toggle={setUnsavedChanges} />
             <TextArea id="dashboard-speaker-talk-input-notes"
                       labelText="Anmerkungen:"
                       placeholderText="Anmerkungen"

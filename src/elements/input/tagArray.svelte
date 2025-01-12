@@ -4,15 +4,18 @@
 
     import ScheduleTag from 'elements/schedule/scheduleTag.svelte';
     import Toggle from './toggle.svelte';
+    import Label from 'elements/text/label.svelte';
 
+    export let labelText: string;
     export let data: AllTalkTag;
     export let selected: AllTalkTag;
+
 
     const dispatcher = createEventDispatcher();
 
     function contains(talk: TalkTag): boolean {
         for (const entry of selected) {
-            if (talk.text == entry.text) {
+            if (talk.text === entry.text) {
                 return true;
             }
         }
@@ -35,7 +38,7 @@
     }
 </script>
 
-
+<Label>{labelText}</Label>
 <div class="toggle-talk-tag-wrapper">
     {#each data as tag}
         <Toggle ariaLabel="Klicke, um einen Tag zu aus- oder abzuwählen"

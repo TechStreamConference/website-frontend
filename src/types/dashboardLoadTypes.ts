@@ -66,4 +66,5 @@ export type LoadSpeakerTalk = {
     allTalks: DashboardAllTalk,
     currentTalk: Clone<DashboardTalk> | undefined,
     tags: AllTalkTag,
+    talkDurations: DashboardTalkDurationChoices,
 }
