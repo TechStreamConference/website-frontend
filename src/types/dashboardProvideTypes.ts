@@ -171,6 +171,7 @@ export const dashboardTalkDurationChoicesScheme = z.array(z.number());
 export type DashboardTalkDurationChoices = z.infer<typeof dashboardTalkDurationChoicesScheme>
 
 export const dashboardTalkTagScheme = z.object({
+                                                   id:          z.number(),
                                                    color_index: z.number(),
                                                    text:        z.string(),
                                                });

@@ -49,3 +49,11 @@ export type SetCreateSocialMediaLink = {
     social_media_type_id: number,
     url: string,
 }
+
+export type SetTalk = {
+    title: string,
+    description: string,
+    tag_ids: number[],
+    possible_durations: number[],
+    notes: string,
+}

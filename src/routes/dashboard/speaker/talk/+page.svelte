@@ -3,12 +3,13 @@
     import * as MenuItem from 'menu/menuItems';
 
     import type { LoadSpeakerTalk } from 'types/dashboardLoadTypes';
+    import type { SetTalk } from 'types/dashboardSetTypes';
 
     import { Clone } from 'helper/clone';
     import { getElementByTitle } from 'helper/basic';
     import { loadTalkFromEventIDAsync } from './talkHelper';
     import { setUnsavedChanges } from 'stores/saved';
-    import { SaveMessageType } from 'types/saveMessageType';
+    import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
     import { scrollToTop } from 'helper/scroll';
 
     import Tabs from 'elements/navigation/tabs.svelte';
@@ -23,6 +24,7 @@
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import TagArray from 'elements/input/tagArray.svelte';
     import DurationArray from 'elements/input/durationArray.svelte';
+    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;
@@ -35,8 +37,18 @@
             return false;
         }
 
-        saveMessage.setSaveMessage(SaveMessageType.Save);
-        return true;
+        const toSave: SetTalk = {
+            title:              data.currentTalk.value.title,
+            description:        data.currentTalk.value.description,
+            notes:              data.currentTalk.value.notes,
+            possible_durations: data.currentTalk.value.possible_durations,
+            tag_ids:            data.currentTalk.value.tags.map(x => x.id),
+        };
+
+        const result = await trySaveDashboardDataAsync(toSave, `/api/dashboard/speaker/talk/${data.currentTalk.value.id}`);
+
+        saveMessage.setSaveMessage(result);
+        return isSuccessType(result);
     }
 
     async function updateDisplayedEvent(selected: string): Promise<void> {
