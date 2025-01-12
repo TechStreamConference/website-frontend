@@ -169,3 +169,28 @@ export type DashboardAllTimeSlots = z.infer<typeof dashboardAllTimeSlotsScheme>;
 
 export const dashboardTalkDurationChoicesScheme = z.array(z.number());
 export type DashboardTalkDurationChoices = z.infer<typeof dashboardTalkDurationChoicesScheme>
+
+export const dashboardTalkTagScheme = z.object({
+                                                   color_index: z.number(),
+                                                   text:        z.string(),
+                                               });
+export type DashboardTalkTag = z.infer<typeof dashboardTalkTagScheme>;
+export const dashboardAllTalkTagScheme = z.array(dashboardTalkTagScheme);
+export type DashboardAllTalkTag = z.infer<typeof dashboardTalkTagScheme>;
+
+export const dashboardTalkScheme = z.object({
+                                                id:                  z.number(),
+                                                event_id:            z.number(),
+                                                title:               z.string(),
+                                                description:         z.string(),
+                                                notes:               z.string().nullable(),
+                                                requested_changes:   z.string().nullable(),
+                                                time_slot_accepted:  z.boolean(),
+                                                speaker:             dashboardSpeakerTeamMemberScheme,
+                                                tags:                dashboardAllTalkTagScheme,
+                                                possible_durations:  dashboardTalkDurationChoicesScheme,
+                                                suggested_time_slot: dashboardTimeSlotScheme,
+                                            });
+export type DashboardTalk = z.infer<typeof dashboardTalkScheme>;
+export const dashboardAllTalkScheme = z.array(dashboardTalkScheme);
+export type DashboardAllTalk = z.infer<typeof dashboardAllTalkScheme>;

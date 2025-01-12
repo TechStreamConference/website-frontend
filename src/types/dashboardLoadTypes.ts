@@ -13,6 +13,7 @@ import type {
     DashboardEventApplication,
     DashboardAllTimeSlots,
     DashboardTalkDurationChoices,
+    DashboardAllTalk,
 } from './dashboardProvideTypes';
 
 export type LoadDashboard = {
@@ -56,4 +57,9 @@ export type LoadUserApplication = {
               socials: LoadUserSocials,
           } | undefined,
     error: SimpleError | undefined
+}
+
+export type LoadSpeakerTalk = {
+    allEvent: DashboardAllEventID,
+    allTalks: DashboardAllTalk,
 }
