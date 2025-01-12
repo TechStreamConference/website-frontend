@@ -14,6 +14,7 @@ import type {
     DashboardAllTimeSlots,
     DashboardTalkDurationChoices,
     DashboardAllTalk,
+    DashboardTalk,
 } from './dashboardProvideTypes';
 
 export type LoadDashboard = {
@@ -62,4 +63,5 @@ export type LoadUserApplication = {
 export type LoadSpeakerTalk = {
     allEvent: DashboardAllEventID,
     allTalks: DashboardAllTalk,
+    currentTalk: DashboardTalk | undefined,
 }
