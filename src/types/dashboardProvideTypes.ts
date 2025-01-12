@@ -183,7 +183,7 @@ export const dashboardTalkScheme = z.object({
                                                 event_id:            z.number(),
                                                 title:               z.string(),
                                                 description:         z.string(),
-                                                notes:               z.string().nullable(),
+                                                notes:               z.string().nullable().transform(x => x ?? ''),
                                                 requested_changes:   z.string().nullable(),
                                                 time_slot_accepted:  z.boolean(),
                                                 speaker:             dashboardSpeakerTeamMemberScheme,
