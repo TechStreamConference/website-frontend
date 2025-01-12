@@ -118,6 +118,9 @@
         flex-direction: column;
         gap:            var(--full-gap);
         margin-top:     var(--4x-margin);
+        border:         1px solid var(--primary-color-dark);
+        border-radius:  var(--border-radius);
+        padding:        var(--full-padding);
     }
 
     :global(.dashboard-speaker-talk-submit-button) {
