@@ -7,15 +7,20 @@
     import { tagColorLookup, tagTextColorLookup } from 'lookup/tagColorLookup';
 
     export let tag: TalkTag;
-
     export let classes: string = '';
+    export let color: boolean = true;
 
     onMount(() => {
         const element = document.getElementsByClassName(`schedule-entry-tag-${tag.text}`);
 
         Array.from(element).forEach((element) => {
-            (element as HTMLElement).style.backgroundColor = tagColorLookup(tag.color_index);
-            (element as HTMLElement).style.color           = tagTextColorLookup(tag.color_index);
+            if (color) {
+                (element as HTMLElement).style.backgroundColor = tagColorLookup(tag.color_index);
+                (element as HTMLElement).style.color           = tagTextColorLookup(tag.color_index);
+                return;
+            }
+            (element as HTMLElement).style.backgroundColor = 'rgba(255,255,255,0)';
+            (element as HTMLElement).style.color           = '#FFF';
         });
     });
 </script>
