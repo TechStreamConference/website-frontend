@@ -1,11 +1,15 @@
 <script lang="ts">
+    import { createEventDispatcher } from 'svelte';
+
     export let toggle: boolean;
     export let ariaLabel: string;
-
     export let classes: string = '';
+
+    const dispatcher = createEventDispatcher();
 
     function onToggle() {
         toggle = !toggle;
+        dispatcher('toggle', toggle);
     }
 </script>
 
@@ -25,6 +29,6 @@
     .toggle-button {
         background: none;
         border:     none;
-        cursor: pointer;
+        cursor:     pointer;
     }
 </style>
