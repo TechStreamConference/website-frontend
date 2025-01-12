@@ -1,8 +1,9 @@
-import type { DashboardEvent } from 'types/dashboardProvideTypes';
 import { error } from '@sveltejs/kit';
 
-export function getEventByTitle(event: DashboardEvent[], title: string): DashboardEvent {
-    for (const entry of event) {
+export function getElementByTitle<T extends {
+    title: string
+}>(elements: T[], title: string): T {
+    for (const entry of elements) {
         if (entry.title === title) {
             return entry;
         }
@@ -13,8 +14,10 @@ export function getEventByTitle(event: DashboardEvent[], title: string): Dashboa
 }
 
 
-export function getEventByID(event: DashboardEvent[], ID: number): DashboardEvent {
-    for (const entry of event) {
+export function getElementByID<T extends {
+    id: number
+}>(elements: T[], ID: number): T {
+    for (const entry of elements) {
         if (entry.id === ID) {
             return entry;
         }
