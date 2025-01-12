@@ -8,6 +8,7 @@
     import { getElementByTitle } from 'helper/basic';
     import { loadTalkFromEventIDAsync } from './talkHelper';
     import { setUnsavedChanges } from 'stores/saved';
+    import { SaveMessageType } from 'types/saveMessageType';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
@@ -17,15 +18,18 @@
     import Button from 'elements/input/button.svelte';
     import Input from 'elements/input/input.svelte';
     import TextArea from 'elements/input/textArea.svelte';
+    import SaveMessage from 'elements/text/saveMessage.svelte';
 
     export let data: LoadSpeakerTalk;
+    let saveMessage: SaveMessage;
 
     async function save(): Promise<boolean> {
         if (!data.currentTalk) {
-            console.log('Saving talk undefined');
+            saveMessage.setSaveMessage(SaveMessageType.Error);
             return false;
         }
-        console.log(data.currentTalk.value);
+
+        saveMessage.setSaveMessage(SaveMessageType.Save);
         return true;
     }
 
@@ -47,6 +51,7 @@
 <UnsavedChangesCallbackWrapper callback={save} />
 
 <SectionDashboard classes="standard-dashboard-section">
+    <SaveMessage bind:this={saveMessage} />
     <NavigationDropDown id="dashboard-speaker-talk-event-navigation"
                         labelText="Event:"
                         data={ data.allEvent.map(x => x.title) }
