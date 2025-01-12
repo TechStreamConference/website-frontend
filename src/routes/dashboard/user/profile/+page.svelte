@@ -9,6 +9,11 @@
     import HeadlineH2 from 'elements/text/headlineH2.svelte';
     import Input from 'elements/input/input.svelte';
     import Button from 'elements/input/button.svelte';
+    import SaveMessage from 'elements/text/saveMessage.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
+
+    let saveMessage: SaveMessage;
+    let errorMessages: string[] = [];
 
     let name: string         = '';
     let mail: string         = '';
@@ -36,6 +41,8 @@
 />
 
 <SectionDashboard classes="standard-dashboard-section dashboard-user-profile-section-wrapper">
+    <SaveMessage bind:this={saveMessage} />
+    <MessageWrapper messages={errorMessages} />
     <form class="dashboard-user-profile-section-entry-wrapper"
           on:submit|preventDefault={saveName}>
         <HeadlineH2>Name</HeadlineH2>
