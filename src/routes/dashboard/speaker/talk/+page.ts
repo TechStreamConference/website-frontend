@@ -1,8 +1,10 @@
 import type { LoadSpeakerTalk } from 'types/dashboardLoadTypes';
+
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { dashboardAllEventIDScheme } from 'types/dashboardProvideTypes';
 import { loadTalkFromEventIDAsync } from './talkHelper';
+import { Clone } from 'helper/clone';
 
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
@@ -26,7 +28,7 @@ export async function load({ fetch }: {
 
     const eventID: number = allEvent[0].event_id;
     const allTalks        = await loadTalkFromEventIDAsync(fetch, eventID);
-    const currentTalk     = allTalks.length > 0 ? allTalks[0] : undefined;
+    const currentTalk     = allTalks.length > 0 ? new Clone(allTalks[0]) : undefined;
 
     return {
         allEvent,
