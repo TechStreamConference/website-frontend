@@ -190,7 +190,7 @@ export const dashboardTalkScheme = z.object({
                                                 speaker:             dashboardSpeakerTeamMemberScheme,
                                                 tags:                dashboardAllTalkTagScheme,
                                                 possible_durations:  dashboardTalkDurationChoicesScheme,
-                                                suggested_time_slot: dashboardTimeSlotScheme,
+                                                suggested_time_slot: dashboardTimeSlotScheme.nullable(),
                                             });
 export type DashboardTalk = z.infer<typeof dashboardTalkScheme>;
 export const dashboardAllTalkScheme = z.array(dashboardTalkScheme);

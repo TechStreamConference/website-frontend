@@ -11,6 +11,10 @@
     import { setUnsavedChanges } from 'stores/saved';
     import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
     import { scrollToTop } from 'helper/scroll';
+    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
+    import { formatDate } from 'helper/dates.js';
+    import { fade } from 'svelte/transition';
+    import { apiUrl } from 'helper/links';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
@@ -24,7 +28,7 @@
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import TagArray from 'elements/input/tagArray.svelte';
     import DurationArray from 'elements/input/durationArray.svelte';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
+    import HeadlineH2 from 'elements/text/headlineH2.svelte';
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;
@@ -45,7 +49,10 @@
             tag_ids:            data.currentTalk.value.tags.map(x => x.id),
         };
 
-        const result = await trySaveDashboardDataAsync(toSave, `/api/dashboard/speaker/talk/${data.currentTalk.value.id}`);
+        const result = await trySaveDashboardDataAsync(
+            toSave,
+            `/api/dashboard/speaker/talk/${data.currentTalk.value.id}`,
+        );
 
         saveMessage.setSaveMessage(result);
         return isSuccessType(result);
@@ -59,6 +66,52 @@
 
     function updateDisplayedTalk(selected: string): void {
         data.currentTalk = new Clone(getElementByTitle(data.allTalks, selected));
+    }
+
+    async function acceptSlot(): Promise<void> {
+        if (data.currentTalk === undefined) {
+            console.error('undefined current talk while accept slot');
+            return;
+        }
+        const response = await fetch(
+            apiUrl(`/api/dashboard/speaker/talk/${data.currentTalk.value.id}/accept-time-slot`),
+            { method: 'PUT' },
+        );
+
+        if (response.ok) {
+            saveMessage.setSaveMessage(SaveMessageType.Approved);
+            setTimeout(() => {
+                if (data.currentTalk === undefined) {
+                    return;
+                }
+                data.currentTalk.value.time_slot_accepted = true;
+            }, 500);
+            return;
+        }
+        saveMessage.setSaveMessage(SaveMessageType.Error);
+    }
+
+    async function rejectSlot(): Promise<void> {
+        if (data.currentTalk === undefined) {
+            console.error('undefined current talk while reject slot');
+            return;
+        }
+        const response = await fetch(
+            apiUrl(`/api/dashboard/speaker/talk/${data.currentTalk.value.id}/reject-time-slot`),
+            { method: 'PUT' },
+        );
+
+        if (response.ok) {
+            saveMessage.setSaveMessage(SaveMessageType.Delete);
+            setTimeout(() => {
+                if (data.currentTalk === undefined) {
+                    return;
+                }
+                data.currentTalk.value.suggested_time_slot = null;
+            }, 500);
+            return;
+        }
+        saveMessage.setSaveMessage(SaveMessageType.Delete);
     }
 </script>
 
@@ -82,8 +135,36 @@
     {#if data.currentTalk === undefined}
         <TextLine>Kein aktueller Talk ausgewählt.</TextLine>
     {:else }
-        <form class="dashboard-speaker-talk-form"
+        {#if !data.currentTalk.value.time_slot_accepted && data.currentTalk.value.suggested_time_slot}
+
+            <div class="dashboard-speaker-talk-time-slot dashboard-speaker-section"
+                 transition:fade={{ duration: 300 }}>
+                <HeadlineH2>Slot:</HeadlineH2>
+                <div class="dashboard-speaker-talk-time-slot-wrapper">
+                    <TextLine>Slot:</TextLine>
+                    <TextLine>{formatDate(data.currentTalk.value.suggested_time_slot.start_time,
+                                          '%d, %DD.%MM.%YYYY - %hh:%mm Uhr'
+                    )}</TextLine>
+                    <TextLine>Dauer:</TextLine>
+                    <TextLine>{data.currentTalk.value.suggested_time_slot.duration} Minuten</TextLine>
+                    <TextLine>Art:</TextLine>
+                    <TextLine>{data.currentTalk.value.suggested_time_slot.is_special
+                               ? "YouTube-Premiere"
+                               : "Live-Talk"}</TextLine>
+                </div>
+                <div class="dashboard-speaker-talk-button-wrapper">
+                    <Button ariaLabel="Klicke, um den Time-Slot abzulehnen"
+                            on:click={rejectSlot}>Ablehnen
+                    </Button>
+                    <Button ariaLabel="Klicke, um den Time-Slot anzunehmen"
+                            on:click={acceptSlot}>Annehmen
+                    </Button>
+                </div>
+            </div>
+        {/if}
+        <form class="dashboard-speaker-talk-form dashboard-speaker-section"
               on:submit|preventDefault={save}>
+            <HeadlineH2>Talk:</HeadlineH2>
             {#if data.currentTalk.value.requested_changes}
                 <Message classes="message-pre-wrap"
                          message={`Änderungswünsche\n${data.currentTalk.value.requested_changes}`} />
@@ -116,26 +197,47 @@
                       bind:value={data.currentTalk.value.notes}
                       on:input={setUnsavedChanges}
                       on:submit={save} />
-            <Button classes="dashboard-speaker-talk-submit-button"
-                    type="submit"
-                    ariaLabel="Klicke, um den Talk zu speichern">Speichern
-            </Button>
+            <div class="dashboard-speaker-talk-button-wrapper">
+                <Button type="submit"
+                        ariaLabel="Klicke, um den Talk zu speichern">Speichern
+                </Button>
+            </div>
         </form>
     {/if}
 </SectionDashboard>
 
 <style>
+    .dashboard-speaker-section {
+        margin-top:    var(--4x-margin);
+        border:        1px solid var(--primary-color-dark);
+        border-radius: var(--border-radius);
+        padding:       var(--full-padding);
+    }
+
     .dashboard-speaker-talk-form {
         display:        flex;
         flex-direction: column;
         gap:            var(--full-gap);
-        margin-top:     var(--4x-margin);
-        border:         1px solid var(--primary-color-dark);
-        border-radius:  var(--border-radius);
-        padding:        var(--full-padding);
     }
 
-    :global(.dashboard-speaker-talk-submit-button) {
-        margin: var(--2x-margin) auto 0;
+    .dashboard-speaker-talk-time-slot {
+        display:        flex;
+        flex-direction: column;
+
+    }
+
+    .dashboard-speaker-talk-time-slot-wrapper {
+        display:               grid;
+        grid-template-columns: auto auto;
+        width:                 fit-content;
+        gap:                   var(--full-gap);
+        margin:                var(--2x-margin) auto;
+    }
+
+    .dashboard-speaker-talk-button-wrapper {
+        display:        flex;
+        flex-direction: row;
+        margin:         var(--2x-margin) auto 0;
+        gap:            var(--full-gap);
     }
 </style>
