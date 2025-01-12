@@ -20,11 +20,13 @@
     import TextArea from 'elements/input/textArea.svelte';
     import Message from 'elements/text/message.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
+    import Tags from 'elements/input/tags.svelte';
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;
 
     async function save(): Promise<boolean> {
+        console.log(data.currentTalk?.value);
         if (!data.currentTalk) {
             saveMessage.setSaveMessage(SaveMessageType.Error);
             return false;
@@ -65,7 +67,8 @@
     {#if data.currentTalk === undefined}
         <TextLine>Kein aktueller Talk ausgewählt.</TextLine>
     {:else }
-        <form on:submit|preventDefault={save}>
+        <form class="dashboard-speaker-talk-form"
+              on:submit|preventDefault={save}>
             {#if data.currentTalk.value.requested_changes}
                 <Message classes="message-pre-wrap"
                          message={`Änderungswünsche\n${data.currentTalk.value.requested_changes}`} />
@@ -83,9 +86,33 @@
                       bind:value={data.currentTalk.value.description}
                       on:input={setUnsavedChanges}
                       on:submit={save} />
-            <Button type="submit"
+            <Tags data={data.tags}
+                  bind:selected={data.currentTalk.value.tags}
+                  on:toggle={setUnsavedChanges} />
+            <TextArea id="dashboard-speaker-talk-input-notes"
+                      labelText="Anmerkungen:"
+                      placeholderText="Anmerkungen"
+                      ariaLabel="Gebe hier Informationen ein, die für die Bearbeitung des Talk interest sein könnten"
+                      bind:value={data.currentTalk.value.notes}
+                      on:input={setUnsavedChanges}
+                      on:submit={save} />
+            <Button classes="dashboard-speaker-talk-submit-button"
+                    type="submit"
                     ariaLabel="Klicke, um den Talk zu speichern">Speichern
             </Button>
         </form>
     {/if}
 </SectionDashboard>
+
+<style>
+    .dashboard-speaker-talk-form {
+        display:        flex;
+        flex-direction: column;
+        gap:            var(--full-gap);
+        margin-top:     var(--4x-margin);
+    }
+
+    :global(.dashboard-speaker-talk-submit-button) {
+        margin: var(--2x-margin) auto 0;
+    }
+</style>

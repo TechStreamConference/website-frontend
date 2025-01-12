@@ -5,11 +5,13 @@ import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { dashboardAllEventIDScheme } from 'types/dashboardProvideTypes';
 import { loadTalkFromEventIDAsync } from './talkHelper';
 import { Clone } from 'helper/clone';
+import { allTalkTagScheme } from 'types/provideTypes';
 
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadSpeakerTalk> {
     const allEventPromise: Promise<Response> = fetch(apiUrl(`/api/dashboard/speaker/all-events`));
+    const allTagsPromise                     = fetch(apiUrl(`/api/tags`));
 
     const allEvent = await checkAndParseInputDataAsync(
         await allEventPromise,
@@ -17,12 +19,19 @@ export async function load({ fetch }: {
         `Serveranfrage für alle Event IDs nicht erfolgreich. throw error(406)`,
         `Unerwartete Daten für alle Event Ids. throw error(406)`,
     );
+    const allTags  = await checkAndParseInputDataAsync(
+        await allTagsPromise,
+        allTalkTagScheme,
+        `Serveranfrage für alle Talk-Tags nicht erfolgreich; throw error (406)`,
+        `unerwartete Daten for alle Talk-Tags; throw error(406)`,
+    );
 
     if (allEvent.length === 0) {
         return {
             allEvent,
-            allTalks:    [],
+            allTalks: [],
             currentTalk: undefined,
+            tags: allTags,
         };
     }
 
@@ -34,5 +43,6 @@ export async function load({ fetch }: {
         allEvent,
         allTalks,
         currentTalk,
+        tags: allTags,
     };
 }

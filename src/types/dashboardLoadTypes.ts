@@ -1,4 +1,4 @@
-import type { Globals, SimpleError } from './provideTypes';
+import type { AllTalkTag, Globals, SimpleError } from './provideTypes';
 import type { Clone } from 'helper/clone';
 import type {
     DashboardRoles,
@@ -65,4 +65,5 @@ export type LoadSpeakerTalk = {
     allEvent: DashboardAllEventID,
     allTalks: DashboardAllTalk,
     currentTalk: Clone<DashboardTalk> | undefined,
+    tags: AllTalkTag,
 }
