@@ -2,9 +2,10 @@
     import type { AllTalkTag, TalkTag } from 'types/provideTypes';
     import { createEventDispatcher } from 'svelte';
 
-    import ScheduleTag from 'elements/schedule/scheduleTag.svelte';
+    import Tag from 'elements/text/tag.svelte';
     import Toggle from './toggle.svelte';
     import Label from 'elements/text/label.svelte';
+    import { tagColorLookup, tagTextColorLookup } from 'lookup/tagColorLookup';
 
     export let labelText: string;
     export let data: AllTalkTag;
@@ -44,12 +45,16 @@
         <Toggle ariaLabel="Klicke, um einen Tag aus- oder abzuwählen"
                 toggle={contains(tag)}
                 on:toggle={ (e) => { updateSelected(e.detail, tag); }}>
-            <ScheduleTag slot="slotTrue"
-                         tag={tag}
-                         color={true} />
-            <ScheduleTag slot="slotFalse"
-                         tag={tag}
-                         color={false} />
+            <Tag slot="slotTrue"
+                 text={tag.text}
+                 --tag-text-color={tagTextColorLookup(tag.color_index)}
+                 --tag-background-color={tagColorLookup(tag.color_index)}
+            />
+            <Tag slot="slotFalse"
+                 text={tag.text}
+                 --tag-text-color="#FFF"
+                 --tag-background-color="#FFFFFF00"
+            />
         </Toggle>
     {/each}
 </div>

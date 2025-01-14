@@ -3,8 +3,8 @@
     import { createEventDispatcher } from 'svelte';
 
     import Toggle from './toggle.svelte';
-    import TextLine from 'elements/text/textLine.svelte';
     import Label from 'elements/text/label.svelte';
+    import Tag from 'elements/text/tag.svelte';
 
     export let labelText: string;
     export let data: DashboardTalkDurationChoices;
@@ -43,10 +43,16 @@
         <Toggle ariaLabel="Klicke, um einen mögliche Talk-Dauer in Minuten aus- oder abzuwählen"
                 toggle={contains(duration)}
                 on:toggle={ (e) => { updateSelected(e.detail, duration); }}>
-            <TextLine slot="slotTrue"
-                      classes="dashboard-speaker-talk-duration dashboard-speaker-talk-duration-true">{duration}</TextLine>
-            <TextLine slot="slotFalse"
-                      classes="dashboard-speaker-talk-duration dashboard-speaker-talk-duration-false">{duration}</TextLine>
+            <Tag slot="slotTrue"
+                 text={duration.toString()}
+                 --tag-text-color={"var(--white-color)"}
+                 --tag-background-color={"var(--primary-color-dark)"}
+            />
+            <Tag slot="slotFalse"
+                 text={duration.toString()}
+                 --tag-text-color="#FFF"
+                 --tag-background-color="#FFFFFF00"
+            />
         </Toggle>
     {/each}
 </div>
@@ -61,20 +67,6 @@
         border-radius:   var(--border-radius);
         padding:         var(--full-padding);
         justify-content: space-between;
-    }
-
-    :global(.dashboard-speaker-talk-duration) {
-        padding:       var(--full-padding);
-        border-radius: var(--border-radius);
-    }
-
-    :global(.dashboard-speaker-talk-duration-true) {
-        color:            var(--white-color);
-        background-color: var(--primary-color-dark);
-    }
-
-    :global(.dashboard-speaker-talk-duration-false) {
-        background-color: rgba(255, 255, 255, 0);
     }
 
 </style>
