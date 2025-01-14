@@ -39,9 +39,9 @@
 </script>
 
 <Label>{labelText}</Label>
-<div class="toggle-talk-tag-wrapper">
+<div class="toggle-talk-duration-wrapper">
     {#each data as tag}
-        <Toggle ariaLabel="Klicke, um einen Tag zu aus- oder abzuwählen"
+        <Toggle ariaLabel="Klicke, um einen Tag aus- oder abzuwählen"
                 toggle={contains(tag)}
                 on:toggle={ (e) => { updateSelected(e.detail, tag); }}>
             <ScheduleTag slot="slotTrue"
@@ -55,7 +55,7 @@
 </div>
 
 <style>
-    .toggle-talk-tag-wrapper {
+    .toggle-talk-duration-wrapper {
         display:         flex;
         flex-direction:  row;
         flex-wrap:       wrap;
