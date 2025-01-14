@@ -172,13 +172,13 @@
             <Input id="dashboard-speaker-talk-input-title"
                    labelText="Titel:"
                    placeholderText="Titel"
-                   ariaLabel="Gebe hier den Titel des Talks ein"
+                   ariaLabel="Gib hier den Titel des Talks ein"
                    bind:value={data.currentTalk.value.title}
                    on:input={setUnsavedChanges} />
             <TextArea id="dashboard-speaker-talk-input-description"
                       labelText="Beschreibung:"
                       placeholderText="Beschreibung"
-                      ariaLabel="Gebe hier die Beschreibung des Talks ein"
+                      ariaLabel="Gib hier die Beschreibung des Talks ein"
                       bind:value={data.currentTalk.value.description}
                       on:input={setUnsavedChanges}
                       on:submit={save} />
@@ -193,7 +193,7 @@
             <TextArea id="dashboard-speaker-talk-input-notes"
                       labelText="Anmerkungen:"
                       placeholderText="Anmerkungen"
-                      ariaLabel="Gebe hier Informationen ein, die für die Bearbeitung des Talk interest sein könnten"
+                      ariaLabel="Gib hier Anmerkungen zum Talk ein."
                       bind:value={data.currentTalk.value.notes}
                       on:input={setUnsavedChanges}
                       on:submit={save} />
