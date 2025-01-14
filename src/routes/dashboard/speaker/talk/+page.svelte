@@ -32,6 +32,7 @@
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;
+    let rejectText: string = '';
 
     async function save(): Promise<boolean> {
         console.log(data.currentTalk?.value);
@@ -96,9 +97,15 @@
             console.error('undefined current talk while reject slot');
             return;
         }
+        const toSave   = {
+            reason: rejectText.trim(),
+        };
         const response = await fetch(
             apiUrl(`/api/dashboard/speaker/talk/${data.currentTalk.value.id}/reject-time-slot`),
-            { method: 'PUT' },
+            {
+                method: 'PUT',
+                body:   JSON.stringify(toSave),
+            },
         );
 
         if (response.ok) {
@@ -111,7 +118,7 @@
             }, 500);
             return;
         }
-        saveMessage.setSaveMessage(SaveMessageType.Delete);
+        saveMessage.setSaveMessage(SaveMessageType.Error);
     }
 </script>
 
@@ -152,6 +159,13 @@
                                ? "YouTube-Premiere"
                                : "Live-Talk"}</TextLine>
                 </div>
+                <TextArea id="dashboard-speaker-talk-reject-text-area"
+                          labelText="Ablehnungsgrund:"
+                          placeholderText="Ablehnungsgrund"
+                          ariaLabel="Gib hier einen Grund an warum du den vorgeschlagenen Time-Slot ablehnen musst."
+                          rows={5}
+                          bind:value={rejectText}
+                          on:input={setUnsavedChanges} />
                 <div class="dashboard-speaker-talk-button-wrapper">
                     <Button ariaLabel="Klicke, um den Time-Slot abzulehnen"
                             on:click={rejectSlot}>Ablehnen

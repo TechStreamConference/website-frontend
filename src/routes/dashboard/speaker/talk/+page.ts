@@ -46,6 +46,10 @@ export async function load({ fetch }: {
     const allTalks        = await loadTalkFromEventIDAsync(fetch, eventID);
     const currentTalk     = allTalks.length > 0 ? new Clone(allTalks[0]) : undefined;
 
+    if (currentTalk) {
+        currentTalk.value.time_slot_accepted = false;
+    }
+
     return {
         allEvents,
         allTalks,
