@@ -62,7 +62,7 @@ export type LoadUserApplication = {
 }
 
 export type LoadSpeakerTalk = {
-    allEvent: DashboardAllEventID,
+    allEvents: DashboardAllEventID,
     allTalks: DashboardAllTalk,
     currentTalk: Clone<DashboardTalk> | undefined,
     tags: AllTalkTag,

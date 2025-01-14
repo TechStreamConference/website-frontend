@@ -59,7 +59,7 @@
     }
 
     async function updateDisplayedEvent(selected: string): Promise<void> {
-        const current    = getElementByTitle(data.allEvent, selected);
+        const current    = getElementByTitle(data.allEvents, selected);
         data.allTalks    = await loadTalkFromEventIDAsync(fetch, current.event_id);
         data.currentTalk = data.allTalks.length > 0 ? new Clone(data.allTalks[0]) : undefined;
     }
@@ -125,7 +125,7 @@
     <SaveMessage bind:this={saveMessage} />
     <NavigationDropDown id="dashboard-speaker-talk-event-navigation"
                         labelText="Event:"
-                        data={ data.allEvent.map(x => x.title) }
+                        data={ data.allEvents.map(x => x.title) }
                         on:navigated={ (e) => { updateDisplayedEvent(e.detail); }} />
     <NavigationDropDown id="dashboard-speaker-talk-talk-navigation"
                         labelText="Talk:"
