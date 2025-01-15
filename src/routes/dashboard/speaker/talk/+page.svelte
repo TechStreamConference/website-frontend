@@ -29,6 +29,8 @@
     import TagArray from 'elements/input/tagArray.svelte';
     import DurationArray from 'elements/input/durationArray.svelte';
     import HeadlineH2 from 'elements/text/headlineH2.svelte';
+    import Paragraph from 'elements/text/paragraph.svelte';
+    import ScheduleTag from 'elements/schedule/scheduleTag.svelte';
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;
@@ -56,6 +58,9 @@
         );
 
         saveMessage.setSaveMessage(result);
+        if (isSuccessType(result)) {
+            data.currentTalk.value.requested_changes = null;
+        }
         return isSuccessType(result);
     }
 
@@ -142,7 +147,7 @@
     {#if data.currentTalk === undefined}
         <TextLine>Kein aktueller Talk ausgewählt.</TextLine>
     {:else }
-        {#if !data.currentTalk.value.time_slot_accepted && data.currentTalk.value.suggested_time_slot}
+        {#if data.currentTalk.value.suggested_time_slot}
 
             <div class="dashboard-speaker-talk-time-slot dashboard-speaker-section"
                  transition:fade={{ duration: 300 }}>
@@ -159,6 +164,7 @@
                                ? "YouTube-Premiere"
                                : "Live-Talk"}</TextLine>
                 </div>
+                {#if !data.currentTalk.value.time_slot_accepted}
                 <TextArea id="dashboard-speaker-talk-reject-text-area"
                           labelText="Ablehnungsgrund:"
                           placeholderText="Ablehnungsgrund"
@@ -166,57 +172,79 @@
                           rows={5}
                           bind:value={rejectText}
                           on:input={setUnsavedChanges} />
-                <div class="dashboard-speaker-talk-button-wrapper">
-                    <Button ariaLabel="Klicke, um den Time-Slot abzulehnen"
-                            on:click={rejectSlot}>Ablehnen
-                    </Button>
-                    <Button ariaLabel="Klicke, um den Time-Slot anzunehmen"
-                            on:click={acceptSlot}>Annehmen
-                    </Button>
-                </div>
+                    <div class="dashboard-speaker-talk-button-wrapper">
+                        <Button ariaLabel="Klicke, um den Time-Slot abzulehnen"
+                                on:click={rejectSlot}>Ablehnen
+                        </Button>
+                        <Button ariaLabel="Klicke, um den Time-Slot anzunehmen"
+                                on:click={acceptSlot}>Annehmen
+                        </Button>
+                    </div>
+                {/if}
             </div>
         {/if}
-        <form class="dashboard-speaker-talk-form dashboard-speaker-section"
-              on:submit|preventDefault={save}>
-            <HeadlineH2>Talk:</HeadlineH2>
-            {#if data.currentTalk.value.requested_changes}
-                <Message classes="message-pre-wrap"
-                         message={`Änderungswünsche\n${data.currentTalk.value.requested_changes}`} />
-            {/if}
-            <Input id="dashboard-speaker-talk-input-title"
-                   labelText="Titel:"
-                   placeholderText="Titel"
-                   ariaLabel="Gib hier den Titel des Talks ein"
-                   bind:value={data.currentTalk.value.title}
-                   on:input={setUnsavedChanges} />
-            <TextArea id="dashboard-speaker-talk-input-description"
-                      labelText="Beschreibung:"
-                      placeholderText="Beschreibung"
-                      ariaLabel="Gib hier die Beschreibung des Talks ein"
-                      bind:value={data.currentTalk.value.description}
-                      on:input={setUnsavedChanges}
-                      on:submit={save} />
-            <TagArray labelText="Tags:"
-                      data={data.tags}
-                      bind:selected={data.currentTalk.value.tags}
-                      on:toggle={setUnsavedChanges} />
-            <DurationArray labelText="Vortragslänge:"
-                           data={data.talkDurations}
-                           bind:selected={data.currentTalk.value.possible_durations}
-                           on:toggle={setUnsavedChanges} />
-            <TextArea id="dashboard-speaker-talk-input-notes"
-                      labelText="Anmerkungen:"
-                      placeholderText="Anmerkungen"
-                      ariaLabel="Gib hier Anmerkungen zum Talk ein."
-                      bind:value={data.currentTalk.value.notes}
-                      on:input={setUnsavedChanges}
-                      on:submit={save} />
-            <div class="dashboard-speaker-talk-button-wrapper">
-                <Button type="submit"
-                        ariaLabel="Klicke, um den Talk zu speichern">Speichern
-                </Button>
+        {#if data.currentTalk.value.requested_changes !== null}
+            <form class="dashboard-speaker-talk-form dashboard-speaker-section"
+                  on:submit|preventDefault={save}
+                  transition:fade={{ duration: 300 }}>
+                <HeadlineH2>Talk:</HeadlineH2>
+                {#if data.currentTalk.value.requested_changes}
+                    <Message classes="message-pre-wrap"
+                             message={`Änderungswünsche\n${data.currentTalk.value.requested_changes}`} />
+                {/if}
+                <Input id="dashboard-speaker-talk-input-title"
+                       labelText="Titel:"
+                       placeholderText="Titel"
+                       ariaLabel="Gib hier den Titel des Talks ein"
+                       bind:value={data.currentTalk.value.title}
+                       on:input={setUnsavedChanges} />
+                <TextArea id="dashboard-speaker-talk-input-description"
+                          labelText="Beschreibung:"
+                          placeholderText="Beschreibung"
+                          ariaLabel="Gib hier die Beschreibung des Talks ein"
+                          bind:value={data.currentTalk.value.description}
+                          on:input={setUnsavedChanges}
+                          on:submit={save} />
+                <TagArray labelText="Tags:"
+                          data={data.tags}
+                          bind:selected={data.currentTalk.value.tags}
+                          on:toggle={setUnsavedChanges} />
+                <DurationArray labelText="Vortragslänge in Minuten:"
+                               data={data.talkDurations}
+                               bind:selected={data.currentTalk.value.possible_durations}
+                               on:toggle={setUnsavedChanges} />
+                <TextArea id="dashboard-speaker-talk-input-notes"
+                          labelText="Anmerkungen:"
+                          placeholderText="Anmerkungen"
+                          ariaLabel="Gib hier Anmerkungen zum Talk ein."
+                          bind:value={data.currentTalk.value.notes}
+                          on:input={setUnsavedChanges}
+                          on:submit={save} />
+                <div class="dashboard-speaker-talk-button-wrapper">
+                    <Button type="submit"
+                            ariaLabel="Klicke, um den Talk zu speichern">Speichern
+                    </Button>
+                </div>
+            </form>
+        {:else}
+            <div class="dashboard-speaker-section"
+                 transition:fade={{ duration: 300 }}>
+                <HeadlineH2>Talk:</HeadlineH2>
+                <div class="dashboard-speaker-talk-time-slot-wrapper">
+                    <TextLine>Titel:</TextLine>
+                    <TextLine>{data.currentTalk.value.title}</TextLine>
+                    <TextLine>Beschreibung:</TextLine>
+                    <Paragraph classes="paragraph-pre-wrap">{data.currentTalk.value.description}</Paragraph>
+                    <TextLine>Tags:</TextLine>
+                    <div class="dashboard-speaker-talk-entry-wrapper">
+                        {#each data.currentTalk.value.tags as tag}
+                            <ScheduleTag {tag} />
+                        {/each}
+                    </div>
+                </div>
+
             </div>
-        </form>
+        {/if}
     {/if}
 </SectionDashboard>
 
@@ -253,5 +281,12 @@
         flex-direction: row;
         margin:         var(--2x-margin) auto 0;
         gap:            var(--full-gap);
+    }
+
+    .dashboard-speaker-talk-entry-wrapper {
+        display:        flex;
+        flex-direction: row;
+        gap:            var(--full-gap);
+        flex-wrap:      wrap;
     }
 </style>
