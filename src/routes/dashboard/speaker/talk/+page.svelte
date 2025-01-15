@@ -200,7 +200,7 @@
                       data={data.tags}
                       bind:selected={data.currentTalk.value.tags}
                       on:toggle={setUnsavedChanges} />
-            <DurationArray labelText="Vortragslänge"
+            <DurationArray labelText="Vortragslänge:"
                            data={data.talkDurations}
                            bind:selected={data.currentTalk.value.possible_durations}
                            on:toggle={setUnsavedChanges} />
