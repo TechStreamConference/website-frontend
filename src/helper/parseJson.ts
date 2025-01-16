@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { globalsScheme, type Globals } from 'types/provideTypes';
 import { z, ZodSchema } from 'zod';
-import { registerLookup } from 'lookup/registerLookup';
+import { responseLookup } from 'lookup/responseLookup';
 
 export async function parseMultipleErrorsAsync(response: Response): Promise<string[]> {
     try {
@@ -12,7 +12,7 @@ export async function parseMultipleErrorsAsync(response: Response): Promise<stri
         const values: string[]   = Object.values(json);
         const toReturn: string[] = [];
         for (const value of values) {
-            toReturn.push(registerLookup(value));
+            toReturn.push(responseLookup(value));
         }
         return toReturn;
 
