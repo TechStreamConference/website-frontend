@@ -12,6 +12,7 @@ const lookup: ResponseDict = {
     'The email field must contain a valid email address.': 'Das E-Mail-Feld muss eine gültige E-Mail-Adresse enthalten',
 
     USERNAME_OR_EMAIL_ALREADY_TAKEN: 'Name oder E-Mail sind bereits vergeben',
+    EMAILS_EQUAL:                    'Die neue und die alte E-Mail ist gleich',
 
     'The password field is required.':  'Das Feld \'Passwort\' ist erforderlich.',
     PASSWORD_MISSING_FIELD:             'Das Feld \'Passwort\' ist erforderlich.',
@@ -20,6 +21,7 @@ const lookup: ResponseDict = {
     PASSWORD_MISSING_UPPERCASE_LETTER:  'Deinem Passwort fehlt ein Großbuchstabe.',
     PASSWORD_MISSING_NUMBER:            'Deinem Passwort fehlt eine Ziffer.',
     PASSWORD_MISSING_SPECIAL_CHARACTER: 'Deinem Passwort fehlt ein Sonderzeichen.',
+    PASSWORDS_EQUAL:                    'Das neue und das alte Passwort ist gleich.',
 
     TOKEN_EXPIRED_OR_DOES_NOT_EXIST: 'Der Link ist ungültig oder bereits abgelaufen.',
 
