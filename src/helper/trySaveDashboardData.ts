@@ -40,7 +40,7 @@ export async function trySaveDashboardDataAsyncNew<T>(
     if (response.ok) {
         resetUnsavedChanges();
         return {
-            success:  false,
+            success:  true,
             messages: [],
         };
     }

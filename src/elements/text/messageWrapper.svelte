@@ -5,8 +5,17 @@
 </script>
 
 {#if messages.length > 0}
-    {#each messages as message}
-        <Message {message}
-                 classes="message-pre-wrap" />
-    {/each}
+    <div class="message-wrapper">
+        {#each messages as message}
+            <Message {message}
+                     classes="message-pre-wrap" />
+        {/each}
+    </div>
 {/if}
+
+<style>
+    .message-wrapper {
+        display:        flex;
+        flex-direction: column;
+    }
+</style>
