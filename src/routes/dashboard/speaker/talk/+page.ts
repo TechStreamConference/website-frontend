@@ -3,16 +3,15 @@ import type { LoadSpeakerTalk } from 'types/dashboardLoadTypes';
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { dashboardAllEventIDScheme, dashboardTalkDurationChoicesScheme } from 'types/dashboardProvideTypes';
-import { loadTalkFromEventIDAsync } from './talkHelper';
-import { Clone } from 'helper/clone';
+import { loadPendingTalksFromEventIDAsync, loadTentativeOrAcceptedTalksFromEventIDAsync } from './talkHelper';
 import { allTalkTagScheme } from 'types/provideTypes';
 
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadSpeakerTalk> {
-    const allEventsFetchPromise: Promise<Response> = fetch(apiUrl(`/api/dashboard/speaker/all-events`));
-    const allTagsFetchPromise                      = fetch(apiUrl(`/api/tags`));
-    const allTalkDurationFetchPromise              = fetch(apiUrl(`/api/talk-duration-choices`));
+    const allEventsFetchPromise       = fetch(apiUrl(`/api/dashboard/speaker/all-events`));
+    const allTagsFetchPromise         = fetch(apiUrl(`/api/tags`));
+    const allTalkDurationFetchPromise = fetch(apiUrl(`/api/talk-duration-choices`));
 
     const allTagsParsePromise         = checkAndParseInputDataAsync(await allTagsFetchPromise,
                                                                     allTalkTagScheme,
@@ -35,22 +34,21 @@ export async function load({ fetch }: {
     if (allEvents.length === 0) {
         return {
             allEvents,
-            allTalks:      [],
-            currentTalk:   undefined,
-            tags:          await allTagsParsePromise,
-            talkDurations: await allTalkDurationParsePromise,
+            tentativeOrAcceptedTalk: [],
+            pendingTalks:            [],
+            tags:                    await allTagsParsePromise,
+            talkDurations:           await allTalkDurationParsePromise,
         };
     }
 
-    const eventID: number = allEvents[0].event_id;
-    const allTalks        = await loadTalkFromEventIDAsync(fetch, eventID);
-    const currentTalk     = allTalks.length > 0 ? new Clone(allTalks[0]) : undefined;
-
+    const eventID: number                    = allEvents[0].event_id;
+    const AllTentativeOrAcceptedTalksPromise = loadTentativeOrAcceptedTalksFromEventIDAsync(fetch, eventID);
+    const AllPendingTalksPromise             = loadPendingTalksFromEventIDAsync(fetch);
     return {
         allEvents,
-        allTalks,
-        currentTalk,
-        tags:          await allTagsParsePromise,
-        talkDurations: await allTalkDurationParsePromise,
+        tentativeOrAcceptedTalk: await AllTentativeOrAcceptedTalksPromise,
+        pendingTalks:            await AllPendingTalksPromise,
+        tags:                    await allTagsParsePromise,
+        talkDurations:           await allTalkDurationParsePromise,
     };
 }

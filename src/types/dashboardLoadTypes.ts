@@ -1,5 +1,4 @@
 import type { AllTalkTag, Globals, SimpleError } from './provideTypes';
-import type { Clone } from 'helper/clone';
 import type {
     DashboardRoles,
     DashboardAllEvents,
@@ -14,8 +13,8 @@ import type {
     DashboardEventApplication,
     DashboardAllTimeSlots,
     DashboardTalkDurationChoices,
-    DashboardAllTalk,
-    DashboardTalk,
+    DashboardAllTentativeOrAcceptedTalk,
+    DashboardAllPendingTalk,
 } from './dashboardProvideTypes';
 
 export type LoadDashboard = {
@@ -63,8 +62,8 @@ export type LoadUserApplication = {
 
 export type LoadSpeakerTalk = {
     allEvents: DashboardAllEventID,
-    allTalks: DashboardAllTalk,
-    currentTalk: Clone<DashboardTalk> | undefined,
+    tentativeOrAcceptedTalk: DashboardAllTentativeOrAcceptedTalk,
+    pendingTalks: DashboardAllPendingTalk,
     tags: AllTalkTag,
     talkDurations: DashboardTalkDurationChoices,
 }

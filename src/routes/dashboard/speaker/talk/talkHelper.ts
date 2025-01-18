@@ -1,16 +1,30 @@
-import type { DashboardAllTalk } from 'types/dashboardProvideTypes';
+import type { DashboardAllPendingTalk, DashboardAllTentativeOrAcceptedTalk } from 'types/dashboardProvideTypes';
 
 import { apiUrl } from 'helper/links';
-import { dashboardAllTalkScheme } from 'types/dashboardProvideTypes';
+import { dashboardAllPendingTalkScheme, dashboardAllTentativeOrAcceptedTalkScheme } from 'types/dashboardProvideTypes';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 
-export async function loadTalkFromEventIDAsync(fetch: typeof globalThis.fetch, eventID: number): Promise<DashboardAllTalk> {
+export async function loadTentativeOrAcceptedTalksFromEventIDAsync(
+    fetch: typeof globalThis.fetch,
+    eventID: number,
+): Promise<DashboardAllTentativeOrAcceptedTalk> {
     const allTalksPromise = fetch(apiUrl(`/api/dashboard/speaker/tentative-or-accepted-talks/${eventID}`));
 
     return await checkAndParseInputDataAsync(
         await allTalksPromise,
-        dashboardAllTalkScheme,
-        `Serveranfrage für Talks für Event ID ${eventID} nicht erfolgreich; throw (406)`,
-        `Unerwartete Daten für Talks für Event ID ${eventID};  throw (406)`,
+        dashboardAllTentativeOrAcceptedTalkScheme,
+        `Serveranfrage für tentative or accepted Talks für Event ID ${eventID} nicht erfolgreich; throw (406)`,
+        `Unerwartete Daten für tentative or accepted Talks für Event ID ${eventID};  throw (406)`,
+    );
+}
+
+export async function loadPendingTalksFromEventIDAsync(fetch: typeof globalThis.fetch): Promise<DashboardAllPendingTalk> {
+    const allTalksPromise = fetch(apiUrl(`/api/dashboard/speaker/pending-talks`));
+
+    return await checkAndParseInputDataAsync(
+        await allTalksPromise,
+        dashboardAllPendingTalkScheme,
+        `Serveranfrage für pending Talks nicht erfolgreich; throw (406)`,
+        `Unerwartete Daten für pending Talks; throw (406)`,
     );
 }

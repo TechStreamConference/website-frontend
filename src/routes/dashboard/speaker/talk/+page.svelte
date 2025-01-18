@@ -5,21 +5,18 @@
     import type { LoadSpeakerTalk } from 'types/dashboardLoadTypes';
     import type { SetTalk } from 'types/dashboardSetTypes';
 
-    import { Clone } from 'helper/clone';
     import { getElementByTitle } from 'helper/basic';
-    import { loadTalkFromEventIDAsync } from './talkHelper';
+    import { loadTentativeOrAcceptedTalksFromEventIDAsync } from './talkHelper';
     import { setUnsavedChanges } from 'stores/saved';
     import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
     import { scrollToTop } from 'helper/scroll';
     import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
     import { formatDate } from 'helper/dates.js';
-    import { fade } from 'svelte/transition';
     import { apiUrl } from 'helper/links';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
-    import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
     import TextLine from 'elements/text/textLine.svelte';
     import Button from 'elements/input/button.svelte';
     import Input from 'elements/input/input.svelte';
@@ -28,98 +25,75 @@
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import TagArray from 'elements/input/tagArray.svelte';
     import DurationArray from 'elements/input/durationArray.svelte';
-    import HeadlineH2 from 'elements/text/headlineH2.svelte';
+    import SubHeadline from 'elements/text/subHeadline.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
     import ScheduleTag from 'elements/schedule/scheduleTag.svelte';
+    import Tag from 'elements/text/tag.svelte';
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;
     let rejectText: string = '';
 
-    async function save(): Promise<boolean> {
-        console.log(data.currentTalk?.value);
+    async function save(index: number): Promise<boolean> {
         scrollToTop();
-        if (!data.currentTalk) {
-            saveMessage.setSaveMessage(SaveMessageType.Error);
-            return false;
-        }
+
+        const currentTalk = data.pendingTalks[index];
 
         const toSave: SetTalk = {
-            title:              data.currentTalk.value.title,
-            description:        data.currentTalk.value.description,
-            notes:              data.currentTalk.value.notes,
-            possible_durations: data.currentTalk.value.possible_durations,
-            tag_ids:            data.currentTalk.value.tags.map(x => x.id),
+            title:              currentTalk.title,
+            description:        currentTalk.description,
+            notes:              currentTalk.notes,
+            possible_durations: currentTalk.possible_durations,
+            tag_ids:            currentTalk.tags.map(x => x.id),
         };
 
-        const result = await trySaveDashboardDataAsync(
-            toSave,
-            `/api/dashboard/speaker/talk/${data.currentTalk.value.id}`,
-        );
+        console.log(toSave);
+
+        const result = await trySaveDashboardDataAsync(toSave, `/api/dashboard/speaker/talk/${currentTalk.id}`);
 
         saveMessage.setSaveMessage(result);
         if (isSuccessType(result)) {
-            data.currentTalk.value.requested_changes = null;
+            currentTalk.requested_changes = null;
         }
         return isSuccessType(result);
     }
 
     async function updateDisplayedEvent(selected: string): Promise<void> {
-        const current    = getElementByTitle(data.allEvents, selected);
-        data.allTalks    = await loadTalkFromEventIDAsync(fetch, current.event_id);
-        data.currentTalk = data.allTalks.length > 0 ? new Clone(data.allTalks[0]) : undefined;
+        const current                = getElementByTitle(data.allEvents, selected);
+        data.tentativeOrAcceptedTalk = await loadTentativeOrAcceptedTalksFromEventIDAsync(fetch, current.event_id);
     }
 
-    function updateDisplayedTalk(selected: string): void {
-        data.currentTalk = new Clone(getElementByTitle(data.allTalks, selected));
-    }
-
-    async function acceptSlot(): Promise<void> {
-        if (data.currentTalk === undefined) {
-            console.error('undefined current talk while accept slot');
-            return;
-        }
-        const response = await fetch(
-            apiUrl(`/api/dashboard/speaker/talk/${data.currentTalk.value.id}/accept-time-slot`),
+    async function acceptSlot(index: number): Promise<void> {
+        const currentTalk = data.tentativeOrAcceptedTalk[index];
+        const response    = await fetch(
+            apiUrl(`/api/dashboard/speaker/talk/${currentTalk.id}/accept-time-slot`),
             { method: 'PUT' },
         );
 
         if (response.ok) {
             saveMessage.setSaveMessage(SaveMessageType.Approved);
             setTimeout(() => {
-                if (data.currentTalk === undefined) {
-                    return;
-                }
-                data.currentTalk.value.time_slot_accepted = true;
+                currentTalk.time_slot_accepted = true;
             }, 500);
             return;
         }
         saveMessage.setSaveMessage(SaveMessageType.Error);
     }
 
-    async function rejectSlot(): Promise<void> {
-        if (data.currentTalk === undefined) {
-            console.error('undefined current talk while reject slot');
-            return;
-        }
-        const toSave   = {
+    async function rejectSlot(index: number): Promise<void> {
+        const currentTalk = data.tentativeOrAcceptedTalk[index];
+        const toSave      = {
             reason: rejectText.trim(),
         };
-        const response = await fetch(
-            apiUrl(`/api/dashboard/speaker/talk/${data.currentTalk.value.id}/reject-time-slot`),
-            {
-                method: 'PUT',
-                body:   JSON.stringify(toSave),
-            },
-        );
+        const response    = await fetch(apiUrl(`/api/dashboard/speaker/talk/${currentTalk.id}/reject-time-slot`), {
+            method: 'PUT',
+            body:   JSON.stringify(toSave),
+        });
 
         if (response.ok) {
             saveMessage.setSaveMessage(SaveMessageType.Delete);
             setTimeout(() => {
-                if (data.currentTalk === undefined) {
-                    return;
-                }
-                data.currentTalk.value.suggested_time_slot = null;
+                currentTalk.suggested_time_slot = null;
             }, 500);
             return;
         }
@@ -131,7 +105,6 @@
 <Tabs entries={Menu.speaker}
       entryName={MenuItem.speakerTalk.name}
       classes="navigation-tabs-dashboard-subpage" />
-<UnsavedChangesCallbackWrapper callback={save} />
 
 <SectionDashboard classes="standard-dashboard-section">
     <SaveMessage bind:this={saveMessage} />
@@ -139,113 +112,111 @@
                         labelText="Event:"
                         data={ data.allEvents.map(x => x.title) }
                         on:navigated={ (e) => { updateDisplayedEvent(e.detail); }} />
-    <NavigationDropDown id="dashboard-speaker-talk-talk-navigation"
-                        labelText="Talk:"
-                        data={ data.allTalks.map(x => x.title) }
-                        on:navigated={ (e) => { updateDisplayedTalk(e.detail); }} />
 
-    {#if data.currentTalk === undefined}
-        <TextLine>Kein aktueller Talk ausgewählt.</TextLine>
-    {:else }
-        {#if data.currentTalk.value.suggested_time_slot}
-
-            <div class="dashboard-speaker-talk-time-slot dashboard-speaker-section"
-                 transition:fade={{ duration: 300 }}>
-                <HeadlineH2>Slot:</HeadlineH2>
+    {#each data.pendingTalks as talk, index}
+        <form class="dashboard-speaker-talk-form dashboard-speaker-section"
+              on:submit|preventDefault={() => { save(index); }}>
+            <SubHeadline classes="sub-headline-center">{talk.title}</SubHeadline>
+            <SubHeadline classes="sub-headline-center">Vortrag:</SubHeadline>
+            {#if talk.requested_changes}
+                <Message classes="message-pre-wrap"
+                         message={`Änderungswünsche:\n${talk.requested_changes}`} />
+            {/if}
+            <Input id="dashboard-speaker-talk-input-title"
+                   labelText="Titel:"
+                   placeholderText="Titel"
+                   ariaLabel="Gib hier den Titel des Talks ein"
+                   bind:value={talk.title}
+                   on:input={setUnsavedChanges} />
+            <TextArea id="dashboard-speaker-talk-input-description"
+                      labelText="Beschreibung:"
+                      placeholderText="Beschreibung"
+                      ariaLabel="Gib hier die Beschreibung des Talks ein"
+                      bind:value={talk.description}
+                      on:input={setUnsavedChanges}
+                      on:submit={() => { save(index); }} />
+            <TagArray labelText="Tags:"
+                      data={data.tags}
+                      bind:selected={talk.tags}
+                      on:toggle={setUnsavedChanges} />
+            <DurationArray labelText="Vortragslänge in Minuten:"
+                           data={data.talkDurations}
+                           bind:selected={talk.possible_durations}
+                           on:toggle={setUnsavedChanges} />
+            <TextArea id="dashboard-speaker-talk-input-notes"
+                      labelText="Anmerkungen:"
+                      placeholderText="Anmerkungen"
+                      ariaLabel="Gib hier Anmerkungen zum Talk ein."
+                      bind:value={talk.notes}
+                      on:input={setUnsavedChanges}
+                      on:submit={() => { save(index); }} />
+            <div class="dashboard-speaker-talk-button-wrapper">
+                <Button type="submit"
+                        ariaLabel="Klicke, um den Talk zu speichern">Speichern
+                </Button>
+            </div>
+        </form>
+    {/each}
+    {#each data.tentativeOrAcceptedTalk as talk, index}
+        <div class="dashboard-speaker-talk-time-slot dashboard-speaker-section">
+            <SubHeadline classes="sub-headline-center">{talk.title}</SubHeadline>
+            <SubHeadline classes="sub-headline-center">Vortrag:</SubHeadline>
+            <div class="dashboard-speaker-talk-time-slot-wrapper">
+                <TextLine>Titel:</TextLine>
+                <TextLine>{talk.title}</TextLine>
+                <TextLine>Beschreibung:</TextLine>
+                <Paragraph classes="paragraph-pre-wrap">{talk.description}</Paragraph>
+                <TextLine>Tags:</TextLine>
+                <div class="dashboard-speaker-talk-entry-wrapper">
+                    {#each talk.tags as tag}
+                        <ScheduleTag {tag} />
+                    {/each}
+                </div>
+                <TextLine>Mögliche Vortragszeiten:</TextLine>
+                <div class="dashboard-speaker-talk-entry-wrapper">
+                    {#each talk.possible_durations as duration}
+                        <Tag text={duration.toString() + ' min'}
+                             --tag-text-color={"var(--white-color)"}
+                             --tag-background-color={"var(--primary-color-dark)"}
+                        />
+                    {/each}
+                </div>
+            </div>
+            {#if talk.suggested_time_slot}
+                <SubHeadline classes="sub-headline-center">Zeit:</SubHeadline>
                 <div class="dashboard-speaker-talk-time-slot-wrapper">
                     <TextLine>Slot:</TextLine>
-                    <TextLine>{formatDate(data.currentTalk.value.suggested_time_slot.start_time,
+                    <TextLine>{formatDate(talk.suggested_time_slot.start_time,
                                           '%d, %DD.%MM.%YYYY - %hh:%mm Uhr'
                     )}</TextLine>
                     <TextLine>Dauer:</TextLine>
-                    <TextLine>{data.currentTalk.value.suggested_time_slot.duration} Minuten</TextLine>
+                    <TextLine>{talk.suggested_time_slot.duration} Minuten</TextLine>
                     <TextLine>Art:</TextLine>
-                    <TextLine>{data.currentTalk.value.suggested_time_slot.is_special
+                    <TextLine>{talk.suggested_time_slot.is_special
                                ? "YouTube-Premiere"
                                : "Live-Talk"}</TextLine>
                 </div>
-                {#if !data.currentTalk.value.time_slot_accepted}
-                <TextArea id="dashboard-speaker-talk-reject-text-area"
-                          labelText="Ablehnungsgrund:"
-                          placeholderText="Ablehnungsgrund"
-                          ariaLabel="Gib hier einen Grund an warum du den vorgeschlagenen Time-Slot ablehnen musst."
-                          rows={5}
-                          bind:value={rejectText}
-                          on:input={setUnsavedChanges} />
+                {#if !talk.time_slot_accepted}
+                    <TextArea id="dashboard-speaker-talk-reject-text-area"
+                              labelText="Ablehnungsgrund (optional):"
+                              placeholderText="Ablehnungsgrund"
+                              ariaLabel="Gib hier einen Grund an warum du den vorgeschlagenen Time-Slot ablehnen musst."
+                              rows={5}
+                              bind:value={rejectText}
+                              on:input={setUnsavedChanges} />
                     <div class="dashboard-speaker-talk-button-wrapper">
                         <Button ariaLabel="Klicke, um den Time-Slot abzulehnen"
-                                on:click={rejectSlot}>Ablehnen
+                                on:click={() => { rejectSlot(index);}}>Ablehnen
                         </Button>
                         <Button ariaLabel="Klicke, um den Time-Slot anzunehmen"
-                                on:click={acceptSlot}>Annehmen
+                                on:click={() => { acceptSlot(index); }}>Annehmen
                         </Button>
                     </div>
                 {/if}
-            </div>
-        {/if}
-        {#if data.currentTalk.value.requested_changes !== null}
-            <form class="dashboard-speaker-talk-form dashboard-speaker-section"
-                  on:submit|preventDefault={save}
-                  transition:fade={{ duration: 300 }}>
-                <HeadlineH2>Talk:</HeadlineH2>
-                {#if data.currentTalk.value.requested_changes}
-                    <Message classes="message-pre-wrap"
-                             message={`Änderungswünsche\n${data.currentTalk.value.requested_changes}`} />
-                {/if}
-                <Input id="dashboard-speaker-talk-input-title"
-                       labelText="Titel:"
-                       placeholderText="Titel"
-                       ariaLabel="Gib hier den Titel des Talks ein"
-                       bind:value={data.currentTalk.value.title}
-                       on:input={setUnsavedChanges} />
-                <TextArea id="dashboard-speaker-talk-input-description"
-                          labelText="Beschreibung:"
-                          placeholderText="Beschreibung"
-                          ariaLabel="Gib hier die Beschreibung des Talks ein"
-                          bind:value={data.currentTalk.value.description}
-                          on:input={setUnsavedChanges}
-                          on:submit={save} />
-                <TagArray labelText="Tags:"
-                          data={data.tags}
-                          bind:selected={data.currentTalk.value.tags}
-                          on:toggle={setUnsavedChanges} />
-                <DurationArray labelText="Vortragslänge in Minuten:"
-                               data={data.talkDurations}
-                               bind:selected={data.currentTalk.value.possible_durations}
-                               on:toggle={setUnsavedChanges} />
-                <TextArea id="dashboard-speaker-talk-input-notes"
-                          labelText="Anmerkungen:"
-                          placeholderText="Anmerkungen"
-                          ariaLabel="Gib hier Anmerkungen zum Talk ein."
-                          bind:value={data.currentTalk.value.notes}
-                          on:input={setUnsavedChanges}
-                          on:submit={save} />
-                <div class="dashboard-speaker-talk-button-wrapper">
-                    <Button type="submit"
-                            ariaLabel="Klicke, um den Talk zu speichern">Speichern
-                    </Button>
-                </div>
-            </form>
-        {:else}
-            <div class="dashboard-speaker-section"
-                 transition:fade={{ duration: 300 }}>
-                <HeadlineH2>Talk:</HeadlineH2>
-                <div class="dashboard-speaker-talk-time-slot-wrapper">
-                    <TextLine>Titel:</TextLine>
-                    <TextLine>{data.currentTalk.value.title}</TextLine>
-                    <TextLine>Beschreibung:</TextLine>
-                    <Paragraph classes="paragraph-pre-wrap">{data.currentTalk.value.description}</Paragraph>
-                    <TextLine>Tags:</TextLine>
-                    <div class="dashboard-speaker-talk-entry-wrapper">
-                        {#each data.currentTalk.value.tags as tag}
-                            <ScheduleTag {tag} />
-                        {/each}
-                    </div>
-                </div>
+            {/if}
+        </div>
+    {/each}
 
-            </div>
-        {/if}
-    {/if}
 </SectionDashboard>
 
 <style>
@@ -254,6 +225,7 @@
         border:        1px solid var(--primary-color-dark);
         border-radius: var(--border-radius);
         padding:       var(--full-padding);
+        gap:           var(--full-gap);
     }
 
     .dashboard-speaker-talk-form {
@@ -273,7 +245,7 @@
         grid-template-columns: auto auto;
         width:                 fit-content;
         gap:                   var(--full-gap);
-        margin:                var(--2x-margin) auto;
+        margin:                0 auto;
     }
 
     .dashboard-speaker-talk-button-wrapper {

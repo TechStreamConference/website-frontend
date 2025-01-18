@@ -179,19 +179,36 @@ export type DashboardTalkTag = z.infer<typeof dashboardTalkTagScheme>;
 export const dashboardAllTalkTagScheme = z.array(dashboardTalkTagScheme);
 export type DashboardAllTalkTag = z.infer<typeof dashboardTalkTagScheme>;
 
-export const dashboardTalkScheme = z.object({
-                                                id:                  z.number(),
-                                                event_id:            z.number(),
-                                                title:               z.string(),
-                                                description:         z.string(),
-                                                notes:               z.string().nullable().transform(x => x ?? ''),
-                                                requested_changes:   z.string().nullable(),
-                                                time_slot_accepted:  z.boolean(),
-                                                speaker:             dashboardSpeakerTeamMemberScheme,
-                                                tags:                dashboardAllTalkTagScheme,
-                                                possible_durations:  dashboardTalkDurationChoicesScheme,
-                                                suggested_time_slot: dashboardTimeSlotScheme.nullable(),
-                                            });
-export type DashboardTalk = z.infer<typeof dashboardTalkScheme>;
-export const dashboardAllTalkScheme = z.array(dashboardTalkScheme);
-export type DashboardAllTalk = z.infer<typeof dashboardAllTalkScheme>;
+export const dashboardTentativeOrAcceptedTalkScheme = z.object({
+                                                                   id:                  z.number(),
+                                                                   event_id:            z.number(),
+                                                                   title:               z.string(),
+                                                                   description:         z.string(),
+                                                                   notes:               z.string()
+                                                                                         .nullable()
+                                                                                         .transform(x => x ?? ''),
+                                                                   requested_changes:   z.string().nullable(),
+                                                                   time_slot_accepted:  z.boolean(),
+                                                                   tags:                dashboardAllTalkTagScheme,
+                                                                   possible_durations:  dashboardTalkDurationChoicesScheme,
+                                                                   suggested_time_slot: dashboardTimeSlotScheme.nullable(),
+                                                               });
+export type DashboardTentativeOrAcceptedTalk = z.infer<typeof dashboardTentativeOrAcceptedTalkScheme>;
+export const dashboardAllTentativeOrAcceptedTalkScheme = z.array(dashboardTentativeOrAcceptedTalkScheme);
+export type DashboardAllTentativeOrAcceptedTalk = z.infer<typeof dashboardAllTentativeOrAcceptedTalkScheme>;
+
+export const dashboardPendingTalkScheme = z.object({
+                                                       id:                 z.number(),
+                                                       event_id:           z.number(),
+                                                       title:              z.string(),
+                                                       description:        z.string(),
+                                                       notes:              z.string()
+                                                                            .nullable()
+                                                                            .transform(x => x ?? ''),
+                                                       requested_changes:  z.string().nullable(),
+                                                       tags:               dashboardAllTalkTagScheme,
+                                                       possible_durations: dashboardTalkDurationChoicesScheme,
+                                                   });
+export type DashboardPendingTalk = z.infer<typeof dashboardPendingTalkScheme>;
+export const dashboardAllPendingTalkScheme = z.array(dashboardPendingTalkScheme);
+export type DashboardAllPendingTalk = z.infer<typeof dashboardAllPendingTalkScheme>;
