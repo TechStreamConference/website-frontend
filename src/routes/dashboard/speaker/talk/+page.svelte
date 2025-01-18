@@ -13,6 +13,7 @@
     import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
     import { formatDate } from 'helper/dates.js';
     import { apiUrl } from 'helper/links';
+    import { fade } from 'svelte/transition';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
@@ -207,20 +208,23 @@
                 </div>
             </div>
             {#if talk.suggested_time_slot}
-                <SubHeadline classes="sub-headline-center">Zeit:</SubHeadline>
-                <div class="dashboard-speaker-talk-time-slot-wrapper">
-                    <TextLine>Slot:</TextLine>
-                    <TextLine>{formatDate(talk.suggested_time_slot.start_time,
-                                          '%d, %DD.%MM.%YYYY - %hh:%mm Uhr'
-                    )}</TextLine>
-                    <TextLine>Dauer:</TextLine>
-                    <TextLine>{talk.suggested_time_slot.duration} Minuten</TextLine>
-                    <TextLine>Art:</TextLine>
-                    <TextLine>{talk.suggested_time_slot.is_special
-                               ? "YouTube-Premiere"
-                               : "Live-Talk"}</TextLine>
-                </div>
-                {#if !talk.time_slot_accepted}
+                <div transition:fade={{ duration: 300 }}>
+                    <SubHeadline classes="sub-headline-center">Zeit:</SubHeadline>
+                    <div class="dashboard-speaker-talk-time-slot-wrapper">
+                        <TextLine>Slot:</TextLine>
+                        <TextLine>{formatDate(talk.suggested_time_slot.start_time,
+                                              '%d, %DD.%MM.%YYYY - %hh:%mm Uhr'
+                        )}</TextLine>
+                        <TextLine>Dauer:</TextLine>
+                        <TextLine>{talk.suggested_time_slot.duration} Minuten</TextLine>
+                        <TextLine>Art:</TextLine>
+                        <TextLine>{talk.suggested_time_slot.is_special
+                                   ? "YouTube-Premiere"
+                                   : "Live-Talk"}</TextLine>
+                    </div>
+                    {#if !talk.time_slot_accepted}
+                        <div class="dashboard-speaker-talk-time-slot-action-wrapper"
+                             transition:fade={{ duration: 300 }}>
                     <TextArea id="dashboard-speaker-talk-reject-text-area"
                               labelText="Ablehnungsgrund (optional):"
                               placeholderText="Ablehnungsgrund"
@@ -228,15 +232,17 @@
                               rows={5}
                               bind:value={rejectText}
                               on:input={setUnsavedChanges} />
-                    <div class="dashboard-speaker-talk-button-wrapper">
-                        <Button ariaLabel="Klicke, um den Time-Slot abzulehnen"
-                                on:click={() => { rejectPopup.show(index);}}>Ablehnen
-                        </Button>
-                        <Button ariaLabel="Klicke, um den Time-Slot anzunehmen"
-                                on:click={() => { acceptPopup.show(index); }}>Annehmen
-                        </Button>
-                    </div>
-                {/if}
+                            <div class="dashboard-speaker-talk-button-wrapper">
+                                <Button ariaLabel="Klicke, um den Time-Slot abzulehnen"
+                                        on:click={() => { rejectPopup.show(index);}}>Ablehnen
+                                </Button>
+                                <Button ariaLabel="Klicke, um den Time-Slot anzunehmen"
+                                        on:click={() => { acceptPopup.show(index); }}>Annehmen
+                                </Button>
+                            </div>
+                        </div>
+                    {/if}
+                </div>
             {:else}
                 <TextLine classes="text-line-center">Diesem Vortrag wurde noch keine Vortragszeit zugewiesen.</TextLine>
             {/if}
@@ -272,6 +278,12 @@
         width:                 fit-content;
         gap:                   var(--full-gap);
         margin:                0 auto;
+    }
+
+    .dashboard-speaker-talk-time-slot-action-wrapper {
+        display:         flex;
+        flex-direction:  column;
+        justify-content: center;
     }
 
     .dashboard-speaker-talk-button-wrapper {
