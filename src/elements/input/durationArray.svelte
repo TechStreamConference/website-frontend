@@ -41,7 +41,7 @@
 <Label>{labelText}</Label>
 <div class="toggle-talk-duration-wrapper">
     {#each data as duration}
-        <Toggle ariaLabel="Klicke, um einen mögliche Talk-Dauer in Minuten aus- oder abzuwählen"
+        <Toggle ariaLabel="Klicke, um eine mögliche Talk-Dauer in Minuten aus- oder abzuwählen"
                 toggle={contains(duration)}
                 on:toggle={ (e) => { updateSelected(e.detail, duration); }}>
             <div slot="slotTrue"
