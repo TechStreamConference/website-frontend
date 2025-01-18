@@ -29,10 +29,13 @@
     import Paragraph from 'elements/text/paragraph.svelte';
     import ScheduleTag from 'elements/schedule/scheduleTag.svelte';
     import Tag from 'elements/text/tag.svelte';
+    import GeneralPopup from 'elements/popups/generalPopup.svelte';
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;
     let rejectText: string = '';
+    let acceptPopup: GeneralPopup;
+    let rejectPopup: GeneralPopup;
 
     async function save(index: number): Promise<boolean> {
         scrollToTop();
@@ -72,9 +75,7 @@
 
         if (response.ok) {
             saveMessage.setSaveMessage(SaveMessageType.Approved);
-            setTimeout(() => {
-                currentTalk.time_slot_accepted = true;
-            }, 500);
+            data.tentativeOrAcceptedTalk[index].time_slot_accepted = true;
             return;
         }
         saveMessage.setSaveMessage(SaveMessageType.Error);
@@ -92,9 +93,7 @@
 
         if (response.ok) {
             saveMessage.setSaveMessage(SaveMessageType.Delete);
-            setTimeout(() => {
-                currentTalk.suggested_time_slot = null;
-            }, 500);
+            data.tentativeOrAcceptedTalk[index].suggested_time_slot = null;
             return;
         }
         saveMessage.setSaveMessage(SaveMessageType.Error);
@@ -105,6 +104,31 @@
 <Tabs entries={Menu.speaker}
       entryName={MenuItem.speakerTalk.name}
       classes="navigation-tabs-dashboard-subpage" />
+
+<GeneralPopup bind:this={acceptPopup}
+              headline="Vortragszeit akzeptieren?"
+              text="Hiermit akzeptierst du die vorgeschlagene Vortragszeit."
+              acceptButtonText="Akzeptieren"
+              denyButtonText="Verwerfen"
+              acceptCallback={(index) => {
+                  if (typeof index !== 'number') {
+                      console.error(`provided index ${index} is not a number`);
+                      return;
+                  }
+                  acceptSlot(index);}}
+              denyCallback={() => {}} />
+<GeneralPopup bind:this={rejectPopup}
+              headline="Vortragszeit ablehnen?"
+              text="Hiermit lehnst du die vorgeschlagene Vortragszeit ab. Gib uns gerne einen Grund an."
+              acceptButtonText="Ablehnen"
+              denyButtonText="Verwerfen"
+              acceptCallback={(index) => {
+                  if (typeof index !== 'number') {
+                      console.error(`provided index ${index} is not a number`);
+                      return;
+                  }
+                  rejectSlot(index);}}
+              denyCallback={() => {}} />
 
 <SectionDashboard classes="standard-dashboard-section">
     <SaveMessage bind:this={saveMessage} />
@@ -206,13 +230,15 @@
                               on:input={setUnsavedChanges} />
                     <div class="dashboard-speaker-talk-button-wrapper">
                         <Button ariaLabel="Klicke, um den Time-Slot abzulehnen"
-                                on:click={() => { rejectSlot(index);}}>Ablehnen
+                                on:click={() => { rejectPopup.show(index);}}>Ablehnen
                         </Button>
                         <Button ariaLabel="Klicke, um den Time-Slot anzunehmen"
-                                on:click={() => { acceptSlot(index); }}>Annehmen
+                                on:click={() => { acceptPopup.show(index); }}>Annehmen
                         </Button>
                     </div>
                 {/if}
+            {:else}
+                <TextLine classes="text-line-center">Diesem Vortrag wurde noch keine Vortragszeit zugewiesen.</TextLine>
             {/if}
         </div>
     {/each}
@@ -225,7 +251,7 @@
         border:        1px solid var(--primary-color-dark);
         border-radius: var(--border-radius);
         padding:       var(--full-padding);
-        gap:           var(--full-gap);
+        gap:           var(--2x-gap);
     }
 
     .dashboard-speaker-talk-form {
