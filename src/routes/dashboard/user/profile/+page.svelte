@@ -7,21 +7,28 @@
     import { setUnsavedChanges } from 'stores/saved';
     import { trySaveDashboardDataAsyncNew } from 'helper/trySaveDashboardData';
     import { SaveMessageType } from 'types/saveMessageType';
+    import { fade } from 'svelte/transition';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
-    import HeadlineH2 from 'elements/text/headlineH2.svelte';
+    import SubHeadline from 'elements/text/subHeadline.svelte';
     import Input from 'elements/input/input.svelte';
     import Button from 'elements/input/button.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
+    import TextLine from 'elements/text/textLine.svelte';
 
-    let saveMessageName: SaveMessage;
-    let errorMessagesName: string[]     = [];
-    let saveMessageMail: SaveMessage;
-    let errorMessagesMail: string[]     = [];
-    let saveMessagePassword: SaveMessage;
-    let errorMessagesPassword: string[] = [];
+    enum State {
+        None,
+        Mail,
+        Password,
+        Name,
+    }
+
+    let state: State = State.None;
+
+    let saveMessage: SaveMessage;
+    let errorMessages: string[] = [];
 
     let name: string         = '';
     let mail: string         = '';
@@ -29,68 +36,75 @@
     let newPassword2: string = '';
     let oldPassword: string  = '';
 
-    async function save<T>(toSave: T, url: string, saveMessage: SaveMessage): Promise<SaveDashboardResult> {
+    function changeState(value: State) {
+        if (state === State.None) {
+            state = value;
+            return;
+        }
+
+        state = State.None;
+        setTimeout(() => {
+            state = value;
+        }, 300);
+    }
+
+    async function save<T>(toSave: T, url: string): Promise<SaveDashboardResult> {
         const response = await trySaveDashboardDataAsyncNew(toSave, url, 'PUT');
         saveMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
 
         if (response.success) {
-            oldPassword = '';
+            oldPassword   = '';
+            errorMessages = [];
+            changeState(State.None);
         }
 
+        errorMessages = response.messages;
         return response;
     }
 
     async function saveName(): Promise<void> {
-        errorMessagesName = [];
-        const toSave      = {
+        errorMessages = [];
+        const toSave  = {
             username: name.trim(),
             password: oldPassword.trim(),
         };
 
-        const response = await save(toSave, '/api/account/change-username', saveMessageName);
+        const response = await save(toSave, '/api/account/change-username');
 
         if (response.success) {
             name = '';
-        } else {
-            errorMessagesName = response.messages;
         }
     }
 
     async function saveMail(): Promise<void> {
-        errorMessagesMail = [];
-        const toSave      = {
+        const toSave = {
             email:    mail.trim(),
             password: oldPassword.trim(),
         };
 
-        const response = await save(toSave, '/api/account/change-email', saveMessageMail);
+        const response = await save(toSave, '/api/account/change-email');
 
         if (response.success) {
             mail = '';
-        } else {
-            errorMessagesMail = response.messages;
         }
     }
 
     async function savePassword(): Promise<void> {
         if (newPassword1.trim() !== newPassword2.trim()) {
-            saveMessagePassword.setSaveMessage(SaveMessageType.Error);
-            errorMessagesPassword = ['Die beiden neuen Passwörter stimmen nicht überein.'];
+            saveMessage.setSaveMessage(SaveMessageType.Error);
+            errorMessages = ['Die beiden neuen Passwörter stimmen nicht überein.'];
             return;
         }
-        errorMessagesPassword = [];
-        const toSave          = {
+        const toSave = {
             new_password: newPassword1.trim(),
             old_password: oldPassword.trim(),
         };
 
-        const response = await save(toSave, '/api/account/change-password', saveMessagePassword);
+        const response = await save(toSave, '/api/account/change-password');
 
         if (response.success) {
             newPassword1 = '';
             newPassword2 = '';
-        } else {
-            errorMessagesPassword = response.messages;
         }
     }
 </script>
@@ -100,99 +114,140 @@
       entryName={MenuItem.userProfile.name}
       classes="navigation-tabs-dashboard-subpage"
 />
-
 <SectionDashboard classes="standard-dashboard-section dashboard-user-profile-section-wrapper">
-    <SaveMessage bind:this={saveMessageName} />
-    <MessageWrapper messages={errorMessagesName} />
-    <form class="dashboard-user-profile-section-entry-wrapper"
-          on:submit|preventDefault={saveName}>
-        <HeadlineH2>Name</HeadlineH2>
-        <Input id="dashboard-user-profile-input-username"
-               labelText="neuer Name:"
-               placeholderText="neuer Name"
-               ariaLabel="Trage hier deinen neuen Namen ein"
-               bind:value={name}
-               on:input={setUnsavedChanges} />
-        <Input id="dashboard-user-profile-input-username-password"
-               labelText="Passwort:"
-               placeholderText="Passwort"
-               ariaLabel="Trage hier dein Passwort ein"
-               type="password"
-               bind:value={oldPassword}
-               on:input={setUnsavedChanges} />
+    <div class="dashboard-user-profile-section-entry-wrapper">
+        <div class="dashboard-user-profile-entry-grid">
+            <TextLine>Name:</TextLine>
+            <TextLine>XXXXXXXXXXXXXXXXXXX</TextLine>
+            <TextLine>Mail:</TextLine>
+            <TextLine>XXXXXXXXXXXXXXXXXXXXX</TextLine>
+        </div>
         <div class="dashboard-user-profile-button-wrapper">
-            <Button type="submit"
-                    ariaLabel="Klicke, um deinen neuen Namen zu speichern">Speichern
+            <Button ariaLabel="Klicke, um deinen Namen zu ändern."
+                    on:click={() => {changeState(State.Name)}}>Name ändern
+            </Button>
+            <Button ariaLabel="Klicke, um deine E-Mail zu ändern."
+                    on:click={() => {changeState(State.Mail)}}>E-Mail ändern
+            </Button>
+            <Button ariaLabel="Klicke, um dein Passwort zu ändern."
+                    on:click={() => {changeState(State.Password)}}>Passwort ändern
             </Button>
         </div>
-    </form>
+    </div>
 </SectionDashboard>
-<SectionDashboard classes="standard-dashboard-section dashboard-user-profile-section-wrapper">
-    <SaveMessage bind:this={saveMessageMail} />
-    <MessageWrapper messages={errorMessagesMail} />
-    <form class="dashboard-user-profile-section-entry-wrapper"
-          on:submit|preventDefault={saveMail}>
-        <HeadlineH2>E-Mail</HeadlineH2>
-        <Input id="dashboard-user-profile-input-mail"
-               labelText="neue E-Mail:"
-               placeholderText="neue E-Mail"
-               ariaLabel="Trage hier deine neue E-Mail ein"
-               bind:value={mail}
-               on:input={setUnsavedChanges} />
-        <Input id="dashboard-user-profile-input-mail-password"
-               labelText="Passwort:"
-               placeholderText="Passwort"
-               ariaLabel="Trage hier dein Passwort ein"
-               type="password"
-               bind:value={oldPassword}
-               on:input={setUnsavedChanges} />
-        <div class="dashboard-user-profile-button-wrapper">
-            <Button type="submit"
-                    ariaLabel="Klicke, um deine neue E-Mail zu speichern">Speichern
-            </Button>
-        </div>
-    </form>
-</SectionDashboard>
-<SectionDashboard classes="standard-dashboard-section dashboard-user-profile-section-wrapper">
-    <SaveMessage bind:this={saveMessagePassword} />
-    <MessageWrapper messages={errorMessagesPassword} />
-    <form class="dashboard-user-profile-section-entry-wrapper"
-          on:submit|preventDefault={savePassword}>
-        <HeadlineH2>Passwort</HeadlineH2>
-        <Input id="dashboard-user-profile-input-password-new-1"
-               labelText="Neues Passwort:"
-               placeholderText="Neues Passwort"
-               ariaLabel="Trage hier dein neues Passwort ein"
-               type="password"
-               bind:value={newPassword1}
-               on:input={setUnsavedChanges} />
-        <Input id="dashboard-user-profile-input-password-new-2"
-               labelText="Wiederholung neues Passwort:"
-               placeholderText="Wiederholung neues Passwort"
-               ariaLabel="Wiederhole hier dein neues Passwort ein"
-               type="password"
-               bind:value={newPassword2}
-               on:input={setUnsavedChanges} />
-        <Input id="dashboard-user-profile-input-password-old"
-               labelText="Altes Passwort:"
-               placeholderText="Altes Passwort"
-               ariaLabel="Trage hier dein altes Passwort ein"
-               type="password"
-               bind:value={oldPassword}
-               on:input={setUnsavedChanges} />
-        <div class="dashboard-user-profile-button-wrapper">
-            <Button type="submit"
-                    ariaLabel="Klicke, um dein neues Passwort zu speichern">Speichern
-            </Button>
-        </div>
-    </form>
-</SectionDashboard>
+<SaveMessage bind:this={saveMessage} />
+<MessageWrapper messages={errorMessages} />
+{#if state === State.Name}
+    <div class="dashboard-user-profile-transition-wrapper"
+         transition:fade={{ duration: 300 }}>
+        <SectionDashboard classes="standard-dashboard-section dashboard-user-profile-section-wrapper">
+            <form class="dashboard-user-profile-section-entry-wrapper"
+                  on:submit|preventDefault={saveName}>
+                <SubHeadline classes="sub-headline-center">Name</SubHeadline>
+                <Input id="dashboard-user-profile-input-username"
+                       labelText="neuer Name:"
+                       placeholderText="neuer Name"
+                       ariaLabel="Trage hier deinen neuen Namen ein"
+                       bind:value={name}
+                       on:input={setUnsavedChanges} />
+                <Input id="dashboard-user-profile-input-username-password"
+                       labelText="Passwort:"
+                       placeholderText="Passwort"
+                       ariaLabel="Trage hier dein Passwort ein"
+                       type="password"
+                       bind:value={oldPassword}
+                       on:input={setUnsavedChanges} />
+                <div class="dashboard-user-profile-button-wrapper">
+                    <Button type="submit"
+                            ariaLabel="Klicke, um deinen neuen Namen zu speichern">Speichern
+                    </Button>
+                </div>
+            </form>
+        </SectionDashboard>
+    </div>
+{:else if state === State.Mail}
+    <div class="dashboard-user-profile-transition-wrapper"
+         transition:fade={{ duration: 300 }}>
+        <SectionDashboard classes="standard-dashboard-section dashboard-user-profile-section-wrapper">
+            <form class="dashboard-user-profile-section-entry-wrapper"
+                  on:submit|preventDefault={saveMail}>
+                <SubHeadline classes="sub-headline-center">E-Mail</SubHeadline>
+                <Input id="dashboard-user-profile-input-mail"
+                       labelText="neue E-Mail:"
+                       placeholderText="neue E-Mail"
+                       ariaLabel="Trage hier deine neue E-Mail ein"
+                       bind:value={mail}
+                       on:input={setUnsavedChanges} />
+                <Input id="dashboard-user-profile-input-mail-password"
+                       labelText="Passwort:"
+                       placeholderText="Passwort"
+                       ariaLabel="Trage hier dein Passwort ein"
+                       type="password"
+                       bind:value={oldPassword}
+                       on:input={setUnsavedChanges} />
+                <div class="dashboard-user-profile-button-wrapper">
+                    <Button type="submit"
+                            ariaLabel="Klicke, um deine neue E-Mail zu speichern">Speichern
+                    </Button>
+                </div>
+            </form>
+        </SectionDashboard>
+    </div>
+{:else if state === State.Password}
+    <div class="dashboard-user-profile-transition-wrapper"
+         transition:fade={{ duration: 300 }}>
+        <SectionDashboard classes="standard-dashboard-section dashboard-user-profile-section-wrapper">
+            <form class="dashboard-user-profile-section-entry-wrapper"
+                  on:submit|preventDefault={savePassword}>
+                <SubHeadline classes="sub-headline-center">Passwort</SubHeadline>
+                <Input id="dashboard-user-profile-input-password-new-1"
+                       labelText="Neues Passwort:"
+                       placeholderText="Neues Passwort"
+                       ariaLabel="Trage hier dein neues Passwort ein"
+                       type="password"
+                       bind:value={newPassword1}
+                       on:input={setUnsavedChanges} />
+                <Input id="dashboard-user-profile-input-password-new-2"
+                       labelText="Wiederholung neues Passwort:"
+                       placeholderText="Wiederholung neues Passwort"
+                       ariaLabel="Wiederhole hier dein neues Passwort ein"
+                       type="password"
+                       bind:value={newPassword2}
+                       on:input={setUnsavedChanges} />
+                <Input id="dashboard-user-profile-input-password-old"
+                       labelText="Altes Passwort:"
+                       placeholderText="Altes Passwort"
+                       ariaLabel="Trage hier dein altes Passwort ein"
+                       type="password"
+                       bind:value={oldPassword}
+                       on:input={setUnsavedChanges} />
+                <div class="dashboard-user-profile-button-wrapper">
+                    <Button type="submit"
+                            ariaLabel="Klicke, um dein neues Passwort zu speichern">Speichern
+                    </Button>
+                </div>
+            </form>
+        </SectionDashboard>
+    </div>
+{/if}
 
 
 <style>
     :global(.dashboard-user-profile-section-wrapper) {
         border:        1px solid var(--primary-color-dark);
         border-radius: var(--border-radius);
+    }
+
+    .dashboard-user-profile-transition-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .dashboard-user-profile-entry-grid {
+        display:               grid;
+        grid-template-columns: auto auto;
+        gap:                   var(--full-gap);
+        margin:                0 auto;
     }
 
     .dashboard-user-profile-section-entry-wrapper {
