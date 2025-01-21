@@ -62,6 +62,11 @@ export const speakerEvents: MenuItem      = {
     url:         '/dashboard/speaker/events',
     description: 'Klicke hier, um zu den event-spezifischen Einstellungen zu gelangen',
 };
+export const speakerTalk: MenuItem        = {
+    name:        'Talk',
+    url:         '/dashboard/speaker/talk',
+    description: 'Klicke hier, um zu den Talk-Einstellungen zu gelangen',
+};
 export const speakerSocialMedia: MenuItem = {
     name:        'Social Media',
     url:         '/dashboard/speaker/socials',
@@ -79,12 +84,12 @@ export const teamMemberSocialMedia: MenuItem = {
     description: 'Klicke hier, um zu den Social-Media-Einstellungen zu gelangen',
 };
 
-export const userProfile: MenuItem = {
+export const userProfile: MenuItem     = {
     name:        'Profil',
     url:         '/dashboard/user/profile',
     description: 'Klicke hier, um das Profil zu bearbeiten',
 };
-export const application: MenuItem = {
+export const userApplication: MenuItem = {
     name:        'Bewerbung',
     url:         '/dashboard/user/application',
     description: 'Klicke hier, um dich als Speaker für das aktuelle Event zu bewerben',

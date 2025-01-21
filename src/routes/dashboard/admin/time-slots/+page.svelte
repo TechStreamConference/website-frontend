@@ -184,9 +184,14 @@
                     <Toggle ariaLabel="Klicke, um zwischen Live-Talk und Aufzeichnung zu wechseln"
                             bind:toggle={entry.is_special}
                             on:click={unsavedChanges}
-                            iconTrue="Video"
-                            iconFalse="Broadcast"
-                            on:change={setUnsavedChanges} />
+                            on:change={setUnsavedChanges}>
+                        <Icon slot="slotTrue"
+                              type="Video"
+                              color="green" />
+                        <Icon slot="slotFalse"
+                              type="Broadcast"
+                              color="red" />
+                    </Toggle>
                 </Tooltip>
                 <Button ariaLabel="Klicke, um den Slot nach oben zu verschieben"
                         buttonSize="small-button"

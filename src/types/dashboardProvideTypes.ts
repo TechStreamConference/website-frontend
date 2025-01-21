@@ -16,7 +16,7 @@ export const dashboardEventIDScheme = z.object({
 export type DashboardEventID = z.infer<typeof dashboardEventIDScheme>;
 
 export const dashboardAllEventIDScheme = z.array(dashboardEventIDScheme);
-export type DashboardAllEventID = z.infer<typeof dashboardAllEventIDScheme>;
+export type DashboardAllEventIDs = z.infer<typeof dashboardAllEventIDScheme>;
 
 export const dashboardSpeakerTeamMemberScheme = z.object({
                                                              id:                z.number(),
@@ -103,7 +103,7 @@ export const dashboardApprovalSpeakerTeamMemberScheme = z.object({
 export type DashboardApprovalSpeakerTeamMember = z.infer<typeof dashboardApprovalSpeakerTeamMemberScheme>;
 
 export const dashboardAllApprovalSpeakerTeamMemberScheme = z.array(dashboardApprovalSpeakerTeamMemberScheme);
-export type DashboardAllApprovalSpeakerTeamMember = z.infer<typeof dashboardAllApprovalSpeakerTeamMemberScheme>;
+export type DashboardAllApprovalSpeakerTeamMembers = z.infer<typeof dashboardAllApprovalSpeakerTeamMemberScheme>;
 
 export const dashboardApprovalSocialMediaLinkScheme = z.object({
                                                                    id:                z.number(),
@@ -119,7 +119,7 @@ export const dashboardApprovalSocialMediaLinkScheme = z.object({
 export type DashboardApprovalSocialMediaLink = z.infer<typeof dashboardApprovalSocialMediaLinkScheme>;
 
 export const dashboardAllApprovalSocialMediaLinkScheme = z.array(dashboardApprovalSocialMediaLinkScheme);
-export type DashboardAllApprovalSocialMediaLink = z.infer<typeof dashboardAllApprovalSocialMediaLinkScheme>;
+export type DashboardAllApprovalSocialMediaLinks = z.infer<typeof dashboardAllApprovalSocialMediaLinkScheme>;
 
 export const dashboardSocialMediaLinkScheme = z.object({
                                                            id:                   z.number(),
@@ -133,7 +133,7 @@ export const dashboardSocialMediaLinkScheme = z.object({
 export type DashboardSocialMediaLink = z.infer<typeof dashboardSocialMediaLinkScheme>;
 
 export const dashboardAllSocialMediaLinkScheme = z.array(dashboardSocialMediaLinkScheme);
-export type DashboardAllSocialMediaLink = z.infer<typeof dashboardAllSocialMediaLinkScheme>;
+export type DashboardAllSocialMediaLinks = z.infer<typeof dashboardAllSocialMediaLinkScheme>;
 
 export const dashboardSocialMediaLinkTypeScheme = z.object({
                                                                id:   z.number(),
@@ -142,7 +142,7 @@ export const dashboardSocialMediaLinkTypeScheme = z.object({
 export type DashboardSocialMediaLinkType = z.infer<typeof dashboardSocialMediaLinkTypeScheme>;
 
 export const dashboardAllSocialMediaLinkTypeScheme = z.array(dashboardSocialMediaLinkTypeScheme);
-export type DashboardAllSocialMediaLinkType = z.infer<typeof dashboardAllSocialMediaLinkTypeScheme>;
+export type DashboardAllSocialMediaLinkTypes = z.infer<typeof dashboardAllSocialMediaLinkTypeScheme>;
 
 export const dashboardEventApplicationScheme = z.object({
                                                             id:                    z.number(),
@@ -169,3 +169,46 @@ export type DashboardAllTimeSlots = z.infer<typeof dashboardAllTimeSlotsScheme>;
 
 export const dashboardTalkDurationChoicesScheme = z.array(z.number());
 export type DashboardTalkDurationChoices = z.infer<typeof dashboardTalkDurationChoicesScheme>
+
+export const dashboardTalkTagScheme = z.object({
+                                                   id:          z.number(),
+                                                   color_index: z.number(),
+                                                   text:        z.string(),
+                                               });
+export type DashboardTalkTag = z.infer<typeof dashboardTalkTagScheme>;
+export const dashboardAllTalkTagScheme = z.array(dashboardTalkTagScheme);
+export type DashboardAllTalkTag = z.infer<typeof dashboardTalkTagScheme>;
+
+export const dashboardTentativeOrAcceptedTalkScheme = z.object({
+                                                                   id:                  z.number(),
+                                                                   event_id:            z.number(),
+                                                                   title:               z.string(),
+                                                                   description:         z.string(),
+                                                                   notes:               z.string()
+                                                                                         .nullable()
+                                                                                         .transform(x => x ?? ''),
+                                                                   requested_changes:   z.string().nullable(),
+                                                                   time_slot_accepted:  z.boolean(),
+                                                                   tags:                dashboardAllTalkTagScheme,
+                                                                   possible_durations:  dashboardTalkDurationChoicesScheme,
+                                                                   suggested_time_slot: dashboardTimeSlotScheme.nullable(),
+                                                               });
+export type DashboardTentativeOrAcceptedTalk = z.infer<typeof dashboardTentativeOrAcceptedTalkScheme>;
+export const dashboardAllTentativeOrAcceptedTalkScheme = z.array(dashboardTentativeOrAcceptedTalkScheme);
+export type DashboardAllTentativeOrAcceptedTalks = z.infer<typeof dashboardAllTentativeOrAcceptedTalkScheme>;
+
+export const dashboardPendingTalkScheme = z.object({
+                                                       id:                 z.number(),
+                                                       event_id:           z.number(),
+                                                       title:              z.string(),
+                                                       description:        z.string(),
+                                                       notes:              z.string()
+                                                                            .nullable()
+                                                                            .transform(x => x ?? ''),
+                                                       requested_changes:  z.string().nullable(),
+                                                       tags:               dashboardAllTalkTagScheme,
+                                                       possible_durations: dashboardTalkDurationChoicesScheme,
+                                                   });
+export type DashboardPendingTalk = z.infer<typeof dashboardPendingTalkScheme>;
+export const dashboardAllPendingTalkScheme = z.array(dashboardPendingTalkScheme);
+export type DashboardAllPendingTalks = z.infer<typeof dashboardAllPendingTalkScheme>;

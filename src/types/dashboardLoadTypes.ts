@@ -1,18 +1,20 @@
-import type { Globals, SimpleError } from './provideTypes';
+import type { AllTalkTag, Globals, SimpleError } from './provideTypes';
 import type {
     DashboardRoles,
     DashboardAllEvents,
-    DashboardAllApprovalSpeakerTeamMember,
-    DashboardAllApprovalSocialMediaLink,
+    DashboardAllApprovalSpeakerTeamMembers,
+    DashboardAllApprovalSocialMediaLinks,
     DashboardSpeakerTeamMember,
-    DashboardAllEventID,
+    DashboardAllEventIDs,
     DashboardEventID,
     DashboardAllEventSpeaker,
-    DashboardAllSocialMediaLink,
-    DashboardAllSocialMediaLinkType,
+    DashboardAllSocialMediaLinks,
+    DashboardAllSocialMediaLinkTypes,
     DashboardEventApplication,
     DashboardAllTimeSlots,
     DashboardTalkDurationChoices,
+    DashboardAllTentativeOrAcceptedTalks,
+    DashboardAllPendingTalks,
 } from './dashboardProvideTypes';
 
 export type LoadDashboard = {
@@ -33,20 +35,20 @@ export type LoadAdminTimeSlots = {
 }
 
 export type LoadAdminApproval = {
-    speaker: DashboardAllApprovalSpeakerTeamMember,
-    teamMember: DashboardAllApprovalSpeakerTeamMember,
-    socialMedia: DashboardAllApprovalSocialMediaLink
+    speaker: DashboardAllApprovalSpeakerTeamMembers,
+    teamMember: DashboardAllApprovalSpeakerTeamMembers,
+    socialMedia: DashboardAllApprovalSocialMediaLinks
 };
 
 export type LoadSpeakerTeamMemberEvent = {
-    allEvents: DashboardAllEventID,
+    allEvents: DashboardAllEventIDs,
     current: DashboardEventID,
     event: DashboardSpeakerTeamMember,
 }
 
 export type LoadUserSocials = {
-    socials: DashboardAllSocialMediaLink,
-    socialTypes: DashboardAllSocialMediaLinkType,
+    socials: DashboardAllSocialMediaLinks,
+    socialTypes: DashboardAllSocialMediaLinkTypes,
 }
 
 export type LoadUserApplication = {
@@ -56,4 +58,12 @@ export type LoadUserApplication = {
               socials: LoadUserSocials,
           } | undefined,
     error: SimpleError | undefined
+}
+
+export type LoadSpeakerTalk = {
+    allEvents: DashboardAllEventIDs,
+    tentativeOrAcceptedTalks: DashboardAllTentativeOrAcceptedTalks,
+    pendingTalks: DashboardAllPendingTalks,
+    tags: AllTalkTag,
+    talkDurations: DashboardTalkDurationChoices,
 }

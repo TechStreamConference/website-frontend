@@ -1,5 +1,5 @@
 import type { LoadUserSocials } from 'types/dashboardLoadTypes';
-import type { DashboardAllSocialMediaLink, DashboardAllSocialMediaLinkType } from 'types/dashboardProvideTypes';
+import type { DashboardAllSocialMediaLinks, DashboardAllSocialMediaLinkTypes } from 'types/dashboardProvideTypes';
 
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
@@ -9,12 +9,12 @@ import { z } from 'zod';
 import { SaveMessageType } from 'types/saveMessageType';
 
 export type ValidateReturn = {
-    data: DashboardAllSocialMediaLink,
+    data: DashboardAllSocialMediaLinks,
     messages: string[],
 }
 
 export type DeleteReturn = {
-    data: DashboardAllSocialMediaLink,
+    data: DashboardAllSocialMediaLinks,
     message: SaveMessageType,
 }
 
@@ -41,7 +41,7 @@ export async function loadDataAsync(fetch: typeof globalThis.fetch): Promise<Loa
     };
 }
 
-export async function loadSocials(fetch: typeof globalThis.fetch): Promise<DashboardAllSocialMediaLink> {
+export async function loadSocials(fetch: typeof globalThis.fetch): Promise<DashboardAllSocialMediaLinks> {
     const socialsPromise = fetch(apiUrl('/api/dashboard/user/social-media-link'));
 
     return await checkAndParseInputDataAsync(
@@ -52,7 +52,7 @@ export async function loadSocials(fetch: typeof globalThis.fetch): Promise<Dashb
     );
 }
 
-export function getIDFromSocialMediaType(types: DashboardAllSocialMediaLinkType, type: string): number {
+export function getIDFromSocialMediaType(types: DashboardAllSocialMediaLinkTypes, type: string): number {
     for (const element of types) {
         if (type === element.name) {
             return element.id;
@@ -63,7 +63,7 @@ export function getIDFromSocialMediaType(types: DashboardAllSocialMediaLinkType,
 }
 
 
-export function validate(data: DashboardAllSocialMediaLink): ValidateReturn {
+export function validate(data: DashboardAllSocialMediaLinks): ValidateReturn {
     const https: string      = 'https://';
     const http: string       = 'http://';
     const messages: string[] = [];
@@ -91,7 +91,7 @@ export function validate(data: DashboardAllSocialMediaLink): ValidateReturn {
     };
 }
 
-export async function deleteLinkAsync(data: DashboardAllSocialMediaLink, index: number): Promise<DeleteReturn> {
+export async function deleteLinkAsync(data: DashboardAllSocialMediaLinks, index: number): Promise<DeleteReturn> {
     const id = data[index].id;
     if (id !== 0) {
         const deleteResponse: Response = await fetch(

@@ -12,10 +12,13 @@ export const globalsDefault: Globals = {
 
 
 export const talkTagScheme = z.object({
+                                          id:          z.number(),
                                           color_index: z.number(),
                                           text:        z.string(),
                                       });
 export type TalkTag = z.infer<typeof talkTagScheme>;
+export const allTalkTagScheme = z.array(talkTagScheme);
+export type AllTalkTag = z.infer<typeof allTalkTagScheme>;
 
 export const talkScheme = z.object({
                                        speaker_id:  z.number(),
@@ -23,7 +26,7 @@ export const talkScheme = z.object({
                                        duration:    z.number(),
                                        title:       z.string(),
                                        description: z.string(),
-                                       tags:        z.array(talkTagScheme),
+                                       tags:        allTalkTagScheme,
                                        is_special:  z.boolean(),
                                    });
 export type Talk = z.infer<typeof talkScheme>;

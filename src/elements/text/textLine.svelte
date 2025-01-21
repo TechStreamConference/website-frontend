@@ -13,6 +13,10 @@
         text-align:  var(--text-align);
     }
 
+    .text-line-center {
+        text-align: center;
+    }
+
     .text-line-white {
         color: var(--white-color);
     }

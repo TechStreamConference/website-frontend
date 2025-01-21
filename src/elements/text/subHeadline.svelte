@@ -10,6 +10,10 @@
 </h3>
 
 <style>
+    .sub-headline-center {
+        text-align: center;
+    }
+
     .sub-headline-big {
         font-size:   var(--1-5x-font-size);
         line-height: var(--1-5x-line-height);
