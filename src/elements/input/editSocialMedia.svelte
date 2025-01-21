@@ -1,6 +1,6 @@
 <script lang="ts">
     import type {
-        DashboardAllSocialMediaLink, DashboardSocialMediaLink
+        DashboardAllSocialMediaLinks, DashboardSocialMediaLink
     } from 'types/dashboardProvideTypes';
 
     import DropDown from './dropDown.svelte';
@@ -10,7 +10,7 @@
     import Icon from 'elements/image/icon.svelte';
     import Tooltip from 'elements/text/tooltip.svelte';
 
-    export let links: DashboardAllSocialMediaLink;
+    export let links: DashboardAllSocialMediaLinks;
     export let deleteCallback: (id: number) => void;
     export let socialMediaTypes: string[];
 

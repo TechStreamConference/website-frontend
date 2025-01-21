@@ -1,4 +1,4 @@
-import type { DashboardAllPendingTalk, DashboardAllTentativeOrAcceptedTalk } from 'types/dashboardProvideTypes';
+import type { DashboardAllPendingTalks, DashboardAllTentativeOrAcceptedTalks } from 'types/dashboardProvideTypes';
 
 import { apiUrl } from 'helper/links';
 import { dashboardAllPendingTalkScheme, dashboardAllTentativeOrAcceptedTalkScheme } from 'types/dashboardProvideTypes';
@@ -7,7 +7,7 @@ import { checkAndParseInputDataAsync } from 'helper/parseJson';
 export async function loadTentativeOrAcceptedTalksFromEventIDAsync(
     fetch: typeof globalThis.fetch,
     eventID: number,
-): Promise<DashboardAllTentativeOrAcceptedTalk> {
+): Promise<DashboardAllTentativeOrAcceptedTalks> {
     const allTalksPromise = fetch(apiUrl(`/api/dashboard/speaker/tentative-or-accepted-talks/${eventID}`));
 
     return await checkAndParseInputDataAsync(
@@ -18,7 +18,7 @@ export async function loadTentativeOrAcceptedTalksFromEventIDAsync(
     );
 }
 
-export async function loadPendingTalksFromEventIDAsync(fetch: typeof globalThis.fetch): Promise<DashboardAllPendingTalk> {
+export async function loadPendingTalksFromEventIDAsync(fetch: typeof globalThis.fetch): Promise<DashboardAllPendingTalks> {
     const allTalksPromise = fetch(apiUrl(`/api/dashboard/speaker/pending-talks`));
 
     return await checkAndParseInputDataAsync(

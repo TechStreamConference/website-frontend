@@ -34,10 +34,10 @@ export async function load({ fetch }: {
     if (allEvents.length === 0) {
         return {
             allEvents,
-            tentativeOrAcceptedTalk: [],
-            pendingTalks:            [],
-            tags:                    await allTagsParsePromise,
-            talkDurations:           await allTalkDurationParsePromise,
+            tentativeOrAcceptedTalks: [],
+            pendingTalks:             [],
+            tags:                     await allTagsParsePromise,
+            talkDurations:            await allTalkDurationParsePromise,
         };
     }
 
@@ -46,9 +46,9 @@ export async function load({ fetch }: {
     const AllPendingTalksPromise             = loadPendingTalksFromEventIDAsync(fetch);
     return {
         allEvents,
-        tentativeOrAcceptedTalk: await AllTentativeOrAcceptedTalksPromise,
-        pendingTalks:            await AllPendingTalksPromise,
-        tags:                    await allTagsParsePromise,
-        talkDurations:           await allTalkDurationParsePromise,
+        tentativeOrAcceptedTalks: await AllTentativeOrAcceptedTalksPromise,
+        pendingTalks:             await AllPendingTalksPromise,
+        tags:                     await allTagsParsePromise,
+        talkDurations:            await allTalkDurationParsePromise,
     };
 }

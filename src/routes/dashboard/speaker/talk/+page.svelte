@@ -51,8 +51,6 @@
             tag_ids:            currentTalk.tags.map(x => x.id),
         };
 
-        console.log(toSave);
-
         const result = await trySaveDashboardDataAsync(toSave, `/api/dashboard/speaker/talk/${currentTalk.id}`);
 
         saveMessage.setSaveMessage(result);
@@ -64,11 +62,11 @@
 
     async function updateDisplayedEvent(selected: string): Promise<void> {
         const current                = getElementByTitle(data.allEvents, selected);
-        data.tentativeOrAcceptedTalk = await loadTentativeOrAcceptedTalksFromEventIDAsync(fetch, current.event_id);
+        data.tentativeOrAcceptedTalks = await loadTentativeOrAcceptedTalksFromEventIDAsync(fetch, current.event_id);
     }
 
     async function acceptSlot(index: number): Promise<void> {
-        const currentTalk = data.tentativeOrAcceptedTalk[index];
+        const currentTalk = data.tentativeOrAcceptedTalks[index];
         const response    = await fetch(
             apiUrl(`/api/dashboard/speaker/talk/${currentTalk.id}/accept-time-slot`),
             { method: 'PUT' },
@@ -76,14 +74,14 @@
 
         if (response.ok) {
             saveMessage.setSaveMessage(SaveMessageType.Approved);
-            data.tentativeOrAcceptedTalk[index].time_slot_accepted = true;
+            data.tentativeOrAcceptedTalks[index].time_slot_accepted = true;
             return;
         }
         saveMessage.setSaveMessage(SaveMessageType.Error);
     }
 
     async function rejectSlot(index: number): Promise<void> {
-        const currentTalk = data.tentativeOrAcceptedTalk[index];
+        const currentTalk = data.tentativeOrAcceptedTalks[index];
         const toSave      = {
             reason: rejectText.trim(),
         };
@@ -94,7 +92,7 @@
 
         if (response.ok) {
             saveMessage.setSaveMessage(SaveMessageType.Delete);
-            data.tentativeOrAcceptedTalk[index].suggested_time_slot = null;
+            data.tentativeOrAcceptedTalks[index].suggested_time_slot = null;
             return;
         }
         saveMessage.setSaveMessage(SaveMessageType.Error);
@@ -142,7 +140,6 @@
         <form class="dashboard-speaker-talk-form dashboard-speaker-section"
               on:submit|preventDefault={() => { save(index); }}>
             <SubHeadline classes="sub-headline-center">{talk.title}</SubHeadline>
-            <SubHeadline classes="sub-headline-center">Vortrag:</SubHeadline>
             {#if talk.requested_changes}
                 <Message classes="message-pre-wrap"
                          message={`Änderungswünsche:\n${talk.requested_changes}`} />
@@ -182,7 +179,7 @@
             </div>
         </form>
     {/each}
-    {#each data.tentativeOrAcceptedTalk as talk, index}
+    {#each data.tentativeOrAcceptedTalks as talk, index}
         <div class="dashboard-speaker-talk-time-slot dashboard-speaker-section">
             <SubHeadline classes="sub-headline-center">{talk.title}</SubHeadline>
             <SubHeadline classes="sub-headline-center">Vortrag:</SubHeadline>

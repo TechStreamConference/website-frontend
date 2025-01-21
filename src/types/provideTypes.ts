@@ -12,6 +12,7 @@ export const globalsDefault: Globals = {
 
 
 export const talkTagScheme = z.object({
+                                          id:          z.number(),
                                           color_index: z.number(),
                                           text:        z.string(),
                                       });
