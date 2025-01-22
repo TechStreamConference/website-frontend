@@ -144,18 +144,18 @@
             <form class="dashboard-user-profile-section-entry-wrapper"
                   on:submit|preventDefault={saveName}>
                 <SubHeadline classes="sub-headline-center">Name</SubHeadline>
-                <Input id="dashboard-user-profile-input-username"
-                       labelText="neuer Name:"
-                       placeholderText="neuer Name"
-                       ariaLabel="Trage hier deinen neuen Namen ein"
-                       bind:value={name}
-                       on:input={setUnsavedChanges} />
                 <Input id="dashboard-user-profile-input-username-password"
                        labelText="Passwort:"
                        placeholderText="Passwort"
                        ariaLabel="Trage hier dein Passwort ein"
                        type="password"
                        bind:value={oldPassword}
+                       on:input={setUnsavedChanges} />
+                <Input id="dashboard-user-profile-input-username"
+                       labelText="neuer Name:"
+                       placeholderText="neuer Name"
+                       ariaLabel="Trage hier deinen neuen Namen ein"
+                       bind:value={name}
                        on:input={setUnsavedChanges} />
                 <div class="dashboard-user-profile-button-wrapper">
                     <Button type="submit"
@@ -172,18 +172,18 @@
             <form class="dashboard-user-profile-section-entry-wrapper"
                   on:submit|preventDefault={saveMail}>
                 <SubHeadline classes="sub-headline-center">E-Mail</SubHeadline>
-                <Input id="dashboard-user-profile-input-mail"
-                       labelText="neue E-Mail:"
-                       placeholderText="neue E-Mail"
-                       ariaLabel="Trage hier deine neue E-Mail ein"
-                       bind:value={mail}
-                       on:input={setUnsavedChanges} />
                 <Input id="dashboard-user-profile-input-mail-password"
                        labelText="Passwort:"
                        placeholderText="Passwort"
                        ariaLabel="Trage hier dein Passwort ein"
                        type="password"
                        bind:value={oldPassword}
+                       on:input={setUnsavedChanges} />
+                <Input id="dashboard-user-profile-input-mail"
+                       labelText="neue E-Mail:"
+                       placeholderText="neue E-Mail"
+                       ariaLabel="Trage hier deine neue E-Mail ein"
+                       bind:value={mail}
                        on:input={setUnsavedChanges} />
                 <div class="dashboard-user-profile-button-wrapper">
                     <Button type="submit"
@@ -200,6 +200,13 @@
             <form class="dashboard-user-profile-section-entry-wrapper"
                   on:submit|preventDefault={savePassword}>
                 <SubHeadline classes="sub-headline-center">Passwort</SubHeadline>
+                <Input id="dashboard-user-profile-input-password-old"
+                       labelText="Altes Passwort:"
+                       placeholderText="Altes Passwort"
+                       ariaLabel="Trage hier dein altes Passwort ein"
+                       type="password"
+                       bind:value={oldPassword}
+                       on:input={setUnsavedChanges} />
                 <Input id="dashboard-user-profile-input-password-new-1"
                        labelText="Neues Passwort:"
                        placeholderText="Neues Passwort"
@@ -213,13 +220,6 @@
                        ariaLabel="Wiederhole hier dein neues Passwort ein"
                        type="password"
                        bind:value={newPassword2}
-                       on:input={setUnsavedChanges} />
-                <Input id="dashboard-user-profile-input-password-old"
-                       labelText="Altes Passwort:"
-                       placeholderText="Altes Passwort"
-                       ariaLabel="Trage hier dein altes Passwort ein"
-                       type="password"
-                       bind:value={oldPassword}
                        on:input={setUnsavedChanges} />
                 <div class="dashboard-user-profile-button-wrapper">
                     <Button type="submit"
@@ -239,7 +239,7 @@
     }
 
     .dashboard-user-profile-transition-wrapper {
-        display: flex;
+        display:         flex;
         justify-content: center;
     }
 
