@@ -8,6 +8,16 @@ export type SaveDashboardResult = {
     messages: string[];
 }
 
+export function combineSaveDashboardData(lhs: SaveDashboardResult, rhs: SaveDashboardResult): SaveDashboardResult {
+    return {
+        success:  lhs.success && rhs.success,
+        messages: [
+            ...lhs.messages,
+            ...rhs.messages,
+        ],
+    };
+}
+
 export async function trySaveDashboardDataAsyncOld<T>(
     data: T,
     url: string,

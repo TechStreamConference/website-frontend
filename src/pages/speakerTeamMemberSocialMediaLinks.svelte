@@ -2,10 +2,20 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/menuItems';
 
+    import type { SaveDashboardResult } from 'helper/trySaveDashboardData';
     import type { LoadDashboard, LoadUserSocials } from 'types/dashboardLoadTypes';
     import type { DashboardSocialMediaLink } from 'types/dashboardProvideTypes';
     import type { SetAllUpdateSocialMediaLink, SetCreateSocialMediaLink } from 'types/dashboardSetTypes';
     import type { DeleteReturn, ValidateReturn } from 'pageHelper/speakerTeamMemberSocials';
+
+    import { SaveMessageType } from 'types/saveMessageType';
+    import { combineSaveDashboardData, trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import {
+        deleteLinkAsync,
+        getIDFromSocialMediaType,
+        loadSocials,
+        validate,
+    } from 'pageHelper/speakerTeamMemberSocials';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
@@ -13,32 +23,33 @@
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import SpeakerTeamMemberSocialMediaLinkForm from './speakerTeamMemberSocialMediaLinksForm.svelte';
-
-    import { trySaveDashboardDataAsyncOld } from 'helper/trySaveDashboardData';
-    import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
-    import { deleteLinkAsync, loadSocials } from 'pageHelper/speakerTeamMemberSocials';
-    import { getIDFromSocialMediaType, validate } from 'pageHelper/speakerTeamMemberSocials';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     export let data: LoadDashboard & LoadUserSocials;
 
     let saveMessage: SaveMessage;
-    let messages: string[] = [];
+    let errorQueue: string[] = [];
 
 
     async function trySaveAsync(): Promise<boolean> {
         const validateResult: ValidateReturn = validate(data.socials);
-        messages                             = validateResult.messages;
+        errorQueue                           = validateResult.messages;
         data.socials                         = validateResult.data;
-        if (messages.length > 0) {
+        if (errorQueue.length > 0) {
             return false;
         }
 
         const toSave: SetAllUpdateSocialMediaLink = { social_media_links: [] };
-        let createFail: boolean                   = false;
+        let createResult: SaveDashboardResult     = {
+            success:  true,
+            messages: [],
+        };
         for (let link of data.socials) {
             if (link.id === 0) {
-                if (!(await tryCreateAsync(link))) {
-                    createFail = true;
+                const result = await tryCreateAsync(link);
+                if (!result.success) {
+                    createResult.success = false;
+                    createResult.messages.push(...result.messages);
                 }
                 continue;
             }
@@ -53,49 +64,44 @@
                                            });
         }
 
-        const messageType = await (async () => {
+        const saveResult: SaveDashboardResult = await (async () => {
             if (toSave.social_media_links.length === 0) {
-                return SaveMessageType.Save;
+                return {
+                    success:  true,
+                    messages: [],
+                };
             }
-            return await trySaveDashboardDataAsyncOld<SetAllUpdateSocialMediaLink>(
-                toSave,
-                '/api/dashboard/user/social-media-link',
-            );
+
+            return await trySaveDashboardDataAsync(toSave, '/api/dashboard/user/social-media-link', 'PUT');
         })();
 
-        const success: boolean = isSuccessType(messageType);
+        const result = combineSaveDashboardData(createResult, saveResult);
 
-        if (!success || createFail) {
-            saveMessage.setSaveMessage(SaveMessageType.Error);
-        } else {
-            saveMessage.setSaveMessage(SaveMessageType.Save);
-            if (data.socials.length !== toSave.social_media_links.length) {
-                data.socials = await loadSocials(fetch);
-            }
+        saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
+        errorQueue = result.messages;
+
+        const reload = result.success && data.socials.length !== toSave.social_media_links.length;
+        if (reload) {
+            data.socials = await loadSocials(fetch);
         }
 
-        return success;
+        return result.success;
     }
 
-    async function tryCreateAsync(link: DashboardSocialMediaLink): Promise<boolean> {
+    async function tryCreateAsync(link: DashboardSocialMediaLink): Promise<SaveDashboardResult> {
         const toSave: SetCreateSocialMediaLink = {
             social_media_type_id: getIDFromSocialMediaType(data.socialTypes, link.name),
             url:                  link.url,
         };
 
-        const messageType = await trySaveDashboardDataAsyncOld<SetCreateSocialMediaLink>(
-            toSave,
-            '/api/dashboard/user/social-media-link',
-            'POST',
-        );
-
-        return isSuccessType(messageType);
+        return await trySaveDashboardDataAsync(toSave, '/api/dashboard/user/social-media-link', 'POST');
     }
 
     async function tryDeleteAsync(e: CustomEvent<number>): Promise<void> {
         const value: number              = e.detail;
         const deleteResult: DeleteReturn = await deleteLinkAsync(data.socials, value);
-        saveMessage.setSaveMessage(deleteResult.message);
+        saveMessage.setSaveMessage(deleteResult.result.success ? SaveMessageType.Delete : SaveMessageType.Error);
+        errorQueue   = deleteResult.result.messages;
         data.socials = deleteResult.data;
     }
 </script>
@@ -115,10 +121,7 @@
         />
     {/if}
     <SaveMessage bind:this={saveMessage} />
-    {#each messages as message}
-        <Message color="error"
-                 {message} />
-    {/each}
+    <MessageWrapper messages={errorQueue} />
 
     <SpeakerTeamMemberSocialMediaLinkForm bind:data={data}
                                           bind:roles={data.roles}
