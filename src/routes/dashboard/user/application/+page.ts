@@ -1,13 +1,12 @@
 import type { LoadUserApplication } from 'types/dashboardLoadTypes';
 import {
-    dashboardAllSocialMediaLinkTypeScheme,
-    dashboardEventApplicationScheme,
+    dashboardAllSocialMediaLinkTypeScheme, dashboardEventApplicationScheme,
 } from 'types/dashboardProvideTypes';
 import { simpleErrorScheme } from 'types/provideTypes';
 
 import { apiUrl } from 'helper/links';
 import { error } from '@sveltejs/kit';
-import { applicationLookup } from 'lookup/applicationLookup';
+import { responseLookup } from 'lookup/responseLookup';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { redirectIfUnauthorizedOrReturnRolesAsync } from 'helper/loggedIn';
 
@@ -24,7 +23,7 @@ export async function load({ fetch }: {
             throw error(406, 'not able to parse event json in application page');
         }
     })();
-    const event = (() => {
+    const event              = (() => {
         if ('event' in eventJson) {
             return dashboardEventApplicationScheme.safeParse(eventJson['event']);
         }
@@ -40,7 +39,7 @@ export async function load({ fetch }: {
             throw error(406, 'not able to parse event data in application page');
         }
 
-        myError.data.error = applicationLookup(myError.data.error);
+        myError.data.error = responseLookup(myError.data.error);
 
         return {
             data:  undefined,

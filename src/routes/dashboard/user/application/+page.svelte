@@ -2,16 +2,14 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/menuItems';
     import * as SocialHelper from 'pageHelper/speakerTeamMemberSocials';
-    import * as EventHelper from 'pageHelper/speakerTeamMemberEvent';
-
     import type { NewImage } from 'pageHelper/speakerTeamMemberEvent';
+    import * as EventHelper from 'pageHelper/speakerTeamMemberEvent';
     import type { LoadDashboard, LoadUserApplication } from 'types/dashboardLoadTypes';
     import type { SetCreateSocialMediaLink, SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
 
     import { SaveMessageType } from 'types/saveMessageType';
-    import { apiUrl } from 'helper/links';
     import { formatDate } from 'helper/dates';
-    import { resetUnsavedChanges } from 'stores/saved';
+    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SpeakerTeamMemberEventForm from 'pages/speakerTeamMemberEventForm.svelte';
@@ -21,17 +19,17 @@
     import Paragraph from 'elements/text/paragraph.svelte';
     import StyledLink from 'elements/input/styledLink.svelte';
     import HeadlineH2 from 'elements/text/headlineH2.svelte';
-    import Message from 'elements/text/message.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
     import TextLine from 'elements/text/textLine.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     export let data: LoadDashboard & LoadUserApplication;
 
-    let messages: string[] = [];
-    let success: boolean   = false;
-    let eventForm: SpeakerTeamMemberEventForm;
     let saveMessage: SaveMessage;
+    let errorQueue: string[] = [];
+    let success: boolean     = false;
+    let eventForm: SpeakerTeamMemberEventForm;
 
     function deleteLink(e: CustomEvent<number>) {
         if (!data.data) {
@@ -53,18 +51,18 @@
         if (!data.data) {
             return false;
         }
-        messages = [];
+        errorQueue = [];
 
         const socialResult: SocialHelper.ValidateReturn = SocialHelper.validate(data.data.socials.socials);
         const eventResult: EventHelper.ValidateReturn   = EventHelper.validate(event);
-        messages                                        = socialResult.messages;
-        messages.push(...(eventResult.messages));
+        errorQueue                                      = socialResult.messages;
+        errorQueue.push(...(eventResult.messages));
         if (!image.imageFile) {
-            messages.push('Das Profilbild fehlt.');
+            errorQueue.push('Das Profilbild fehlt.');
         }
         data.data.socials.socials = socialResult.data;
 
-        return messages.length == 0;
+        return errorQueue.length == 0;
     }
 
     async function trySave(): Promise<boolean> {
@@ -111,20 +109,12 @@
             formData.append('photo', image.imageFile);
         }
 
-        const saveResponse: Response = await fetch(apiUrl('/api/dashboard/user/apply-as-speaker'), {
-            method: 'POST',
-            body:   formData,
-        });
+        const result = await trySaveDashboardDataAsync(formData, '/api/dashboard/user/apply-as-speaker', 'POST');
 
-        if (saveResponse.ok) {
-            saveMessage.setSaveMessage(SaveMessageType.Save);
-            resetUnsavedChanges();
-            success = true;
-            return true;
-        }
-
-        saveMessage.setSaveMessage(SaveMessageType.Error);
-        return false;
+        saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
+        errorQueue = result.messages;
+        success    = result.success;
+        return result.success;
     }
 </script>
 
@@ -185,9 +175,7 @@
             </div>
             <div class="dashboard-user-application-form-messages-wrapper">
                 <SaveMessage bind:this={saveMessage} />
-                {#each messages as message}
-                    <Message {message} />
-                {/each}
+                <MessageWrapper messages={errorQueue} />
             </div>
             <div class="dashboard-user-application-section">
                 <HeadlineH2>Deine Bewerbung</HeadlineH2>

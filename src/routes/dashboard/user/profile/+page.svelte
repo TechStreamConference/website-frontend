@@ -5,7 +5,7 @@
     import type { SaveDashboardResult } from 'helper/trySaveDashboardData';
 
     import { setUnsavedChanges } from 'stores/saved';
-    import { trySaveDashboardDataAsyncOutReset } from 'helper/trySaveDashboardData';
+    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
     import { SaveMessageType } from 'types/saveMessageType';
     import { fade } from 'svelte/transition';
 
@@ -28,7 +28,7 @@
     let state: State = State.None;
 
     let saveMessage: SaveMessage;
-    let errorMessages: string[] = [];
+    let errorQueue: string[] = [];
 
     let name: string         = '';
     let mail: string         = '';
@@ -49,21 +49,20 @@
     }
 
     async function save<T>(toSave: T, url: string): Promise<SaveDashboardResult> {
-        const response = await trySaveDashboardDataAsyncOutReset(toSave, url, 'PUT');
+        const response = await trySaveDashboardDataAsync(toSave, url, 'PUT');
+
         saveMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
+        errorQueue = response.messages;
 
         if (response.success) {
-            oldPassword   = '';
-            errorMessages = [];
+            oldPassword = '';
             changeState(State.None);
         }
 
-        errorMessages = response.messages;
         return response;
     }
 
     async function saveName(): Promise<void> {
-        errorMessages = [];
         const toSave  = {
             username: name.trim(),
             password: oldPassword.trim(),
@@ -92,7 +91,7 @@
     async function savePassword(): Promise<void> {
         if (newPassword1.trim() !== newPassword2.trim()) {
             saveMessage.setSaveMessage(SaveMessageType.Error);
-            errorMessages = ['Die beiden neuen Passwörter stimmen nicht überein.'];
+            errorQueue = ['Die beiden neuen Passwörter stimmen nicht überein.'];
             return;
         }
         const toSave = {
@@ -136,7 +135,7 @@
     </div>
 </SectionDashboard>
 <SaveMessage bind:this={saveMessage} />
-<MessageWrapper messages={errorMessages} />
+<MessageWrapper messages={errorQueue} />
 {#if state === State.Name}
     <div class="dashboard-user-profile-transition-wrapper"
          transition:fade={{ duration: 300 }}>
