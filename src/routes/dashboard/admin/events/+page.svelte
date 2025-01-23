@@ -5,18 +5,17 @@
     import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
     import type { DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
     import type { SetAdminEvent, SetAllAdminEventSpeaker } from 'types/dashboardSetTypes';
-    import { combineSaveType, SaveMessageType } from 'types/saveMessageType';
+    import { type SaveDashboardResult, trySaveDashboardDataAsyncOutReset } from 'helper/trySaveDashboardData';
+    import { SaveMessageType } from 'types/saveMessageType';
 
     import { onMount } from 'svelte';
     import { Clone } from 'helper/clone';
-    import { isSuccessType } from 'types/saveMessageType';
-    import {
-        convertSaveEventData, convertSaveSpeakerData, getEventByTitle, loadSpeaker, validateData,
-    } from './eventsHelper';
-    import { setUnsavedChanges } from 'stores/saved';
+    import { convertSaveEventData, convertSaveSpeakerData, loadSpeaker, validateData } from './eventsHelper';
+    import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
     import { convertTimeAndDateToHTML, formatDate } from 'helper/dates';
-    import { trySaveDashboardDataAsyncOld } from 'helper/trySaveDashboardData';
+    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
     import { scrollToTop } from 'helper/scroll';
+    import { getElementByTitle } from 'helper/basic';
 
     import TextLine from 'elements/text/textLine.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
@@ -26,9 +25,9 @@
     import TextArea from 'elements/input/textArea.svelte';
     import Button from 'elements/input/button.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
-    import Message from 'elements/text/message.svelte';
     import Tabs from 'elements/navigation/tabs.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     export let data: LoadDashboard & LoadAdminEvents;
 
@@ -51,7 +50,7 @@
     });
 
     function updateDisplayed(title: string): void {
-        currentEvent                       = getEventByTitle(copiedData.value.allEvents, title);
+        currentEvent                       = getElementByTitle(copiedData.value.allEvents, title);
         currentEvent.publish_date          = convertTimeAndDateToHTML(currentEvent.publish_date);
         currentEvent.schedule_visible_from = convertTimeAndDateToHTML(currentEvent.schedule_visible_from);
         currentEvent.call_for_papers_start = convertTimeAndDateToHTML(currentEvent.call_for_papers_start);
@@ -122,37 +121,48 @@
             return false;
         }
 
-        const saveType: SaveMessageType = await (async (
-            toSaveEvent: SetAdminEvent,
-            toSaveSpeaker: SetAllAdminEventSpeaker,
-        ) => {
+        const result: SaveDashboardResult = await (async () => {
             if (toSaveEvent.id === 0) {
-                const saveType = await trySaveDashboardDataAsyncOld<SetAdminEvent>(
-                    toSaveEvent,
-                    `/api/dashboard/admin/event/new`,
-                    'POST',
-                );
-
-                if (isSuccessType(saveType)) {
-                    location.reload(); // reload page to fetch new data from database
+                const result = await trySaveDashboardDataAsync(toSaveEvent, '/api/dashboard/admin/event/new', 'POST');
+                if (result.success) {
+                    location.reload();
                 }
-
-                return saveType;
-            } else {
-                const saveTypeEvent   = await trySaveDashboardDataAsyncOld<SetAdminEvent>(
-                    toSaveEvent,
-                    `/api/dashboard/admin/event/${toSaveEvent.id}`,
-                );
-                const saveTypeSpeaker = await trySaveDashboardDataAsyncOld<SetAllAdminEventSpeaker>(
-                    toSaveSpeaker,
-                    `/api/dashboard/admin/event/${toSaveEvent.id}/speaker`,
-                );
-                return combineSaveType(saveTypeEvent, saveTypeSpeaker);
+                return result;
             }
-        })(toSaveEvent, toSaveSpeaker);
 
-        message.setSaveMessage(saveType);
-        return isSuccessType(saveType);
+            // manually reset unsaved changes to ensure that they are only reset if both Api calls were successful
+            const resultEventPromise   = trySaveDashboardDataAsyncOutReset(
+                toSaveEvent,
+                `/api/dashboard/admin/event/${toSaveEvent.id}`,
+                'PUT',
+            );
+            const resultSpeakerPromise = trySaveDashboardDataAsyncOutReset(
+                toSaveSpeaker,
+                `/api/dashboard/admin/event/${toSaveEvent.id}/speaker`,
+                'PUT',
+            );
+
+            const resultEvent   = await resultEventPromise;
+            const resultSpeaker = await resultSpeakerPromise;
+            const toReturn      = {
+                success:  resultEvent.success && resultSpeaker.success,
+                messages: [
+                    ...resultEvent.messages,
+                    ...resultSpeaker.messages,
+                ],
+            };
+
+            if (toReturn.success) {
+                resetUnsavedChanges();
+            }
+
+            return toReturn;
+
+        })();
+
+        message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
+        errorQueue = result.messages;
+        return result.success;
     }
 </script>
 
@@ -172,9 +182,7 @@
     </Button>
     <div class="dashboard-admin-event-message-wrapper">
         <SaveMessage bind:this={message} />
-        {#each errorQueue as error}
-            <Message message={error} />
-        {/each}
+        <MessageWrapper messages={errorQueue} />
     </div>
     {#if copiedData.value.allEvents}
         <NavigationDropDown

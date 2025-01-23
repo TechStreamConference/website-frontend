@@ -9,7 +9,7 @@ export function getElementByTitle<T extends {
         }
     }
 
-    console.error(`not able to look up event by title: ${title}`);
+    console.error(`not able to look up element by title: ${title}`);
     throw error(404);
 }
 
@@ -23,6 +23,6 @@ export function getElementByID<T extends {
         }
     }
 
-    console.error(`not able to look up event by ID: ${ID}`);
+    console.error(`not able to look up element by ID: ${ID}`);
     throw error(404);
 }

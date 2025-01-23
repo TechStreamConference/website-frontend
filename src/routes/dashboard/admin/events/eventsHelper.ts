@@ -2,13 +2,8 @@ import {
     dashboardAllEventSpeakerScheme, type DashboardAllEvents, type DashboardAllEventSpeaker, type DashboardEvent,
 } from 'types/dashboardProvideTypes';
 
-import { error } from '@sveltejs/kit';
-import type {
-    SetAdminEvent, SetAllAdminEventSpeaker,
-} from 'types/dashboardSetTypes';
-import {
-    checkSQLTimeAndDate, convertTimeAndDateToSQL, isBeforeOrSameDatesString,
-} from 'helper/dates';
+import type { SetAdminEvent, SetAllAdminEventSpeaker } from 'types/dashboardSetTypes';
+import { checkSQLTimeAndDate, convertTimeAndDateToSQL, isBeforeOrSameDatesString } from 'helper/dates';
 import { z } from 'zod';
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
@@ -18,17 +13,6 @@ function trimOrNull(entry: string): string | null {
         return null;
     }
     return entry.trim();
-}
-
-export function getEventByTitle(events: DashboardAllEvents, title: string): DashboardEvent {
-    for (const event of events) {
-        if (event.title === title) {
-            return event;
-        }
-    }
-
-    console.error(`error while looking up event by title: ${title}`);
-    throw error(500);
 }
 
 export function convertSaveEventData(data: DashboardEvent): SetAdminEvent {
