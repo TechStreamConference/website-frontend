@@ -1,4 +1,5 @@
 import type { LoadResetPassword } from 'types/loadTypes';
+
 import { getGlobalsAsync } from 'stores/globals';
 import { redirect } from '@sveltejs/kit';
 

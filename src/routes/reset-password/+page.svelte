@@ -4,8 +4,7 @@
 
     import type { LoadResetPassword } from 'types/loadTypes';
 
-    import { apiUrl } from 'helper/links';
-    import { parseMultipleErrorsAsync } from 'helper/parseJson';
+    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
 
     import Input from 'elements/input/input.svelte';
     import Button from 'elements/input/button.svelte';
@@ -14,7 +13,7 @@
     import HeadlinePage from 'elements/text/headlinePage.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
     import StyledLink from 'elements/input/styledLink.svelte';
-    import Message from 'elements/text/message.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     enum State {
         DidReset,
@@ -26,14 +25,14 @@
 
     let password1: string;
     let password2: string;
-    let errorMessages: string[]  = [];
+    let errorQueue: string[] = [];
 
     async function resetPassword(): Promise<void> {
-        errorMessages = [];
+        errorQueue      = [];
         const trimmed_1 = password1.trim();
         const trimmed_2 = password2.trim();
         if (trimmed_1 !== trimmed_2) {
-            errorMessages.push('Die Passwörter stimmen nicht überein');
+            errorQueue.push('Die Passwörter stimmen nicht überein');
             return;
         }
 
@@ -41,17 +40,13 @@
             new_password: trimmed_1,
             token:        data.token,
         };
-        const response = await fetch(apiUrl('/api/account/reset-password'), {
-            method: 'POST',
-            body:   JSON.stringify(toSave),
-        });
+        const response = await trySaveDashboardDataAsync(toSave, '/api/account/reset-password', 'POST');
 
-        if (!response.ok) {
-            errorMessages      = await parseMultipleErrorsAsync(response);
-            return;
+        errorQueue = response.messages;
+
+        if (response.success) {
+            state = State.DidReset;
         }
-
-        state        = State.DidReset;
     }
 
 </script>
@@ -63,9 +58,7 @@
         <form on:submit|preventDefault={resetPassword}
               class="reset-password-wrapper">
             <HeadlinePage>Passwort zurücksetzen</HeadlinePage>
-            {#each errorMessages as message}
-                <Message {message} />
-            {/each}
+            <MessageWrapper messages={errorQueue} />
             <Input
                   classes="reset-password-input-line"
                   id="reset-password-input-line-1"
