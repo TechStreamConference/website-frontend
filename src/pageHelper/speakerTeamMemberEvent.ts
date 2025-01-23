@@ -1,13 +1,11 @@
 import type { DashboardSpeakerTeamMember } from 'types/dashboardProvideTypes';
 import type { LoadSpeakerTeamMemberEvent } from 'types/dashboardLoadTypes';
+import type { SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
 
-import {
-    dashboardAllEventIDScheme, dashboardSpeakerTeamMemberScheme,
-} from 'types/dashboardProvideTypes';
+import { dashboardAllEventIDScheme, dashboardSpeakerTeamMemberScheme } from 'types/dashboardProvideTypes';
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { error } from '@sveltejs/kit';
-import type { SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
 
 
 export type NewImage = {
@@ -26,14 +24,15 @@ export async function loadDataAsync(
     fetch: typeof globalThis.fetch,
     type: 'speaker' | 'team-member',
 ): Promise<LoadSpeakerTeamMemberEvent> {
-    const allEventResponse: Promise<Response> = fetch(apiUrl(`/api/dashboard/${type}/all-events`));
-    const allEvents                           = await checkAndParseInputDataAsync(
-        await allEventResponse,
+    const allEventFetchPromise: Promise<Response> = fetch(apiUrl(`/api/dashboard/${type}/all-events`));
+    const allEventsParsePromise                   = checkAndParseInputDataAsync(
+        await allEventFetchPromise,
         dashboardAllEventIDScheme,
         `Serveranfrage für alle Event IDs im ${type} nicht erfolgreich. throw error(406)`,
         `Unerwartete Daten für alle Event Ids der ${type}. throw error(406)`,
     );
 
+    const allEvents = await allEventsParsePromise;
     if (allEvents.length == 0) {
         console.error('Keine Events nach dem Laden von allen Events vorhanden.');
         throw error(406);
@@ -54,9 +53,9 @@ export async function loadSpeakerTeamMemberAsync(
     eventID: number,
     type: string,
 ): Promise<DashboardSpeakerTeamMember> {
-    const eventResponse: Promise<Response> = fetch(apiUrl(`/api/dashboard/${type}/event/${eventID}`));
+    const eventPromise: Promise<Response> = fetch(apiUrl(`/api/dashboard/${type}/event/${eventID}`));
     return await checkAndParseInputDataAsync(
-        await eventResponse,
+        await eventPromise,
         dashboardSpeakerTeamMemberScheme,
         `Serveranfrage für den ${type}-Eintrag für Event ${eventID} nicht erfolgreich. throw error(406)`,
         `Unerwartete Daten für den ${type}-Eintrag für das Event ${eventID}. throw error(406)`,

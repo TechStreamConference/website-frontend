@@ -2,22 +2,22 @@
     import type { LoadDashboard, LoadSpeakerTeamMemberEvent } from 'types/dashboardLoadTypes';
     import type { SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
     import type { Menu, MenuItem } from 'types/provideTypes';
+    import type { NewImage, ValidateReturn } from 'pageHelper/speakerTeamMemberEvent';
 
-    import { apiUrl } from 'helper/links';
-    import { _unsavedChanges, resetUnsavedChanges } from 'stores/saved';
+    import { _unsavedChanges } from 'stores/saved';
     import { SaveMessageType } from 'types/saveMessageType';
-    import { loadSpeakerTeamMemberAsync, type NewImage, type ValidateReturn } from 'pageHelper/speakerTeamMemberEvent';
-    import { validate } from 'pageHelper/speakerTeamMemberEvent';
+    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
     import { scrollToTop } from 'helper/scroll';
+    import { loadSpeakerTeamMemberAsync, validate } from 'pageHelper/speakerTeamMemberEvent';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import Message from 'elements/text/message.svelte';
-    import ErrorMessage from 'elements/text/message.svelte';
     import SpeakerTeamMemberEventForm from './speakerTeamMemberEventForm.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
     export let type: 'speaker' | 'team-member';
@@ -25,7 +25,7 @@
     export let menuItem: MenuItem;
 
     let saveMessage: SaveMessage;
-    let errorMessages: string[] = [];
+    let errorQueue: string[] = [];
 
     let form: SpeakerTeamMemberEventForm;
 
@@ -55,10 +55,10 @@
         const returnValue: ValidateReturn = validate(toSave);
         toSave                            = returnValue.data;
         if (returnValue.messages.length > 0) {
-            errorMessages = returnValue.messages;
+            errorQueue = returnValue.messages;
             return false;
         } else {
-            errorMessages = [];
+            errorQueue = [];
         }
 
         const formData = new FormData();
@@ -67,25 +67,20 @@
             formData.append('photo', newImage.imageFile);
         }
 
-        const response: Response = await fetch(apiUrl(`/api/dashboard/${type}/event/${data.current.event_id}`), {
-            method: 'POST',
-            body:   formData,
-        });
+        const response = await trySaveDashboardDataAsync(
+            formData,
+            `/api/dashboard/${type}/event/${data.current.event_id}`,
+            'POST',
+        );
 
-        if (response.ok) {
-            resetUnsavedChanges();
-            saveMessage.setSaveMessage(SaveMessageType.Save);
+        saveMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
+        errorQueue = response.messages;
+
+        if (response.success) {
             data.event = await loadSpeakerTeamMemberAsync(fetch, data.current.event_id, type);
-            return true;
         }
 
-        if (import.meta.env.DEV) {
-            console.error(await response.json());
-        }
-
-        saveMessage.setSaveMessage(SaveMessageType.Error);
-
-        return false;
+        return response.success;
     }
 </script>
 
@@ -116,10 +111,8 @@
                   classes="message-pre-wrap"
             />
         {/if}
-        {#each errorMessages as message}
-            <ErrorMessage {message} />
-        {/each}
         <SaveMessage bind:this={saveMessage} />
+        <MessageWrapper messages={errorQueue} />
     </div>
     <SpeakerTeamMemberEventForm bind:this={form}
                                 data={data}
