@@ -1,4 +1,5 @@
-import { type DashboardAllTimeSlots, dashboardAllTimeSlotsScheme } from 'types/dashboardProvideTypes';
+import type { DashboardAllTimeSlots } from 'types/dashboardProvideTypes';
+import { dashboardAllTimeSlotsScheme } from 'types/dashboardProvideTypes';
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 
