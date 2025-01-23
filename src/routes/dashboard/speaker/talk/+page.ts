@@ -13,6 +13,11 @@ export async function load({ fetch }: {
     const allTagsFetchPromise         = fetch(apiUrl(`/api/tags`));
     const allTalkDurationFetchPromise = fetch(apiUrl(`/api/talk-duration-choices`));
 
+    const allEventsParsePromise       = checkAndParseInputDataAsync(await allEventsFetchPromise,
+                                                                    dashboardAllEventIDScheme,
+                                                                    `Serveranfrage für alle Event IDs nicht erfolgreich. throw error(406)`,
+                                                                    `Unerwartete Daten für alle Event Ids. throw error(406)`,
+    );
     const allTagsParsePromise         = checkAndParseInputDataAsync(await allTagsFetchPromise,
                                                                     allTalkTagScheme,
                                                                     `Serveranfrage für alle Talk-Tags nicht erfolgreich; throw error (406)`,
@@ -24,13 +29,8 @@ export async function load({ fetch }: {
         `Serveranfrage für alle Talk-Längen nicht erfolgreich; throw error(406)`,
         `Unerwartete Daten für alle Talk-Längen; throw error(406)`,
     );
-    const allEvents                   = await checkAndParseInputDataAsync(
-        await allEventsFetchPromise,
-        dashboardAllEventIDScheme,
-        `Serveranfrage für alle Event IDs nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Event Ids. throw error(406)`,
-    );
 
+    const allEvents = await allEventsParsePromise;
     if (allEvents.length === 0) {
         return {
             allEvents,

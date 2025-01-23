@@ -8,9 +8,9 @@
     import { getElementByTitle } from 'helper/basic';
     import { loadTentativeOrAcceptedTalksFromEventIDAsync } from './talkHelper';
     import { setUnsavedChanges } from 'stores/saved';
-    import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
+    import { SaveMessageType } from 'types/saveMessageType';
     import { scrollToTop } from 'helper/scroll';
-    import { trySaveDashboardDataAsyncOld } from 'helper/trySaveDashboardData.js';
+    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
     import { formatDate } from 'helper/dates.js';
     import { apiUrl } from 'helper/links';
     import { fade } from 'svelte/transition';
@@ -31,9 +31,11 @@
     import ScheduleTag from 'elements/schedule/scheduleTag.svelte';
     import Tag from 'elements/text/tag.svelte';
     import GeneralPopup from 'elements/popups/generalPopup.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;
+    let errorQuere: string[];
     let rejectText: string = '';
     let acceptPopup: GeneralPopup;
     let rejectPopup: GeneralPopup;
@@ -41,8 +43,7 @@
     async function save(index: number): Promise<boolean> {
         scrollToTop();
 
-        const currentTalk = data.pendingTalks[index];
-
+        const currentTalk     = data.pendingTalks[index];
         const toSave: SetTalk = {
             title:              currentTalk.title,
             description:        currentTalk.description,
@@ -51,33 +52,34 @@
             tag_ids:            currentTalk.tags.map(x => x.id),
         };
 
-        const result = await trySaveDashboardDataAsyncOld(toSave, `/api/dashboard/speaker/talk/${currentTalk.id}`);
+        const result = await trySaveDashboardDataAsync(toSave, `/api/dashboard/speaker/talk/${currentTalk.id}`, 'PUT');
 
-        saveMessage.setSaveMessage(result);
-        if (isSuccessType(result)) {
+        saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
+        errorQuere = result.messages;
+        if (result.success) {
             currentTalk.requested_changes = null;
         }
-        return isSuccessType(result);
+        return result.success;
     }
 
     async function updateDisplayedEvent(selected: string): Promise<void> {
-        const current                = getElementByTitle(data.allEvents, selected);
+        const current                 = getElementByTitle(data.allEvents, selected);
         data.tentativeOrAcceptedTalks = await loadTentativeOrAcceptedTalksFromEventIDAsync(fetch, current.event_id);
     }
 
     async function acceptSlot(index: number): Promise<void> {
         const currentTalk = data.tentativeOrAcceptedTalks[index];
-        const response    = await fetch(
-            apiUrl(`/api/dashboard/speaker/talk/${currentTalk.id}/accept-time-slot`),
-            { method: 'PUT' },
+        const response    = await trySaveDashboardDataAsync(
+            [],
+            `/api/dashboard/speaker/talk/${currentTalk.id}/accept-time-slot`,
+            'PUT',
         );
 
-        if (response.ok) {
-            saveMessage.setSaveMessage(SaveMessageType.Approved);
+        saveMessage.setSaveMessage(response.success ? SaveMessageType.Approved : SaveMessageType.Error);
+        errorQuere = response.messages;
+        if (response.success) {
             data.tentativeOrAcceptedTalks[index].time_slot_accepted = true;
-            return;
         }
-        saveMessage.setSaveMessage(SaveMessageType.Error);
     }
 
     async function rejectSlot(index: number): Promise<void> {
@@ -131,6 +133,7 @@
 
 <SectionDashboard classes="standard-dashboard-section">
     <SaveMessage bind:this={saveMessage} />
+    <MessageWrapper messages={errorQuere} />
     <NavigationDropDown id="dashboard-speaker-talk-event-navigation"
                         labelText="Event:"
                         data={ data.allEvents.map(x => x.title) }
