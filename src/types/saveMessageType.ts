@@ -7,6 +7,10 @@ export enum SaveMessageType {
     Save
 }
 
+export function isSuccessType(type: SaveMessageType): boolean {
+    return type === SaveMessageType.Save || type === SaveMessageType.Delete || type == SaveMessageType.Approved;
+}
+
 export function combineSaveType(lhs: SaveMessageType, rhs: SaveMessageType): SaveMessageType {
     if (lhs === SaveMessageType.Error || rhs === SaveMessageType.Error) {
         return SaveMessageType.Error;
