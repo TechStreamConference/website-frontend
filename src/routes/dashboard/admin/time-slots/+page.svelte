@@ -8,7 +8,7 @@
     import { resetUnsavedChanges, setUnsavedChanges, unsavedChanges } from 'stores/saved';
     import { error } from '@sveltejs/kit';
     import { getTimeSlotsAsync } from './timeSlotHelper';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDashboardDataAsyncOld } from 'helper/trySaveDashboardData';
     import { isSuccessType } from 'types/saveMessageType';
     import { checkSQLTimeAndDate, convertTimeAndDateToSQL } from 'helper/dates';
 
@@ -81,7 +81,7 @@
             console.log(temp);
             entry.start_time = temp ? temp : entry.start_time;
         }
-        const result = await trySaveDashboardDataAsync(
+        const result = await trySaveDashboardDataAsyncOld(
             { 'time_slots': toSave },
             `/api/dashboard/admin/time-slots/${data.currentEventID}`,
             'POST',

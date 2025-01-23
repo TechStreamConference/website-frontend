@@ -8,7 +8,7 @@ export type SaveDashboardResult = {
     messages: string[];
 }
 
-export async function trySaveDashboardDataAsync<T>(
+export async function trySaveDashboardDataAsyncOld<T>(
     data: T,
     url: string,
     routeType: string = 'PUT',
@@ -26,8 +26,7 @@ export async function trySaveDashboardDataAsync<T>(
     return SaveMessageType.Error;
 }
 
-// this will replace the old function over time
-export async function trySaveDashboardDataAsyncNew<T>(
+export async function trySaveDashboardDataAsyncOutReset<T>(
     data: T,
     url: string,
     routeType: string,
@@ -37,16 +36,23 @@ export async function trySaveDashboardDataAsyncNew<T>(
         body:   JSON.stringify(data),
     });
 
-    if (response.ok) {
+    return {
+        success:  response.ok,
+        messages: response.ok ? [] : await parseMultipleErrorsAsync(response),
+    };
+}
+
+
+export async function trySaveDashboardDataAsync<T>(
+    data: T,
+    url: string,
+    routeType: string,
+): Promise<SaveDashboardResult> {
+    const result = await trySaveDashboardDataAsyncOutReset(data, url, routeType);
+
+    if (result.success) {
         resetUnsavedChanges();
-        return {
-            success:  true,
-            messages: [],
-        };
     }
 
-    return {
-        success:  false,
-        messages: await parseMultipleErrorsAsync(response),
-    };
+    return result;
 }

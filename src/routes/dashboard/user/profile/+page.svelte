@@ -5,7 +5,7 @@
     import type { SaveDashboardResult } from 'helper/trySaveDashboardData';
 
     import { setUnsavedChanges } from 'stores/saved';
-    import { trySaveDashboardDataAsyncNew } from 'helper/trySaveDashboardData';
+    import { trySaveDashboardDataAsyncOutReset } from 'helper/trySaveDashboardData';
     import { SaveMessageType } from 'types/saveMessageType';
     import { fade } from 'svelte/transition';
 
@@ -49,7 +49,7 @@
     }
 
     async function save<T>(toSave: T, url: string): Promise<SaveDashboardResult> {
-        const response = await trySaveDashboardDataAsyncNew(toSave, url, 'PUT');
+        const response = await trySaveDashboardDataAsyncOutReset(toSave, url, 'PUT');
         saveMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
 
         if (response.success) {

@@ -8,7 +8,7 @@
     import { Clone } from 'helper/clone';
     import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
     import { setUnsavedChanges } from 'stores/saved';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDashboardDataAsyncOld } from 'helper/trySaveDashboardData';
     import { resetGlobals } from 'stores/globals';
 
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -28,7 +28,7 @@
             footer_text: copiedData.value.globals.footer_text,
         };
 
-        const saveType: SaveMessageType = await trySaveDashboardDataAsync<SetAdminGlobals>(
+        const saveType: SaveMessageType = await trySaveDashboardDataAsyncOld<SetAdminGlobals>(
             adminGlobals,
             '/api/dashboard/admin/globals',
         );

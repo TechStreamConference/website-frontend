@@ -10,7 +10,7 @@
     import { setUnsavedChanges } from 'stores/saved';
     import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
     import { scrollToTop } from 'helper/scroll';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
+    import { trySaveDashboardDataAsyncOld } from 'helper/trySaveDashboardData.js';
     import { formatDate } from 'helper/dates.js';
     import { apiUrl } from 'helper/links';
     import { fade } from 'svelte/transition';
@@ -51,7 +51,7 @@
             tag_ids:            currentTalk.tags.map(x => x.id),
         };
 
-        const result = await trySaveDashboardDataAsync(toSave, `/api/dashboard/speaker/talk/${currentTalk.id}`);
+        const result = await trySaveDashboardDataAsyncOld(toSave, `/api/dashboard/speaker/talk/${currentTalk.id}`);
 
         saveMessage.setSaveMessage(result);
         if (isSuccessType(result)) {

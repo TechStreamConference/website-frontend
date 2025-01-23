@@ -15,7 +15,7 @@
     } from './eventsHelper';
     import { setUnsavedChanges } from 'stores/saved';
     import { convertTimeAndDateToHTML, formatDate } from 'helper/dates';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDashboardDataAsyncOld } from 'helper/trySaveDashboardData';
     import { scrollToTop } from 'helper/scroll';
 
     import TextLine from 'elements/text/textLine.svelte';
@@ -127,7 +127,7 @@
             toSaveSpeaker: SetAllAdminEventSpeaker,
         ) => {
             if (toSaveEvent.id === 0) {
-                const saveType = await trySaveDashboardDataAsync<SetAdminEvent>(
+                const saveType = await trySaveDashboardDataAsyncOld<SetAdminEvent>(
                     toSaveEvent,
                     `/api/dashboard/admin/event/new`,
                     'POST',
@@ -139,11 +139,11 @@
 
                 return saveType;
             } else {
-                const saveTypeEvent   = await trySaveDashboardDataAsync<SetAdminEvent>(
+                const saveTypeEvent   = await trySaveDashboardDataAsyncOld<SetAdminEvent>(
                     toSaveEvent,
                     `/api/dashboard/admin/event/${toSaveEvent.id}`,
                 );
-                const saveTypeSpeaker = await trySaveDashboardDataAsync<SetAllAdminEventSpeaker>(
+                const saveTypeSpeaker = await trySaveDashboardDataAsyncOld<SetAllAdminEventSpeaker>(
                     toSaveSpeaker,
                     `/api/dashboard/admin/event/${toSaveEvent.id}/speaker`,
                 );

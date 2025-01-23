@@ -14,7 +14,7 @@
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import SpeakerTeamMemberSocialMediaLinkForm from './speakerTeamMemberSocialMediaLinksForm.svelte';
 
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDashboardDataAsyncOld } from 'helper/trySaveDashboardData';
     import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
     import { deleteLinkAsync, loadSocials } from 'pageHelper/speakerTeamMemberSocials';
     import { getIDFromSocialMediaType, validate } from 'pageHelper/speakerTeamMemberSocials';
@@ -57,7 +57,7 @@
             if (toSave.social_media_links.length === 0) {
                 return SaveMessageType.Save;
             }
-            return await trySaveDashboardDataAsync<SetAllUpdateSocialMediaLink>(
+            return await trySaveDashboardDataAsyncOld<SetAllUpdateSocialMediaLink>(
                 toSave,
                 '/api/dashboard/user/social-media-link',
             );
@@ -83,7 +83,7 @@
             url:                  link.url,
         };
 
-        const messageType = await trySaveDashboardDataAsync<SetCreateSocialMediaLink>(
+        const messageType = await trySaveDashboardDataAsyncOld<SetCreateSocialMediaLink>(
             toSave,
             '/api/dashboard/user/social-media-link',
             'POST',
