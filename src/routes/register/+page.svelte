@@ -4,6 +4,8 @@
 
     import type { LoadRegister } from 'types/loadTypes';
 
+    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
+
     import HeadlinePage from 'elements/text/headlinePage.svelte';
     import ErrorMessage from 'elements/text/message.svelte';
     import Input from 'elements/input/input.svelte';
@@ -12,9 +14,7 @@
     import Paragraph from 'elements/text/paragraph.svelte';
     import PageWrapper from 'elements/section/pageWrapper.svelte';
     import PasswordHints from 'elements/text/passwordHints.svelte';
-
-    import { apiUrl } from 'helper/links';
-    import { parseMultipleErrorsAsync } from 'helper/parseJson';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     export let data: LoadRegister; // data from database
 
@@ -35,7 +35,7 @@
     let usernameMessage: string = '';
     let emailMessage: string    = '';
     let passwordMessage: string = '';
-    let errorMessages: string[] = [''];
+    let errorQueue: string[]    = [''];
 
     let registered: boolean = false;
 
@@ -90,7 +90,7 @@
         const nameResult = await namePromise;
         const mailResult = await mailPromise;
 
-        errorMessages   = [];
+        errorQueue      = [];
         usernameMessage = nameResult ? nameResult : '';
         emailMessage    = mailResult ? mailResult : '';
         passwordMessage = passwordResult ? passwordResult : '';
@@ -115,16 +115,9 @@
             token:    data.token,
         };
 
-        const response: Response = await fetch(apiUrl('/api/account/register'), {
-            method: 'POST',
-            body:   JSON.stringify(toSave),
-        });
-
-        if (!response.ok) {
-            errorMessages = await parseMultipleErrorsAsync(response);
-            return;
-        }
-        registered = true;
+        const response = await trySaveDashboardDataAsync(toSave, '/api/account/register', 'POST');
+        errorQueue     = response.messages;
+        registered     = response.success;
     }
 </script>
 
@@ -141,9 +134,7 @@
                     <ErrorMessage message={usernameMessage} />
                     <ErrorMessage message={emailMessage} />
                     <ErrorMessage message={passwordMessage} />
-                    {#each errorMessages as message}
-                        <ErrorMessage {message} />
-                    {/each}
+                    <MessageWrapper messages={errorQueue} />
                 </div>
                 <Input
                       classes="register-input-line"
