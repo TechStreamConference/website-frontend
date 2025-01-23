@@ -10,12 +10,10 @@
     import Link from 'elements/text/link.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
     import PageWrapper from 'elements/section/pageWrapper.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
-    import { z } from 'zod';
     import { goto } from '$app/navigation';
-    import { apiUrl } from 'helper/links';
-    import { loginLookup } from 'lookup/loginLookup';
-    import { parseMultipleErrorsAsync, parseProvidedJsonAsync } from 'helper/parseJson';
+    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
 
     export let data: LoadLogin; // data from database
 
@@ -32,11 +30,11 @@
 
     const loggedInMessage     = data.loggedIn ? 'Du bist bereits angemeldet.' : '';
     const displayLoginMessage = data.showLoginMessage ? 'Du musst dich zunächst anmelden.' : '';
-    let errorMessage: string  = '';
+    let errorQueue: string[]  = [];
 
     function changeState(_state: State): void {
-        errorMessage = '';
-        state        = _state;
+        errorQueue = [];
+        state      = _state;
     }
 
     async function loginAsync(): Promise<void> {
@@ -45,22 +43,14 @@
             password:          password.trim(),
         };
 
-        const response: Response = await fetch(apiUrl('/api/account/login'), {
-            method: 'POST',
-            body:   JSON.stringify(data),
-        });
+        const result = await trySaveDashboardDataAsync(data, '/api/account/login', 'POST');
 
-        if (response.ok) {
+        if (result.success) {
             await goto('/dashboard');
             return;
         }
 
-        const result = await parseMultipleErrorsAsync(response);
-        if (result.length == 0) {
-            errorMessage = '';
-            return;
-        }
-        errorMessage = result[0];
+        errorQueue = result.messages;
     }
 
     async function resetPassword(): Promise<void> {
@@ -69,34 +59,16 @@
         };
 
         if (data.username_or_email.length === 0) {
-            errorMessage = 'Keine E-Mail-Adresse oder Name angegeben.';
+            errorQueue = ['Keine E-Mail-Adresse oder Name angegeben.'];
             return;
         }
 
-        const response: Response = await fetch(apiUrl('/api/account/forgot-password'), {
-            method: 'POST',
-            body:   JSON.stringify(data),
-        });
+        const result = await trySaveDashboardDataAsync(data, '/api/account/forgot-password', 'POST');
 
-        if (response.ok) {
+        errorQueue = result.messages;
+        if (result.success) {
             changeState(State.ResetPasswordSuccess);
-            return;
         }
-
-        try {
-            const scheme = z.object({
-                                        error: z.string(),
-                                    });
-            const object = await parseProvidedJsonAsync(response, scheme);
-            if (object) {
-                errorMessage = loginLookup(object.error);
-                return;
-            }
-        } catch { /* empty */
-        }
-
-        errorMessage = 'Fehler beim Speichern';
-
     }
 </script>
 
@@ -111,7 +83,7 @@
             <div class="login-message-wrapper">
                 <ErrorMessage message={loggedInMessage} />
                 <ErrorMessage message={displayLoginMessage} />
-                <ErrorMessage message={errorMessage} />
+                <MessageWrapper messages={errorQueue} />
             </div>
             <Input
                   classes="login-username-mail"
@@ -150,7 +122,7 @@
         <form class="login-form-width-wrapper"
               on:submit|preventDefault={resetPassword}>
             <HeadlinePage>Passwort zurücksetzen</HeadlinePage>
-            <ErrorMessage message={errorMessage} />
+            <MessageWrapper messages={errorQueue} />
             <Input
                   classes="login-username-mail login-username-mail-reset-extra"
                   id="login-username-or-email"
