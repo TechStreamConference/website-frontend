@@ -41,9 +41,10 @@ export async function trySaveDashboardDataAsyncOutReset<T>(
     url: string,
     routeType: string,
 ): Promise<SaveDashboardResult> {
+    const stringData = data instanceof FormData ? data : JSON.stringify(data);
     const response: Response = await fetch(apiUrl(url), {
         method: routeType,
-        body:   JSON.stringify(data),
+        body:   stringData,
     });
 
     return {
