@@ -63,7 +63,7 @@
     }
 
     async function saveName(): Promise<void> {
-        const toSave  = {
+        const toSave = {
             username: name.trim(),
             password: oldPassword.trim(),
         };
@@ -134,8 +134,10 @@
         </div>
     </div>
 </SectionDashboard>
-<SaveMessage bind:this={saveMessage} />
-<MessageWrapper messages={errorQueue} />
+<SectionDashboard classes="standard-dashboard-section">
+    <SaveMessage bind:this={saveMessage} />
+    <MessageWrapper messages={errorQueue} />
+</SectionDashboard>
 {#if state === State.Name}
     <div class="dashboard-user-profile-transition-wrapper"
          transition:fade={{ duration: 300 }}>
