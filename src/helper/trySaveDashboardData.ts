@@ -18,24 +18,6 @@ export function combineSaveDashboardData(lhs: SaveDashboardResult, rhs: SaveDash
     };
 }
 
-export async function trySaveDashboardDataAsyncOld<T>(
-    data: T,
-    url: string,
-    routeType: string = 'PUT',
-): Promise<SaveMessageType> {
-    const response: Response = await fetch(apiUrl(url), {
-        method: routeType,
-        body:   JSON.stringify(data),
-    });
-
-    if (response.ok) {
-        resetUnsavedChanges();
-        return SaveMessageType.Save;
-    }
-
-    return SaveMessageType.Error;
-}
-
 export async function trySaveDashboardDataAsyncOutReset<T>(
     data: T,
     url: string,
