@@ -43,6 +43,12 @@ const lookup: ResponseDict = {
     CURRENTLY_NOT_ACCEPTING_SPEAKER_APPLICATIONS: 'Aktuell kann man sich nicht bewerben.\nSchau gerne bei der nächsten Bewerbungsphase wieder vorbei.\nWenn du bereits ein Speaker bist, kannst du deine Daten im Speaker-Tab bearbeiten.',
     USER_ALREADY_HAS_PENDING_APPLICATION:         'Du hast dich bereits für dieses Jahr beworben\nWir sind gerade dabei, deine Bewerbung zu überprüfen.\nSobald wir deine Bewerbung angenommen haben, kannst du deinen Eintrag im Speaker-Tab bearbeiten.',
     NO_EVENT_TO_APPLY_FOR:                        'Aktuell kann man sich nicht bewerben.\nSchau gerne bei der nächsten Bewerbungsphase wieder vorbei.\nWenn du bereits ein Speaker bist, kannst du deine Daten im Speaker-Tab bearbeiten.',
+
+    // time slots
+    TIME_SLOTS_OVERLAP: 'Mindestens 2 Vortragszeiten überlappen sich.',
+
+    // no changes
+    NO_CHANGES_DETECTED: 'Es wurden keine Änderungen vorgenommen.',
 };
 
 export function responseLookup(key: string): string {
@@ -50,5 +56,7 @@ export function responseLookup(key: string): string {
         return lookup[key];
     }
 
-    return key;
+    console.error(`Fehler beim response lookup - key: ${key}`);
+
+    return '👻 Ein unbekannter Fehler ist aufgetreten. Upsi. 👻';
 }
