@@ -16,10 +16,11 @@
     import StyledLink from 'elements/input/styledLink.svelte';
     import Tabs from 'elements/navigation/tabs.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
+    import GeneralPopup from 'elements/popups/generalPopup.svelte';
 
     import { apiUrl } from 'helper/links';
     import { scrollToAnchor } from 'helper/scroll';
-    import { getBackgroundClass } from './approvalHelper';
+    import { getBackgroundClass, ApprovalData } from './approvalHelper';
     import { SaveMessageType } from 'types/saveMessageType';
     import { setUnsavedChanges } from 'stores/saved';
     import { ApprovalSection, getSectionHash } from 'types/approvalSection';
@@ -27,6 +28,7 @@
     import { trySaveDataAsync } from 'helper/trySaveData.js';
 
     export let data: LoadAdminApproval;
+    let approvalPopup: GeneralPopup;
 
     const saveMessages: {
         [key in ApprovalSection]: {
@@ -82,18 +84,23 @@
             return;
         }
 
-        const success = await saveApprovalAsync(section, id);
+        approvalPopup.show(new ApprovalData(section, id));
+    }
+
+    async function approvalPopupCallback(provided: ApprovalData) {
+        const success = await saveApprovalAsync(provided);
+
         if (success) {
-            deleteEntry(section, id);
+            deleteEntry(provided.section, provided.id);
         }
     }
 
-    async function saveApprovalAsync(section: ApprovalSection, id: number): Promise<boolean> {
-        const route: string = `/api/dashboard/admin/approval/${routePartLookup[section]}/${id}`;
+    async function saveApprovalAsync(provided: ApprovalData): Promise<boolean> {
+        const route: string = `/api/dashboard/admin/approval/${routePartLookup[provided.section]}/${provided.id}`;
         const response      = await trySaveDataAsync(fetch, [], route, 'PUT');
 
-        saveMessages[section][id].setSaveMessage(response.success ? SaveMessageType.Approved : SaveMessageType.Error);
-        specificErrors[section][id] = response.messages;
+        saveMessages[provided.section][provided.id].setSaveMessage(response.success ? SaveMessageType.Approved : SaveMessageType.Error);
+        specificErrors[provided.section][provided.id] = response.messages;
 
         return response.success;
     }
@@ -119,6 +126,21 @@
         }, 3005);
     }
 </script>
+
+<GeneralPopup bind:this={approvalPopup}
+              headline="Eintrag Freigeben?"
+              text="Wenn du den Eintrag freigibst kannst du dies nicht mehr rückgängig machen."
+              denyButtonText="Abbrechen"
+              acceptButtonText="Freigeben"
+              denyCallback={() => {}}
+              acceptCallback={(provided) => {
+                  if (!(provided instanceof ApprovalData)) {
+                      console.error(`Unexpected data in popup callback; data: ${provided}`);
+                      return;
+                  }
+                  approvalPopupCallback(provided);
+              }}
+/>
 
 <Tabs
       entries={Menu.admin}
