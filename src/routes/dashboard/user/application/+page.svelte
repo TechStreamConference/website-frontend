@@ -10,6 +10,7 @@
     import { SaveMessageType } from 'types/saveMessageType';
     import { formatDate } from 'helper/dates';
     import { trySaveDataAsync } from 'helper/trySaveDashboardData';
+    import { scrollToTop } from 'helper/scroll';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SpeakerTeamMemberEventForm from 'pages/speakerTeamMemberEventForm.svelte';
@@ -62,10 +63,11 @@
         }
         data.data.socials.socials = socialResult.data;
 
-        return errorQueue.length == 0;
+        return errorQueue.length === 0;
     }
 
     async function trySave(): Promise<boolean> {
+        scrollToTop();
         if (!data.data) {
             console.error('data member is undefined.');
             saveMessage.setSaveMessage(SaveMessageType.Error);
