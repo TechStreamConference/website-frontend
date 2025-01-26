@@ -8,7 +8,7 @@
     import { Clone } from 'helper/clone';
     import { SaveMessageType } from 'types/saveMessageType';
     import { setUnsavedChanges } from 'stores/saved';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
     import { resetGlobals } from 'stores/globals';
 
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -30,7 +30,7 @@
             footer_text: copiedData.value.globals.footer_text,
         };
 
-        const result = await trySaveDashboardDataAsync(adminGlobals, '/api/dashboard/admin/globals', 'PUT');
+        const result = await trySaveDataAsync(adminGlobals, '/api/dashboard/admin/globals', 'PUT');
 
         resetGlobals(); // reset cache to force a global fetch next time
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);

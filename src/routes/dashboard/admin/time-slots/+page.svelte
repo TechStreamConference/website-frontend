@@ -7,7 +7,7 @@
 
     import { setUnsavedChanges, unsavedChanges } from 'stores/saved';
     import { getTimeSlotsAsync } from './timeSlotHelper';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
     import { checkSQLTimeAndDate, convertTimeAndDateToSQL } from 'helper/dates';
 
     import Tabs from 'elements/navigation/tabs.svelte';
@@ -59,7 +59,7 @@
             console.log(temp);
             entry.start_time = temp ? temp : entry.start_time;
         }
-        const result = await trySaveDashboardDataAsync(
+        const result = await trySaveDataAsync(
             { 'time_slots': toSave },
             `/api/dashboard/admin/time-slots/${data.currentEventID}`,
             'POST',

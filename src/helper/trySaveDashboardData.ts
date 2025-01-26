@@ -2,12 +2,12 @@ import { resetUnsavedChanges } from 'stores/saved';
 import { apiUrl } from './links';
 import { parseMultipleErrorsAsync } from 'helper/parseJson';
 
-export type SaveDashboardResult = {
+export type SaveResult = {
     success: boolean;
     messages: string[];
 }
 
-export function combineSaveDashboardData(lhs: SaveDashboardResult, rhs: SaveDashboardResult): SaveDashboardResult {
+export function combineSaveResult(lhs: SaveResult, rhs: SaveResult): SaveResult {
     return {
         success:  lhs.success && rhs.success,
         messages: [
@@ -17,11 +17,11 @@ export function combineSaveDashboardData(lhs: SaveDashboardResult, rhs: SaveDash
     };
 }
 
-export async function trySaveDashboardDataAsyncOutReset<T>(
+export async function trySaveDataAsyncOutReset<T>(
     data: T,
     url: string,
     routeType: string,
-): Promise<SaveDashboardResult> {
+): Promise<SaveResult> {
     const stringData = data instanceof FormData ? data : JSON.stringify(data);
     const response: Response = await fetch(apiUrl(url), {
         method: routeType,
@@ -35,12 +35,12 @@ export async function trySaveDashboardDataAsyncOutReset<T>(
 }
 
 
-export async function trySaveDashboardDataAsync<T>(
+export async function trySaveDataAsync<T>(
     data: T,
     url: string,
     routeType: string,
-): Promise<SaveDashboardResult> {
-    const result = await trySaveDashboardDataAsyncOutReset(data, url, routeType);
+): Promise<SaveResult> {
+    const result = await trySaveDataAsyncOutReset(data, url, routeType);
 
     if (result.success) {
         resetUnsavedChanges();

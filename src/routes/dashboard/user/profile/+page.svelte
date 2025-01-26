@@ -2,10 +2,10 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/menuItems';
 
-    import type { SaveDashboardResult } from 'helper/trySaveDashboardData';
+    import type { SaveResult } from 'helper/trySaveDashboardData';
 
     import { setUnsavedChanges } from 'stores/saved';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
     import { SaveMessageType } from 'types/saveMessageType';
     import { fade } from 'svelte/transition';
 
@@ -48,8 +48,8 @@
         }, 300);
     }
 
-    async function save<T>(toSave: T, url: string): Promise<SaveDashboardResult> {
-        const response = await trySaveDashboardDataAsync(toSave, url, 'PUT');
+    async function save<T>(toSave: T, url: string): Promise<SaveResult> {
+        const response = await trySaveDataAsync(toSave, url, 'PUT');
 
         saveMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorQueue = response.messages;

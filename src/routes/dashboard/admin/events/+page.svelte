@@ -5,7 +5,7 @@
     import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
     import type { DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
     import type { SetAdminEvent, SetAllAdminEventSpeaker } from 'types/dashboardSetTypes';
-    import { type SaveDashboardResult, trySaveDashboardDataAsyncOutReset } from 'helper/trySaveDashboardData';
+    import { type SaveResult, trySaveDataAsyncOutReset } from 'helper/trySaveDashboardData';
     import { SaveMessageType } from 'types/saveMessageType';
 
     import { onMount } from 'svelte';
@@ -13,7 +13,7 @@
     import { convertSaveEventData, convertSaveSpeakerData, loadSpeaker, validateData } from './eventsHelper';
     import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
     import { convertTimeAndDateToHTML, formatDate } from 'helper/dates';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
     import { scrollToTop } from 'helper/scroll';
     import { getElementByTitle } from 'helper/basic';
 
@@ -121,9 +121,9 @@
             return false;
         }
 
-        const result: SaveDashboardResult = await (async () => {
+        const result: SaveResult = await (async () => {
             if (toSaveEvent.id === 0) {
-                const result = await trySaveDashboardDataAsync(toSaveEvent, '/api/dashboard/admin/event/new', 'POST');
+                const result = await trySaveDataAsync(toSaveEvent, '/api/dashboard/admin/event/new', 'POST');
                 if (result.success) {
                     location.reload();
                 }
@@ -131,12 +131,12 @@
             }
 
             // manually reset unsaved changes to ensure that they are only reset if both Api calls were successful
-            const resultEventPromise   = trySaveDashboardDataAsyncOutReset(
+            const resultEventPromise   = trySaveDataAsyncOutReset(
                 toSaveEvent,
                 `/api/dashboard/admin/event/${toSaveEvent.id}`,
                 'PUT',
             );
-            const resultSpeakerPromise = trySaveDashboardDataAsyncOutReset(
+            const resultSpeakerPromise = trySaveDataAsyncOutReset(
                 toSaveSpeaker,
                 `/api/dashboard/admin/event/${toSaveEvent.id}/speaker`,
                 'PUT',

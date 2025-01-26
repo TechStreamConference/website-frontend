@@ -4,7 +4,7 @@
 
     import type { LoadRegister } from 'types/loadTypes';
 
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
+    import { trySaveDataAsync } from 'helper/trySaveDashboardData.js';
 
     import HeadlinePage from 'elements/text/headlinePage.svelte';
     import ErrorMessage from 'elements/text/message.svelte';
@@ -115,7 +115,7 @@
             token:    data.token,
         };
 
-        const response = await trySaveDashboardDataAsync(toSave, '/api/account/register', 'POST');
+        const response = await trySaveDataAsync(toSave, '/api/account/register', 'POST');
         errorQueue     = response.messages;
         registered     = response.success;
     }

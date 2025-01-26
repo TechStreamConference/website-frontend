@@ -9,7 +9,7 @@
 
     import { SaveMessageType } from 'types/saveMessageType';
     import { formatDate } from 'helper/dates';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SpeakerTeamMemberEventForm from 'pages/speakerTeamMemberEventForm.svelte';
@@ -109,7 +109,7 @@
             formData.append('photo', image.imageFile);
         }
 
-        const result = await trySaveDashboardDataAsync(formData, '/api/dashboard/user/apply-as-speaker', 'POST');
+        const result = await trySaveDataAsync(formData, '/api/dashboard/user/apply-as-speaker', 'POST');
 
         saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorQueue = result.messages;

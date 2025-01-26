@@ -2,14 +2,14 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/menuItems';
 
-    import type { SaveDashboardResult } from 'helper/trySaveDashboardData';
+    import type { SaveResult } from 'helper/trySaveDashboardData';
     import type { LoadDashboard, LoadUserSocials } from 'types/dashboardLoadTypes';
     import type { DashboardSocialMediaLink } from 'types/dashboardProvideTypes';
     import type { SetAllUpdateSocialMediaLink, SetCreateSocialMediaLink } from 'types/dashboardSetTypes';
     import type { DeleteReturn, ValidateReturn } from 'pageHelper/speakerTeamMemberSocials';
 
     import { SaveMessageType } from 'types/saveMessageType';
-    import { combineSaveDashboardData, trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { combineSaveResult, trySaveDataAsync } from 'helper/trySaveDashboardData';
     import {
         deleteLinkAsync,
         getIDFromSocialMediaType,
@@ -40,7 +40,7 @@
         }
 
         const toSave: SetAllUpdateSocialMediaLink = { social_media_links: [] };
-        let createResult: SaveDashboardResult     = {
+        let createResult: SaveResult              = {
             success:  true,
             messages: [],
         };
@@ -64,7 +64,7 @@
                                            });
         }
 
-        const saveResult: SaveDashboardResult = await (async () => {
+        const saveResult: SaveResult = await (async () => {
             if (toSave.social_media_links.length === 0) {
                 return {
                     success:  true,
@@ -72,10 +72,10 @@
                 };
             }
 
-            return await trySaveDashboardDataAsync(toSave, '/api/dashboard/user/social-media-link', 'PUT');
+            return await trySaveDataAsync(toSave, '/api/dashboard/user/social-media-link', 'PUT');
         })();
 
-        const result = combineSaveDashboardData(createResult, saveResult);
+        const result = combineSaveResult(createResult, saveResult);
 
         saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorQueue = result.messages;
@@ -88,13 +88,13 @@
         return result.success;
     }
 
-    async function tryCreateAsync(link: DashboardSocialMediaLink): Promise<SaveDashboardResult> {
+    async function tryCreateAsync(link: DashboardSocialMediaLink): Promise<SaveResult> {
         const toSave: SetCreateSocialMediaLink = {
             social_media_type_id: getIDFromSocialMediaType(data.socialTypes, link.name),
             url:                  link.url,
         };
 
-        return await trySaveDashboardDataAsync(toSave, '/api/dashboard/user/social-media-link', 'POST');
+        return await trySaveDataAsync(toSave, '/api/dashboard/user/social-media-link', 'POST');
     }
 
     async function tryDeleteAsync(e: CustomEvent<number>): Promise<void> {

@@ -7,7 +7,7 @@ import { dashboardAllSocialMediaLinkScheme, dashboardAllSocialMediaLinkTypeSchem
 import { error } from '@sveltejs/kit';
 import { z } from 'zod';
 import { SaveMessageType } from 'types/saveMessageType';
-import { type SaveDashboardResult, trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+import { type SaveResult, trySaveDataAsync } from 'helper/trySaveDashboardData';
 import { setUnsavedChanges } from 'stores/saved';
 
 export type ValidateReturn = {
@@ -17,7 +17,7 @@ export type ValidateReturn = {
 
 export type DeleteReturn = {
     data: DashboardAllSocialMediaLinks,
-    result: SaveDashboardResult,
+    result: SaveResult,
 }
 
 export async function loadDataAsync(fetch: typeof globalThis.fetch): Promise<LoadUserSocials> {
@@ -104,7 +104,7 @@ export async function deleteLinkAsync(data: DashboardAllSocialMediaLinks, index:
         };
     }
 
-    const result = await trySaveDashboardDataAsync([], `/api/dashboard/user/social-media-link/${id}`, 'DELETE');
+    const result = await trySaveDataAsync([], `/api/dashboard/user/social-media-link/${id}`, 'DELETE');
 
     if (!result.success) {
         return {

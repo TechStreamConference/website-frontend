@@ -4,7 +4,7 @@
 
     import type { LoadResetPassword } from 'types/loadTypes';
 
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
+    import { trySaveDataAsync } from 'helper/trySaveDashboardData.js';
 
     import Input from 'elements/input/input.svelte';
     import Button from 'elements/input/button.svelte';
@@ -40,7 +40,7 @@
             new_password: trimmed_1,
             token:        data.token,
         };
-        const response = await trySaveDashboardDataAsync(toSave, '/api/account/reset-password', 'POST');
+        const response = await trySaveDataAsync(toSave, '/api/account/reset-password', 'POST');
 
         errorQueue = response.messages;
 

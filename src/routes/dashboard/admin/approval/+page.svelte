@@ -24,7 +24,7 @@
     import { setUnsavedChanges } from 'stores/saved';
     import { ApprovalSection, getSectionHash } from 'types/approvalSection';
     import { validateApproval, validateRequestedChanges } from './approvalValidation';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
+    import { trySaveDataAsync } from 'helper/trySaveDashboardData.js';
 
     export let data: LoadAdminApproval;
 
@@ -67,7 +67,7 @@
     async function saveRequestedChangesAsync(section: ApprovalSection, id: number, change: string): Promise<void> {
         const toSave        = { message: change };
         const route: string = `/api/dashboard/admin/approval/${routePartLookup[section]}/${id}/request-changes`;
-        const response      = await trySaveDashboardDataAsync(toSave, route, 'PUT');
+        const response      = await trySaveDataAsync(toSave, route, 'PUT');
 
         saveMessages[section][id].setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
         specificErrors[section][id] = response.messages;
@@ -90,7 +90,7 @@
 
     async function saveApprovalAsync(section: ApprovalSection, id: number): Promise<boolean> {
         const route: string = `/api/dashboard/admin/approval/${routePartLookup[section]}/${id}`;
-        const response      = await trySaveDashboardDataAsync([], route, 'PUT');
+        const response      = await trySaveDataAsync([], route, 'PUT');
 
         saveMessages[section][id].setSaveMessage(response.success ? SaveMessageType.Approved : SaveMessageType.Error);
         specificErrors[section][id] = response.messages;

@@ -6,7 +6,7 @@
 
     import { _unsavedChanges } from 'stores/saved';
     import { SaveMessageType } from 'types/saveMessageType';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData.js';
+    import { trySaveDataAsync } from 'helper/trySaveDashboardData.js';
     import { scrollToTop } from 'helper/scroll';
     import { loadSpeakerTeamMemberAsync, validate } from 'pageHelper/speakerTeamMemberEvent';
 
@@ -67,7 +67,7 @@
             formData.append('photo', newImage.imageFile);
         }
 
-        const response = await trySaveDashboardDataAsync(
+        const response = await trySaveDataAsync(
             formData,
             `/api/dashboard/${type}/event/${data.current.event_id}`,
             'POST',

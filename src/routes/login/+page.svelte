@@ -13,7 +13,7 @@
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     import { goto } from '$app/navigation';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
 
     export let data: LoadLogin; // data from database
 
@@ -43,7 +43,7 @@
             password:          password.trim(),
         };
 
-        const result = await trySaveDashboardDataAsync(data, '/api/account/login', 'POST');
+        const result = await trySaveDataAsync(data, '/api/account/login', 'POST');
 
         if (result.success) {
             await goto('/dashboard');
@@ -63,7 +63,7 @@
             return;
         }
 
-        const result = await trySaveDashboardDataAsync(data, '/api/account/forgot-password', 'POST');
+        const result = await trySaveDataAsync(data, '/api/account/forgot-password', 'POST');
 
         errorQueue = result.messages;
         if (result.success) {
