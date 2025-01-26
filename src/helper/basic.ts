@@ -28,9 +28,9 @@ export function getElementByID<T extends {
 }
 
 export function getIDFromTitle<T extends {
-    id:number,
-    title:string
-}>(elements: T[], title:string): number {
+    id: number,
+    title: string
+}>(elements: T[], title: string): number {
     for (const entry of elements) {
         if (entry.title === title) {
             return entry.id;
