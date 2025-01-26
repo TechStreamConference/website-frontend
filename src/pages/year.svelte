@@ -177,7 +177,7 @@
 
 <style>
     .year-header {
-        width:               100vw;
+        width:               100%;
         background-image:    url('/background.png');
         background-position: center;
         background-size:     cover;
