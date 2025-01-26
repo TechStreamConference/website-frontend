@@ -37,4 +37,8 @@
         font-size:        var(--full-font-size);
         line-height:      var(--1-5x-line-height);
     }
+
+    .styled-link-white {
+        color: var(--white-color);
+    }
 </style>
