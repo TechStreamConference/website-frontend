@@ -28,8 +28,8 @@ export async function loadDataAsync(
     const allEventsParsePromise                   = checkAndParseInputDataAsync(
         await allEventFetchPromise,
         dashboardAllEventIDScheme,
-        `Serveranfrage für alle Event IDs im ${type} nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Event Ids der ${type}. throw error(406)`,
+        `Serveranfrage für alle Event IDs im ${type} nicht erfolgreich.`,
+        `Unerwartete Daten für alle Event Ids der ${type}.`,
     );
 
     const allEvents = await allEventsParsePromise;
@@ -57,8 +57,8 @@ export async function loadSpeakerTeamMemberAsync(
     return await checkAndParseInputDataAsync(
         await eventPromise,
         dashboardSpeakerTeamMemberScheme,
-        `Serveranfrage für den ${type}-Eintrag für Event ${eventID} nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für den ${type}-Eintrag für das Event ${eventID}. throw error(406)`,
+        `Serveranfrage für den ${type}-Eintrag für Event ${eventID} nicht erfolgreich.`,
+        `Unerwartete Daten für den ${type}-Eintrag für das Event ${eventID}.`,
     );
 }
 

@@ -6,9 +6,7 @@ import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { dashboardAllSocialMediaLinkScheme, dashboardAllSocialMediaLinkTypeScheme } from 'types/dashboardProvideTypes';
 import { error } from '@sveltejs/kit';
 import { z } from 'zod';
-import { SaveMessageType } from 'types/saveMessageType';
 import { type SaveResult, trySaveDataAsync } from 'helper/trySaveDashboardData';
-import { setUnsavedChanges } from 'stores/saved';
 
 export type ValidateReturn = {
     data: DashboardAllSocialMediaLinks,
@@ -26,14 +24,14 @@ export async function loadDataAsync(fetch: typeof globalThis.fetch): Promise<Loa
 
     const socialsParsePromise     = checkAndParseInputDataAsync(await socialsFetchPromise,
                                                                 dashboardAllSocialMediaLinkScheme,
-                                                                `Serveranfrage für alle Social Media Links nicht erfolgreich. throw error(406)`,
-                                                                `Unerwartete Daten für alle Social Media Links. throw error(406)`,
+                                                                `Serveranfrage für alle Social Media Links nicht erfolgreich.`,
+                                                                `Unerwartete Daten für alle Social Media Links.`,
     );
     const socialTypesParsePromise = checkAndParseInputDataAsync(
         await socialTypeFetchPromise,
         dashboardAllSocialMediaLinkTypeScheme,
-        `Serveranfrage für alle Social Media Links Types nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Social Media Links Types. throw error(406)`,
+        `Serveranfrage für alle Social Media Links Types nicht erfolgreich.`,
+        `Unerwartete Daten für alle Social Media Links Types.`,
     );
 
     return {
@@ -48,8 +46,8 @@ export async function loadSocials(fetch: typeof globalThis.fetch): Promise<Dashb
     return await checkAndParseInputDataAsync(
         await socialsPromise,
         dashboardAllSocialMediaLinkScheme,
-        `Serveranfrage für alle Social Media Links nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Social Media Links. throw error(406)`,
+        `Serveranfrage für alle Social Media Links nicht erfolgreich.`,
+        `Unerwartete Daten für alle Social Media Links.`,
     );
 }
 

@@ -57,8 +57,8 @@ export async function loadSpeaker(fetch: typeof globalThis.fetch, eventId: numbe
     return await checkAndParseInputDataAsync(
         await allSpeakerPromise,
         dashboardAllEventSpeakerScheme,
-        `Serveranfrage für alle Speaker im event ${eventId} nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Speaker im Event ${eventId}. throw error(406)`,
+        `Serveranfrage für alle Speaker im event ${eventId} nicht erfolgreich.`,
+        `Unerwartete Daten für alle Speaker im Event ${eventId}.`,
     );
 }
 

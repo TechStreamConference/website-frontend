@@ -51,8 +51,8 @@ export async function load({ fetch }: {
     const socialTypes = await checkAndParseInputDataAsync(
         await socialTypesPromise,
         dashboardAllSocialMediaLinkTypeScheme,
-        `Serveranfrage für alle Social Media Links Types nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Social Media Links Types. throw error(406)`,
+        `Serveranfrage für alle Social Media Links Types nicht erfolgreich.`,
+        `Unerwartete Daten für alle Social Media Links Types.`,
     );
 
     return {

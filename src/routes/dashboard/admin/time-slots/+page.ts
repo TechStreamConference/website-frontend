@@ -13,8 +13,8 @@ export async function load({ fetch }: {
 
     const allEventsParsePromise           = checkAndParseInputDataAsync(await allEventFetchPromise,
                                                                         dashboardAllEventsScheme,
-                                                                        `Serveranfrage für alle Events nicht erfolgreich. throw error(406)`,
-                                                                        `Unerwartete Daten für alle Events. throw error(406)`,
+                                                                        `Serveranfrage für alle Events nicht erfolgreich.`,
+                                                                        `Unerwartete Daten für alle Events.`,
     );
     const talkDurationChoicesParsePromise = checkAndParseInputDataAsync(
         await talkDurationFetchPromise,
