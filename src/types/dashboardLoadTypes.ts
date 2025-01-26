@@ -15,6 +15,7 @@ import type {
     DashboardTalkDurationChoices,
     DashboardAllTentativeOrAcceptedTalks,
     DashboardAllPendingTalks,
+    DashboardUserData,
 } from './dashboardProvideTypes';
 
 export type LoadDashboard = {
@@ -58,6 +59,10 @@ export type LoadUserApplication = {
               socials: LoadUserSocials,
           } | undefined,
     error: SimpleError | undefined
+}
+
+export type LoadUserProfile = {
+    userData: DashboardUserData,
 }
 
 export type LoadSpeakerTalk = {

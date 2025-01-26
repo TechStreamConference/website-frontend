@@ -3,11 +3,13 @@
     import * as MenuItem from 'menu/menuItems';
 
     import type { SaveResult } from 'helper/trySaveDashboardData';
+    import type { LoadUserProfile } from 'types/dashboardLoadTypes';
 
     import { setUnsavedChanges } from 'stores/saved';
     import { trySaveDataAsync } from 'helper/trySaveDashboardData';
     import { SaveMessageType } from 'types/saveMessageType';
     import { fade } from 'svelte/transition';
+    import { loadUserData } from './profileHelper';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -25,6 +27,7 @@
         Name,
     }
 
+    export let data: LoadUserProfile;
     let state: State = State.None;
 
     let saveMessage: SaveMessage;
@@ -71,7 +74,8 @@
         const response = await save(toSave, '/api/account/change-username');
 
         if (response.success) {
-            name = '';
+            name          = '';
+            data.userData = await loadUserData(fetch);
         }
     }
 
@@ -84,7 +88,12 @@
         const response = await save(toSave, '/api/account/change-email');
 
         if (response.success) {
-            mail = '';
+            mail       = '';
+            errorQueue = [ // assignment because of reactivity
+                ...errorQueue,
+                'Du musst deine Mail erst bestätigen damit sie hier angezeigt wird.',
+            ];
+            // no fetch of user data because the mail has to be verified first
         }
     }
 
@@ -104,6 +113,7 @@
         if (response.success) {
             newPassword1 = '';
             newPassword2 = '';
+            // no fetch of user data because the password does not get displayed anyway.
         }
     }
 </script>
@@ -117,9 +127,9 @@
     <div class="dashboard-user-profile-section-entry-wrapper">
         <div class="dashboard-user-profile-entry-grid">
             <TextLine>Name:</TextLine>
-            <TextLine>XXXXXXXXXXXXXXXXXXX</TextLine>
+            <TextLine>{data.userData.username}</TextLine>
             <TextLine>Mail:</TextLine>
-            <TextLine>XXXXXXXXXXXXXXXXXXXXX</TextLine>
+            <TextLine>{data.userData.email}</TextLine>
         </div>
         <div class="dashboard-user-profile-button-wrapper">
             <Button ariaLabel="Klicke, um deinen Namen zu ändern."
