@@ -5,7 +5,7 @@
     import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
     import type { DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
     import type { SetAdminEvent, SetAllAdminEventSpeaker } from 'types/dashboardSetTypes';
-    import { type SaveResult, trySaveDataAsyncOutReset } from 'helper/trySaveData';
+    import { combineSaveResult, type SaveResult, trySaveDataAsyncOutReset } from 'helper/trySaveData';
     import { SaveMessageType } from 'types/saveMessageType';
 
     import { onMount } from 'svelte';
@@ -146,13 +146,7 @@
 
             const resultEvent   = await resultEventPromise;
             const resultSpeaker = await resultSpeakerPromise;
-            const toReturn      = {
-                success:  resultEvent.success && resultSpeaker.success,
-                messages: [
-                    ...resultEvent.messages,
-                    ...resultSpeaker.messages,
-                ],
-            };
+            const toReturn      = combineSaveResult(resultEvent, resultSpeaker);
 
             if (toReturn.success) {
                 resetUnsavedChanges();
