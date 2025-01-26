@@ -1,6 +1,5 @@
 import { resetUnsavedChanges } from 'stores/saved';
 import { apiUrl } from './links';
-import { SaveMessageType } from 'types/saveMessageType';
 import { parseMultipleErrorsAsync } from 'helper/parseJson';
 
 export type SaveDashboardResult = {
