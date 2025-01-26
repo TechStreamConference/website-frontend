@@ -2,14 +2,14 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/menuItems';
 
-    import type { SaveResult } from 'helper/trySaveDashboardData';
+    import type { SaveResult } from 'helper/trySaveData';
     import type { LoadDashboard, LoadUserSocials } from 'types/dashboardLoadTypes';
     import type { DashboardSocialMediaLink } from 'types/dashboardProvideTypes';
     import type { SetAllUpdateSocialMediaLink, SetCreateSocialMediaLink } from 'types/dashboardSetTypes';
     import type { DeleteReturn, ValidateReturn } from 'pageHelper/speakerTeamMemberSocials';
 
     import { SaveMessageType } from 'types/saveMessageType';
-    import { combineSaveResult, trySaveDataAsync } from 'helper/trySaveDashboardData';
+    import { combineSaveResult, trySaveDataAsync } from 'helper/trySaveData';
     import {
         deleteLinkAsync,
         getIDFromSocialMediaType,

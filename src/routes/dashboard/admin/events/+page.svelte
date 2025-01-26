@@ -5,7 +5,7 @@
     import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
     import type { DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
     import type { SetAdminEvent, SetAllAdminEventSpeaker } from 'types/dashboardSetTypes';
-    import { type SaveResult, trySaveDataAsyncOutReset } from 'helper/trySaveDashboardData';
+    import { type SaveResult, trySaveDataAsyncOutReset } from 'helper/trySaveData';
     import { SaveMessageType } from 'types/saveMessageType';
 
     import { onMount } from 'svelte';
@@ -13,7 +13,7 @@
     import { convertSaveEventData, convertSaveSpeakerData, loadSpeaker, validateData } from './eventsHelper';
     import { resetUnsavedChanges, setUnsavedChanges } from 'stores/saved';
     import { convertTimeAndDateToHTML, formatDate } from 'helper/dates';
-    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveData';
     import { scrollToTop } from 'helper/scroll';
     import { getElementByTitle } from 'helper/basic';
 

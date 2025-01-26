@@ -7,7 +7,7 @@
 
     import { setUnsavedChanges, unsavedChanges } from 'stores/saved';
     import { getTimeSlotsAsync } from './timeSlotHelper';
-    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveData';
     import { checkSQLTimeAndDate, convertTimeAndDateToSQL } from 'helper/dates';
 
     import Tabs from 'elements/navigation/tabs.svelte';

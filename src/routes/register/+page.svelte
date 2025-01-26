@@ -4,7 +4,7 @@
 
     import type { LoadRegister } from 'types/loadTypes';
 
-    import { trySaveDataAsync } from 'helper/trySaveDashboardData.js';
+    import { trySaveDataAsync } from 'helper/trySaveData.js';
 
     import HeadlinePage from 'elements/text/headlinePage.svelte';
     import ErrorMessage from 'elements/text/message.svelte';

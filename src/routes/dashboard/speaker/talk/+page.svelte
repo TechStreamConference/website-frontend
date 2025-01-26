@@ -10,7 +10,7 @@
     import { setUnsavedChanges } from 'stores/saved';
     import { SaveMessageType } from 'types/saveMessageType';
     import { scrollToTop } from 'helper/scroll';
-    import { trySaveDataAsync } from 'helper/trySaveDashboardData.js';
+    import { trySaveDataAsync } from 'helper/trySaveData.js';
     import { formatDate } from 'helper/dates.js';
     import { apiUrl } from 'helper/links';
     import { fade } from 'svelte/transition';

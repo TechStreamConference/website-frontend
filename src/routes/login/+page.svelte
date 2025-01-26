@@ -13,7 +13,7 @@
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     import { goto } from '$app/navigation';
-    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveData';
 
     export let data: LoadLogin; // data from database
 

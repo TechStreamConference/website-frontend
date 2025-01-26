@@ -24,7 +24,7 @@
     import { setUnsavedChanges } from 'stores/saved';
     import { ApprovalSection, getSectionHash } from 'types/approvalSection';
     import { validateApproval, validateRequestedChanges } from './approvalValidation';
-    import { trySaveDataAsync } from 'helper/trySaveDashboardData.js';
+    import { trySaveDataAsync } from 'helper/trySaveData.js';
 
     export let data: LoadAdminApproval;
 

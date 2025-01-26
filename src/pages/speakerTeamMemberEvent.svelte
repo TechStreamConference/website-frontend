@@ -6,7 +6,7 @@
 
     import { _unsavedChanges } from 'stores/saved';
     import { SaveMessageType } from 'types/saveMessageType';
-    import { trySaveDataAsync } from 'helper/trySaveDashboardData.js';
+    import { trySaveDataAsync } from 'helper/trySaveData.js';
     import { scrollToTop } from 'helper/scroll';
     import { loadSpeakerTeamMemberAsync, validate } from 'pageHelper/speakerTeamMemberEvent';
 

@@ -2,11 +2,11 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/menuItems';
 
-    import type { SaveResult } from 'helper/trySaveDashboardData';
+    import type { SaveResult } from 'helper/trySaveData';
     import type { LoadUserProfile } from 'types/dashboardLoadTypes';
 
     import { setUnsavedChanges } from 'stores/saved';
-    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveData';
     import { SaveMessageType } from 'types/saveMessageType';
     import { fade } from 'svelte/transition';
     import { loadUserData } from './profileHelper';

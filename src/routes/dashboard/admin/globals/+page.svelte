@@ -8,7 +8,7 @@
     import { Clone } from 'helper/clone';
     import { SaveMessageType } from 'types/saveMessageType';
     import { setUnsavedChanges } from 'stores/saved';
-    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveData';
     import { resetGlobals } from 'stores/globals';
 
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';

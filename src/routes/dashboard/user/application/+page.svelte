@@ -9,7 +9,7 @@
 
     import { SaveMessageType } from 'types/saveMessageType';
     import { formatDate } from 'helper/dates';
-    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveData';
     import { scrollToTop } from 'helper/scroll';
 
     import Tabs from 'elements/navigation/tabs.svelte';

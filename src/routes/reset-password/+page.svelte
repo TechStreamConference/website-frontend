@@ -4,7 +4,7 @@
 
     import type { LoadResetPassword } from 'types/loadTypes';
 
-    import { trySaveDataAsync } from 'helper/trySaveDashboardData.js';
+    import { trySaveDataAsync } from 'helper/trySaveData.js';
 
     import Input from 'elements/input/input.svelte';
     import Button from 'elements/input/button.svelte';

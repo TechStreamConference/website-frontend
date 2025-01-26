@@ -2,7 +2,7 @@
     import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
 
-    import { trySaveDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveData';
 
     import TextLine from 'elements/text/textLine.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';

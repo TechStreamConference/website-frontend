@@ -6,7 +6,7 @@ import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { dashboardAllSocialMediaLinkScheme, dashboardAllSocialMediaLinkTypeScheme } from 'types/dashboardProvideTypes';
 import { error } from '@sveltejs/kit';
 import { z } from 'zod';
-import { type SaveResult, trySaveDataAsync } from 'helper/trySaveDashboardData';
+import { type SaveResult, trySaveDataAsync } from 'helper/trySaveData';
 
 export type ValidateReturn = {
     data: DashboardAllSocialMediaLinks,
