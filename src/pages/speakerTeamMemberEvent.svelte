@@ -68,6 +68,7 @@
         }
 
         const response = await trySaveDataAsync(
+            fetch,
             formData,
             `/api/dashboard/${type}/event/${data.current.event_id}`,
             'POST',

@@ -52,7 +52,7 @@
             tag_ids:            currentTalk.tags.map(x => x.id),
         };
 
-        const result = await trySaveDataAsync(toSave, `/api/dashboard/speaker/talk/${currentTalk.id}`, 'PUT');
+        const result = await trySaveDataAsync(fetch, toSave, `/api/dashboard/speaker/talk/${currentTalk.id}`, 'PUT');
 
         saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorQueue = result.messages;
@@ -70,6 +70,7 @@
     async function acceptSlot(index: number): Promise<void> {
         const currentTalk = data.tentativeOrAcceptedTalks[index];
         const response    = await trySaveDataAsync(
+            fetch,
             [],
             `/api/dashboard/speaker/talk/${currentTalk.id}/accept-time-slot`,
             'PUT',

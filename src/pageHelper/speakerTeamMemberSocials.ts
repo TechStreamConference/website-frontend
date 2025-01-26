@@ -90,7 +90,7 @@ export function validate(data: DashboardAllSocialMediaLinks): ValidateReturn {
     };
 }
 
-export async function deleteLinkAsync(data: DashboardAllSocialMediaLinks, index: number): Promise<DeleteReturn> {
+export async function deleteLinkAsync(fetch: typeof globalThis.fetch, data: DashboardAllSocialMediaLinks, index: number): Promise<DeleteReturn> {
     const id = data[index].id;
     if (id === 0) {
         return {
@@ -102,7 +102,7 @@ export async function deleteLinkAsync(data: DashboardAllSocialMediaLinks, index:
         };
     }
 
-    const result = await trySaveDataAsync([], `/api/dashboard/user/social-media-link/${id}`, 'DELETE');
+    const result = await trySaveDataAsync(fetch, [], `/api/dashboard/user/social-media-link/${id}`, 'DELETE');
 
     if (!result.success) {
         return {

@@ -10,7 +10,7 @@
     let errorQueue: string[] = [];
 
     async function logoutAsync(): Promise<void> {
-        const result = await trySaveDataAsync([], '/api/account/logout', 'POST');
+        const result = await trySaveDataAsync(fetch, [], '/api/account/logout', 'POST');
         if (!result.success) {
             return;
         }

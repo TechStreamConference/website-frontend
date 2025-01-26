@@ -18,11 +18,12 @@ export function combineSaveResult(lhs: SaveResult, rhs: SaveResult): SaveResult 
 }
 
 export async function trySaveDataAsyncOutReset<T>(
+    fetch: typeof globalThis.fetch,
     data: T,
     url: string,
     routeType: string,
 ): Promise<SaveResult> {
-    const stringData = data instanceof FormData ? data : JSON.stringify(data);
+    const stringData         = data instanceof FormData ? data : JSON.stringify(data);
     const response: Response = await fetch(apiUrl(url), {
         method: routeType,
         body:   stringData,
@@ -36,11 +37,12 @@ export async function trySaveDataAsyncOutReset<T>(
 
 
 export async function trySaveDataAsync<T>(
+    fetch: typeof globalThis.fetch,
     data: T,
     url: string,
     routeType: string,
 ): Promise<SaveResult> {
-    const result = await trySaveDataAsyncOutReset(data, url, routeType);
+    const result = await trySaveDataAsyncOutReset(fetch, data, url, routeType);
 
     if (result.success) {
         resetUnsavedChanges();

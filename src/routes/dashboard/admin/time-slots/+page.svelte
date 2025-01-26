@@ -60,6 +60,7 @@
             entry.start_time = temp ? temp : entry.start_time;
         }
         const result = await trySaveDataAsync(
+            fetch,
             { 'time_slots': toSave },
             `/api/dashboard/admin/time-slots/${data.currentEventID}`,
             'POST',

@@ -43,7 +43,7 @@
             password:          password.trim(),
         };
 
-        const result = await trySaveDataAsync(data, '/api/account/login', 'POST');
+        const result = await trySaveDataAsync(fetch, data, '/api/account/login', 'POST');
 
         if (result.success) {
             await goto('/dashboard');
@@ -63,7 +63,7 @@
             return;
         }
 
-        const result = await trySaveDataAsync(data, '/api/account/forgot-password', 'POST');
+        const result = await trySaveDataAsync(fetch, data, '/api/account/forgot-password', 'POST');
 
         errorQueue = result.messages;
         if (result.success) {

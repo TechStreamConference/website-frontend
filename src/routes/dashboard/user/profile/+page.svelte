@@ -52,7 +52,7 @@
     }
 
     async function save<T>(toSave: T, url: string): Promise<SaveResult> {
-        const response = await trySaveDataAsync(toSave, url, 'PUT');
+        const response = await trySaveDataAsync(fetch, toSave, url, 'PUT');
 
         saveMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorQueue = response.messages;

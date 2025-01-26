@@ -72,7 +72,7 @@
                 };
             }
 
-            return await trySaveDataAsync(toSave, '/api/dashboard/user/social-media-link', 'PUT');
+            return await trySaveDataAsync(fetch, toSave, '/api/dashboard/user/social-media-link', 'PUT');
         })();
 
         const result = combineSaveResult(createResult, saveResult);
@@ -94,12 +94,12 @@
             url:                  link.url,
         };
 
-        return await trySaveDataAsync(toSave, '/api/dashboard/user/social-media-link', 'POST');
+        return await trySaveDataAsync(fetch, toSave, '/api/dashboard/user/social-media-link', 'POST');
     }
 
     async function tryDeleteAsync(e: CustomEvent<number>): Promise<void> {
         const value: number              = e.detail;
-        const deleteResult: DeleteReturn = await deleteLinkAsync(data.socials, value);
+        const deleteResult: DeleteReturn = await deleteLinkAsync(fetch, data.socials, value);
         saveMessage.setSaveMessage(deleteResult.result.success ? SaveMessageType.Delete : SaveMessageType.Error);
         errorQueue   = deleteResult.result.messages;
         data.socials = deleteResult.data;

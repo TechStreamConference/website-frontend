@@ -30,7 +30,7 @@
             footer_text: copiedData.value.globals.footer_text,
         };
 
-        const result = await trySaveDataAsync(adminGlobals, '/api/dashboard/admin/globals', 'PUT');
+        const result = await trySaveDataAsync(fetch, adminGlobals, '/api/dashboard/admin/globals', 'PUT');
 
         resetGlobals(); // reset cache to force a global fetch next time
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);

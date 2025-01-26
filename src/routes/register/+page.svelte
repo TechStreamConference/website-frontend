@@ -115,7 +115,7 @@
             token:    data.token,
         };
 
-        const response = await trySaveDataAsync(toSave, '/api/account/register', 'POST');
+        const response = await trySaveDataAsync(fetch, toSave, '/api/account/register', 'POST');
         errorQueue     = response.messages;
         registered     = response.success;
     }
