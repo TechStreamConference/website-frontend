@@ -91,7 +91,7 @@
             mail       = '';
             errorQueue = [ // assignment because of reactivity
                 ...errorQueue,
-                'Du musst deine Mail erst bestätigen damit sie hier angezeigt wird.',
+                'Du musst deine E-Mail-Adresse erst bestätigen, damit sie hier angezeigt wird.',
             ];
             // no fetch of user data because the mail has to be verified first
         }
