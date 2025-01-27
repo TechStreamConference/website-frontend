@@ -25,7 +25,7 @@
     export let menuItem: MenuItem;
 
     let saveMessage: SaveMessage;
-    let errorQueue: string[] = [];
+    let errorList: string[] = [];
 
     let form: SpeakerTeamMemberEventForm;
 
@@ -55,10 +55,10 @@
         const returnValue: ValidateReturn = validate(toSave);
         toSave                            = returnValue.data;
         if (returnValue.messages.length > 0) {
-            errorQueue = returnValue.messages;
+            errorList = returnValue.messages;
             return false;
         } else {
-            errorQueue = [];
+            errorList = [];
         }
 
         const formData = new FormData();
@@ -75,7 +75,7 @@
         );
 
         saveMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
-        errorQueue = response.messages;
+        errorList = response.messages;
 
         if (response.success) {
             data.event = await loadSpeakerTeamMemberAsync(fetch, data.current.event_id, type);
@@ -113,7 +113,7 @@
             />
         {/if}
         <SaveMessage bind:this={saveMessage} />
-        <MessageWrapper messages={errorQueue} />
+        <MessageWrapper messages={errorList} />
     </div>
     <SpeakerTeamMemberEventForm bind:this={form}
                                 data={data}

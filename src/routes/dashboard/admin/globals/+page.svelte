@@ -23,7 +23,7 @@
 
     let copiedData           = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
     let message: SaveMessage;
-    let errorQueue: string[] = [];
+    let errorList: string[] = [];
 
     async function trySaveAsync(): Promise<boolean> {
         const adminGlobals: SetAdminGlobals = {
@@ -34,7 +34,7 @@
 
         resetGlobals(); // reset cache to force a global fetch next time
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
-        errorQueue = result.messages;
+        errorList = result.messages;
         return result.success;
     }
 </script>
@@ -47,7 +47,7 @@
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 <SectionDashboard classes="dashboard-admin-global-section">
     <SaveMessage bind:this={message} />
-    <MessageWrapper messages={errorQueue} />
+    <MessageWrapper messages={errorList} />
     <form class="dashboard-admin-global-form"
           on:submit|preventDefault={trySaveAsync}>
 		<TextArea

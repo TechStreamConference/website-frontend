@@ -28,14 +28,14 @@
     export let data: LoadDashboard & LoadUserSocials;
 
     let saveMessage: SaveMessage;
-    let errorQueue: string[] = [];
+    let errorList: string[] = [];
 
 
     async function trySaveAsync(): Promise<boolean> {
         const validateResult: ValidateReturn = validate(data.socials);
-        errorQueue                           = validateResult.messages;
-        data.socials                         = validateResult.data;
-        if (errorQueue.length > 0) {
+        errorList    = validateResult.messages;
+        data.socials = validateResult.data;
+        if (errorList.length > 0) {
             return false;
         }
 
@@ -78,7 +78,7 @@
         const result = combineSaveResult(createResult, saveResult);
 
         saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
-        errorQueue = result.messages;
+        errorList = result.messages;
 
         const reload = result.success && data.socials.length !== toSave.social_media_links.length;
         if (reload) {
@@ -101,7 +101,7 @@
         const value: number              = e.detail;
         const deleteResult: DeleteReturn = await deleteLinkAsync(fetch, data.socials, value);
         saveMessage.setSaveMessage(deleteResult.result.success ? SaveMessageType.Delete : SaveMessageType.Error);
-        errorQueue   = deleteResult.result.messages;
+        errorList    = deleteResult.result.messages;
         data.socials = deleteResult.data;
     }
 </script>
@@ -121,7 +121,7 @@
         />
     {/if}
     <SaveMessage bind:this={saveMessage} />
-    <MessageWrapper messages={errorQueue} />
+    <MessageWrapper messages={errorList} />
 
     <SpeakerTeamMemberSocialMediaLinkForm bind:data={data}
                                           bind:roles={data.roles}

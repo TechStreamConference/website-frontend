@@ -31,7 +31,7 @@
     let state: State = State.None;
 
     let saveMessage: SaveMessage;
-    let errorQueue: string[] = [];
+    let errorList: string[] = [];
 
     let name: string         = '';
     let mail: string         = '';
@@ -55,7 +55,7 @@
         const response = await trySaveDataAsync(fetch, toSave, url, 'PUT');
 
         saveMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
-        errorQueue = response.messages;
+        errorList = response.messages;
 
         if (response.success) {
             oldPassword = '';
@@ -89,8 +89,8 @@
 
         if (response.success) {
             mail       = '';
-            errorQueue = [ // assignment because of reactivity
-                ...errorQueue,
+            errorList = [ // assignment because of reactivity
+                ...errorList,
                 'Du musst deine E-Mail-Adresse erst bestätigen, damit sie hier angezeigt wird.',
             ];
             // no fetch of user data because the mail has to be verified first
@@ -100,7 +100,7 @@
     async function savePassword(): Promise<void> {
         if (newPassword1.trim() !== newPassword2.trim()) {
             saveMessage.setSaveMessage(SaveMessageType.Error);
-            errorQueue = ['Die beiden neuen Passwörter stimmen nicht überein.'];
+            errorList = ['Die beiden neuen Passwörter stimmen nicht überein.'];
             return;
         }
         const toSave = {
@@ -146,7 +146,7 @@
 </SectionDashboard>
 <SectionDashboard classes="standard-dashboard-section">
     <SaveMessage bind:this={saveMessage} />
-    <MessageWrapper messages={errorQueue} />
+    <MessageWrapper messages={errorList} />
 </SectionDashboard>
 {#if state === State.Name}
     <div class="dashboard-user-profile-transition-wrapper"

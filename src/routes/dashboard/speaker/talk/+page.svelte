@@ -35,7 +35,7 @@
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;
-    let errorQueue: string[];
+    let errorList: string[];
     let rejectText: string = '';
     let acceptPopup: GeneralPopup;
     let rejectPopup: GeneralPopup;
@@ -55,7 +55,7 @@
         const result = await trySaveDataAsync(fetch, toSave, `/api/dashboard/speaker/talk/${currentTalk.id}`, 'PUT');
 
         saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
-        errorQueue = result.messages;
+        errorList = result.messages;
         if (result.success) {
             currentTalk.requested_changes = null;
         }
@@ -77,7 +77,7 @@
         );
 
         saveMessage.setSaveMessage(response.success ? SaveMessageType.Approved : SaveMessageType.Error);
-        errorQueue = response.messages;
+        errorList = response.messages;
         if (response.success) {
             data.tentativeOrAcceptedTalks[index].time_slot_accepted = true;
         }
@@ -134,7 +134,7 @@
 
 <SectionDashboard classes="standard-dashboard-section">
     <SaveMessage bind:this={saveMessage} />
-    <MessageWrapper messages={errorQueue} />
+    <MessageWrapper messages={errorList} />
     <NavigationDropDown id="dashboard-speaker-talk-event-navigation"
                         labelText="Event:"
                         data={ data.allEvents.map(x => x.title) }

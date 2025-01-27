@@ -30,11 +30,11 @@
 
     const loggedInMessage     = data.loggedIn ? 'Du bist bereits angemeldet.' : '';
     const displayLoginMessage = data.showLoginMessage ? 'Du musst dich zunächst anmelden.' : '';
-    let errorQueue: string[]  = [];
+    let errorList: string[]   = [];
 
     function changeState(_state: State): void {
-        errorQueue = [];
-        state      = _state;
+        errorList = [];
+        state     = _state;
     }
 
     async function loginAsync(): Promise<void> {
@@ -50,7 +50,7 @@
             return;
         }
 
-        errorQueue = result.messages;
+        errorList = result.messages;
     }
 
     async function resetPassword(): Promise<void> {
@@ -59,13 +59,13 @@
         };
 
         if (data.username_or_email.length === 0) {
-            errorQueue = ['Keine E-Mail-Adresse oder Name angegeben.'];
+            errorList = ['Keine E-Mail-Adresse oder Name angegeben.'];
             return;
         }
 
         const result = await trySaveDataAsync(fetch, data, '/api/account/forgot-password', 'POST');
 
-        errorQueue = result.messages;
+        errorList = result.messages;
         if (result.success) {
             changeState(State.ResetPasswordSuccess);
         }
@@ -83,7 +83,7 @@
             <div class="login-message-wrapper">
                 <ErrorMessage message={loggedInMessage} />
                 <ErrorMessage message={displayLoginMessage} />
-                <MessageWrapper messages={errorQueue} />
+                <MessageWrapper messages={errorList} />
             </div>
             <Input
                   classes="login-username-mail"
@@ -122,7 +122,7 @@
         <form class="login-form-width-wrapper"
               on:submit|preventDefault={resetPassword}>
             <HeadlinePage>Passwort zurücksetzen</HeadlinePage>
-            <MessageWrapper messages={errorQueue} />
+            <MessageWrapper messages={errorList} />
             <Input
                   classes="login-username-mail login-username-mail-reset-extra"
                   id="login-username-or-email"

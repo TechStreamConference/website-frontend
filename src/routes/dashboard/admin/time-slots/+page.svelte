@@ -28,7 +28,7 @@
     export let data: LoadAdminTimeSlots;
 
     let saveMessage: SaveMessage;
-    let errorQueue: string[] = [];
+    let errorList: string[] = [];
 
     function addSlot() {
         const newSlotsData: DashboardTimeSlot = {
@@ -46,7 +46,7 @@
     }
 
     async function updateDisplayed(value: string) {
-        errorQueue          = [];
+        errorList           = [];
         data.currentEventID = getIDFromTitle(data.allEvents, value);
         data.currentSlots   = await getTimeSlotsAsync(fetch, data.currentEventID);
     }
@@ -67,14 +67,14 @@
         );
 
         saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
-        errorQueue = result.messages;
+        errorList = result.messages;
         return result.success;
     }
 
     function moveUp(index: number) {
-        errorQueue = [];
+        errorList = [];
         if (index - 1 == -1) {
-            errorQueue = ['Es gibt keinen Slot vor diesem Slot.'];
+            errorList = ['Es gibt keinen Slot vor diesem Slot.'];
             return;
         }
 
@@ -93,9 +93,9 @@
     }
 
     function moveDown(index: number) {
-        errorQueue = [];
+        errorList = [];
         if (index + 1 == data.currentSlots.length) {
-            errorQueue = ['Es gibt kein Slot hinter diesem Slot.'];
+            errorList = ['Es gibt kein Slot hinter diesem Slot.'];
             return;
         }
 
@@ -137,7 +137,7 @@
 
     <form on:submit|preventDefault={save}>
         <SaveMessage bind:this={saveMessage} />
-        <MessageWrapper messages={errorQueue} />
+        <MessageWrapper messages={errorList} />
         <div class="dashboard-admin-time-slots-grid">
             {#each data.currentSlots as entry, index}
                 <Input

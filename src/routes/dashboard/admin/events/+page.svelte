@@ -37,7 +37,7 @@
     let navigationDropDown: NavigationDropDown;
 
     let currentEvent: DashboardEvent;
-    let errorQueue: string[] = [];
+    let errorList: string[] = [];
 
 
     onMount(() => {
@@ -116,8 +116,8 @@
 
         scrollToTop(); // scroll here already so that all error messages can be seen.
 
-        errorQueue = validateData(toSaveEvent, toSaveSpeaker, copiedData.value.allEvents);
-        if (errorQueue.length > 0) {
+        errorList = validateData(toSaveEvent, toSaveSpeaker, copiedData.value.allEvents);
+        if (errorList.length > 0) {
             return false;
         }
 
@@ -157,7 +157,7 @@
         })();
 
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
-        errorQueue = result.messages;
+        errorList = result.messages;
         return result.success;
     }
 </script>
@@ -178,7 +178,7 @@
     </Button>
     <div class="dashboard-admin-event-message-wrapper">
         <SaveMessage bind:this={message} />
-        <MessageWrapper messages={errorQueue} />
+        <MessageWrapper messages={errorList} />
     </div>
     {#if copiedData.value.allEvents}
         <NavigationDropDown

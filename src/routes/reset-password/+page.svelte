@@ -25,14 +25,14 @@
 
     let password1: string;
     let password2: string;
-    let errorQueue: string[] = [];
+    let errorList: string[] = [];
 
     async function resetPassword(): Promise<void> {
-        errorQueue      = [];
+        errorList = [];
         const trimmed_1 = password1.trim();
         const trimmed_2 = password2.trim();
         if (trimmed_1 !== trimmed_2) {
-            errorQueue.push('Die Passwörter stimmen nicht überein');
+            errorList.push('Die Passwörter stimmen nicht überein');
             return;
         }
 
@@ -42,7 +42,7 @@
         };
         const response = await trySaveDataAsync(fetch, toSave, '/api/account/reset-password', 'POST');
 
-        errorQueue = response.messages;
+        errorList = response.messages;
 
         if (response.success) {
             state = State.DidReset;
@@ -58,7 +58,7 @@
         <form on:submit|preventDefault={resetPassword}
               class="reset-password-wrapper">
             <HeadlinePage>Passwort zurücksetzen</HeadlinePage>
-            <MessageWrapper messages={errorQueue} />
+            <MessageWrapper messages={errorList} />
             <Input
                   classes="reset-password-input-line"
                   id="reset-password-input-line-1"

@@ -67,7 +67,7 @@ export function validateData(
     allSpeaker: SetAllAdminEventSpeaker,
     allEvents: DashboardAllEvents,
 ): string[] {
-    const errorQueue: string[] = [];
+    const errorList: string[] = [];
 
     // name
     for (const event of allEvents) {
@@ -75,48 +75,48 @@ export function validateData(
             continue;
         }
         if (event.title.trim() === data.title.trim()) {
-            errorQueue.push(`Event mit dem Titel ${data.title} existiert bereits.`);
+            errorList.push(`Event mit dem Titel ${data.title} existiert bereits.`);
         }
     }
 
     // text
     if (data.title.trim().length === 0) {
-        errorQueue.push('Das Feld "Titel" muss angegeben werden.');
+        errorList.push('Das Feld "Titel" muss angegeben werden.');
     }
     if (data.subtitle.trim().length === 0) {
-        errorQueue.push('Das Feld "Untertitel" muss angegeben werden.');
+        errorList.push('Das Feld "Untertitel" muss angegeben werden.');
     }
     if (data.description_headline.trim().length === 0) {
-        errorQueue.push('Das Feld "Überschrift Beschreibung" muss angegeben werden.');
+        errorList.push('Das Feld "Überschrift Beschreibung" muss angegeben werden.');
     }
     if (data.description.trim().length === 0) {
-        errorQueue.push('Das Feld "Beschreibung" muss angegeben werden.');
+        errorList.push('Das Feld "Beschreibung" muss angegeben werden.');
     }
 
     // dates
     if (!isBeforeOrSameDatesString(data.start_date, data.end_date)) {
-        errorQueue.push('Das Start-Datum liegt nach dem End-Datum.');
+        errorList.push('Das Start-Datum liegt nach dem End-Datum.');
     }
 
     if (data.publish_date && data.schedule_visible_from) {
         if (!isBeforeOrSameDatesString(data.publish_date, data.schedule_visible_from)) {
-            errorQueue.push('Der Ablaufplan ist vor dem Event sichtbar.');
+            errorList.push('Der Ablaufplan ist vor dem Event sichtbar.');
         }
     }
     if (data.publish_date) {
         if (!isBeforeOrSameDatesString(data.publish_date, data.start_date)) {
-            errorQueue.push('Das Event wird erst nach dem Event-Start veröffentlicht.');
+            errorList.push('Das Event wird erst nach dem Event-Start veröffentlicht.');
         }
     }
     if (data.schedule_visible_from) {
         if (!isBeforeOrSameDatesString(data.schedule_visible_from, data.start_date)) {
-            errorQueue.push('Der Ablaufplan ist erst nach dem Event-Start sichtbar.');
+            errorList.push('Der Ablaufplan ist erst nach dem Event-Start sichtbar.');
         }
     }
 
     if (data.call_for_papers_start && data.call_for_papers_end) {
         if (!isBeforeOrSameDatesString(data.call_for_papers_start, data.call_for_papers_end)) {
-            errorQueue.push('Das Anmeldeende liegt vor dem Anmeldestart.');
+            errorList.push('Das Anmeldeende liegt vor dem Anmeldestart.');
         }
     }
 
@@ -124,23 +124,23 @@ export function validateData(
     // url
     const urlScheme = z.string().url().nullable();
     if (!urlScheme.safeParse(data.discord_url).success) {
-        errorQueue.push('Die Discord-URL ist nicht valide.');
+        errorList.push('Die Discord-URL ist nicht valide.');
     }
     if (!urlScheme.safeParse(data.presskit_url).success) {
-        errorQueue.push('Die Presskit-URL ist nicht valide.');
+        errorList.push('Die Presskit-URL ist nicht valide.');
     }
     if (!urlScheme.safeParse(data.twitch_url).success) {
-        errorQueue.push('Die Twitch-URL ist nicht valide.');
+        errorList.push('Die Twitch-URL ist nicht valide.');
     }
 
     // speaker
     for (const speaker of allSpeaker) {
         if (speaker.visible_from) {
             if (!isBeforeOrSameDatesString(speaker.visible_from, data.start_date)) {
-                errorQueue.push(`Speaker ${speaker.name} ist erst nach dem Event-Start sichtbar.`);
+                errorList.push(`Speaker ${speaker.name} ist erst nach dem Event-Start sichtbar.`);
             }
         }
     }
 
-    return errorQueue;
+    return errorList;
 }

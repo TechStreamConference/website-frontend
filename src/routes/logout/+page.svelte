@@ -7,7 +7,7 @@
     import TextLine from 'elements/text/textLine.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
-    let errorQueue: string[] = [];
+    let errorList: string[] = [];
 
     async function logoutAsync(): Promise<void> {
         const result = await trySaveDataAsync(fetch, [], '/api/account/logout', 'POST');
@@ -23,4 +23,4 @@
 </script>
 
 <TextLine>Logging out...</TextLine>
-<MessageWrapper messages={errorQueue} />
+<MessageWrapper messages={errorList} />

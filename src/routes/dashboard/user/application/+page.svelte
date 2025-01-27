@@ -28,8 +28,8 @@
     export let data: LoadDashboard & LoadUserApplication;
 
     let saveMessage: SaveMessage;
-    let errorQueue: string[] = [];
-    let success: boolean     = false;
+    let errorList: string[] = [];
+    let success: boolean    = false;
     let eventForm: SpeakerTeamMemberEventForm;
 
     function deleteLink(e: CustomEvent<number>) {
@@ -52,18 +52,18 @@
         if (!data.data) {
             return false;
         }
-        errorQueue = [];
+        errorList = [];
 
         const socialResult: SocialHelper.ValidateReturn = SocialHelper.validate(data.data.socials.socials);
         const eventResult: EventHelper.ValidateReturn   = EventHelper.validate(event);
-        errorQueue                                      = socialResult.messages;
-        errorQueue.push(...(eventResult.messages));
+        errorList = socialResult.messages;
+        errorList.push(...(eventResult.messages));
         if (!image.imageFile) {
-            errorQueue.push('Das Profilbild fehlt.');
+            errorList.push('Das Profilbild fehlt.');
         }
         data.data.socials.socials = socialResult.data;
 
-        return errorQueue.length === 0;
+        return errorList.length === 0;
     }
 
     async function trySave(): Promise<boolean> {
@@ -114,8 +114,8 @@
         const result = await trySaveDataAsync(fetch, formData, '/api/dashboard/user/apply-as-speaker', 'POST');
 
         saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
-        errorQueue = result.messages;
-        success    = result.success;
+        errorList = result.messages;
+        success   = result.success;
         return result.success;
     }
 </script>
@@ -177,7 +177,7 @@
             </div>
             <div class="dashboard-user-application-form-messages-wrapper">
                 <SaveMessage bind:this={saveMessage} />
-                <MessageWrapper messages={errorQueue} />
+                <MessageWrapper messages={errorList} />
             </div>
             <div class="dashboard-user-application-section">
                 <HeadlineH2>Deine Bewerbung</HeadlineH2>

@@ -35,7 +35,7 @@
     let usernameMessage: string = '';
     let emailMessage: string    = '';
     let passwordMessage: string = '';
-    let errorQueue: string[]    = [''];
+    let errorList: string[]     = [''];
 
     let registered: boolean = false;
 
@@ -90,7 +90,7 @@
         const nameResult = await namePromise;
         const mailResult = await mailPromise;
 
-        errorQueue      = [];
+        errorList       = [];
         usernameMessage = nameResult ? nameResult : '';
         emailMessage    = mailResult ? mailResult : '';
         passwordMessage = passwordResult ? passwordResult : '';
@@ -116,8 +116,8 @@
         };
 
         const response = await trySaveDataAsync(fetch, toSave, '/api/account/register', 'POST');
-        errorQueue     = response.messages;
-        registered     = response.success;
+        errorList  = response.messages;
+        registered = response.success;
     }
 </script>
 
@@ -134,7 +134,7 @@
                     <ErrorMessage message={usernameMessage} />
                     <ErrorMessage message={emailMessage} />
                     <ErrorMessage message={passwordMessage} />
-                    <MessageWrapper messages={errorQueue} />
+                    <MessageWrapper messages={errorList} />
                 </div>
                 <Input
                       classes="register-input-line"
