@@ -9,7 +9,7 @@ export function getElementByTitle<T extends {
         }
     }
 
-    console.error(`not able to look up event by title: ${title}`);
+    console.error(`not able to look up element by title: ${title}`);
     throw error(404);
 }
 
@@ -23,6 +23,20 @@ export function getElementByID<T extends {
         }
     }
 
-    console.error(`not able to look up event by ID: ${ID}`);
+    console.error(`not able to look up element by ID: ${ID}`);
+    throw error(404);
+}
+
+export function getIDFromTitle<T extends {
+    id: number,
+    title: string
+}>(elements: T[], title: string): number {
+    for (const entry of elements) {
+        if (entry.title === title) {
+            return entry.id;
+        }
+    }
+
+    console.log(`not able to look up ID for ${title}`);
     throw error(404);
 }

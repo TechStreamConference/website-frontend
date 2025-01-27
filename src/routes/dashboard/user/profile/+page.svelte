@@ -2,12 +2,14 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/menuItems';
 
-    import type { SaveDashboardResult } from 'helper/trySaveDashboardData';
+    import type { SaveResult } from 'helper/trySaveData';
+    import type { LoadUserProfile } from 'types/dashboardLoadTypes';
 
     import { setUnsavedChanges } from 'stores/saved';
-    import { trySaveDashboardDataAsyncNew } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveData';
     import { SaveMessageType } from 'types/saveMessageType';
     import { fade } from 'svelte/transition';
+    import { loadUserData } from './profileHelper';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -25,10 +27,11 @@
         Name,
     }
 
+    export let data: LoadUserProfile;
     let state: State = State.None;
 
     let saveMessage: SaveMessage;
-    let errorMessages: string[] = [];
+    let errorList: string[] = [];
 
     let name: string         = '';
     let mail: string         = '';
@@ -48,23 +51,22 @@
         }, 300);
     }
 
-    async function save<T>(toSave: T, url: string): Promise<SaveDashboardResult> {
-        const response = await trySaveDashboardDataAsyncNew(toSave, url, 'PUT');
+    async function save<T>(toSave: T, url: string): Promise<SaveResult> {
+        const response = await trySaveDataAsync(fetch, toSave, url, 'PUT');
+
         saveMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
+        errorList = response.messages;
 
         if (response.success) {
-            oldPassword   = '';
-            errorMessages = [];
+            oldPassword = '';
             changeState(State.None);
         }
 
-        errorMessages = response.messages;
         return response;
     }
 
     async function saveName(): Promise<void> {
-        errorMessages = [];
-        const toSave  = {
+        const toSave = {
             username: name.trim(),
             password: oldPassword.trim(),
         };
@@ -72,7 +74,8 @@
         const response = await save(toSave, '/api/account/change-username');
 
         if (response.success) {
-            name = '';
+            name          = '';
+            data.userData = await loadUserData(fetch);
         }
     }
 
@@ -85,14 +88,19 @@
         const response = await save(toSave, '/api/account/change-email');
 
         if (response.success) {
-            mail = '';
+            mail       = '';
+            errorList = [ // assignment because of reactivity
+                ...errorList,
+                'Du musst deine E-Mail-Adresse erst bestätigen, damit sie hier angezeigt wird.',
+            ];
+            // no fetch of user data because the mail has to be verified first
         }
     }
 
     async function savePassword(): Promise<void> {
         if (newPassword1.trim() !== newPassword2.trim()) {
             saveMessage.setSaveMessage(SaveMessageType.Error);
-            errorMessages = ['Die beiden neuen Passwörter stimmen nicht überein.'];
+            errorList = ['Die beiden neuen Passwörter stimmen nicht überein.'];
             return;
         }
         const toSave = {
@@ -105,6 +113,7 @@
         if (response.success) {
             newPassword1 = '';
             newPassword2 = '';
+            // no fetch of user data because the password does not get displayed anyway.
         }
     }
 </script>
@@ -118,9 +127,9 @@
     <div class="dashboard-user-profile-section-entry-wrapper">
         <div class="dashboard-user-profile-entry-grid">
             <TextLine>Name:</TextLine>
-            <TextLine>XXXXXXXXXXXXXXXXXXX</TextLine>
+            <TextLine>{data.userData.username}</TextLine>
             <TextLine>Mail:</TextLine>
-            <TextLine>XXXXXXXXXXXXXXXXXXXXX</TextLine>
+            <TextLine>{data.userData.email}</TextLine>
         </div>
         <div class="dashboard-user-profile-button-wrapper">
             <Button ariaLabel="Klicke, um deinen Namen zu ändern."
@@ -135,8 +144,10 @@
         </div>
     </div>
 </SectionDashboard>
-<SaveMessage bind:this={saveMessage} />
-<MessageWrapper messages={errorMessages} />
+<SectionDashboard classes="standard-dashboard-section">
+    <SaveMessage bind:this={saveMessage} />
+    <MessageWrapper messages={errorList} />
+</SectionDashboard>
 {#if state === State.Name}
     <div class="dashboard-user-profile-transition-wrapper"
          transition:fade={{ duration: 300 }}>

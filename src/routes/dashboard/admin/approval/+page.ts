@@ -3,40 +3,40 @@ import type { LoadAdminApproval } from 'types/dashboardLoadTypes';
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import {
-    dashboardAllApprovalSocialMediaLinkScheme,
-    dashboardAllApprovalSpeakerTeamMemberScheme,
+    dashboardAllApprovalSocialMediaLinkScheme, dashboardAllApprovalSpeakerTeamMemberScheme,
 } from 'types/dashboardProvideTypes';
 
 
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminApproval> {
-    const speakerResponse: Promise<Response>     = fetch(apiUrl('/api/dashboard/admin/approval/speaker'));
-    const teamMemberResponse: Promise<Response>  = fetch(apiUrl('/api/dashboard/admin/approval/team-member'));
-    const socialMediaResponse: Promise<Response> = fetch(apiUrl('/api/dashboard/admin/approval/social-media-link'));
+    const speakerFetchPromise: Promise<Response>     = fetch(apiUrl('/api/dashboard/admin/approval/speaker'));
+    const teamMemberFetchPromise: Promise<Response>  = fetch(apiUrl('/api/dashboard/admin/approval/team-member'));
+    const socialMediaFetchPromise: Promise<Response> = fetch(apiUrl('/api/dashboard/admin/approval/social-media-link'));
 
-    const speaker     = await checkAndParseInputDataAsync(
-        await speakerResponse,
+
+    const speakerParsePromise     = checkAndParseInputDataAsync(
+        await speakerFetchPromise,
         dashboardAllApprovalSpeakerTeamMemberScheme,
-        `Serveranfrage für die Freigabedaten der Speaker nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für die Freigabedaten der Speaker. throw error(406)`,
+        `Serveranfrage für die Freigabedaten der Speaker nicht erfolgreich.`,
+        `Unerwartete Daten für die Freigabedaten der Speaker.`,
     );
-    const teamMember  = await checkAndParseInputDataAsync(
-        await teamMemberResponse,
+    const teamMemberParsePromise  = checkAndParseInputDataAsync(
+        await teamMemberFetchPromise,
         dashboardAllApprovalSpeakerTeamMemberScheme,
-        `Serveranfrage für die Freigabedaten der Team Member nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für die Freigabedaten der Team Member. throw error(406)`,
+        `Serveranfrage für die Freigabedaten der Team Member nicht erfolgreich.`,
+        `Unerwartete Daten für die Freigabedaten der Team Member.`,
     );
-    const socialMedia = await checkAndParseInputDataAsync(
-        await socialMediaResponse,
+    const socialMediaParsePromise = checkAndParseInputDataAsync(
+        await socialMediaFetchPromise,
         dashboardAllApprovalSocialMediaLinkScheme,
-        `Serveranfrage für die Freigabedaten der Social Media Link nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für die Freigabedaten der Social Media Link. throw error(406)`,
+        `Serveranfrage für die Freigabedaten der Social Media Link nicht erfolgreich.`,
+        `Unerwartete Daten für die Freigabedaten der Social Media Link.`,
     );
 
     return {
-        speaker,
-        teamMember,
-        socialMedia,
+        speaker:     await speakerParsePromise,
+        teamMember:  await teamMemberParsePromise,
+        socialMedia: await socialMediaParsePromise,
     };
 }

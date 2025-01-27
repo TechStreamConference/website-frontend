@@ -50,7 +50,7 @@ export async function checkAndParseInputDataAsync<T extends ZodSchema>(
 ): Promise<z.infer<T>> {
     if (!response.ok) {
         console.error(messageOK);
-        throw error(406);
+        throw error(response.status);
     }
 
     const data = await parseProvidedJsonAsync<T>(response, scheme);
@@ -67,7 +67,7 @@ export async function checkAndParseGlobalsAsync(response: Response): Promise<Glo
     return await checkAndParseInputDataAsync(
         response,
         globalsScheme,
-        `Serveranfrage für globals nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für globals. throw error(406)`,
+        `Serveranfrage für globals nicht erfolgreich.`,
+        `Unerwartete Daten für globals.`,
     );
 }

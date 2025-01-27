@@ -29,8 +29,8 @@ export async function loadYearAsync(
     const yearData: Year    = await checkAndParseInputDataAsync(
         await yearDataPromise,
         yearScheme,
-        `Serveranfrage für das Jahr ${year} nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für das Jahr ${year}. throw error(406)`,
+        `Serveranfrage für das Jahr ${year} nicht erfolgreich.`,
+        `Unerwartete Daten für das Jahr ${year}.`,
     );
 
     return {

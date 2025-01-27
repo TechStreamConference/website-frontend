@@ -12,30 +12,19 @@
     import Paragraph from 'elements/text/paragraph.svelte';
     import Image from 'elements/image/image.svelte';
     import HeadlineH2 from 'elements/text/headlineH2.svelte';
-    import Message from 'elements/text/message.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import StyledLink from 'elements/input/styledLink.svelte';
     import Tabs from 'elements/navigation/tabs.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     import { apiUrl } from 'helper/links';
     import { scrollToAnchor } from 'helper/scroll';
     import { getBackgroundClass } from './approvalHelper';
-    import {
-        isSuccessType,
-        SaveMessageType,
-    } from 'types/saveMessageType';
-    import {
-        resetUnsavedChanges,
-        setUnsavedChanges,
-    } from 'stores/saved';
-    import {
-        ApprovalSection,
-        getSectionHash,
-    } from 'types/approvalSection';
-    import {
-        validateApproval,
-        validateRequestedChanges,
-    } from './approvalValidation';
+    import { SaveMessageType } from 'types/saveMessageType';
+    import { setUnsavedChanges } from 'stores/saved';
+    import { ApprovalSection, getSectionHash } from 'types/approvalSection';
+    import { validateApproval, validateRequestedChanges } from './approvalValidation';
+    import { trySaveDataAsync } from 'helper/trySaveData.js';
 
     export let data: LoadAdminApproval;
 
@@ -76,19 +65,12 @@
     }
 
     async function saveRequestedChangesAsync(section: ApprovalSection, id: number, change: string): Promise<void> {
-        const route: string      = apiUrl(`/api/dashboard/admin/approval/${routePartLookup[section]}/${id}/request-changes`);
-        const response: Response = await fetch(route, {
-            method: 'PUT',
-            body:   JSON.stringify({ message: change }),
-        });
+        const toSave        = { message: change };
+        const route: string = `/api/dashboard/admin/approval/${routePartLookup[section]}/${id}/request-changes`;
+        const response      = await trySaveDataAsync(fetch, toSave, route, 'PUT');
 
-        if (!response.ok) {
-            saveMessages[section][id].setSaveMessage(SaveMessageType.Error);
-            return;
-        }
-
-        resetUnsavedChanges();
-        saveMessages[section][id].setSaveMessage(SaveMessageType.Save);
+        saveMessages[section][id].setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
+        specificErrors[section][id] = response.messages;
     }
 
     async function approvalAsync(section: ApprovalSection, id: number, changes: string): Promise<void> {
@@ -100,26 +82,20 @@
             return;
         }
 
-        const result: SaveMessageType = await saveApprovalAsync(section, id);
-        if (isSuccessType(result)) {
+        const success = await saveApprovalAsync(section, id);
+        if (success) {
             deleteEntry(section, id);
         }
     }
 
-    async function saveApprovalAsync(section: ApprovalSection, id: number): Promise<SaveMessageType> {
-        const route: string      = apiUrl(`/api/dashboard/admin/approval/${routePartLookup[section]}/${id}`);
-        const response: Response = await fetch(route, {
-            method: 'PUT',
-        });
+    async function saveApprovalAsync(section: ApprovalSection, id: number): Promise<boolean> {
+        const route: string = `/api/dashboard/admin/approval/${routePartLookup[section]}/${id}`;
+        const response      = await trySaveDataAsync(fetch, [], route, 'PUT');
 
-        if (!response.ok) {
-            saveMessages[section][id].setSaveMessage(SaveMessageType.Error);
-            return SaveMessageType.Error;
-        }
+        saveMessages[section][id].setSaveMessage(response.success ? SaveMessageType.Approved : SaveMessageType.Error);
+        specificErrors[section][id] = response.messages;
 
-        resetUnsavedChanges();
-        saveMessages[section][id].setSaveMessage(SaveMessageType.Approved);
-        return SaveMessageType.Approved;
+        return response.success;
     }
 
     function deleteEntry(section: ApprovalSection, id: number): void {
@@ -159,11 +135,7 @@
                       classes="dashboard-admin-approval-subheading">{speaker.account.username}</SubHeadline
                 >
                 <SaveMessage bind:this={saveMessages[ApprovalSection.Speaker][speaker.id]} />
-                {#if specificErrors[ApprovalSection.Speaker][speaker.id]}
-                    {#each specificErrors[ApprovalSection.Speaker][speaker.id] as error}
-                        <Message message={error} />
-                    {/each}
-                {/if}
+                <MessageWrapper messages={specificErrors[ApprovalSection.Speaker][speaker.id]} />
                 <div class="dashboard-admin-approval-grid">
                     <TextLine>Event:</TextLine>
                     <TextLine>{speaker.event.title}</TextLine>
@@ -233,11 +205,7 @@
                       classes="dashboard-admin-approval-subheading">{member.account.username}</SubHeadline
                 >
                 <SaveMessage bind:this={saveMessages[ApprovalSection.TeamMember][member.id]} />
-                {#if specificErrors[ApprovalSection.TeamMember][member.id]}
-                    {#each specificErrors[ApprovalSection.TeamMember][member.id] as error}
-                        <Message message={error} />
-                    {/each}
-                {/if}
+                <MessageWrapper messages={specificErrors[ApprovalSection.TeamMember][member.id]} />
                 <div class="dashboard-admin-approval-grid">
                     <TextLine>Event:</TextLine>
                     <TextLine>{member.event.title}</TextLine>
@@ -305,11 +273,7 @@
                       classes="dashboard-admin-approval-subheading">{media.account.username}</SubHeadline
                 >
                 <SaveMessage bind:this={saveMessages[ApprovalSection.SocialMedia][media.id]} />
-                {#if specificErrors[ApprovalSection.SocialMedia][media.id]}
-                    {#each specificErrors[ApprovalSection.SocialMedia][media.id] as error}
-                        <Message message={error} />
-                    {/each}
-                {/if}
+                <MessageWrapper messages={specificErrors[ApprovalSection.SocialMedia][media.id]} />
                 <div class="dashboard-admin-approval-grid-big">
                     <StyledLink
                           icon={media.name}

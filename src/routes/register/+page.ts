@@ -16,12 +16,9 @@ export async function load({
     const loggedInPromise: Promise<boolean> = fetchLoginStatusAsync(fetch);
     const token: string | null              = url.searchParams.get('token');
 
-    // data
-    const loggedIn: boolean = await loggedInPromise;
-
     return {
-        loggedIn,
-        globals: await globalsPromise,
+        loggedIn: await loggedInPromise,
+        globals:  await globalsPromise,
         token,
     };
 }

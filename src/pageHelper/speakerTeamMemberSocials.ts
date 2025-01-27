@@ -6,7 +6,7 @@ import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { dashboardAllSocialMediaLinkScheme, dashboardAllSocialMediaLinkTypeScheme } from 'types/dashboardProvideTypes';
 import { error } from '@sveltejs/kit';
 import { z } from 'zod';
-import { SaveMessageType } from 'types/saveMessageType';
+import { type SaveResult, trySaveDataAsync } from 'helper/trySaveData';
 
 export type ValidateReturn = {
     data: DashboardAllSocialMediaLinks,
@@ -15,29 +15,28 @@ export type ValidateReturn = {
 
 export type DeleteReturn = {
     data: DashboardAllSocialMediaLinks,
-    message: SaveMessageType,
+    result: SaveResult,
 }
 
 export async function loadDataAsync(fetch: typeof globalThis.fetch): Promise<LoadUserSocials> {
-    const socialsPromise    = fetch(apiUrl('/api/dashboard/user/social-media-link'));
-    const socialTypePromise = fetch(apiUrl('/api/social-media-link-types'));
+    const socialsFetchPromise    = fetch(apiUrl('/api/dashboard/user/social-media-link'));
+    const socialTypeFetchPromise = fetch(apiUrl('/api/social-media-link-types'));
 
-    const socials     = await checkAndParseInputDataAsync(
-        await socialsPromise,
-        dashboardAllSocialMediaLinkScheme,
-        `Serveranfrage für alle Social Media Links nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Social Media Links. throw error(406)`,
+    const socialsParsePromise     = checkAndParseInputDataAsync(await socialsFetchPromise,
+                                                                dashboardAllSocialMediaLinkScheme,
+                                                                `Serveranfrage für alle Social Media Links nicht erfolgreich.`,
+                                                                `Unerwartete Daten für alle Social Media Links.`,
     );
-    const socialTypes = await checkAndParseInputDataAsync(
-        await socialTypePromise,
+    const socialTypesParsePromise = checkAndParseInputDataAsync(
+        await socialTypeFetchPromise,
         dashboardAllSocialMediaLinkTypeScheme,
-        `Serveranfrage für alle Social Media Links Types nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Social Media Links Types. throw error(406)`,
+        `Serveranfrage für alle Social Media Links Types nicht erfolgreich.`,
+        `Unerwartete Daten für alle Social Media Links Types.`,
     );
 
     return {
-        socials,
-        socialTypes,
+        socials:     await socialsParsePromise,
+        socialTypes: await socialTypesParsePromise,
     };
 }
 
@@ -47,8 +46,8 @@ export async function loadSocials(fetch: typeof globalThis.fetch): Promise<Dashb
     return await checkAndParseInputDataAsync(
         await socialsPromise,
         dashboardAllSocialMediaLinkScheme,
-        `Serveranfrage für alle Social Media Links nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Social Media Links. throw error(406)`,
+        `Serveranfrage für alle Social Media Links nicht erfolgreich.`,
+        `Unerwartete Daten für alle Social Media Links.`,
     );
 }
 
@@ -91,25 +90,30 @@ export function validate(data: DashboardAllSocialMediaLinks): ValidateReturn {
     };
 }
 
-export async function deleteLinkAsync(data: DashboardAllSocialMediaLinks, index: number): Promise<DeleteReturn> {
+export async function deleteLinkAsync(fetch: typeof globalThis.fetch, data: DashboardAllSocialMediaLinks, index: number): Promise<DeleteReturn> {
     const id = data[index].id;
-    if (id !== 0) {
-        const deleteResponse: Response = await fetch(
-            apiUrl(`/api/dashboard/user/social-media-link/${id}`),
-            { method: 'DELETE' },
-        );
-        if (!deleteResponse.ok) {
-            console.error(`Deleting Link: Bad Backend response: ${deleteResponse.status}`);
-            return {
-                data,
-                message: SaveMessageType.DeleteError,
-            };
-        }
+    if (id === 0) {
+        return {
+            data,
+            result: {
+                success:  false,
+                messages: [],
+            },
+        };
+    }
+
+    const result = await trySaveDataAsync(fetch, [], `/api/dashboard/user/social-media-link/${id}`, 'DELETE');
+
+    if (!result.success) {
+        return {
+            data,
+            result,
+        };
     }
 
     data = data.filter((item) => item.id !== id);
     return {
         data,
-        message: SaveMessageType.Delete,
+        result,
     };
 }

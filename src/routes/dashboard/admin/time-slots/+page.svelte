@@ -3,13 +3,11 @@
     import * as MenuItem from 'menu/menuItems';
 
     import type { LoadAdminTimeSlots } from 'types/dashboardLoadTypes';
-    import type { DashboardEvent, DashboardTimeSlot } from 'types/dashboardProvideTypes';
+    import type { DashboardTimeSlot } from 'types/dashboardProvideTypes';
 
-    import { resetUnsavedChanges, setUnsavedChanges, unsavedChanges } from 'stores/saved';
-    import { error } from '@sveltejs/kit';
+    import { setUnsavedChanges, unsavedChanges } from 'stores/saved';
     import { getTimeSlotsAsync } from './timeSlotHelper';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
-    import { isSuccessType } from 'types/saveMessageType';
+    import { trySaveDataAsync } from 'helper/trySaveData';
     import { checkSQLTimeAndDate, convertTimeAndDateToSQL } from 'helper/dates';
 
     import Tabs from 'elements/navigation/tabs.svelte';
@@ -21,42 +19,22 @@
     import Icon from 'elements/image/icon.svelte';
     import Toggle from 'elements/input/toggle.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
-    import Message from 'elements/text/message.svelte';
     import Tooltip from 'elements/text/tooltip.svelte';
     import DropDown from 'elements/input/dropDown.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
+    import { getElementByID, getIDFromTitle } from 'helper/basic';
+    import { SaveMessageType } from 'types/saveMessageType';
 
     export let data: LoadAdminTimeSlots;
 
     let saveMessage: SaveMessage;
-    let errorMessage: string | undefined = undefined;
-
-    function getIDFromTitle(title: string): number {
-        for (const entry of data.allEvents) {
-            if (entry.title === title) {
-                return entry.id;
-            }
-        }
-
-        console.log(`not able to look up ID for ${title}`);
-        throw error(404);
-    }
-
-    function getEventFromID(id: number): DashboardEvent {
-        for (const event of data.allEvents) {
-            if (event.id === id) {
-                return event;
-            }
-        }
-
-        console.log(`not able to look up Event with ID ${id}`);
-        throw error(404);
-    }
+    let errorList: string[] = [];
 
     function addSlot() {
         const newSlotsData: DashboardTimeSlot = {
             event_id:   data.currentEventID,
             id:         0,
-            start_time: getEventFromID(data.currentEventID).start_date + 'T00:00:00', // the start of the event is used here, as it should not be too far away from the actual date.
+            start_time: getElementByID(data.allEvents, data.currentEventID).start_date + 'T00:00:00', // the start of the event is used here, as it should not be too far away from the actual date.
             duration:   0,
             is_special: false,
         };
@@ -68,8 +46,8 @@
     }
 
     async function updateDisplayed(value: string) {
-        errorMessage        = undefined;
-        data.currentEventID = getIDFromTitle(value);
+        errorList           = [];
+        data.currentEventID = getIDFromTitle(data.allEvents, value);
         data.currentSlots   = await getTimeSlotsAsync(fetch, data.currentEventID);
     }
 
@@ -81,25 +59,22 @@
             console.log(temp);
             entry.start_time = temp ? temp : entry.start_time;
         }
-        const result = await trySaveDashboardDataAsync(
+        const result = await trySaveDataAsync(
+            fetch,
             { 'time_slots': toSave },
             `/api/dashboard/admin/time-slots/${data.currentEventID}`,
             'POST',
         );
 
-        saveMessage.setSaveMessage(result);
-
-        if (isSuccessType(result)) {
-            resetUnsavedChanges();
-            return true;
-        }
-        return false;
+        saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
+        errorList = result.messages;
+        return result.success;
     }
 
     function moveUp(index: number) {
-        errorMessage = undefined;
+        errorList = [];
         if (index - 1 == -1) {
-            errorMessage = 'Es gibt keinen Slot vor diesem Slot.';
+            errorList = ['Es gibt keinen Slot vor diesem Slot.'];
             return;
         }
 
@@ -118,9 +93,9 @@
     }
 
     function moveDown(index: number) {
-        errorMessage = undefined;
+        errorList = [];
         if (index + 1 == data.currentSlots.length) {
-            errorMessage = 'Es gibt kein Slot hinter diesem Slot.';
+            errorList = ['Es gibt kein Slot hinter diesem Slot.'];
             return;
         }
 
@@ -162,9 +137,7 @@
 
     <form on:submit|preventDefault={save}>
         <SaveMessage bind:this={saveMessage} />
-        {#if errorMessage !== undefined}
-            <Message message={errorMessage} />
-        {/if}
+        <MessageWrapper messages={errorList} />
         <div class="dashboard-admin-time-slots-grid">
             {#each data.currentSlots as entry, index}
                 <Input

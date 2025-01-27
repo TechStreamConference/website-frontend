@@ -212,3 +212,9 @@ export const dashboardPendingTalkScheme = z.object({
 export type DashboardPendingTalk = z.infer<typeof dashboardPendingTalkScheme>;
 export const dashboardAllPendingTalkScheme = z.array(dashboardPendingTalkScheme);
 export type DashboardAllPendingTalks = z.infer<typeof dashboardAllPendingTalkScheme>;
+
+export const dashboardUserDataScheme = z.object({
+                                                    username: z.string(),
+                                                    email:    z.string(),
+                                                });
+export type DashboardUserData = z.infer<typeof dashboardUserDataScheme>;

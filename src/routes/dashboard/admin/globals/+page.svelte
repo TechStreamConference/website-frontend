@@ -6,9 +6,9 @@
     import type { SetAdminGlobals } from 'types/dashboardSetTypes';
 
     import { Clone } from 'helper/clone';
-    import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
+    import { SaveMessageType } from 'types/saveMessageType';
     import { setUnsavedChanges } from 'stores/saved';
-    import { trySaveDashboardDataAsync } from 'helper/trySaveDashboardData';
+    import { trySaveDataAsync } from 'helper/trySaveData';
     import { resetGlobals } from 'stores/globals';
 
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -17,25 +17,25 @@
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
     import Tabs from 'elements/navigation/tabs.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     export let data: LoadDashboard; // data from database
 
-    let copiedData = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
+    let copiedData           = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
     let message: SaveMessage;
+    let errorList: string[] = [];
 
     async function trySaveAsync(): Promise<boolean> {
         const adminGlobals: SetAdminGlobals = {
             footer_text: copiedData.value.globals.footer_text,
         };
 
-        const saveType: SaveMessageType = await trySaveDashboardDataAsync<SetAdminGlobals>(
-            adminGlobals,
-            '/api/dashboard/admin/globals',
-        );
+        const result = await trySaveDataAsync(fetch, adminGlobals, '/api/dashboard/admin/globals', 'PUT');
 
         resetGlobals(); // reset cache to force a global fetch next time
-        message.setSaveMessage(saveType);
-        return isSuccessType(saveType);
+        message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
+        errorList = result.messages;
+        return result.success;
     }
 </script>
 
@@ -47,6 +47,7 @@
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 <SectionDashboard classes="dashboard-admin-global-section">
     <SaveMessage bind:this={message} />
+    <MessageWrapper messages={errorList} />
     <form class="dashboard-admin-global-form"
           on:submit|preventDefault={trySaveAsync}>
 		<TextArea
@@ -76,7 +77,7 @@
     }
 
     .dashboard-admin-global-form {
-        display: flex;
+        display:        flex;
         flex-direction: column;
     }
 

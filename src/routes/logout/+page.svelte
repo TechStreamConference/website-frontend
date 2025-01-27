@@ -1,12 +1,17 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
-    import { apiUrl } from 'helper/links';
     import { onMount } from 'svelte';
+
+    import { trySaveDataAsync } from 'helper/trySaveData';
+
     import TextLine from 'elements/text/textLine.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
+
+    let errorList: string[] = [];
 
     async function logoutAsync(): Promise<void> {
-        const response: Response = await fetch(apiUrl('/api/account/logout'), { method: 'POST' });
-        if (!response.ok) {
+        const result = await trySaveDataAsync(fetch, [], '/api/account/logout', 'POST');
+        if (!result.success) {
             return;
         }
         await goto('/');
@@ -18,3 +23,4 @@
 </script>
 
 <TextLine>Logging out...</TextLine>
+<MessageWrapper messages={errorList} />

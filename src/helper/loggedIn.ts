@@ -19,7 +19,7 @@ export async function redirectIfUnauthorizedOrReturnRolesAsync(fetch: typeof glo
     return await checkAndParseInputDataAsync(
         response,
         dashboardRolesScheme,
-        `Serveranfrage für roles nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für roles. throw error(406)`,
+        `Serveranfrage für roles nicht erfolgreich.`,
+        `Unerwartete Daten für roles.`,
     );
 }

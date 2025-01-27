@@ -4,7 +4,7 @@
     export let messages: string[];
 </script>
 
-{#if messages.length > 0}
+{#if messages && messages.length > 0}
     <div class="message-wrapper">
         {#each messages as message}
             <Message {message}

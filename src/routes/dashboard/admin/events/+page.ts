@@ -7,17 +7,17 @@ import { dashboardAllEventsScheme } from 'types/dashboardProvideTypes';
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminEvents> {
-    const allEventsPromise = fetch(apiUrl('/api/dashboard/admin/all-events'));
+    const allEventsFetchPromise = fetch(apiUrl('/api/dashboard/admin/all-events'));
 
-    const allEvents = await checkAndParseInputDataAsync(
-        await allEventsPromise,
+    const allEventsParsePromise = checkAndParseInputDataAsync(
+        await allEventsFetchPromise,
         dashboardAllEventsScheme,
-        `Serveranfrage für alle Events nicht erfolgreich. throw error(406)`,
-        `Unerwartete Daten für alle Events. throw error(406)`,
+        `Serveranfrage für alle Events nicht erfolgreich.`,
+        `Unerwartete Daten für alle Events.`,
     );
 
     return {
-        allEvents,
+        allEvents:  await allEventsParsePromise,
         allSpeaker: [], // will be filled inside the component
     };
 }
