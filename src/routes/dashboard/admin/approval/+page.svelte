@@ -105,6 +105,8 @@
         return response.success;
     }
 
+    async function rejectAsync(user_id:number, event_id:number): Promise<void> {}
+
     function deleteEntry(section: ApprovalSection, id: number): void {
         setTimeout(() => {
             delete saveMessages[section][id];
@@ -165,15 +167,12 @@
                     <TextLine classes={getBackgroundClass(speaker.diff, 'name')}>{speaker.name}</TextLine>
                     <TextLine classes={getBackgroundClass(speaker.diff, 'short_bio')}
                     >Kurzbeschreibung:
-                    </TextLine
-                    >
+                    </TextLine>
                     <TextLine classes={getBackgroundClass(speaker.diff, 'short_bio')}
-                    >{speaker.short_bio}</TextLine
-                    >
+                    >{speaker.short_bio}</TextLine>
                     <TextLine classes={getBackgroundClass(speaker.diff, 'bio')}>Beschreibung:</TextLine>
                     <Paragraph classes="{getBackgroundClass(speaker.diff, 'bio')} paragraph-pre-wrap"
-                    >{speaker.bio}</Paragraph
-                    >
+                    >{speaker.bio}</Paragraph>
                     <TextLine classes={getBackgroundClass(speaker.diff, 'photo')}>Foto:</TextLine>
                     <Image
                           classes={getBackgroundClass(speaker.diff, 'photo')}
@@ -197,15 +196,20 @@
                           on:click={() =>
 							requestChangesAsync(ApprovalSection.Speaker, speaker.id, speaker.requested_changes)}
                     >Änderungswünsche
-                    </Button
-                    >
+                    </Button>
+                    {#if speaker.can_reject}
+                        <Button
+                              ariaLabel="Klicke hier, um den Speaker abzulehnen"
+                              on:click={() => console.error("TODO: REJECT")}
+                        >Ablehnen
+                        </Button>
+                    {/if}
                     <Button
                           ariaLabel="Klicke hier, um den Datensatz freizugeben"
                           on:click={() =>
 							approvalAsync(ApprovalSection.Speaker, speaker.id, speaker.requested_changes)}
                     >Freigeben
-                    </Button
-                    >
+                    </Button>
                 </div>
             </div>
         {/each}
@@ -265,15 +269,13 @@
                           on:click={() =>
 							requestChangesAsync(ApprovalSection.TeamMember, member.id, member.requested_changes)}
                     >Änderungswünsche
-                    </Button
-                    >
+                    </Button>
                     <Button
                           ariaLabel="Klicke hier, um den Datensatz freizugeben"
                           on:click={() =>
 							approvalAsync(ApprovalSection.TeamMember, member.id, member.requested_changes)}
                     >Freigeben
-                    </Button
-                    >
+                    </Button>
                 </div>
             </div>
         {/each}
@@ -321,15 +323,13 @@
                           on:click={() =>
 							requestChangesAsync(ApprovalSection.SocialMedia, media.id, media.requested_changes)}
                     >Änderungswünsche
-                    </Button
-                    >
+                    </Button>
                     <Button
                           ariaLabel="Klicke hier, um den Datensatz freizugeben"
                           on:click={() =>
 							approvalAsync(ApprovalSection.SocialMedia, media.id, media.requested_changes)}
                     >Freigeben
-                    </Button
-                    >
+                    </Button>
                 </div>
             </div>
         {/each}
