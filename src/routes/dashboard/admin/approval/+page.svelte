@@ -18,7 +18,7 @@
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
     import GeneralPopup from 'elements/popups/generalPopup.svelte';
 
-    import { apiUrl } from 'helper/links';
+    import { imageUrl } from 'helper/links';
     import { scrollToAnchor } from 'helper/scroll';
     import { ApprovalData, getBackgroundClass, RejectData } from './approvalHelper';
     import { SaveMessageType } from 'types/saveMessageType';
@@ -219,7 +219,7 @@
                     <Image
                           classes={getBackgroundClass(speaker.diff, 'photo')}
                           alt={'Speaker-Bild von ' + speaker.name}
-                          src={apiUrl(`/api/${speaker.photo}`)}
+                          src={imageUrl(speaker.photo)}
                     />
                 </div>
                 <TextArea
@@ -292,7 +292,7 @@
                     <Image
                           classes={getBackgroundClass(member.diff, 'photo')}
                           alt={'Team-Member-Bild von ' + member.name}
-                          src={apiUrl(`/api/${member.photo}`)}
+                          src={imageUrl(member.photo)}
                     />
                 </div>
                 <TextArea
