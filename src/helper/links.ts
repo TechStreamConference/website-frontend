@@ -5,5 +5,5 @@ export function apiUrl(link: string): string {
 }
 
 export function imageUrl(link: string): string {
-    return prefix + '/api/' + link;
+    return prefix + '/api/images/' + link;
 }
