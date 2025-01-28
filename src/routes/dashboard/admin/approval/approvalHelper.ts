@@ -1,3 +1,9 @@
+import { ApprovalSection } from 'types/approvalSection';
+
+export class ApprovalData { // use a class here to be able to check types in js
+    constructor(public section: ApprovalSection, public id: number) {}
+}
+
 export function getBackgroundClass(diff: string[] | null, reference: string): string {
     if (!diff) {
         return '';

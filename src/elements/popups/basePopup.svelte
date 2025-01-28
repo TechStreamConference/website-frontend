@@ -16,7 +16,7 @@
 
     function hideWithDispatch() {
         hide();
-        dispatchClose()
+        dispatchClose();
     }
 
     function dispatchClose() {
@@ -90,6 +90,8 @@
         position:        relative;
         width:           fit-content;
         height:          fit-content;
+        max-width:       100%;
+        max-height:      100%;
         display:         flex;
         flex-direction:  column;
         justify-content: center;
@@ -107,7 +109,7 @@
 
         @media (max-width: 1280px) {
             right: 50%;
-            top: 101%;
+            top:   101%;
         }
     }
 

@@ -147,6 +147,7 @@
             <HeadlineH2 classes="headline-h2-border">Plan</HeadlineH2>
             <div class="center-styled-link">
                 <StyledLink
+                      classes="styled-link-white"
                       href={apiUrl(`/api/events/${data.year.event.year}/ics`)}
                       title="Klicke um den Ablaufplan als ICS-Datei herunter zu laden"
                       icon="Calender"

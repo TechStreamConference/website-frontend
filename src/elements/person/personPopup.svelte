@@ -42,8 +42,11 @@
 
 <style>
     .person-popup-content-wrapper {
-        margin:  var(--full-margin);
-        display: flex;
+        margin:                var(--full-margin);
+        display:               grid;
+        grid-template-columns: 1fr 1fr;
+        width:                 80vw;
+        max-width:             100rem;
     }
 
     .person-popup-align-center {
@@ -51,8 +54,6 @@
     }
 
     .person-popup-column-wrapper {
-        width:          50%;
-        height:         fit-content;
         display:        flex;
         flex-direction: column;
         padding:        var(--2x-margin);
@@ -67,7 +68,7 @@
     }
 
     :global(.person-popup-picture) {
-        width:         auto;
+        width:         100%;
         height:        auto;
         max-width:     30rem;
         border:        1px solid var(--primary-color-light);
@@ -84,9 +85,11 @@
 
     @media (max-width: 900px) {
         .person-popup-content-wrapper {
-            flex-direction: column;
-            height:         75vh;
-            overflow-y:     auto;
+            grid-template-columns: 1fr;
+            grid-auto-rows:        1fr;
+            height:                75vh;
+            overflow-y:            auto;
+            max-width:             100%;
         }
 
         .person-popup-column-wrapper {
