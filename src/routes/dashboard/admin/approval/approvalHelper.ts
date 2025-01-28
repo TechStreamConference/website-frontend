@@ -1,7 +1,13 @@
 import { ApprovalSection } from 'types/approvalSection';
 
 export class ApprovalData { // use a class here to be able to check types in js
-    constructor(public section: ApprovalSection, public id: number) {}
+    constructor(public section: ApprovalSection, public id: number) {
+    }
+}
+
+export class RejectData { // use a class here to be able to check types in js
+    constructor(public id: number, public user_id: number, public event_id: number) {
+    }
 }
 
 export function getBackgroundClass(diff: string[] | null, reference: string): string {

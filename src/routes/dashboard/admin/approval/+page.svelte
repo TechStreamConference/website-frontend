@@ -20,7 +20,7 @@
 
     import { apiUrl } from 'helper/links';
     import { scrollToAnchor } from 'helper/scroll';
-    import { getBackgroundClass, ApprovalData } from './approvalHelper';
+    import { ApprovalData, getBackgroundClass, RejectData } from './approvalHelper';
     import { SaveMessageType } from 'types/saveMessageType';
     import { setUnsavedChanges } from 'stores/saved';
     import { ApprovalSection, getSectionHash } from 'types/approvalSection';
@@ -29,6 +29,7 @@
 
     export let data: LoadAdminApproval;
     let approvalPopup: GeneralPopup;
+    let rejectPopup: GeneralPopup;
 
     const saveMessages: {
         [key in ApprovalSection]: {
@@ -87,7 +88,7 @@
         approvalPopup.show(new ApprovalData(section, id));
     }
 
-    async function approvalPopupCallback(provided: ApprovalData) {
+    async function approvalPopupCallbackAsync(provided: ApprovalData): Promise<void> {
         const success = await saveApprovalAsync(provided);
 
         if (success) {
@@ -99,13 +100,40 @@
         const route: string = `/api/dashboard/admin/approval/${routePartLookup[provided.section]}/${provided.id}`;
         const response      = await trySaveDataAsync(fetch, [], route, 'PUT');
 
-        saveMessages[provided.section][provided.id].setSaveMessage(response.success ? SaveMessageType.Approved : SaveMessageType.Error);
+        saveMessages[provided.section][provided.id].setSaveMessage(response.success
+                                                                   ? SaveMessageType.Approved
+                                                                   : SaveMessageType.Error);
         specificErrors[provided.section][provided.id] = response.messages;
 
         return response.success;
     }
 
-    async function rejectAsync(user_id:number, event_id:number): Promise<void> {}
+    async function rejectAsync(id: number, user_id: number, event_id: number): Promise<void> {
+        specificErrors[ApprovalSection.Speaker][id] = [];
+        scrollToAnchor(getSectionHash(ApprovalSection.Speaker, id));
+
+        rejectPopup.show(new RejectData(id, user_id, event_id));
+    }
+
+    async function rejectPopupCallbackAsync(provided: RejectData): Promise<void> {
+        const success = await saveRejectAsync(provided);
+
+        if (success) {
+            deleteEntry(ApprovalSection.Speaker, provided.id);
+        }
+    }
+
+    async function saveRejectAsync(provided: RejectData): Promise<boolean> {
+        const route  = `/api/dashboard/admin/approval/user/${provided.user_id}/event/${provided.event_id}/reject`;
+        const result = await trySaveDataAsync(fetch, [], route, 'DELETE');
+
+        saveMessages[ApprovalSection.Speaker][provided.id].setSaveMessage(result.success
+                                                                               ? SaveMessageType.Delete
+                                                                               : SaveMessageType.DeleteError);
+        specificErrors[ApprovalSection.Speaker][provided.id] = result.messages;
+
+        return result.success;
+    }
 
     function deleteEntry(section: ApprovalSection, id: number): void {
         setTimeout(() => {
@@ -140,7 +168,21 @@
                       console.error(`Unexpected data in popup callback; data: ${provided}`);
                       return;
                   }
-                  approvalPopupCallback(provided);
+                  approvalPopupCallbackAsync(provided);
+              }}
+/>
+<GeneralPopup bind:this={rejectPopup}
+              headline="Speaker Ablehnen?"
+              text="Wenn du einen Speaker ablehnst, wird er komplett gelöscht."
+              denyButtonText="Abbrechen"
+              acceptButtonText="Ablehnen"
+              denyCallback={() => {}}
+              acceptCallback={(provided) => {
+                  if (!(provided instanceof RejectData)) {
+                      console.error(`Unexpected data in popup callback; data: ${provided}`);
+                      return;
+                  }
+                  rejectPopupCallbackAsync(provided);
               }}
 />
 
@@ -200,7 +242,7 @@
                     {#if speaker.can_reject}
                         <Button
                               ariaLabel="Klicke hier, um den Speaker abzulehnen"
-                              on:click={() => console.error("TODO: REJECT")}
+                              on:click={() => rejectAsync(speaker.id, speaker.user_id, speaker.event_id)}
                         >Ablehnen
                         </Button>
                     {/if}

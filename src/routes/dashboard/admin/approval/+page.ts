@@ -53,7 +53,6 @@ export async function load({ fetch }: {
                                                                                     can_reject: z.boolean(),
                                                                                 }));
         speaker[i].can_reject = result ? result.can_reject : false;
-        // speaker[i].can_reject = true;
     }
 
     return {
