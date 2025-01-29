@@ -3,13 +3,11 @@
     import * as MenuItem from 'menu/menuItems';
 
     import type { LoadSpeakerTalk } from 'types/dashboardLoadTypes';
-    import type { SetTalk } from 'types/dashboardSetTypes';
 
     import { getElementByTitle } from 'helper/basic';
     import { loadTentativeOrAcceptedTalksFromEventIDAsync } from './talkHelper';
     import { setUnsavedChanges } from 'stores/saved';
     import { SaveMessageType } from 'types/saveMessageType';
-    import { scrollToTop } from 'helper/scroll';
     import { trySaveDataAsync } from 'helper/trySaveData.js';
     import { formatDate } from 'helper/dates.js';
     import { apiUrl } from 'helper/links';
@@ -20,18 +18,15 @@
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import TextLine from 'elements/text/textLine.svelte';
     import Button from 'elements/input/button.svelte';
-    import Input from 'elements/input/input.svelte';
     import TextArea from 'elements/input/textArea.svelte';
-    import Message from 'elements/text/message.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
-    import TagArray from 'elements/input/tagArray.svelte';
-    import DurationArray from 'elements/input/durationArray.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
     import ScheduleTag from 'elements/schedule/scheduleTag.svelte';
     import Tag from 'elements/text/tag.svelte';
     import GeneralPopup from 'elements/popups/generalPopup.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
+    import SpeakerTalkForm from 'pages/speakerTalkForm.svelte';
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;
@@ -39,28 +34,6 @@
     let rejectText: string = '';
     let acceptPopup: GeneralPopup;
     let rejectPopup: GeneralPopup;
-
-    async function save(index: number): Promise<boolean> {
-        scrollToTop();
-
-        const currentTalk     = data.pendingTalks[index];
-        const toSave: SetTalk = {
-            title:              currentTalk.title,
-            description:        currentTalk.description,
-            notes:              currentTalk.notes,
-            possible_durations: currentTalk.possible_durations,
-            tag_ids:            currentTalk.tags.map(x => x.id),
-        };
-
-        const result = await trySaveDataAsync(fetch, toSave, `/api/dashboard/speaker/talk/${currentTalk.id}`, 'PUT');
-
-        saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
-        errorList = result.messages;
-        if (result.success) {
-            currentTalk.requested_changes = null;
-        }
-        return result.success;
-    }
 
     async function updateDisplayedEvent(selected: string): Promise<void> {
         const current                 = getElementByTitle(data.allEvents, selected);
@@ -140,48 +113,11 @@
                         data={ data.allEvents.map(x => x.title) }
                         on:navigated={ (e) => { updateDisplayedEvent(e.detail); }} />
 
-    {#each data.pendingTalks as talk, index}
-        <form class="dashboard-speaker-talk-form dashboard-speaker-section"
-              on:submit|preventDefault={() => { save(index); }}>
-            <SubHeadline classes="sub-headline-center">{talk.title}</SubHeadline>
-            {#if talk.requested_changes}
-                <Message classes="message-pre-wrap"
-                         message={`Änderungswünsche:\n${talk.requested_changes}`} />
-            {/if}
-            <Input id="dashboard-speaker-talk-input-title"
-                   labelText="Titel:"
-                   placeholderText="Titel"
-                   ariaLabel="Gib hier den Titel des Talks ein"
-                   bind:value={talk.title}
-                   on:input={setUnsavedChanges} />
-            <TextArea id="dashboard-speaker-talk-input-description"
-                      labelText="Beschreibung:"
-                      placeholderText="Beschreibung"
-                      ariaLabel="Gib hier die Beschreibung des Talks ein"
-                      bind:value={talk.description}
-                      on:input={setUnsavedChanges}
-                      on:submit={() => { save(index); }} />
-            <TagArray labelText="Tags:"
-                      data={data.tags}
-                      bind:selected={talk.tags}
-                      on:toggle={setUnsavedChanges} />
-            <DurationArray labelText="Vortragslänge in Minuten:"
-                           data={data.talkDurations}
-                           bind:selected={talk.possible_durations}
-                           on:toggle={setUnsavedChanges} />
-            <TextArea id="dashboard-speaker-talk-input-notes"
-                      labelText="Anmerkungen:"
-                      placeholderText="Anmerkungen"
-                      ariaLabel="Gib hier Anmerkungen zum Talk ein."
-                      bind:value={talk.notes}
-                      on:input={setUnsavedChanges}
-                      on:submit={() => { save(index); }} />
-            <div class="dashboard-speaker-talk-button-wrapper">
-                <Button type="submit"
-                        ariaLabel="Klicke, um den Talk zu speichern">Speichern
-                </Button>
-            </div>
-        </form>
+    {#each data.pendingTalks as talk}
+        <SpeakerTalkForm classes="dashboard-speaker-talk-form dashboard-speaker-section"
+                         data={talk}
+                         tags={data.tags}
+                         talkDurations={data.talkDurations} />
     {/each}
     {#each data.tentativeOrAcceptedTalks as talk, index}
         <div class="dashboard-speaker-talk-time-slot dashboard-speaker-section">
@@ -253,18 +189,12 @@
 </SectionDashboard>
 
 <style>
-    .dashboard-speaker-section {
+    :global(.dashboard-speaker-section) {
         margin-top:    var(--4x-margin);
         border:        1px solid var(--primary-color-dark);
         border-radius: var(--border-radius);
         padding:       var(--full-padding);
         gap:           var(--2x-gap);
-    }
-
-    .dashboard-speaker-talk-form {
-        display:        flex;
-        flex-direction: column;
-        gap:            var(--full-gap);
     }
 
     .dashboard-speaker-talk-time-slot {
