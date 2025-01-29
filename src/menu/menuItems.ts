@@ -77,6 +77,11 @@ export const speakerSocialMedia: MenuItem = {
     url:         '/dashboard/speaker/socials',
     description: 'Klicke hier, um zu den Social-Media-Einstellungen zu gelangen',
 };
+export const speakerApplication: MenuItem = {
+    name:        'Talk einreichen',
+    url:         '/dashboard/speaker/application',
+    description: 'Klicke hier, um einen neuen Talk einzureichen',
+};
 
 export const teamMemberEvents: MenuItem      = {
     name:        'Events',
