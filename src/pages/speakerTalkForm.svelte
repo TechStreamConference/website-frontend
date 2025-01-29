@@ -7,6 +7,7 @@
     import { scrollToAnchor } from 'helper/scroll';
     import { trySaveDataAsync } from 'helper/trySaveData';
     import { SaveMessageType } from 'types/saveMessageType';
+    import { createEventDispatcher } from 'svelte';
 
     import TagArray from 'elements/input/tagArray.svelte';
     import Message from 'elements/text/message.svelte';
@@ -22,9 +23,10 @@
     export let data: DashboardPendingTalk;
     export let tags: AllTalkTag;
     export let talkDurations: DashboardTalkDurationChoices;
-    let errorList: string[]    = [];
-    let saveMessage: SaveMessage;
 
+    let errorList: string[] = [];
+    let saveMessage: SaveMessage;
+    let dispatcher          = createEventDispatcher();
 
     async function save(): Promise<boolean> {
         scrollToAnchor(`dashboard-speaker-talk-form-${data.id}`);
@@ -37,12 +39,18 @@
             tag_ids:            data.tags.map(x => x.id),
         };
 
-        const result = await trySaveDataAsync(fetch, toSave, `/api/dashboard/speaker/talk/${data.id}`, 'PUT');
+        const result = await (async () => {
+            if (data.id === 0) {
+                return await trySaveDataAsync(fetch, toSave, `/api/dashboard/speaker/submit-talk`, 'POST');
+            }
+            return await trySaveDataAsync(fetch, toSave, `/api/dashboard/speaker/talk/${data.id}`, 'PUT');
+        })();
 
         saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorList = result.messages;
         if (result.success) {
             data.requested_changes = null;
+            dispatcher('save');
         }
         return result.success;
     }
@@ -97,9 +105,9 @@
 
 <style>
     .dashboard-speaker-talk-form {
-        display:        flex;
-        flex-direction: column;
-        gap:            var(--full-gap);
+        display:           flex;
+        flex-direction:    column;
+        gap:               var(--full-gap);
         scroll-margin-top: var(--16x-margin);
     }
 
