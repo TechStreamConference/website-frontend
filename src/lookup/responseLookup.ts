@@ -49,6 +49,7 @@ const lookup: ResponseDict = {
 
     // no changes
     NO_CHANGES_DETECTED: 'Es wurden keine Änderungen vorgenommen.',
+    NO_CHANGES : 'Es wurden keine Änderungen vorgenommen.',
 };
 
 export function responseLookup(key: string): string {
