@@ -22,7 +22,7 @@
     import Message from 'elements/text/message.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
-    import SpeakerTeamMemberSocialMediaLinkForm from './speakerTeamMemberSocialMediaLinksForm.svelte';
+    import SpeakerTeamMemberSocialMediaLinkForm from 'forms/speakerTeamMemberSocialMediaLinksForm.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     export let data: LoadDashboard & LoadUserSocials;

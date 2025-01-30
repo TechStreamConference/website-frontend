@@ -22,6 +22,7 @@ const config = {
 			'dashboard': 'src/dashboard',
 			'pages': 'src/pages',
 			'pageHelper': `src/pageHelper`,
+			'forms': 'src/forms',
 		}
 	}
 };
