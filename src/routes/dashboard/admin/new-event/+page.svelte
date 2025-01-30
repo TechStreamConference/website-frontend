@@ -11,7 +11,6 @@
     import AdminEventForm from 'forms/adminEventForm.svelte';
     import TextLine from 'elements/text/textLine.svelte';
     import StyledLink from 'elements/input/styledLink.svelte';
-    import { adminEvents } from 'menu/menuItems';
 
     enum State {
         Default,
@@ -50,8 +49,8 @@
             <TextLine>Das event '{event.title}' wurde erfolgreich angelegt.</TextLine>
             <TextLine>Du kannst es ab jetzt im Event Tab bearbeiten.</TextLine>
             <StyledLink text={MenuItem.adminEvents.name}
-                        title={adminEvents.description}
-                        href={adminEvents.url}
+                        title={MenuItem.adminEvents.description}
+                        href={MenuItem.adminEvents.url}
                         newTab={false} />
         </div>
     {:else}
