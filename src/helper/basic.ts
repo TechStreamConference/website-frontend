@@ -40,3 +40,11 @@ export function getIDFromTitle<T extends {
     console.log(`not able to look up ID for ${title}`);
     throw error(404);
 }
+
+export function trimOrNull(entry: string): string | null {
+    const trimmed = entry.trim();
+    if (trimmed.length === 0) {
+        return null;
+    }
+    return trimmed;
+}
