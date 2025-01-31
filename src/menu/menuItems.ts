@@ -61,7 +61,7 @@ export const adminApproval: MenuItem   = { // deprecated
     url:         '/dashboard/admin/approval',
     description: 'Klicke hier, um ausstehende Freigaben zu bearbeiten',
 };
-export const adminApprovalSpeakerTeamMember: MenuItem   = { // deprecated
+export const adminApprovalSpeakerTeamMember: MenuItem   = {
     name:        'Freigabe Speaker Team-Member',
     url:         '/dashboard/admin/approval-speaker-team-member',
     description: 'Klicke hier, um ausstehende Freigaben von Speakern und Team-Membern zu bearbeiten',
