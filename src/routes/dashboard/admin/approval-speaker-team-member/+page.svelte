@@ -3,23 +3,24 @@
     import * as MenuItem from 'menu/menuItems';
 
     import type { LoadAdminApprovalSpeakerTeamMember } from 'types/dashboardLoadTypes';
-    import type { DashboardAllApprovalSocialMediaLinks } from 'types/dashboardProvideTypes';
 
     import { getElementByUserIdSafe } from 'helper/basic';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
-    import AdminSpeakerTeamMemberApprovalForm from 'forms/adminSpeakerTeamMemberApprovalForm.svelte';
+    import AdminSpeakerTeamMemberApprovalFormWrapper from 'forms/adminSpeakerTeamMemberApprovalFormWrapper.svelte';
     import AdminSocialMediaApprovalFormWrapper from 'forms/adminSocialMediaApprovalFormWrapper.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
 
     export let data: LoadAdminApprovalSpeakerTeamMember;
 
-    function collectSocialMediaByUserId(userID: number): DashboardAllApprovalSocialMediaLinks {
-        const toReturn: DashboardAllApprovalSocialMediaLinks = [];
-        for (const media of data.socialMedia) {
-            if (media.user_id === userID) {
-                toReturn.push(media);
+    function collectElementMediaByUserId<T extends {
+        user_id: number
+    }>(elements: T[], userID: number): T[] {
+        const toReturn: T[] = [];
+        for (const element of elements) {
+            if (element.user_id === userID) {
+                toReturn.push(element);
             }
         }
         return toReturn;
@@ -56,11 +57,11 @@
     {#each data.userIDArray as userID}
         <div class="dashboard-admin-user-wrapper">
             <SubHeadline classes="sub-headline-center">{getNameByUserID(userID)}</SubHeadline>
-            <AdminSpeakerTeamMemberApprovalForm type="speaker"
-                                                speaker={getElementByUserIdSafe(data.speaker, userID)} />
-            <AdminSpeakerTeamMemberApprovalForm type="team-member"
-                                                speaker={getElementByUserIdSafe(data.teamMember, userID)} />
-            <AdminSocialMediaApprovalFormWrapper media={collectSocialMediaByUserId(userID)} />
+            <AdminSpeakerTeamMemberApprovalFormWrapper type="speaker"
+                                                       speakerTeamMember={collectElementMediaByUserId(data.speaker, userID)} />
+            <AdminSpeakerTeamMemberApprovalFormWrapper type="team-member"
+                                                       speakerTeamMember={collectElementMediaByUserId(data.teamMember, userID)} />
+            <AdminSocialMediaApprovalFormWrapper media={collectElementMediaByUserId(data.socialMedia, userID)} />
         </div>
     {/each}
 </SectionDashboard>
@@ -72,7 +73,8 @@
         flex-direction: column;
         border:         1px solid var(--primary-color-light);
         border-radius:  var(--border-radius);
-        padding:        var(--full-padding)
+        padding:        var(--full-padding);
+        gap:            var(--full-gap);
     }
 
 </style>
