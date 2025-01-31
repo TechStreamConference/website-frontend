@@ -13,8 +13,8 @@
     import { scrollToTop } from 'helper/scroll';
 
     import Tabs from 'elements/navigation/tabs.svelte';
-    import SpeakerTeamMemberEventForm from 'pages/speakerTeamMemberEventForm.svelte';
-    import SpeakerTeamMemberSocialMediaLinkForm from 'pages/speakerTeamMemberSocialMediaLinksForm.svelte';
+    import SpeakerTeamMemberEventForm from 'forms/speakerTeamMemberEventForm.svelte';
+    import SpeakerTeamMemberSocialMediaLinkForm from 'forms/speakerTeamMemberSocialMediaLinksForm.svelte';
     import Button from 'elements/input/button.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';

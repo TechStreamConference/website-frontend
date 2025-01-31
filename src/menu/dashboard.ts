@@ -32,6 +32,7 @@ export const admin: Menu      = [
     Item.adminApproval,
     Item.adminEventSlots,
     Item.adminEvents,
+    Item.adminNewEvent,
     Item.adminGlobals,
 ];
 export const speaker: Menu    = [

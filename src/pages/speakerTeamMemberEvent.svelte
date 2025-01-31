@@ -15,7 +15,7 @@
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import Message from 'elements/text/message.svelte';
-    import SpeakerTeamMemberEventForm from './speakerTeamMemberEventForm.svelte';
+    import SpeakerTeamMemberEventForm from 'forms/speakerTeamMemberEventForm.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
 

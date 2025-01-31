@@ -51,6 +51,11 @@ export const adminEvents: MenuItem     = {
     url:         '/dashboard/admin/events',
     description: 'Klicke hier, um zu den Event-Einstellungen zu gelangen',
 };
+export const adminNewEvent: MenuItem   = {
+    name:        'Neues Event',
+    url:         '/dashboard/admin/new-event',
+    description: 'Klicke hier, um ein neues Event anzulegen',
+};
 export const adminApproval: MenuItem   = {
     name:        'Freigabe',
     url:         '/dashboard/admin/approval',
