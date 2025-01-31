@@ -68,7 +68,7 @@ export const speakerEvents: MenuItem      = {
     description: 'Klicke hier, um zu den event-spezifischen Einstellungen zu gelangen',
 };
 export const speakerTalk: MenuItem        = {
-    name:        'Talk',
+    name:        'Meine Talks',
     url:         '/dashboard/speaker/talk',
     description: 'Klicke hier, um zu den Talk-Einstellungen zu gelangen',
 };
