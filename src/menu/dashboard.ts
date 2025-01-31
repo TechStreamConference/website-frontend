@@ -38,6 +38,7 @@ export const admin: Menu      = [
 export const speaker: Menu    = [
     Item.speakerEvents,
     Item.speakerTalk,
+    Item.speakerApplication,
     Item.speakerSocialMedia,
 ];
 export const teamMember: Menu = [

@@ -68,7 +68,7 @@ export const speakerEvents: MenuItem      = {
     description: 'Klicke hier, um zu den event-spezifischen Einstellungen zu gelangen',
 };
 export const speakerTalk: MenuItem        = {
-    name:        'Talk',
+    name:        'Meine Talks',
     url:         '/dashboard/speaker/talk',
     description: 'Klicke hier, um zu den Talk-Einstellungen zu gelangen',
 };
@@ -76,6 +76,11 @@ export const speakerSocialMedia: MenuItem = {
     name:        'Social Media',
     url:         '/dashboard/speaker/socials',
     description: 'Klicke hier, um zu den Social-Media-Einstellungen zu gelangen',
+};
+export const speakerApplication: MenuItem = {
+    name:        'Talk einreichen',
+    url:         '/dashboard/speaker/application',
+    description: 'Klicke hier, um einen neuen Talk einzureichen',
 };
 
 export const teamMemberEvents: MenuItem      = {

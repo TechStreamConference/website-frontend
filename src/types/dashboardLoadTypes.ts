@@ -16,6 +16,7 @@ import type {
     DashboardAllTentativeOrAcceptedTalks,
     DashboardAllPendingTalks,
     DashboardUserData,
+    DashboardEvent,
 } from './dashboardProvideTypes';
 
 export type LoadDashboard = {
@@ -69,6 +70,13 @@ export type LoadSpeakerTalk = {
     allEvents: DashboardAllEventIDs,
     tentativeOrAcceptedTalks: DashboardAllTentativeOrAcceptedTalks,
     pendingTalks: DashboardAllPendingTalks,
+    tags: AllTalkTag,
+    talkDurations: DashboardTalkDurationChoices,
+}
+
+export type LoadSpeakerApplication = {
+    canApply: boolean,
+    event: DashboardEvent | undefined,
     tags: AllTalkTag,
     talkDurations: DashboardTalkDurationChoices,
 }

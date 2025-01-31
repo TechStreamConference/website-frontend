@@ -2,8 +2,9 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/menuItems';
     import * as SocialHelper from 'pageHelper/speakerTeamMemberSocials';
-    import type { NewImage } from 'pageHelper/speakerTeamMemberEvent';
     import * as EventHelper from 'pageHelper/speakerTeamMemberEvent';
+
+    import type { NewImage } from 'pageHelper/speakerTeamMemberEvent';
     import type { LoadDashboard, LoadUserApplication } from 'types/dashboardLoadTypes';
     import type { SetCreateSocialMediaLink, SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
 
@@ -134,37 +135,11 @@
                        --text-align="center">
                 {"Du hast dich erfolgreich beworben.\nWir werden nun deine Bewerbung kontrollieren.\nWenn wir dich annehmen, kannst du deine Daten im Speaker-Dashboard bearbeiten.\nDazu wird dann ein neuer Tab oben rechts erscheinen."}
             </Paragraph>
-            <div class="dashboard-user-application-button-wrapper">
-                <StyledLink title="Klicke hier, um zur Hauptseite zurück zu kehren"
-                            text="Hauptseite"
-                            href="/"
-                            newTab={false}
-                />
-            </div>
         </div>
     {:else if data.error}
         <div class="dashboard-user-application-error">
             <Paragraph classes="paragraph-pre-wrap"
                        --text-align="center">{data.error.error}</Paragraph>
-            <div class="dashboard-user-application-button-wrapper">
-                <StyledLink title="Klicke hier, um zur Hauptseite zurück zu kehren"
-                            text="Hauptseite"
-                            href="/"
-                            newTab={false}
-                />
-                {#if data.roles.is_speaker}
-                    <StyledLink title={MenuItem.speakerEvents.description}
-                                text={MenuItem.speakerEvents.name}
-                                href={MenuItem.speakerEvents.url}
-                                newTab={false}
-                    />
-                    <StyledLink title={MenuItem.speakerSocialMedia.description}
-                                text={MenuItem.speakerSocialMedia.name}
-                                href={MenuItem.speakerSocialMedia.url}
-                                newTab={false}
-                    />
-                {/if}
-            </div>
         </div>
     {:else if data.data}
         <form class="dashboard-user-application-form"
