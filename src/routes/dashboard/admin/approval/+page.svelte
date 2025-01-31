@@ -2,7 +2,7 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/menuItems';
 
-    import type { LoadAdminApproval } from 'types/dashboardLoadTypes';
+    import type { LoadAdminApprovalSpeakerTeamMember } from 'types/dashboardLoadTypes';
 
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
@@ -27,7 +27,7 @@
     import { validateApproval, validateRequestedChanges } from './approvalValidation';
     import { trySaveDataAsync } from 'helper/trySaveData.js';
 
-    export let data: LoadAdminApproval;
+    export let data: LoadAdminApprovalSpeakerTeamMember;
     let approvalPopup: GeneralPopup;
     let rejectPopup: GeneralPopup;
 

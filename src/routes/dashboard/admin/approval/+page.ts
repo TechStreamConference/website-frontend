@@ -1,4 +1,4 @@
-import type { LoadAdminApproval } from 'types/dashboardLoadTypes';
+import type { LoadAdminApprovalSpeakerTeamMember } from 'types/dashboardLoadTypes';
 
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync, parseProvidedJsonAsync } from 'helper/parseJson';
@@ -10,7 +10,7 @@ import { z } from 'zod';
 
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
-}): Promise<LoadAdminApproval> {
+}): Promise<LoadAdminApprovalSpeakerTeamMember> {
     const speakerFetchPromise: Promise<Response>     = fetch(apiUrl('/api/dashboard/admin/approval/speaker'));
     const teamMemberFetchPromise: Promise<Response>  = fetch(apiUrl('/api/dashboard/admin/approval/team-member'));
     const socialMediaFetchPromise: Promise<Response> = fetch(apiUrl('/api/dashboard/admin/approval/social-media-link'));
