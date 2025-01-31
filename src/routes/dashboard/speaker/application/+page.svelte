@@ -39,10 +39,6 @@
             <TextLine>Sobald wir deinen Talk bearbeitet haben, werden wir dich benachrichtigen.</TextLine>
             <TextLine>Du möchtest deinen Talk noch bearbeiten? Kein Problem. Er wird bereits im Talk-Tab angezeigt.
             </TextLine>
-            <StyledLink text={MenuItem.speakerTalk.name}
-                        href={MenuItem.speakerTalk.url}
-                        title={MenuItem.speakerTalk.description}
-                        newTab={false} />
         </div>
     {:else}
         {#if data.canApply && data.event}
