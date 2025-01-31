@@ -101,9 +101,9 @@ export const dashboardApprovalSpeakerTeamMemberScheme = z.object({
                                                                                                      title: z.string(),
                                                                                                  }),
                                                                      diff:              z.array(z.string()).nullable(),
-                                                                     can_reject: z.boolean()
-                                                                                  .optional()
-                                                                                  .transform((val) => val
+                                                                     can_reject:        z.boolean()
+                                                                                         .optional()
+                                                                                         .transform((val) => val
                                                                                                              ?? false),
                                                                  });
 export type DashboardApprovalSpeakerTeamMember = z.infer<typeof dashboardApprovalSpeakerTeamMemberScheme>;
@@ -113,6 +113,7 @@ export type DashboardAllApprovalSpeakerTeamMembers = z.infer<typeof dashboardAll
 
 export const dashboardApprovalSocialMediaLinkScheme = z.object({
                                                                    id:                z.number(),
+                                                                   user_id:           z.number(),
                                                                    name:              z.string(),
                                                                    url:               z.string(),
                                                                    requested_changes: z.string()
