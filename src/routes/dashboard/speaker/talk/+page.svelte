@@ -26,7 +26,7 @@
     import Tag from 'elements/text/tag.svelte';
     import GeneralPopup from 'elements/popups/generalPopup.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
-    import SpeakerTalkForm from 'pages/speakerTalkForm.svelte';
+    import SpeakerTalkForm from 'forms/speakerTalkForm.svelte';
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;

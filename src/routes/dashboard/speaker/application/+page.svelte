@@ -7,7 +7,7 @@
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import TextLine from 'elements/text/textLine.svelte';
-    import SpeakerTalkForm from 'pages/speakerTalkForm.svelte';
+    import SpeakerTalkForm from 'forms/speakerTalkForm.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
 
     export let data: LoadSpeakerApplication;
