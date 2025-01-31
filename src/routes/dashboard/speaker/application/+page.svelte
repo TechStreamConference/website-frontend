@@ -9,7 +9,6 @@
     import TextLine from 'elements/text/textLine.svelte';
     import SpeakerTalkForm from 'pages/speakerTalkForm.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
-    import StyledLink from 'elements/input/styledLink.svelte';
 
     export let data: LoadSpeakerApplication;
     let saved: boolean = false;

@@ -10,7 +10,6 @@
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import AdminEventForm from 'forms/adminEventForm.svelte';
     import TextLine from 'elements/text/textLine.svelte';
-    import StyledLink from 'elements/input/styledLink.svelte';
 
     enum State {
         Default,
@@ -48,10 +47,6 @@
         <div class="dashboard-admin-new-event-message-wrapper">
             <TextLine>Das event '{event.title}' wurde erfolgreich angelegt.</TextLine>
             <TextLine>Du kannst es ab jetzt im Event Tab bearbeiten.</TextLine>
-            <StyledLink text={MenuItem.adminEvents.name}
-                        title={MenuItem.adminEvents.description}
-                        href={MenuItem.adminEvents.url}
-                        newTab={false} />
         </div>
     {:else}
         <AdminEventForm {event}
