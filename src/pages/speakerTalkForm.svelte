@@ -24,9 +24,11 @@
     export let tags: AllTalkTag;
     export let talkDurations: DashboardTalkDurationChoices;
 
-    let errorList: string[] = [];
+    // @formatter:off
     let saveMessage: SaveMessage;
-    let dispatcher          = createEventDispatcher();
+    let errorList:   string[]     = [];
+    let dispatcher                = createEventDispatcher();
+    // @formatter:on
 
     async function save(): Promise<boolean> {
         scrollToAnchor(`dashboard-speaker-talk-form-${data.id}`);

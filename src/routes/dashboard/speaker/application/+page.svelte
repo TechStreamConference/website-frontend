@@ -24,7 +24,6 @@
         possible_durations: [],
         notes:              '',
         requested_changes:  '',
-
     };
 </script>
 
