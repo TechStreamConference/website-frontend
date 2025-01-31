@@ -27,6 +27,18 @@ export function getElementByID<T extends {
     throw error(404);
 }
 
+export function getElementByUserIdSafe<T extends {
+    user_id: number
+}>(elements: T[], userID: number): T | undefined {
+    for (const entry of elements) {
+        if (entry.user_id === userID) {
+            return entry;
+        }
+    }
+
+    return undefined;
+}
+
 export function getIDFromTitle<T extends {
     id: number,
     title: string
