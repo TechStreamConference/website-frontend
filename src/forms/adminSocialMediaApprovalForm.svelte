@@ -5,6 +5,7 @@
     import { createEventDispatcher } from 'svelte';
     import { trySaveDataAsync } from 'helper/trySaveData';
     import { SaveMessageType } from 'types/saveMessageType';
+    import { scrollToAnchor } from 'helper/scroll';
 
     import TextLine from 'elements/text/textLine.svelte';
     import TextArea from 'elements/input/textArea.svelte';
@@ -33,6 +34,8 @@
     }
 
     async function requestChanges(): Promise<void> {
+        scrollToAnchor(`social-media-approval-entry-${media.id}`);
+
         if (!validateRequestedChanges()) {
             return;
         }
@@ -57,6 +60,8 @@
     }
 
     async function approve(): Promise<void> {
+        scrollToAnchor(`social-media-approval-entry-${media.id}`);
+
         if (!validateApprove()) {
             return;
         }
@@ -79,7 +84,8 @@
               acceptCallback={approve}
 />
 
-<div class="social-media-approval-wrapper">
+<div class="social-media-approval-wrapper"
+     id="social-media-approval-entry-{media.id}">
     <SaveMessage bind:this={message} />
     <MessageWrapper messages={errorList} />
     <div class="dashboard-admin-approval-grid">
@@ -116,9 +122,10 @@
 
 <style>
     .social-media-approval-wrapper {
-        border:        1px solid var(--primary-color-dark);
-        border-radius: var(--border-radius);
-        padding:       var(--full-padding);
+        border:            1px solid var(--primary-color-dark);
+        border-radius:     var(--border-radius);
+        padding:           var(--full-padding);
+        scroll-margin-top: var(--16x-margin);
     }
 
     .dashboard-admin-approval-grid {
