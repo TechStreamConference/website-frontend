@@ -57,7 +57,7 @@
 
         const socialResult: SocialHelper.ValidateReturn = SocialHelper.validate(data.data.socials.socials);
         const eventResult: EventHelper.ValidateReturn   = EventHelper.validate(event);
-        errorList = socialResult.messages;
+        errorList                                       = socialResult.messages;
         errorList.push(...(eventResult.messages));
         if (!image.imageFile) {
             errorList.push('Das Profilbild fehlt.');
@@ -150,10 +150,8 @@
                     - {formatDate(data.data.event.end_date, '%DD.%MM.%YYYY')}</TextLine>
                 <TextLine>Noch bis: {formatDate(data.data.event.call_for_papers_end, '%DD.%MM.%YYYY')}</TextLine>
             </div>
-            <div class="dashboard-user-application-form-messages-wrapper">
-                <SaveMessage bind:this={saveMessage} />
-                <MessageWrapper messages={errorList} />
-            </div>
+            <SaveMessage bind:this={saveMessage} />
+            <MessageWrapper messages={errorList} />
             <div class="dashboard-user-application-section">
                 <HeadlineH2>Deine Bewerbung</HeadlineH2>
                 <SpeakerTeamMemberEventForm bind:this={eventForm}
