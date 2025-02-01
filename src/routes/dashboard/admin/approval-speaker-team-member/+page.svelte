@@ -53,7 +53,7 @@
         throw (404);
     }
 
-    function deleteEntry(type: DataType, id: number) {
+    function deleteEntry(type: DataType, id: number): void {
         setTimeout(() => {
             switch (type) {
                 case DataType.Speaker:
@@ -76,6 +76,16 @@
             data.userIDArray = getUserIds(data.speaker, data.teamMember, data.socialMedia);
         }, 3000);
     }
+
+    function cleanUpSocialMediaLinks(user_id: number): void {
+        setTimeout(() => {
+            data.socialMedia = data.socialMedia.filter((socialMedia) => {
+                return socialMedia.user_id !== user_id;
+            });
+
+            data.userIDArray = getUserIds(data.speaker, data.teamMember, data.socialMedia);
+        }, 2900); // move this timeout a litte bit forward to make sure the social media links gets cleanup bevor delete of speaker / team member
+    }
 </script>
 
 <Tabs
@@ -84,14 +94,20 @@
       classes="navigation-tabs-dashboard-subpage"
 />
 
-<SectionDashboard classes="standard-dashboard-section">
+<SectionDashboard classes="standard-dashboard-section dashboard-admin-approval-wrapper">
     {#each data.userIDArray as userID}
         <div class="dashboard-admin-user-wrapper">
             <SubHeadline classes="sub-headline-center">{getNameByUserID(userID)}</SubHeadline>
             <AdminSpeakerTeamMemberApprovalFormWrapper type="speaker"
-                                                       speakerTeamMember={collectElementMediaByUserId(data.speaker, userID)} />
+                                                       speakerTeamMember={collectElementMediaByUserId(data.speaker, userID)}
+                                                       on:approve={(e)=>{deleteEntry(DataType.Speaker, e.detail)}}
+                                                       on:reject={(e)=>{deleteEntry(DataType.Speaker, e.detail.id);
+                                                           cleanUpSocialMediaLinks(e.detail.user_id);}} />
             <AdminSpeakerTeamMemberApprovalFormWrapper type="team-member"
-                                                       speakerTeamMember={collectElementMediaByUserId(data.teamMember, userID)} />
+                                                       speakerTeamMember={collectElementMediaByUserId(data.teamMember, userID)}
+                                                       on:approve={(e)=>{deleteEntry(DataType.TeamMember, e.detail)}}
+                                                       on:reject={(e) => {deleteEntry(DataType.TeamMember, e.detail.id);
+                                                           cleanUpSocialMediaLinks(e.detail.user_id);}} />
             <AdminSocialMediaApprovalFormWrapper media={collectElementMediaByUserId(data.socialMedia, userID)}
                                                  on:approved={(e) => {deleteEntry(DataType.SocialMedia, e.detail);}} />
         </div>
@@ -107,6 +123,10 @@
         border-radius:  var(--border-radius);
         padding:        var(--full-padding);
         gap:            var(--full-gap);
+    }
+
+    :global(.dashboard-admin-approval-wrapper) {
+        gap: var(--4x-gap) !important;
     }
 
 </style>
