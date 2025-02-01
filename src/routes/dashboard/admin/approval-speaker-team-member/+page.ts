@@ -1,14 +1,13 @@
 import type { LoadAdminApprovalSpeakerTeamMember } from 'types/dashboardLoadTypes';
-import type {
-    DashboardAllApprovalSocialMediaLinks, DashboardAllApprovalSpeakerTeamMembers,
-} from 'types/dashboardProvideTypes';
+import type { DashboardAllApprovalSpeakerTeamMembers } from 'types/dashboardProvideTypes';
 
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync, parseProvidedJsonAsync } from 'helper/parseJson';
+import { z } from 'zod';
+import { getUserIds } from './approvalHelper';
 import {
     dashboardAllApprovalSocialMediaLinkScheme, dashboardAllApprovalSpeakerTeamMemberScheme,
 } from 'types/dashboardProvideTypes';
-import { z } from 'zod';
 
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
@@ -67,19 +66,4 @@ async function collectCanRejectSpeakerAsync(speakerParsePromise: Promise<Dashboa
     }
 
     return speaker;
-}
-
-
-function getUserIds(
-    speaker: DashboardAllApprovalSpeakerTeamMembers,
-    teamMember: DashboardAllApprovalSpeakerTeamMembers,
-    socialMedia: DashboardAllApprovalSocialMediaLinks,
-): number[] {
-    const ids = new Set<number>();
-
-    speaker.forEach(speaker => ids.add(speaker.user_id));
-    teamMember.forEach(teamMember => ids.add(teamMember.user_id));
-    socialMedia.forEach(socialMedia => ids.add(socialMedia.user_id));
-
-    return [...ids].sort((a, b) => a - b);
 }

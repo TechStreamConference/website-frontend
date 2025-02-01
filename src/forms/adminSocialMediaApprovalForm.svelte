@@ -1,7 +1,10 @@
 <script lang="ts">
-    import type { DashboardApprovalSocialMediaLink } from 'types/dashboardProvideTypes';
+    import { type DashboardApprovalSocialMediaLink } from 'types/dashboardProvideTypes';
 
     import { setUnsavedChanges } from 'stores/saved';
+    import { createEventDispatcher } from 'svelte';
+    import { trySaveDataAsync } from 'helper/trySaveData';
+    import { SaveMessageType } from 'types/saveMessageType';
 
     import TextLine from 'elements/text/textLine.svelte';
     import TextArea from 'elements/input/textArea.svelte';
@@ -9,22 +12,76 @@
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import StyledLink from 'elements/input/styledLink.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
+    import GeneralPopup from 'elements/popups/generalPopup.svelte';
 
     export let media: DashboardApprovalSocialMediaLink;
 
     let message: SaveMessage;
     let errorList: string[] = [];
 
-    async function requestChanges() {
+    let approvalPopup: GeneralPopup;
+    const dispatch = createEventDispatcher();
+
+    function validateRequestedChanges(): boolean {
+        errorList = [];
+
+        if (media.requested_changes.trim().length === 0) {
+            errorList.push('Keine Änderungswünsche eingetragen');
+        }
+
+        return errorList.length === 0;
     }
 
-    async function approve() {
+    async function requestChanges(): Promise<void> {
+        if (!validateRequestedChanges()) {
+            return;
+        }
+
+        const toSave        = { message: media.requested_changes };
+        const route: string = `/api/dashboard/admin/approval/social-media-link/${media.id}/request-changes`;
+        const response      = await trySaveDataAsync(fetch, toSave, route, 'PUT');
+
+        message.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
+        errorList = response.messages;
+        dispatch('changes');
+    }
+
+    function validateApprove(): boolean {
+        errorList = [];
+
+        if (media.requested_changes.trim().length !== 0) {
+            errorList.push('Ein Eintrag mit Änderungswünschen kann nicht freigegeben werden');
+        }
+
+        return errorList.length === 0;
+    }
+
+    async function approve(): Promise<void> {
+        if (!validateApprove()) {
+            return;
+        }
+
+        const route: string = `/api/dashboard/admin/approval/social-media-link/${media.id}`;
+        const response      = await trySaveDataAsync(fetch, [], route, 'PUT');
+
+        message.setSaveMessage(response.success ? SaveMessageType.Approved : SaveMessageType.Error);
+        errorList = response.messages;
+        dispatch('approved');
     }
 </script>
 
-<SaveMessage bind:this={message} />
-<MessageWrapper messages={errorList} />
+<GeneralPopup bind:this={approvalPopup}
+              headline="Eintrag Freigeben?"
+              text="Wenn du '{media.url}' freigibst kannst du dies nicht mehr rückgängig machen."
+              denyButtonText="Abbrechen"
+              acceptButtonText="Freigeben"
+              denyCallback={() => {}}
+              acceptCallback={approve}
+/>
+
 <div class="social-media-approval-wrapper">
+    <SaveMessage bind:this={message} />
+    <MessageWrapper messages={errorList} />
     <div class="dashboard-admin-approval-grid">
         <StyledLink
               icon={media.name}
@@ -51,18 +108,19 @@
         </Button>
         <Button
               ariaLabel="Klicke hier, um den Datensatz freizugeben"
-              on:click={approve}
+              on:click={() => {approvalPopup.show('')}}
         >Freigeben
         </Button>
     </div>
 </div>
 
 <style>
-    .social-media-approval-wrapper{
-        border: 1px solid var(--primary-color-dark);
+    .social-media-approval-wrapper {
+        border:        1px solid var(--primary-color-dark);
         border-radius: var(--border-radius);
-        padding: var(--full-padding);
+        padding:       var(--full-padding);
     }
+
     .dashboard-admin-approval-grid {
         display:      flex;
         gap:          var(--full-gap);

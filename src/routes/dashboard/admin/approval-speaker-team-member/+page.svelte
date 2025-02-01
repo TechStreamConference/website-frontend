@@ -5,6 +5,7 @@
     import type { LoadAdminApprovalSpeakerTeamMember } from 'types/dashboardLoadTypes';
 
     import { getElementByUserIdSafe } from 'helper/basic';
+    import { getUserIds } from './approvalHelper';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -13,6 +14,12 @@
     import SubHeadline from 'elements/text/subHeadline.svelte';
 
     export let data: LoadAdminApprovalSpeakerTeamMember;
+
+    enum DataType {
+        Speaker,
+        TeamMember,
+        SocialMedia,
+    }
 
     function collectElementMediaByUserId<T extends {
         user_id: number
@@ -45,6 +52,30 @@
         console.error(`not able to look up username by user ID: ${userID}`);
         throw (404);
     }
+
+    function deleteEntry(type: DataType, id: number) {
+        setTimeout(() => {
+            switch (type) {
+                case DataType.Speaker:
+                    data.speaker = data.speaker.filter((speaker) => {
+                        return speaker.id !== id;
+                    });
+                    break;
+                case DataType.TeamMember:
+                    data.teamMember = data.teamMember.filter((teamMember) => {
+                        return teamMember.id !== id;
+                    });
+                    break;
+                case DataType.SocialMedia:
+                    data.socialMedia = data.socialMedia.filter((socialMedia) => {
+                        return socialMedia.id !== id;
+                    });
+                    break;
+            }
+
+            data.userIDArray = getUserIds(data.speaker, data.teamMember, data.socialMedia);
+        }, 3000);
+    }
 </script>
 
 <Tabs
@@ -61,7 +92,8 @@
                                                        speakerTeamMember={collectElementMediaByUserId(data.speaker, userID)} />
             <AdminSpeakerTeamMemberApprovalFormWrapper type="team-member"
                                                        speakerTeamMember={collectElementMediaByUserId(data.teamMember, userID)} />
-            <AdminSocialMediaApprovalFormWrapper media={collectElementMediaByUserId(data.socialMedia, userID)} />
+            <AdminSocialMediaApprovalFormWrapper media={collectElementMediaByUserId(data.socialMedia, userID)}
+                                                 on:approved={(e) => {deleteEntry(DataType.SocialMedia, e.detail);}} />
         </div>
     {/each}
 </SectionDashboard>
