@@ -44,7 +44,9 @@
 
         message.setSaveMessage(result.success ? SaveMessageType.Approved : SaveMessageType.Error);
         errorList = result.messages;
-        dispatch('approve');
+        if (result.success) {
+            dispatch('approve');
+        }
     }
 
     function validateChangesReject(): boolean {
@@ -71,7 +73,9 @@
 
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorList = result.messages;
-        dispatch('reject');
+        if (result.success) {
+            dispatch('reject');
+        }
     }
 
     async function changes(): Promise<void> {
@@ -88,7 +92,9 @@
 
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorList = result.messages;
-        dispatch('changes');
+        if (result.success) {
+            dispatch('changes');
+        }
     }
 </script>
 
@@ -165,7 +171,8 @@
 
     .dashboard-admin-pending-talk-approval-entry {
         display:               grid;
-        grid-template-columns: auto 1fr;
+        grid-template-columns: auto auto;
+        justify-content:       center;
         row-gap:               var(--quad-gap);
         column-gap:            var(--2x-gap);
     }
