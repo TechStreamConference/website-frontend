@@ -124,10 +124,10 @@
 </script>
 
 <UnsavedChangesCallbackWrapper callback={save} />
+<Tabs classes="navigation-tabs-dashboard-subpage"
+      entries={Menu.admin}
+      entryName={MenuItem.adminEventSlots.name} />
 <SectionDashboard classes="standard-dashboard-section">
-    <Tabs classes="navigation-tabs-dashboard-subpage"
-          entries={Menu.admin}
-          entryName={MenuItem.adminEventSlots.name} />
     <NavigationDropDown id="dashboard-admin-time-slots-event-drop-down"
                         labelText="Aktuelles Event:"
                         data={data.allEvents.map(x=>x.title)}
