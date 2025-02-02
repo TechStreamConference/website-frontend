@@ -135,6 +135,10 @@
         margin:       var(--2x-margin) 0;
     }
 
+    :global(.dashboard-admin-approval-social-media-text) {
+        align-self: center;
+    }
+
     .dashboard-admin-approval-button-array {
         display:         flex;
         flex-direction:  row;
