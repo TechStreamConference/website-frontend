@@ -54,9 +54,7 @@
     async function save(): Promise<boolean> {
         const toSave = structuredClone(data.currentSlots);
         for (let entry of toSave) {
-            console.log(entry.start_time);
             const temp = checkSQLTimeAndDate(convertTimeAndDateToSQL(entry.start_time));
-            console.log(temp);
             entry.start_time = temp ? temp : entry.start_time;
         }
         const result = await trySaveDataAsync(
