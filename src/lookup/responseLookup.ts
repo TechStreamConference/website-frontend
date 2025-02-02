@@ -45,12 +45,16 @@ const lookup: ResponseDict = {
     NO_EVENT_TO_APPLY_FOR:                        'Aktuell kann man sich nicht bewerben.\nSchau gerne bei der nächsten Bewerbungsphase wieder vorbei.\nWenn du bereits ein Speaker bist, kannst du deine Daten im Speaker-Tab bearbeiten.',
     SPEAKER_CANNOT_BE_REJECTED:                   'Dieser Speaker kann nicht abgelehnt werden.',
 
+    // talk
+    TALK_ALREADY_APPROVED: 'Der Talk ist bereits freigegeben',
+    TALK_NOT_FOUND:        'Da haben wir wohl diesen Talk verlegt. Vielleicht finden wir ihn bald wieder.',
+
     // time slots
     TIME_SLOTS_OVERLAP: 'Mindestens 2 Vortragszeiten überlappen sich.',
 
     // no changes
     NO_CHANGES_DETECTED: 'Es wurden keine Änderungen vorgenommen.',
-    NO_CHANGES : 'Es wurden keine Änderungen vorgenommen.',
+    NO_CHANGES:          'Es wurden keine Änderungen vorgenommen.',
 };
 
 export function responseLookup(key: string): string {
