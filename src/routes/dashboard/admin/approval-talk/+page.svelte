@@ -42,9 +42,11 @@
     }
 
     async function moveTalk(id: number): Promise<void> {
-        data.pendingTalks   = data.pendingTalks.filter((talk) => talk.id !== id);
-        data.tentativeTalks = await fetchTentativeTalks(fetch);
-        data.userIDArray    = getUserIds(data.pendingTalks, data.tentativeTalks);
+        setTimeout(async () => {
+            data.pendingTalks   = data.pendingTalks.filter((talk) => talk.id !== id);
+            data.tentativeTalks = await fetchTentativeTalks(fetch);
+            data.userIDArray    = getUserIds(data.pendingTalks, data.tentativeTalks);
+        }, 3000);
     }
 </script>
 
@@ -59,7 +61,9 @@
             <AdminPendingTalkApprovalFormWrapper talks={getElementsByUserID(data.pendingTalks, userID)}
                                                  on:reject={(e) => deleteEntry(DataType.Pending, e.detail)}
                                                  on:approve={(e) => moveTalk(e.detail)} />
-            <AdminTentativeTalkApprovalFormWrapper talks={getElementsByUserID(data.tentativeTalks, userID)} />
+            <AdminTentativeTalkApprovalFormWrapper talks={getElementsByUserID(data.tentativeTalks, userID)}
+                                                   slots={data.slots}
+                                                   on:reject={(e) => deleteEntry(DataType.Tentative, e.detail)} />
         </div>
     {/each}
 </SectionDashboard>
