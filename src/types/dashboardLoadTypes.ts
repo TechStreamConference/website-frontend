@@ -43,6 +43,12 @@ export type LoadAdminApprovalSpeakerTeamMember = {
     userIDArray: number[],
 };
 
+export type LoadAdminApprovalTalk = {
+    pendingTalks: DashboardAllPendingTalks,
+    tentativeTalks: DashboardAllTentativeOrAcceptedTalks,
+    userIDArray: number[],
+}
+
 export type LoadSpeakerTeamMemberEvent = {
     allEvents: DashboardAllEventIDs,
     current: DashboardEventID,

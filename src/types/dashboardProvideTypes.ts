@@ -212,9 +212,12 @@ export const dashboardPendingTalkScheme = z.object({
                                                        notes:              z.string()
                                                                             .nullable()
                                                                             .transform(x => x ?? ''),
-                                                       requested_changes:  z.string().nullable(),
+                                                       requested_changes:  z.string()
+                                                                            .nullable()
+                                                                            .transform(x => x ?? ''),
                                                        tags:               dashboardAllTalkTagScheme,
                                                        possible_durations: dashboardTalkDurationChoicesScheme,
+                                                       speaker:            dashboardSpeakerTeamMemberScheme,
                                                    });
 export type DashboardPendingTalk = z.infer<typeof dashboardPendingTalkScheme>;
 export const dashboardAllPendingTalkScheme = z.array(dashboardPendingTalkScheme);
