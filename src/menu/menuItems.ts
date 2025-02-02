@@ -36,30 +36,35 @@ export const imprint: MenuItem = {
     description: 'Klicke hier, um zum Impressum zu gelangen',
 };
 
-export const adminGlobals: MenuItem    = {
+export const adminGlobals: MenuItem                   = {
     name:        'Globals',
     url:         '/dashboard/admin/globals',
     description: 'Klicke hier, um zu den globalen Einstellungen im Admin-Dashboard zu gelangen',
 };
-export const adminEventSlots: MenuItem = {
+export const adminEventSlots: MenuItem                = {
     name:        'Zeit-Slots',
     url:         '/dashboard/admin/time-slots',
     description: 'Klicke hier, um zu den Time-Slot-Einstellungen zu gelangen',
 };
-export const adminEvents: MenuItem     = {
+export const adminEvents: MenuItem                    = {
     name:        'Events',
     url:         '/dashboard/admin/events',
     description: 'Klicke hier, um zu den Event-Einstellungen zu gelangen',
 };
-export const adminNewEvent: MenuItem   = {
+export const adminNewEvent: MenuItem                  = {
     name:        'Neues Event',
     url:         '/dashboard/admin/new-event',
     description: 'Klicke hier, um ein neues Event anzulegen',
 };
-export const adminApprovalSpeakerTeamMember: MenuItem   = {
+export const adminApprovalSpeakerTeamMember: MenuItem = {
     name:        'Freigabe Speaker / Team-Member',
     url:         '/dashboard/admin/approval-speaker-team-member',
     description: 'Klicke hier, um ausstehende Freigaben von Speakern und Team-Membern zu bearbeiten',
+};
+export const adminApprovalTalk: MenuItem              = {
+    name:        'Freigabe Vorträge',
+    url:         '/dashboard/admin/approval-talk',
+    description: 'Klicke hier, um ausstehende Freigaben von Vorträgen zu bearbeiten',
 };
 
 export const speakerEvents: MenuItem      = {

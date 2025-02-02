@@ -30,6 +30,7 @@ export const footerIn: Menu = [
 
 export const admin: Menu      = [
     Item.adminApprovalSpeakerTeamMember,
+    Item.adminApprovalTalk,
     Item.adminEventSlots,
     Item.adminEvents,
     Item.adminNewEvent,
