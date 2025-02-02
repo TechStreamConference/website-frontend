@@ -84,7 +84,7 @@
             });
 
             data.userIDArray = getUserIds(data.speaker, data.teamMember, data.socialMedia);
-        }, 2900); // move this timeout a litte bit forward to make sure the social media links gets cleanup bevor delete of speaker / team member
+        }, 2900); // move this timeout a litte bit forward to make sure the social media links gets cleaned up before deletion of speaker / team member
     }
 </script>
 
