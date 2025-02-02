@@ -9,6 +9,7 @@
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import AdminPendingTalkApprovalFormWrapper from 'forms/adminPendingTalkApprovalFormWrapper.svelte';
+    import AdminTentativeTalkApprovalFormWrapper from 'forms/adminTentativeTalkApprovalFormWrapper.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
 
     export let data: LoadAdminApprovalTalk;
@@ -58,6 +59,7 @@
             <AdminPendingTalkApprovalFormWrapper talks={getElementsByUserID(data.pendingTalks, userID)}
                                                  on:reject={(e) => deleteEntry(DataType.Pending, e.detail)}
                                                  on:approve={(e) => moveTalk(e.detail)} />
+            <AdminTentativeTalkApprovalFormWrapper talks={getElementsByUserID(data.tentativeTalks, userID)} />
         </div>
     {/each}
 </SectionDashboard>
