@@ -1,9 +1,16 @@
-import type { DashboardAllPendingTalks, DashboardAllTentativeOrAcceptedTalks } from 'types/dashboardProvideTypes';
+import type {
+    DashboardAllPendingTalks, DashboardAllTentativeOrAcceptedTalks, DashboardAllTimeSlots,
+} from 'types/dashboardProvideTypes';
 
-import { dashboardAllTentativeOrAcceptedTalkScheme } from 'types/dashboardProvideTypes';
+
+import { dashboardAllTentativeOrAcceptedTalkScheme, dashboardAllTimeSlotsScheme } from 'types/dashboardProvideTypes';
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 
+
+type TentativeSlots = {
+    [key: number]: DashboardAllTimeSlots
+};
 
 export function getUserIds(
     pendingTalks: DashboardAllPendingTalks,
@@ -31,4 +38,30 @@ export async function fetchTentativeTalks(fetch: typeof globalThis.fetch): Promi
     const test = (await tentativeTalksParsePromise).filter(x => !x.time_slot_accepted);
     console.log(test);
     return test;
+}
+
+
+export async function fetchTentativeSlots(
+    fetch: typeof globalThis.fetch,
+    tentativeTalks: DashboardAllTentativeOrAcceptedTalks,
+): Promise<TentativeSlots> {
+    const slots: TentativeSlots = {};
+
+    for (const talk of tentativeTalks) {
+        if (talk.event_id in slots) {
+            continue;
+        }
+
+        const fetchPromise = fetch(apiUrl(`/api/dashboard/admin/time-slots/${talk.event_id}`));
+        const parsePromise = checkAndParseInputDataAsync(
+            await fetchPromise,
+            dashboardAllTimeSlotsScheme,
+            `Serveranfrage für timeslots für das event ${talk.event_id} nicht erfolgreich`,
+            `Unerwartete Daten für timeslots für das event ${talk.event_id}`,
+        );
+
+        slots[talk.event_id] = await parsePromise;
+    }
+
+    return slots;
 }

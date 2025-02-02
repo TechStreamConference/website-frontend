@@ -3,13 +3,13 @@ import type { LoadAdminApprovalTalk } from 'types/dashboardLoadTypes';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { dashboardAllPendingTalkScheme } from 'types/dashboardProvideTypes';
 import { apiUrl } from 'helper/links';
-import { fetchTentativeTalks, getUserIds } from './approvalHelper';
+import { fetchTentativeSlots, fetchTentativeTalks, getUserIds } from './approvalHelper';
 
 
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminApprovalTalk> {
-    const tentativeTalksPromise = fetchTentativeTalks(fetch);
+    const tentativeTalksPromise    = fetchTentativeTalks(fetch);
     const pendingTalksFetchPromise = fetch(apiUrl('/api/dashboard/admin/pending-talks'));
 
     const pendingTalksParsePromise = checkAndParseInputDataAsync(
@@ -22,7 +22,8 @@ export async function load({ fetch }: {
     return {
         pendingTalks:   await pendingTalksParsePromise,
         tentativeTalks: await tentativeTalksPromise,
-        userIDArray:    getUserIds(await pendingTalksParsePromise, await tentativeTalksPromise,),
+        userIDArray:    getUserIds(await pendingTalksParsePromise, await tentativeTalksPromise),
+        slots:          await fetchTentativeSlots(fetch, await tentativeTalksPromise),
     };
 }
 
