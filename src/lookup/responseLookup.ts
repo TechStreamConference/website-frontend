@@ -51,7 +51,9 @@ const lookup: ResponseDict = {
     DUPLICATE_TALK:        'Diesen Talk gibt es bereits',
 
     // time slots
-    TIME_SLOTS_OVERLAP: 'Mindestens 2 Vortragszeiten überlappen sich.',
+    TIME_SLOTS_OVERLAP:         'Mindestens 2 Vortragszeiten überlappen sich.',
+    TIME_SLOT_ALREADY_OCCUPIED: 'Dieser Slot ist bereits vergeben.',
+    TIME_SLOT_INVALID_DURATION: 'Dieser Slot stimmt nicht mit den gewünschten Längen überein',
 
     // no changes
     NO_CHANGES_DETECTED: 'Es wurden keine Änderungen vorgenommen.',
