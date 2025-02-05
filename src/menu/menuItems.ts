@@ -56,10 +56,10 @@ export const adminNewEvent: MenuItem   = {
     url:         '/dashboard/admin/new-event',
     description: 'Klicke hier, um ein neues Event anzulegen',
 };
-export const adminApproval: MenuItem   = {
-    name:        'Freigabe',
-    url:         '/dashboard/admin/approval',
-    description: 'Klicke hier, um ausstehende Freigaben zu bearbeiten',
+export const adminApprovalSpeakerTeamMember: MenuItem   = {
+    name:        'Freigabe Speaker / Team-Member',
+    url:         '/dashboard/admin/approval-speaker-team-member',
+    description: 'Klicke hier, um ausstehende Freigaben von Speakern und Team-Membern zu bearbeiten',
 };
 
 export const speakerEvents: MenuItem      = {
@@ -107,7 +107,7 @@ export const userApplication: MenuItem = {
 
 export const admin: MenuItem      = {
     name:        'Admin',
-    url:         adminApproval.url,
+    url:         adminApprovalSpeakerTeamMember.url,
     description: 'Klicke hier, um zum Admin-Dashboard zu gelangen',
 };
 export const teamMember: MenuItem = {

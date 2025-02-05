@@ -4,7 +4,7 @@
     import type { NewImage } from 'pageHelper/speakerTeamMemberEvent';
 
     import { setUnsavedChanges } from 'stores/saved';
-    import { apiUrl } from 'helper/links';
+    import { imageUrl } from 'helper/links';
     import { onDestroy } from 'svelte';
     import { createEventDispatcher } from 'svelte';
 
@@ -136,7 +136,7 @@
     {:else if data.event.photo}
         <Image
               alt="Dein aktuelles Speaker-Bild für das Event {data.current.title}"
-              src={apiUrl(`/api/${data.event.photo}`)}
+              src={imageUrl(data.event.photo)}
               classes="dashboard-speaker-events-image"
         />
     {/if}

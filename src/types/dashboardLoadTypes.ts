@@ -36,10 +36,11 @@ export type LoadAdminTimeSlots = {
     currentEventID: number;
 }
 
-export type LoadAdminApproval = {
+export type LoadAdminApprovalSpeakerTeamMember = {
     speaker: DashboardAllApprovalSpeakerTeamMembers,
     teamMember: DashboardAllApprovalSpeakerTeamMembers,
-    socialMedia: DashboardAllApprovalSocialMediaLinks
+    socialMedia: DashboardAllApprovalSocialMediaLinks,
+    userIDArray: number[],
 };
 
 export type LoadSpeakerTeamMemberEvent = {

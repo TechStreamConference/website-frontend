@@ -29,7 +29,7 @@ export const footerIn: Menu = [
 ];
 
 export const admin: Menu      = [
-    Item.adminApproval,
+    Item.adminApprovalSpeakerTeamMember,
     Item.adminEventSlots,
     Item.adminEvents,
     Item.adminNewEvent,
