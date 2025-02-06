@@ -26,7 +26,7 @@ export function getUserIds(
 
 export async function fetchTentativeTalks(fetch: typeof globalThis.fetch): Promise<DashboardAllTentativeOrAcceptedTalks> {
     // TODO replace tentative talks fetch
-    const tentativeTalksFetchPromise = fetch(apiUrl(`/api/dashboard/admin/tentative-or-accepted-talks/1`));
+    const tentativeTalksFetchPromise = fetch(apiUrl(`/api/dashboard/admin/tentative-talks`));
 
     const tentativeTalksParsePromise = checkAndParseInputDataAsync(
         await tentativeTalksFetchPromise,
@@ -35,9 +35,7 @@ export async function fetchTentativeTalks(fetch: typeof globalThis.fetch): Promi
         'Unerwartete Daten für tentative or accepted Talks.',
     );
 
-    const test = (await tentativeTalksParsePromise).filter(x => !x.time_slot_accepted);
-    console.log(test);
-    return test;
+    return await tentativeTalksParsePromise;
 }
 
 
