@@ -14,6 +14,7 @@
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
     import GeneralPopup from 'elements/popups/generalPopup.svelte';
+    import Message from 'elements/text/message.svelte';
 
     import { trySaveDataAsync } from 'helper/trySaveData.js';
     import { SaveMessageType } from 'types/saveMessageType';
@@ -120,6 +121,10 @@
         <TextLine>Notizen:</TextLine>
         <Paragraph classes="paragraph-pre-wrap">{talk.notes}</Paragraph>
     </div>
+    {#if talk.suggested_time_slot}
+        <Message message={`Vorgeschlagen: ${getDropDownEntrySafe(talk.suggested_time_slot)}`}
+                 color="success" />
+    {/if}
     <DropDown id="dashboard-admin-tentative-talk-approval-slot-drop-down-{talk.id}"
               labelText="Slot:"
               data={slots[talk.event_id].map(x => getDropDownEntrySafe(x))}
