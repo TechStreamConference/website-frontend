@@ -14,13 +14,11 @@
 
 <style>
     button {
-        transform:     translate(-2px);
-        padding:       var(--quad-padding);
-        background:    none;
+        padding:       var(--quad-padding) var(--half-padding);
+        background:    var(--background-color-light);
         border:        none;
         transition:    background-color var(--transition-duration);
         border-radius: var(--border-radius);
-        margin-bottom: var(--2x-margin);
         cursor:        pointer;
         font-size:     var(--full-font-size);
     }

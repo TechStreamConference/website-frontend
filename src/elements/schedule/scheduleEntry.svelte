@@ -49,7 +49,7 @@
 
 <style>
     .schedule-entry-horizontal-line {
-        border-bottom:  1px solid var(--text-color);
+        border-bottom:  1px solid var(--primary-color-dark);
         padding-bottom: var(--2x-padding);
     }
 
@@ -57,12 +57,14 @@
         display:        flex;
         flex-direction: column;
         align-items:    flex-start;
+        gap:            var(--full-gap);
     }
 
     .schedule-entry-title-wrapper {
-        display:        flex;
-        flex-direction: row;
-        gap:            var(--full-gap);
+        display:         flex;
+        flex-direction:  row;
+        justify-content: space-between;
+        width:           100%;
 
     }
 
@@ -74,6 +76,21 @@
 
     :global(.schedule-entry-time) {
         margin-left: var(--full-margin);
+    }
+
+    .schedule-entry-speaker-wrapper {
+        display:        flex;
+        flex-direction: row;
+        gap:            var(--full-gap);
+        flex-wrap:      wrap;
+    }
+
+    :global(.schedule-entry-speaker-text) {
+        align-self: center;
+    }
+
+    :global(.schedule-entry-speaker-description) {
+        margin-top: var(--4x-margin);
     }
 
     @media (max-width: 1280px) {

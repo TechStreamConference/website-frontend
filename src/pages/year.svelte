@@ -233,7 +233,10 @@
     }
 
     .year-section-inner {
-        margin-top: var(--2x-margin);
+        margin-top:     var(--2x-margin);
+        display:        flex;
+        flex-direction: column;
+        gap:            var(--4x-gap);
     }
 
     .year-video-wrapper {
