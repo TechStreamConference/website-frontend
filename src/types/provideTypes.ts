@@ -10,7 +10,6 @@ export const globalsDefault: Globals = {
     years_with_events: [],
 };
 
-
 export const talkTagScheme = z.object({
                                           id:          z.number(),
                                           color_index: z.number(),
@@ -19,17 +18,6 @@ export const talkTagScheme = z.object({
 export type TalkTag = z.infer<typeof talkTagScheme>;
 export const allTalkTagScheme = z.array(talkTagScheme);
 export type AllTalkTag = z.infer<typeof allTalkTagScheme>;
-
-export const talkScheme = z.object({
-                                       speaker_id:  z.number(),
-                                       starts_at:   z.string(),
-                                       duration:    z.number(),
-                                       title:       z.string(),
-                                       description: z.string(),
-                                       tags:        allTalkTagScheme,
-                                       is_special:  z.boolean(),
-                                   });
-export type Talk = z.infer<typeof talkScheme>;
 
 export const socialMediaLinkScheme = z.object({
                                                   name: z.string(),
@@ -61,6 +49,18 @@ export const personScheme = z.object({
                                          social_media_links: socialMediaLinksScheme,
                                      });
 export type Person = z.infer<typeof personScheme>;
+
+export const talkScheme = z.object({
+                                       speaker_id:  z.number(),
+                                       starts_at:   z.string(),
+                                       duration:    z.number(),
+                                       title:       z.string(),
+                                       description: z.string(),
+                                       tags:        allTalkTagScheme,
+                                       guests:      z.array(personScheme),
+                                       is_special:  z.boolean(),
+                                   });
+export type Talk = z.infer<typeof talkScheme>;
 
 export const eventScheme = z.object({
                                         id:                   z.number(),

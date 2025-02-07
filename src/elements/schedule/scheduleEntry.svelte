@@ -5,6 +5,7 @@
     import ScheduleSpeaker from './scheduleSpeaker.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
+    import TextLine from 'elements/text/textLine.svelte';
 
     import { formatDate } from 'helper/dates';
 
@@ -25,13 +26,25 @@
             {/each}
         </div>
     </div>
-    <ScheduleSpeaker
-          {speaker}
-          on:click={(event) => {
+    <div class="schedule-entry-speaker-wrapper">
+        <ScheduleSpeaker
+              {speaker}
+              on:click={(event) => {
 			personPopupCallback(event, speaker);
 		}}
-    />
-    <Paragraph>{talk.description}</Paragraph>
+        />
+        {#if talk.guests.length > 0}
+            <TextLine classes="schedule-entry-speaker-text">|</TextLine>
+            <TextLine classes="schedule-entry-speaker-text">Gäste:</TextLine>
+            {#each talk.guests as guest}
+                <ScheduleSpeaker
+                      speaker={guest}
+                      on:click={(event) => {personPopupCallback(event, guest);}}
+                />
+            {/each}
+        {/if}
+    </div>
+    <Paragraph classes="schedule-entry-speaker-description">{talk.description}</Paragraph>
 </div>
 
 <style>
