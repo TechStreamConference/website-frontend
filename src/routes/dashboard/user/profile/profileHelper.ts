@@ -14,3 +14,26 @@ export async function loadUserData(fetch: typeof globalThis.fetch): Promise<Dash
         'Unerwartete Daten für User Data.',
     );
 }
+
+
+export function censorEmail(email: string): string {
+    const [localPart, domain] = email.split('@');
+    if (!localPart || !domain) {
+        return email;
+    }
+
+    const censoredLocal = localPart.length >= 2 ? localPart[0] + '***' + localPart[localPart.length - 1] : localPart;
+
+    const domainParts = domain.split('.');
+    if (domainParts.length < 2) {
+        return email;
+    }
+    const domainName = domainParts.slice(0, domainParts.length - 1).join('.');
+    const tld        = domainParts[domainParts.length - 1];
+
+    const censoredDomain = domainName.length >= 2
+                           ? domainName[0] + '***' + domainName[domainName.length - 1]
+                           : domainName;
+
+    return `${censoredLocal}@${censoredDomain}.${tld}`;
+}

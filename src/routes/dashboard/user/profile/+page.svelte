@@ -10,6 +10,7 @@
     import { SaveMessageType } from 'types/saveMessageType';
     import { fade } from 'svelte/transition';
     import { loadUserData } from './profileHelper';
+    import { censorEmail } from './profileHelper.js';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -129,7 +130,7 @@
             <TextLine>Name:</TextLine>
             <TextLine>{data.roles.username}</TextLine>
             <TextLine>Mail:</TextLine>
-            <TextLine>{data.roles.email}</TextLine>
+            <TextLine>{censorEmail(data.roles.email)}</TextLine>
         </div>
         <div class="dashboard-user-profile-button-wrapper">
             <Button ariaLabel="Klicke, um deinen Namen zu ändern."
