@@ -19,6 +19,7 @@
     import { trySaveDataAsync } from 'helper/trySaveData.js';
     import { SaveMessageType } from 'types/saveMessageType';
     import { createEventDispatcher, onMount } from 'svelte';
+    import { getElementByID } from 'helper/basic';
 
     export let talk: DashboardTentativeOrAcceptedTalk;
     export let slots: {
@@ -81,6 +82,7 @@
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorList = result.messages;
         if (result.success) {
+            talk.suggested_time_slot = getElementByID(slots[talk.event_id], id);
             dispatch('suggest');
         }
     }
