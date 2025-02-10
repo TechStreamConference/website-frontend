@@ -40,25 +40,32 @@ export async function fetchTentativeTalks(fetch: typeof globalThis.fetch): Promi
 
 export async function fetchTentativeSlots(
     fetch: typeof globalThis.fetch,
+    pendingTalks: DashboardAllPendingTalks,
     tentativeTalks: DashboardAllTentativeOrAcceptedTalks,
 ): Promise<TentativeSlots> {
     const slots: TentativeSlots = {};
+    const fetchSlots            = async <T extends {
+        event_id: number,
+    }>(talks: T[]) => {
+        for (const talk of talks) {
+            if (talk.event_id in slots) {
+                continue;
+            }
 
-    for (const talk of tentativeTalks) {
-        if (talk.event_id in slots) {
-            continue;
+            const fetchPromise = fetch(apiUrl(`/api/dashboard/admin/time-slots/${talk.event_id}`));
+            const parsePromise = checkAndParseInputDataAsync(
+                await fetchPromise,
+                dashboardAllTimeSlotsScheme,
+                `Serveranfrage für timeslots für das event ${talk.event_id} nicht erfolgreich`,
+                `Unerwartete Daten für timeslots für das event ${talk.event_id}`,
+            );
+
+            slots[talk.event_id] = await parsePromise;
         }
+    };
 
-        const fetchPromise = fetch(apiUrl(`/api/dashboard/admin/time-slots/${talk.event_id}`));
-        const parsePromise = checkAndParseInputDataAsync(
-            await fetchPromise,
-            dashboardAllTimeSlotsScheme,
-            `Serveranfrage für timeslots für das event ${talk.event_id} nicht erfolgreich`,
-            `Unerwartete Daten für timeslots für das event ${talk.event_id}`,
-        );
-
-        slots[talk.event_id] = await parsePromise;
-    }
+    await fetchSlots(tentativeTalks);
+    await fetchSlots(pendingTalks);
 
     return slots;
 }

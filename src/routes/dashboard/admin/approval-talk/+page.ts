@@ -19,10 +19,12 @@ export async function load({ fetch }: {
         'Unerwartete Daten für pending Talks.',
     );
 
+    const timeSlotsPromise = fetchTentativeSlots(fetch, await pendingTalksParsePromise, await tentativeTalksPromise);
+
     return {
         pendingTalks:   await pendingTalksParsePromise,
         tentativeTalks: await tentativeTalksPromise,
         userIDArray:    getUserIds(await pendingTalksParsePromise, await tentativeTalksPromise),
-        slots:          await fetchTentativeSlots(fetch, await tentativeTalksPromise),
+        slots:          await timeSlotsPromise,
     };
 }

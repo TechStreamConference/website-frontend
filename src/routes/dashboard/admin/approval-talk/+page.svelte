@@ -43,9 +43,10 @@
 
     async function moveTalk(id: number): Promise<void> {
         setTimeout(async () => {
-            data.pendingTalks   = data.pendingTalks.filter((talk) => talk.id !== id);
-            data.tentativeTalks = await fetchTentativeTalks(fetch);
-            data.userIDArray    = getUserIds(data.pendingTalks, data.tentativeTalks);
+            const tentativeTalksPromise = fetchTentativeTalks(fetch);
+            data.pendingTalks           = data.pendingTalks.filter((talk) => talk.id !== id);
+            data.tentativeTalks         = await tentativeTalksPromise;
+            data.userIDArray            = getUserIds(data.pendingTalks, data.tentativeTalks);
         }, 3000);
     }
 </script>
