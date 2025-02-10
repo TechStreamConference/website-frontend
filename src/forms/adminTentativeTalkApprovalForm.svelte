@@ -56,7 +56,7 @@
             'POST',
         );
 
-        message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
+        message.setSaveMessage(result.success ? SaveMessageType.Delete : SaveMessageType.DeleteError);
         errorList = result.messages;
         if (result.success) {
             dispatch('reject');
