@@ -46,9 +46,13 @@ const lookup: ResponseDict = {
     SPEAKER_CANNOT_BE_REJECTED:                   'Dieser Speaker kann nicht abgelehnt werden.',
 
     // talk
-    TALK_ALREADY_APPROVED: 'Der Talk ist bereits freigegeben',
-    TALK_NOT_FOUND:        'Da haben wir wohl diesen Talk verlegt. Vielleicht finden wir ihn bald wieder.',
-    DUPLICATE_TALK:        'Diesen Talk gibt es bereits',
+    TALK_ALREADY_APPROVED:                         'Der Talk ist bereits freigegeben.',
+    TALK_NOT_FOUND:                                'Da haben wir wohl diesen Talk verlegt. Vielleicht finden wir ihn bald wieder.',
+    DUPLICATE_TALK:                                'Diesen Talk gibt es bereits.',
+    'The title field is required.':                'Das Feld \'Titel\' ist erforderlich.',
+    'The description field is required.':          'Das Feld \'Beschreibung\' ist erforderlich.',
+    'The tag_ids.* field is required.':            'Das Feld \'Tags\' ist erforderlich.',
+    'The possible_durations.* field is required.': 'Das Feld \'Vortragslänge in Minuten\' ist erforderlich.',
 
     // time slots
     TIME_SLOTS_OVERLAP:                'Mindestens 2 Vortragszeiten überlappen sich.',
