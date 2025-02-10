@@ -105,11 +105,11 @@
     }
 
     .dashboard-admin-talk-approval-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        gap:            var(--4x-gap);
-        border:         1px solid var(--primary-color-dark);
-        border-radius:  var(--border-radius);
-        padding:        var(--full-padding);
+        gap: var(--4x-gap);
+        border: 1px solid var(--primary-color-dark);
+        border-radius: var(--border-radius);
+        padding: var(--full-padding);
     }
 </style>
