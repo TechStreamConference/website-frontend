@@ -70,7 +70,7 @@ export function responseLookup(key: string): string {
         return lookup[key];
     }
 
-    console.error(`Fehler beim response lookup - key: ${key}`);
+    console.error(`Fehler beim response lookup - key: '${key}'`);
 
     return '👻 Ein unbekannter Fehler ist aufgetreten. Upsi. 👻';
 }
