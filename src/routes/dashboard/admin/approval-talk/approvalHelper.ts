@@ -25,7 +25,6 @@ export function getUserIds(
 }
 
 export async function fetchTentativeTalks(fetch: typeof globalThis.fetch): Promise<DashboardAllTentativeOrAcceptedTalks> {
-    // TODO replace tentative talks fetch
     const tentativeTalksFetchPromise = fetch(apiUrl(`/api/dashboard/admin/tentative-talks`));
 
     const tentativeTalksParsePromise = checkAndParseInputDataAsync(
