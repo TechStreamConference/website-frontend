@@ -126,6 +126,8 @@
     {#if talk.suggested_time_slot}
         <Message message={`Vorgeschlagen: ${getDropDownEntrySafe(talk.suggested_time_slot)}`}
                  color="success" />
+    {:else}
+        <Message message="Noch kein Slot vorgeschlagen." />
     {/if}
     <DropDown id="dashboard-admin-tentative-talk-approval-slot-drop-down-{talk.id}"
               labelText="Slot:"
