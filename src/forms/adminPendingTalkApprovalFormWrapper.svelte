@@ -13,7 +13,7 @@
 {#if talks.length > 0}
     <div class="dashboard-admin-pending-talk-approval-wrapper">
         <SubHeadline size="sub-headline-small"
-                     classes="sub-headline-center">Ausstehend
+                     classes="sub-headline-center">Ausstehend:
         </SubHeadline>
         {#each talks as talk}
             <AdminPendingTalkApprovalForm {talk}
