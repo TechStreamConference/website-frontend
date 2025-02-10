@@ -3,6 +3,7 @@
     import * as MenuItem from 'menu/menuItems';
 
     import type { LoadAdminApprovalTalk } from 'types/dashboardLoadTypes';
+    import type { DashboardAllPendingTalks, DashboardAllTentativeOrAcceptedTalks } from 'types/dashboardProvideTypes';
 
     import { fetchTentativeTalks, getUserIds } from './approvalHelper';
 
@@ -25,6 +26,32 @@
         }
     }>(elements: T[], userID: number): T[] {
         return elements.filter((entry) => entry.speaker.user_id === userID);
+    }
+
+    function getNameByUserID(
+        pending: DashboardAllPendingTalks,
+        tentative: DashboardAllTentativeOrAcceptedTalks,
+        userID: number,
+    ): string {
+        const filter = <T extends {
+            speaker: {
+                user_id: number,
+                name: string
+            }
+        }>(elements: T[]): string | undefined => {
+            for (const element of elements) {
+                if (element.speaker.user_id === userID) {
+                    return element.speaker.name;
+                }
+            }
+        };
+
+        let result = filter(pending);
+        if (result) {
+            return result;
+        }
+        result = filter(tentative);
+        return result ? result : '';
     }
 
     function deleteEntry(type: DataType, id: number): void {
@@ -58,7 +85,10 @@
 <SectionDashboard classes="standard-dashboard-section dashboard-admin-talk-approval-section">
     {#each data.userIDArray as userID}
         <div class="dashboard-admin-talk-approval-wrapper">
-            <SubHeadline classes="sub-headline-center">{userID}</SubHeadline>
+            <SubHeadline classes="sub-headline-center">{getNameByUserID(data.pendingTalks,
+                                                                        data.tentativeTalks,
+                                                                        userID
+            )}</SubHeadline>
             <AdminPendingTalkApprovalFormWrapper talks={getElementsByUserID(data.pendingTalks, userID)}
                                                  on:reject={(e) => deleteEntry(DataType.Pending, e.detail)}
                                                  on:approve={(e) => moveTalk(e.detail)} />
