@@ -199,6 +199,7 @@ export const dashboardTentativeOrAcceptedTalkScheme = z.object({
                                                                    tags:                dashboardAllTalkTagScheme,
                                                                    possible_durations:  dashboardTalkDurationChoicesScheme,
                                                                    suggested_time_slot: dashboardTimeSlotScheme.nullable(),
+                                                                   speaker:             dashboardSpeakerTeamMemberScheme,
                                                                });
 export type DashboardTentativeOrAcceptedTalk = z.infer<typeof dashboardTentativeOrAcceptedTalkScheme>;
 export const dashboardAllTentativeOrAcceptedTalkScheme = z.array(dashboardTentativeOrAcceptedTalkScheme);
@@ -212,9 +213,12 @@ export const dashboardPendingTalkScheme = z.object({
                                                        notes:              z.string()
                                                                             .nullable()
                                                                             .transform(x => x ?? ''),
-                                                       requested_changes:  z.string().nullable(),
+                                                       requested_changes:  z.string()
+                                                                            .nullable()
+                                                                            .transform(x => x ?? ''),
                                                        tags:               dashboardAllTalkTagScheme,
                                                        possible_durations: dashboardTalkDurationChoicesScheme,
+                                                       speaker:            dashboardSpeakerTeamMemberScheme,
                                                    });
 export type DashboardPendingTalk = z.infer<typeof dashboardPendingTalkScheme>;
 export const dashboardAllPendingTalkScheme = z.array(dashboardPendingTalkScheme);
