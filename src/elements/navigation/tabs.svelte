@@ -79,7 +79,9 @@
     }
 
     .navigation-tabs-dashboard-subpage {
-        max-width:  100rem;
+        width:      fit-content;
+        min-width:  100rem;
+        max-width:  calc(100vw - 5rem);
         align-self: center;
         margin-top: var(--2x-margin);
     }
