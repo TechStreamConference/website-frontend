@@ -52,7 +52,7 @@ const lookup: ResponseDict = {
     'The title field is required.':                'Das Feld \'Titel\' ist erforderlich.',
     'The description field is required.':          'Das Feld \'Beschreibung\' ist erforderlich.',
     'The tag_ids.* field is required.':            'Wähle durch Anklicken mindestens einen Tag aus, der zu deinem Vortrag passt.',
-    'The possible_durations.* field is required.': 'Das Feld \'Vortragslänge in Minuten\' ist erforderlich.',
+    'The possible_durations.* field is required.': 'Wähle bitte eine oder mehrere mögliche Vortragsdauern aus.',
 
     // time slots
     TIME_SLOTS_OVERLAP:                'Mindestens 2 Vortragszeiten überlappen sich.',
