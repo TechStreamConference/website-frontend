@@ -46,14 +46,19 @@ const lookup: ResponseDict = {
     SPEAKER_CANNOT_BE_REJECTED:                   'Dieser Speaker kann nicht abgelehnt werden.',
 
     // talk
-    TALK_ALREADY_APPROVED: 'Der Talk ist bereits freigegeben',
-    TALK_NOT_FOUND:        'Da haben wir wohl diesen Talk verlegt. Vielleicht finden wir ihn bald wieder.',
-    DUPLICATE_TALK:        'Diesen Talk gibt es bereits',
+    TALK_ALREADY_APPROVED:                         'Der Talk ist bereits freigegeben.',
+    TALK_NOT_FOUND:                                'Da haben wir wohl diesen Talk verlegt. Vielleicht finden wir ihn bald wieder.',
+    DUPLICATE_TALK:                                'Diesen Talk gibt es bereits.',
+    'The title field is required.':                'Das Feld \'Titel\' ist erforderlich.',
+    'The description field is required.':          'Das Feld \'Beschreibung\' ist erforderlich.',
+    'The tag_ids.* field is required.':            'Wähle durch Anklicken mindestens einen Tag aus, der zu deinem Vortrag passt.',
+    'The possible_durations.* field is required.': 'Wähle bitte eine oder mehrere mögliche Vortragsdauern aus.',
 
     // time slots
-    TIME_SLOTS_OVERLAP:         'Mindestens 2 Vortragszeiten überlappen sich.',
-    TIME_SLOT_ALREADY_OCCUPIED: 'Dieser Slot ist bereits vergeben.',
-    TIME_SLOT_INVALID_DURATION: 'Dieser Slot stimmt nicht mit den gewünschten Längen überein',
+    TIME_SLOTS_OVERLAP:                'Mindestens 2 Vortragszeiten überlappen sich.',
+    TIME_SLOT_ALREADY_OCCUPIED:        'Dieser Slot ist bereits vergeben.',
+    TIME_SLOT_INVALID_DURATION:        'Dieser Slot stimmt nicht mit den gewünschten Längen überein',
+    CANNOT_DELETE_ASSIGNED_TIME_SLOTS: 'Es ist nicht möglich, Time Slots zu editieren, da einige Slots schon zugewiesen sind.',
 
     // no changes
     NO_CHANGES_DETECTED: 'Es wurden keine Änderungen vorgenommen.',
@@ -65,7 +70,7 @@ export function responseLookup(key: string): string {
         return lookup[key];
     }
 
-    console.error(`Fehler beim response lookup - key: ${key}`);
+    console.error(`Fehler beim response lookup - key: '${key}'`);
 
     return '👻 Ein unbekannter Fehler ist aufgetreten. Upsi. 👻';
 }

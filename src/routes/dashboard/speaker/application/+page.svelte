@@ -22,6 +22,17 @@
         tags:               [],
         possible_durations: [],
         notes:              '',
+        speaker:            {
+            id:                0,
+            name:              '',
+            user_id:           0,
+            requested_changes: '',
+            bio:               '',
+            photo:             '',
+            is_approved:       false,
+            visible_from:      null,
+            short_bio:         '',
+        },
         requested_changes:  '',
     };
 </script>

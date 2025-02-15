@@ -51,7 +51,7 @@
         saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorList = result.messages;
         if (result.success) {
-            data.requested_changes = null;
+            data.requested_changes = '';
             dispatcher('save');
         }
         return result.success;
