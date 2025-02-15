@@ -3,13 +3,14 @@
     import * as MenuItem from 'menu/menuItems';
 
     import type { SaveResult } from 'helper/trySaveData';
-    import type { LoadUserProfile } from 'types/dashboardLoadTypes';
+    import type { LoadDashboard } from 'types/dashboardLoadTypes';
 
     import { setUnsavedChanges } from 'stores/saved';
     import { trySaveDataAsync } from 'helper/trySaveData';
     import { SaveMessageType } from 'types/saveMessageType';
     import { fade } from 'svelte/transition';
     import { loadUserData } from './profileHelper';
+    import { censorEmail } from './profileHelper.js';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -27,7 +28,7 @@
         Name,
     }
 
-    export let data: LoadUserProfile;
+    export let data: LoadDashboard;
     let state: State = State.None;
 
     let saveMessage: SaveMessage;
@@ -75,7 +76,7 @@
 
         if (response.success) {
             name          = '';
-            data.userData = await loadUserData(fetch);
+            data.roles = await loadUserData(fetch);
         }
     }
 
@@ -127,9 +128,9 @@
     <div class="dashboard-user-profile-section-entry-wrapper">
         <div class="dashboard-user-profile-entry-grid">
             <TextLine>Name:</TextLine>
-            <TextLine>{data.userData.username}</TextLine>
+            <TextLine>{data.roles.username}</TextLine>
             <TextLine>Mail:</TextLine>
-            <TextLine>{data.userData.email}</TextLine>
+            <TextLine>{censorEmail(data.roles.email)}</TextLine>
         </div>
         <div class="dashboard-user-profile-button-wrapper">
             <Button ariaLabel="Klicke, um deinen Namen zu ändern."

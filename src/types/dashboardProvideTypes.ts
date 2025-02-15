@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export const dashboardRolesScheme = z.object({
                                                  user_id:        z.number(),
+                                                 username:       z.string(),
                                                  email:          z.string(),
                                                  is_speaker:     z.boolean(),
                                                  is_team_member: z.boolean(),
@@ -223,9 +224,3 @@ export const dashboardPendingTalkScheme = z.object({
 export type DashboardPendingTalk = z.infer<typeof dashboardPendingTalkScheme>;
 export const dashboardAllPendingTalkScheme = z.array(dashboardPendingTalkScheme);
 export type DashboardAllPendingTalks = z.infer<typeof dashboardAllPendingTalkScheme>;
-
-export const dashboardUserDataScheme = z.object({
-                                                    username: z.string(),
-                                                    email:    z.string(),
-                                                });
-export type DashboardUserData = z.infer<typeof dashboardUserDataScheme>;
