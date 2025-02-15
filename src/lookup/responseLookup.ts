@@ -51,7 +51,7 @@ const lookup: ResponseDict = {
     DUPLICATE_TALK:                                'Diesen Talk gibt es bereits.',
     'The title field is required.':                'Das Feld \'Titel\' ist erforderlich.',
     'The description field is required.':          'Das Feld \'Beschreibung\' ist erforderlich.',
-    'The tag_ids.* field is required.':            'Das Feld \'Tags\' ist erforderlich.',
+    'The tag_ids.* field is required.':            'Wähle durch Anklicken mindestens einen Tag aus, der zu deinem Vortrag passt.',
     'The possible_durations.* field is required.': 'Das Feld \'Vortragslänge in Minuten\' ist erforderlich.',
 
     // time slots
