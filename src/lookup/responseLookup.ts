@@ -58,7 +58,7 @@ const lookup: ResponseDict = {
     TIME_SLOTS_OVERLAP:                'Mindestens 2 Vortragszeiten überlappen sich.',
     TIME_SLOT_ALREADY_OCCUPIED:        'Dieser Slot ist bereits vergeben.',
     TIME_SLOT_INVALID_DURATION:        'Dieser Slot stimmt nicht mit den gewünschten Längen überein',
-    CANNOT_DELETE_ASSIGNED_TIME_SLOTS: 'Es ist nicht möglich Time Slots editieren, da einige Slots schon zugewiesen sind.',
+    CANNOT_DELETE_ASSIGNED_TIME_SLOTS: 'Es ist nicht möglich, Time Slots zu editieren, da einige Slots schon zugewiesen sind.',
 
     // no changes
     NO_CHANGES_DETECTED: 'Es wurden keine Änderungen vorgenommen.',
