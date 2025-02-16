@@ -1,12 +1,14 @@
 <script lang="ts">
-    import Label from 'elements/text/label.svelte';
     import type { DashboardAllPersons, DashboardPerson } from 'types/dashboardProvideTypes';
+
+    import { createEventDispatcher } from 'svelte';
+    import { imageUrl } from 'helper/links';
+
+    import Label from 'elements/text/label.svelte';
     import Tag from 'elements/text/tag.svelte';
     import Toggle from 'elements/input/toggle.svelte';
     import Icon from 'elements/image/icon.svelte';
     import Image from 'elements/image/image.svelte';
-    import { createEventDispatcher } from 'svelte';
-    import { imageUrl } from 'helper/links';
 
     export let labelText: string;
     export let data: DashboardAllPersons;
@@ -21,10 +23,6 @@
             }
         }
         return false;
-    }
-
-    function toggle(person: DashboardPerson): void {
-        updateSelected(contains(person), person);
     }
 
     function updateSelected(value: boolean, person: DashboardPerson): void {
@@ -102,6 +100,6 @@
         display:        flex;
         flex-direction: row;
         gap:            var(--full-gap);
-        align-items: center;
+        align-items:    center;
     }
 </style>
