@@ -79,9 +79,12 @@
 </div>
 <style>
     .toggle-person-wrapper {
-        display:        flex;
-        flex-direction: row;
-        gap:            var(--full-gap);
+        display:         flex;
+        flex-direction:  row;
+        gap:             var(--full-gap);
+        flex-wrap:       wrap;
+        justify-content: center;
+
     }
 
     :global(.toggle-person-entry-wrapper) {
@@ -95,8 +98,8 @@
     }
 
     :global(.toggle-person-image) {
-        height:        20rem;
-        width:         20rem;
+        height:        22rem;
+        width:         auto;
         border:        1px solid var(--primary-color-dark);
         border-radius: var(--border-radius);
     }
