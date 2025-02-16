@@ -3,16 +3,19 @@
     import * as MenuItem from 'menu/menuItems';
 
     import type { LoadAdminGuests } from 'types/dashboardLoadTypes';
+    import type { DashboardAllPersons } from 'types/dashboardProvideTypes';
 
     import { getNavigationEntries, loadPossibleGuestsOfTalk, loadTalksOfEvent, parseIdOfEntry } from './guests-helper';
+    import { setUnsavedChanges } from 'stores/saved';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
-    import TextLine from 'elements/text/textLine.svelte';
+    import PersonArray from 'elements/input/personArray.svelte';
 
     export let data: LoadAdminGuests;
     let talkDropDown: NavigationDropDown;
+    let selected: DashboardAllPersons = [];
 
     async function loadNewTalks(selected: string): Promise<void> {
         const id = parseIdOfEntry(selected);
@@ -51,10 +54,10 @@
                         data={getNavigationEntries(data.talksOfEvent)}
                         on:navigated={(e) => { loadNewGuests(e.detail); }}
                         bind:this={talkDropDown} />
-
-    {#each data.guestsOfTalk as guest}
-        <TextLine>{guest.name}</TextLine>
-    {/each}
+    <PersonArray labelText="Mögliche Gäste:"
+                 data={data.guestsOfTalk}
+                 {selected}
+                 on:toggle={setUnsavedChanges} />
 </SectionDashboard>
 
 <style>

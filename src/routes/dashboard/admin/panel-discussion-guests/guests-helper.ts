@@ -1,7 +1,7 @@
-import type { DashboardAllGuests, DashboardAllTentativeOrAcceptedTalks } from 'types/dashboardProvideTypes';
+import type { DashboardAllPersons, DashboardAllTentativeOrAcceptedTalks } from 'types/dashboardProvideTypes';
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
-import { dashboardAllGuestsScheme, dashboardAllTentativeOrAcceptedTalkScheme } from 'types/dashboardProvideTypes';
+import { dashboardAllPersonsScheme, dashboardAllTentativeOrAcceptedTalkScheme } from 'types/dashboardProvideTypes';
 import { error } from '@sveltejs/kit';
 
 export function parseIdOfEntry(entry:string) : number {
@@ -54,12 +54,12 @@ export async function loadTalksOfEvent(
 export async function loadPossibleGuestsOfTalk(
     fetch: typeof globalThis.fetch,
     id: number,
-): Promise<DashboardAllGuests> {
+): Promise<DashboardAllPersons> {
     const possibleGuestsFetchPromise = fetch(apiUrl(`/api/dashboard/admin/talk/${id}/possible-guests`));
 
     const possibleGuestsParsePromise = checkAndParseInputDataAsync(
         await possibleGuestsFetchPromise,
-        dashboardAllGuestsScheme,
+        dashboardAllPersonsScheme,
         `Serveranfrage für die möglichen Gäste für talk id '${id}' nicht erfolgreich.`,
         `Unerwartete Daten für die möglichen Gäste für talk id '${id}'`,
     );
