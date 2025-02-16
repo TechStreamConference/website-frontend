@@ -110,12 +110,16 @@
                  bind:selected={selected}
                  on:toggle={setUnsavedChanges} />
     {#if data.talksOfEvent.length > 0}
-        <Button ariaLabel="Klicke hier, um die ausgehwählen Gäste zu speichern."
-                on:click={save}>Speichern
-        </Button>
+        <div class="dashboard-guests-button-wrapper">
+            <Button ariaLabel="Klicke hier, um die ausgehwählen Gäste zu speichern."
+                    on:click={save}>Speichern
+            </Button>
+        </div>
     {/if}
 </SectionDashboard>
 
 <style>
-
+    .dashboard-guests-button-wrapper {
+        margin: 0 auto;
+    }
 </style>
