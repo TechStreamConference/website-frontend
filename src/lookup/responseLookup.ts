@@ -63,6 +63,12 @@ const lookup: ResponseDict = {
     // no changes
     NO_CHANGES_DETECTED: 'Es wurden keine Änderungen vorgenommen.',
     NO_CHANGES:          'Es wurden keine Änderungen vorgenommen.',
+
+    // guests
+    "The guest_ids.* field is required." : "Wähle mindestens einen Gast aus.",
+    DUPLICATE_GUEST : "Mindestens ein Gast ist doppelt vorhanden.",
+    HOST_AS_GUEST : "Mindestens ein Gast ist auch Host des ausgewählten Talks.",
+    INVALID_GUEST : "Mindestens ein Gast hat einen ungültigen Speaker-Eintrag.",
 };
 
 export function responseLookup(key: string): string {
