@@ -18,6 +18,7 @@
         aria-label="{ariaLabel}"
         on:click={onToggle}
 >
+    <slot/>
     {#if toggle}
         <slot name="slotTrue" />
     {:else}
