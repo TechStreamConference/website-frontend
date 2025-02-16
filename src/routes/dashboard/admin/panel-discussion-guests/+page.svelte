@@ -10,6 +10,7 @@
     import { trySaveDataAsync } from 'helper/trySaveData.js';
     import { SaveMessageType } from 'types/saveMessageType';
     import { onMount } from 'svelte';
+    import { getElementByID } from 'helper/basic';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -23,8 +24,8 @@
     export let data: LoadAdminGuests;
     let talkDropDown: NavigationDropDown;
     let personArray: PersonArray;
-    let selected: DashboardAllPersons = [];
-    let currentTalkId: number         = 0;
+    let selectedArray: DashboardAllPersons = [];
+    let currentTalkId: number              = 0;
 
     let message: SaveMessage;
     let errorList: string[] = [];
@@ -37,6 +38,7 @@
                 return;
             }
             currentTalkId = parseIdOfEntry(entry);
+            selectedArray = getElementByID(data.talksOfEvent, currentTalkId).guests;
         }
     });
 
@@ -57,8 +59,8 @@
     }
 
     async function loadNewGuests(selected: string): Promise<void> {
-        personArray.clear();
         currentTalkId = parseIdOfEntry(selected);
+        selectedArray = getElementByID(data.talksOfEvent, currentTalkId).guests;
         data.guestsOfTalk = await loadPossibleGuestsOfTalk(fetch, currentTalkId);
     }
 
@@ -69,9 +71,7 @@
             return false;
         }
 
-        const ids = selected.map(x => x.user_id);
-        console.log(selected);
-        console.log(ids);
+        const ids = selectedArray.map(x => x.user_id);
 
         const result = await trySaveDataAsync(
             fetch,
@@ -110,7 +110,7 @@
     <PersonArray bind:this={personArray}
                  labelText="Mögliche Gäste:"
                  data={data.guestsOfTalk}
-                 bind:selected={selected}
+                 bind:selected={selectedArray}
                  on:toggle={setUnsavedChanges} />
     {#if data.talksOfEvent.length > 0}
         <div class="dashboard-guests-button-wrapper">

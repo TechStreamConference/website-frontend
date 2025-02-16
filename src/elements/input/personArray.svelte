@@ -18,7 +18,7 @@
 
     function contains(person: DashboardPerson): boolean {
         for (const entry of selected) {
-            if (entry.id === person.id) {
+            if (entry.user_id === person.user_id) {
                 return true;
             }
         }
@@ -37,7 +37,7 @@
             ];
             return;
         }
-        selected = selected.filter(x => x.id !== person.id);
+        selected = selected.filter(x => x.user_id !== person.user_id);
     }
 
     export function clear() {

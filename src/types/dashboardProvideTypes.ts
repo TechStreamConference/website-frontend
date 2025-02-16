@@ -20,14 +20,14 @@ export const dashboardAllEventIDScheme = z.array(dashboardEventIDScheme);
 export type DashboardAllEventIDs = z.infer<typeof dashboardAllEventIDScheme>;
 
 export const dashboardPersonScheme = z.object({
-                                                 id:           z.number(),
-                                                 user_id:      z.number(),
-                                                 name:         z.string(),
-                                                 short_bio:    z.string(),
-                                                 bio:          z.string(),
-                                                 photo:        z.string(),
-                                                 visible_from: z.string(),
-                                             });
+                                                  id:           z.number(),
+                                                  user_id:      z.number(),
+                                                  name:         z.string(),
+                                                  short_bio:    z.string(),
+                                                  bio:          z.string(),
+                                                  photo:        z.string(),
+                                                  visible_from: z.string(),
+                                              });
 export type DashboardPerson = z.infer<typeof dashboardPersonScheme>;
 export const dashboardAllPersonsScheme = z.array(dashboardPersonScheme);
 export type DashboardAllPersons = z.infer<typeof dashboardAllPersonsScheme>;
@@ -214,6 +214,7 @@ export const dashboardTentativeOrAcceptedTalkScheme = z.object({
                                                                    possible_durations:  dashboardTalkDurationChoicesScheme,
                                                                    suggested_time_slot: dashboardTimeSlotScheme.nullable(),
                                                                    speaker:             dashboardSpeakerTeamMemberScheme,
+                                                                   guests:              dashboardAllPersonsScheme,
                                                                });
 export type DashboardTentativeOrAcceptedTalk = z.infer<typeof dashboardTentativeOrAcceptedTalkScheme>;
 export const dashboardAllTentativeOrAcceptedTalkScheme = z.array(dashboardTentativeOrAcceptedTalkScheme);
