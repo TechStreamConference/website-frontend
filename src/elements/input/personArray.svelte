@@ -39,6 +39,11 @@
         }
         selected = selected.filter(x => x.id !== person.id);
     }
+
+    export function clear() {
+        // not reset data here because this represents the provided data.
+        selected = [];
+    }
 </script>
 
 <Label>{labelText}</Label>

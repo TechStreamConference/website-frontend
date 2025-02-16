@@ -22,6 +22,7 @@
 
     export let data: LoadAdminGuests;
     let talkDropDown: NavigationDropDown;
+    let personArray: PersonArray;
     let selected: DashboardAllPersons = [];
     let currentTalkId: number         = 0;
 
@@ -56,6 +57,7 @@
     }
 
     async function loadNewGuests(selected: string): Promise<void> {
+        personArray.clear();
         currentTalkId = parseIdOfEntry(selected);
         data.guestsOfTalk = await loadPossibleGuestsOfTalk(fetch, currentTalkId);
     }
@@ -105,7 +107,8 @@
                         bind:this={talkDropDown} />
     <SaveMessage bind:this={message} />
     <MessageWrapper messages={errorList} />
-    <PersonArray labelText="Mögliche Gäste:"
+    <PersonArray bind:this={personArray}
+                 labelText="Mögliche Gäste:"
                  data={data.guestsOfTalk}
                  bind:selected={selected}
                  on:toggle={setUnsavedChanges} />
