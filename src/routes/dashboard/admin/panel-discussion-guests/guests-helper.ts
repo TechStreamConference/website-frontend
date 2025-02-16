@@ -2,6 +2,25 @@ import type { DashboardAllGuests, DashboardAllTentativeOrAcceptedTalks } from 't
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { dashboardAllGuestsScheme, dashboardAllTentativeOrAcceptedTalkScheme } from 'types/dashboardProvideTypes';
+import { error } from '@sveltejs/kit';
+
+export function parseIdOfEntry(entry:string) : number {
+    const parts = entry.split(' | ');
+
+    if (parts.length < 2) {
+        console.error("not able to split entry at ' | '");
+        throw error(404);
+    }
+
+    const num = Number(parts[0]);
+
+    if (Number.isNaN(num)) {
+        console.error(`not able to parse id. '${num}' is no number`);
+        throw error(404);
+    }
+
+    return num;
+}
 
 export function getNavigationEntries<T extends {
     id: number,
