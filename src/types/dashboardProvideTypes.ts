@@ -19,6 +19,19 @@ export type DashboardEventID = z.infer<typeof dashboardEventIDScheme>;
 export const dashboardAllEventIDScheme = z.array(dashboardEventIDScheme);
 export type DashboardAllEventIDs = z.infer<typeof dashboardAllEventIDScheme>;
 
+export const dashboardGuestScheme = z.object({
+                                                 id:           z.number(),
+                                                 user_id:      z.number(),
+                                                 name:         z.string(),
+                                                 short_bio:    z.string(),
+                                                 bio:          z.string(),
+                                                 photo:        z.string(),
+                                                 visible_from: z.string(),
+                                             });
+export type DashboardGuest = z.infer<typeof dashboardGuestScheme>;
+export const dashboardAllGuestsScheme = z.array(dashboardGuestScheme);
+export type DashboardAllGuests = z.infer<typeof dashboardAllGuestsScheme>;
+
 export const dashboardSpeakerTeamMemberScheme = z.object({
                                                              id:                z.number(),
                                                              user_id:           z.number(),
