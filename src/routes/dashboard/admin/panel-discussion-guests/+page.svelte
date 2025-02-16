@@ -7,15 +7,36 @@
 
     import { getNavigationEntries, loadPossibleGuestsOfTalk, loadTalksOfEvent, parseIdOfEntry } from './guests-helper';
     import { setUnsavedChanges } from 'stores/saved';
+    import { trySaveDataAsync } from 'helper/trySaveData.js';
+    import { SaveMessageType } from 'types/saveMessageType';
+    import { onMount } from 'svelte';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
     import PersonArray from 'elements/input/personArray.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
+    import SaveMessage from 'elements/text/saveMessage.svelte';
+    import Button from 'elements/input/button.svelte';
 
     export let data: LoadAdminGuests;
     let talkDropDown: NavigationDropDown;
     let selected: DashboardAllPersons = [];
+    let currentTalkId: number         = 0;
+
+    let message: SaveMessage;
+    let errorList: string[] = [];
+
+    onMount(() => {
+        if (data.talksOfEvent.length > 0) {
+            const entry = talkDropDown.getSelected();
+            if (typeof entry !== 'string') {
+                console.error('selected is no string by initialisation');
+                return;
+            }
+            currentTalkId = parseIdOfEntry(entry);
+        }
+    });
 
     async function loadNewTalks(selected: string): Promise<void> {
         const id = parseIdOfEntry(selected);
@@ -23,6 +44,7 @@
         data.talksOfEvent = await loadTalksOfEvent(fetch, id);
 
         if (data.talksOfEvent.length === 0) {
+            currentTalkId = 0;
             talkDropDown.clear();
             data.guestsOfTalk = [];
             return;
@@ -33,8 +55,32 @@
     }
 
     async function loadNewGuests(selected: string): Promise<void> {
-        const id          = parseIdOfEntry(selected);
-        data.guestsOfTalk = await loadPossibleGuestsOfTalk(fetch, id);
+        currentTalkId = parseIdOfEntry(selected);
+        data.guestsOfTalk = await loadPossibleGuestsOfTalk(fetch, currentTalkId);
+    }
+
+    async function save(): Promise<boolean> {
+        if (currentTalkId === 0) {
+            errorList = ['Aktuell ist kein Talk ausgewählt.'];
+            message.setSaveMessage(SaveMessageType.Error);
+            return false;
+        }
+
+        const ids = selected.map(x => x.user_id);
+        console.log(selected);
+        console.log(ids);
+
+        const result = await trySaveDataAsync(
+            fetch,
+            { guest_ids: ids },
+            `/api/dashboard/admin/talk/${currentTalkId}/set-guests`,
+            'PUT',
+        );
+
+        errorList = result.messages;
+        message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
+
+        return result.success;
     }
 </script>
 
@@ -54,10 +100,15 @@
                         data={getNavigationEntries(data.talksOfEvent)}
                         on:navigated={(e) => { loadNewGuests(e.detail); }}
                         bind:this={talkDropDown} />
+    <SaveMessage bind:this={message} />
+    <MessageWrapper messages={errorList} />
     <PersonArray labelText="Mögliche Gäste:"
                  data={data.guestsOfTalk}
-                 {selected}
+                 bind:selected={selected}
                  on:toggle={setUnsavedChanges} />
+    <Button ariaLabel="Klicke hier, um die ausgehwählen Gäste zu speichern."
+            on:click={save}>Speichern
+    </Button>
 </SectionDashboard>
 
 <style>
