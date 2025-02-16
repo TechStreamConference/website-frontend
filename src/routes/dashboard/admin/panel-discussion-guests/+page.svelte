@@ -18,6 +18,7 @@
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import Button from 'elements/input/button.svelte';
+    import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 
     export let data: LoadAdminGuests;
     let talkDropDown: NavigationDropDown;
@@ -84,6 +85,8 @@
     }
 </script>
 
+<UnsavedChangesCallbackWrapper callback={save} />
+
 <Tabs
       entries={Menu.admin}
       entryName={MenuItem.adminPanelDiscussionGuests.name}
@@ -106,9 +109,11 @@
                  data={data.guestsOfTalk}
                  bind:selected={selected}
                  on:toggle={setUnsavedChanges} />
-    <Button ariaLabel="Klicke hier, um die ausgehwählen Gäste zu speichern."
-            on:click={save}>Speichern
-    </Button>
+    {#if data.talksOfEvent.length > 0}
+        <Button ariaLabel="Klicke hier, um die ausgehwählen Gäste zu speichern."
+                on:click={save}>Speichern
+        </Button>
+    {/if}
 </SectionDashboard>
 
 <style>
