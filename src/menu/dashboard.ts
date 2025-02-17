@@ -1,5 +1,6 @@
 import type { Menu } from 'types/provideTypes';
 import type { DashboardRoles } from 'types/dashboardProvideTypes';
+
 import * as Item from './menuItems';
 
 export function SectionIn(roles: DashboardRoles) {
@@ -31,6 +32,7 @@ export const footerIn: Menu = [
 export const admin: Menu      = [
     Item.adminApprovalSpeakerTeamMember,
     Item.adminApprovalTalk,
+    Item.adminPanelDiscussionGuests,
     Item.adminEventSlots,
     Item.adminEvents,
     Item.adminNewEvent,

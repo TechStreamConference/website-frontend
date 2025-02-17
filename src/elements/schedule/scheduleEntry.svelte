@@ -5,6 +5,7 @@
     import ScheduleSpeaker from './scheduleSpeaker.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
+    import TextLine from 'elements/text/textLine.svelte';
 
     import { formatDate } from 'helper/dates';
 
@@ -25,18 +26,30 @@
             {/each}
         </div>
     </div>
-    <ScheduleSpeaker
-          {speaker}
-          on:click={(event) => {
+    <div class="schedule-entry-speaker-wrapper">
+        <ScheduleSpeaker
+              {speaker}
+              on:click={(event) => {
 			personPopupCallback(event, speaker);
 		}}
-    />
-    <Paragraph>{talk.description}</Paragraph>
+        />
+        {#if talk.guests.length > 0}
+            <TextLine classes="schedule-entry-speaker-text">|</TextLine>
+            <TextLine classes="schedule-entry-speaker-text">Gäste:</TextLine>
+            {#each talk.guests as guest}
+                <ScheduleSpeaker
+                      speaker={guest}
+                      on:click={(event) => {personPopupCallback(event, guest);}}
+                />
+            {/each}
+        {/if}
+    </div>
+    <Paragraph classes="schedule-entry-speaker-description">{talk.description}</Paragraph>
 </div>
 
 <style>
     .schedule-entry-horizontal-line {
-        border-bottom:  1px solid var(--text-color);
+        border-bottom:  1px solid var(--primary-color-dark);
         padding-bottom: var(--2x-padding);
     }
 
@@ -44,12 +57,14 @@
         display:        flex;
         flex-direction: column;
         align-items:    flex-start;
+        gap:            var(--full-gap);
     }
 
     .schedule-entry-title-wrapper {
-        display:        flex;
-        flex-direction: row;
-        gap:            var(--full-gap);
+        display:         flex;
+        flex-direction:  row;
+        justify-content: space-between;
+        width:           100%;
 
     }
 
@@ -61,6 +76,21 @@
 
     :global(.schedule-entry-time) {
         margin-left: var(--full-margin);
+    }
+
+    .schedule-entry-speaker-wrapper {
+        display:        flex;
+        flex-direction: row;
+        gap:            var(--full-gap);
+        flex-wrap:      wrap;
+    }
+
+    :global(.schedule-entry-speaker-text) {
+        align-self: center;
+    }
+
+    :global(.schedule-entry-speaker-description) {
+        margin-top: var(--4x-margin);
     }
 
     @media (max-width: 1280px) {
