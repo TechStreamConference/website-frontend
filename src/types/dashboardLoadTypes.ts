@@ -35,6 +35,11 @@ export type LoadAdminGuests = {
     guestsOfTalk: DashboardAllPersons,
 }
 
+export type LoadAdminCreatePanelDiscussion = {
+    allEvents: DashboardAllEvents,
+    possibleHosts: DashboardAllPersons,
+}
+
 export type LoadAdminTimeSlots = {
     allEvents: DashboardAllEvents,
     currentSlots: DashboardAllTimeSlots,
