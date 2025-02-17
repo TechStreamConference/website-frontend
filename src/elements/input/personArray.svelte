@@ -50,7 +50,7 @@
 <div class="toggle-person-wrapper">
     {#each data as person}
         <Toggle classes="toggle-person-entry-wrapper"
-                ariaLabel="Klicke, um eine mögliche Talk-Dauer in Minuten aus- oder abzuwählen"
+                ariaLabel="Klicke, um mögliche Gäste an- oder abzuwählen"
                 toggle={contains(person)}
                 on:toggle={ (e) => { updateSelected(e.detail, person); }}>
             <Image classes="toggle-person-image"

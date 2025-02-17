@@ -58,7 +58,7 @@
     }
 
     export function clear(): void {
-        // notice that the drop-down data are bindet in html.
+        // notice that the drop-down data are bound in html.
         // They clear when the provided data are cleared.
         // When I would clear it here, Svelte would overwrite it anyway.
         selected  = undefined;
