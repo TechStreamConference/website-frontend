@@ -5,12 +5,13 @@
     import type { LoadAdminGuests } from 'types/dashboardLoadTypes';
     import type { DashboardAllPersons } from 'types/dashboardProvideTypes';
 
-    import { getNavigationEntries, loadPossibleGuestsOfTalk, loadTalksOfEvent, parseIdOfEntry } from './guests-helper';
+    import { loadPossibleGuestsOfTalk, loadTalksOfEvent } from './guests-helper';
     import { setUnsavedChanges } from 'stores/saved';
     import { trySaveDataAsync } from 'helper/trySaveData.js';
     import { SaveMessageType } from 'types/saveMessageType';
     import { onMount } from 'svelte';
     import { getElementByID } from 'helper/basic';
+    import { getDropDownEntriesWithID, getIdFromDropDownEntry } from 'helper/navigation';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -37,13 +38,13 @@
                 console.error('selected is no string by initialisation');
                 return;
             }
-            currentTalkId = parseIdOfEntry(entry);
+            currentTalkId = getIdFromDropDownEntry(entry);
             selectedArray = getElementByID(data.talksOfEvent, currentTalkId).guests;
         }
     });
 
     async function loadNewTalks(selected: string): Promise<void> {
-        const id = parseIdOfEntry(selected);
+        const id = getIdFromDropDownEntry(selected);
 
         data.talksOfEvent = await loadTalksOfEvent(fetch, id);
 
@@ -59,7 +60,7 @@
     }
 
     async function loadNewGuests(selected: string): Promise<void> {
-        currentTalkId = parseIdOfEntry(selected);
+        currentTalkId = getIdFromDropDownEntry(selected);
         selectedArray = getElementByID(data.talksOfEvent, currentTalkId).guests;
         data.guestsOfTalk = await loadPossibleGuestsOfTalk(fetch, currentTalkId);
     }
@@ -98,11 +99,11 @@
 <SectionDashboard classes="standard-dashboard-section">
     <NavigationDropDown id="dashboard-admin-guest-year"
                         labelText="Aktuelles Jahr:"
-                        data={getNavigationEntries(data.allEvents)}
+                        data={getDropDownEntriesWithID(data.allEvents)}
                         on:navigated={(e) => { loadNewTalks(e.detail); }} />
     <NavigationDropDown id="dashboard-admin-guest-talk"
                         labelText="Aktueller Talk:"
-                        data={getNavigationEntries(data.talksOfEvent)}
+                        data={getDropDownEntriesWithID(data.talksOfEvent)}
                         on:navigated={(e) => { loadNewGuests(e.detail); }}
                         bind:this={talkDropDown} />
     <SaveMessage bind:this={message} />
