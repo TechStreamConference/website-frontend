@@ -18,11 +18,13 @@
     import DurationArray from 'elements/input/durationArray.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
+    import FormWrapper from 'elements/wrapper/formWrapper.svelte';
 
-    export let classes: string = '';
+    export let classes: string  = '';
     export let data: DashboardPendingTalk;
     export let tags: AllTalkTag;
     export let talkDurations: DashboardTalkDurationChoices;
+    export let useForm: boolean = true;
 
     // @formatter:off
     let saveMessage: SaveMessage;
@@ -59,9 +61,9 @@
 
 </script>
 
-<form id="dashboard-speaker-talk-form-{data.id}"
-      class="dashboard-speaker-talk-form {classes}"
-      on:submit|preventDefault={save}>
+<FormWrapper classes="dashboard-speaker-talk-form {classes}"
+             submitCallback={save}
+             {useForm}>
     <SubHeadline classes="sub-headline-center">{data.id === 0 ? "neuer Talk" : data.title}</SubHeadline>
     <SaveMessage bind:this={saveMessage} />
     <MessageWrapper messages={errorList} />
@@ -98,15 +100,17 @@
               bind:value={data.notes}
               on:input={setUnsavedChanges}
               on:submit={save} />
-    <div class="dashboard-speaker-talk-button-wrapper">
-        <Button type="submit"
-                ariaLabel="Klicke, um den Talk zu speichern">Speichern
-        </Button>
-    </div>
-</form>
+    {#if useForm}
+        <div class="dashboard-speaker-talk-button-wrapper">
+            <Button type="submit"
+                    ariaLabel="Klicke, um den Talk zu speichern">Speichern
+            </Button>
+        </div>
+    {/if}
+</FormWrapper>
 
 <style>
-    .dashboard-speaker-talk-form {
+    :global(.dashboard-speaker-talk-form) {
         display:           flex;
         flex-direction:    column;
         gap:               var(--full-gap);
