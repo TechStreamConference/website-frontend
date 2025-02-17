@@ -33,6 +33,7 @@ export const admin: Menu      = [
     Item.adminApprovalSpeakerTeamMember,
     Item.adminApprovalTalk,
     Item.adminPanelDiscussionGuests,
+    Item.adminCreatePanelDiscussion,
     Item.adminEventSlots,
     Item.adminEvents,
     Item.adminNewEvent,

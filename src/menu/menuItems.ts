@@ -46,12 +46,17 @@ export const adminEventSlots: MenuItem                = {
     url:         '/dashboard/admin/time-slots',
     description: 'Klicke hier, um zu den Time-Slot-Einstellungen zu gelangen',
 };
-export const adminPanelDiscussionGuests: MenuItem     = {
+export const adminPanelDiscussionGuests: MenuItem = {
     name:        'Gäste',
     url:         '/dashboard/admin/panel-discussion-guests',
     description: 'Klicke hier, um einem Talk Gäste zuzuweisen',
 };
-export const adminEvents: MenuItem                    = {
+export const adminCreatePanelDiscussion: MenuItem = {
+    name:        'Gesprächsrunde anlegen',
+    url:         '/dashboard/admin/create-panel-discussion',
+    description: 'Klicke hier, um eine neue Gesprächsrunde anzulegen',
+};
+export const adminEvents: MenuItem                = {
     name:        'Events',
     url:         '/dashboard/admin/events',
     description: 'Klicke hier, um zu den Event-Einstellungen zu gelangen',
