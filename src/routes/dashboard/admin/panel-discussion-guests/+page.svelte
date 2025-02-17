@@ -24,7 +24,6 @@
 
     export let data: LoadAdminGuests;
     let talkDropDown: NavigationDropDown;
-    let personArray: PersonArray;
     let selectedArray: DashboardAllPersons = [];
     let currentTalkId: number              = 0;
 
@@ -108,8 +107,7 @@
                         bind:this={talkDropDown} />
     <SaveMessage bind:this={message} />
     <MessageWrapper messages={errorList} />
-    <PersonArray bind:this={personArray}
-                 labelText="Mögliche Gäste:"
+    <PersonArray labelText="Mögliche Gäste:"
                  data={data.guestsOfTalk}
                  bind:selected={selectedArray}
                  on:toggle={setUnsavedChanges} />
