@@ -17,6 +17,7 @@ import type {
     DashboardAllPendingTalks,
     DashboardEvent,
     DashboardAllPersons,
+    DashboardAllTalkTag,
 } from './dashboardProvideTypes';
 
 export type LoadDashboard = {
@@ -33,6 +34,13 @@ export type LoadAdminGuests = {
     allEvents: DashboardAllEvents,
     talksOfEvent: DashboardAllTentativeOrAcceptedTalks,
     guestsOfTalk: DashboardAllPersons,
+}
+
+export type LoadAdminCreatePanelDiscussion = {
+    allEvents: DashboardAllEvents,
+    possibleHosts: DashboardAllPersons,
+    durations: DashboardTalkDurationChoices,
+    tags: DashboardAllTalkTag,
 }
 
 export type LoadAdminTimeSlots = {

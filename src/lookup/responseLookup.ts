@@ -49,6 +49,9 @@ const lookup: ResponseDict = {
     TALK_ALREADY_APPROVED:                         'Der Talk ist bereits freigegeben.',
     TALK_NOT_FOUND:                                'Da haben wir wohl diesen Talk verlegt. Vielleicht finden wir ihn bald wieder.',
     DUPLICATE_TALK:                                'Diesen Talk gibt es bereits.',
+    TALK_CREATION_FAILED:                          'Fehler beim Erstellen des Talks.',
+    INVALID_DURATION:                              'Ungültige Längenangabe des Talks.',
+    NO_TAGS:                                       'Füge mindestens ein Tag hinzu',
     'The title field is required.':                'Das Feld \'Titel\' ist erforderlich.',
     'The description field is required.':          'Das Feld \'Beschreibung\' ist erforderlich.',
     'The tag_ids.* field is required.':            'Wähle durch Anklicken mindestens einen Tag aus, der zu deinem Vortrag passt.',
@@ -65,10 +68,10 @@ const lookup: ResponseDict = {
     NO_CHANGES:          'Es wurden keine Änderungen vorgenommen.',
 
     // guests
-    "The guest_ids.* field is required." : "Wähle mindestens einen Gast aus.",
-    DUPLICATE_GUEST : "Mindestens ein Gast ist doppelt vorhanden.",
-    HOST_AS_GUEST : "Mindestens ein Gast ist auch Host des ausgewählten Talks.",
-    INVALID_GUEST : "Mindestens ein Gast hat einen ungültigen Speaker-Eintrag.",
+    'The guest_ids.* field is required.': 'Wähle mindestens einen Gast aus.',
+    DUPLICATE_GUEST:                      'Mindestens ein Gast ist doppelt vorhanden.',
+    HOST_AS_GUEST:                        'Mindestens ein Gast ist auch Host des ausgewählten Talks.',
+    INVALID_GUEST:                        'Mindestens ein Gast hat einen ungültigen Speaker-Eintrag.',
 };
 
 export function responseLookup(key: string): string {

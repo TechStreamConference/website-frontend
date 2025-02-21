@@ -1,39 +1,8 @@
 import type { DashboardAllPersons, DashboardAllTentativeOrAcceptedTalks } from 'types/dashboardProvideTypes';
+
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { dashboardAllPersonsScheme, dashboardAllTentativeOrAcceptedTalkScheme } from 'types/dashboardProvideTypes';
-import { error } from '@sveltejs/kit';
-
-export function parseIdOfEntry(entry:string) : number {
-    const parts = entry.split(' | ');
-
-    if (parts.length < 2) {
-        console.error("not able to split entry at ' | '");
-        throw error(404);
-    }
-
-    const num = Number(parts[0]);
-
-    if (Number.isNaN(num)) {
-        console.error(`not able to parse id. '${num}' is no number`);
-        throw error(404);
-    }
-
-    return num;
-}
-
-export function getNavigationEntries<T extends {
-    id: number,
-    title: string
-}>(entries: T[]): string[] {
-    const toReturn: string[] = [];
-
-    for (const entry of entries) {
-        toReturn.push(`${entry.id} | ${entry.title}`);
-    }
-
-    return toReturn;
-}
 
 export async function loadTalksOfEvent(
     fetch: typeof globalThis.fetch,

@@ -198,7 +198,7 @@ export const dashboardTalkTagScheme = z.object({
                                                });
 export type DashboardTalkTag = z.infer<typeof dashboardTalkTagScheme>;
 export const dashboardAllTalkTagScheme = z.array(dashboardTalkTagScheme);
-export type DashboardAllTalkTag = z.infer<typeof dashboardTalkTagScheme>;
+export type DashboardAllTalkTag = z.infer<typeof dashboardAllTalkTagScheme>;
 
 export const dashboardTentativeOrAcceptedTalkScheme = z.object({
                                                                    id:                  z.number(),
