@@ -5,4 +5,5 @@
     export let data: LoadDashboard & LoadUserSocials;
 </script>
 
-<SpeakerTeamMemberSocialMediaLinks {data} />
+<SpeakerTeamMemberSocialMediaLinks {data}
+                                   type="speaker" />

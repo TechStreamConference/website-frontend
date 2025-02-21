@@ -11,10 +11,7 @@
     import { SaveMessageType } from 'types/saveMessageType';
     import { combineSaveResult, trySaveDataAsync } from 'helper/trySaveData';
     import {
-        deleteLinkAsync,
-        getIDFromSocialMediaType,
-        loadSocials,
-        validate,
+        deleteLinkAsync, getIDFromSocialMediaType, loadSocials, validate,
     } from 'pageHelper/speakerTeamMemberSocials';
 
     import Tabs from 'elements/navigation/tabs.svelte';
@@ -26,6 +23,7 @@
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     export let data: LoadDashboard & LoadUserSocials;
+    export let type: 'speaker' | 'team-member';
 
     let saveMessage: SaveMessage;
     let errorList: string[] = [];
@@ -33,8 +31,8 @@
 
     async function trySaveAsync(): Promise<boolean> {
         const validateResult: ValidateReturn = validate(data.socials);
-        errorList    = validateResult.messages;
-        data.socials = validateResult.data;
+        errorList                            = validateResult.messages;
+        data.socials                         = validateResult.data;
         if (errorList.length > 0) {
             return false;
         }
@@ -107,8 +105,8 @@
 </script>
 
 <Tabs
-      entries={Menu.speaker}
-      entryName={MenuItem.speakerSocialMedia.name}
+      entries={type === "speaker" ? Menu.speaker : Menu.teamMember}
+      entryName={type === "speaker" ? MenuItem.speakerSocialMedia.name : MenuItem.teamMemberSocialMedia.name}
       classes="navigation-tabs-dashboard-subpage"
 />
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
