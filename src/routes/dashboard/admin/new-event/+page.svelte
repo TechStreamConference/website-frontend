@@ -42,7 +42,7 @@
       entryName={MenuItem.adminNewEvent.name}
       classes="navigation-tabs-dashboard-subpage" />
 
-<SectionDashboard classes="dashboard-admin-event-section">
+<SectionDashboard classes="standard-dashboard-section">
     {#if currentState === State.Saved}
         <div class="dashboard-admin-new-event-message-wrapper">
             <TextLine>Das event '{event.title}' wurde erfolgreich angelegt.</TextLine>
