@@ -144,9 +144,10 @@
                 </Button>
             </form>
         {:else if state === State.EmailSend}
-            <TextLine>State: {state}</TextLine>
+            <TextLine classes="text-line-center">Deine Nachricht wurde erfolgreich verschickt.</TextLine>
+            <TextLine classes="text-line-center">Wir werden uns in nächster Zeit bei dir melden.</TextLine>
         {:else}
-            <TextLine>State: {state}</TextLine>
+            <TextLine classes="text-line-center">👻 Upsi. Dieses Seite ist kaputt. 👻</TextLine>
         {/if}
     </SectionDashboard>
 </PageWrapper>
