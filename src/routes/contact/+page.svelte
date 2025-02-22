@@ -6,6 +6,7 @@
     import { resetUnsavedChanges, setUnsavedChanges, unsavedChanges } from 'stores/saved';
     import { trySaveDataAsync } from 'helper/trySaveData.js';
     import { SaveMessageType } from 'types/saveMessageType';
+    import { scrollToTop } from 'helper/scroll';
     import { z } from 'zod';
 
     import PageWrapper from 'elements/section/pageWrapper.svelte';
@@ -82,6 +83,8 @@
 
     async function save(): Promise<boolean> {
         validate();
+        scrollToTop();
+
 
         const saveData = {
             'name':    name.trim(),
