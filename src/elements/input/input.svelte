@@ -57,49 +57,49 @@
 </script>
 
 <div class="{classes} input-line-wrapper">
-    <Label for_={id}>{labelText}</Label>
-    <div class="input-line-entry-wrapper">
-        {#if type === 'file'}
-            <input
-                  bind:this={input}
-                  class="normal-font input-line"
-                  {id}
-                  type="file"
-                  accept={fileAccept}
-                  name={id}
-                  placeholder={placeholderText}
-                  bind:value
-                  on:input
-                  on:change
-                  aria-label={ariaLabel}
-                  step="1"
-            />
-        {:else}
-            <input
-                  bind:this={input}
-                  class="normal-font input-line"
-                  {id}
-                  use:typeWorkaround={type}
-                  maxlength={limit}
-                  name={id}
-                  placeholder={placeholderText}
-                  bind:value
-                  on:input={calcColor}
-                  on:change
-                  aria-label={ariaLabel}
-                  step="1"
-            />
-        {/if}
+    <div class="input-line-label-wrapper">
+        <Label for_={id}>{labelText}</Label>
         {#if limit !== -1}
             {#if typeof value === 'string'}
-                <TextLine classes="input-limit-text text-color-custom"
+                <TextLine classes="text-color-custom"
                           --color={colorString}>{value.length} / {limit}</TextLine>
             {:else if typeof value === 'number'}
-                <TextLine classes="input-limit-text text-color-custom"
+                <TextLine classes="text-color-custom"
                           --color={colorString}>{value.toString().length} / {limit}</TextLine>
             {/if}
         {/if}
     </div>
+    {#if type === 'file'}
+        <input
+              bind:this={input}
+              class="normal-font input-line"
+              {id}
+              type="file"
+              accept={fileAccept}
+              name={id}
+              placeholder={placeholderText}
+              bind:value
+              on:input
+              on:change
+              aria-label={ariaLabel}
+              step="1"
+        />
+    {:else}
+        <input
+              bind:this={input}
+              class="normal-font input-line"
+              {id}
+              use:typeWorkaround={type}
+              maxlength={limit}
+              name={id}
+              placeholder={placeholderText}
+              bind:value
+              on:input={calcColor}
+              on:change
+              aria-label={ariaLabel}
+              step="1"
+        />
+    {/if}
 </div>
 
 <style>
@@ -109,10 +109,10 @@
         width:          100%;
     }
 
-    .input-line-entry-wrapper {
-        display:        flex;
-        flex-direction: row;
-        position:       relative;
+    .input-line-label-wrapper {
+        display:         flex;
+        flex-direction:  row;
+        justify-content: space-between;
     }
 
     .input-line {
@@ -123,12 +123,5 @@
         padding:          var(--half-padding);
         width:            100%;
         font-size:        var(--full-font-size);
-    }
-
-    :global(.input-limit-text) {
-        position:  absolute;
-        top:       50%;
-        right:     1rem;
-        translate: 0 -50%;
     }
 </style>
