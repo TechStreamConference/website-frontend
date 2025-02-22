@@ -22,7 +22,6 @@
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
     import UnsavedChangesPopup from 'elements/popups/unsavedChangesPopup.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
-    import { onMount } from 'svelte';
 
     enum State {
         Default,
