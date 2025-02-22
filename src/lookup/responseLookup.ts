@@ -72,6 +72,10 @@ const lookup: ResponseDict = {
     DUPLICATE_GUEST:                      'Mindestens ein Gast ist doppelt vorhanden.',
     HOST_AS_GUEST:                        'Mindestens ein Gast ist auch Host des ausgewählten Talks.',
     INVALID_GUEST:                        'Mindestens ein Gast hat einen ungültigen Speaker-Eintrag.',
+
+    // contact
+    'The name field is required.':    'Das Feld \'Name\' ist erforderlich.',
+    'The message field is required.': 'Das Feld \'Nachricht\' ist erforderlich.',
 };
 
 export function responseLookup(key: string): string {
