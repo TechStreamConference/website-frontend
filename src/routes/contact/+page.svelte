@@ -12,6 +12,7 @@
     import DropDown from 'elements/input/dropDown.svelte';
     import TextArea from 'elements/input/textArea.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
+    import Button from 'elements/input/button.svelte';
 
     enum State {
         Default,
@@ -84,6 +85,10 @@
                           bind:value={message}
                           on:input={setUnsavedChanges}
                           on:submit={save} />
+                <Button type="submit"
+                        ariaLabel="Klicke, um die Mail zu verschicken"
+                        classes="center-button">Senden
+                </Button>
             </form>
         {:else if state === State.EmailSend}
             <TextLine>State: {state}</TextLine>
