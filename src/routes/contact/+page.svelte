@@ -142,7 +142,7 @@
                        on:input={setUnsavedChanges} />
                 <div class="contact-subject-wrapper">
                     <DropDown id="contact-subject-dropdown"
-                              labelText="Betreff:"
+                              labelText="Was gibts?"
                               data={subjectData}
                               bind:selected={subject} />
                     {#if subject === subjectOther}
