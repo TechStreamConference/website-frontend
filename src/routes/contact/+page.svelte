@@ -6,6 +6,7 @@
     import { resetUnsavedChanges, setUnsavedChanges, unsavedChanges } from 'stores/saved';
     import { trySaveDataAsync } from 'helper/trySaveData.js';
     import { SaveMessageType } from 'types/saveMessageType';
+    import { onMount } from 'svelte';
     import { scrollToTop } from 'helper/scroll';
     import { z } from 'zod';
 
@@ -82,9 +83,12 @@
     }
 
     async function save(): Promise<boolean> {
-        validate();
         scrollToTop();
 
+        if (!validate()) {
+            saveMessage.setSaveMessage(SaveMessageType.Error);
+            return false;
+        }
 
         const saveData = {
             'name':    name.trim(),
