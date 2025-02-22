@@ -1,5 +1,17 @@
 import { error } from '@sveltejs/kit';
 
+export interface Color {
+    red: number;
+    green: number;
+    blue: number;
+}
+
+export const orange: Color = {
+    red:   255,
+    green: 165,
+    blue:  0,
+};
+
 export function getElementByTitle<T extends {
     title: string
 }>(elements: T[], title: string): T {
@@ -59,4 +71,13 @@ export function trimOrNull(entry: string): string | null {
         return null;
     }
     return trimmed;
+}
+
+
+export function lerpColor(start: Color, end: Color, factor: number): Color {
+    return {
+        red:   start.red + factor * (end.red - start.red),
+        green: start.green + factor * (end.green - start.green),
+        blue:  start.blue + factor * (end.blue - start.blue),
+    };
 }
