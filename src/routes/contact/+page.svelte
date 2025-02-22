@@ -103,7 +103,11 @@
         errorList = result.messages;
 
         if (result.success) {
-            state = State.EmailSend;
+            state           = State.EmailSend;
+            name            = '';
+            mail            = '';
+            subjectConcrete = '';
+            message         = '';
         }
 
         return result.success;
