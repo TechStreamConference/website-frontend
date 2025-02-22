@@ -4,6 +4,9 @@
     import type { LoadContact } from 'types/loadTypes';
 
     import { setUnsavedChanges } from 'stores/saved';
+    import { trySaveDataAsync } from 'helper/trySaveData.js';
+    import { SaveMessageType } from 'types/saveMessageType';
+    import { z } from 'zod';
 
     import PageWrapper from 'elements/section/pageWrapper.svelte';
     import TextLine from 'elements/text/textLine.svelte';
@@ -13,6 +16,8 @@
     import TextArea from 'elements/input/textArea.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import Button from 'elements/input/button.svelte';
+    import SaveMessage from 'elements/text/saveMessage.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
     enum State {
         Default,
@@ -21,22 +26,68 @@
 
     const subjectOther: string  = 'Sonstiges';
     const subjectData: string[] = [
-        subjectOther,
         'Vortrag',
         'sponsoring',
+        subjectOther,
     ];
 
     let state                   = State.Default;
     let name: string            = '';
     let mail: string            = '';
-    let subject: string         = '';
+    let subject: string         = subjectData[0];
     let subjectConcrete: string = '';
     let message: string         = '';
 
+    let saveMessage: SaveMessage;
+    let errorList: string[] = [];
+
     export let data: LoadContact;
 
+    function validate(): boolean {
+        errorList = [];
+        if (name.trim().length === 0) {
+            errorList.push('Bitte gib einen Namen ein.');
+        }
+
+        if (mail.trim().length === 0) {
+            errorList.push('Bitte gib eine E-Mail ein.');
+        }
+        const mailScheme = z.string().email();
+        if (mailScheme.safeParse(mail)) {
+            errorList.push(`'${mail}' ist keine valide E-Mail`);
+        }
+
+        if (subject === subjectOther && subjectConcrete.trim().length === 0) {
+            errorList.push('Bitte gib einen konkreten Betreff ein');
+        }
+
+        if (message.trim().length === 0) {
+            errorList.push('Bitte gibt eine Nachricht ein.');
+        }
+
+        return errorList.length === 0;
+    }
+
     async function save(): Promise<boolean> {
-        return false;
+        validate();
+
+        const saveData = {
+            'name':    name.trim(),
+            'email':   mail.trim(),
+            'subject': subject === subjectOther ? subjectConcrete.trim() : subject,
+            'message': message.trim(),
+        };
+
+        const result = await trySaveDataAsync(fetch, saveData, '/api/contact', 'POST');
+
+        saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
+        errorList = result.messages;
+
+        if (result.success) {
+            state = State.EmailSend;
+        }
+
+        return result.success;
     }
 </script>
 
@@ -46,6 +97,8 @@
 >
     <SectionDashboard classes="standard-dashboard-section">
         <HeadlinePage>Kontakt</HeadlinePage>
+        <SaveMessage bind:this={saveMessage} />
+        <MessageWrapper messages={errorList} />
         {#if state === State.Default}
             <form class="contact-form"
                   on:submit|preventDefault={save}>
