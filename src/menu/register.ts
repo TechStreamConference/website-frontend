@@ -8,5 +8,6 @@ export const headerOut: Menu = [
 
 export const footerOut: Menu = [
     Item.login,
+    Item.contact,
     Item.imprint,
 ];
