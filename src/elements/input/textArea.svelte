@@ -17,7 +17,7 @@
     export let limit: number           = -1;
 
     export let value: string = '';
-    let colorString: string = '';
+    let colorString: string  = '';
 
     const dispatch = createEventDispatcher();
 
@@ -67,7 +67,7 @@
           name={id}
           placeholder={placeholderText}
           bind:value
-          on:input={calcColor}
+          on:input={ () => { calcColor(); dispatch('input'); } }
           aria-label={ariaLabel}
           {rows}
           on:keydown={handleKeydown}

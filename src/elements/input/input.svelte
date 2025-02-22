@@ -4,6 +4,7 @@
     import { typeWorkaround } from 'types/workaround';
     import { lerpColor, orange } from 'helper/basic';
     import { onMount } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
 
     import Label from 'elements/text/label.svelte';
     import TextLine from 'elements/text/textLine.svelte';
@@ -22,6 +23,7 @@
     let colorString: string                  = '';
 
     let input: HTMLInputElement;
+    const dispatch = createEventDispatcher();
 
     onMount(() => {
         calcColor();
@@ -94,7 +96,7 @@
               name={id}
               placeholder={placeholderText}
               bind:value
-              on:input={calcColor}
+              on:input={ () => { calcColor(); dispatch('input'); } }
               on:change
               aria-label={ariaLabel}
               step="1"

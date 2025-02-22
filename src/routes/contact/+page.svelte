@@ -3,7 +3,7 @@
 
     import type { LoadContact } from 'types/loadTypes';
 
-    import { setUnsavedChanges } from 'stores/saved';
+    import { resetUnsavedChanges, setUnsavedChanges, unsavedChanges } from 'stores/saved';
     import { trySaveDataAsync } from 'helper/trySaveData.js';
     import { SaveMessageType } from 'types/saveMessageType';
     import { z } from 'zod';
@@ -18,6 +18,9 @@
     import Button from 'elements/input/button.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
+    import UnsavedChangesPopup from 'elements/popups/unsavedChangesPopup.svelte';
+    import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
+    import { onMount } from 'svelte';
 
     enum State {
         Default,
@@ -42,6 +45,15 @@
     let errorList: string[] = [];
 
     export let data: LoadContact;
+
+    onMount(() => {
+        resetUnsavedChanges();
+        window.addEventListener('beforeunload', (event) => {
+            if (unsavedChanges()) {
+                event.preventDefault();
+            }
+        });
+    });
 
     function validate(): boolean {
         errorList = [];
@@ -90,6 +102,9 @@
         return result.success;
     }
 </script>
+
+<UnsavedChangesPopup />
+<UnsavedChangesCallbackWrapper callback={save} />
 
 <PageWrapper globals={data.globals}
              headerMenu={data.loggedIn ? Menu.headerIn : Menu.headerOut}
