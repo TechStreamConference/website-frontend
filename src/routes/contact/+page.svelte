@@ -81,7 +81,7 @@
         return errorList.length === 0;
     }
 
-    async function save(): Promise<boolean> {
+    async function saveAsync(): Promise<boolean> {
         scrollToTop();
 
         if (!validate()) {
@@ -114,7 +114,7 @@
 </script>
 
 <UnsavedChangesPopup />
-<UnsavedChangesCallbackWrapper callback={save} />
+<UnsavedChangesCallbackWrapper callback={saveAsync} />
 
 <PageWrapper globals={data.globals}
              headerMenu={data.loggedIn ? Menu.headerIn : Menu.headerOut}
@@ -126,7 +126,7 @@
         <MessageWrapper messages={errorList} />
         {#if state === State.Default}
             <form class="contact-form"
-                  on:submit|preventDefault={save}>
+                  on:submit|preventDefault={saveAsync}>
                 <Input id="contact-name-input"
                        labelText="Name:"
                        placeholderText="Name"
@@ -162,7 +162,7 @@
                           limit={2000}
                           bind:value={message}
                           on:input={setUnsavedChanges}
-                          on:submit={save} />
+                          on:submit={saveAsync} />
                 <Button type="submit"
                         ariaLabel="Klicke, um die Mail zu verschicken"
                         classes="center-button">Senden
