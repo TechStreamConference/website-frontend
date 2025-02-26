@@ -40,7 +40,7 @@
             new_password: trimmed_1,
             token:        data.token,
         };
-        const response = await trySaveDataAsync(fetch, toSave, '/api/account/reset-password', 'POST');
+        const response = await trySaveDataAsync(fetch, toSave, '/account/reset-password', 'POST');
 
         errorList = response.messages;
 

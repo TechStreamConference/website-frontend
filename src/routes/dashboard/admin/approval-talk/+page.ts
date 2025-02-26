@@ -10,7 +10,7 @@ export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminApprovalTalk> {
     const tentativeTalksPromise    = fetchTentativeTalks(fetch);
-    const pendingTalksFetchPromise = fetch(apiUrl('/api/dashboard/admin/pending-talks'));
+    const pendingTalksFetchPromise = fetch(apiUrl('/dashboard/admin/pending-talks'));
 
     const pendingTalksParsePromise = checkAndParseInputDataAsync(
         await pendingTalksFetchPromise,

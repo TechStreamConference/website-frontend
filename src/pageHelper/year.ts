@@ -1,7 +1,6 @@
 import type { LoadYear } from 'types/loadTypes';
-import type {
-    Year, Globals,
-} from 'types/provideTypes';
+import type { Year, Globals } from 'types/provideTypes';
+
 import { yearScheme } from 'types/provideTypes';
 
 
@@ -14,7 +13,7 @@ export async function loadYearAsync(
     fetch: typeof globalThis.fetch,
     year: number | undefined = undefined,
 ): Promise<LoadYear> {
-    let yearRoute: string = '/api/events';
+    let yearRoute: string = '/events';
     if (year) {
         yearRoute += '/' + year;
     }

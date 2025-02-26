@@ -9,9 +9,9 @@ import { allTalkTagScheme } from 'types/provideTypes';
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadSpeakerTalk> {
-    const allEventsFetchPromise       = fetch(apiUrl(`/api/dashboard/speaker/all-events`));
-    const allTagsFetchPromise         = fetch(apiUrl(`/api/tags`));
-    const allTalkDurationFetchPromise = fetch(apiUrl(`/api/talk-duration-choices`));
+    const allEventsFetchPromise       = fetch(apiUrl(`/dashboard/speaker/all-events`));
+    const allTagsFetchPromise         = fetch(apiUrl(`/tags`));
+    const allTalkDurationFetchPromise = fetch(apiUrl(`/talk-duration-choices`));
 
     const allEventsParsePromise       = checkAndParseInputDataAsync(await allEventsFetchPromise,
                                                                     dashboardAllEventIDScheme,

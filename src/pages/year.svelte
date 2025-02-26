@@ -148,7 +148,7 @@
             <div class="center-styled-link">
                 <StyledLink
                       classes="styled-link-white"
-                      href={apiUrl(`/api/events/${data.year.event.year}/ics`)}
+                      href={apiUrl(`/events/${data.year.event.year}/ics`)}
                       title="Klicke um den Ablaufplan als ICS-Datei herunter zu laden"
                       icon="Calender"
                       newTab={false}

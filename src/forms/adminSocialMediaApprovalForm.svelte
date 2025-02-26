@@ -41,7 +41,7 @@
         }
 
         const toSave        = { message: media.requested_changes };
-        const route: string = `/api/dashboard/admin/approval/social-media-link/${media.id}/request-changes`;
+        const route: string = `/dashboard/admin/approval/social-media-link/${media.id}/request-changes`;
         const response      = await trySaveDataAsync(fetch, toSave, route, 'PUT');
 
         message.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
@@ -66,7 +66,7 @@
             return;
         }
 
-        const route: string = `/api/dashboard/admin/approval/social-media-link/${media.id}`;
+        const route: string = `/dashboard/admin/approval/social-media-link/${media.id}`;
         const response      = await trySaveDataAsync(fetch, [], route, 'PUT');
 
         message.setSaveMessage(response.success ? SaveMessageType.Approved : SaveMessageType.Error);

@@ -27,7 +27,7 @@
 
         try {
             // don't use `checkAndParseInputDataAsync<T>()` here because that could cause an `throw error(406)` loop
-            const response: Response = await fetch(apiUrl('/api/globals'));
+            const response: Response = await fetch(apiUrl('/globals'));
             if (!response.ok) {
                 await handleFail(response);
                 return;

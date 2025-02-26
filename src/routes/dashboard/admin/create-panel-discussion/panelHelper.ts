@@ -5,7 +5,7 @@ import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 
 export async function loadPossibleHosts(fetch: typeof globalThis.fetch, eventId: number): Promise<DashboardAllPersons> {
-    const possibleHostsFetchPromise = fetch(apiUrl(`/api/dashboard/admin/talk/possible-hosts/${eventId}`));
+    const possibleHostsFetchPromise = fetch(apiUrl(`/dashboard/admin/talk/possible-hosts/${eventId}`));
 
     const possibleHostsParsePromise = checkAndParseInputDataAsync(
         await possibleHostsFetchPromise,

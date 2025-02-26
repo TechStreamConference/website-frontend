@@ -22,7 +22,7 @@ export async function getGlobalsAsync(fetch: typeof globalThis.fetch): Promise<G
 }
 
 export async function getGlobalsAsyncForced(fetch: typeof globalThis.fetch): Promise<Globals> {
-    const globalsResponse      = await fetch(apiUrl('/api/globals'));
+    const globalsResponse      = await fetch(apiUrl('/globals'));
     const globalsData: Globals = await checkAndParseGlobalsAsync(globalsResponse);
 
     resetGlobals();

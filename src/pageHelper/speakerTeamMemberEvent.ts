@@ -24,7 +24,7 @@ export async function loadDataAsync(
     fetch: typeof globalThis.fetch,
     type: 'speaker' | 'team-member',
 ): Promise<LoadSpeakerTeamMemberEvent> {
-    const allEventFetchPromise: Promise<Response> = fetch(apiUrl(`/api/dashboard/${type}/all-events`));
+    const allEventFetchPromise: Promise<Response> = fetch(apiUrl(`/dashboard/${type}/all-events`));
     const allEventsParsePromise                   = checkAndParseInputDataAsync(
         await allEventFetchPromise,
         dashboardAllEventIDScheme,
@@ -53,7 +53,7 @@ export async function loadSpeakerTeamMemberAsync(
     eventID: number,
     type: string,
 ): Promise<DashboardSpeakerTeamMember> {
-    const eventPromise: Promise<Response> = fetch(apiUrl(`/api/dashboard/${type}/event/${eventID}`));
+    const eventPromise: Promise<Response> = fetch(apiUrl(`/dashboard/${type}/event/${eventID}`));
     return await checkAndParseInputDataAsync(
         await eventPromise,
         dashboardSpeakerTeamMemberScheme,

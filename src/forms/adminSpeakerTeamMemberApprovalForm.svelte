@@ -52,7 +52,7 @@
             return;
         }
 
-        const route: string = `/api/dashboard/admin/approval/${type}/${speakerTeamMember.id}`;
+        const route: string = `/dashboard/admin/approval/${type}/${speakerTeamMember.id}`;
         const response      = await trySaveDataAsync(fetch, [], route, 'PUT');
 
         message.setSaveMessage(response.success ? SaveMessageType.Approved : SaveMessageType.Error);
@@ -67,7 +67,7 @@
             return;
         }
 
-        const route  = `/api/dashboard/admin/approval/user/${speakerTeamMember.user_id}/event/${speakerTeamMember.event_id}/reject`;
+        const route  = `/dashboard/admin/approval/user/${speakerTeamMember.user_id}/event/${speakerTeamMember.event_id}/reject`;
         const result = await trySaveDataAsync(fetch, [], route, 'DELETE');
 
         message.setSaveMessage(result.success ? SaveMessageType.Delete : SaveMessageType.DeleteError);
@@ -93,7 +93,7 @@
         }
 
         const toSave        = { message: speakerTeamMember.requested_changes };
-        const route: string = `/api/dashboard/admin/approval/${type}/${speakerTeamMember.id}/request-changes`;
+        const route: string = `/dashboard/admin/approval/${type}/${speakerTeamMember.id}/request-changes`;
         const response      = await trySaveDataAsync(fetch, toSave, route, 'PUT');
 
         message.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);

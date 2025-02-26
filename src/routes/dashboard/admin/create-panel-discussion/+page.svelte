@@ -83,7 +83,7 @@
             possible_durations: talkData.possible_durations,
         };
 
-        const result = await trySaveDataAsync(fetch, toSave, '/api/dashboard/admin/talk/create', 'POST');
+        const result = await trySaveDataAsync(fetch, toSave, '/dashboard/admin/talk/create', 'POST');
 
         errorList = result.messages;
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);

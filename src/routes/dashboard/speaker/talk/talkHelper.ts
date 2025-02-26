@@ -8,7 +8,7 @@ export async function loadTentativeOrAcceptedTalksFromEventIDAsync(
     fetch: typeof globalThis.fetch,
     eventID: number,
 ): Promise<DashboardAllTentativeOrAcceptedTalks> {
-    const allTalksPromise = fetch(apiUrl(`/api/dashboard/speaker/tentative-or-accepted-talks/${eventID}`));
+    const allTalksPromise = fetch(apiUrl(`/dashboard/speaker/tentative-or-accepted-talks/${eventID}`));
 
     return await checkAndParseInputDataAsync(
         await allTalksPromise,
@@ -19,7 +19,7 @@ export async function loadTentativeOrAcceptedTalksFromEventIDAsync(
 }
 
 export async function loadPendingTalksFromEventIDAsync(fetch: typeof globalThis.fetch): Promise<DashboardAllPendingTalks> {
-    const allTalksPromise = fetch(apiUrl(`/api/dashboard/speaker/pending-talks`));
+    const allTalksPromise = fetch(apiUrl(`/dashboard/speaker/pending-talks`));
 
     return await checkAndParseInputDataAsync(
         await allTalksPromise,

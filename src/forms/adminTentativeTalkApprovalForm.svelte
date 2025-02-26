@@ -53,7 +53,7 @@
         const result = await trySaveDataAsync(
             fetch,
             { reason: rejectReason },
-            `/api/dashboard/admin/talk/${talk.id}/reject`,
+            `/dashboard/admin/talk/${talk.id}/reject`,
             'POST',
         );
 
@@ -75,7 +75,7 @@
         const result = await trySaveDataAsync(
             fetch,
             { time_slot_id: id },
-            `/api/dashboard/admin/talk/${talk.id}/suggest-time-slot`,
+            `/dashboard/admin/talk/${talk.id}/suggest-time-slot`,
             'PUT',
         );
 

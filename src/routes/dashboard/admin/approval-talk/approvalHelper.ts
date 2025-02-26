@@ -25,7 +25,7 @@ export function getUserIds(
 }
 
 export async function fetchTentativeTalks(fetch: typeof globalThis.fetch): Promise<DashboardAllTentativeOrAcceptedTalks> {
-    const tentativeTalksFetchPromise = fetch(apiUrl(`/api/dashboard/admin/tentative-talks`));
+    const tentativeTalksFetchPromise = fetch(apiUrl(`/dashboard/admin/tentative-talks`));
 
     const tentativeTalksParsePromise = checkAndParseInputDataAsync(
         await tentativeTalksFetchPromise,
@@ -52,7 +52,7 @@ export async function fetchTentativeSlots(
                 continue;
             }
 
-            const fetchPromise = fetch(apiUrl(`/api/dashboard/admin/time-slots/${talk.event_id}`));
+            const fetchPromise = fetch(apiUrl(`/dashboard/admin/time-slots/${talk.event_id}`));
             const parsePromise = checkAndParseInputDataAsync(
                 await fetchPromise,
                 dashboardAllTimeSlotsScheme,

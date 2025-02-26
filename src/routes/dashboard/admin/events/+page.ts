@@ -7,7 +7,7 @@ import { dashboardAllEventsScheme } from 'types/dashboardProvideTypes';
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminEvents> {
-    const allEventsFetchPromise = fetch(apiUrl('/api/dashboard/admin/all-events'));
+    const allEventsFetchPromise = fetch(apiUrl('/dashboard/admin/all-events'));
 
     const allEventsParsePromise = checkAndParseInputDataAsync(
         await allEventsFetchPromise,

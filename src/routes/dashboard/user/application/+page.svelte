@@ -112,7 +112,7 @@
             formData.append('photo', image.imageFile);
         }
 
-        const result = await trySaveDataAsync(fetch, formData, '/api/dashboard/user/apply-as-speaker', 'POST');
+        const result = await trySaveDataAsync(fetch, formData, '/dashboard/user/apply-as-speaker', 'POST');
 
         saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorList = result.messages;

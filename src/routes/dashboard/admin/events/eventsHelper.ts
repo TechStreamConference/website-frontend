@@ -52,7 +52,7 @@ export async function loadSpeaker(fetch: typeof globalThis.fetch, eventId: numbe
         return [];
     }
 
-    const allSpeakerPromise = fetch(apiUrl(`/api/dashboard/admin/event/${eventId}/speaker`));
+    const allSpeakerPromise = fetch(apiUrl(`/dashboard/admin/event/${eventId}/speaker`));
 
     return await checkAndParseInputDataAsync(
         await allSpeakerPromise,

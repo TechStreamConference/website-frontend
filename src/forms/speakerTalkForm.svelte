@@ -45,9 +45,9 @@
 
         const result = await (async () => {
             if (data.id === 0) {
-                return await trySaveDataAsync(fetch, toSave, `/api/dashboard/speaker/submit-talk`, 'POST');
+                return await trySaveDataAsync(fetch, toSave, `/dashboard/speaker/submit-talk`, 'POST');
             }
-            return await trySaveDataAsync(fetch, toSave, `/api/dashboard/speaker/talk/${data.id}`, 'PUT');
+            return await trySaveDataAsync(fetch, toSave, `/dashboard/speaker/talk/${data.id}`, 'PUT');
         })();
 
         saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
