@@ -17,7 +17,8 @@
     export let labelText: string       = '';
     export let placeholderText: string = '';
     export let fileAccept: string      = '';
-    export let limit: number           = -1;
+    export const NO_LIMIT: number  = -1;
+    export let limit: number           = NO_LIMIT;
 
     export let value: string | number | File = '';
     let colorString: string                  = '';
@@ -34,7 +35,7 @@
     }
 
     function calcColor(): void {
-        if (limit === -1) {
+        if (limit === NO_LIMIT) {
             return;
         }
         if (typeof value !== 'string' && typeof value !== 'number') {
@@ -61,7 +62,7 @@
 <div class="{classes} input-line-wrapper">
     <div class="input-line-label-wrapper">
         <Label for_={id}>{labelText}</Label>
-        {#if limit !== -1}
+        {#if limit !== NO_LIMIT}
             {#if typeof value === 'string'}
                 <TextLine classes="text-color-custom"
                           --color={colorString}>{value.length} / {limit}</TextLine>

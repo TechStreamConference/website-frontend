@@ -14,7 +14,8 @@
     export let classes: string         = '';
     export let placeholderText: string = '';
     export let rows: number            = 10;
-    export let limit: number           = -1;
+    export const NO_LIMIT:number = -1;
+    export let limit: number           = NO_LIMIT;
 
     export let value: string = '';
     let colorString: string  = '';
@@ -22,10 +23,6 @@
     const dispatch = createEventDispatcher();
 
     onMount(() => {
-        if (limit === -1) {
-            return;
-        }
-
         calcColor();
     });
 
@@ -37,6 +34,10 @@
 
 
     function calcColor(): void {
+        if (limit === NO_LIMIT) {
+            return;
+        }
+
         let factor = 1 - (value.length / limit);
         if (factor > 0.5) {
             factor = 1;
@@ -55,7 +56,7 @@
 
 <div class="{classes}">
     <Label for_={id}>{labelText}</Label>
-    {#if limit !== -1}
+    {#if limit !== NO_LIMIT}
         <TextLine classes="text-area-limit-text text-color-custom"
                   --color={colorString}>{value.length}
             / {limit}</TextLine>
