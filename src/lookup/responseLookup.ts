@@ -76,6 +76,7 @@ const lookup: ResponseDict = {
     // contact
     'The name field is required.':    'Das Feld \'Name\' ist erforderlich.',
     'The message field is required.': 'Das Feld \'Nachricht\' ist erforderlich.',
+    'The subject field is required.': 'Das feld \'Betreff\' ist erforderlich.',
 };
 
 export function responseLookup(key: string): string {
