@@ -148,7 +148,7 @@
                         <Input id="contact-subject-concrete-input"
                                labelText="Betreff:"
                                placeholderText="Betreff"
-                               ariaLabel="Spezifiziere hier dein Betreff"
+                               ariaLabel="Spezifiziere hier den Betreff"
                                limit={78}
                                bind:value={subjectConcrete}
                                on:input={setUnsavedChanges} />
