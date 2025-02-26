@@ -158,7 +158,7 @@
                           labelText="Nachricht:"
                           placeholderText="Nachricht"
                           ariaLabel="Gib hier deine Nachricht ein"
-                          rows={25}
+                          rows={15}
                           limit={2000}
                           bind:value={message}
                           on:input={setUnsavedChanges}
