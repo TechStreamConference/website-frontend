@@ -25,7 +25,7 @@
 
     enum State {
         Default,
-        EmailSend,
+        EmailSent,
     }
 
     const subjectOther: string  = 'Sonstiges';
@@ -102,7 +102,7 @@
         errorList = result.messages;
 
         if (result.success) {
-            state           = State.EmailSend;
+            state           = State.EmailSent;
             name            = '';
             mail            = '';
             subjectConcrete = '';
@@ -168,7 +168,7 @@
                         classes="center-button">Senden
                 </Button>
             </form>
-        {:else if state === State.EmailSend}
+        {:else if state === State.EmailSent}
             <TextLine classes="text-line-center">Deine Nachricht wurde erfolgreich verschickt.</TextLine>
             <TextLine classes="text-line-center">Wir werden uns in nächster Zeit bei dir melden.</TextLine>
         {:else}
