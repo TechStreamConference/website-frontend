@@ -1,7 +1,5 @@
 <script lang="ts">
-    import type { Color } from 'helper/basic';
-
-    import { lerpColor, orange } from 'helper/basic';
+    import { lerpTextCountColor } from 'helper/color';
     import { createEventDispatcher, onMount } from 'svelte';
 
     import Label from 'elements/text/label.svelte';
@@ -14,7 +12,7 @@
     export let classes: string         = '';
     export let placeholderText: string = '';
     export let rows: number            = 10;
-    export const NO_LIMIT:number = -1;
+    export const NO_LIMIT: number      = -1;
     export let limit: number           = NO_LIMIT;
 
     export let value: string = '';
@@ -38,19 +36,8 @@
             return;
         }
 
-        let factor = 1 - (value.length / limit);
-        if (factor > 0.5) {
-            factor = 1;
-        } else {
-            factor *= 2;
-        }
-
-        const color: Color = lerpColor(orange, {
-            red:   255,
-            green: 255,
-            blue:  255,
-        }, factor);
-        colorString        = `rgb(${color.red},${color.green}, ${color.blue})`;
+        const color = lerpTextCountColor(value.length, limit);
+        colorString = `rgb(${color.red},${color.green}, ${color.blue})`;
     }
 </script>
 

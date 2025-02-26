@@ -1,8 +1,6 @@
 <script lang="ts">
-    import type { Color } from 'helper/basic';
-
     import { typeWorkaround } from 'types/workaround';
-    import { lerpColor, orange } from 'helper/basic';
+    import { lerpTextCountColor } from 'helper/color';
     import { onMount } from 'svelte';
     import { createEventDispatcher } from 'svelte';
 
@@ -17,7 +15,7 @@
     export let labelText: string       = '';
     export let placeholderText: string = '';
     export let fileAccept: string      = '';
-    export const NO_LIMIT: number  = -1;
+    export const NO_LIMIT: number      = -1;
     export let limit: number           = NO_LIMIT;
 
     export let value: string | number | File = '';
@@ -43,19 +41,8 @@
         }
 
         const length = typeof value === 'string' ? value.length : value.toString().length;
-        let factor   = 1 - (length / limit);
-        if (factor > 0.5) {
-            factor = 1;
-        } else {
-            factor *= 2;
-        }
-
-        const color: Color = lerpColor(orange, {
-            red:   255,
-            green: 255,
-            blue:  255,
-        }, factor);
-        colorString        = `rgb(${color.red},${color.green}, ${color.blue})`;
+        const color  = lerpTextCountColor(length, limit);
+        colorString  = `rgb(${color.red},${color.green}, ${color.blue})`;
     }
 </script>
 
