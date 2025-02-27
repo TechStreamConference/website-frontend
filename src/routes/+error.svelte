@@ -5,12 +5,9 @@
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
     import { apiUrl } from 'helper/links';
-    import {
-        globalsDefault,
-        globalsScheme,
-    } from 'types/provideTypes';
+    import { globalsDefault, globalsScheme } from 'types/provideTypes';
     import { parseProvidedJsonAsync } from 'helper/parseJson';
-    import * as Menu from 'menu/404';
+    import * as Menu from 'menu/page';
 
     import Header from 'elements/navigation/header.svelte';
     import Footer from 'elements/navigation/footer.svelte';
@@ -50,7 +47,7 @@
     }
 </script>
 
-<Header menu={Menu.header} />
+<Header menu={Menu.headerOut} />
 <div class="wrapper page-404">
     <div class="content">
         <HeadlinePage classes="border">{$page.status}</HeadlinePage>
@@ -72,7 +69,7 @@
             Hauptseite
         </Button>
     </div>
-    <Footer menu={Menu.footer}
+    <Footer menu={Menu.footerOut}
             globals={data} />
 </div>
 
