@@ -1,6 +1,6 @@
 <script lang="ts">
     import * as Menu from 'menu/dashboard';
-    import * as MenuItem from 'menu/menuItems';
+    import * as MenuItem from 'menu/dashboardItems';
 
     import type { LoadAdminGuests } from 'types/dashboardLoadTypes';
     import type { DashboardAllPersons } from 'types/dashboardProvideTypes';
