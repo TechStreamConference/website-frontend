@@ -1,5 +1,5 @@
 <script lang="ts">
-    import * as Menu from 'menu/imprint';
+    import * as Menu from 'menu/page';
 
     import type { LoadImprint } from 'types/loadTypes';
 

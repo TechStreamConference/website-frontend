@@ -1,5 +1,5 @@
 <script lang="ts">
-    import * as Menu from 'menu/contact';
+    import * as Menu from 'menu/page';
 
     import type { LoadContact } from 'types/loadTypes';
 

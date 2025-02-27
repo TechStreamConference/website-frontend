@@ -1,6 +1,6 @@
 <script lang="ts">
-    import * as Menu from 'menu/verify';
-    import * as MenuItem from 'menu/menuItems';
+    import * as Menu from 'menu/page';
+    import * as MenuItem from 'menu/pageItems';
 
     import StyledLink from 'elements/input/styledLink.svelte';
     import HeadlinePage from 'elements/text/headlinePage.svelte';
@@ -11,8 +11,8 @@
     export let data;
 </script>
 
-<PageWrapper headerMenu={Menu.header}
-             footerMenu={Menu.footer}
+<PageWrapper headerMenu={Menu.headerOut}
+             footerMenu={Menu.footerOut}
              globals={data.globals}>
     <div class="verify-email-content-wrapper">
         <HeadlinePage>E-Mail Verifizierung</HeadlinePage>

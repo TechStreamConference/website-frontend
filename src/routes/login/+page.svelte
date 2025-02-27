@@ -1,5 +1,5 @@
 <script lang="ts">
-    import * as Menu from 'menu/login';
+    import * as Menu from 'menu/page';
 
     import type { LoadLogin } from 'types/loadTypes';
 
@@ -73,8 +73,8 @@
 </script>
 
 
-<PageWrapper headerMenu={Menu.headerOut}
-             footerMenu={Menu.footerOut}
+<PageWrapper headerMenu={data.loggedIn ? Menu.headerIn : Menu.headerOut}
+             footerMenu={data.loggedIn ? Menu.footerIn : Menu.footerOut}
              globals={data.globals}>
     {#if state === State.Login}
         <form class="login-form-width-wrapper"
