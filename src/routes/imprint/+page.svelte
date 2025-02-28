@@ -21,8 +21,8 @@
 
         <TextLine>Michael Gerhold</TextLine>
         <TextLine>c/o LEADERLY UG (haftungsbeschränkt)</TextLine>
-        <TextLine>Carl-Zeiss-Str. 4</TextLine>
-        <TextLine classes="imprint-one-line-margin">14727 Premnitz OT Mögelin</TextLine>
+        <TextLine>Amtstraße 22</TextLine>
+        <TextLine classes="imprint-one-line-margin">44575 Castrop-Rauxel</TextLine>
         <TextLine>
             E-Mail:
             <Link
