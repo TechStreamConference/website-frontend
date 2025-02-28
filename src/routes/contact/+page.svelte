@@ -67,7 +67,7 @@
         }
         const validatedMail = z.string().email().safeParse(mail);
         if (!validatedMail.success) {
-            errorList.push(`'${mail}' ist keine valide E-Mail`);
+            errorList.push(`'${mail}' ist keine valide E-Mail.`);
         }
 
         if (subject === subjectOther && subjectConcrete.trim().length === 0) {
@@ -141,7 +141,7 @@
                        on:input={setUnsavedChanges} />
                 <div class="contact-subject-wrapper">
                     <DropDown id="contact-subject-dropdown"
-                              labelText="Was gibts?"
+                              labelText="Was gibt's?"
                               data={subjectData}
                               bind:selected={subject} />
                     {#if subject === subjectOther}
