@@ -65,8 +65,8 @@
         if (mail.trim().length === 0) {
             errorList.push('Bitte gib eine E-Mail ein.');
         }
-        const mailScheme = z.string().email();
-        if (mailScheme.safeParse(mail)) {
+        const validatedMail = z.string().email().safeParse(mail);
+        if (!validatedMail.success) {
             errorList.push(`'${mail}' ist keine valide E-Mail`);
         }
 
