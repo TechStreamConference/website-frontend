@@ -57,4 +57,8 @@
     .big-button {
         padding: var(--4x-padding) var(--8x-padding);
     }
+
+    .center-button {
+        align-self: center;
+    }
 </style>

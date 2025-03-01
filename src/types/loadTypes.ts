@@ -23,6 +23,11 @@ export type LoadImprint = {
     globals: Globals;
 };
 
+export type LoadContact = {
+    loggedIn: boolean;
+    globals: Globals;
+};
+
 export type LoadVerifyEmail = {
     success: boolean | undefined,
     globals: Globals;

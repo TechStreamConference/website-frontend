@@ -26,6 +26,7 @@ export const headerIn: Menu = [
 ];
 
 export const footerIn: Menu = [
+    Item.contact,
     Item.imprint,
 ];
 

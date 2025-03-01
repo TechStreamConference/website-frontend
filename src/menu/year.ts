@@ -57,11 +57,13 @@ export const headerOut: Menu = [
 export const footerIn: Menu = [
     Item.intern,
     Item.logout,
+    Item.contact,
     Item.imprint,
 ];
 
 export const footerOut: Menu = [
     Item.login,
     Item.register,
+    Item.contact,
     Item.imprint,
 ];

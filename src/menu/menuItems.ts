@@ -36,6 +36,12 @@ export const imprint: MenuItem = {
     description: 'Klicke hier, um zum Impressum zu gelangen',
 };
 
+export const contact: MenuItem = {
+    name:        'Kontakt',
+    url:         '/contact',
+    description: 'Klicke hier, um mit uns in Kontakt zu treten',
+};
+
 export const adminGlobals: MenuItem                   = {
     name:        'Globals',
     url:         '/dashboard/admin/globals',
@@ -46,17 +52,17 @@ export const adminEventSlots: MenuItem                = {
     url:         '/dashboard/admin/time-slots',
     description: 'Klicke hier, um zu den Time-Slot-Einstellungen zu gelangen',
 };
-export const adminPanelDiscussionGuests: MenuItem = {
+export const adminPanelDiscussionGuests: MenuItem     = {
     name:        'Gäste',
     url:         '/dashboard/admin/panel-discussion-guests',
     description: 'Klicke hier, um einem Talk Gäste zuzuweisen',
 };
-export const adminCreatePanelDiscussion: MenuItem = {
+export const adminCreatePanelDiscussion: MenuItem     = {
     name:        'Gesprächsrunde anlegen',
     url:         '/dashboard/admin/create-panel-discussion',
     description: 'Klicke hier, um eine neue Gesprächsrunde anzulegen',
 };
-export const adminEvents: MenuItem                = {
+export const adminEvents: MenuItem                    = {
     name:        'Events',
     url:         '/dashboard/admin/events',
     description: 'Klicke hier, um zu den Event-Einstellungen zu gelangen',
