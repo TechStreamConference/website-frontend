@@ -76,7 +76,7 @@
         const result = await trySaveDataAsync(
             fetch,
             { guest_ids: ids },
-            `/api/dashboard/admin/talk/${currentTalkId}/set-guests`,
+            `/dashboard/admin/talk/${currentTalkId}/set-guests`,
             'PUT',
         );
 

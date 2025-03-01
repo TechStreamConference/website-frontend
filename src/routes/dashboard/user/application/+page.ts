@@ -13,8 +13,8 @@ import { redirectIfUnauthorizedOrReturnRolesAsync } from 'helper/loggedIn';
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadUserApplication> {
-    const eventResponse      = await fetch(apiUrl('/api/dashboard/user/get-application-event'));
-    const socialTypesPromise = fetch(apiUrl('/api/social-media-link-types'));
+    const eventResponse      = await fetch(apiUrl('/dashboard/user/get-application-event'));
+    const socialTypesPromise = fetch(apiUrl('/social-media-link-types'));
     const rolesPromise       = redirectIfUnauthorizedOrReturnRolesAsync(fetch);
     const eventJson          = await (async () => {
         try {

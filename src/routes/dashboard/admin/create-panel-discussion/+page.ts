@@ -9,9 +9,9 @@ import { allTalkTagScheme } from 'types/provideTypes';
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminCreatePanelDiscussion> {
-    const eventsFetchPromise = fetch(apiUrl('/api/dashboard/admin/all-events'));
-    const durationFetchPromise = fetch(apiUrl('/api/talk-duration-choices'));
-    const tagsFetchPromise     = fetch(apiUrl('/api/tags'));
+    const eventsFetchPromise = fetch(apiUrl('/dashboard/admin/all-events'));
+    const durationFetchPromise = fetch(apiUrl('/talk-duration-choices'));
+    const tagsFetchPromise     = fetch(apiUrl('/tags'));
 
     const eventsParsePromise = checkAndParseInputDataAsync(
         await eventsFetchPromise,

@@ -60,7 +60,7 @@
         const result = await trySaveDataAsync(
             fetch,
             { 'time_slots': toSave },
-            `/api/dashboard/admin/time-slots/${data.currentEventID}`,
+            `/dashboard/admin/time-slots/${data.currentEventID}`,
             'POST',
         );
 

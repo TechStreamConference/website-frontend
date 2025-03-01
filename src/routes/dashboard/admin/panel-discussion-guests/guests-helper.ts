@@ -8,7 +8,7 @@ export async function loadTalksOfEvent(
     fetch: typeof globalThis.fetch,
     id: number,
 ): Promise<DashboardAllTentativeOrAcceptedTalks> {
-    const talkFetchPromise = fetch(apiUrl(`/api/dashboard/admin/tentative-or-accepted-talks/${id}`));
+    const talkFetchPromise = fetch(apiUrl(`/dashboard/admin/tentative-or-accepted-talks/${id}`));
 
     const talkParsePromise = checkAndParseInputDataAsync(
         await talkFetchPromise,
@@ -24,7 +24,7 @@ export async function loadPossibleGuestsOfTalk(
     fetch: typeof globalThis.fetch,
     id: number,
 ): Promise<DashboardAllPersons> {
-    const possibleGuestsFetchPromise = fetch(apiUrl(`/api/dashboard/admin/talk/${id}/possible-guests`));
+    const possibleGuestsFetchPromise = fetch(apiUrl(`/dashboard/admin/talk/${id}/possible-guests`));
 
     const possibleGuestsParsePromise = checkAndParseInputDataAsync(
         await possibleGuestsFetchPromise,

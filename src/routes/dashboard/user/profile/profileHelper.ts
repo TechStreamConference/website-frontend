@@ -5,7 +5,7 @@ import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { dashboardRolesScheme } from 'types/dashboardProvideTypes';
 
 export async function loadUserData(fetch: typeof globalThis.fetch): Promise<DashboardRoles> {
-    const userDataFetchPromise = fetch(apiUrl('/api/account/roles'));
+    const userDataFetchPromise = fetch(apiUrl('/account/roles'));
 
     return await checkAndParseInputDataAsync(
         await userDataFetchPromise,

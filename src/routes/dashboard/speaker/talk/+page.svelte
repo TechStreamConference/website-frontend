@@ -45,7 +45,7 @@
         const response    = await trySaveDataAsync(
             fetch,
             [],
-            `/api/dashboard/speaker/talk/${currentTalk.id}/accept-time-slot`,
+            `/dashboard/speaker/talk/${currentTalk.id}/accept-time-slot`,
             'PUT',
         );
 
@@ -61,7 +61,7 @@
         const toSave      = {
             reason: rejectText.trim(),
         };
-        const response    = await fetch(apiUrl(`/api/dashboard/speaker/talk/${currentTalk.id}/reject-time-slot`), {
+        const response    = await fetch(apiUrl(`/dashboard/speaker/talk/${currentTalk.id}/reject-time-slot`), {
             method: 'PUT',
             body:   JSON.stringify(toSave),
         });

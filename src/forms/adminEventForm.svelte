@@ -149,20 +149,20 @@
 
         const result: SaveResult = await (async () => {
             if (toSaveEvent.id === 0) {
-                return await trySaveDataAsync(fetch, toSaveEvent, '/api/dashboard/admin/event/new', 'POST');
+                return await trySaveDataAsync(fetch, toSaveEvent, '/dashboard/admin/event/new', 'POST');
             }
 
             // manually reset unsaved changes to ensure that they are only reset if both Api calls were successful
             const resultEventPromise   = trySaveDataAsyncOutReset(
                 fetch,
                 toSaveEvent,
-                `/api/dashboard/admin/event/${toSaveEvent.id}`,
+                `/dashboard/admin/event/${toSaveEvent.id}`,
                 'PUT',
             );
             const resultSpeakerPromise = trySaveDataAsyncOutReset(
                 fetch,
                 toSaveSpeaker,
-                `/api/dashboard/admin/event/${toSaveEvent.id}/speaker`,
+                `/dashboard/admin/event/${toSaveEvent.id}/speaker`,
                 'PUT',
             );
 

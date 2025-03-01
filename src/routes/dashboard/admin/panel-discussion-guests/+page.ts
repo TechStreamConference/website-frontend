@@ -8,7 +8,7 @@ import { loadPossibleGuestsOfTalk, loadTalksOfEvent } from './guests-helper';
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminGuests> {
-    const allEventsFetchPromise = fetch(apiUrl('/api/dashboard/admin/all-events'));
+    const allEventsFetchPromise = fetch(apiUrl('/dashboard/admin/all-events'));
 
     const allEventsParsePromise = checkAndParseInputDataAsync(
         await allEventsFetchPromise,

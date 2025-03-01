@@ -4,7 +4,7 @@ import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 
 export async function getTimeSlotsAsync(fetch: typeof globalThis.fetch, id: number): Promise<DashboardAllTimeSlots> {
-    const timeSlotsPromise = fetch(apiUrl(`/api/dashboard/admin/time-slots/${id}`));
+    const timeSlotsPromise = fetch(apiUrl(`/dashboard/admin/time-slots/${id}`));
     return checkAndParseInputDataAsync(
         await timeSlotsPromise,
         dashboardAllTimeSlotsScheme,

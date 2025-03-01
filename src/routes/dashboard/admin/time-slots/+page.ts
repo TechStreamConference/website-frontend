@@ -8,8 +8,8 @@ import {
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminTimeSlots> {
-    const allEventFetchPromise     = fetch(apiUrl('/api/dashboard/admin/all-events'));
-    const talkDurationFetchPromise = fetch(apiUrl('/api/talk-duration-choices'));
+    const allEventFetchPromise     = fetch(apiUrl('/dashboard/admin/all-events'));
+    const talkDurationFetchPromise = fetch(apiUrl('/talk-duration-choices'));
 
     const allEventsParsePromise           = checkAndParseInputDataAsync(await allEventFetchPromise,
                                                                         dashboardAllEventsScheme,
@@ -34,7 +34,7 @@ export async function load({ fetch }: {
     }
 
     const id                    = allEvents[0].id;
-    const timeSlotsFetchPromise = fetch(apiUrl(`/api/dashboard/admin/time-slots/${id}`));
+    const timeSlotsFetchPromise = fetch(apiUrl(`/dashboard/admin/time-slots/${id}`));
     const timeSlotsParsePromise = checkAndParseInputDataAsync(
         await timeSlotsFetchPromise,
         dashboardAllTimeSlotsScheme,

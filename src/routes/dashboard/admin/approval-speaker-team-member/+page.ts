@@ -12,9 +12,9 @@ import {
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminApprovalSpeakerTeamMember> {
-    const speakerFetchPromise: Promise<Response>     = fetch(apiUrl('/api/dashboard/admin/approval/speaker'));
-    const teamMemberFetchPromise: Promise<Response>  = fetch(apiUrl('/api/dashboard/admin/approval/team-member'));
-    const socialMediaFetchPromise: Promise<Response> = fetch(apiUrl('/api/dashboard/admin/approval/social-media-link'));
+    const speakerFetchPromise: Promise<Response>     = fetch(apiUrl('/dashboard/admin/approval/speaker'));
+    const teamMemberFetchPromise: Promise<Response>  = fetch(apiUrl('/dashboard/admin/approval/team-member'));
+    const socialMediaFetchPromise: Promise<Response> = fetch(apiUrl('/dashboard/admin/approval/social-media-link'));
 
     const speakerParsePromise     = checkAndParseInputDataAsync(await speakerFetchPromise,
                                                                 dashboardAllApprovalSpeakerTeamMemberScheme,
@@ -48,7 +48,7 @@ async function collectCanRejectSpeakerAsync(speakerParsePromise: Promise<Dashboa
 
     const promises: Promise<Response>[] = [];
     for (const entry of speaker) {
-        const promise = fetch(apiUrl(`/api/dashboard/admin/approval/user/${entry.user_id}/event/${entry.event_id}/can-reject`));
+        const promise = fetch(apiUrl(`/dashboard/admin/approval/user/${entry.user_id}/event/${entry.event_id}/can-reject`));
         promises.push(promise);
     }
 

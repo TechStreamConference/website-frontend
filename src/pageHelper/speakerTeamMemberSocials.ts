@@ -19,8 +19,8 @@ export type DeleteReturn = {
 }
 
 export async function loadDataAsync(fetch: typeof globalThis.fetch): Promise<LoadUserSocials> {
-    const socialsFetchPromise    = fetch(apiUrl('/api/dashboard/user/social-media-link'));
-    const socialTypeFetchPromise = fetch(apiUrl('/api/social-media-link-types'));
+    const socialsFetchPromise    = fetch(apiUrl('/dashboard/user/social-media-link'));
+    const socialTypeFetchPromise = fetch(apiUrl('/social-media-link-types'));
 
     const socialsParsePromise     = checkAndParseInputDataAsync(await socialsFetchPromise,
                                                                 dashboardAllSocialMediaLinkScheme,
@@ -41,7 +41,7 @@ export async function loadDataAsync(fetch: typeof globalThis.fetch): Promise<Loa
 }
 
 export async function loadSocials(fetch: typeof globalThis.fetch): Promise<DashboardAllSocialMediaLinks> {
-    const socialsPromise = fetch(apiUrl('/api/dashboard/user/social-media-link'));
+    const socialsPromise = fetch(apiUrl('/dashboard/user/social-media-link'));
 
     return await checkAndParseInputDataAsync(
         await socialsPromise,
@@ -102,7 +102,7 @@ export async function deleteLinkAsync(fetch: typeof globalThis.fetch, data: Dash
         };
     }
 
-    const result = await trySaveDataAsync(fetch, [], `/api/dashboard/user/social-media-link/${id}`, 'DELETE');
+    const result = await trySaveDataAsync(fetch, [], `/dashboard/user/social-media-link/${id}`, 'DELETE');
 
     if (!result.success) {
         return {

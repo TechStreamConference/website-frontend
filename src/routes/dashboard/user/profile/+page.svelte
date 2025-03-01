@@ -72,7 +72,7 @@
             password: oldPassword.trim(),
         };
 
-        const response = await save(toSave, '/api/account/change-username');
+        const response = await save(toSave, '/account/change-username');
 
         if (response.success) {
             name          = '';
@@ -86,7 +86,7 @@
             password: oldPassword.trim(),
         };
 
-        const response = await save(toSave, '/api/account/change-email');
+        const response = await save(toSave, '/account/change-email');
 
         if (response.success) {
             mail       = '';
@@ -109,7 +109,7 @@
             old_password: oldPassword.trim(),
         };
 
-        const response = await save(toSave, '/api/account/change-password');
+        const response = await save(toSave, '/account/change-password');
 
         if (response.success) {
             newPassword1 = '';

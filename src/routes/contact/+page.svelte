@@ -96,7 +96,7 @@
             'message': message.trim(),
         };
 
-        const result = await trySaveDataAsync(fetch, saveData, '/api/contact', 'POST');
+        const result = await trySaveDataAsync(fetch, saveData, '/contact', 'POST');
 
         saveMessage.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorList = result.messages;

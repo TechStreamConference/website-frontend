@@ -40,7 +40,7 @@
             return;
         }
 
-        const result = await trySaveDataAsync(fetch, [], `/api/dashboard/admin/talk/${talk.id}/approve`, 'PUT');
+        const result = await trySaveDataAsync(fetch, [], `/dashboard/admin/talk/${talk.id}/approve`, 'PUT');
 
         message.setSaveMessage(result.success ? SaveMessageType.Approved : SaveMessageType.Error);
         errorList = result.messages;
@@ -67,7 +67,7 @@
         const result = await trySaveDataAsync(
             fetch,
             { reason: talk.requested_changes },
-            `/api/dashboard/admin/talk/${talk.id}/reject`,
+            `/dashboard/admin/talk/${talk.id}/reject`,
             'POST',
         );
 
@@ -86,7 +86,7 @@
         const result = await trySaveDataAsync(
             fetch,
             { requested_changes: talk.requested_changes },
-            `/api/dashboard/admin/talk/${talk.id}/request-changes`,
+            `/dashboard/admin/talk/${talk.id}/request-changes`,
             'POST',
         );
 

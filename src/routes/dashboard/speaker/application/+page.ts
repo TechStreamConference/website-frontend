@@ -8,9 +8,9 @@ import { z } from 'zod';
 export async function load({ fetch }: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadSpeakerApplication> {
-    const canApplyFetchPromise        = fetch(apiUrl('/api/dashboard/speaker/can-submit-talk'));
-    const allTagsFetchPromise         = fetch(apiUrl(`/api/tags`));
-    const allTalkDurationFetchPromise = fetch(apiUrl(`/api/talk-duration-choices`));
+    const canApplyFetchPromise        = fetch(apiUrl('/dashboard/speaker/can-submit-talk'));
+    const allTagsFetchPromise         = fetch(apiUrl('/tags'));
+    const allTalkDurationFetchPromise = fetch(apiUrl('/talk-duration-choices'));
 
     if (!(await canApplyFetchPromise).ok) { // not able for current speaker to apply a talk
         return {

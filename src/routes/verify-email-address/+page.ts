@@ -25,7 +25,7 @@ export async function load({
     }
 
     const toSave   = { token };
-    const response = await fetch(apiUrl('/api/account/verify'), {
+    const response = await fetch(apiUrl('/account/verify'), {
         method: 'POST',
         body:   JSON.stringify(toSave),
     });

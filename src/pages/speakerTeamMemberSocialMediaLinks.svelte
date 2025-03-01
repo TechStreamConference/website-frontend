@@ -70,7 +70,7 @@
                 };
             }
 
-            return await trySaveDataAsync(fetch, toSave, '/api/dashboard/user/social-media-link', 'PUT');
+            return await trySaveDataAsync(fetch, toSave, '/dashboard/user/social-media-link', 'PUT');
         })();
 
         const result = combineSaveResult(createResult, saveResult);
@@ -92,7 +92,7 @@
             url:                  link.url,
         };
 
-        return await trySaveDataAsync(fetch, toSave, '/api/dashboard/user/social-media-link', 'POST');
+        return await trySaveDataAsync(fetch, toSave, '/dashboard/user/social-media-link', 'POST');
     }
 
     async function tryDeleteAsync(e: CustomEvent<number>): Promise<void> {

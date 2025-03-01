@@ -21,7 +21,7 @@ export async function onUsernameChangedAsync(username: string, fetch: typeof glo
         return 'Der Name darf maximal 30 Zeichen enthalten.';
     }
 
-    const response: Response = await fetch(apiUrl('/api/account/username/exists?username=' + trimmed));
+    const response: Response = await fetch(apiUrl('/account/username/exists?username=' + trimmed));
     if (!response.ok) {
         console.error('Fehler beim Überprüfen des Namen. Fehlercode: ' + response.status);
         return;
@@ -50,7 +50,7 @@ export async function onMailChangedAsync(mail: string, fetch: typeof globalThis.
         return 'Die angegebene E-Mail-Adresse ist nicht gültig.';
     }
 
-    const response: Response = await fetch(apiUrl('/api/account/email/exists?email=' + trimmed));
+    const response: Response = await fetch(apiUrl('/account/email/exists?email=' + trimmed));
     if (!response.ok) {
         console.error('Fehler beim Überprüfen der E-Mail. Fehlercode: ' + response.status);
         return;
