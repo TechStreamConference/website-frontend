@@ -1,7 +1,9 @@
-import { redirect } from '@sveltejs/kit';
+import * as MenuItems from 'menu/pageItems';
+
 import type { DashboardRoles } from 'types/dashboardProvideTypes';
+
+import { redirect } from '@sveltejs/kit';
 import { redirectIfUnauthorizedOrReturnRolesAsync } from './loggedIn';
-import * as MenuItems from 'menu/menuItems';
 
 export async function defaultPermissionCheck(fetch: typeof globalThis.fetch): Promise<DashboardRoles> {
     return await redirectIfUnauthorizedOrReturnRolesAsync(fetch);

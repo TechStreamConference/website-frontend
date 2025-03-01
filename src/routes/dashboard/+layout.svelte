@@ -1,5 +1,5 @@
 <script lang="ts">
-    import * as Menu from 'menu/dashboard';
+    import * as Menu from 'menu/page';
 
     import type { LoadDashboard } from 'types/dashboardLoadTypes';
 

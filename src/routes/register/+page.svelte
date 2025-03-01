@@ -1,6 +1,6 @@
 <script lang="ts">
     import * as Validators from './validation';
-    import * as Menu from 'menu/register';
+    import * as Menu from 'menu/page';
 
     import type { LoadRegister } from 'types/loadTypes';
 
@@ -121,8 +121,8 @@
     }
 </script>
 
-<PageWrapper headerMenu={Menu.headerOut}
-             footerMenu={Menu.footerOut}
+<PageWrapper headerMenu={data.loggedIn ? Menu.headerIn : Menu.headerOut}
+             footerMenu={data.loggedIn ? Menu.footerIn : Menu.footerOut}
              globals={data.globals}>
     <div class="register-content">
         {#if !registered}

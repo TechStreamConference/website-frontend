@@ -1,6 +1,6 @@
 <script lang="ts">
-    import * as Menu from 'menu/resetPassword';
-    import * as MenuItem from 'menu/menuItems';
+    import * as Menu from 'menu/page';
+    import * as MenuItem from 'menu/pageItems';
 
     import type { LoadResetPassword } from 'types/loadTypes';
 
@@ -51,8 +51,8 @@
 
 </script>
 
-<PageWrapper headerMenu={Menu.header}
-             footerMenu={Menu.footer}
+<PageWrapper headerMenu={Menu.headerOut}
+             footerMenu={Menu.footerOut}
              globals={data.globals}>
     {#if state === State.Default}
         <form on:submit|preventDefault={resetPassword}

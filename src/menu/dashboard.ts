@@ -1,56 +1,47 @@
 import type { Menu } from 'types/provideTypes';
 import type { DashboardRoles } from 'types/dashboardProvideTypes';
 
-import * as Item from './menuItems';
+import * as PageItem from './pageItems';
+import * as DashboardItem from './dashboardItems';
 
 export function SectionIn(roles: DashboardRoles) {
     const menu: Menu = [];
 
     if (roles.is_admin) {
-        menu.push(Item.admin);
+        menu.push(PageItem.admin);
     }
     if (roles.is_team_member) {
-        menu.push(Item.teamMember);
+        menu.push(PageItem.teamMember);
     }
     if (roles.is_speaker) {
-        menu.push(Item.speaker);
+        menu.push(PageItem.speaker);
     }
-    menu.push(Item.user);
+    menu.push(PageItem.user);
 
     return menu;
 }
 
-export const headerIn: Menu = [
-    Item.mainPage,
-    Item.logout,
-];
-
-export const footerIn: Menu = [
-    Item.contact,
-    Item.imprint,
-];
-
 export const admin: Menu      = [
-    Item.adminApprovalSpeakerTeamMember,
-    Item.adminApprovalTalk,
-    Item.adminPanelDiscussionGuests,
-    Item.adminCreatePanelDiscussion,
-    Item.adminEventSlots,
-    Item.adminEvents,
-    Item.adminNewEvent,
-    Item.adminGlobals,
+    DashboardItem.adminApprovalSpeakerTeamMember,
+    DashboardItem.adminApprovalTalk,
+    DashboardItem.adminPanelDiscussionGuests,
+    DashboardItem.adminCreatePanelDiscussion,
+    DashboardItem.adminEventSlots,
+    DashboardItem.adminEvents,
+    DashboardItem.adminNewEvent,
+    DashboardItem.adminGlobals,
 ];
 export const speaker: Menu    = [
-    Item.speakerEvents,
-    Item.speakerTalk,
-    Item.speakerApplication,
-    Item.speakerSocialMedia,
+    DashboardItem.speakerEvents,
+    DashboardItem.speakerTalk,
+    DashboardItem.speakerApplication,
+    DashboardItem.speakerSocialMedia,
 ];
 export const teamMember: Menu = [
-    Item.teamMemberEvents,
-    Item.teamMemberSocialMedia,
+    DashboardItem.teamMemberEvents,
+    DashboardItem.teamMemberSocialMedia,
 ];
 export const user: Menu       = [
-    Item.userProfile,
-    Item.userApplication,
+    DashboardItem.userProfile,
+    DashboardItem.userApplication,
 ];

@@ -1,6 +1,6 @@
 <script lang="ts">
     import * as Menu from 'menu/dashboard';
-    import * as MenuItem from 'menu/menuItems';
+    import * as MenuItem from 'menu/dashboardItems';
     import * as SocialHelper from 'pageHelper/speakerTeamMemberSocials';
     import * as EventHelper from 'pageHelper/speakerTeamMemberEvent';
 

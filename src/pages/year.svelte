@@ -1,5 +1,5 @@
 <script lang="ts">
-    import * as Menu from 'menu/year';
+    import * as Menu from 'menu/page';
 
     import type { LoadYear } from 'types/loadTypes';
     import type { Person, Talk } from 'types/provideTypes';
@@ -69,7 +69,7 @@
     }
 </script>
 
-<PageWrapper headerMenu={data.loggedIn ? Menu.headerIn : Menu.headerOut}
+<PageWrapper headerMenu={data.loggedIn ? Menu.headerMainIn : Menu.headerMainOut}
              footerMenu={data.loggedIn ? Menu.footerIn : Menu.footerOut}
              globals={data.globals}>
 
