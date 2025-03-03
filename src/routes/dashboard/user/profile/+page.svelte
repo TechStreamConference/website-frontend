@@ -11,6 +11,7 @@
     import { fade } from 'svelte/transition';
     import { loadUserData } from './profileHelper';
     import { censorEmail } from './profileHelper.js';
+    import { setFocus } from 'helper/basic';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -41,14 +42,35 @@
     let oldPassword: string  = '';
 
     function changeState(value: State) {
+        const focus = () => {
+            setTimeout(() => {
+                switch (state) {
+                    case State.None:
+                        console.error('State \'None\' while try setting focus');
+                        return;
+                    case State.Mail:
+                        setFocus('dashboard-user-profile-input-mail-password');
+                        return;
+                    case State.Password:
+                        setFocus('dashboard-user-profile-input-password-old');
+                        return;
+                    case State.Name:
+                        setFocus('dashboard-user-profile-input-username-password');
+                        return;
+                }
+            }, 10);
+        };
+
         if (state === State.None) {
             state = value;
+            focus();
             return;
         }
 
         state = State.None;
         setTimeout(() => {
             state = value;
+            focus();
         }, 300);
     }
 
@@ -75,7 +97,7 @@
         const response = await save(toSave, '/account/change-username');
 
         if (response.success) {
-            name          = '';
+            name       = '';
             data.roles = await loadUserData(fetch);
         }
     }
@@ -89,7 +111,7 @@
         const response = await save(toSave, '/account/change-email');
 
         if (response.success) {
-            mail       = '';
+            mail      = '';
             errorList = [ // assignment because of reactivity
                 ...errorList,
                 'Du musst deine E-Mail-Adresse erst bestätigen, damit sie hier angezeigt wird.',
