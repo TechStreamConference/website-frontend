@@ -62,3 +62,14 @@ export function trimOrNull(entry: string): string | null {
     }
     return trimmed;
 }
+
+
+export function setFocus(id: string): void {
+    const element = document.getElementById(id) as HTMLElement;
+    if (!element) {
+        console.error(`could not find element with id '${id}'. Focus not set.`);
+        return;
+    }
+
+    element.focus();
+}

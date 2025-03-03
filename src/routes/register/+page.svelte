@@ -5,6 +5,8 @@
     import type { LoadRegister } from 'types/loadTypes';
 
     import { trySaveDataAsync } from 'helper/trySaveData.js';
+    import { setFocus } from 'helper/basic';
+    import { onMount } from 'svelte';
 
     import HeadlinePage from 'elements/text/headlinePage.svelte';
     import ErrorMessage from 'elements/text/message.svelte';
@@ -38,6 +40,10 @@
     let errorList: string[]     = [''];
 
     let registered: boolean = false;
+
+    onMount(() => {
+        setFocus("register-username");
+    })
 
     function startTimer(timer: {
         current: number | null
@@ -116,8 +122,8 @@
         };
 
         const response = await trySaveDataAsync(fetch, toSave, '/account/register', 'POST');
-        errorList  = response.messages;
-        registered = response.success;
+        errorList      = response.messages;
+        registered     = response.success;
     }
 </script>
 

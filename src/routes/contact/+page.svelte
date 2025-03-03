@@ -8,6 +8,7 @@
     import { SaveMessageType } from 'types/saveMessageType';
     import { onMount } from 'svelte';
     import { scrollToTop } from 'helper/scroll';
+    import { setFocus } from 'helper/basic';
     import { z } from 'zod';
 
     import PageWrapper from 'elements/section/pageWrapper.svelte';
@@ -48,6 +49,7 @@
     export let data: LoadContact;
 
     onMount(() => {
+        setFocus('contact-name-input');
         resetUnsavedChanges();
         window.addEventListener('beforeunload', (event) => {
             if (unsavedChanges()) {
