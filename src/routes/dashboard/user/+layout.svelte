@@ -5,7 +5,7 @@
     import type { LoadDashboard } from 'types/dashboardLoadTypes';
 
     import Tabs from 'elements/navigation/tabs.svelte';
-    import Headline from 'elements/text/headline.svelte';
+    import HeadlineInfoDashboard from 'elements/text/headlineInfoDashboard.svelte';
 
     export let data: LoadDashboard;
 </script>
@@ -16,14 +16,9 @@
       alignment="navigation-tabs-end"
       background="navigation-tabs-purple"
 />
-<div class="dashboard-user">
-    <Headline classes="headline-border">User</Headline>
-</div>
-<slot />
 
-<style>
-    .dashboard-user {
-        max-width: 100rem;
-        margin:    var(--2x-margin) auto 0;
-    }
-</style>
+<HeadlineInfoDashboard headline="User">
+    In diesem Bereich kannst du Änderungen an deinem Profil vornehmen. Klicke dazu unten auf „Profil”. Was du hier einträgst, ist nicht öffentlich sichtbar. Du kannst dich hier auch als Speaker bewerben. Klicke dazu auf „Bewerbung”.
+</HeadlineInfoDashboard>
+
+<slot />

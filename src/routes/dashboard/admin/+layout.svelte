@@ -5,7 +5,7 @@
     import type { LoadDashboard } from 'types/dashboardLoadTypes';
 
     import Tabs from 'elements/navigation/tabs.svelte';
-    import Headline from 'elements/text/headline.svelte';
+    import HeadlineInfoDashboard from 'elements/text/headlineInfoDashboard.svelte';
 
     export let data: LoadDashboard;
 </script>
@@ -16,14 +16,7 @@
       alignment="navigation-tabs-end"
       background="navigation-tabs-purple"
 />
-<div class="dashboard-admin">
-    <Headline classes="headline-border">Admin</Headline>
-</div>
-<slot />
+<HeadlineInfoDashboard headline="Admin">
 
-<style>
-    .dashboard-admin {
-        max-width: 100rem;
-        margin:    var(--2x-margin) auto 0;
-    }
-</style>
+</HeadlineInfoDashboard>
+<slot />

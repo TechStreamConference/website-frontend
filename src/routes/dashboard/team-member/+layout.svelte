@@ -5,7 +5,7 @@
     import type { LoadDashboard } from 'types/dashboardLoadTypes';
 
     import Tabs from 'elements/navigation/tabs.svelte';
-    import Headline from 'elements/text/headline.svelte';
+    import HeadlineInfoDashboard from 'elements/text/headlineInfoDashboard.svelte';
 
     export let data: LoadDashboard;
 </script>
@@ -16,14 +16,7 @@
       alignment="navigation-tabs-end"
       background="navigation-tabs-purple"
 />
-<div class="dashboard-team-member">
-    <Headline classes="headline-border">Team Member</Headline>
-</div>
+<HeadlineInfoDashboard headline="Team Member">
+    In diesem Bereich kannst du einstellen, wie du auf der Startseite angezeigt werden möchtest. Du tauchst dort als Team-Mitglied auf. Editiere deine Daten unter „Events”. Deine Social-Media-Verlinkungen kannst du unter „Social Media” bearbeiten.
+</HeadlineInfoDashboard>
 <slot />
-
-<style>
-    .dashboard-team-member {
-        max-width: 100rem;
-        margin:    var(--2x-margin) auto 0;
-    }
-</style>
