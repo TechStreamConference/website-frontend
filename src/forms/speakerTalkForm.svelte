@@ -115,6 +115,9 @@
         flex-direction:    column;
         gap:               var(--full-gap);
         scroll-margin-top: var(--16x-margin);
+        border:            1px solid var(--primary-color-dark);
+        border-radius:     var(--border-radius);
+        padding:           var(--full-padding);
     }
 
     .dashboard-speaker-talk-button-wrapper {

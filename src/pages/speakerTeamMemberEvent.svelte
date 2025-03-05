@@ -18,11 +18,13 @@
     import SpeakerTeamMemberEventForm from 'forms/speakerTeamMemberEventForm.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
+    import Explanation from 'elements/text/explanation.svelte';
 
     export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
     export let type: 'speaker' | 'team-member';
     export let menu: Menu;
     export let menuItem: MenuItem;
+    export let explanation: string;
 
     let saveMessage: SaveMessage;
     let errorList: string[] = [];
@@ -90,7 +92,10 @@
       classes="navigation-tabs-dashboard-subpage" />
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 
-<SectionDashboard classes="dashboard-speaker-event-section">
+<SectionDashboard classes="standard-dashboard-section">
+    <Explanation>
+        {@html explanation}
+    </Explanation>
     <NavigationDropDown
           id="dashboard-speaker-event-drop-down"
           labelText="Event:"
@@ -122,13 +127,6 @@
 </SectionDashboard>
 
 <style>
-    :global(.dashboard-speaker-event-section) {
-        max-width:      100rem;
-        display:        flex;
-        flex-direction: column;
-        gap:            var(--full-gap);
-    }
-
     .dashboard-speaker-event-message-wrapper {
         margin: var(--full-margin) 0;
     }

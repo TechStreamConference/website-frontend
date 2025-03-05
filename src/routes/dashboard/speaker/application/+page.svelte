@@ -9,6 +9,7 @@
     import TextLine from 'elements/text/textLine.svelte';
     import SpeakerTalkForm from 'forms/speakerTalkForm.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
+    import Explanation from 'elements/text/explanation.svelte';
 
     export let data: LoadSpeakerApplication;
     let saved: boolean = false;
@@ -42,6 +43,9 @@
       classes="navigation-tabs-dashboard-subpage" />
 
 <SectionDashboard classes="standard-dashboard-section">
+    <Explanation>
+        Hier kannst du ein Thema für einen Vortrag einreichen, den du gerne bei unserem Event halten möchtest. Trage dafür deine Daten unten ein. Wenn du deinen Vortrag eingereicht hast, wird er von uns geprüft und wir werden uns per E-Mail bei dir melden.
+    </Explanation>
     {#if saved}
         <div class="dashboard-speaker-application-success-wrapper">
             <TextLine>Dein Talk wurde erfolgreich eingereicht.</TextLine>

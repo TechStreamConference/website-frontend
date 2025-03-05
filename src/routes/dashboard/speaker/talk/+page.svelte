@@ -27,6 +27,7 @@
     import GeneralPopup from 'elements/popups/generalPopup.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
     import SpeakerTalkForm from 'forms/speakerTalkForm.svelte';
+    import Explanation from 'elements/text/explanation.svelte';
 
     export let data: LoadSpeakerTalk;
     let saveMessage: SaveMessage;
@@ -106,6 +107,9 @@
               denyCallback={() => {}} />
 
 <SectionDashboard classes="standard-dashboard-section">
+    <Explanation>
+        Du siehst hier die Vorträge, die du eingereicht hast. Wähle zunächst über das Dropdown-Menü das Event aus. Wenn ein Talk von uns akzeptiert wurde, kannst du daran keine Änderungen mehr vornehmen.
+    </Explanation>
     <SaveMessage bind:this={saveMessage} />
     <MessageWrapper messages={errorList} />
     <NavigationDropDown id="dashboard-speaker-talk-event-navigation"

@@ -193,6 +193,9 @@
         display:        flex;
         flex-direction: column;
         gap:            var(--full-gap);
+        border: 1px solid var(--primary-color-dark);
+        border-radius: var(--border-radius);
+        padding: var(--full-padding)
     }
 
     :global(.dashboard-speaker-events-image) {
