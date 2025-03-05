@@ -19,12 +19,12 @@
     import Button from 'elements/input/button.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
-    import StyledLink from 'elements/input/styledLink.svelte';
     import HeadlineH2 from 'elements/text/headlineH2.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
     import TextLine from 'elements/text/textLine.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
+    import Explanation from 'elements/text/explanation.svelte';
 
     export let data: LoadDashboard & LoadUserApplication;
 
@@ -127,8 +127,15 @@
       classes="navigation-tabs-dashboard-subpage"
 />
 <UnsavedChangesCallbackWrapper callback={trySave} />
-
 <SectionDashboard classes="standard-dashboard-section">
+    <Explanation>
+        Auf dieser Seite kannst du dich als Speaker bewerben. Trage dazu unten deine Daten ein. Falls wir deine
+        Bewerbung sowie einen Vortrag von dir für das Event annehmen, sind das die Daten, die später auf der Hauptseite
+        angezeigt werden.
+        <br /><br />
+        Nachdem du dich beworben hast, wird deine Bewerbung von den Admins geprüft und du erhältst eine E-Mail mit
+        Informationen über die nächsten Schritte.
+    </Explanation>
     {#if success}
         <div class="dashboard-user-application-error">
             <Paragraph classes="paragraph-pre-wrap"
