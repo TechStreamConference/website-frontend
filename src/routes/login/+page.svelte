@@ -14,6 +14,8 @@
 
     import { goto } from '$app/navigation';
     import { trySaveDataAsync } from 'helper/trySaveData';
+    import { setFocus } from 'helper/basic';
+    import { onMount } from 'svelte';
 
     export let data: LoadLogin; // data from database
 
@@ -31,6 +33,10 @@
     const loggedInMessage     = data.loggedIn ? 'Du bist bereits angemeldet.' : '';
     const displayLoginMessage = data.showLoginMessage ? 'Du musst dich zunächst anmelden.' : '';
     let errorList: string[]   = [];
+
+    onMount(() => {
+        setFocus('login-username-or-email');
+    });
 
     function changeState(_state: State): void {
         errorList = [];
