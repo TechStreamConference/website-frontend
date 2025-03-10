@@ -40,32 +40,34 @@
     }
 </script>
 
-<Label>{labelText}</Label>
-<div class="toggle-talk-tag-wrapper">
-    {#each data as tag}
-        <Toggle ariaLabel="Klicke, um einen Tag aus- oder abzuwählen"
-                toggle={contains(tag)}
-                on:toggle={ (e) => { updateSelected(e.detail, tag); }}>
-            <div slot="slotTrue"
-                 class="toggle-talk-tag-entry-wrapper">
-                <Icon color="green"
-                      type="CircleCheck" />
-                <Tag text={tag.text}
-                     --tag-text-color={tagTextColorLookup(tag.color_index)}
-                     --tag-background-color={tagColorLookup(tag.color_index)}
-                />
-            </div>
-            <div slot="slotFalse"
-                 class="toggle-talk-tag-entry-wrapper">
-                <Icon color="red"
-                      type="CircleCross" />
-                <Tag text={tag.text}
-                     --tag-text-color="#FFF"
-                     --tag-background-color="#FFFFFF00"
-                />
-            </div>
-        </Toggle>
-    {/each}
+<div>
+    <Label>{labelText}</Label>
+    <div class="toggle-talk-tag-wrapper">
+        {#each data as tag}
+            <Toggle ariaLabel="Klicke, um einen Tag aus- oder abzuwählen"
+                    toggle={contains(tag)}
+                    on:toggle={ (e) => { updateSelected(e.detail, tag); }}>
+                <div slot="slotTrue"
+                     class="toggle-talk-tag-entry-wrapper">
+                    <Icon color="green"
+                          type="CircleCheck" />
+                    <Tag text={tag.text}
+                         --tag-text-color={tagTextColorLookup(tag.color_index)}
+                         --tag-background-color={tagColorLookup(tag.color_index)}
+                    />
+                </div>
+                <div slot="slotFalse"
+                     class="toggle-talk-tag-entry-wrapper">
+                    <Icon color="red"
+                          type="CircleCross" />
+                    <Tag text={tag.text}
+                         --tag-text-color="#FFF"
+                         --tag-background-color="#FFFFFF00"
+                    />
+                </div>
+            </Toggle>
+        {/each}
+    </div>
 </div>
 
 <style>
@@ -84,6 +86,6 @@
         display:        flex;
         flex-direction: row;
         gap:            var(--full-gap);
-        align-items: center;
+        align-items:    center;
     }
 </style>

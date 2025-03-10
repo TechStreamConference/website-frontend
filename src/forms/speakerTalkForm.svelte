@@ -19,6 +19,7 @@
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import FormWrapper from 'elements/wrapper/formWrapper.svelte';
+    import Paragraph from 'elements/text/paragraph.svelte';
 
     export let classes: string  = '';
     export let data: DashboardPendingTalk;
@@ -72,41 +73,53 @@
         <Message classes="message-pre-wrap"
                  message={`Änderungswünsche:\n${data.requested_changes}`} />
     {/if}
-    <Input id="dashboard-speaker-talk-input-title"
-           labelText="Titel:"
-           placeholderText="Titel"
-           ariaLabel="Gib hier den Titel des Talks ein"
-           bind:value={data.title}
-           on:input={setUnsavedChanges} />
-    <TextArea id="dashboard-speaker-talk-input-description"
-              labelText="Beschreibung:"
-              placeholderText="Beschreibung"
-              ariaLabel="Gib hier die Beschreibung des Talks ein"
-              bind:value={data.description}
-              on:input={setUnsavedChanges}
-              on:submit={save} />
-    <TagArray labelText="Tags:"
-              data={tags}
-              bind:selected={data.tags}
-              on:toggle={setUnsavedChanges} />
-    <DurationArray labelText="Vortragslänge in Minuten:"
-                   data={talkDurations}
-                   bind:selected={data.possible_durations}
-                   on:toggle={setUnsavedChanges} />
-    <TextArea id="dashboard-speaker-talk-input-notes"
-              labelText="Anmerkungen:"
-              placeholderText="Anmerkungen"
-              ariaLabel="Gib hier Anmerkungen zum Talk ein."
-              bind:value={data.notes}
-              on:input={setUnsavedChanges}
-              on:submit={save} />
-    {#if useForm}
-        <div class="dashboard-speaker-talk-button-wrapper">
-            <Button type="submit"
-                    ariaLabel="Klicke, um den Talk zu speichern">Speichern
-            </Button>
-        </div>
-    {/if}
+    <div class="input-grid">
+        <Input id="dashboard-speaker-talk-input-title"
+               labelText="Titel:"
+               placeholderText="Titel"
+               ariaLabel="Gib hier den Titel des Talks ein"
+               bind:value={data.title}
+               on:input={setUnsavedChanges} />
+        <Paragraph classes="paragraph-gray">Titel</Paragraph>
+        <div class="grid-line" />
+        <TextArea id="dashboard-speaker-talk-input-description"
+                  labelText="Beschreibung:"
+                  placeholderText="Beschreibung"
+                  ariaLabel="Gib hier die Beschreibung des Talks ein"
+                  bind:value={data.description}
+                  on:input={setUnsavedChanges}
+                  on:submit={save} />
+        <Paragraph classes="paragraph-gray">Beschreibung</Paragraph>
+        <div class="grid-line" />
+        <TagArray labelText="Tags:"
+                  data={tags}
+                  bind:selected={data.tags}
+                  on:toggle={setUnsavedChanges} />
+        <Paragraph classes="paragraph-gray">Tags</Paragraph>
+        <div class="grid-line" />
+        <DurationArray labelText="Vortragslänge in Minuten:"
+                       data={talkDurations}
+                       bind:selected={data.possible_durations}
+                       on:toggle={setUnsavedChanges} />
+        <Paragraph classes="paragraph-gray">Vortragslänge</Paragraph>
+        <div class="grid-line" />
+        <TextArea id="dashboard-speaker-talk-input-notes"
+                  labelText="Anmerkungen:"
+                  placeholderText="Anmerkungen"
+                  ariaLabel="Gib hier Anmerkungen zum Talk ein."
+                  bind:value={data.notes}
+                  on:input={setUnsavedChanges}
+                  on:submit={save} />
+        <Paragraph classes="paragraph-gray">Anmerkungen</Paragraph>
+        {#if useForm}
+            <div class="grid-line" />
+            <div class="dashboard-speaker-talk-button-wrapper">
+                <Button type="submit"
+                        ariaLabel="Klicke, um den Talk zu speichern">Speichern
+                </Button>
+            </div>
+        {/if}
+    </div>
 </FormWrapper>
 
 <style>
@@ -120,7 +133,23 @@
         padding:           var(--full-padding);
     }
 
+    .input-grid {
+        display:               grid;
+        grid-template-columns: 1fr 1fr;
+        gap:                   var(--full-gap);
+    }
+
+    .grid-line {
+        border-top:  1px solid var(--background-color-light);
+        grid-column: 1/3;
+    }
+
+    :global(.input-grid > .paragraph-gray) {
+        align-self: center;
+    }
+
     .dashboard-speaker-talk-button-wrapper {
+        grid-column:    1/3;
         display:        flex;
         flex-direction: row;
         margin:         var(--2x-margin) auto 0;
