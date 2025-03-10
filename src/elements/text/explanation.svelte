@@ -11,7 +11,7 @@
 <style>
     .explanation-wrapper {
         width: 100%;
-        border : 1px solid var(--white-color);
+        border : 1px solid var(--text-color);
         border-radius : var(--border-radius);
         padding: var(--full-padding);
         text-align: center;

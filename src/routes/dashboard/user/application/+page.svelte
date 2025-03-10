@@ -187,7 +187,7 @@
         display:        flex;
         flex-direction: column;
         gap:            var(--4x-gap);
-        margin-top:     var(--8x-margin);
+        margin-top:     var(--full-margin);
     }
 
     .dashboard-user-application-event-infos {
