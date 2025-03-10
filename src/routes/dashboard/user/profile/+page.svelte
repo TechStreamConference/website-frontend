@@ -160,9 +160,9 @@
     <div class="dashboard-user-profile-section-wrapper">
         <div class="dashboard-user-profile-section-entry-wrapper">
             <div class="dashboard-user-profile-entry-grid">
-                <TextLine>Name:</TextLine>
+                <TextLine classes="text-align-right">Name:</TextLine>
                 <TextLine>{data.roles.username}</TextLine>
-                <TextLine>Mail:</TextLine>
+                <TextLine classes="text-align-right">E-Mail-Adresse:</TextLine>
                 <TextLine>{censorEmail(data.roles.email)}</TextLine>
             </div>
             <div class="dashboard-user-profile-button-wrapper">
@@ -170,7 +170,7 @@
                         on:click={() => {changeState(State.Name)}}>Name ändern
                 </Button>
                 <Button ariaLabel="Klicke, um deine E-Mail zu ändern."
-                        on:click={() => {changeState(State.Mail)}}>E-Mail ändern
+                        on:click={() => {changeState(State.Mail)}}>E-Mail-Adresse ändern
                 </Button>
                 <Button ariaLabel="Klicke, um dein Passwort zu ändern."
                         on:click={() => {changeState(State.Password)}}>Passwort ändern
@@ -195,8 +195,8 @@
                            bind:value={oldPassword}
                            on:input={setUnsavedChanges} />
                     <Input id="dashboard-user-profile-input-username"
-                           labelText="neuer Name:"
-                           placeholderText="neuer Name"
+                           labelText="Neuer Name:"
+                           placeholderText="Neuer Name"
                            ariaLabel="Trage hier deinen neuen Namen ein"
                            bind:value={name}
                            on:input={setUnsavedChanges} />
@@ -223,14 +223,14 @@
                            bind:value={oldPassword}
                            on:input={setUnsavedChanges} />
                     <Input id="dashboard-user-profile-input-mail"
-                           labelText="neue E-Mail:"
-                           placeholderText="neue E-Mail"
-                           ariaLabel="Trage hier deine neue E-Mail ein"
+                           labelText="Neue E-Mail-Adresse:"
+                           placeholderText="Neue E-Mail-Adresse"
+                           ariaLabel="Trage hier deine neue E-Mail-Adresse ein"
                            bind:value={mail}
                            on:input={setUnsavedChanges} />
                     <div class="dashboard-user-profile-button-wrapper">
                         <Button type="submit"
-                                ariaLabel="Klicke, um deine neue E-Mail zu speichern">Speichern
+                                ariaLabel="Klicke, um deine neue E-Mail-Adresse zu speichern">Speichern
                         </Button>
                     </div>
                 </form>

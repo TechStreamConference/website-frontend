@@ -17,6 +17,10 @@
         text-align: center;
     }
 
+    .text-align-right {
+        text-align: right;
+    }
+
     .text-line-white {
         color: var(--white-color);
     }
