@@ -15,6 +15,7 @@
     import TextArea from 'elements/input/textArea.svelte';
     import MyCropper from 'elements/MyCropper/myCropper.svelte';
     import FormWrapper from 'elements/wrapper/formWrapper.svelte';
+    import Paragraph from 'elements/text/paragraph.svelte';
 
     export let data: LoadSpeakerTeamMemberEvent;
     // If the save button is not displayed, the form also gets removed. This means on:save will not be triggert is that case.
@@ -140,52 +141,77 @@
               classes="dashboard-speaker-events-image"
         />
     {/if}
-    <Input
-          bind:this={imageInput}
-          id="dashboard-speaker-event-image-input"
-          labelText="Bild:"
-          placeholderText="Bild"
-          ariaLabel="Lade hier dein Bild für das Event {data.current.title} hoch"
-          type="file"
-          fileAccept=".jpg, .jpeg, .png"
-          on:input={(event) => {
+    <div class="input-grid">
+        <Input
+              bind:this={imageInput}
+              id="dashboard-speaker-event-image-input"
+              labelText="Profilbild:"
+              placeholderText="Profilbild"
+              ariaLabel="Lade hier dein Profilbild für das Event {data.current.title} hoch"
+              type="file"
+              fileAccept=".jpg, .jpeg, .png"
+              on:input={(event) => {
 				// no setUnsavedChanges here because the cropper already does that.
 				changeImage(event);
 			}}
-          value={newImage.imageFile}
-    />
-    <Input
-          id="dashboard-speaker-event-name-input"
-          labelText="Name:"
-          placeholderText="Name"
-          ariaLabel="Gib hier deinen Namen für das Event {data.current.title} ein"
-          bind:value={data.event.name}
-          on:input={setUnsavedChanges}
-    />
-    <Input
-          id="dashboard-speaker-event-short-bio-input"
-          labelText="Kurzbeschreibung:"
-          placeholderText="Kurzbeschreibung"
-          ariaLabel="Gib hier deine Kurzbeschreibung in Stichworten für das Event {data.current
+              value={newImage.imageFile}
+        />
+        <Paragraph classes="paragraph-gray">Lade hier dein Profilbild für deine Bewerbung hoch. Wenn deine
+                                            Speaker-Bewerbung und später dein
+                                            Vortrag angenommen werden, wird dieses Bild auf der Startseite angezeigt.
+        </Paragraph>
+        <div class="row-border" />
+        <Input
+              id="dashboard-speaker-event-name-input"
+              labelText="Name:"
+              placeholderText="Name"
+              ariaLabel="Gib hier deinen Namen für das Event {data.current.title} ein"
+              bind:value={data.event.name}
+              on:input={setUnsavedChanges}
+        />
+        <Paragraph classes="paragraph-gray">Unter diesem Namen tauchst du später auf der Hauptseite auf. Er muss nicht
+                                            identisch zu dem Namen
+                                            sein, mit dem du dich einloggst.
+        </Paragraph>
+        <div class="row-border" />
+        <Input
+              id="dashboard-speaker-event-short-bio-input"
+              labelText="Kurzbeschreibung:"
+              placeholderText="Kurzbeschreibung"
+              ariaLabel="Gib hier deine Kurzbeschreibung in Stichworten für das Event {data.current
 				.title} ein"
-          bind:value={data.event.short_bio}
-          on:input={setUnsavedChanges}
-    />
-    <TextArea
-          id="dashboard-speaker-event-bio-text-area"
-          labelText="Beschreibung:"
-          placeholderText="Beschreibung"
-          ariaLabel="Gib hier deine Beschreibung für das Event {data.current.title} ein"
-          bind:value={data.event.bio}
-          on:input={setUnsavedChanges}
-    />
-    {#if displaySaveButton}
-        <Button
-              type="submit"
-              ariaLabel="Klicke zum Speichern"
-              classes="button-text dashboard-speaker-event-submit-button">Speichern
-        </Button>
-    {/if}
+              bind:value={data.event.short_bio}
+              on:input={setUnsavedChanges}
+        />
+        <Paragraph classes="paragraph-gray">Deine Kurzbeschreibung sollte aus etwa drei bis fünf Stichpunkten bestehen,
+                                            z. B. <i>„Unity Developer,
+                                                     Game Designer”</i> oder <i>„Embedded- und Lowlevel-Coding”</i>.
+        </Paragraph>
+        <div class="row-border" />
+        <TextArea
+              id="dashboard-speaker-event-bio-text-area"
+              labelText="Beschreibung:"
+              placeholderText="Beschreibung"
+              ariaLabel="Gib hier deine Beschreibung für das Event {data.current.title} ein"
+              bind:value={data.event.bio}
+              on:input={setUnsavedChanges}
+        />
+        <Paragraph classes="paragraph-gray">Beschreibe dich hier in einem kurzen Text von ca. 50 bis 80 Wörtern. Ein
+                                            Beispieltext könnte lauten:
+            <i>„GyrosGeier hat nicht nur einen witzigen Namen – nein – er kennt sich auch ziemlich gut im Bereich
+               der Low-Level- bzw. Systemprogrammierung aus. Im vergangenen Jahr ist er nach Tokyo ausgewandert und
+               arbeitet dort für eine Firma, die Mikrosatelliten ins Weltall schießt. In seinen Streams bastelt er
+               an zahlreichen Projekten und vergisst niemals, den Yak-Stapel zu vergrößern.”</i>
+        </Paragraph>
+        {#if displaySaveButton}
+            <div class="row-border" />
+            <Button
+                  type="submit"
+                  ariaLabel="Klicke zum Speichern"
+                  classes="button-text dashboard-speaker-event-submit-button">Speichern
+            </Button>
+        {/if}
+    </div>
 </FormWrapper>
 
 <style>
@@ -193,9 +219,26 @@
         display:        flex;
         flex-direction: column;
         gap:            var(--full-gap);
-        border: 1px solid var(--primary-color-dark);
-        border-radius: var(--border-radius);
-        padding: var(--full-padding)
+        border:         1px solid var(--primary-color-dark);
+        border-radius:  var(--border-radius);
+        padding:        var(--full-padding)
+    }
+
+    .input-grid {
+        display:               grid;
+        grid-template-columns: 1fr 1fr;
+        gap:                   var(--full-gap);
+
+
+    }
+
+    :global(.input-grid > .paragraph-gray) {
+        align-self: center;
+    }
+
+    .row-border {
+        border-top:  1px solid var(--background-color-light);
+        grid-column: 1 / 3;
     }
 
     :global(.dashboard-speaker-events-image) {
@@ -207,7 +250,8 @@
     }
 
     :global(.dashboard-speaker-event-submit-button) {
-        margin: auto;
+        margin:      0 auto;
+        grid-column: 1 / 3;
     }
 
     .dashboard-speaker-event-cropped-image-wrapper {

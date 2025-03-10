@@ -167,6 +167,10 @@
             </div>
             <div class="dashboard-user-application-section">
                 <HeadlineH2>Social-Media-Daten</HeadlineH2>
+                <Paragraph classes="paragraph-gray">Trage hier Links zu deinen Social-Media-Profilen ein, die öffentlich
+                                                    angezeigt werden sollen. Klicke auf „Neu”, um weitere Links
+                                                    hinzuzufügen.
+                </Paragraph>
                 <SpeakerTeamMemberSocialMediaLinkForm bind:data={data.data.socials}
                                                       bind:roles={data.roles}
                                                       displaySaveButton={false}
@@ -198,10 +202,10 @@
     }
 
     .dashboard-user-application-form {
-        margin-top:     var(--8x-margin);
+        margin-top:     var(--full-margin);
         display:        flex;
         flex-direction: column;
-        gap:            var(--8x-gap);
+        gap:            var(--2x-gap);
     }
 
     .dashboard-user-application-section {
