@@ -12,6 +12,7 @@
     import AdminPendingTalkApprovalFormWrapper from 'forms/adminPendingTalkApprovalFormWrapper.svelte';
     import AdminTentativeTalkApprovalFormWrapper from 'forms/adminTentativeTalkApprovalFormWrapper.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
+    import TextLine from 'elements/text/textLine.svelte';
 
     export let data: LoadAdminApprovalTalk;
 
@@ -97,6 +98,9 @@
                                                    on:reject={(e) => deleteEntry(DataType.Tentative, e.detail)} />
         </div>
     {/each}
+    {#if data.userIDArray.length === 0}
+        <TextLine classes="text-line-center">Keine Einträge vorhanden.</TextLine>
+    {/if}
 </SectionDashboard>
 
 <style>
