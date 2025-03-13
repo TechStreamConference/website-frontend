@@ -5,11 +5,14 @@
     import type { LoadSpeakerApplication } from 'types/dashboardLoadTypes';
     import type { DashboardPendingTalk } from 'types/dashboardProvideTypes';
 
+    import { formatDate } from 'helper/dates.js';
+
     import Tabs from 'elements/navigation/tabs.svelte';
     import TextLine from 'elements/text/textLine.svelte';
     import SpeakerTalkForm from 'forms/speakerTalkForm.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import Explanation from 'elements/text/explanation.svelte';
+    import SubHeadline from 'elements/text/subHeadline.svelte';
 
     export let data: LoadSpeakerApplication;
     let saved: boolean = false;
@@ -44,7 +47,9 @@
 
 <SectionDashboard classes="standard-dashboard-section">
     <Explanation>
-        Hier kannst du ein Thema für einen Vortrag einreichen, den du gerne bei unserem Event halten möchtest. Trage dafür deine Daten unten ein. Wenn du deinen Vortrag eingereicht hast, wird er von uns geprüft und wir werden uns per E-Mail bei dir melden.
+        Hier kannst du ein Thema für einen Vortrag einreichen, den du gerne bei unserem Event halten möchtest. Trage
+        dafür deine Daten unten ein. Wenn du deinen Vortrag eingereicht hast, wird er von uns geprüft und wir werden uns
+        per E-Mail bei dir melden.
     </Explanation>
     {#if saved}
         <div class="dashboard-speaker-application-success-wrapper">
@@ -56,7 +61,13 @@
         </div>
     {:else}
         {#if data.canApply && data.event}
-            <TextLine classes="text-line-center">Aktuelles Event: {data.event.title}</TextLine>
+            <div class="current-event-wrapper">
+                <SubHeadline>Aktuelles Event:</SubHeadline>
+                <TextLine>{data.event.title}</TextLine>
+                <TextLine>{formatDate(data.event.start_date, '%DD.%MM.')} - {formatDate(data.event.end_date,
+                                                                                        '%DD.%MM.%YYYY'
+                )}</TextLine>
+            </div>
             <SpeakerTalkForm data={entry}
                              tags={data.tags}
                              talkDurations={data.talkDurations}
@@ -76,5 +87,12 @@
         align-items:     center;
         gap:             var(--full-gap);
         margin-top:      var(--2x-margin);
+    }
+
+    .current-event-wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: var(--full-margin) 0;
     }
 </style>
