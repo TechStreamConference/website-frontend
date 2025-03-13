@@ -178,7 +178,7 @@
         grid-column:    1/3;
         display:        flex;
         flex-direction: row;
-        margin:         var(--2x-margin) auto 0;
+        margin:         0 auto;
         gap:            var(--full-gap);
     }
 </style>
