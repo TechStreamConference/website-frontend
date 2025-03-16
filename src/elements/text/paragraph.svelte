@@ -19,6 +19,10 @@
         color: var(--white-color);
     }
 
+    .paragraph-gray {
+        color: var(--gray-text-color);
+    }
+
     .paragraph-pre-wrap {
         white-space: pre-wrap;
     }

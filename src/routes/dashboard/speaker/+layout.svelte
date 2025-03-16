@@ -4,7 +4,7 @@
 
     import type { LoadDashboard } from 'types/dashboardLoadTypes';
 
-    import Headline from 'elements/text/headline.svelte';
+    import HeadlineInfoDashboard from 'elements/text/headlineInfoDashboard.svelte';
     import Tabs from 'elements/navigation/tabs.svelte';
 
     export let data: LoadDashboard;
@@ -16,14 +16,8 @@
       alignment="navigation-tabs-end"
       background="navigation-tabs-purple"
 />
-<div class="dashboard-speaker">
-    <Headline classes="headline-border">Speaker</Headline>
-</div>
-<slot />
+<HeadlineInfoDashboard headline="Speaker">
+    Unter „Events” kannst du bestimmen, wie du auf unserer Startseite angezeigt werden möchtest. Möchtest du einen neuen Vortrag einreichen, klicke auf „Talk einreichen”. Deine bereits eingereichten Vorträge kannst du unter „Meine Talks” verwalten. Im Bereich „Social Media” kannst du Links zu deinen Profilen in den sozialen Medien eintragen, die auf der Startseite angezeigt werden sollen.
+</HeadlineInfoDashboard>
 
-<style>
-    .dashboard-speaker {
-        max-width: 100rem;
-        margin:    var(--2x-margin) auto 0;
-    }
-</style>
+<slot />

@@ -12,6 +12,7 @@
     import AdminSpeakerTeamMemberApprovalFormWrapper from 'forms/adminSpeakerTeamMemberApprovalFormWrapper.svelte';
     import AdminSocialMediaApprovalFormWrapper from 'forms/adminSocialMediaApprovalFormWrapper.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
+    import TextLine from 'elements/text/textLine.svelte';
 
     export let data: LoadAdminApprovalSpeakerTeamMember;
 
@@ -112,6 +113,9 @@
                                                  on:approved={(e) => {deleteEntry(DataType.SocialMedia, e.detail);}} />
         </div>
     {/each}
+    {#if data.userIDArray.length === 0}
+        <TextLine classes="text-line-center">Keine Einträge vorhanden.</TextLine>
+    {/if}
 </SectionDashboard>
 
 <style>

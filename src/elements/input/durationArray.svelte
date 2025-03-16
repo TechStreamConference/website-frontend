@@ -38,32 +38,34 @@
     }
 </script>
 
-<Label>{labelText}</Label>
-<div class="toggle-talk-duration-wrapper">
-    {#each data as duration}
-        <Toggle ariaLabel="Klicke, um eine mögliche Talk-Dauer in Minuten aus- oder abzuwählen"
-                toggle={contains(duration)}
-                on:toggle={ (e) => { updateSelected(e.detail, duration); }}>
-            <div slot="slotTrue"
-                 class="toggle-talk-duration-entry-wrapper">
-                <Icon color="green"
-                      type="CircleCheck" />
-                <Tag text={duration.toString()}
-                     --tag-text-color={"var(--white-color)"}
-                     --tag-background-color={"var(--primary-color-dark)"}
-                />
-            </div>
-            <div slot="slotFalse"
-                 class="toggle-talk-duration-entry-wrapper">
-                <Icon color="red"
-                      type="CircleCross" />
-                <Tag text={duration.toString()}
-                     --tag-text-color="#FFF"
-                     --tag-background-color="#FFFFFF00"
-                />
-            </div>
-        </Toggle>
-    {/each}
+<div>
+    <Label>{labelText}</Label>
+    <div class="toggle-talk-duration-wrapper">
+        {#each data as duration}
+            <Toggle ariaLabel="Klicke, um eine mögliche Talk-Dauer in Minuten aus- oder abzuwählen"
+                    toggle={contains(duration)}
+                    on:toggle={ (e) => { updateSelected(e.detail, duration); }}>
+                <div slot="slotTrue"
+                     class="toggle-talk-duration-entry-wrapper">
+                    <Icon color="green"
+                          type="CircleCheck" />
+                    <Tag text={duration.toString()}
+                         --tag-text-color={"var(--white-color)"}
+                         --tag-background-color={"var(--primary-color-dark)"}
+                    />
+                </div>
+                <div slot="slotFalse"
+                     class="toggle-talk-duration-entry-wrapper">
+                    <Icon color="red"
+                          type="CircleCross" />
+                    <Tag text={duration.toString()}
+                         --tag-text-color="#FFF"
+                         --tag-background-color="#FFFFFF00"
+                    />
+                </div>
+            </Toggle>
+        {/each}
+    </div>
 </div>
 
 <style>
@@ -82,6 +84,6 @@
         display:        flex;
         flex-direction: row;
         gap:            var(--full-gap);
-        align-items: center;
+        align-items:    center;
     }
 </style>

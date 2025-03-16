@@ -14,6 +14,7 @@
     --gray-color-light:             rgb(190, 190, 190);
 
     --text-color:                   black;
+    --gray-text-color:              #333333;
     --line-color:                   var(--primary-color-light);
     --icon-color:                   var(--secondary-color);
     --outline-hover-color:          var(--secondary-color);
@@ -56,6 +57,7 @@ body {
         --background-color-transparent: rgba(40, 40, 40, 0.85);
 
         --text-color:                   white;
+        --gray-text-color:              #bbbbbb;
         --line-color:                   var(--secondary-color);
         --icon-color:                   var(--primary-color-light);
         --outline-hover-color:          white;

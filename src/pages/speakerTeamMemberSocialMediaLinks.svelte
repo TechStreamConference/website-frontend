@@ -21,6 +21,7 @@
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import SpeakerTeamMemberSocialMediaLinkForm from 'forms/speakerTeamMemberSocialMediaLinksForm.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
+    import Explanation from 'elements/text/explanation.svelte';
 
     export let data: LoadDashboard & LoadUserSocials;
     export let type: 'speaker' | 'team-member';
@@ -112,6 +113,9 @@
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 
 <SectionDashboard classes="standard-dashboard-section">
+    <Explanation>
+        Hier kannst du deine Social-Media-Links bearbeiten. Falls du bei mehreren Events als Speaker registriert bist, dann gelten diese Daten für alle Events. Beachte, dass alle Änderungen an diesen Daten erst durch uns freigegeben werden müssen.
+    </Explanation>
     {#if data.roles.is_speaker && data.roles.is_team_member}
         <Message
               classes="message-pre-wrap"
