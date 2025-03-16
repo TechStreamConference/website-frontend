@@ -57,4 +57,8 @@
     .link-white {
         color: var(--white-color);
     }
+
+    .word-break{
+        word-break: break-all;
+    }
 </style>
