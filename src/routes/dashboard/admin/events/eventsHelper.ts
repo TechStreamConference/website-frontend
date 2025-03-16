@@ -1,10 +1,8 @@
-import {
-    dashboardAllEventSpeakerScheme, type DashboardAllEvents, type DashboardAllEventSpeaker, type DashboardEvent,
-} from 'types/dashboardProvideTypes';
-
+import type { DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
 import type { SetAdminEvent, SetAllAdminEventSpeaker } from 'types/dashboardSetTypes';
-import { checkSQLTimeAndDate, convertTimeAndDateToSQL, isBeforeOrSameDatesString } from 'helper/dates';
-import { z } from 'zod';
+
+import { dashboardAllEventSpeakerScheme } from 'types/dashboardProvideTypes';
+import { checkSQLTimeAndDate, convertTimeAndDateToSQL } from 'helper/dates';
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 

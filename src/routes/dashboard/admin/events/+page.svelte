@@ -3,12 +3,17 @@
     import * as MenuItem from 'menu/dashboardItems';
 
     import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
-    import type { DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
+    import type { DashboardAdminVdoLink, DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
 
+    import { dashboardAdminVdoLinkScheme } from 'types/dashboardProvideTypes';
     import { onMount } from 'svelte';
     import { loadSpeaker } from './eventsHelper';
     import { convertTimeAndDateToHTML } from 'helper/dates';
     import { getElementByTitle } from 'helper/basic';
+    import { apiUrl } from 'helper/links';
+    import { trySaveDataAsyncOutReset } from 'helper/trySaveData.js';
+    import { parseProvidedJsonAsync } from 'helper/parseJson';
+    import { SaveMessageType } from 'types/saveMessageType';
 
     import TextLine from 'elements/text/textLine.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -19,25 +24,13 @@
     import GeneralPopup from 'elements/popups/generalPopup.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
     import VdoGrid from 'elements/vdo/vdo-grid.svelte';
+    import Input from 'elements/input/input.svelte';
+    import SaveMessage from 'elements/text/saveMessage.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
-    const link    = 'https://coder2k.net/test-conf/?push=jD301AhMw3XzGlcbIdbjxSzW7bUOV7B4dh4fvdpR&room=Rwsk9ZdxWB6bX0dOm3TJiP1XZDmR6b&password=0vmg6uRnfjZ36xM1DRNwztPSEyerAtX9GKezp7xQNUHfbNVMqn&label=anywaygame_cam&maxframerate=30&ssid&g=0';
-    const entry   = {
-        name:        'anywaygame',
-        push_cam:    link,
-        push_screen: link,
-        view_cam:    link,
-        view_screen: link,
-    };
-    const entries = [
-        entry,
-        entry,
-        entry,
-        entry,
-        entry,
-        entry,
-    ];
 
     export let data: LoadDashboard & LoadAdminEvents;
+    let vdoLinks: DashboardAdminVdoLink | undefined;
 
     let navigationDropDown: NavigationDropDown;
     let displayLinkPopup: GeneralPopup;
@@ -45,6 +38,11 @@
     let sendLinkPopup: GeneralPopup;
 
     let currentEvent: DashboardEvent;
+
+    let baseUrl: string = '';
+
+    let linkMessage: SaveMessage;
+    let linkErrorQueue: string[] = [];
 
     onMount(() => {
         const selected = navigationDropDown.getSelected();
@@ -62,6 +60,8 @@
         currentEvent.call_for_papers_start = convertTimeAndDateToHTML(currentEvent.call_for_papers_start);
         currentEvent.call_for_papers_end   = convertTimeAndDateToHTML(currentEvent.call_for_papers_end);
 
+        vdoLinks = undefined;
+
         loadSpeaker(fetch, currentEvent.id).then((newData: DashboardAllEventSpeaker) => {
             data.allSpeaker = newData;
         }, () => {
@@ -78,15 +78,61 @@
 
 
     async function displayLinksAsync(): Promise<void> {
-        console.error('displaying links');
+        const response = await fetch(apiUrl(`/dashboard/admin/video-room/event/${currentEvent.id}`));
+
+        if (!response.ok) {
+            linkErrorQueue = ['Keine Links für dieses Event gefunden. Sicher, dass schon welche generiert sind?'];
+            return;
+        }
+
+        const data = await parseProvidedJsonAsync(response, dashboardAdminVdoLinkScheme);
+
+        if (data === undefined) {
+            linkMessage.setSaveMessage(SaveMessageType.Error);
+            linkErrorQueue = ['Fehler beim Laden der Video-Links'];
+        }
+
+        vdoLinks = data;
     }
 
     async function genLinksAsync(): Promise<void> {
-        console.error('genLinks');
+        if (baseUrl.trim().length === 0) {
+            linkMessage.setSaveMessage(SaveMessageType.Error);
+            linkErrorQueue = ['Keine Base URL angegeben'];
+            return;
+        }
+        const response = await trySaveDataAsyncOutReset(
+            fetch,
+            { base_url: baseUrl },
+            `/dashboard/admin/video-room/event/${currentEvent.id}`,
+            'POST',
+        );
+
+        linkMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
+        linkErrorQueue = response.messages;
     }
 
     async function sendLinksAsync(): Promise<void> {
-        console.error('sendLinks');
+        const response = await trySaveDataAsyncOutReset(
+            fetch,
+            {},
+            `/dashboard/admin/video-room/event/${currentEvent.id}/set-visible`,
+            'POST',
+        );
+
+        linkMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
+        linkErrorQueue     = response.messages;
+        // number will stay undefined when no infos are provided
+        const numUsers     = response.infos['num_users'];
+        const numAccounts  = response.infos['num_accounts'];
+        const numMailsSent = response.infos['num_mails_sent'];
+
+        if (numUsers !== numAccounts) {
+            linkErrorQueue.push(`Nicht für alle Speaker wurde eine Mail gefunden. | User: ${numUsers} | Accounts: ${numAccounts}`);
+        }
+        if (numAccounts !== numMailsSent) {
+            linkErrorQueue.push(`Nicht alle Mails konnten erfolgreich verschickt werden. | Accounts: ${numAccounts} | Mails: ${numMailsSent}`);
+        }
     }
 </script>
 
@@ -132,6 +178,8 @@
                             event={currentEvent} />
             <div class="links-wrapper">
                 <SubHeadline classes="white">Video Links</SubHeadline>
+                <SaveMessage bind:this={linkMessage} />
+                <MessageWrapper messages={linkErrorQueue} />
                 <div class="button-array">
                     <Button ariaLabel="Klicke hier, um vorhandene Links anzuzeigen"
                             on:click={ () => { displayLinkPopup.show(""); } }>Links anzeigen
@@ -143,7 +191,12 @@
                             on:click={ () => { sendLinkPopup.show(""); } }>Links verschicken
                     </Button>
                 </div>
-                <VdoGrid {entries}
+                <Input ariaLabel="Trage hier die base url zum generieren von links ein"
+                       placeholderText="Trage hier die base url zum generieren von links ein"
+                       labelText="Base URL:"
+                       id="dashboard-admin-input-base-url"
+                       bind:value={baseUrl}></Input>
+                <VdoGrid entries={vdoLinks}
                          displayAdmin={true} />
 
             </div>

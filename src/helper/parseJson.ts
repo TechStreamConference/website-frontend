@@ -1,5 +1,7 @@
+import type { Globals } from 'types/provideTypes';
+
 import { error } from '@sveltejs/kit';
-import { globalsScheme, type Globals } from 'types/provideTypes';
+import { globalsScheme } from 'types/provideTypes';
 import { z, ZodSchema } from 'zod';
 import { responseLookup } from 'lookup/responseLookup';
 
@@ -20,6 +22,18 @@ export async function parseMultipleErrorsAsync(response: Response): Promise<stri
         console.error('error while parsing error response');
         console.log(response);
         return [];
+    }
+}
+
+export async function parseMultipleInfosAsync(response: Response): Promise<{
+    [key: string]: string
+}> {
+    try {
+        const text: string = await response.text();
+        return await JSON.parse(text);
+
+    } catch {
+        return {};
     }
 }
 

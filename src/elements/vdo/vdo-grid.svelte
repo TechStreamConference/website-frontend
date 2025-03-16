@@ -1,10 +1,11 @@
 <script lang="ts">
+    import type { DashboardAdminVdoLink } from 'types/dashboardProvideTypes';
+
     import TextLine from 'elements/text/textLine.svelte';
-    import Link from 'elements/text/link.svelte';
     import Toggle from 'elements/input/toggle.svelte';
     import VodGridEntry from './vod-grid-entry.svelte';
 
-    export let entries; // TODO typehint when datatype was provided
+    export let entries: DashboardAdminVdoLink | undefined;
     export let displayAdmin: boolean = false;
 
     let displayCam: boolean    = true;
@@ -13,15 +14,13 @@
     let displayView: boolean   = true;
 </script>
 
-{#if entries.length > 0}
+{#if entries !== undefined}
     <div class="link-grid">
         {#if displayAdmin}
-            <TextLine classes="expand-grid-line">Raum:</TextLine>
-            <Link title="Klicke hier, um zum Raum zu gelangen"
-                  classes="link-inline expand-grid-line"
-                  newTab={true}
-                  href="https://google.de">www.google.de
-            </Link>
+            <div class="grid-line expand-grid-line" />
+            <VodGridEntry description="Raum:"
+                          visible={true}
+                          link={entries.director} />
 
             <div class="grid-line expand-grid-line" />
             <div class="grid-toggle-filter expand-grid-line">
@@ -64,30 +63,22 @@
             </div>
         {/if}
 
-        {#each entries as e}
+        {#each entries.speakers as e}
             <div class="grid-line expand-grid-line" />
             <TextLine classes="expand-grid-line">{e.name}:</TextLine>
-            {#if displayCam && displayPush}
-                <VodGridEntry description={"Cam" + (displayAdmin ? " Push:" : "")}
-                              visible={true}
-                              link={e.push_cam} />
-            {/if}
-            {#if displayScreen && displayPush}
-                <VodGridEntry description={"Screen" + (displayAdmin ? " Push:" : "")}
-                              visible={true}
-                              link={e.push_screen} />
-            {/if}
+            <VodGridEntry description={"Cam" + (displayAdmin ? " Push:" : "")}
+                          visible={displayCam && displayPush}
+                          link={e.push_cam} />
+            <VodGridEntry description={"Screen" + (displayAdmin ? " Push:" : "")}
+                          visible={displayScreen && displayPush}
+                          link={e.push_screen} />
             {#if displayAdmin}
-                {#if displayCam && displayView}
-                    <VodGridEntry description="Cam View:"
-                                  visible={true}
-                                  link={e.view_cam} />
-                {/if}
-                {#if displayScreen && displayView}
-                    <VodGridEntry description="Screen View:"
-                                  visible={true}
-                                  link={e.view_screen} />
-                {/if}
+                <VodGridEntry description="Cam View:"
+                              visible={displayCam && displayView}
+                              link={e.view_cam} />
+                <VodGridEntry description="Screen View:"
+                              visible={displayScreen && displayView}
+                              link={e.view_screen} />
             {/if}
         {/each}
     </div>

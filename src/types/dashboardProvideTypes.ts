@@ -238,3 +238,18 @@ export const dashboardPendingTalkScheme = z.object({
 export type DashboardPendingTalk = z.infer<typeof dashboardPendingTalkScheme>;
 export const dashboardAllPendingTalkScheme = z.array(dashboardPendingTalkScheme);
 export type DashboardAllPendingTalks = z.infer<typeof dashboardAllPendingTalkScheme>;
+
+
+export const dashboardVdoLinkScheme = z.object({
+                                                   name:        z.string(),
+                                                   push_cam:    z.string(),
+                                                   push_screen: z.string(),
+                                                   view_cam:    z.string(),
+                                                   view_screen: z.string(),
+                                               });
+export type DashboardVdoLink = z.infer<typeof dashboardVdoLinkScheme>;
+export const dashboardAdminVdoLinkScheme = z.object({
+                                                        director: z.string(),
+                                                        speakers: z.array(dashboardVdoLinkScheme),
+                                                    });
+export type DashboardAdminVdoLink = z.infer<typeof dashboardAdminVdoLinkScheme>;
