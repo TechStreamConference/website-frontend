@@ -7,6 +7,8 @@
     export let title: string;
     export let icon: string    = '';
     export let text: string    = '';
+
+    export let iconClasses: string = '';
 </script>
 
 <a
@@ -18,7 +20,7 @@
       on:click
 >
     {#if icon}
-        <Icon type={icon} />
+        <Icon classes={iconClasses} type={icon} />
     {/if}
     {#if text}
         {text}
@@ -36,6 +38,10 @@
         text-decoration:  none;
         font-size:        var(--full-font-size);
         line-height:      var(--1-5x-line-height);
+    }
+
+    .transparent-background {
+        background: transparent !important;
     }
 
     .styled-link-white {
