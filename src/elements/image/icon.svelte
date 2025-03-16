@@ -33,4 +33,9 @@
     .orange {
         color: orange;
     }
+
+    .white-only {
+        color: var(--white-color);
+        background: transparent !important;
+    }
 </style>

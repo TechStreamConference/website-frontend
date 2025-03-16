@@ -12,6 +12,8 @@
 <div class={classes}>
     {#each links as link}
         <StyledLink
+              classes="transparent-background"
+              iconClasses="white-only"
               href={link.url}
               icon={link.name}
               title="Klicke für {link.name} von {person}"
@@ -23,9 +25,8 @@
 <style>
     div {
         display:               grid;
-        grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+        grid-template-columns: repeat(4, 1fr);
         gap:                   var(--full-gap) 0;
-        padding:               var(--4x-margin) 0;
         justify-items:         center;
     }
 </style>

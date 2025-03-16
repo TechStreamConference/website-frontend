@@ -81,13 +81,13 @@
     }
 
     .person-rectangle-flex-growth {
-        flex-grow:  1;
         margin:     var(--2x-margin) var(--2x-margin) 0;
         border-top: 1px solid var(--line-color);
     }
 
     .person-rectangle-bottom-wrapper {
-        margin: var(--2x-margin) var(--2x-margin) 0;
+        flex-grow: 1;
+        margin: var(--2x-margin);
     }
 
     :global(.person-rectangle-button) {
