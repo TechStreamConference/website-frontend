@@ -2,7 +2,7 @@
     import TextLine from 'elements/text/textLine.svelte';
     import Button from 'elements/input/button.svelte';
     import Link from 'elements/text/link.svelte';
-    import Icon from './image/icon.svelte';
+    import Icon from 'elements/image/icon.svelte';
 
     export var visible: boolean;
     export var description: string;
