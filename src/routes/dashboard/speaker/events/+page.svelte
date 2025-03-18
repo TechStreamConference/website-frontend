@@ -24,7 +24,6 @@
 
     export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
 
-    const containsLinks: boolean = true;
     let displayLinks: boolean    = false;
 
     let showLinkPopup: GeneralPopup;
@@ -42,7 +41,7 @@
               acceptCallback={showLinksAsync}
               denyCallback={() => {}} />
 
-{#if containsLinks}
+{#if data.containsCurrentVideoLinks}
     <div class="link-wrapper">
         <SubHeadline>Video Links des aktuellen Events:</SubHeadline>
         {#if displayLinks}

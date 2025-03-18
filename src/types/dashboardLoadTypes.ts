@@ -70,6 +70,7 @@ export type LoadSpeakerTeamMemberEvent = {
     allEvents: DashboardAllEventIDs,
     current: DashboardEventID,
     event: DashboardSpeakerTeamMember,
+    containsCurrentVideoLinks: boolean,
 }
 
 export type LoadUserSocials = {
