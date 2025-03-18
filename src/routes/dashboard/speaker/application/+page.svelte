@@ -56,7 +56,8 @@
             <TextLine>Dein Talk wurde erfolgreich eingereicht.</TextLine>
             <TextLine>Du bekommst jetzt eine E-Mail.</TextLine>
             <TextLine>Sobald wir deinen Talk bearbeitet haben, werden wir dich benachrichtigen.</TextLine>
-            <TextLine>Du möchtest deinen Talk noch bearbeiten? Kein Problem. Er wird bereits im Talk-Tab angezeigt.
+            <TextLine>Du möchtest deinen Talk noch bearbeiten? Kein Problem. Er wird bereits im Tab „Meine Talks“
+                      angezeigt.
             </TextLine>
         </div>
     {:else}
@@ -89,10 +90,10 @@
         margin-top:      var(--2x-margin);
     }
 
-    .current-event-wrapper{
-        display: flex;
+    .current-event-wrapper {
+        display:        flex;
         flex-direction: column;
-        align-items: center;
-        margin: var(--full-margin) 0;
+        align-items:    center;
+        margin:         var(--full-margin) 0;
     }
 </style>
