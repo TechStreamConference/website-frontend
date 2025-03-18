@@ -3,6 +3,11 @@
     import * as MenuItem from 'menu/dashboardItems';
 
     import type { LoadDashboard, LoadSpeakerTeamMemberEvent } from 'types/dashboardLoadTypes';
+    import type { DashboardAdminVdoLink } from 'types/dashboardProvideTypes';
+
+    import { apiUrl } from 'helper/links';
+    import { checkAndParseInputDataAsync } from 'helper/parseJson';
+    import { z } from 'zod';
 
     import SpeakerTeamMemberEvent from 'pages/speakerTeamMemberEvent.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
@@ -10,25 +15,40 @@
     import Button from 'elements/input/button.svelte';
     import GeneralPopup from 'elements/popups/generalPopup.svelte';
 
-    const link    = 'https://coder2k.net/test-conf/?push=jD301AhMw3XzGlcbIdbjxSzW7bUOV7B4dh4fvdpR&room=Rwsk9ZdxWB6bX0dOm3TJiP1XZDmR6b&password=0vmg6uRnfjZ36xM1DRNwztPSEyerAtX9GKezp7xQNUHfbNVMqn&label=anywaygame_cam&maxframerate=30&ssid&g=0';
-    const entry   = {
-        name:        'anywaygame',
-        push_cam:    link,
-        push_screen: link,
-        view_cam:    link,
-        view_screen: link,
-    };
-    const entries = [
-        entry,
-    ];
+    let vdoData: DashboardAdminVdoLink | undefined = undefined;
 
     export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
 
-    let displayLinks: boolean    = false;
+    let displayLinks: boolean = false;
 
     let showLinkPopup: GeneralPopup;
 
     async function showLinksAsync(): Promise<void> {
+        const fetchPromise = fetch(apiUrl('/dashboard/speaker/video-room'));
+        const parsePromise = checkAndParseInputDataAsync(
+            await fetchPromise,
+            z.object({
+                         push_cam: z.string(),
+                         push_screen: z.string(),
+                     }),
+            `Serveranfrage für Video Links nicht erfolgreich.`,
+            `Unerwartete Daten für Video Links.`,
+        );
+
+        const links = await parsePromise;
+
+        vdoData      = {
+            director: '',
+            speakers: [
+                {
+                    name:        data.roles.username,
+                    view_cam:    '',
+                    view_screen: '',
+                    push_screen: links.push_screen,
+                    push_cam:    links.push_cam,
+                },
+            ],
+        };
         displayLinks = true;
     }
 </script>
@@ -45,7 +65,7 @@
     <div class="link-wrapper">
         <SubHeadline>Video Links des aktuellen Events:</SubHeadline>
         {#if displayLinks}
-            <VdoGrid {entries} />
+            <VdoGrid entries={vdoData} />
         {:else}
             <Button ariaLabel="Klicke hier, um deine aktuellen Video Links anzuzeigen"
                     on:click={ () => {showLinkPopup.show(""); }}>Links anzeigen

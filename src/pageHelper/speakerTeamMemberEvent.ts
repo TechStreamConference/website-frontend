@@ -62,7 +62,7 @@ export async function loadDataAsync(
         allEvents,
         current,
         event,
-        containsCurrentVideoLinks: await linkRequestPromise,
+        containsCurrentVideoLinks:await linkRequestPromise,
     };
 }
 
