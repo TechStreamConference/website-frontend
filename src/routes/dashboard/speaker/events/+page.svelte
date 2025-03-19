@@ -7,7 +7,10 @@
     import SpeakerTeamMemberEvent from 'pages/speakerTeamMemberEvent.svelte';
 
     export let data: LoadDashboard & LoadSpeakerTeamMemberEvent;
+
+
 </script>
+
 
 <SpeakerTeamMemberEvent
       {data}

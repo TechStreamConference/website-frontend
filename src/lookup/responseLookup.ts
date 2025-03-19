@@ -77,6 +77,9 @@ const lookup: ResponseDict = {
     'The name field is required.':    'Das Feld \'Name\' ist erforderlich.',
     'The message field is required.': 'Das Feld \'Nachricht\' ist erforderlich.',
     'The subject field is required.': 'Das feld \'Betreff\' ist erforderlich.',
+
+    // video room
+    VIDEO_ROOM_DOES_NOT_EXIST: 'Keine Links zum Verschicken vorhanden.',
 };
 
 export function responseLookup(key: string): string {

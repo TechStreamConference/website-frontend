@@ -25,6 +25,10 @@ export type LoadDashboard = {
     globals: Globals
 }
 
+export type LoadDashboardSpeaker = {
+    containsCurrentVideoLinks: boolean,
+}
+
 export type LoadAdminEvents = {
     allEvents: DashboardAllEvents,
     allSpeaker: DashboardAllEventSpeaker

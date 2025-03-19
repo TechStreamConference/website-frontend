@@ -3,24 +3,46 @@
     import * as MenuItem from 'menu/dashboardItems';
 
     import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
-    import type { DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
+    import type { DashboardAdminVdoLink, DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
 
+    import { dashboardAdminVdoLinkScheme } from 'types/dashboardProvideTypes';
     import { onMount } from 'svelte';
     import { loadSpeaker } from './eventsHelper';
     import { convertTimeAndDateToHTML } from 'helper/dates';
     import { getElementByTitle } from 'helper/basic';
+    import { apiUrl } from 'helper/links';
+    import { trySaveDataAsyncOutReset } from 'helper/trySaveData.js';
+    import { parseProvidedJsonAsync } from 'helper/parseJson';
+    import { SaveMessageType } from 'types/saveMessageType';
 
     import TextLine from 'elements/text/textLine.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import Tabs from 'elements/navigation/tabs.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
     import AdminEventForm from 'forms/adminEventForm.svelte';
+    import Button from 'elements/input/button.svelte';
+    import GeneralPopup from 'elements/popups/generalPopup.svelte';
+    import SubHeadline from 'elements/text/subHeadline.svelte';
+    import VdoGrid from 'elements/vdo/vdo-grid.svelte';
+    import Input from 'elements/input/input.svelte';
+    import SaveMessage from 'elements/text/saveMessage.svelte';
+    import MessageWrapper from 'elements/text/messageWrapper.svelte';
+
 
     export let data: LoadDashboard & LoadAdminEvents;
+    let vdoLinks: DashboardAdminVdoLink | undefined;
 
     let navigationDropDown: NavigationDropDown;
+    let displayLinkPopup: GeneralPopup;
+    let generateLinkPopup: GeneralPopup;
+    let sendLinkPopup: GeneralPopup;
 
     let currentEvent: DashboardEvent;
+
+    let baseUrl: string = '';
+
+    let linkMessage: SaveMessage;
+    let linkErrorQueue: string[] = [];
 
     onMount(() => {
         const selected = navigationDropDown.getSelected();
@@ -38,6 +60,8 @@
         currentEvent.call_for_papers_start = convertTimeAndDateToHTML(currentEvent.call_for_papers_start);
         currentEvent.call_for_papers_end   = convertTimeAndDateToHTML(currentEvent.call_for_papers_end);
 
+        vdoLinks = undefined;
+
         loadSpeaker(fetch, currentEvent.id).then((newData: DashboardAllEventSpeaker) => {
             data.allSpeaker = newData;
         }, () => {
@@ -52,14 +76,94 @@
         });
     }
 
+
+    async function displayLinksAsync(): Promise<void> {
+        const response = await fetch(apiUrl(`/dashboard/admin/video-room/event/${currentEvent.id}`));
+
+        if (!response.ok) {
+            linkErrorQueue = ['Keine Links für dieses Event gefunden. Sicher, dass schon welche generiert sind?'];
+            return;
+        }
+
+        const data = await parseProvidedJsonAsync(response, dashboardAdminVdoLinkScheme);
+
+        if (data === undefined) {
+            linkMessage.setSaveMessage(SaveMessageType.Error);
+            linkErrorQueue = ['Fehler beim Laden der Video-Links'];
+        }
+
+        vdoLinks = data;
+    }
+
+    async function genLinksAsync(): Promise<void> {
+        if (baseUrl.trim().length === 0) {
+            linkMessage.setSaveMessage(SaveMessageType.Error);
+            linkErrorQueue = ['Keine Base URL angegeben'];
+            return;
+        }
+        const response = await trySaveDataAsyncOutReset(
+            fetch,
+            { base_url: baseUrl },
+            `/dashboard/admin/video-room/event/${currentEvent.id}`,
+            'POST',
+        );
+
+        linkMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
+        linkErrorQueue = response.messages;
+    }
+
+    async function sendLinksAsync(): Promise<void> {
+        const response = await trySaveDataAsyncOutReset(
+            fetch,
+            {},
+            `/dashboard/admin/video-room/event/${currentEvent.id}/set-visible`,
+            'POST',
+        );
+
+        linkMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
+        linkErrorQueue     = response.messages;
+        // number will stay undefined when no infos are provided
+        const numUsers     = response.infos['num_users'];
+        const numAccounts  = response.infos['num_accounts'];
+        const numMailsSent = response.infos['num_mails_sent'];
+
+        if (numUsers !== numAccounts) {
+            linkErrorQueue.push(`Nicht für alle Speaker wurde eine Mail gefunden. | User: ${numUsers} | Accounts: ${numAccounts}`);
+        }
+        if (numAccounts !== numMailsSent) {
+            linkErrorQueue.push(`Nicht alle Mails konnten erfolgreich verschickt werden. | Accounts: ${numAccounts} | Mails: ${numMailsSent}`);
+        }
+    }
 </script>
+
+<GeneralPopup bind:this={displayLinkPopup}
+              headline="Links anzeigen?"
+              text="Hinweis: Die Links enthalten sensible Daten wie Passwörter."
+              denyButtonText="Nein"
+              acceptButtonText="Ja"
+              denyCallback={() => {}}
+              acceptCallback={displayLinksAsync} />
+<GeneralPopup bind:this={generateLinkPopup}
+              headline="Links generieren?"
+              text="Hinweis: Durch das generieren neuer Links werden die alten (kommunizierten) Links ungültig."
+              denyButtonText="Nein"
+              acceptButtonText="Ja"
+              denyCallback={() => {}}
+              acceptCallback={genLinksAsync} />
+<GeneralPopup bind:this={sendLinkPopup}
+              headline="Links versenden?"
+              text="Hinweis: Alle Speaker werden benachrichtigt."
+              denyButtonText="Nein"
+              acceptButtonText="Ja"
+              denyCallback={() => {}}
+              acceptCallback={sendLinksAsync} />
 
 <Tabs
       entries={Menu.admin}
       entryName={MenuItem.adminEvents.name}
       classes="navigation-tabs-dashboard-subpage"
 />
-<SectionDashboard classes="dashboard-admin-event-section">
+<SectionDashboard classes="dashboard-admin-event-section standard-dashboard-section">
     {#if data.allEvents}
         <NavigationDropDown
               id={'dashboard-admin-event-drop-down'}
@@ -72,6 +176,30 @@
             <AdminEventForm classes="dashboard-admin-event-form"
                             speakerArray={data.allSpeaker}
                             event={currentEvent} />
+            <div class="links-wrapper">
+                <SubHeadline classes="white">Video Links</SubHeadline>
+                <SaveMessage bind:this={linkMessage} />
+                <MessageWrapper messages={linkErrorQueue} />
+                <div class="button-array">
+                    <Button ariaLabel="Klicke hier, um vorhandene Links anzuzeigen"
+                            on:click={ () => { displayLinkPopup.show(""); } }>Links anzeigen
+                    </Button>
+                    <Button ariaLabel="Klicke hier, um neue Links zu generieren"
+                            on:click={ () => { generateLinkPopup.show(""); } }>Links generieren
+                    </Button>
+                    <Button ariaLabel="Klicke hier, um die vorhandenen Links zu kommunizieren"
+                            on:click={ () => { sendLinkPopup.show(""); } }>Links verschicken
+                    </Button>
+                </div>
+                <Input ariaLabel="Trage hier die base url zum generieren von links ein"
+                       placeholderText="Trage hier die base url zum generieren von links ein"
+                       labelText="Base URL:"
+                       id="dashboard-admin-input-base-url"
+                       bind:value={baseUrl}></Input>
+                <VdoGrid entries={vdoLinks}
+                         displayAdmin={true} />
+
+            </div>
         {:else}
             <TextLine>Kein aktuelles Event</TextLine>
         {/if}
@@ -82,12 +210,25 @@
 
 <style>
     :global(.dashboard-admin-event-section) {
-        max-width:      100rem;
-        display:        flex;
-        flex-direction: column;
+        gap: var(--full-gap);
     }
 
     :global(.dashboard-admin-event-form) {
         margin-top: var(--4x-margin);
+    }
+
+    .links-wrapper {
+        display:        flex;
+        flex-direction: column;
+        padding:        var(--full-padding);
+        border:         1px solid var(--primary-color-dark);
+        gap:            var(--full-gap);
+        align-items:    center;
+    }
+
+    .button-array {
+        display:        flex;
+        flex-direction: row;
+        gap:            var(--full-gap);
     }
 </style>

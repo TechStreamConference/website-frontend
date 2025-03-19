@@ -24,6 +24,7 @@ const lookup: IconDict = {
     ArrowDown:   'fa-solid fa-arrow-down',
     Broadcast:   'fa-solid fa-tower-broadcast',
     Video:       'fa-solid fa-video',
+    Copy:        'fa-solid fa-link',
 };
 
 export function iconLookup(type: string): string {

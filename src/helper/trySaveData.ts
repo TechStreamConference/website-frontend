@@ -1,10 +1,13 @@
 import { resetUnsavedChanges } from 'stores/saved';
 import { apiUrl } from './links';
-import { parseMultipleErrorsAsync } from 'helper/parseJson';
+import { parseMultipleErrorsAsync, parseMultipleInfosAsync } from 'helper/parseJson';
 
 export type SaveResult = {
     success: boolean;
     messages: string[];
+    infos: {
+        [key: string]: string
+    };
 }
 
 export function combineSaveResult(lhs: SaveResult, rhs: SaveResult): SaveResult {
@@ -14,6 +17,9 @@ export function combineSaveResult(lhs: SaveResult, rhs: SaveResult): SaveResult 
             ...lhs.messages,
             ...rhs.messages,
         ],
+        infos:    {
+            ...lhs.infos, ...rhs.infos,
+        },
     };
 }
 
@@ -32,6 +38,7 @@ export async function trySaveDataAsyncOutReset<T>(
     return {
         success:  response.ok,
         messages: response.ok ? [] : await parseMultipleErrorsAsync(response),
+        infos:    await parseMultipleInfosAsync(response),
     };
 }
 

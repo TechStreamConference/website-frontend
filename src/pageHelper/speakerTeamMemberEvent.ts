@@ -6,6 +6,7 @@ import { dashboardAllEventIDScheme, dashboardSpeakerTeamMemberScheme } from 'typ
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { error } from '@sveltejs/kit';
+import { z } from 'zod';
 
 
 export type NewImage = {
