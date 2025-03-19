@@ -26,7 +26,7 @@ export const dashboardPersonScheme = z.object({
                                                   short_bio:    z.string(),
                                                   bio:          z.string(),
                                                   photo:        z.string(),
-                                                  visible_from: z.string(),
+                                                  visible_from: z.string().nullable(),
                                               });
 export type DashboardPerson = z.infer<typeof dashboardPersonScheme>;
 export const dashboardAllPersonsScheme = z.array(dashboardPersonScheme);
