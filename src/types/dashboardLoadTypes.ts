@@ -25,6 +25,10 @@ export type LoadDashboard = {
     globals: Globals
 }
 
+export type LoadDashboardSpeaker = {
+    containsCurrentVideoLinks: boolean,
+}
+
 export type LoadAdminEvents = {
     allEvents: DashboardAllEvents,
     allSpeaker: DashboardAllEventSpeaker
@@ -70,7 +74,6 @@ export type LoadSpeakerTeamMemberEvent = {
     allEvents: DashboardAllEventIDs,
     current: DashboardEventID,
     event: DashboardSpeakerTeamMember,
-    containsCurrentVideoLinks: boolean,
 }
 
 export type LoadUserSocials = {

@@ -25,22 +25,6 @@ export async function loadDataAsync(
     fetch: typeof globalThis.fetch,
     type: 'speaker' | 'team-member',
 ): Promise<LoadSpeakerTeamMemberEvent> {
-    const linkRequestPromise = (async (): Promise<boolean> => {
-        if (type === 'team-member') {
-            return false;
-        }
-
-        const linkFetchPromise = fetch(apiUrl('/dashboard/speaker/video-room/exists'));
-        const linkParsePromise = checkAndParseInputDataAsync(
-            await linkFetchPromise,
-            z.object({ exists: z.boolean() }),
-            `Serveranfrage für die Existenz von VDO Links nicht erfolgreich.`,
-            `Unerwartete Daten für die Existenz von VDO Links.`,
-        );
-
-        return (await linkParsePromise).exists;
-    })();
-
     const allEventFetchPromise: Promise<Response> = fetch(apiUrl(`/dashboard/${type}/all-events`));
     const allEventsParsePromise                   = checkAndParseInputDataAsync(
         await allEventFetchPromise,
@@ -62,7 +46,6 @@ export async function loadDataAsync(
         allEvents,
         current,
         event,
-        containsCurrentVideoLinks:await linkRequestPromise,
     };
 }
 
