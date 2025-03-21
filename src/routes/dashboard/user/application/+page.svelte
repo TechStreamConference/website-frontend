@@ -165,17 +165,20 @@
                                             bind:data={data.data.speaker}
                                             displaySaveButton={false} />
             </div>
-            <div class="dashboard-user-application-section">
-                <HeadlineH2>Social-Media-Daten</HeadlineH2>
-                <Paragraph classes="paragraph-gray">Trage hier Links zu deinen Social-Media-Profilen ein, die öffentlich
-                                                    angezeigt werden sollen. Klicke auf „Neu”, um weitere Links
-                                                    hinzuzufügen.
-                </Paragraph>
-                <SpeakerTeamMemberSocialMediaLinkForm bind:data={data.data.socials}
-                                                      bind:roles={data.roles}
-                                                      displaySaveButton={false}
-                                                      on:delete={deleteLink} />
-            </div>
+            {#if !(data.roles.is_speaker || data.roles.is_team_member)}
+                <div class="dashboard-user-application-section">
+                    <HeadlineH2>Social-Media-Daten</HeadlineH2>
+                    <Paragraph classes="paragraph-gray">Trage hier Links zu deinen Social-Media-Profilen ein, die
+                                                        öffentlich
+                                                        angezeigt werden sollen. Klicke auf „Neu”, um weitere Links
+                                                        hinzuzufügen.
+                    </Paragraph>
+                    <SpeakerTeamMemberSocialMediaLinkForm bind:data={data.data.socials}
+                                                          bind:roles={data.roles}
+                                                          displaySaveButton={false}
+                                                          on:delete={deleteLink} />
+                </div>
+            {/if}
             <div class="dashboard-user-application-button-wrapper">
                 <Button type="submit"
                         ariaLabel="Klicke hier, um dich zu bewerben">Bewerben
