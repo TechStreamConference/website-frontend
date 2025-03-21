@@ -47,6 +47,7 @@
             publish_date:          checkSQLTimeAndDate(convertTimeAndDateToSQL(data.publish_date)),
             call_for_papers_start: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.call_for_papers_start)),
             call_for_papers_end:   checkSQLTimeAndDate(convertTimeAndDateToSQL(data.call_for_papers_end)),
+            frontpage_date:        checkSQLTimeAndDate(convertTimeAndDateToSQL(data.frontpage_date)),
         };
     }
 
@@ -244,6 +245,14 @@
               type="datetime-local"
               ariaLabel="Gib das Veröffentlichungsdatum des ausgewählten Events ein."
               bind:value={event.publish_date}
+              on:input={setUnsavedChanges}
+        />
+        <Input
+              id="dashboard-admin-event-publish-frontend-event-date"
+              labelText="Veröffentlichungsdatum Frontpage:"
+              type="datetime-local"
+              ariaLabel="Gib das Veröffentlichungsdatum des ausgewählten Events auf der Frontpage ein."
+              bind:value={event.frontpage_date}
               on:input={setUnsavedChanges}
         />
         <Input
