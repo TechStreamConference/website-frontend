@@ -77,6 +77,9 @@ export const dashboardEventScheme = z.object({
                                                  call_for_papers_end:   z.string()
                                                                          .nullable()
                                                                          .transform((val) => val ?? ''),
+                                                 frontpage_date:        z.string()
+                                                                         .nullable()
+                                                                         .transform((val) => val ?? ''),
 
                                              });
 export type DashboardEvent = z.infer<typeof dashboardEventScheme>;

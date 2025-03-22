@@ -1,5 +1,7 @@
 <script lang="ts">
     import * as Menu from 'menu/page';
+    import * as MenuItemPage from 'menu/pageItems';
+    import * as MenuItemDashboard from 'menu/dashboardItems';
 
     import type { LoadYear } from 'types/loadTypes';
     import type { Person, Talk } from 'types/provideTypes';
@@ -18,6 +20,8 @@
     import Schedule from 'elements/schedule/schedule.svelte';
     import StyledLink from 'elements/input/styledLink.svelte';
     import PageWrapper from 'elements/section/pageWrapper.svelte';
+    import TextLine from 'elements/text/textLine.svelte';
+    import Link from 'elements/text/link.svelte';
 
     import { formatDate } from 'helper/dates';
     import { apiUrl } from 'helper/links';
@@ -37,6 +41,22 @@
 
     function closePersonPopup(): void {
         personPopup.hide();
+    }
+
+
+    function lastEventLink(): string {
+        const currentIndex = data.globals.years_with_events.indexOf(data.year.event.year);
+        if (currentIndex === -1) { // no element found. displays main-page then.
+            console.error(`current year '${data.year.event.year}' not in globals array`);
+            return '';
+        }
+        if (currentIndex >= data.globals.years_with_events.length - 1) { // no previous year in the array. displays main-page then.
+            console.error(`no previous year for current year '${data.year.event.year}' not in globals array`);
+            return '';
+        }
+
+
+        return `/year/${data.globals.years_with_events[currentIndex + 1]}`;
     }
 
     function splitTalks(): ScheduleDay[] {
@@ -91,85 +111,164 @@
         </div>
     </div>
     <div class="year-content-wrapper">
-        <Section id="Trailer">
-            <div class="year-video-wrapper">
-                <YouTubeVideo
-                      id={data.year.event.trailer_youtube_id}
-                      title="Tech Stream Conference Trailer {data.year.event.year}"
-                />
-            </div>
-        </Section>
+        {#if data.year.event.trailer_youtube_id}
+            <Section id="Trailer">
+                <div class="year-video-wrapper">
+                    <YouTubeVideo
+                          id={data.year.event.trailer_youtube_id}
+                          title="Tech Stream Conference Trailer {data.year.event.year}"
+                    />
+                </div>
+            </Section>
+        {/if}
 
         <Section id="Description">
             <HeadlineH2 classes="headline-h2-border">{data.year.event.description_headline}</HeadlineH2>
             <div class="year-description-wrapper">
-                <div class="year-discription-text-wrapper">
+                <div class="year-description-text-wrapper">
                     <Paragraph classes="year-discription-paragraph paragraph-pre-wrap"
-                    >{data.year.event.description}</Paragraph
-                    >
+                    >{data.year.event.description}</Paragraph>
                     <YearEventLinks {data} />
                 </div>
                 <LogoBig classes="year-logo-big" />
             </div>
         </Section>
 
-        <Section id="Speaker">
-            <HeadlineH2 classes="headline-h2-border">Vortragende</HeadlineH2>
-            <div class="year-section-inner">
-                <PersonArray personData={data.year.speakers}
-                             personPopupCallback={openPersonPopup} />
-            </div>
-        </Section>
+        {#if !data.year.event.is_visible_on_frontpage}
+            <Section>
+                <div class="year-section-inner">
+                    <HeadlineH2 classes="headline-h2-border">Noch in Planung</HeadlineH2>
+                    <Paragraph --text-align="center">
+                        Wir sind gerade mitten in der Planung des nächsten Events.<br />
+                        Du kannst dich
+                        {#if data.year.event.call_for_papers_start && data.year.event.call_for_papers_end}
+                            vom {formatDate(
+                              data.year.event.call_for_papers_start,
+                              '%DD.%MM.'
+                        )} bis {formatDate(data.year.event.call_for_papers_end, '%DD.%MM.%YYYY')}
+                        {/if}
+                        als Speaker bewerben und einen Vortrag einreichen.<br />
+                        {#if data.loggedIn}
+                            Bewirb dich im
+                            <Link classes="link-inline"
+                                  href={MenuItemDashboard.userApplication.url}
+                                  title={MenuItemDashboard.userApplication.description}>User-Dashboard
+                            </Link>
+                            als Speaker.<br /><br /> Du bist bereits Speaker?<br /> Dann kannst du im
+                            <Link classes="link-inline"
+                                  href={MenuItemDashboard.speakerApplication.url}
+                                  title={MenuItemDashboard.speakerApplication.description}>Speaker-Dashboard
+                            </Link>
+                            einen Talk einreichen.
+                        {:else}
+                            <Link classes="link-inline"
+                                  href={MenuItemPage.login.url}
+                                  title={MenuItemPage.login.description}>Melde dich dafür an
+                            </Link>
+                            oder
+                            <Link classes="link-inline"
+                                  href={MenuItemPage.register.url}
+                                  title={MenuItemPage.register.description}>registriere
+                            </Link>
+                            einen neuen Account.
+                        {/if}
+                        <br /><br />Oder schau dir in der Zwischenzeit
+                        <Link classes="link-inline"
+                              href={lastEventLink()}
+                              title="Klicke hier, um dir die Hauptseite des letzten Events anzeigen zu lassen">
+                            unser letztes Event
+                        </Link>
+                        an.
+                    </Paragraph>
+                </div>
+            </Section>
+        {/if}
 
-        <Section id="Sponsors">
-            <HeadlineH2 classes="headline-h2-border">Sponsoren</HeadlineH2>
-            <div class="year-section-inner">
-                <SponsorArray logos={data.year.sponsors} />
-            </div>
-        </Section>
+        {#if data.year.event.is_visible_on_frontpage}
+            <Section id="Speaker">
+                <HeadlineH2 classes="headline-h2-border">Vortragende</HeadlineH2>
+                <div class="year-section-inner">
+                    {#if data.year.speakers.length > 0}
+                        <PersonArray personData={data.year.speakers}
+                                     personPopupCallback={openPersonPopup} />
+                    {:else}
+                        <TextLine classes="text-line-center">Sei gespannt, welche Speaker in den nächsten Tagen hier auf
+                                                             dich warten.
+                        </TextLine>
+                    {/if}
+                </div>
+            </Section>
+        {/if}
 
-        <Section>
-            <HeadlineH2 classes="headline-h2-border">Medienpartner</HeadlineH2>
-            <div class="year-section-inner">
-                <SponsorArray logos={data.year.media_partners} />
-            </div>
-        </Section>
+        {#if data.year.sponsors.length > 0}
+            <Section id="Sponsors">
+                <HeadlineH2 classes="headline-h2-border">Sponsoren</HeadlineH2>
+                <div class="year-section-inner">
+                    <SponsorArray logos={data.year.sponsors} />
+                </div>
+            </Section>
+        {/if}
 
-        <Section id="Team">
-            <HeadlineH2 classes="headline-h2-border">Team</HeadlineH2>
-            <div class="year-section-inner">
-                <PersonArray personData={data.year.team_members}
-                             personPopupCallback={openPersonPopup} />
-            </div>
-        </Section>
+        {#if data.year.media_partners.length > 0}
+            <Section>
+                <HeadlineH2 classes="headline-h2-border">Medienpartner</HeadlineH2>
+                <div class="year-section-inner">
+                    <SponsorArray logos={data.year.media_partners} />
+                </div>
+            </Section>
+        {/if}
 
-        <Section id="Schedule">
-            <HeadlineH2 classes="headline-h2-border">Plan</HeadlineH2>
-            <div class="center-styled-link">
-                <StyledLink
-                      classes="styled-link-white"
-                      href={apiUrl(`/events/${data.year.event.year}/ics`)}
-                      title="Klicke um den Ablaufplan als ICS-Datei herunter zu laden"
-                      icon="Calender"
-                      newTab={false}
-                      text="Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!"
-                />
-            </div>
-            <div class="year-section-inner">
-                {#each splitTalks() as days}
-                    <Schedule
-                          schedule={days.normal}
-                          speakers={data.year.speakers}
-                          personPopupCallback={openPersonPopup}
-                    />
-                    <Schedule
-                          schedule={days.special}
-                          speakers={data.year.speakers}
-                          personPopupCallback={openPersonPopup}
-                    />
-                {/each}
-            </div>
-        </Section>
+        {#if data.year.event.is_visible_on_frontpage}
+            <Section id="Team">
+                <HeadlineH2 classes="headline-h2-border">Team</HeadlineH2>
+                <div class="year-section-inner">
+                    {#if data.year.team_members.length > 0}
+                        <PersonArray personData={data.year.team_members}
+                                     personPopupCallback={openPersonPopup} />
+                    {:else}
+                        <TextLine classes="text-line-center">Sei gespannt welche, Team Member in den nächsten Tagen hier
+                                                             auf dich warten.
+                        </TextLine>
+                    {/if}
+                </div>
+            </Section>
+        {/if}
+
+        {#if data.year.event.is_visible_on_frontpage}
+            <Section id="Schedule">
+                <HeadlineH2 classes="headline-h2-border">Plan</HeadlineH2>
+                {#if data.year.talks.length > 0}
+                    <div class="center-styled-link">
+                        <StyledLink
+                              classes="styled-link-white"
+                              href={apiUrl(`/events/${data.year.event.year}/ics`)}
+                              title="Klicke, um den Ablaufplan als ICS-Datei herunterzuladen"
+                              icon="Calender"
+                              newTab={false}
+                              text="Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!"
+                        />
+                    </div>
+                    <div class="year-section-inner">
+                        {#each splitTalks() as days}
+                            <Schedule
+                                  schedule={days.normal}
+                                  speakers={data.year.speakers}
+                                  personPopupCallback={openPersonPopup}
+                            />
+                            <Schedule
+                                  schedule={days.special}
+                                  speakers={data.year.speakers}
+                                  personPopupCallback={openPersonPopup}
+                            />
+                        {/each}
+                    </div>
+                {:else}
+                    <TextLine classes="text-line-center">Sei gespannt, welche Vorträge in den nächsten Tagen hier
+                                                         auf dich warten.
+                    </TextLine>
+                {/if}
+            </Section>
+        {/if}
     </div>
 </PageWrapper>
 
@@ -215,10 +314,11 @@
         margin-top:     var(--2x-margin);
     }
 
-    .year-discription-text-wrapper {
+    .year-description-text-wrapper {
         display:        flex;
         flex-direction: column;
         margin-right:   var(--2x-margin);
+        flex-grow:      1;
     }
 
     :global(.year-discription-paragraph) {
@@ -228,6 +328,7 @@
     .year-content-wrapper {
         flex-grow: 1;
         max-width: 150rem;
+        width:     100%;
         margin:    0 auto 10rem;
         padding:   0 var(--2x-padding);
     }
@@ -259,7 +360,7 @@
             margin-left: 0;
         }
 
-        .year-discription-text-wrapper {
+        .year-description-text-wrapper {
             margin-right: 0;
         }
 

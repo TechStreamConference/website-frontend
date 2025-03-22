@@ -18,6 +18,7 @@ export type SetAdminEvent = {
     publish_date: string | null,
     call_for_papers_start: string | null,
     call_for_papers_end: string | null,
+    frontpage_date: string | null,
 }
 
 export type SetAdminEventSpeaker = {

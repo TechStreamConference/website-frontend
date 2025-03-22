@@ -59,6 +59,7 @@
         currentEvent.schedule_visible_from = convertTimeAndDateToHTML(currentEvent.schedule_visible_from);
         currentEvent.call_for_papers_start = convertTimeAndDateToHTML(currentEvent.call_for_papers_start);
         currentEvent.call_for_papers_end   = convertTimeAndDateToHTML(currentEvent.call_for_papers_end);
+        currentEvent.frontpage_date        = convertTimeAndDateToHTML(currentEvent.frontpage_date);
 
         vdoLinks = undefined;
 
