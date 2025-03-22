@@ -4,10 +4,11 @@ type ResponseDict = {
 
 const lookup: ResponseDict = {
     // name
-    'The username field is required.':                             'Das Feld \'Name\' ist erforderlich.',
-    'The username field must be at least 3 characters in length.': 'Der Name muss mindestens aus 3 Zeichen bestehen.',
-    'The username field cannot exceed 30 characters in length.':   'Der Name darf maximal aus 30 Zeichen bestehen.',
-    USERNAME_ALREADY_TAKEN:                                        'Der Name ist bereits vergeben.',
+    'The username field is required.':                                                    'Das Feld \'Name\' ist erforderlich.',
+    'The username field must be at least 3 characters in length.':                        'Der Name muss mindestens aus 3 Zeichen bestehen.',
+    'The username field cannot exceed 30 characters in length.':                          'Der Name darf maximal aus 30 Zeichen bestehen.',
+    'The username field may only contain alphanumeric, underscore, and dash characters.': 'Der Name darf nur aus Buchstaben, Zahlen und Unterstrichen bestehen',
+    USERNAME_ALREADY_TAKEN:                                                               'Der Name ist bereits vergeben.',
 
 
     // email
