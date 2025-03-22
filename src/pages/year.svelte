@@ -192,7 +192,7 @@
                         <PersonArray personData={data.year.speakers}
                                      personPopupCallback={openPersonPopup} />
                     {:else}
-                        <TextLine classes="text-line-center">Sei gespannt welche Speaker in den nächsten Tagen hier auf
+                        <TextLine classes="text-line-center">Sei gespannt, welche Speaker in den nächsten Tagen hier auf
                                                              dich warten.
                         </TextLine>
                     {/if}
@@ -226,7 +226,7 @@
                         <PersonArray personData={data.year.team_members}
                                      personPopupCallback={openPersonPopup} />
                     {:else}
-                        <TextLine classes="text-line-center">Sei gespannt welche Team Member in den nächsten Tagen hier
+                        <TextLine classes="text-line-center">Sei gespannt welche, Team Member in den nächsten Tagen hier
                                                              auf dich warten.
                         </TextLine>
                     {/if}
@@ -242,7 +242,7 @@
                         <StyledLink
                               classes="styled-link-white"
                               href={apiUrl(`/events/${data.year.event.year}/ics`)}
-                              title="Klicke um den Ablaufplan als ICS-Datei herunter zu laden"
+                              title="Klicke, um den Ablaufplan als ICS-Datei herunterzuladen"
                               icon="Calender"
                               newTab={false}
                               text="Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!"
@@ -263,7 +263,7 @@
                         {/each}
                     </div>
                 {:else}
-                    <TextLine classes="text-line-center">Sei gespannt welche Team Member in den nächsten Tagen hier
+                    <TextLine classes="text-line-center">Sei gespannt, welche Vorträge in den nächsten Tagen hier
                                                          auf dich warten.
                     </TextLine>
                 {/if}
