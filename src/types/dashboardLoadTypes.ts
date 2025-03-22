@@ -100,6 +100,7 @@ export type LoadSpeakerTalk = {
 
 export type LoadSpeakerApplication = {
     canApply: boolean,
+    applyError: string,
     event: DashboardEvent | undefined,
     tags: AllTalkTag,
     talkDurations: DashboardTalkDurationChoices,

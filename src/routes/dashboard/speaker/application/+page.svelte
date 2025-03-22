@@ -13,6 +13,11 @@
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import Explanation from 'elements/text/explanation.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
+    import Paragraph from 'elements/text/paragraph.svelte';
+    import Link from 'elements/text/link.svelte';
+
+    const APPLY_ERROR_NO_SPEAKER: string              = 'NO_APPROVED_SPEAKER_ENTRY';
+     // const APPLY_ERROR_CURRENTLY_NOT_ACCEPTING: string = 'CURRENTLY_NOT_ACCEPTING_SPEAKER_APPLICATIONS'; // default state
 
     export let data: LoadSpeakerApplication;
     let saved: boolean = false;
@@ -74,8 +79,24 @@
                              talkDurations={data.talkDurations}
                              on:save={() => saved = true} />
         {:else}
-            <TextLine>Aktuell kannst du keinen Talk einreichen.</TextLine>
-            <TextLine>Versuche es gerne bei der nächsten Bewerbungsphase wieder.</TextLine>
+            {#if data.applyError === APPLY_ERROR_NO_SPEAKER}
+                <Paragraph --text-align="center">
+                    Du bist noch kein Speaker für das aktuelle Event.<br />Aber gute Neuigkeiten für dich: Das kannst du
+                    ganz einfach ändern.<br />
+                    Bewerbe dich gerne für das aktuelle Event im
+                    <Link classes="link-inline"
+                          title={MenuItem.userApplication.description}
+                          href={MenuItem.userApplication.url}>User Dashboard.
+                    </Link>
+                    <br /><br />Du hast dich bereits für dieses Jahr
+                    beworben?<br /> Dann hab gerne etwas Geduld. Wir arbeiten dran.
+                </Paragraph>
+            {:else}
+                <Paragraph --text-align="center">
+                    Aktuell nehmen wir keine neuen Talk Bewerbungen an.<br />
+                    Versuche es gerne bei der nächsten Bewerbungsphase wieder.
+                </Paragraph>
+            {/if}
         {/if}
     {/if}
 </SectionDashboard>

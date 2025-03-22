@@ -1,6 +1,7 @@
 import type { LoadSpeakerApplication } from 'types/dashboardLoadTypes';
+
 import { apiUrl } from 'helper/links';
-import { checkAndParseInputDataAsync } from 'helper/parseJson';
+import { checkAndParseInputDataAsync, parseMultipleInfosAsync } from 'helper/parseJson';
 import { allTalkTagScheme } from 'types/provideTypes';
 import { dashboardEventScheme, dashboardTalkDurationChoicesScheme } from 'types/dashboardProvideTypes';
 import { z } from 'zod';
@@ -13,8 +14,10 @@ export async function load({ fetch }: {
     const allTalkDurationFetchPromise = fetch(apiUrl('/talk-duration-choices'));
 
     if (!(await canApplyFetchPromise).ok) { // not able for current speaker to apply a talk
+        const errors = await parseMultipleInfosAsync(await canApplyFetchPromise);
         return {
             canApply:      false,
+            applyError:    errors['error'],
             event:         undefined,
             tags:          [],
             talkDurations: [],
@@ -44,6 +47,7 @@ export async function load({ fetch }: {
 
     return {
         canApply:      (await canApplyParsePromise).can_submit_talk,
+        applyError:    '',
         event:         (await canApplyParsePromise).event,
         tags:          await allTagsParsePromise,
         talkDurations: await allTalkDurationParsePromise,
