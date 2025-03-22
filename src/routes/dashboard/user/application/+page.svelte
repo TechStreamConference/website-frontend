@@ -170,7 +170,7 @@
                     <HeadlineH2>Social-Media-Daten</HeadlineH2>
                     <Paragraph classes="paragraph-gray">Trage hier Links zu deinen Social-Media-Profilen ein, die
                                                         öffentlich
-                                                        angezeigt werden sollen. Klicke auf „Neu”, um weitere Links
+                                                        angezeigt werden sollen. Klicke auf „Neu“, um weitere Links
                                                         hinzuzufügen.
                     </Paragraph>
                     <SpeakerTeamMemberSocialMediaLinkForm bind:data={data.data.socials}
