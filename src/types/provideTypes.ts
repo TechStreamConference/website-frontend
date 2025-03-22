@@ -63,18 +63,21 @@ export const talkScheme = z.object({
 export type Talk = z.infer<typeof talkScheme>;
 
 export const eventScheme = z.object({
-                                        id:                   z.number(),
-                                        year:                 z.number(),
-                                        title:                z.string(),
-                                        subtitle:             z.string(),
-                                        start_date:           z.string(),
-                                        end_date:             z.string(),
-                                        description_headline: z.string(),
-                                        description:          z.string(),
-                                        discord_url:          z.string(),
-                                        twitch_url:           z.string(),
-                                        presskit_url:         z.string(),
-                                        trailer_youtube_id:   z.string(),
+                                        id:                      z.number(),
+                                        year:                    z.number(),
+                                        title:                   z.string(),
+                                        subtitle:                z.string(),
+                                        start_date:              z.string(),
+                                        end_date:                z.string(),
+                                        description_headline:    z.string(),
+                                        description:             z.string(),
+                                        discord_url:             z.string().nullable(),
+                                        twitch_url:              z.string().nullable(),
+                                        presskit_url:            z.string().nullable(),
+                                        trailer_youtube_id:      z.string().nullable(),
+                                        is_visible_on_frontpage: z.boolean(),
+                                        call_for_papers_start:   z.string().nullable(),
+                                        call_for_papers_end:     z.string().nullable(),
                                     });
 export type Event = z.infer<typeof eventScheme>;
 
