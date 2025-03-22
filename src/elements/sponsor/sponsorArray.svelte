@@ -24,8 +24,14 @@
 <style>
     .sponsor-array-image-grid {
         display:               grid;
-        grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(45rem, 1fr));
         gap:                   var(--4x-gap);
+    }
+
+    @media (max-width: 1280px) {
+        .sponsor-array-image-grid {
+            grid-template-columns: repeat(auto-fill, minmax(33rem, 1fr));
+        }
     }
 
     .sponsor-array-image-container {
