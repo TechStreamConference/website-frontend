@@ -50,7 +50,7 @@
       entryName={MenuItem.speakerApplication.name}
       classes="navigation-tabs-dashboard-subpage" />
 
-<SectionDashboard classes="standard-dashboard-section">
+<SectionDashboard classes="standard-dashboard-section wide-dashboard-section-override">
     <Explanation>
         Hier kannst du ein Thema für einen Vortrag einreichen, den du gerne bei unserem Event halten möchtest. Trage
         dafür deine Daten unten ein. Wenn du deinen Vortrag eingereicht hast, wird er von uns geprüft und wir werden uns

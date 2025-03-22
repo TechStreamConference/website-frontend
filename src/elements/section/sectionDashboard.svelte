@@ -20,4 +20,8 @@
         flex-direction: column;
         gap:            var(--full-gap);
     }
+
+    .wide-dashboard-section-override {
+        max-width: 150rem !important;
+    }
 </style>

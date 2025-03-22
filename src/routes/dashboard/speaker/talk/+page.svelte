@@ -106,7 +106,7 @@
                   rejectSlot(index);}}
               denyCallback={() => {}} />
 
-<SectionDashboard classes="standard-dashboard-section">
+<SectionDashboard classes="standard-dashboard-section wide-dashboard-section-override">
     <Explanation>
         Du siehst hier die Vorträge, die du eingereicht hast. Wähle zunächst über das Dropdown-Menü das Event aus. Wenn ein Talk von uns akzeptiert wurde, kannst du daran keine Änderungen mehr vornehmen.
     </Explanation>
