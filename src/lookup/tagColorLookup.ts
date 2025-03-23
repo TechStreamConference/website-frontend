@@ -1,30 +1,39 @@
-
+// @formatter:off
 const colors: string[] = [
-    "#FF5733", "#33FF57", "#3357FF", "#FF33A6", "#33FFF6",
-    "#FFC300", "#DAF7A6", "#581845", "#C70039", "#900C3F",
-    "#FFC0CB", "#FF1493", "#FF7F50", "#FFD700", "#2E8B57",
-    "#40E0D0", "#191970", "#8B008B", "#A52A2A", "#7FFF00",
-    "#DC143C", "#BDB76B", "#FA8072", "#D8BFD8", "#87CEFA",
-    "#9ACD32", "#BC8F8F", "#708090", "#556B2F", "#8B4513",
-    "#8FBC8F", "#228B22", "#ADFF2F", "#F08080", "#FFA07A",
-    "#B0E0E6", "#FFB6C1", "#F5DEB3", "#663399", "#CD5C5C",
-    "#DB7093", "#4169E1", "#008B8B", "#FF8C00", "#B8860B",
-    "#6B8E23", "#FFFAF0", "#191919", "#FFFACD", "#BA55D3",
-    "#FFDAB9", "#FF00FF", "#E6E6FA", "#6495ED", "#DAA520",
-    "#008080", "#708090", "#FF6347", "#3CB371", "#FFFFE0",
+    "#00ff00", "#006400", // 1 green
+    "#00ffff", "#00c8c8", // 3 cyan !important
+    "#0000ff", "#000096", // 5 blue
+    "#00ff00", "#006400", // 7 green
+    "#000000", "#323232", // 9 black
+    "#0000ff", "#000096", // 11 blue
+    "#ffff38", "#969600", // 13 yellow
+    "#000000", "#323232", // 15 black !important
+    "#00ff00", "#006400", // 17 green !important
+    "#c80000", "#960000", // 19 red
+    "#c800c8", "#960096", // 21 magenta
+    "#c80000", "#960000", // 23 red !important
 ];
+// @formatter:on,
 
-function hexToRgb(hex: string): { r: number; g: number; b: number } {
+function hexToRgb(hex: string): {
+    r: number;
+    g: number;
+    b: number
+} {
     // Remove leading '#' if present
-    const cleanHex = hex.replace(/^#/, "");
+    const cleanHex = hex.replace(/^#/, '');
 
     // Parse r, g, b
     const bigint = parseInt(cleanHex, 16);
-    const r = (bigint >> 16) & 255;
-    const g = (bigint >> 8) & 255;
-    const b = bigint & 255;
+    const r      = (bigint >> 16) & 255;
+    const g      = (bigint >> 8) & 255;
+    const b      = bigint & 255;
 
-    return { r, g, b };
+    return {
+        r,
+        g,
+        b,
+    };
 }
 
 function keyFromIndex(index: number): number {
@@ -36,8 +45,12 @@ export function tagColorLookup(key: number): string {
 }
 
 export function tagTextColorLookup(key: number): string {
-    const color = colors[keyFromIndex(key)];
-    const { r, g, b } = hexToRgb(color);
+    const color     = colors[keyFromIndex(key)];
+    const {
+              r,
+              g,
+              b,
+          }         = hexToRgb(color);
     const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-    return luminance > 128 ? "#000" : "#fff";
+    return luminance > 128 ? '#000' : '#fff';
 }
