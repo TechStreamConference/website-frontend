@@ -1,7 +1,8 @@
 import type { HandleFetch } from '@sveltejs/kit';
 import { env } from '$env/dynamic/public';
 
-export const handleFetch: HandleFetch = async ({ request, fetch }) => {
+export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
+    const cookies = event.request.headers.get("cookie")
     if (!env.PUBLIC_API_BASE_URL_SSR) {
         console.error('[handleFetch] env.PUBLIC_API_BASE_URL_SSR is not set.');
         return fetch(request);
@@ -16,5 +17,6 @@ export const handleFetch: HandleFetch = async ({ request, fetch }) => {
         request.url.replace(clientUrlBase, serverUrlBase),
         request
     );
+    request.headers.set('cookie', cookies!);
     return fetch(request);
 };
