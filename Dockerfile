@@ -28,7 +28,7 @@ RUN echo 'alias ll="ls -la"' >> ~/.bashrc
 COPY --from=builder /app/build ./build
 
 # Copy any additional files the build needs
-COPY ./.svelte-kit ./.svelte-kit
+COPY --from=builder /app/.svelte-kit ./.svelte-kit
 COPY ./static ./static
 COPY ./src ./src
 COPY svelte.config.js .
