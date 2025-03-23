@@ -1,4 +1,4 @@
-import {env} from "$env/dynamic/public";
+import { env } from "$env/dynamic/public";
 
 export function apiUrl(link: string): string {
     let urlBase = 'http://localhost:8080/api';
