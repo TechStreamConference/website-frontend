@@ -1,10 +1,13 @@
+import {env} from "$env/dynamic/public";
+
 export function apiUrl(link: string): string {
-    const base_url = import.meta.env.VITE_API_BASE_URL;
-    if (base_url){
-        return `${base_url}${link}`;
+    let urlBase = 'http://localhost:8080/api';
+    if (env.PUBLIC_API_BASE_URL_CSR) {
+        urlBase = env.PUBLIC_API_BASE_URL_CSR;
+    } else {
+        console.error('[apiUrl] env.PUBLIC_API_BASE_URL_CSR is not set.');
     }
-    console.error(`VITE_API_BASE_URL is undefined. default to local host.`);
-    return 'http://localhost:8080/api' + link;
+    return urlBase + link;
 }
 
 export function imageUrl(link: string): string {
