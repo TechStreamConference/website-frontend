@@ -83,17 +83,17 @@
                 <Paragraph --text-align="center">
                     Du bist noch kein Speaker für das aktuelle Event.<br />Aber gute Neuigkeiten für dich: Das kannst du
                     ganz einfach ändern.<br />
-                    Bewerbe dich gerne für das aktuelle Event im
+                    Bewirb dich gerne für das aktuelle Event im
                     <Link classes="link-inline"
                           title={MenuItem.userApplication.description}
-                          href={MenuItem.userApplication.url}>User Dashboard.
+                          href={MenuItem.userApplication.url}>User-Dashboard.
                     </Link>
                     <br /><br />Du hast dich bereits für dieses Jahr
                     beworben?<br /> Dann hab gerne etwas Geduld. Wir arbeiten dran.
                 </Paragraph>
             {:else}
                 <Paragraph --text-align="center">
-                    Aktuell nehmen wir keine neuen Talk Bewerbungen an.<br />
+                    Aktuell nehmen wir keine neuen Talks an.<br />
                     Versuche es gerne bei der nächsten Bewerbungsphase wieder.
                 </Paragraph>
             {/if}
