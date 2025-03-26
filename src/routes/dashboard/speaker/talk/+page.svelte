@@ -79,7 +79,7 @@
 
 <Tabs entries={Menu.speaker}
       entryName={MenuItem.speakerTalk.name}
-      classes="navigation-tabs-dashboard-subpage" />
+      classes="navigation-tabs-dashboard-subpage navigation-tabs-wide-dashboard-override" />
 
 <GeneralPopup bind:this={acceptPopup}
               headline="Vortragszeit akzeptieren?"

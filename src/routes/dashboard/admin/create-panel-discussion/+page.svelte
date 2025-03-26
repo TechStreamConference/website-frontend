@@ -93,7 +93,7 @@
     }
 </script>
 
-<Tabs classes="navigation-tabs-dashboard-subpage"
+<Tabs classes="navigation-tabs-dashboard-subpage navigation-tabs-wide-dashboard-override"
       entries={Menu.admin}
       entryName={MenuItem.adminCreatePanelDiscussion.name} />
 
