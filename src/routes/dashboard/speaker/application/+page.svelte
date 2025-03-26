@@ -16,8 +16,9 @@
     import Paragraph from 'elements/text/paragraph.svelte';
     import Link from 'elements/text/link.svelte';
 
-    const APPLY_ERROR_NO_SPEAKER: string              = 'NO_APPROVED_SPEAKER_ENTRY';
-     // const APPLY_ERROR_CURRENTLY_NOT_ACCEPTING: string = 'CURRENTLY_NOT_ACCEPTING_SPEAKER_APPLICATIONS'; // default state
+    // Standard Apply Error is 'CURRENTLY_NOT_ACCEPTING_SPEAKER_APPLICATIONS'.
+    // This error is the else path to make sure at least one error message is displayed.
+    const APPLY_ERROR_NO_SPEAKER: string = 'NO_APPROVED_SPEAKER_ENTRY';
 
     export let data: LoadSpeakerApplication;
     let saved: boolean = false;
