@@ -97,7 +97,7 @@
       entries={Menu.admin}
       entryName={MenuItem.adminCreatePanelDiscussion.name} />
 
-<SectionDashboard classes="standard-dashboard-section">
+<SectionDashboard classes="standard-dashboard-section wide-dashboard-section-override">
     {#if currentState === State.Default}
         <NavigationDropDown bind:this={eventDropDown}
                             labelText="Aktuelles Jahr:"

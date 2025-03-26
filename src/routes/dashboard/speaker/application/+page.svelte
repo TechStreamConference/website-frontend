@@ -13,6 +13,12 @@
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import Explanation from 'elements/text/explanation.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
+    import Paragraph from 'elements/text/paragraph.svelte';
+    import Link from 'elements/text/link.svelte';
+
+    // Standard Apply Error is 'CURRENTLY_NOT_ACCEPTING_SPEAKER_APPLICATIONS'.
+    // This error is the else path to make sure at least one error message is displayed.
+    const APPLY_ERROR_NO_SPEAKER: string = 'NO_APPROVED_SPEAKER_ENTRY';
 
     export let data: LoadSpeakerApplication;
     let saved: boolean = false;
@@ -45,7 +51,7 @@
       entryName={MenuItem.speakerApplication.name}
       classes="navigation-tabs-dashboard-subpage" />
 
-<SectionDashboard classes="standard-dashboard-section">
+<SectionDashboard classes="standard-dashboard-section wide-dashboard-section-override">
     <Explanation>
         Hier kannst du ein Thema für einen Vortrag einreichen, den du gerne bei unserem Event halten möchtest. Trage
         dafür deine Daten unten ein. Wenn du deinen Vortrag eingereicht hast, wird er von uns geprüft und wir werden uns
@@ -74,8 +80,24 @@
                              talkDurations={data.talkDurations}
                              on:save={() => saved = true} />
         {:else}
-            <TextLine>Aktuell kannst du keinen Talk einreichen.</TextLine>
-            <TextLine>Versuche es gerne bei der nächsten Bewerbungsphase wieder.</TextLine>
+            {#if data.applyError === APPLY_ERROR_NO_SPEAKER}
+                <Paragraph --text-align="center">
+                    Du bist noch kein Speaker für das aktuelle Event.<br />Aber gute Neuigkeiten für dich: Das kannst du
+                    ganz einfach ändern.<br />
+                    Bewirb dich gerne für das aktuelle Event im
+                    <Link classes="link-inline"
+                          title={MenuItem.userApplication.description}
+                          href={MenuItem.userApplication.url}>User-Dashboard.
+                    </Link>
+                    <br /><br />Du hast dich bereits für dieses Jahr
+                    beworben?<br /> Dann hab gerne etwas Geduld. Wir arbeiten dran.
+                </Paragraph>
+            {:else}
+                <Paragraph --text-align="center">
+                    Aktuell nehmen wir keine neuen Talks an.<br />
+                    Versuche es gerne bei der nächsten Bewerbungsphase wieder.
+                </Paragraph>
+            {/if}
         {/if}
     {/if}
 </SectionDashboard>
