@@ -45,6 +45,8 @@ const lookup: ResponseDict = {
     USER_ALREADY_HAS_PENDING_APPLICATION:         'Du hast dich bereits für dieses Jahr beworben\nWir sind gerade dabei, deine Bewerbung zu überprüfen.\nSobald wir deine Bewerbung angenommen haben, kannst du deinen Eintrag im Speaker-Tab bearbeiten.',
     NO_EVENT_TO_APPLY_FOR:                        'Aktuell kann man sich nicht bewerben.\nSchau gerne bei der nächsten Bewerbungsphase wieder vorbei.\nWenn du bereits ein Speaker bist, kannst du deine Daten im Speaker-Tab bearbeiten.',
     SPEAKER_CANNOT_BE_REJECTED:                   'Dieser Speaker kann nicht abgelehnt werden.',
+    'photo does not have a valid mime type.':     'Das Foto hat das falsche Format. Stelle sicher, dass dein Foto ein .jpeg oder .png ist.',
+    'photo is not a valid, uploaded image file.': 'Das Foto hat das falsche Format. Stelle sicher, dass dein Foto ein .jpeg oder .png ist.',
 
     // talk
     TALK_ALREADY_APPROVED:                         'Der Talk ist bereits freigegeben.',
