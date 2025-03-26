@@ -263,9 +263,11 @@
                         {/each}
                     </div>
                 {:else}
-                    <TextLine classes="text-line-center">Sei gespannt, welche Vorträge in den nächsten Tagen hier
-                                                         auf dich warten.
-                    </TextLine>
+                    <div class="year-section-inner">
+                        <TextLine classes="text-line-center">Sei gespannt, welche Vorträge in den nächsten Tagen hier
+                                                             auf dich warten.
+                        </TextLine>
+                    </div>
                 {/if}
             </Section>
         {/if}
