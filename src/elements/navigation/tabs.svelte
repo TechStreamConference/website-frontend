@@ -6,9 +6,9 @@
 
     export let entries: Menu;
     export let entryName: string;
-    export let classes: string                          = '';
+    export let classes: string                      = '';
     export let position: 'start' | 'center' | 'end' = 'start';
-    export let color: 'default' | 'purple'              = 'default';
+    export let color: 'default' | 'purple'          = 'default';
 
     let current: number = 0;
 
@@ -51,13 +51,19 @@
         justify-content: end;
     }
 
+    .subpage-navigation-tabs {
+        width:      fit-content;
+        min-width:  100rem;
+        max-width:  calc(100vw - 5rem);
+        align-self: center;
+    }
+
     .navigation-tabs {
         display:        flex;
         flex-direction: row;
         border-bottom:  1px solid var(--line-color);
         padding:        0 var(--2x-padding);
         margin-bottom:  var(--full-margin);
-        width:          100%;
         gap:            var(--full-gap);
         padding-top:    var(--full-padding);
     }
