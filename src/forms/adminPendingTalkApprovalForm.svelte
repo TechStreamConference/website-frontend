@@ -113,7 +113,7 @@
               denyCallback={() => {}}
               acceptCallback={reject} />
 
-<form class="dashboard-admin-pending-talk-approval-form"
+<form class="dashboard-admin-pending-talk-approval-form form-border"
       on:submit|preventDefault={() => approvePopup.show('') }>
     <SaveMessage bind:this={message} />
     <MessageWrapper messages={errorList} />
@@ -164,9 +164,6 @@
         display:        flex;
         flex-direction: column;
         gap:            var(--full-gap);
-        border:         1px solid var(--primary-color-dark);
-        border-radius:  var(--border-radius);
-        padding:        var(--full-padding);
     }
 
     .dashboard-admin-pending-talk-approval-entry {

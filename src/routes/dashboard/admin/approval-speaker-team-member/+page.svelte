@@ -96,7 +96,7 @@
 
 <SectionDashboard classes="standard-dashboard-section dashboard-admin-approval-wrapper">
     {#each data.userIDArray as userID}
-        <div class="dashboard-admin-user-wrapper">
+        <div class="dashboard-admin-user-wrapper form-border">
             <SubHeadline classes="sub-headline-center">{getNameByUserID(userID)}</SubHeadline>
             <AdminSpeakerTeamMemberApprovalFormWrapper type="speaker"
                                                        speakerTeamMember={collectElementMediaByUserId(data.speaker, userID)}
@@ -122,9 +122,6 @@
     .dashboard-admin-user-wrapper {
         display:        flex;
         flex-direction: column;
-        border:         1px solid var(--primary-color-light);
-        border-radius:  var(--border-radius);
-        padding:        var(--full-padding);
         gap:            var(--full-gap);
     }
 

@@ -107,7 +107,7 @@
                             on:navigated={(e) => {onNavigate(e.detail)}} />
         <SaveMessage bind:this={message} />
         <MessageWrapper messages={errorList} />
-        <form class="dashboard-admin-create-panel-discussion-form"
+        <form class="dashboard-admin-create-panel-discussion-form form-border"
               on:submit|preventDefault={save}>
             <SpeakerTalkForm bind:data={talkData}
                              tags={data.tags}

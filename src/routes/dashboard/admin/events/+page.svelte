@@ -176,7 +176,7 @@
             <AdminEventForm classes="dashboard-admin-event-form"
                             speakerArray={data.allSpeaker}
                             event={currentEvent} />
-            <div class="links-wrapper">
+            <div class="links-wrapper form-border">
                 <SubHeadline classes="white">Video Links</SubHeadline>
                 <SaveMessage bind:this={linkMessage} />
                 <MessageWrapper messages={linkErrorQueue} />
@@ -220,8 +220,6 @@
     .links-wrapper {
         display:        flex;
         flex-direction: column;
-        padding:        var(--full-padding);
-        border:         1px solid var(--primary-color-dark);
         gap:            var(--full-gap);
         align-items:    center;
     }

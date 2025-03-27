@@ -156,7 +156,7 @@
         ab.
     </Explanation>
 
-    <div class="dashboard-user-profile-section-wrapper">
+    <div class="dashboard-user-profile-section-wrapper form-border">
         <div class="dashboard-user-profile-section-entry-wrapper">
             <div class="dashboard-user-profile-entry-grid">
                 <TextLine classes="text-align-right">Name:</TextLine>
@@ -182,7 +182,7 @@
     {#if state === State.Name}
         <div class="dashboard-user-profile-transition-wrapper"
              transition:fade={{ duration: 300 }}>
-            <div class="dashboard-user-profile-section-wrapper">
+            <div class="dashboard-user-profile-section-wrapper form-border">
                 <form class="dashboard-user-profile-section-entry-wrapper"
                       on:submit|preventDefault={saveName}>
                     <SubHeadline classes="sub-headline-center">Name</SubHeadline>
@@ -210,7 +210,7 @@
     {:else if state === State.Mail}
         <div class="dashboard-user-profile-transition-wrapper"
              transition:fade={{ duration: 300 }}>
-            <div class="dashboard-user-profile-section-wrapper">
+            <div class="dashboard-user-profile-section-wrapper form-border">
                 <form class="dashboard-user-profile-section-entry-wrapper"
                       on:submit|preventDefault={saveMail}>
                     <SubHeadline classes="sub-headline-center">E-Mail</SubHeadline>
@@ -238,7 +238,7 @@
     {:else if state === State.Password}
         <div class="dashboard-user-profile-transition-wrapper"
              transition:fade={{ duration: 300 }}>
-            <div class="dashboard-user-profile-section-wrapper">
+            <div class="dashboard-user-profile-section-wrapper form-border">
                 <form class="dashboard-user-profile-section-entry-wrapper"
                       on:submit|preventDefault={savePassword}>
                     <SubHeadline classes="sub-headline-center">Passwort</SubHeadline>
@@ -278,9 +278,6 @@
 <style>
     .dashboard-user-profile-section-wrapper {
         width:         100%;
-        padding:       var(--full-padding);
-        border:        1px solid var(--primary-color-dark);
-        border-radius: var(--border-radius);
     }
 
     .dashboard-user-profile-transition-wrapper {

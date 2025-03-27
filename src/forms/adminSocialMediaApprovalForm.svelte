@@ -84,7 +84,7 @@
               acceptCallback={approve}
 />
 
-<div class="social-media-approval-wrapper"
+<div class="social-media-approval-wrapper form-border"
      id="social-media-approval-entry-{media.id}">
     <SaveMessage bind:this={message} />
     <MessageWrapper messages={errorList} />
@@ -122,9 +122,6 @@
 
 <style>
     .social-media-approval-wrapper {
-        border:            1px solid var(--primary-color-dark);
-        border-radius:     var(--border-radius);
-        padding:           var(--full-padding);
         scroll-margin-top: var(--16x-margin);
     }
 

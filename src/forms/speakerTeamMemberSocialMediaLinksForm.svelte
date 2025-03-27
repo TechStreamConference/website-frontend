@@ -55,7 +55,8 @@
       denyCallback={() => {}}
 ></GeneralPopup>
 
-<FormWrapper submitCallback={() => dispatch('save')}
+<FormWrapper classes="form-border"
+             submitCallback={() => dispatch('save')}
              useForm={displaySaveButton}>
     <EditSocialMedia
           links={data.socials}

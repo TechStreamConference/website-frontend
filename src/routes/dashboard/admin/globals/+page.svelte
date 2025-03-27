@@ -47,7 +47,7 @@
 <SectionDashboard classes="dashboard-admin-global-section">
     <SaveMessage bind:this={message} />
     <MessageWrapper messages={errorList} />
-    <form class="dashboard-admin-global-form"
+    <form class="dashboard-admin-global-form form-border"
           on:submit|preventDefault={trySaveAsync}>
 		<TextArea
               classes="admin-footer-description input"

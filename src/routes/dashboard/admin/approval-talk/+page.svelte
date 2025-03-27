@@ -86,7 +86,7 @@
 
 <SectionDashboard classes="standard-dashboard-section dashboard-admin-talk-approval-section">
     {#each data.userIDArray as userID}
-        <div class="dashboard-admin-talk-approval-wrapper">
+        <div class="dashboard-admin-talk-approval-wrapper form-border">
             <SubHeadline classes="sub-headline-center">{getNameByUserID(data.pendingTalks,
                                                                         data.tentativeTalks,
                                                                         userID
@@ -113,8 +113,5 @@
         display: flex;
         flex-direction: column;
         gap: var(--4x-gap);
-        border: 1px solid var(--primary-color-dark);
-        border-radius: var(--border-radius);
-        padding: var(--full-padding);
     }
 </style>

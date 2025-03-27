@@ -42,6 +42,7 @@
         let createResult: SaveResult              = {
             success:  true,
             messages: [],
+            infos: {},
         };
         for (let link of data.socials) {
             if (link.id === 0) {
@@ -68,6 +69,7 @@
                 return {
                     success:  true,
                     messages: [],
+                    infos: {},
                 };
             }
 
