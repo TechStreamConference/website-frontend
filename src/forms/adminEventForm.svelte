@@ -195,7 +195,7 @@
     <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 {/if}
 
-<form class="dashboard-admin-event-form {classes}"
+<form class="dashboard-admin-event-form form-border {classes}"
       on:submit|preventDefault={trySaveAsync}>
     <SaveMessage bind:this={message} />
     <MessageWrapper messages={errorList} />
@@ -370,9 +370,6 @@
         display:        flex;
         flex-direction: column;
         gap:            var(--full-gap);
-        border:         1px solid var(--primary-color-light);
-        border-radius:  var(--border-radius);
-        padding:        var(--full-padding);
     }
 
     :global(.dashboard-admin-event-event-subheadline) {

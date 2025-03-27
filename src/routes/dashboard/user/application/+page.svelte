@@ -154,7 +154,7 @@
                        --text-align="center">{data.error.error}</Paragraph>
         </div>
     {:else if data.data}
-        <form class="dashboard-user-application-form"
+        <form class="dashboard-user-application-form form-border"
               on:submit|preventDefault={trySave}>
             <div class="dashboard-user-application-event-infos">
                 <HeadlineH2>{data.data.event.title}</HeadlineH2>
@@ -164,14 +164,14 @@
             </div>
             <SaveMessage bind:this={saveMessage} />
             <MessageWrapper messages={errorList} />
-            <div class="dashboard-user-application-section">
+            <div class="dashboard-user-application-section form-border">
                 <HeadlineH2>Deine Bewerbung</HeadlineH2>
                 <SpeakerTeamMemberEventForm bind:this={eventForm}
                                             bind:data={data.data.speaker}
                                             displaySaveButton={false} />
             </div>
             {#if !(data.roles.is_speaker || data.roles.is_team_member)}
-                <div class="dashboard-user-application-section">
+                <div class="dashboard-user-application-section form-border">
                     <HeadlineH2>Social-Media-Daten</HeadlineH2>
                     <Paragraph classes="paragraph-gray">Trage hier Links zu deinen Social-Media-Profilen ein, die
                                                         öffentlich
@@ -220,10 +220,6 @@
         display:        flex;
         flex-direction: column;
         gap:            var(--full-gap);
-        border:         1px solid var(--primary-color-dark);
-        padding:        var(--full-padding);
-        border-radius:  var(--border-radius);
-
     }
 
     .dashboard-user-application-button-wrapper {

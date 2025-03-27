@@ -111,7 +111,7 @@
     />
 {/if}
 
-<FormWrapper classes="dashboard-speaker-event-form"
+<FormWrapper classes="dashboard-speaker-event-form form-border"
              submitCallback={() => { dispatch('save'); }}
              useForm={displaySaveButton}
 >
@@ -219,9 +219,6 @@
         display:        flex;
         flex-direction: column;
         gap:            var(--full-gap);
-        border:         1px solid var(--primary-color-dark);
-        border-radius:  var(--border-radius);
-        padding:        var(--full-padding)
     }
 
     .input-grid {
