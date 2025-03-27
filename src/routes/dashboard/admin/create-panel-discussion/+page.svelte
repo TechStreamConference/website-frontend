@@ -93,7 +93,8 @@
     }
 </script>
 
-<Tabs classes="navigation-tabs-dashboard-subpage navigation-tabs-wide-dashboard-override"
+<Tabs classes="subpage-navigation-tabs"
+      position="center"
       entries={Menu.admin}
       entryName={MenuItem.adminCreatePanelDiscussion.name} />
 

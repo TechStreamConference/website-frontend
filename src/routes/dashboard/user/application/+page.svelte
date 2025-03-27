@@ -121,11 +121,10 @@
     }
 </script>
 
-<Tabs
+<Tabs classes="subpage-navigation-tabs"
+      position="center"
       entries={Menu.user}
-      entryName={MenuItem.userApplication.name}
-      classes="navigation-tabs-dashboard-subpage"
-/>
+      entryName={MenuItem.userApplication.name} />
 <UnsavedChangesCallbackWrapper callback={trySave} />
 <SectionDashboard classes="standard-dashboard-section">
     <Explanation>

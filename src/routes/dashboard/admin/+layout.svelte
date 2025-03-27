@@ -10,12 +10,10 @@
     export let data: LoadDashboard;
 </script>
 
-<Tabs
+<Tabs position="end"
+      color="purple"
       entries={Menu.SectionIn(data.roles)}
-      entryName={MenuItem.admin.name}
-      alignment="navigation-tabs-end"
-      background="navigation-tabs-purple"
-/>
+      entryName={MenuItem.admin.name} />
 <HeadlineInfoDashboard headline="Admin">
 
 </HeadlineInfoDashboard>

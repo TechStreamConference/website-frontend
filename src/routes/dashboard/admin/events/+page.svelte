@@ -159,11 +159,10 @@
               denyCallback={() => {}}
               acceptCallback={sendLinksAsync} />
 
-<Tabs
+<Tabs classes="subpage-navigation-tabs"
+      position="center"
       entries={Menu.admin}
-      entryName={MenuItem.adminEvents.name}
-      classes="navigation-tabs-dashboard-subpage"
-/>
+      entryName={MenuItem.adminEvents.name} />
 <SectionDashboard classes="dashboard-admin-event-section standard-dashboard-section">
     {#if data.allEvents}
         <NavigationDropDown

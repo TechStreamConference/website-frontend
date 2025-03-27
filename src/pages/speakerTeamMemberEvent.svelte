@@ -87,9 +87,10 @@
     }
 </script>
 
-<Tabs entries={menu}
-      entryName={menuItem.name}
-      classes="navigation-tabs-dashboard-subpage" />
+<Tabs classes="subpage-navigation-tabs"
+      position="center"
+      entries={menu}
+      entryName={menuItem.name} />
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 
 <SectionDashboard classes="standard-dashboard-section">

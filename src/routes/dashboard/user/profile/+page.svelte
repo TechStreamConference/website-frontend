@@ -142,11 +142,10 @@
     }
 </script>
 
-<Tabs
+<Tabs classes="subpage-navigation-tabs"
+      position="center"
       entries={Menu.user}
-      entryName={MenuItem.userProfile.name}
-      classes="navigation-tabs-dashboard-subpage"
-/>
+      entryName={MenuItem.userProfile.name} />
 <SectionDashboard classes="standard-dashboard-section">
     <Explanation>
         Bearbeite hier dein Profil. Dein Name und deine E-Mail-Adresse sind nur für Administratoren sichtbar und werden
@@ -278,8 +277,8 @@
 
 <style>
     .dashboard-user-profile-section-wrapper {
-        width: 100%;
-        padding: var(--full-padding);
+        width:         100%;
+        padding:       var(--full-padding);
         border:        1px solid var(--primary-color-dark);
         border-radius: var(--border-radius);
     }

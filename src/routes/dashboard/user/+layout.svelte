@@ -10,15 +10,15 @@
     export let data: LoadDashboard;
 </script>
 
-<Tabs
+<Tabs position="end"
+      color="purple"
       entries={Menu.SectionIn(data.roles)}
-      entryName={MenuItem.user.name}
-      alignment="navigation-tabs-end"
-      background="navigation-tabs-purple"
-/>
+      entryName={MenuItem.user.name} />
 
 <HeadlineInfoDashboard headline="User">
-    In diesem Bereich kannst du Änderungen an deinem Profil vornehmen. Klicke dazu unten auf „Profil”. Was du hier einträgst, ist nicht öffentlich sichtbar. Du kannst dich hier auch als Speaker bewerben. Klicke dazu auf „Bewerbung”.
+    In diesem Bereich kannst du Änderungen an deinem Profil vornehmen. Klicke dazu unten auf „Profil”. Was du hier
+    einträgst, ist nicht öffentlich sichtbar. Du kannst dich hier auch als Speaker bewerben. Klicke dazu auf
+    „Bewerbung”.
 </HeadlineInfoDashboard>
 
 <slot />

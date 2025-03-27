@@ -21,7 +21,7 @@
 
     export let data: LoadDashboard; // data from database
 
-    let copiedData           = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
+    let copiedData          = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
     let message: SaveMessage;
     let errorList: string[] = [];
 
@@ -39,11 +39,10 @@
     }
 </script>
 
-<Tabs
+<Tabs classes="subpage-navigation-tabs"
+      position="center"
       entries={Menu.admin}
-      entryName={MenuItem.adminGlobals.name}
-      classes="navigation-tabs-dashboard-subpage"
-/>
+      entryName={MenuItem.adminGlobals.name} />
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 <SectionDashboard classes="dashboard-admin-global-section">
     <SaveMessage bind:this={message} />

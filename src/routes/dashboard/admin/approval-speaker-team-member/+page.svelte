@@ -89,11 +89,10 @@
     }
 </script>
 
-<Tabs
+<Tabs classes="subpage-navigation-tabs"
+      position="center"
       entries={Menu.admin}
-      entryName={MenuItem.adminApprovalSpeakerTeamMember.name}
-      classes="navigation-tabs-dashboard-subpage"
-/>
+      entryName={MenuItem.adminApprovalSpeakerTeamMember.name} />
 
 <SectionDashboard classes="standard-dashboard-section dashboard-admin-approval-wrapper">
     {#each data.userIDArray as userID}
