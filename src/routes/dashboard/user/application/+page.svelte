@@ -138,9 +138,15 @@
     </Explanation>
     {#if success}
         <div class="dashboard-user-application-error">
-            <Paragraph classes="paragraph-pre-wrap"
-                       --text-align="center">
-                {"Du hast dich erfolgreich beworben.\nWir werden nun deine Bewerbung kontrollieren.\nWenn wir dich annehmen, kannst du deine Daten im Speaker-Dashboard bearbeiten.\nDazu wird dann ein neuer Tab oben rechts erscheinen."}
+            <Paragraph --text-align="center">
+                Du hast dich erfolgreich beworben.<br />
+                Wir werden nun deine Bewerbung kontrollieren.<br />
+                Wenn wir dich annehmen, kannst du deine Daten im Speaker-Dashboard bearbeiten.<br />
+                {#if data.roles.is_speaker}
+                    Das Speaker Dashboard kennst du ja bereits.
+                {:else}
+                    Dazu wird dann ein neuer Tab oben rechts erscheinen.
+                {/if}
             </Paragraph>
         </div>
     {:else if data.error}
