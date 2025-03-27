@@ -124,4 +124,18 @@
     :global(.navigation-tabs-text-line) {
         font-size: var(--1-5x-font-size);
     }
+
+    @media (max-width: 1280px) {
+        .subpage-navigation-tabs {
+            min-width: 0;
+        }
+
+        :global(.navigation-tabs-text-line) {
+            font-size: var(--full-font-size);
+        }
+
+        .navigation-tabs-entry {
+            padding: var(--half-padding) var(--full-padding);
+        }
+    }
 </style>
