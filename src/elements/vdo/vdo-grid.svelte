@@ -27,7 +27,7 @@
                 <Toggle ariaLabel="Klicke hier, um Cam Links zu filtern"
                         bind:toggle={displayCam}>
                     <TextLine slot="slotTrue"
-                              classes="toggle-slot toggle-slot-true">Cam
+                              classes="toggle-slot toggle-slot-true text-line-white">Cam
                     </TextLine>
                     <TextLine slot="slotFalse"
                               classes="toggle-slot">Cam
@@ -36,7 +36,7 @@
                 <Toggle ariaLabel="Klicke hier, um Screen Links zu filtern"
                         bind:toggle={displayScreen}>
                     <TextLine slot="slotTrue"
-                              classes="toggle-slot toggle-slot-true">Screen
+                              classes="toggle-slot toggle-slot-true text-line-white">Screen
                     </TextLine>
                     <TextLine slot="slotFalse"
                               classes="toggle-slot">Screen
@@ -45,7 +45,7 @@
                 <Toggle ariaLabel="Klicke hier, um Push Links zu filtern"
                         bind:toggle={displayPush}>
                     <TextLine slot="slotTrue"
-                              classes="toggle-slot toggle-slot-true">Push
+                              classes="toggle-slot toggle-slot-true text-line-white">Push
                     </TextLine>
                     <TextLine slot="slotFalse"
                               classes="toggle-slot">Push
@@ -54,7 +54,7 @@
                 <Toggle ariaLabel="Klicke hier, um View Links zu filtern"
                         bind:toggle={displayView}>
                     <TextLine slot="slotTrue"
-                              classes="toggle-slot toggle-slot-true">View
+                              classes="toggle-slot toggle-slot-true text-line-white">View
                     </TextLine>
                     <TextLine slot="slotFalse"
                               classes="toggle-slot">View
