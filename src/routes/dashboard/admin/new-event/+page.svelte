@@ -38,9 +38,10 @@
 
 </script>
 
-<Tabs entries={Menu.admin}
-      entryName={MenuItem.adminNewEvent.name}
-      classes="navigation-tabs-dashboard-subpage" />
+<Tabs classes="subpage-navigation-tabs"
+      position="center"
+      entries={Menu.admin}
+      entryName={MenuItem.adminNewEvent.name} />
 
 <SectionDashboard classes="standard-dashboard-section">
     {#if currentState === State.Saved}

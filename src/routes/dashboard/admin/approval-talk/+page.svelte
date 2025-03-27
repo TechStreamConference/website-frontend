@@ -79,7 +79,8 @@
     }
 </script>
 
-<Tabs classes="navigation-tabs-dashboard-subpage"
+<Tabs classes="subpage-navigation-tabs"
+      position="center"
       entries={Menu.admin}
       entryName={MenuItem.adminApprovalTalk.name} />
 
