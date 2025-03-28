@@ -46,7 +46,7 @@
 <SectionDashboard classes="standard-dashboard-section">
     {#if currentState === State.Saved}
         <div class="dashboard-admin-new-event-message-wrapper">
-            <TextLine>Das event '{event.title}' wurde erfolgreich angelegt.</TextLine>
+            <TextLine>Das Event '{event.title}' wurde erfolgreich angelegt.</TextLine>
             <TextLine>Du kannst es ab jetzt im Event Tab bearbeiten.</TextLine>
         </div>
     {:else}
