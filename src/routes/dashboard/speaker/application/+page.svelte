@@ -49,7 +49,7 @@
 
 <Tabs entries={Menu.speaker}
       entryName={MenuItem.speakerApplication.name}
-      classes="navigation-tabs-dashboard-subpage" />
+      classes="navigation-tabs-dashboard-subpage navigation-tabs-wide-dashboard-override" />
 
 <SectionDashboard classes="standard-dashboard-section wide-dashboard-section-override">
     <Explanation>

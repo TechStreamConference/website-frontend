@@ -86,6 +86,10 @@
         margin-top: var(--2x-margin);
     }
 
+    .navigation-tabs-wide-dashboard-override {
+        min-width: 150rem !important;
+    }
+
     .navigation-tabs-entry {
         transition:              background-color var(--transition-duration);
 
