@@ -1,14 +1,14 @@
 <script lang="ts">
-    import type { Menu } from 'types/provideTypes';
+    import type {Menu} from 'types/provideTypes';
 
     import TextLine from 'elements/text/textLine.svelte';
-    import { onMount } from 'svelte';
+    import {onMount} from 'svelte';
 
     export let entries: Menu;
     export let entryName: string;
-    export let classes: string                      = '';
+    export let classes: string = '';
     export let position: 'start' | 'center' | 'end' = 'start';
-    export let color: 'default' | 'purple'          = 'default';
+    export let color: 'default' | 'purple' = 'default';
 
     let current: number = 0;
 
@@ -52,9 +52,9 @@
     }
 
     .subpage-navigation-tabs {
-        width:      fit-content;
-        min-width:  100rem;
-        max-width:  calc(100vw - 5rem);
+        width: fit-content;
+        min-width: 100rem;
+        max-width: calc(100vw - 5rem);
         align-self: center;
     }
 
@@ -63,13 +63,13 @@
     }
 
     .navigation-tabs {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        border-bottom:  1px solid var(--line-color);
-        padding:        0 var(--2x-padding);
-        margin-bottom:  var(--full-margin);
-        gap:            var(--full-gap);
-        padding-top:    var(--full-padding);
+        border-bottom: 1px solid var(--line-color);
+        padding: 0 var(--2x-padding);
+        margin-bottom: var(--full-margin);
+        gap: var(--full-gap);
+        padding-top: var(--full-padding);
     }
 
     .purple-background {
@@ -81,24 +81,24 @@
     }
 
     .navigation-tabs-entry {
-        transition:              background-color var(--transition-duration),
-                                 border var(--transition-duration);
-        padding:                 var(--full-padding) var(--2x-padding);
+        transition: background-color var(--transition-duration),
+        border var(--transition-duration);
+        padding: var(--full-padding) var(--2x-padding);
         border-top-right-radius: var(--border-radius);
-        border-top-left-radius:  var(--border-radius);
-        border-bottom:           var(--background-color);
-        transform:               translateY(1px);
-        text-decoration:         none;
-        border:                  1px solid transparent;
+        border-top-left-radius: var(--border-radius);
+        border-bottom: var(--background-color);
+        transform: translateY(1px);
+        text-decoration: none;
+        border: 1px solid transparent;
     }
 
     .navigation-tabs-entry:hover {
-        transition:   background-color var(--transition-duration),
-                      border var(--transition-duration);
+        transition: background-color var(--transition-duration),
+        border var(--transition-duration);
 
-        background:   var(--background-color-light);
-        border-top:   1px solid var(--line-color);
-        border-left:  1px solid var(--line-color);
+        background: var(--background-color-light);
+        border-top: 1px solid var(--line-color);
+        border-left: 1px solid var(--line-color);
         border-right: 1px solid var(--line-color);
     }
 
@@ -108,12 +108,12 @@
 
     :global(.navigation-tabs-entry:hover .navigation-tabs-text-line) {
         transition: color var(--transition-duration);
-        color:      var(--text-color);
+        color: var(--text-color);
     }
 
     .navigation-tabs-selected-border {
-        border-top:   1px solid var(--line-color);
-        border-left:  1px solid var(--line-color);
+        border-top: 1px solid var(--line-color);
+        border-left: 1px solid var(--line-color);
         border-right: 1px solid var(--line-color);
     }
 
