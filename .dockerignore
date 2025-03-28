@@ -2,3 +2,4 @@ node_modules/
 build/
 .git
 .github
+vite.config.ts
