@@ -58,6 +58,10 @@
         align-self: center;
     }
 
+    .subpage-navigation-tabs-wide-tabs-override {
+        min-width: 150rem !important;
+    }
+
     .navigation-tabs {
         display:        flex;
         flex-direction: row;

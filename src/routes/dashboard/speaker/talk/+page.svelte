@@ -77,7 +77,7 @@
 </script>
 
 
-<Tabs classes="subpage-navigation-tabs"
+<Tabs classes="subpage-navigation-tabs subpage-navigation-tabs-wide-tabs-override"
       position="center"
       entries={Menu.speaker}
       entryName={MenuItem.speakerTalk.name} />
