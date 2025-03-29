@@ -18,5 +18,6 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
         request
     );
     request.headers.set('cookie', cookies!);
+    request.headers.set('x-real-ip', event.request.headers.get('x-real-ip') || '');
     return fetch(request);
 };
