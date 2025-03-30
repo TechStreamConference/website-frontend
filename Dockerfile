@@ -6,9 +6,13 @@ RUN echo 'alias ll="ls -la"' >> ~/.bashrc
 
 # --- Development target ---
 FROM base AS dev
-
+WORKDIR /app
 COPY package*.json ./
 RUN npm install
+RUN cp -r node_modules /node_modules.bak
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 # Source files will be mounted from the host, we don't copy them here.
 CMD ["npm", "run", "dev", "--", "--host"]
 
