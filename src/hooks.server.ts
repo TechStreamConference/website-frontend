@@ -21,15 +21,14 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
     );
     request.headers.set('cookie', cookies!);
 
-    if (dev) {
-        request.headers.set('x-real-ip', '127.0.0.1');
-    } else {
-        const ip = event.request.headers.get('x-real-ip');
-        if (!ip) {
-            console.error('[handleFetch] x-real-ip header is missing.');
-            throw error(500);
-        }
+    const ip = event.request.headers.get('x-real-ip');
+    if (ip) {
         request.headers.set('x-real-ip', ip);
+    } else if (!dev) {
+        console.error('[handleFetch] x-real-ip header is missing.');
+        throw error(500);
+    } else {
+        request.headers.set('x-real-ip', '127.0.0.1');
     }
     return fetch(request);
 };
