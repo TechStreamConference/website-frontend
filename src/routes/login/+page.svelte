@@ -11,7 +11,6 @@
     import Paragraph from 'elements/text/paragraph.svelte';
     import PageWrapper from 'elements/section/pageWrapper.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
-    import SectionDashboard from 'elements/section/sectionDashboard.svelte'
 
     import { goto } from '$app/navigation';
     import { trySaveDataAsync } from 'helper/trySaveData';
