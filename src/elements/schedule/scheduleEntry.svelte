@@ -72,6 +72,7 @@
         display:        flex;
         flex-direction: row;
         gap:            var(--full-gap);
+        flex-wrap:      wrap;
     }
 
     :global(.schedule-entry-time) {
@@ -101,10 +102,6 @@
     }
 
     @media (max-width: 600px) {
-        .schedule-entry-tag-wrapper {
-            flex-direction: column;
-        }
-
         :global(.schedule-entry-time) {
             margin-left: 0;
         }
