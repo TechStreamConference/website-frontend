@@ -18,7 +18,7 @@
 @font-face {
     font-family: 'noto-sans';
     src: local("Noto Sans"),
-     local("NotoSans"),
+    local("NotoSans"),
     local("NotoSans-Light"),
     url("noto-sans-v39-latin-300.woff2");
     font-weight: 300;
@@ -34,7 +34,7 @@
 }
 
 .sub-headline-font {
-    font-family:  noto-sans, sans-serif;
+    font-family: noto-sans, sans-serif;
     font-weight: 500;
     font-style: normal;
     color: var(--text-color);
