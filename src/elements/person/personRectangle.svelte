@@ -92,7 +92,7 @@
 
     :global(.person-rectangle-button) {
         display: block;
-        padding: var(--quad-padding) var(--2x-padding) !important;
+        padding: var(--half-padding) var(--2x-padding) !important;
         margin:  0 var(--2x-margin) var(--2x-margin) var(--2x-margin) !important;
     }
 </style>
