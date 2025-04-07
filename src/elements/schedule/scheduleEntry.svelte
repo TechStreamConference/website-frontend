@@ -91,13 +91,13 @@
     }
 
     :global(.schedule-entry-speaker-description) {
-        margin-top: var(--4x-margin);
+        margin-top: var(--full-margin);
     }
 
     @media (max-width: 1280px) {
         .schedule-entry-title-wrapper {
             flex-direction: column;
-            margin-bottom:  var(--2x-margin);
+            gap: var(--full-gap);
         }
     }
 
