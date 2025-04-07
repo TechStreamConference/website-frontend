@@ -11,6 +11,7 @@
     import Paragraph from 'elements/text/paragraph.svelte';
     import PageWrapper from 'elements/section/pageWrapper.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
+    import SectionDashboard from 'elements/section/sectionDashboard.svelte'
 
     import { goto } from '$app/navigation';
     import { trySaveDataAsync } from 'helper/trySaveData';
@@ -170,6 +171,7 @@
         margin:         0 auto;
         display:        flex;
         flex-direction: column;
+        padding: 0 var(--2x-padding);
     }
 
     .login-form-gap-wrapper {
