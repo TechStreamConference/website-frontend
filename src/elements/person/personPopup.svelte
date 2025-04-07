@@ -78,7 +78,6 @@
     @media (max-width: 900px) {
         .person-popup-content-wrapper {
             grid-template-columns: 1fr;
-            grid-auto-rows:        1fr;
             height:                75vh;
             overflow-y:            auto;
             max-width:             100%;
