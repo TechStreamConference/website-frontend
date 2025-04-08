@@ -14,7 +14,6 @@
     import PersonPopup from 'elements/person/personPopup.svelte';
     import Section from 'elements/section/section.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
-    import YouTubeVideo from 'elements/image/youTubeVideo.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
     import SponsorArray from 'elements/sponsor/sponsorArray.svelte';
     import Schedule from 'elements/schedule/schedule.svelte';
@@ -22,6 +21,7 @@
     import PageWrapper from 'elements/section/pageWrapper.svelte';
     import TextLine from 'elements/text/textLine.svelte';
     import Link from 'elements/text/link.svelte';
+    import Video from 'elements/image/video.svelte';
 
     import { formatDate } from 'helper/dates';
     import { apiUrl } from 'helper/links';
@@ -114,10 +114,7 @@
         {#if data.year.event.trailer_youtube_id}
             <Section id="Trailer">
                 <div class="year-video-wrapper">
-                    <YouTubeVideo
-                          id={data.year.event.trailer_youtube_id}
-                          title="Tech Stream Conference Trailer {data.year.event.year}"
-                    />
+                    <Video ariaLabel="Tech Stream Conference Trailer {data.year.event.year}"/>
                 </div>
             </Section>
         {/if}
