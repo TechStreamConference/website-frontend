@@ -103,9 +103,9 @@
                     Online-Konferenz {formatDate(data.year.event.start_date, '%DD.%MM.')}
                     - {formatDate(data.year.event.end_date, '%DD.%MM.%YYYY')}
                 </SubHeadline>
-                <SubHeadline classes="year-header-subtitle sub-headline-white">
+                <Paragraph classes="year-header-subtitle paragraph-white">
                     {data.year.event.subtitle}
-                </SubHeadline>
+                </Paragraph>
                 <YearEventLinks {data} />
             </div>
         </div>

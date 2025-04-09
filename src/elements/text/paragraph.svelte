@@ -9,7 +9,7 @@
 <style>
     p {
         font-size:   var(--full-font-size);
-        line-height: var(--full-line-height);
+        line-height: 1.5;
         text-wrap:   wrap;
         text-align:  var(--text-align);
         width:       var(--width);

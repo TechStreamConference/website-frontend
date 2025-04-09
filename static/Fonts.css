@@ -1,6 +1,32 @@
-.headline-font{
+@font-face {
+    font-family: 'metropolis';
+    src: local("Metropolis"),
+    local("Metropolis-Black"),
+    url("Metropolis-Black.woff2") format("woff2");
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: 'noto-sans';
+    src: local("Noto Sans"),
+    local("NotoSans"),
+    local("NotoSans-Medium"),
+    url("noto-sans-v39-latin-500.woff2");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'noto-sans';
+    src: local("Noto Sans"),
+    local("NotoSans"),
+    local("NotoSans-Light"),
+    url("noto-sans-v39-latin-300.woff2");
+    font-weight: 300;
+}
+
+.headline-font {
     letter-spacing: 1px;
-    font-family: proxima-nova, sans-serif;
+    font-family: metropolis, sans-serif;
     font-weight: 900;
     text-transform: uppercase;
     font-style: normal;
@@ -8,16 +34,14 @@
 }
 
 .sub-headline-font {
-    letter-spacing: 1px;
-    font-family: gnuolane, sans-serif;
+    font-family: noto-sans, sans-serif;
     font-weight: 500;
     font-style: normal;
     color: var(--text-color);
 }
 
 .normal-font {
-    letter-spacing: 1px;
-    font-family: gnuolane, sans-serif;
+    font-family: noto-sans, sans-serif;
     font-weight: 300;
     font-style: normal;
     color: var(--text-color);
