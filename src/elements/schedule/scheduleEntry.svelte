@@ -72,6 +72,7 @@
         display:        flex;
         flex-direction: row;
         gap:            var(--full-gap);
+        flex-wrap:      wrap;
     }
 
     :global(.schedule-entry-time) {
@@ -90,21 +91,17 @@
     }
 
     :global(.schedule-entry-speaker-description) {
-        margin-top: var(--4x-margin);
+        margin-top: var(--full-margin);
     }
 
     @media (max-width: 1280px) {
         .schedule-entry-title-wrapper {
             flex-direction: column;
-            margin-bottom:  var(--2x-margin);
+            gap: var(--full-gap);
         }
     }
 
     @media (max-width: 600px) {
-        .schedule-entry-tag-wrapper {
-            flex-direction: column;
-        }
-
         :global(.schedule-entry-time) {
             margin-left: 0;
         }

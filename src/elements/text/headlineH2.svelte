@@ -24,6 +24,7 @@
     }
 
     .headline-h2-border {
+        padding-bottom: var(--2x-padding);
         border-bottom: 1px solid var(--line-color);
     }
 

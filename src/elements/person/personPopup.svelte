@@ -70,23 +70,14 @@
     :global(.person-popup-picture) {
         width:         100%;
         height:        auto;
-        max-width:     30rem;
         border:        1px solid var(--primary-color-light);
         align-self:    center;
         border-radius: var(--border-radius);
     }
 
-    @media (max-width: 1280px) {
-
-        :global(.person-popup-picture) {
-            max-width: 20rem;
-        }
-    }
-
     @media (max-width: 900px) {
         .person-popup-content-wrapper {
             grid-template-columns: 1fr;
-            grid-auto-rows:        1fr;
             height:                75vh;
             overflow-y:            auto;
             max-width:             100%;
@@ -98,7 +89,7 @@
         }
 
         :global(.person-popup-picture) {
-            max-width:  20rem;
+            max-width: 40rem;
             align-self: center;
         }
 
