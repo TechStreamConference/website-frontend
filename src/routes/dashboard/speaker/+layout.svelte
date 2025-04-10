@@ -54,12 +54,10 @@
     }
 </script>
 
-<Tabs
+<Tabs position="end"
+      color="purple"
       entries={Menu.SectionIn(data.roles)}
-      entryName={MenuItem.speaker.name}
-      alignment="navigation-tabs-end"
-      background="navigation-tabs-purple"
-/>
+      entryName={MenuItem.speaker.name} />
 <HeadlineInfoDashboard headline="Speaker">
     Unter „Events” kannst du bestimmen, wie du auf unserer Startseite angezeigt werden möchtest. Möchtest du einen neuen
     Vortrag einreichen, klicke auf „Talk einreichen”. Deine bereits eingereichten Vorträge kannst du unter „Meine Talks”

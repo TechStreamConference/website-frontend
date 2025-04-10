@@ -13,7 +13,7 @@
     {#each links as link}
         <StyledLink
               classes="transparent-background"
-              iconClasses="white-only"
+              iconClasses="text-color-only"
               href={link.url}
               icon={link.name}
               title="Klicke für {link.name} von {person}"

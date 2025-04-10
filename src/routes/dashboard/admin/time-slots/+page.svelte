@@ -54,7 +54,7 @@
     async function save(): Promise<boolean> {
         const toSave = structuredClone(data.currentSlots);
         for (let entry of toSave) {
-            const temp = checkSQLTimeAndDate(convertTimeAndDateToSQL(entry.start_time));
+            const temp       = checkSQLTimeAndDate(convertTimeAndDateToSQL(entry.start_time));
             entry.start_time = temp ? temp : entry.start_time;
         }
         const result = await trySaveDataAsync(
@@ -124,7 +124,8 @@
 </script>
 
 <UnsavedChangesCallbackWrapper callback={save} />
-<Tabs classes="navigation-tabs-dashboard-subpage"
+<Tabs classes="subpage-navigation-tabs"
+      position="center"
       entries={Menu.admin}
       entryName={MenuItem.adminEventSlots.name} />
 <SectionDashboard classes="standard-dashboard-section">

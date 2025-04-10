@@ -59,7 +59,7 @@
                     <Icon color="red"
                           type="CircleCross" />
                     <Tag text={duration.toString()}
-                         --tag-text-color="#FFF"
+                         --tag-text-color="var(--text-color)"
                          --tag-background-color="#FFFFFF00"
                     />
                 </div>

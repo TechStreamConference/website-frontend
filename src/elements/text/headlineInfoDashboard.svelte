@@ -9,7 +9,7 @@
     <div class="dashboard-user-headline-wrapper">
         <Headline classes="headline-border">{headline}</Headline>
     </div>
-    <Paragraph classes="paragraph-pre-wrap">
+    <Paragraph>
         <slot />
     </Paragraph>
 </div>

@@ -10,13 +10,13 @@
     export let data: LoadDashboard;
 </script>
 
-<Tabs
+<Tabs position="end"
+      color="purple"
       entries={Menu.SectionIn(data.roles)}
-      entryName={MenuItem.teamMember.name}
-      alignment="navigation-tabs-end"
-      background="navigation-tabs-purple"
-/>
+      entryName={MenuItem.teamMember.name} />
 <HeadlineInfoDashboard headline="Team Member">
-    In diesem Bereich kannst du einstellen, wie du auf der Startseite angezeigt werden möchtest. Du tauchst dort als Team-Mitglied auf. Editiere deine Daten unter „Events”. Deine Social-Media-Verlinkungen kannst du unter „Social Media” bearbeiten.
+    In diesem Bereich kannst du einstellen, wie du auf der Startseite angezeigt werden möchtest. Du tauchst dort als
+    Team-Mitglied auf. Editiere deine Daten unter „Events”. Deine Social-Media-Verlinkungen kannst du unter „Social
+    Media” bearbeiten.
 </HeadlineInfoDashboard>
 <slot />

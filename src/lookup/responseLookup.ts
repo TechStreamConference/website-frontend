@@ -17,9 +17,10 @@ const lookup: ResponseDict = {
     EMAILS_EQUAL:                                          'Die neue und die alte E-Mail ist gleich',
 
     // name or mail
-    USERNAME_OR_EMAIL_FIELD_MISSING: 'Name/E-Mail oder Passwort fehlt.',
-    USERNAME_OR_EMAIL_ALREADY_TAKEN: 'Name oder E-Mail sind bereits vergeben',
-    UNKNOWN_USERNAME_OR_EMAIL:       'Name oder E-Mail ungültig.',
+    USERNAME_OR_EMAIL_FIELD_MISSING:            'Name oder E-Mail fehlt.',
+    USERNAME_OR_EMAIL_ALREADY_TAKEN:            'Name oder E-Mail sind bereits vergeben',
+    UNKNOWN_USERNAME_OR_EMAIL:                  'Name oder E-Mail ungültig.',
+    'The username_or_email field is required.': 'Name oder E-Mail fehlt.',
 
     // password
     'The password field is required.':  'Das Feld \'Passwort\' ist erforderlich.',

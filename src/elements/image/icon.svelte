@@ -38,4 +38,9 @@
         color: var(--white-color);
         background: transparent !important;
     }
+
+    .text-color-only {
+        color: var(--text-color);
+        background: transparent !important;
+    }
 </style>

@@ -47,9 +47,10 @@
     };
 </script>
 
-<Tabs entries={Menu.speaker}
-      entryName={MenuItem.speakerApplication.name}
-      classes="navigation-tabs-dashboard-subpage navigation-tabs-wide-dashboard-override" />
+<Tabs classes="subpage-navigation-tabs subpage-navigation-tabs-wide-tabs-override"
+      position="center"
+      entries={Menu.speaker}
+      entryName={MenuItem.speakerApplication.name} />
 
 <SectionDashboard classes="standard-dashboard-section wide-dashboard-section-override">
     <Explanation>
