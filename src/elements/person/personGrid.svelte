@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Person } from 'types/provideTypes';
+    import type {Person} from 'types/provideTypes';
 
     import PersonRectangle from './personRectangle.svelte';
 
@@ -12,8 +12,8 @@
 <div class={classes}>
     {#each personData as person}
         <PersonRectangle
-              data={person}
-              on:click={(event) => {
+                data={person}
+                on:click={(event) => {
 				personPopupCallback(event, person);
 			}}
         />
@@ -22,28 +22,8 @@
 
 <style>
     div {
-        display:               grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap:                   var(--2x-gap);
-        justify-items:         center;
-    }
-
-    @media (max-width: 1280px) {
-        div {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-
-    @media (max-width: 960px) {
-        div {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 600px) {
-        div {
-            grid-template-columns: repeat(1, 1fr);
-        }
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: var(--2x-gap);
     }
 </style>
