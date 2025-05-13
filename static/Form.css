@@ -1,0 +1,5 @@
+.form-border {
+    border:        1px solid var(--primary-color-light);
+    border-radius: var(--border-radius);
+    padding:       var(--full-padding);
+}

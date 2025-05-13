@@ -1,4 +1,3 @@
-
 <script lang="ts">
     import Label from 'elements/text/label.svelte';
 
@@ -36,17 +35,21 @@
 
 <style>
     div {
-        display: flex;
+        display:        flex;
         flex-direction: column;
-        width: 100%;
+        width:          100%;
     }
 
     select {
-        color: var(--white-color);
+        color:            var(--white-color);
         background-color: var(--primary-color-light);
-        border-radius: var(--border-radius);
-        padding: var(--half-padding);
-        width: 100%;
-        font-size: var(--full-font-size);
+        border-radius:    var(--border-radius);
+        padding:          var(--half-padding);
+        width:            100%;
+        font-size:        var(--full-font-size);
+    }
+
+    option {
+        color: var(--white-color);
     }
 </style>

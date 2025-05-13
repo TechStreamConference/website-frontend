@@ -117,7 +117,7 @@
               denyCallback={() => {}}
               acceptCallback={reject}
 />
-<div class="speaker-team-member-wrapper"
+<div class="speaker-team-member-wrapper form-border"
      id="speaker-team-member-approval-entry-{speakerTeamMember.id}">
     {#if speakerTeamMember.diff === null || speakerTeamMember.diff.length === 0}
         <Message color="success"
@@ -191,9 +191,6 @@
     }
 
     .speaker-team-member-wrapper {
-        border:            1px solid var(--primary-color-dark);
-        border-radius:     var(--border-radius);
-        padding:           var(--full-padding);
         scroll-margin-top: var(--16x-margin);
     }
 

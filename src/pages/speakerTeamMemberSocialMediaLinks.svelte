@@ -42,6 +42,7 @@
         let createResult: SaveResult              = {
             success:  true,
             messages: [],
+            infos: {},
         };
         for (let link of data.socials) {
             if (link.id === 0) {
@@ -68,6 +69,7 @@
                 return {
                     success:  true,
                     messages: [],
+                    infos: {},
                 };
             }
 
@@ -105,16 +107,17 @@
     }
 </script>
 
-<Tabs
+<Tabs classes="subpage-navigation-tabs"
+      position="center"
       entries={type === "speaker" ? Menu.speaker : Menu.teamMember}
-      entryName={type === "speaker" ? MenuItem.speakerSocialMedia.name : MenuItem.teamMemberSocialMedia.name}
-      classes="navigation-tabs-dashboard-subpage"
-/>
+      entryName={type === "speaker" ? MenuItem.speakerSocialMedia.name : MenuItem.teamMemberSocialMedia.name} />
 <UnsavedChangesCallbackWrapper callback={trySaveAsync} />
 
 <SectionDashboard classes="standard-dashboard-section">
     <Explanation>
-        Hier kannst du deine Social-Media-Links bearbeiten. Falls du bei mehreren Events als Speaker registriert bist, dann gelten diese Daten für alle Events. Beachte, dass alle Änderungen an diesen Daten erst durch uns freigegeben werden müssen.
+        Hier kannst du deine Social-Media-Links bearbeiten. Falls du bei mehreren Events als Speaker registriert bist,
+        dann gelten diese Daten für alle Events. Beachte, dass alle Änderungen an diesen Daten erst durch uns
+        freigegeben werden müssen.
     </Explanation>
     {#if data.roles.is_speaker && data.roles.is_team_member}
         <Message

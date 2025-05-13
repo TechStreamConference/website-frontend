@@ -77,9 +77,10 @@
 </script>
 
 
-<Tabs entries={Menu.speaker}
-      entryName={MenuItem.speakerTalk.name}
-      classes="navigation-tabs-dashboard-subpage navigation-tabs-wide-dashboard-override" />
+<Tabs classes="subpage-navigation-tabs subpage-navigation-tabs-wide-tabs-override"
+      position="center"
+      entries={Menu.speaker}
+      entryName={MenuItem.speakerTalk.name} />
 
 <GeneralPopup bind:this={acceptPopup}
               headline="Vortragszeit akzeptieren?"
@@ -124,7 +125,7 @@
                          talkDurations={data.talkDurations} />
     {/each}
     {#each data.tentativeOrAcceptedTalks as talk, index}
-        <div class="dashboard-speaker-talk-time-slot dashboard-speaker-section">
+        <div class="dashboard-speaker-talk-time-slot dashboard-speaker-section form-border">
             <SubHeadline classes="sub-headline-center">{talk.title}</SubHeadline>
             <SubHeadline classes="sub-headline-center">Vortrag:</SubHeadline>
             <div class="dashboard-speaker-talk-time-slot-wrapper">
@@ -195,9 +196,6 @@
 <style>
     :global(.dashboard-speaker-section) {
         margin-top:    var(--4x-margin);
-        border:        1px solid var(--primary-color-dark);
-        border-radius: var(--border-radius);
-        padding:       var(--full-padding);
         gap:           var(--2x-gap);
     }
 

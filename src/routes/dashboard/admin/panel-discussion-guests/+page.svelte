@@ -89,11 +89,10 @@
 
 <UnsavedChangesCallbackWrapper callback={save} />
 
-<Tabs
+<Tabs classes="subpage-navigation-tabs"
+      position="center"
       entries={Menu.admin}
-      entryName={MenuItem.adminPanelDiscussionGuests.name}
-      classes="navigation-tabs-dashboard-subpage"
-/>
+      entryName={MenuItem.adminPanelDiscussionGuests.name} />
 
 <SectionDashboard classes="standard-dashboard-section">
     <NavigationDropDown id="dashboard-admin-guest-year"

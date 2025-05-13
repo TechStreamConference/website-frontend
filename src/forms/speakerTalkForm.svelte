@@ -62,7 +62,7 @@
 
 </script>
 
-<FormWrapper classes="dashboard-speaker-talk-form {classes}"
+<FormWrapper classes="dashboard-speaker-talk-form form-border {classes}"
              submitCallback={save}
              {useForm}>
     <SubHeadline classes="sub-headline-center">{data.id === 0 ? "Neuer Talk" : data.title}</SubHeadline>
@@ -154,9 +154,6 @@
         flex-direction:    column;
         gap:               var(--full-gap);
         scroll-margin-top: var(--16x-margin);
-        border:            1px solid var(--primary-color-dark);
-        border-radius:     var(--border-radius);
-        padding:           var(--full-padding);
     }
 
     .input-grid {

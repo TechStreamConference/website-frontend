@@ -1,7 +1,7 @@
 :root {
-    --primary-color-light:          #563e75;
+    --primary-color-light:          #674c8a;
     --primary-color-mid:            #5e4680;
-    --primary-color-dark:           #674c8a;
+    --primary-color-dark:           #563e75;
     --secondary-color:              #ccff57;
 
     --background-color:             white;
@@ -48,9 +48,9 @@ body {
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --primary-color-light:          #674c8a;
+        --primary-color-light:          #563e75;
         --primary-color-mid:            #5e4680;
-        --primary-color-dark:           #563e75;
+        --primary-color-dark:           #674c8a;
 
         --background-color:             rgb(40, 40, 40);
         --background-color-light:       rgb(60, 60, 60);

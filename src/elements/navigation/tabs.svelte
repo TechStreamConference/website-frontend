@@ -1,21 +1,18 @@
 <script lang="ts">
-    import type { Menu } from 'types/provideTypes';
+    import type {Menu} from 'types/provideTypes';
 
     import TextLine from 'elements/text/textLine.svelte';
+    import {onMount} from 'svelte';
 
-    import { goto } from '$app/navigation';
-
-    export let alignment: string  = 'navigation-tabs-center';
-    export let background: string = 'navigation-tabs-default-background';
-
-    export let entryName: string;
     export let entries: Menu;
+    export let entryName: string;
     export let classes: string = '';
-    export let color: string   = '';
+    export let position: 'start' | 'center' | 'end' = 'start';
+    export let color: 'default' | 'purple' = 'default';
 
     let current: number = 0;
 
-    function initial(): void {
+    onMount(() => {
         for (let i = 0; i < entries.length; ++i) {
             if (entries[i].name === entryName) {
                 current = i;
@@ -23,43 +20,27 @@
             }
         }
         console.error(`not able to set navigation tab for entry ${entryName}`);
-    }
+    });
 
-    initial();
 </script>
 
-<div class="navigation-tabs {classes} {alignment} {background}">
+
+<div class="navigation-tabs {classes} {color}-background navigation-tabs-{position}">
     {#each entries as entry, index}
-        <div
-              class="navigation-tabs-entry {index === current
-				? 'navigation-tabs-active navigation-tabs-default-background'
-				: background}"
-              on:click={() => {
-				goto(entry.url);
-			}}
-              role="presentation"
-        >
-            <a class="navigation-tabs-button"
-               href={entry.url}
-               aria-label={entry.description}>
-                <TextLine
-                      classes="navigation-tabs-entry-text {index === current ? '' : `text-line-${color}`}"
-                >
-                    {entry.name}
-                </TextLine>
-            </a>
-        </div>
+        <a class="navigation-tabs-entry {index === current ? 'navigation-tabs-selected-border' : ''} {index===current ? 'tab-background-selected' : ''}"
+           title={entry.description}
+           href={entry.url}>
+            <TextLine classes="navigation-tabs-text-line {index !== current ? `tab-${color}-text-unselected` : ''}">
+                {entry.name}
+            </TextLine>
+        </a>
     {/each}
 </div>
 
+
 <style>
-    .navigation-tabs {
-        display:        flex;
-        flex-direction: row;
-        border-bottom:  1px solid var(--line-color);
-        padding:        0 var(--2x-padding);
-        margin-bottom:  var(--full-margin);
-        width:          100%;
+    .navigation-tabs-start {
+        justify-content: start;
     }
 
     .navigation-tabs-center {
@@ -70,20 +51,29 @@
         justify-content: end;
     }
 
-    .navigation-tabs-purple {
-        background-color: var(--primary-color-dark);
-    }
-
-    .navigation-tabs-default-background {
-        background-color: var(--background-color);
-    }
-
-    .navigation-tabs-dashboard-subpage {
-        width:      fit-content;
-        min-width:  100rem;
-        max-width:  calc(100vw - 5rem);
+    .subpage-navigation-tabs {
+        width: fit-content;
+        min-width: 100rem;
+        max-width: calc(100vw - 5rem);
         align-self: center;
-        margin-top: var(--2x-margin);
+    }
+
+    .subpage-navigation-tabs-wide-tabs-override {
+        min-width: 150rem !important;
+    }
+
+    .navigation-tabs {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid var(--line-color);
+        padding: 0 var(--2x-padding);
+        margin-bottom: var(--full-margin);
+        gap: var(--full-gap);
+        padding-top: var(--full-padding);
+    }
+
+    .purple-background {
+        background: var(--primary-color-dark);
     }
 
     .navigation-tabs-wide-dashboard-override {
@@ -91,49 +81,65 @@
     }
 
     .navigation-tabs-entry {
-        transition:              background-color var(--transition-duration);
-
-        margin:                  var(--full-margin) var(--full-margin) 0;
-        padding:                 var(--full-padding);
-
-        cursor:                  pointer;
-
-        border-top-left-radius:  var(--border-radius);
+        transition: background-color var(--transition-duration),
+        border var(--transition-duration);
+        padding: var(--full-padding) var(--2x-padding);
         border-top-right-radius: var(--border-radius);
+        border-top-left-radius: var(--border-radius);
+        border-bottom: var(--background-color);
+        transform: translateY(1px);
+        text-decoration: none;
+        border: 1px solid transparent;
     }
 
     .navigation-tabs-entry:hover {
-        background-color: var(--background-color-light);
-        transition:       background-color var(--transition-duration);
+        transition: background-color var(--transition-duration),
+        border var(--transition-duration);
+
+        background: var(--background-color-light);
+        border-top: 1px solid var(--line-color);
+        border-left: 1px solid var(--line-color);
+        border-right: 1px solid var(--line-color);
     }
 
-    .navigation-tabs-active {
-        transform:               translateY(1px);
-        border:                  1px solid var(--line-color);
-        border-top-right-radius: var(--border-radius);
-        border-top-left-radius:  var(--border-radius);
-        border-bottom-color:     transparent;
+    :global(.navigation-tabs-entry .navigation-tabs-text-line) {
+        transition: color var(--transition-duration);
     }
 
-    :global(.navigation-tabs-entry-text) {
+    :global(.navigation-tabs-entry:hover .navigation-tabs-text-line) {
+        transition: color var(--transition-duration);
+        color: var(--text-color);
+    }
+
+    .navigation-tabs-selected-border {
+        border-top: 1px solid var(--line-color);
+        border-left: 1px solid var(--line-color);
+        border-right: 1px solid var(--line-color);
+    }
+
+    :global(.tab-purple-text-unselected) {
+        color: var(--white-color);
+    }
+
+    .tab-background-selected {
+        background: var(--background-color);
+    }
+
+    :global(.navigation-tabs-text-line) {
         font-size: var(--1-5x-font-size);
     }
 
-    .navigation-tabs-button {
-        border:           none;
-        background-color: transparent;
-        cursor:           pointer;
-        text-decoration:  none;
-    }
-
-    @media (max-width: 600px) {
-        .navigation-tabs-entry {
-            margin:  var(--half-margin) var(--half-margin) 0;
-            padding: var(--half-padding);
+    @media (max-width: 1280px) {
+        .subpage-navigation-tabs {
+            min-width: 0;
         }
 
-        :global(.navigation-tabs-entry-text) {
+        :global(.navigation-tabs-text-line) {
             font-size: var(--full-font-size);
+        }
+
+        .navigation-tabs-entry {
+            padding: var(--half-padding) var(--full-padding);
         }
     }
 </style>
