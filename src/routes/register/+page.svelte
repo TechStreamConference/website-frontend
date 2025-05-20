@@ -110,7 +110,7 @@
 
     async function registerAsync(): Promise<void> {
         await grecaptcha.ready(async () => {
-            const token = await grecaptcha.execute('6LdsqAsrAAAAAJkKQUQ_0QNjZTmapyIbejLNzFfi', {action: 'signup'});
+            const token = await grecaptcha.execute('6LdTHz4rAAAAAHOS2doNnKZaQ_DTkeelQSTwRj4l', {action: 'signup'});
 
                 console.log(token.length);
 
