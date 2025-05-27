@@ -185,6 +185,9 @@ export const dashboardTimeSlotScheme = z.object({
                                                     event_id:   z.number(),
                                                     start_time: z.string(),
                                                     duration:   z.number(),
+                                                    is_occupied: z.boolean()
+                                                        .optional()
+                                                        .transform(x => x ?? false),
                                                     is_special: z.boolean(),
                                                 });
 export type DashboardTimeSlot = z.infer<typeof dashboardTimeSlotScheme>;

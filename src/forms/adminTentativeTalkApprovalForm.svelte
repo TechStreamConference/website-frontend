@@ -42,7 +42,11 @@
         if (!slot) {
             return '';
         }
-        return `${slot.id} | ${formatDate(slot.start_time, '%DD.%MM.%YYYY %hh:%mm')} | ${slot.duration} Minuten`;
+        let entry = `${slot.id} | ${formatDate(slot.start_time, '%DD.%MM.%YYYY %hh:%mm')} | ${slot.duration} Minuten`;
+        if (slot.is_occupied) {
+            entry+= ' | Vergeben';
+        }
+        return entry;
     }
 
     function getIDFromDropDownCurrentEntry(): number {
