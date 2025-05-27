@@ -2,16 +2,17 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/dashboardItems';
 
-    import type { LoadAdminGuests } from 'types/dashboardLoadTypes';
-    import type { DashboardAllPersons } from 'types/dashboardProvideTypes';
+    import type {LoadAdminGuests} from 'types/dashboardLoadTypes';
+    import type {DashboardAllPersons} from 'types/dashboardProvideTypes';
 
-    import { loadPossibleGuestsOfTalk, loadTalksOfEvent } from './guests-helper';
-    import { setUnsavedChanges } from 'stores/saved';
-    import { trySaveDataAsync } from 'helper/trySaveData.js';
-    import { SaveMessageType } from 'types/saveMessageType';
-    import { onMount } from 'svelte';
-    import { getElementByID } from 'helper/basic';
-    import { getDropDownEntriesWithID, getIdFromDropDownEntry } from 'helper/navigation';
+    import {loadPossibleGuestsOfTalk, loadTalksOfEvent} from './guests-helper';
+    import {setUnsavedChanges} from 'stores/saved';
+    import {trySaveDataAsync} from 'helper/trySaveData.js';
+    import {SaveMessageType} from 'types/saveMessageType';
+    import {onMount} from 'svelte';
+    import {getElementByID} from 'helper/basic';
+    import {getDropDownEntriesWithID, getIdFromDropDownEntry} from 'helper/navigation';
+    import {scrollToTop} from 'helper/scroll'
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -21,14 +22,17 @@
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import Button from 'elements/input/button.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
+    import GeneralPopup from 'elements/popups/generalPopup.svelte'
 
     export let data: LoadAdminGuests;
     let talkDropDown: NavigationDropDown;
     let selectedArray: DashboardAllPersons = [];
-    let currentTalkId: number              = 0;
+    let currentTalkId: number = 0;
 
     let message: SaveMessage;
     let errorList: string[] = [];
+
+    let clearPopup: GeneralPopup;
 
     onMount(() => {
         if (data.talksOfEvent.length > 0) {
@@ -75,7 +79,7 @@
 
         const result = await trySaveDataAsync(
             fetch,
-            { guest_ids: ids },
+            {guest_ids: ids},
             `/dashboard/admin/talk/${currentTalkId}/set-guests`,
             'PUT',
         );
@@ -83,37 +87,75 @@
         errorList = result.messages;
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
 
+        scrollToTop();
+
+        if (result.success) {
+            getElementByID(data.talksOfEvent, currentTalkId).guests = selectedArray;
+        }
+        await loadNewGuests(talkDropDown.getSelected());
+
         return result.success;
+    }
+
+    async function clear(): Promise<void> {
+        if (currentTalkId === 0) {
+            errorList = ['Aktuell ist kein Talk ausgewählt.'];
+            message.setSaveMessage(SaveMessageType.Error);
+            return;
+        }
+
+        const result = await trySaveDataAsync(fetch, {}, `/dashboard/admin/talk/${currentTalkId}/remove-all-guests`, 'DELETE');
+
+        errorList = result.messages;
+        message.setSaveMessage(result.success ? SaveMessageType.Delete : SaveMessageType.DeleteError);
+
+        if (result.success) {
+            getElementByID(data.talksOfEvent, currentTalkId).guests = [];
+        }
+        await loadNewGuests(talkDropDown.getSelected());
+
+        scrollToTop();
     }
 </script>
 
-<UnsavedChangesCallbackWrapper callback={save} />
+<UnsavedChangesCallbackWrapper callback={save}/>
+<GeneralPopup bind:this={clearPopup}
+              acceptButtonText="Löschen"
+              acceptCallback={clear}
+              denyButtonText="Abbrechen"
+              denyCallback={() => {}}
+              headline="Alle Gäste löschen?"
+              text="Hiermit werden alle Gäste von dem ausgewählten Talk gelöscht. Hinweis: Der Host zählt nicht als Gast."
+/>
 
 <Tabs classes="subpage-navigation-tabs"
       position="center"
       entries={Menu.admin}
-      entryName={MenuItem.adminPanelDiscussionGuests.name} />
+      entryName={MenuItem.adminPanelDiscussionGuests.name}/>
 
 <SectionDashboard classes="standard-dashboard-section">
     <NavigationDropDown id="dashboard-admin-guest-year"
                         labelText="Aktuelles Jahr:"
                         data={getDropDownEntriesWithID(data.allEvents)}
-                        on:navigated={(e) => { loadNewTalks(e.detail); }} />
+                        on:navigated={(e) => { loadNewTalks(e.detail); }}/>
     <NavigationDropDown id="dashboard-admin-guest-talk"
                         labelText="Aktueller Talk:"
                         data={getDropDownEntriesWithID(data.talksOfEvent)}
                         on:navigated={(e) => { loadNewGuests(e.detail); }}
-                        bind:this={talkDropDown} />
-    <SaveMessage bind:this={message} />
-    <MessageWrapper messages={errorList} />
+                        bind:this={talkDropDown}/>
+    <SaveMessage bind:this={message}/>
+    <MessageWrapper messages={errorList}/>
     <PersonArray labelText="Mögliche Gäste:"
                  data={data.guestsOfTalk}
                  bind:selected={selectedArray}
-                 on:toggle={setUnsavedChanges} />
+                 on:toggle={setUnsavedChanges}/>
     {#if data.talksOfEvent.length > 0}
         <div class="dashboard-guests-button-wrapper">
             <Button ariaLabel="Klicke hier, um die ausgehwählen Gäste zu speichern."
                     on:click={save}>Speichern
+            </Button>
+            <Button ariaLabel="Klicke hier, um alle Gäste zu entfernen."
+                    on:click={() => { clearPopup.show(""); } }>Alle Gäste entfernen
             </Button>
         </div>
     {/if}
