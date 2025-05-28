@@ -18,7 +18,7 @@
         </SubHeadline>
         {#each talks as talk}
             <AdminTentativeTalkApprovalForm {talk}
-                                            {slots}
+                                            bind:slots={slots}
                                             on:reject={()=> dispatch('reject', talk.id)}
                                             on:suggest={()=> dispatch('suggest', talk.id)} />
         {/each}
