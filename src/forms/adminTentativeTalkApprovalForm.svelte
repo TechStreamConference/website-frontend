@@ -86,6 +86,7 @@
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorList = result.messages;
         if (result.success) {
+            getElementByID(slots[talk.event_id], talk.suggested_time_slot.id).is_occupied = false;
             talk.suggested_time_slot = getElementByID(slots[talk.event_id], id);
             talk.suggested_time_slot.is_occupied = true;
             dispatch('suggest');
