@@ -95,7 +95,7 @@
                                                  on:reject={(e) => deleteEntry(DataType.Pending, e.detail)}
                                                  on:approve={(e) => moveTalk(e.detail)} />
             <AdminTentativeTalkApprovalFormWrapper talks={getElementsByUserID(data.tentativeTalks, userID)}
-                                                   slots={data.slots}
+                                                   bind:slots={data.slots}
                                                    on:reject={(e) => deleteEntry(DataType.Tentative, e.detail)} />
         </div>
     {/each}

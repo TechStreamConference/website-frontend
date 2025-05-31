@@ -42,7 +42,11 @@
         if (!slot) {
             return '';
         }
-        return `${slot.id} | ${formatDate(slot.start_time, '%DD.%MM.%YYYY %hh:%mm')} | ${slot.duration} Minuten`;
+        let entry = `${slot.id} | ${formatDate(slot.start_time, '%DD.%MM.%YYYY %hh:%mm')} | ${slot.duration} Minuten`;
+        if (slot.is_occupied) {
+            entry+= ' | Vergeben';
+        }
+        return entry;
     }
 
     function getIDFromDropDownCurrentEntry(): number {
@@ -82,7 +86,9 @@
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorList = result.messages;
         if (result.success) {
+            getElementByID(slots[talk.event_id], talk.suggested_time_slot.id).is_occupied = false;
             talk.suggested_time_slot = getElementByID(slots[talk.event_id], id);
+            talk.suggested_time_slot.is_occupied = true;
             dispatch('suggest');
         }
     }
