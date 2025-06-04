@@ -3,6 +3,7 @@
     import {Router} from "@mateothegreat/svelte5-router";
 
     import {homepage_item, dashboard_item, imprint_item} from "@/config/MenuItem";
+    import {dashboard_auth} from "@/hooks/auth";
 
     import Home from "@/routes/Home.svelte";
     import Dashboard from "@/routes/Dashboard.svelte";
@@ -15,6 +16,7 @@
         },
         {
             path: dashboard_item.path,
+            hooks: {pre: dashboard_auth},
             component: Dashboard,
         },
         {
