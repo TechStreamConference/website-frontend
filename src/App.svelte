@@ -2,23 +2,23 @@
     import type {RouteConfig} from "@mateothegreat/svelte5-router";
     import {Router} from "@mateothegreat/svelte5-router";
 
-    import * as Item from './config/MenuItem'
+    import {homepage_item, dashboard_item, imprint_item} from "@/config/MenuItem";
 
-    import Home from "./routes/Home.svelte";
-    import Dashboard from "./routes/Dashboard.svelte";
-    import Imprint from "./routes/Imprint.svelte";
+    import Home from "@/routes/Home.svelte";
+    import Dashboard from "@/routes/Dashboard.svelte";
+    import Imprint from "@/routes/Imprint.svelte";
 
     const routes: RouteConfig[] = [
         {
-            path: Item.homepage.path,
+            path: homepage_item.path,
             component: Home
         },
         {
-            path: Item.dashboard.path,
+            path: dashboard_item.path,
             component: Dashboard,
         },
         {
-            path: Item.imprint.path,
+            path: imprint_item.path,
             component: Imprint,
         },
     ];
