@@ -9,6 +9,8 @@
     import Dashboard from "@/routes/Dashboard.svelte";
     import Imprint from "@/routes/Imprint.svelte";
 
+    import ThemeToggle from "@/lib/interact/ThemeToggle.svelte";
+
     const routes: RouteConfig[] = [
         {
             path: homepage_item.path,
@@ -28,7 +30,14 @@
 
 <main>
     <Router {routes}/>
+
+    <ThemeToggle/>
 </main>
 
 <style>
+
+    main {
+        background-color: var(--color-test);
+    }
+
 </style>
