@@ -1,12 +1,17 @@
 <script lang="ts">
-
+    import ThemeToggle from "@/lib/interact/ThemeToggle.svelte";
 </script>
 
-<h1 class="headline-font">HOME-PAGE</h1>
-<h1>HOME-PAGE</h1>
-
-<a href="dashboard">Dashboard</a>
+<div class="outer">
+    <ThemeToggle/>
+</div>
 
 <style>
-
+    div {
+        display: flex;
+        width: 100vw;
+        justify-content: center;
+        height: 100vh;
+        align-items: center;
+    }
 </style>

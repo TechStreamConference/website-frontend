@@ -2,6 +2,9 @@
     import {theme, setTheme, applyTheme} from '@/helper/theme.ts';
     import {onMount} from "svelte";
 
+    import TextLine from "@/lib/text/TextLine.svelte";
+    import Button from "@/lib/interact/Button.svelte";
+
     onMount(() => {
         applyTheme($theme);
     })
@@ -13,22 +16,10 @@
     }
 </script>
 
-<button class = "hover-move" on:click={toggleTheme} aria-label="Toggle theme">
+<Button class="hover-move" buttonSize="small-button" on:click={toggleTheme} aria-label="Toggle theme">
     {#if $theme === 'dark'}
-        🌞 Light
+        <TextLine>🌞 Light</TextLine>
     {:else}
-        🌙 Dark
+        <TextLine classes="text-line-white">🌙 Dark</TextLine>
     {/if}
-</button>
-
-<style>
-    button {
-        padding: 0.5rem 1rem;
-        border-radius: var(--border-radius);
-        border: 1px solid var(--text-color);
-        background: var(--background-color);
-        color: var(--text-color);
-        cursor: pointer;
-        transition: all var(--transition-duration);
-    }
-</style>
+</Button>
