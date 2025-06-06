@@ -12,17 +12,17 @@ const _globals: Writable<ValueType> = writable(undefined);
 let timer: number | undefined = undefined;
 
 
-export async function get_global(fetch: typeof globalThis.fetch): Promise<Globals> {
+export async function get_globals(): Promise<Globals> {
     const value = get(_globals);
 
     if (value) {
         return value;
     }
 
-    return await get_global_forced(fetch);
+    return await get_globals_forced();
 }
 
-export async function get_global_forced(fetch: typeof globalThis.fetch): Promise<Globals> {
+export async function get_globals_forced(): Promise<Globals> {
     const globalsResponse = await fetch(api_url('/globals'));
     const globalsData: Globals = await check_and_parse_globals(globalsResponse);
 
