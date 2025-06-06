@@ -2,49 +2,44 @@
     cursor: pointer;
     transform: none;
     box-shadow: none;
-    transition:
-        background-color var(--transition-duration),
-        box-shadow var(--transition-duration),
-        transform var(--transition-duration);
+    transition: background-color var(--transition-duration),
+    box-shadow var(--transition-duration),
+    transform var(--transition-duration);
 }
 
 .hover-move:hover {
     background-color: var(--primary-color-mid);
     transform: translateY(-4px) translateX(-4px);
     box-shadow: 4px 4px var(--gray-color);
-    transition:
-        background-color var(--transition-duration),
-        box-shadow var(--transition-duration),
-        transform var(--transition-duration);
+    transition: background-color var(--transition-duration),
+    box-shadow var(--transition-duration),
+    transform var(--transition-duration);
 }
 
 .hover-move:active {
     background-color: var(--primary-color-dark);
     transform: none;
     box-shadow: 1px 1px var(--gray-color-light);
-    transition:
-        background-color var(--transition-duration),
-        box-shadow var(--transition-duration),
-        transform var(--transition-duration);
+    transition: background-color var(--transition-duration),
+    box-shadow var(--transition-duration),
+    transform var(--transition-duration);
 }
 
 @media (max-width: 1280px) {
     .hover-move:hover {
         transform: none;
         box-shadow: none;
-        transition:
-            background-color var(--transition-duration),
-            box-shadow var(--transition-duration),
-            transform var(--transition-duration);
+        transition: background-color var(--transition-duration),
+        box-shadow var(--transition-duration),
+        transform var(--transition-duration);
     }
 
     .hover-move:active {
         background-color: var(--primary-color-light);
         box-shadow: 2px 2px var(--gray-color-light);
         transform: translateY(2px) translateX(2px);
-        transition:
-            background-color var(--transition-duration),
-            box-shadow var(--transition-duration),
-            transform var(--transition-duration);
+        transition: background-color var(--transition-duration),
+        box-shadow var(--transition-duration),
+        transform var(--transition-duration);
     }
 }

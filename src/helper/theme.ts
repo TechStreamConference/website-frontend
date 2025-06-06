@@ -1,32 +1,32 @@
-import { writable } from 'svelte/store';
+import {writable} from 'svelte/store';
 
 type Theme = 'light' | 'dark' | 'system';
 
 // Get the initial theme from localStorage or default to 'system'
-const getInitialTheme = (): Theme => {
+const get_initial_theme = (): Theme => {
     if (typeof window === 'undefined') return 'system';
     return (localStorage.getItem('theme') as Theme) || 'system';
 };
 
-export const theme = writable<Theme>(getInitialTheme());
+export const theme = writable<Theme>(get_initial_theme());
 
 // Update theme and save to localStorage
-export const setTheme = (newTheme: Theme) => {
+export const set_theme = (newTheme: Theme) => {
     theme.set(newTheme);
     if (typeof window !== 'undefined') {
         localStorage.setItem('theme', newTheme);
     }
-    applyTheme(newTheme);
+    apply_theme(newTheme);
 };
 
 // Apply theme to document
-export const applyTheme = (currentTheme: Theme, withTransition: boolean = true) => {
+export const apply_theme = (currentTheme: Theme, withTransition: boolean = true) => {
     if (typeof window === 'undefined') return;
 
     const isDark =
         currentTheme === 'dark' ||
         (currentTheme === 'system' &&
-         window.matchMedia('(prefers-color-scheme: dark)').matches);
+            window.matchMedia('(prefers-color-scheme: dark)').matches);
 
     if (withTransition) {
         // Add a transition class
@@ -38,7 +38,6 @@ export const applyTheme = (currentTheme: Theme, withTransition: boolean = true) 
         }, 300); // Match your transition duration
     }
 
-
     document.documentElement.classList.toggle('dark-theme', isDark);
 };
 
@@ -48,7 +47,7 @@ if (typeof window !== 'undefined') {
         .addEventListener('change', () => {
             theme.subscribe(currentTheme => {
                 if (currentTheme === 'system') {
-                    applyTheme('system');
+                    apply_theme('system');
                 }
             });
         });

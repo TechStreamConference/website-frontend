@@ -1,22 +1,22 @@
 <script lang="ts">
-    import {theme, setTheme, applyTheme} from '@/helper/theme.ts';
+    import {theme, set_theme, apply_theme} from '@/helper/theme.ts';
     import {onMount} from "svelte";
 
     import TextLine from "@/lib/text/TextLine.svelte";
     import Button from "@/lib/interact/Button.svelte";
 
     onMount(() => {
-        applyTheme($theme);
+        apply_theme($theme);
     })
 
-    function toggleTheme() {
+    function toggle_theme() {
         $theme === 'dark'
-            ? setTheme('light')
-            : setTheme('dark');
+            ? set_theme('light')
+            : set_theme('dark');
     }
 </script>
 
-<Button class="hover-move" buttonSize="small-button" on:click={toggleTheme} aria-label="Toggle theme">
+<Button class="hover-move" buttonSize="small-button" on:click={toggle_theme} aria-label="Toggle theme">
     {#if $theme === 'dark'}
         <TextLine>🌞 Light</TextLine>
     {:else}

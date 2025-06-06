@@ -1,4 +1,4 @@
-import type { AllTalkTag, Globals, SimpleError } from './provideTypes';
+import type {AllTalkTag, Globals, SimpleError} from './provideTypes';
 import type {
     DashboardRoles,
     DashboardAllEvents,
@@ -83,10 +83,10 @@ export type LoadUserSocials = {
 
 export type LoadUserApplication = {
     data: {
-              event: DashboardEventApplication,
-              speaker: LoadSpeakerTeamMemberEvent,
-              socials: LoadUserSocials,
-          } | undefined,
+        event: DashboardEventApplication,
+        speaker: LoadSpeakerTeamMemberEvent,
+        socials: LoadUserSocials,
+    } | undefined,
     error: SimpleError | undefined
 }
 

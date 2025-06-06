@@ -1,29 +1,30 @@
-:root /* light-theme */ {
-    --primary-color-light:          #674c8a;
-    --primary-color-mid:            #5e4680;
-    --primary-color-dark:           #563e75;
-    --secondary-color:              #ccff57;
+:root /* light-theme */
+{
+    --primary-color-light: #674c8a;
+    --primary-color-mid: #5e4680;
+    --primary-color-dark: #563e75;
+    --secondary-color: #ccff57;
 
-    --background-color:             white;
-    --background-color-light:       rgb(237, 237, 237);
+    --background-color: white;
+    --background-color-light: rgb(237, 237, 237);
     --background-color-transparent: rgba(102, 102, 102, 0.9);
 
-    --white-color:                  white;
-    --black-color:                  black;
-    --gray-color:                   gray;
-    --gray-color-light:             rgb(190, 190, 190);
+    --white-color: white;
+    --black-color: black;
+    --gray-color: gray;
+    --gray-color-light: rgb(190, 190, 190);
 
-    --text-color:                   black;
-    --gray-text-color:              #333333;
-    --line-color:                   var(--primary-color-light);
-    --icon-color:                   var(--secondary-color);
-    --outline-hover-color:          var(--secondary-color);
-    --error-color:                  orange;
-    --success-color:                green;
+    --text-color: black;
+    --gray-text-color: #333333;
+    --line-color: var(--primary-color-light);
+    --icon-color: var(--secondary-color);
+    --outline-hover-color: var(--secondary-color);
+    --error-color: orange;
+    --success-color: green;
 
-    --border-radius:                5px;
-    --transition-duration:          0.3s;
-    --transition-duration-fast:     0.1s;
+    --border-radius: 5px;
+    --transition-duration: 0.3s;
+    --transition-duration-fast: 0.1s;
     /*horizontal-break-1: 1280px;*/
     /*horizontal-break-2: 600px;*/
 }

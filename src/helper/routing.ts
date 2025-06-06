@@ -1,4 +1,4 @@
-import { goto } from "@mateothegreat/svelte5-router";
+import {goto} from "@mateothegreat/svelte5-router";
 
 
 export const redirect = async (path: string, options?: Parameters<typeof goto>[1]): Promise<ReturnType<typeof goto>> => {

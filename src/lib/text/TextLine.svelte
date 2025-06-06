@@ -3,14 +3,14 @@
 </script>
 
 <p class="normal-font {classes}">
-    <slot />
+    <slot/>
 </p>
 
 <style>
     p {
-        font-size:   var(--full-font-size);
+        font-size: var(--full-font-size);
         line-height: var(--full-line-height);
-        text-align:  var(--text-align);
+        text-align: var(--text-align);
     }
 
     .text-line-center {
@@ -30,6 +30,6 @@
     }
 
     .text-color-custom {
-        color : var(--color);
+        color: var(--color);
     }
 </style>
