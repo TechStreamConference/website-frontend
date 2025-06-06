@@ -6,7 +6,7 @@
     import Button from "@/lib/interact/Button.svelte";
 
     onMount(() => {
-        apply_theme($theme);
+        apply_theme($theme, false);
     })
 
     function toggle_theme() {
