@@ -13,7 +13,7 @@
     }
 </script>
 
-<button on:click={toggleTheme} aria-label="Toggle theme">
+<button class = "hover-move" on:click={toggleTheme} aria-label="Toggle theme">
     {#if $theme === 'dark'}
         🌞 Light
     {:else}
@@ -30,9 +30,5 @@
         color: var(--text-color);
         cursor: pointer;
         transition: all var(--transition-duration);
-    }
-
-    button:hover {
-        background: var(--background-color-light);
     }
 </style>

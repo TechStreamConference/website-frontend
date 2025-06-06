@@ -1,4 +1,4 @@
-:root {
+:root /* light-theme */ {
     --primary-color-light:          #674c8a;
     --primary-color-mid:            #5e4680;
     --primary-color-dark:           #563e75;
@@ -28,38 +28,27 @@
     /*horizontal-break-2: 600px;*/
 }
 
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-    margin:     0;
-    padding:    0;
+:root.dark-theme {
+    --primary-color-light: #563e75;
+    --primary-color-mid: #5e4680;
+    --primary-color-dark: #674c8a;
+
+    --background-color: rgb(40, 40, 40);
+    --background-color-light: rgb(60, 60, 60);
+    --background-color-transparent: rgba(40, 40, 40, 0.85);
+
+    --text-color: white;
+    --gray-text-color: #bbbbbb;
+    --line-color: var(--secondary-color);
+    --icon-color: var(--primary-color-light);
+    --outline-hover-color: white;
+
 }
 
-html {
-    font-size:       62.5%;
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: var(--background-color);
-    transition:       background-color var(--transition-duration);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --primary-color-light:          #563e75;
-        --primary-color-mid:            #5e4680;
-        --primary-color-dark:           #674c8a;
-
-        --background-color:             rgb(40, 40, 40);
-        --background-color-light:       rgb(60, 60, 60);
-        --background-color-transparent: rgba(40, 40, 40, 0.85);
-
-        --text-color:                   white;
-        --gray-text-color:              #bbbbbb;
-        --line-color:                   var(--secondary-color);
-        --icon-color:                   var(--primary-color-light);
-        --outline-hover-color:          white;
-    }
+.theme-transition * {
+    transition: background-color var(--transition-duration),
+    border-color var(--transition-duration),
+    color var(--transition-duration),
+    fill var(--transition-duration),
+    stroke var(--transition-duration);
 }

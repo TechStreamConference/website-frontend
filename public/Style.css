@@ -6,10 +6,6 @@
     padding:    0;
 }
 
-:root {
-    --transition-duration: 300ms;
-}
-
 html {
     font-size:       62.5%;
     scroll-behavior: smooth;

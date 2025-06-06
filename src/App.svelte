@@ -35,9 +35,4 @@
 </main>
 
 <style>
-
-    main {
-        background-color: var(--color-test);
-    }
-
 </style>
