@@ -1,5 +1,5 @@
 import type {RouteResult} from "@mateothegreat/svelte5-router";
-import {imprint_item} from "@/config/MenuItem";
+import {imprint_item} from "@/config/menuItem";
 import {redirect} from "@/helper/routing";
 
 export const dashboard_auth = async (route: RouteResult): Promise<boolean> => {

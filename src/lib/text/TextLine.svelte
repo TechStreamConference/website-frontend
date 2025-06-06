@@ -1,8 +1,9 @@
 <script lang="ts">
     export let classes: string = '';
+    export let font:string = "normal-font"
 </script>
 
-<p class="normal-font {classes}">
+<p class="{font} {classes}">
     <slot/>
 </p>
 

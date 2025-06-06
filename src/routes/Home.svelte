@@ -1,17 +1,6 @@
 <script lang="ts">
-    import ThemeToggle from "@/lib/interact/ThemeToggle.svelte";
+    import {homepage_header_menu_in} from "@/config/menu";
+    import Header from "@/lib/navigation/Header.svelte";
 </script>
 
-<div class="outer">
-    <ThemeToggle/>
-</div>
-
-<style>
-    div {
-        display: flex;
-        width: 100vw;
-        justify-content: center;
-        height: 100vh;
-        align-items: center;
-    }
-</style>
+<Header menu={homepage_header_menu_in}/>

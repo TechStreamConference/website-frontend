@@ -16,10 +16,10 @@
     }
 </script>
 
-<Button class="hover-move" buttonSize="small-button" on:click={toggle_theme} aria-label="Toggle theme">
+<Button buttonSize="small-button" on:click={toggle_theme} aria-label="Toggle theme">
     {#if $theme === 'dark'}
-        <TextLine>🌞 Light</TextLine>
+        <TextLine font="sub-headline-font">🌞 Light</TextLine>
     {:else}
-        <TextLine classes="text-line-white">🌙 Dark</TextLine>
+        <TextLine font="sub-headline-font" classes="text-line-white">🌙 Dark</TextLine>
     {/if}
 </Button>

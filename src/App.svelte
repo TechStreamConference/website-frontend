@@ -2,7 +2,7 @@
     import type {RouteConfig} from "@mateothegreat/svelte5-router";
     import {Router} from "@mateothegreat/svelte5-router";
 
-    import {homepage_item, dashboard_item, imprint_item} from "@/config/MenuItem";
+    import {homepage_item, dashboard_item, imprint_item} from "@/config/menuItem";
     import {dashboard_auth} from "@/hooks/auth";
 
     import Home from "@/routes/Home.svelte";

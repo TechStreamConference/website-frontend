@@ -1,5 +1,5 @@
-import * as Item from '@/config/MenuItem'
-import {DashboardRoles} from "@/types/dashboardProvideTypes";
+import * as Item from '@/config/menuItem'
+import type {DashboardRoles} from "@/types/dashboardProvideTypes";
 
 export type Menu = Item.MenuItem[];
 
