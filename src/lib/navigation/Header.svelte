@@ -1,13 +1,15 @@
 <script lang="ts">
     import type {MenuItem} from '@/types/provideTypes.ts';
 
+    import {has_roles} from "@/stores/roles";
     import {fade} from 'svelte/transition';
 
     import LogoSmall from '@/lib/assets/LogoSmall.svelte';
     import Link from '@/lib/text/Link.svelte';
     import ThemeToggle from "@/lib/interact/ThemeToggle.svelte";
 
-    export let menu: MenuItem[];
+    export let menu_logged_in: MenuItem[];
+    export let menu_logged_out: MenuItem[];
 
     let is_open: boolean = false;
 
@@ -32,7 +34,7 @@
         </a>
         <nav>
             <ul class="navigation-header-desktop-list-wrapper">
-                {#each menu as entry}
+                {#each has_roles() ? menu_logged_in : menu_logged_out as entry}
                     <li>
                         <Link
                                 font="sub-headline-font"
@@ -71,7 +73,7 @@
         {#if is_open}
             <div class="navigation-header-mobile-menu"
                  transition:fade={{ duration: 300 }}>
-                {#each menu as entry}
+                {#each has_roles() ? menu_logged_in : menu_logged_out as entry}
                     <Link
                             font="sub-headline-font"
                             classes="link-standard navigation-header-link"
@@ -135,7 +137,7 @@
     }
 
     /* Mobile */
-    @media (max-width: 1440px) {
+    @media (max-width: 1280px) {
         .navigation-header-desktop-wrapper {
             display: none;
         }

@@ -1,5 +1,8 @@
 import * as Item from '@/config/menuItem'
+
 import type {DashboardRoles} from "@/types/dashboardProvideTypes";
+
+import {roled_checked} from "@/stores/roles";
 
 export type Menu = Item.MenuItem[];
 
@@ -50,9 +53,9 @@ export const default_footer_menu_out: Menu = [
 ];
 
 // dashboard
-
-export function dashboard_section_menu(roles: DashboardRoles) {
+export async function dashboard_section_menu() {
     const menu: Menu = [];
+    const roles: DashboardRoles = await roled_checked();
 
     if (roles.is_admin) {
         menu.push(Item.admin_item);

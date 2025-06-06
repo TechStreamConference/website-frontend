@@ -1,8 +1,9 @@
 import type {Writable} from 'svelte/store';
-import {writable, get} from 'svelte/store';
 import type {Globals} from '@/types/provideTypes';
-import {apiUrl} from '@/helper/links';
-import {checkAndParseGlobalsAsync} from '@/helper/parseJson';
+
+import {writable, get} from 'svelte/store';
+import {api_url} from '@/helper/links';
+import {check_and_parse_globals} from '@/helper/parseJson';
 
 type ValueType =
     Globals
@@ -22,8 +23,8 @@ export async function get_global(fetch: typeof globalThis.fetch): Promise<Global
 }
 
 export async function get_global_forced(fetch: typeof globalThis.fetch): Promise<Globals> {
-    const globalsResponse = await fetch(apiUrl('/globals'));
-    const globalsData: Globals = await checkAndParseGlobalsAsync(globalsResponse);
+    const globalsResponse = await fetch(api_url('/globals'));
+    const globalsData: Globals = await check_and_parse_globals(globalsResponse);
 
     reset_globals();
 
