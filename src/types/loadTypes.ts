@@ -37,3 +37,8 @@ export type LoadResetPassword = {
     globals: Globals;
     token: string;
 }
+
+export type LoadFooter = {
+    loggedIn: boolean;
+    globals: Globals;
+}

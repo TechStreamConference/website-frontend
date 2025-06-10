@@ -1,6 +1,7 @@
-import {writable, get, type Writable} from 'svelte/store';
+import {get, type Writable} from 'svelte/store';
+import {create_persistent_store} from "@/stores/persistantStore";
 
-export const _unsavedChanges: Writable<boolean> = writable(false);
+export const _unsavedChanges: Writable<boolean> = create_persistent_store<boolean>('TEST_CONF_UNSAVED_CHANGES', false);
 
 export function unsaved_changes(): boolean {
     return get(_unsavedChanges);

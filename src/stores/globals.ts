@@ -1,14 +1,16 @@
 import type {Writable} from 'svelte/store';
 import type {Globals} from '@/types/provideTypes';
 
-import {writable, get} from 'svelte/store';
+import {get} from 'svelte/store';
 import {api_url} from '@/helper/links';
 import {check_and_parse_globals} from '@/helper/parseJson';
+import {create_persistent_store} from "@/stores/persistantStore";
+
 
 type ValueType =
     Globals
     | undefined;
-const _globals: Writable<ValueType> = writable(undefined);
+const _globals: Writable<ValueType> = create_persistent_store<ValueType>('TEST_CONF_GLOBALS', undefined);
 let timer: number | undefined = undefined;
 
 

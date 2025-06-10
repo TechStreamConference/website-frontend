@@ -1,9 +1,10 @@
 import {writable, get, type Writable} from 'svelte/store';
+import {create_persistent_store} from "@/stores/persistantStore";
 
 type ValueType =
     (() => Promise<boolean>)
     | undefined;
-const _callback: Writable<ValueType> = writable(undefined);
+const _callback: Writable<ValueType> = create_persistent_store<ValueType>('TEST_CONF_SAVE_CALLBACK', undefined);
 
 export function save_callback(): ValueType {
     return get(_callback);

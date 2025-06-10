@@ -2,13 +2,14 @@ import type {Writable} from "svelte/store";
 import type {DashboardRoles} from "@/types/dashboardProvideTypes";
 
 import {api_url} from "@/helper/links";
-import {writable, get} from "svelte/store";
+import {get} from "svelte/store";
 import {check_and_parse_input_data} from "@/helper/parseJson";
 import {dashboard_roles_scheme} from "@/types/dashboardProvideTypes";
 import {redirect} from "@/helper/routing";
+import {create_persistent_store} from "@/stores/persistantStore";
 
 type ValueType = DashboardRoles | undefined;
-const _roles: Writable<ValueType> = writable(undefined);
+const _roles: Writable<ValueType> = create_persistent_store<ValueType>('TEXT_CONF_ROLES', undefined);
 let timer: undefined | number = undefined;
 
 async function fetch_roles(): Promise<ValueType> {

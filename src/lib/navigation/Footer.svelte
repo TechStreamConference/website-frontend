@@ -8,15 +8,27 @@
     import List from '@/lib/default/List.svelte';
     import ListElement from '@/lib/default/ListElement.svelte';
     import Paragraph from '@/lib/text/Paragraph.svelte';
+    import {load_footer} from "@/loading/footer";
 
     export let classes: string = '';
 
-    export let globals: Globals;
     export let menu_logged_in: Menu;
     export let menu_logged_out: Menu;
-    export let logged_in: boolean;
+    let globals: Globals;
+    let logged_in: boolean;
+    let is_finish_loading: boolean = false;
 
     const currentYear: number = new Date().getFullYear();
+
+    async function load() {
+        const loaded = await load_footer();
+        logged_in = loaded.loggedIn;
+        globals = loaded.globals;
+        is_finish_loading = true;
+    }
+
+    load().catch();
+
 </script>
 
 <footer class={classes}>
@@ -24,38 +36,44 @@
         <nav class="navigation-footer-element">
             <TextLine classes={'text-line-white navigation-footer-font-size'}>Menu:</TextLine>
             <List classes="navigation-footer-list">
-                {#each logged_in ? menu_logged_in : menu_logged_out as entry}
-                    <ListElement>
-                        <Link classes={'link-standard link-white navigation-footer-font-size'}
-                              href={entry.path}
-                              title={entry.aria}>
-                            {entry.label}
-                        </Link>
-                    </ListElement>
-                {/each}
+                {#if is_finish_loading}
+                    {#each logged_in ? menu_logged_in : menu_logged_out as entry}
+                        <ListElement>
+                            <Link classes={'link-standard link-white navigation-footer-font-size'}
+                                  href={entry.path}
+                                  title={entry.aria}>
+                                {entry.label}
+                            </Link>
+                        </ListElement>
+                    {/each}
+                {/if}
             </List>
         </nav>
 
         <nav class="navigation-footer-element">
             <TextLine classes={'text-line-white navigation-footer-font-size'}>Alle Events:</TextLine>
             <List classes="navigation-footer-list">
-                {#each globals.years_with_events as number}
-                    <ListElement>
-                        <Link
-                                classes={'link-standard link-white navigation-footer-font-size'}
-                                href="/year/{number}"
-                                title="Tech Stream Conference Seite des Jahres {number} anschauen"
-                        >
-                            {number}
-                        </Link>
-                    </ListElement>
-                {/each}
+                {#if is_finish_loading}
+                    {#each globals.years_with_events as number}
+                        <ListElement>
+                            <Link
+                                    classes={'link-standard link-white navigation-footer-font-size'}
+                                    href="/year/{number}"
+                                    title="Tech Stream Conference Seite des Jahres {number} anschauen"
+                            >
+                                {number}
+                            </Link>
+                        </ListElement>
+                    {/each}
+                {/if}
             </List>
         </nav>
 
         <div class="navigation-footer-element">
             <Paragraph classes={'paragraph-white paragraph-pre-wrap navigation-footer-font-size'}>
-                {globals.footer_text}
+                {#if is_finish_loading}
+                    {globals.footer_text}
+                {/if}
             </Paragraph>
         </div>
 

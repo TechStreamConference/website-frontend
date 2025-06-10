@@ -6,10 +6,18 @@
     import LogoSmall from '@/lib/assets/LogoSmall.svelte';
     import Link from '@/lib/text/Link.svelte';
     import ThemeToggle from "@/lib/interact/ThemeToggle.svelte";
+    import {load_header} from "@/loading/header";
 
     export let menu_logged_in: MenuItem[];
     export let menu_logged_out: MenuItem[];
-    export let logged_in: boolean;
+    let logged_in: boolean;
+    let is_finish_loading: boolean = false;
+
+    function load() {
+        logged_in = load_header();
+        is_finish_loading = true;
+    }
+    load();
 
     let is_open: boolean = false;
 
@@ -34,16 +42,18 @@
         </a>
         <nav>
             <ul class="navigation-header-desktop-list-wrapper">
-                {#each logged_in ? menu_logged_in : menu_logged_out as entry}
-                    <li>
-                        <Link
-                                font="sub-headline-font"
-                                classes="link-standard navigation-header-link"
-                                href={entry.path}
-                                title={entry.aria}>{entry.label}</Link
-                        >
-                    </li>
-                {/each}
+                {#if is_finish_loading}
+                    {#each logged_in ? menu_logged_in : menu_logged_out as entry}
+                        <li>
+                            <Link
+                                    font="sub-headline-font"
+                                    classes="link-standard navigation-header-link"
+                                    href={entry.path}
+                                    title={entry.aria}>{entry.label}</Link
+                            >
+                        </li>
+                    {/each}
+                {/if}
                 <ThemeToggle/>
             </ul>
         </nav>
@@ -73,15 +83,17 @@
         {#if is_open}
             <div class="navigation-header-mobile-menu"
                  transition:fade={{ duration: 300 }}>
-                {#each logged_in ? menu_logged_in : menu_logged_out as entry}
-                    <Link
-                            font="sub-headline-font"
-                            classes="link-standard navigation-header-link"
-                            href={entry.path}
-                            title={entry.aria}
-                            on:click={collapse}>{entry.label}</Link
-                    >
-                {/each}
+                {#if is_finish_loading}
+                    {#each logged_in ? menu_logged_in : menu_logged_out as entry}
+                        <Link
+                                font="sub-headline-font"
+                                classes="link-standard navigation-header-link"
+                                href={entry.path}
+                                title={entry.aria}
+                                on:click={collapse}>{entry.label}</Link
+                        >
+                    {/each}
+                {/if}
                 <ThemeToggle/>
             </div>
         {/if}

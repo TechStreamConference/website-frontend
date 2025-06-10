@@ -3,12 +3,14 @@
     import {fade} from "svelte/transition";
     import {apply_theme} from "@/helper/theme";
 
+    import Page from "@/lib/default/Page.svelte";
+
     let loading = true;
 
     apply_theme('system', false);
 
     export function mark_loaded(): void {
-        loading = false;
+        // loading = false;
     }
 </script>
 
@@ -24,8 +26,8 @@
 
 <style>
     .global-loading-wrapper {
-        height: 100vh;
-        width: 100vw;
+        height: auto;
+        width: auto;
         background-color: var(--background-color);
     }
 </style>
