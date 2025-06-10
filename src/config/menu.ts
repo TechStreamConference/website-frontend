@@ -2,7 +2,7 @@ import * as Item from '@/config/menuItem'
 
 import type {DashboardRoles} from "@/types/dashboardProvideTypes";
 
-import {roled_checked} from "@/stores/roles";
+import {roles} from "@/stores/roles";
 
 export type Menu = Item.MenuItem[];
 
@@ -55,15 +55,18 @@ export const default_footer_menu_out: Menu = [
 // dashboard
 export async function dashboard_section_menu() {
     const menu: Menu = [];
-    const roles: DashboardRoles = await roled_checked();
+    const roles_: DashboardRoles | undefined = await roles();
+    if (!roles_) {
+        return menu;
+    }
 
-    if (roles.is_admin) {
+    if (roles_.is_admin) {
         menu.push(Item.admin_item);
     }
-    if (roles.is_team_member) {
+    if (roles_.is_team_member) {
         menu.push(Item.team_member_item);
     }
-    if (roles.is_speaker) {
+    if (roles_.is_speaker) {
         menu.push(Item.speaker_item);
     }
     menu.push(Item.user_item);

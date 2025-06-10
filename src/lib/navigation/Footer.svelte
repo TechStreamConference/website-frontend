@@ -1,10 +1,6 @@
 <script lang="ts">
-    import type { Globals } from '@/types/provideTypes';
-    import type {Menu} from '@/config/menu'
-
-    import {get_globals} from "@/stores/globals";
-    import {has_roles} from "@/stores/roles";
-
+    import type {Globals} from '@/types/provideTypes';
+    import type {Menu} from '@/config/menu';
 
     import TextLine from '@/lib/text/TextLine.svelte';
     import Link from '@/lib/text/Link.svelte';
@@ -15,9 +11,10 @@
 
     export let classes: string = '';
 
-    let globals: Globals = get_globals();
+    export let globals: Globals;
     export let menu_logged_in: Menu;
     export let menu_logged_out: Menu;
+    export let logged_in: boolean;
 
     const currentYear: number = new Date().getFullYear();
 </script>
@@ -27,12 +24,12 @@
         <nav class="navigation-footer-element">
             <TextLine classes={'text-line-white navigation-footer-font-size'}>Menu:</TextLine>
             <List classes="navigation-footer-list">
-                {#each has_roles() ? menu_logged_in : menu_logged_out as entry}
+                {#each logged_in ? menu_logged_in : menu_logged_out as entry}
                     <ListElement>
                         <Link classes={'link-standard link-white navigation-footer-font-size'}
-                              href={entry.url}
-                              title={entry.description}>
-                            {entry.name}
+                              href={entry.path}
+                              title={entry.aria}>
+                            {entry.label}
                         </Link>
                     </ListElement>
                 {/each}
@@ -45,9 +42,9 @@
                 {#each globals.years_with_events as number}
                     <ListElement>
                         <Link
-                              classes={'link-standard link-white navigation-footer-font-size'}
-                              href="/year/{number}"
-                              title="Tech Stream Conference Seite des Jahres {number} anschauen"
+                                classes={'link-standard link-white navigation-footer-font-size'}
+                                href="/year/{number}"
+                                title="Tech Stream Conference Seite des Jahres {number} anschauen"
                         >
                             {number}
                         </Link>
@@ -63,35 +60,35 @@
         </div>
 
         <div class="navigation-footer-element">
-            <LogoBig classes="navigation-footer-logo" />
+            <LogoBig classes="navigation-footer-logo"/>
         </div>
     </div>
     <div class="navigation-footer-copyright">
         <TextLine classes={'text-line-white navigation-footer-font-size'}>&copy; Tech Stream
-                                                                          Conference {currentYear}</TextLine>
+            Conference {currentYear}</TextLine>
     </div>
 </footer>
 
 <style>
     footer {
-        display:          flex;
-        flex-direction:   column;
+        display: flex;
+        flex-direction: column;
         background-color: var(--primary-color-light);
-        padding:          var(--2x-padding) 0;
+        padding: var(--2x-padding) 0;
     }
 
     .navigation-footer-wrapper {
-        display:         flex;
-        flex-direction:  row;
-        flex-wrap:       wrap;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         justify-content: space-evenly;
-        gap:             var(--4x-gap);
-        padding:         0 var(--4x-padding);
+        gap: var(--4x-gap);
+        padding: 0 var(--4x-padding);
     }
 
     .navigation-footer-element {
-        flex:       1;
-        min-width:  18rem;
+        flex: 1;
+        min-width: 18rem;
         text-align: center;
     }
 
@@ -100,14 +97,14 @@
     }
 
     :global(.navigation-footer-logo) {
-        height:     16rem;
+        height: 16rem;
         object-fit: contain;
         max-height: 20rem;
     }
 
     .navigation-footer-copyright {
-        margin-top:      var(--2x-margin);
-        display:         flex;
+        margin-top: var(--2x-margin);
+        display: flex;
         justify-content: center;
     }
 

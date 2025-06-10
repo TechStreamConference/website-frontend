@@ -5,7 +5,6 @@ import {api_url} from "@/helper/links";
 import {writable, get} from "svelte/store";
 import {check_and_parse_input_data} from "@/helper/parseJson";
 import {dashboard_roles_scheme} from "@/types/dashboardProvideTypes";
-import {reset_globals} from "@/stores/globals";
 import {redirect} from "@/helper/routing";
 
 type ValueType = DashboardRoles | undefined;
@@ -13,7 +12,7 @@ const _roles: Writable<ValueType> = writable(undefined);
 let timer: undefined | number = undefined;
 
 async function fetch_roles(): Promise<ValueType> {
-    const response = await fetch(api_url('/roles'));
+    const response = await fetch(api_url('/account/roles'));
     if (!response.ok) {
         _roles.set(undefined);
         return undefined;
@@ -26,9 +25,9 @@ async function fetch_roles(): Promise<ValueType> {
         "Unerwartete Daten für die Dashboard-Rollen."
     );
 
-    reset_globals();
+    reset_roles();
     _roles.set(roles);
-    setTimeout(reset_globals, 600000); // ca. 10 Min
+    setTimeout(fetch_roles, 600000); // ca. 10 Min
 
     return roles;
 }
@@ -45,15 +44,15 @@ export async function roles(): Promise<ValueType> {
     return await fetch_roles();
 }
 
-export async function roled_checked(): Promise<DashboardRoles> {
-    const roles = await roles();
+export async function roles_checked(): Promise<DashboardRoles> {
+    const roles_ = await roles();
 
-    if (!roles) {
-        console.log("REDIRECT TO 406");
-        await redirect("/");
+    if (roles_) {
+        return roles_;
     }
 
-    return roles;
+    console.log("REDIRECT TO 406");
+    await redirect("/");
 }
 
 export function reset_roles() {

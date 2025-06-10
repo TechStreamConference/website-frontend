@@ -91,16 +91,5 @@ export const year_scheme = z.object({
 });
 export type Year = z.infer<typeof year_scheme>;
 
-export const menu_item_scheme = z.object({
-    name: z.string(),
-    url: z.string(),
-    description: z.string(),
-});
-export type MenuItem = z.infer<typeof menu_item_scheme>;
-
-export const menu_scheme = z.array(menu_item_scheme);
-export type Menu = z.infer<typeof menu_scheme>;
-
-
 export const simple_error_scheme = z.object({error: z.string()});
 export type SimpleError = z.infer<typeof simple_error_scheme>;
