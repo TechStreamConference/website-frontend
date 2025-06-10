@@ -8,7 +8,7 @@
     import List from '@/lib/default/List.svelte';
     import ListElement from '@/lib/default/ListElement.svelte';
     import Paragraph from '@/lib/text/Paragraph.svelte';
-    import {load_footer} from "@/loading/footer";
+    import {load_footer} from "@/fetch/footer";
 
     export let classes: string = '';
 

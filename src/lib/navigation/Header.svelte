@@ -6,7 +6,7 @@
     import LogoSmall from '@/lib/assets/LogoSmall.svelte';
     import Link from '@/lib/text/Link.svelte';
     import ThemeToggle from "@/lib/interact/ThemeToggle.svelte";
-    import {load_header} from "@/loading/header";
+    import {load_header} from "@/fetch/header";
 
     export let menu_logged_in: MenuItem[];
     export let menu_logged_out: MenuItem[];
