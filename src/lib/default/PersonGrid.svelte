@@ -1,7 +1,7 @@
 <script lang="ts">
     import type {Person} from '@/types/provideTypes';
 
-    import PersonRectangle from '@/lib/person/PersonRectangle.svelte';
+    import PersonRectangle from '@/lib/default/PersonRectangle.svelte';
 
     export let person_popup_callback: (event: Event, person: Person) => void;
 

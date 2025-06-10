@@ -5,19 +5,19 @@
 
     import LogoBig from '@/lib/assets/LogoBig.svelte';
     import YearEventLinks from '@/lib/interact/YearEventLinks.svelte';
-    import PersonArray from '@/lib/person/personGrid.svelte';
-    import HeadlineH2 from '@/lib/text/headlineH2.svelte';
-    import Headline from '@/lib/text/headline.svelte';
-    import PersonPopup from '@/lib/person/personPopup.svelte';
-    import Section from '@/lib/section/section.svelte';
-    import SubHeadline from '@/lib/text/subHeadline.svelte';
-    import YouTubeVideo from '@/lib/image/youTubeVideo.svelte';
-    import Paragraph from '@/lib/text/paragraph.svelte';
-    import SponsorArray from '@/lib/sponsor/sponsorArray.svelte';
-    import Schedule from '@/lib/schedule/schedule.svelte';
-    import StyledLink from '@/lib/input/styledLink.svelte';
-    import TextLine from '@/lib/text/textLine.svelte';
-    import Link from '@/lib/text/link.svelte';
+    import PersonArray from '@/lib/default/PersonGrid.svelte';
+    import HeadlineH2 from '@/lib/text/HeadlineH2.svelte';
+    import Headline from '@/lib/text/Headline.svelte';
+    import PersonPopup from '@/lib/popup/PersonPopup.svelte';
+    import Section from '@/lib/default/Section.svelte';
+    import SubHeadline from '@/lib/text/SubHeadline.svelte';
+    import YouTubeVideo from '@/lib/assets/YouTubeVideo.svelte';
+    import Paragraph from '@/lib/text/Paragraph.svelte';
+    import SponsorArray from '@/lib/default/SponsorArray.svelte';
+    import Schedule from '@/lib/default/Schedule.svelte';
+    import StyledLink from '@/lib/interact/StyledLink.svelte';
+    import TextLine from '@/lib/text/TextLine.svelte';
+    import Link from '@/lib/text/Link.svelte';
 
     import {format_date} from '@/helper/dates';
     import {api_url} from '@/helper/links';

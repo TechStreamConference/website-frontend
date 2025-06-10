@@ -3,9 +3,9 @@
 
     import Paragraph from '@/lib/text/Paragraph.svelte';
     import SubHeadline from '@/lib/text/SubHeadline.svelte';
-    import PersonLinkGrid from '@/lib/person/PersonLinkGrid.svelte';
-    import PersonImage from '@/lib/person/PersonImage.svelte';
-    import BasePopup from '@/lib/popups/basePopup.svelte';
+    import PersonLinkGrid from '@/lib/default/PersonLinkGrid.svelte';
+    import PersonImage from '@/lib/default/PersonImage.svelte';
+    import BasePopup from '@/lib/popup/BasePopup.svelte';
 
     export let data: Person | undefined = undefined;
     let base_popup: BasePopup;
