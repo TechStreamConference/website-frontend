@@ -1,6 +1,4 @@
 <script lang="ts">
-    import type {Globals} from "@/types/provideTypes";
-
     import Loading from "@/lib/async/Loading.svelte";
     import Page from "@/lib/default/Page.svelte";
     import TextLine from "@/lib/text/TextLine.svelte";
@@ -8,26 +6,20 @@
     import Paragraph from "@/lib/text/Paragraph.svelte";
     import SubHeadline from "@/lib/text/SubHeadline.svelte";
     import HeadlinePage from "@/lib/text/HeadlinePage.svelte";
-
-    import {get_globals} from "@/stores/globals";
-    import {default_footer_menu_in, default_footer_menu_out, default_header_menu_in, default_header_menu_out} from "@/config/menu";
-    import {has_roles} from "@/stores/roles";
     import {onMount} from "svelte";
 
-    let loading_guard: Loading;
-    let globals: Globals;
+    import {default_footer_menu_in, default_footer_menu_out, default_header_menu_in, default_header_menu_out} from "@/config/menu";
 
-    onMount(async () => {
-        globals = await get_globals();
+    let loading_guard: Loading;
+
+    onMount(() => {
         loading_guard.mark_loaded();
-    })
+    });
 </script>
 
-<Loading bind:this={loading_guard}>
-    <Page header_menu_logged_in={default_header_menu_in} header_menu_logged_out={default_header_menu_out}
-          footer_menu_logged_in={default_footer_menu_in} footer_menu_logged_out={default_footer_menu_out}
-          logged_in={has_roles()}
-          {globals}>
+<Page header_menu_logged_in={default_header_menu_in} header_menu_logged_out={default_header_menu_out}
+      footer_menu_logged_in={default_footer_menu_in} footer_menu_logged_out={default_footer_menu_out}>
+    <Loading bind:this={loading_guard}>
         <div class="imprint-content-wrapper">
             <HeadlinePage classes="imprint-headline">Impressum</HeadlinePage>
 
@@ -138,9 +130,9 @@
                 </Link>
             </Paragraph>
         </div>
-    </Page>
+    </Loading>
+</Page>
 
-</Loading>
 <style>
     .imprint-content-wrapper {
         padding: 0 var(--2x-padding);

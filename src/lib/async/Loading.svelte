@@ -1,16 +1,13 @@
 <script lang="ts">
-
     import {fade} from "svelte/transition";
     import {apply_theme} from "@/helper/theme";
-
-    import Page from "@/lib/default/Page.svelte";
 
     let loading = true;
 
     apply_theme('system', false);
 
     export function mark_loaded(): void {
-        // loading = false;
+        loading = false;
     }
 </script>
 
@@ -19,7 +16,7 @@
         <h1>Loading...</h1>
     </div>
 {:else}
-    <div class="global-loading-wrapper" transition:fade={{duration:100}}>
+    <div class="global-loading-wrapper" in:fade={{duration:300}}>
         <slot/>
     </div>
 {/if}
