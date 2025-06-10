@@ -1,0 +1,101 @@
+<script lang="ts">
+    import type { Person } from '@/types/provideTypes';
+
+    import Paragraph from '@/lib/text/Paragraph.svelte';
+    import SubHeadline from '@/lib/text/SubHeadline.svelte';
+    import PersonLinkGrid from '@/lib/person/PersonLinkGrid.svelte';
+    import PersonImage from '@/lib/person/PersonImage.svelte';
+    import BasePopup from '@/lib/popups/basePopup.svelte';
+
+    export let data: Person | undefined = undefined;
+    let base_popup: BasePopup;
+
+    export function show(person: Person): void {
+        data = person;
+        base_popup.show();
+    }
+
+    export function hide(): void {
+        base_popup.hide();
+    }
+</script>
+
+<BasePopup bind:this={base_popup}>
+    <div class="person-popup-content-wrapper">
+        {#if data}
+            <div class="person-popup-column-wrapper person-popup-align-center person-popup-line">
+                <PersonImage classes="person-popup-picture"
+                             {data} />
+                <SubHeadline classes="person-popup-one-line-spacer">{data.name}</SubHeadline>
+                <Paragraph classes="paragraph-pre-wrap"
+                >{data.short_bio}</Paragraph
+                >
+                <PersonLinkGrid person={data.name}
+                                links={data.social_media_links} />
+            </div>
+            <div class="person-popup-column-wrapper">
+                <Paragraph classes="person-popup-one-line-spacer paragraph-pre-wrap">{data.bio}</Paragraph>
+            </div>
+        {/if}
+    </div>
+</BasePopup>
+
+<style>
+    .person-popup-content-wrapper {
+        margin:                var(--full-margin);
+        display:               grid;
+        grid-template-columns: 1fr 1fr;
+        width:                 80vw;
+        max-width:             100rem;
+    }
+
+    .person-popup-align-center {
+        text-align: center;
+    }
+
+    .person-popup-column-wrapper {
+        display:        flex;
+        flex-direction: column;
+        padding:        var(--2x-margin);
+    }
+
+    :global(.person-popup-one-line-spacer) {
+        margin-top: var(--full-margin);
+    }
+
+    .person-popup-line {
+        border-right: 1px solid var(--line-color);
+    }
+
+    :global(.person-popup-picture) {
+        width:         100%;
+        height:        auto;
+        border:        1px solid var(--primary-color-light);
+        align-self:    center;
+        border-radius: var(--border-radius);
+    }
+
+    @media (max-width: 900px) {
+        .person-popup-content-wrapper {
+            grid-template-columns: 1fr;
+            height:                75vh;
+            overflow-y:            auto;
+            max-width:             100%;
+        }
+
+        .person-popup-column-wrapper {
+            width:  100%;
+            height: auto;
+        }
+
+        :global(.person-popup-picture) {
+            max-width: 40rem;
+            align-self: center;
+        }
+
+        .person-popup-line {
+            border-bottom: 1px solid var(--line-color);
+            border-right:  none;
+        }
+    }
+</style>

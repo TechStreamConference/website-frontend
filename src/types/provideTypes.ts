@@ -46,7 +46,7 @@ export const person_scheme = z.object({
     short_bio: z.string(),
     name: z.string(),
     photo: z.string(),
-    social_media_links: sponsor_links_scheme,
+    social_media_links: social_media_links_scheme,
 });
 export type Person = z.infer<typeof person_scheme>;
 
