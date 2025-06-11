@@ -3,7 +3,7 @@
 
     import Image from '@/lib/assets/Image.svelte';
 
-    import { imageUrl } from '@/helper/links';
+    import { image_url } from '@/helper/links';
 
     export let link: SponsorLink;
 
@@ -19,7 +19,7 @@
       on:click
 >
     <Image classes="image-default sponsor-link-hover"
-           src={imageUrl(link.logo)}
+           src={image_url(link.logo)}
            alt={link.alt_text} />
 </a>
 

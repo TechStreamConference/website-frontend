@@ -1,17 +1,17 @@
 <script lang="ts">
-    import type {Person} from 'types/provideTypes';
+    import type {Person} from '@/types/provideTypes';
 
-    import SubHeadline from 'elements/text/subHeadline.svelte';
-    import Paragraph from 'elements/text/paragraph.svelte';
-    import LinkArray from './personLinkGrid.svelte';
-    import Button from 'elements/input/button.svelte';
-    import PersonImage from './personImage.svelte';
+    import SubHeadline from '@/lib/text/SubHeadline.svelte';
+    import Paragraph from '@/lib/text/Paragraph.svelte';
+    import LinkArray from '@/lib/default/PersonLinkGrid.svelte';
+    import Button from '@/lib/interact/Button.svelte';
+    import PersonImage from '@/lib/default/PersonImage.svelte';
 
     export let classes: string = '';
 
     export let data: Person;
 
-    function onLinkClicked(event: Event) {
+    function on_link_clicked(event: Event) {
         event.stopPropagation();
     }
 </script>
@@ -25,7 +25,7 @@
     <Paragraph classes="person-rectangle-paragraph person-rectangle-margin">{data.short_bio}</Paragraph>
     <div class="person-rectangle-line person-rectangle-margin"/>
     <div class="person-rectangle-margin">
-        <LinkArray on:click={onLinkClicked}
+        <LinkArray on:click={on_link_clicked}
                    person={data.name}
                    links={data.social_media_links}/>
     </div>
