@@ -18,6 +18,7 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@mateothegreat/svelte5-router": "^2.15.3",
     "zod": "^3.25.55"
   }

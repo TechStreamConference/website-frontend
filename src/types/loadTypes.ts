@@ -1,8 +1,6 @@
 import type {Year, Globals} from './provideTypes';
 
 export type LoadYear = {
-    loggedIn: boolean;
-    globals: Globals;
     year: Year
 };
 

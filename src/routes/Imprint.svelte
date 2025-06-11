@@ -6,15 +6,15 @@
     import Paragraph from "@/lib/text/Paragraph.svelte";
     import SubHeadline from "@/lib/text/SubHeadline.svelte";
     import HeadlinePage from "@/lib/text/HeadlinePage.svelte";
-    import {onMount} from "svelte";
 
     import {default_footer_menu_in, default_footer_menu_out, default_header_menu_in, default_header_menu_out} from "@/config/menu";
+    import {onMount} from "svelte";
 
     let loading_guard: Loading;
 
     onMount(() => {
         loading_guard.mark_loaded();
-    });
+    })
 </script>
 
 <Page header_menu_logged_in={default_header_menu_in} header_menu_logged_out={default_header_menu_out}

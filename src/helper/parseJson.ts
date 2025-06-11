@@ -43,7 +43,7 @@ export async function parse_provided_json<T extends ZodSchema>(
 ): Promise<z.infer<T> | undefined> {
     try {
         const type: T = await response.json();
-        const validated = scheme.safeParse(type);
+        const validated = await scheme.safeParse(type);
 
         if (validated.success) {
             return validated.data;
