@@ -227,7 +227,7 @@
     {/if}
 
     {#if data.year.event.is_visible_on_frontpage}
-        <Section id="Schedule">
+        <Section id="Schedule" classes="section-disable-margin-bottom">
             <HeadlineH2 classes="headline-h2-border">Plan</HeadlineH2>
             {#if data.year.talks.length > 0}
                 <div class="center-styled-link">
@@ -280,7 +280,7 @@
 
     .year-header-content {
         justify-content: center;
-        margin: var(--8x-margin) var(--4x-margin);
+        padding: var(--8x-padding) var(--4x-padding);
         display: flex;
     }
 
@@ -319,11 +319,15 @@
     }
 
     .year-content-wrapper {
+        display: flex;
+        gap: var(--8x-gap);
+        flex-direction: column;
         flex-grow: 1;
         max-width: 150rem;
         width: 100%;
-        margin: 0 auto 10rem;
-        padding: 0 var(--2x-padding);
+        margin: 0 auto;
+        padding: var(--8x-padding) var(--2x-padding);
+        background-color: var(--background-color-light);
     }
 
     .year-section-inner {
