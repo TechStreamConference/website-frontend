@@ -69,7 +69,7 @@
         };
 
         for (let talk of talks) {
-            const date = formatDate(talk.starts_at, '%DD.%MM.%YYYY');
+            const date = format_date(talk.starts_at, '%DD.%MM.%YYYY');
             if (!dict[date]) {
                 dict[date] = newDays();
             }
@@ -181,8 +181,8 @@
             <HeadlineH2 classes="headline-h2-border">Vortragende</HeadlineH2>
             <div class="year-section-inner">
                 {#if data.year.speakers.length > 0}
-                    <PersonArray personData={data.year.speakers}
-                                 personPopupCallback={open_person_popup}/>
+                    <PersonArray person_data={data.year.speakers}
+                                 person_popup_callback={open_person_popup}/>
                 {:else}
                     <TextLine classes="text-line-center">Sei gespannt, welche Speaker in den nächsten Tagen hier auf
                         dich warten.
@@ -215,8 +215,8 @@
             <HeadlineH2 classes="headline-h2-border">Team</HeadlineH2>
             <div class="year-section-inner">
                 {#if data.year.team_members.length > 0}
-                    <PersonArray personData={data.year.team_members}
-                                 personPopupCallback={open_person_popup}/>
+                    <PersonArray person_data={data.year.team_members}
+                                 person_popup_callback={open_person_popup}/>
                 {:else}
                     <TextLine classes="text-line-center">Sei gespannt welche, Team Member in den nächsten Tagen hier
                         auf dich warten.
@@ -236,7 +236,7 @@
                             href={api_url(`/events/${data.year.event.year}/ics`)}
                             title="Klicke, um den Ablaufplan als ICS-Datei herunterzuladen"
                             icon="Calender"
-                            newTab={false}
+                            new_tab={false}
                             text="Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!"
                     />
                 </div>
@@ -245,12 +245,12 @@
                         <Schedule
                                 schedule={days.normal}
                                 speakers={data.year.speakers}
-                                personPopupCallback={open_person_popup}
+                                person_popup_callback={open_person_popup}
                         />
                         <Schedule
                                 schedule={days.special}
                                 speakers={data.year.speakers}
-                                personPopupCallback={open_person_popup}
+                                person_popup_callback={open_person_popup}
                         />
                     {/each}
                 </div>

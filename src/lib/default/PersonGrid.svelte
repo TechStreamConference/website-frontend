@@ -6,11 +6,11 @@
     export let person_popup_callback: (event: Event, person: Person) => void;
 
     export let classes: string = '';
-    export let personData: Person[];
+    export let person_data: Person[];
 </script>
 
 <div class={classes}>
-    {#each personData as person}
+    {#each person_data as person}
         <PersonRectangle
                 data={person}
                 on:click={(event) => {

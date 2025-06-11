@@ -8,6 +8,7 @@
 
     export function mark_loaded(): void {
         loading = false;
+        console.log('loaded');
     }
 </script>
 

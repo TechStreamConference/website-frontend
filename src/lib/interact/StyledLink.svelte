@@ -3,7 +3,7 @@
 
     export let classes: string = '';
     export let href: string;
-    export let newTab: boolean = true;
+    export let new_tab: boolean = true;
     export let title: string;
     export let icon: string = '';
     export let text: string = '';
@@ -14,7 +14,7 @@
 <a
         {href}
         class={classes + ' normal-font button hover-move'}
-        target={newTab ? '_blank' : ''}
+        target={new_tab ? '_blank' : ''}
         rel="noopener noreferrer"
         {title}
         on:click
