@@ -1,9 +1,9 @@
 <script lang="ts">
-    // @TODO remove dummy paths and actual files
-    const videoPath = "/../dummy_video.mp4";
-    const picturePath = "/../dummy_picture.png";
+    export let videoPath;
+    export let picturePath;
 
-    export let ariaLabel:string;
+
+    export let ariaLabel: string;
 </script>
 
 <div class="general-video-wrapper">
@@ -18,6 +18,7 @@
         width: 100%;
         padding-bottom: 56.25%;
     }
+
     .general-video {
         position: absolute;
         top: 0;
