@@ -310,13 +310,22 @@
           on:input={setUnsavedChanges}
     />
     <Input
-          classes="dashboard-admin-event-youtube-trailer-id input"
-          id="dashboard-admin-event-youtube-trailer-id"
-          labelText="YouTube Trailer ID:"
-          placeholderText="YouTube Trailer ID:"
-          ariaLabel="Gib die ID des YouTube Trailer des ausgewählten Events ein."
-          bind:value={event.trailer_youtube_id}
+          classes="dashboard-admin-event-trailer-url input"
+          id="dashboard-admin-event-trailer-url"
+          labelText="Trailer URL:"
+          placeholderText="Trailer URL:"
+          ariaLabel="Gib die URL des Trailer des ausgewählten Events ein."
+          bind:value={event.trailer_url}
           on:input={setUnsavedChanges}
+    />
+    <Input
+            classes="dashboard-admin-event-trailer-poster-url input"
+            id="dashboard-admin-event-trailer-poster-url"
+            labelText="Trailer Poster URL:"
+            placeholderText="Trailer Poster URL:"
+            ariaLabel="Gib die URL des Trailer-Posters des ausgewählten Events ein."
+            bind:value={event.trailer_poster_url}
+            on:input={setUnsavedChanges}
     />
     <Input
           classes="dashboard-admin-event-description-headline input"
