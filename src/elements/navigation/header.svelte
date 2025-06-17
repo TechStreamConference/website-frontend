@@ -1,8 +1,9 @@
 <script lang="ts">
     import type { MenuItem } from 'types/provideTypes';
     import LogoSmall from 'elements/image/logoSmall.svelte';
-    import { fade } from 'svelte/transition';
+    import ThemeToggle from "elements/input/ThemeToggle.svelte";
     import Link from 'elements/text/link.svelte';
+    import { fade } from 'svelte/transition';
 
     export let menu: MenuItem[];
 
@@ -39,6 +40,9 @@
                         >
                     </li>
                 {/each}
+                <li>
+                    <ThemeToggle/>
+                </li>
             </ul>
         </nav>
     </div>
@@ -76,6 +80,7 @@
                           on:click={collapse}>{entry.name}</Link
                     >
                 {/each}
+                <ThemeToggle/>
             </div>
         {/if}
     </div>
