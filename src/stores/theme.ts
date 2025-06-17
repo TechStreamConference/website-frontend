@@ -33,6 +33,7 @@ function updateTheme() {
     }
 
     document.documentElement.classList.toggle("dark-theme", get(isDarkStore));
+    document.documentElement.classList.toggle("light-theme", !get(isDarkStore));
 }
 
 function applyTransition() {
