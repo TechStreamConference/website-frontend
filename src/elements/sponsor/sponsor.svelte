@@ -1,9 +1,10 @@
 <script lang="ts">
-    import type { SponsorLink } from 'types/provideTypes';
+    import type {SponsorLink} from 'types/provideTypes';
 
+    import {isDarkStore} from "stores/theme";
     import Image from 'elements/image/image.svelte';
 
-    import { imageUrl } from 'helper/links';
+    import {imageUrl} from 'helper/links';
 
     export let link: SponsorLink;
 
@@ -11,44 +12,50 @@
 </script>
 
 <a
-      href={link.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      class={classes}
-      title="Klicke hier um zu {link.name} zu navigieren."
-      on:click
+        href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class={classes}
+        title="Klicke hier um zu {link.name} zu navigieren."
+        on:click
 >
-    <Image classes="image-default sponsor-link-hover"
-           src={imageUrl(link.logo)}
-           alt={link.alt_text} />
+    {#if $isDarkStore}
+        <Image classes="image-default sponsor-link-hover"
+               src={imageUrl("")}
+               alt={link.alt_text}/>
+    {:else}
+        <Image classes="image-default sponsor-link-hover"
+               src={imageUrl(link.logo)}
+               alt={link.alt_text}/>
+    {/if}
 </a>
 
 <style>
     a {
-        display:         flex;
+        display: flex;
         justify-content: center;
-        align-items:     center;
+        align-items: center;
     }
 
     .sponsor-size-default {
         max-height: 100%;
-        max-width:  100%;
-        height:     auto;
-        width:      auto;
+        max-width: 100%;
+        height: auto;
+        width: auto;
     }
 
     :global(.sponsor-link-hover) {
-        padding:    var(--quad-padding);
+        padding: var(--quad-padding);
         transition: padding var(--transition-duration);
     }
 
     :global(.sponsor-link-hover:hover) {
-        padding:    0;
+        padding: 0;
         transition: padding var(--transition-duration);
     }
 
     :global(.sponsor-link-hover:active) {
-        padding:    var(--quad-padding);
+        padding: var(--quad-padding);
         transition: padding var(--transition-duration);
     }
 
