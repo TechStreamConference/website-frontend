@@ -8,33 +8,33 @@ const colorsDark: string[] = [
 
     // background color: #282828FF
     // main tag, sub tag  // ID | subtag-count | color  | info      | tag
-    "#00ff00", "#006400", // 1  | 2            |        | weak      | Didaktik
-    "#00ffff", "#00c8c8", // 3  | 10           |        | important | Spieleentwicklung
-    "#0000ff", "#000096", // 5  | 1            |        | weak      | Hacking
-    "#00ff00", "#006400", // 7  | 1            |        | weak      | Kommunikation
-    "#000000", "#323232", // 9  | 4            |        |           | Künstliche Intelligenz (KI)
-    "#0000ff", "#000096", // 11 | 2            |        | weak      | Maker
-    "#ffff38", "#969600", // 13 | 0            |        | weak      | Musik
-    "#000000", "#323232", // 15 | 26           |        | important | Programmierung
-    "#00ff00", "#006400", // 17 | 10           |        | important | Projektmanagement
-    "#c80000", "#960000", // 19 | 1            |        | weak      | Security
-    "#c800c8", "#960096", // 21 | 0            |        | weak      | Streaming
-    "#c80000", "#960000", // 23 | 19           |        | important | Web-Entwicklung
+    "#66CDAA", "#3D8B7A", // 1  | 2            |        | weak      | Didaktik
+    "#9370DB", "#6A5ACD", // 3  | 10           |        | important | Spieleentwicklung
+    "#20B2AA", "#008B8B", // 5  | 1            |        | weak      | Hacking
+    "#8FBC8F", "#5F9F6F", // 7  | 1            |        | weak      | Kommunikation
+    "#DDA0DD", "#9932CC", // 9  | 4            |        |           | Künstliche Intelligenz (KI)
+    "#90EE90", "#3CB371", // 11 | 2            |        | weak      | Maker
+    "#7FFFD4", "#48D1CC", // 13 | 0            |        | weak      | Musik
+    "#8A2BE2", "#4B0082", // 15 | 26           |        | important | Programmierung
+    "#00FA9A", "#00C957", // 17 | 10           |        | important | Projektmanagement
+    "#98FB98", "#549B54", // 19 | 1            |        | weak      | Security
+    "#BA55D3", "#9400D3", // 21 | 0            |        | weak      | Streaming
+    "#7B68EE", "#483D8B", // 23 | 19           |        | important | Web-Entwicklung
 ];
 const colorsLight: string[] = [
     // background color: #FFFFFFFF
-    "#00ff00", "#006400",
-    "#d50808", "#e80000",
-    "#0000ff", "#000096",
-    "#00ff00", "#006400",
-    "#000000", "#323232",
-    "#0000ff", "#000096",
-    "#ffff38", "#969600",
-    "#000000", "#323232",
-    "#00ff00", "#006400",
-    "#c80000", "#960000",
-    "#c800c8", "#960096",
-    "#c80000", "#960000",
+    "#2F8B76", "#1D5B4D",
+    "#6A45C9", "#4A2F8F",
+    "#167F7F", "#0A4D4D",
+    "#548B54", "#325C32",
+    "#8B3A8B", "#662966",
+    "#3CB371", "#266B44",
+    "#3EBFB4", "#267B73",
+    "#5D1C9E", "#341158",
+    "#00995C", "#006B41",
+    "#549B54", "#326B32",
+    "#943AAD", "#682C7A",
+    "#4B3DA8", "#2F2769",
 ];
 // @formatter:on,
 
@@ -43,7 +43,7 @@ function hexToRgb(hex: string): {
     g: number;
     b: number
 } {
-    // Remove leading '#' if present
+    // Remove the leading '#' if present
     const cleanHex = hex.replace(/^#/, '');
 
     // Parse r, g, b
