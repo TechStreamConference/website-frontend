@@ -9,10 +9,10 @@
     }
 </script>
 
-<Button buttonSize="small-button" on:click={toggleTheme} aria-label="Toggle theme">
+<Button buttonSize="small-button" on:click={toggleTheme} ariaLabel="Toggle theme">
     {#if $isDarkStore}
-        <TextLine font="sub-headline-font">🌞 Light</TextLine>
+        <TextLine>🌞 Light</TextLine>
     {:else}
-        <TextLine font="sub-headline-font" classes="text-line-white">🌙 Dark</TextLine>
+        <TextLine classes="text-line-white">🌙 Dark</TextLine>
     {/if}
 </Button>
