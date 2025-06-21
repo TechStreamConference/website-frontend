@@ -1,7 +1,7 @@
 <script lang="ts">
     import type {MenuItem} from 'types/provideTypes';
     import LogoSmall from 'elements/image/logoSmall.svelte';
-    import ThemeToggle from "elements/input/ThemeToggle.svelte";
+    import ThemeToggle from "elements/input/themeToggle.svelte";
     import Link from 'elements/text/link.svelte';
     import {fade} from 'svelte/transition';
 
