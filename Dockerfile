@@ -1,17 +1,45 @@
+ARG HOST_UID=1000
+ARG HOST_GID=1000
+
 FROM node:22-bookworm AS base
 
-WORKDIR /app
+ARG HOST_UID
+ARG HOST_GID
 
-RUN echo 'alias ll="ls -la"' >> ~/.bashrc
+WORKDIR /app
 
 # --- Development target ---
 FROM base AS dev
+
+ARG HOST_UID
+ARG HOST_GID
+
 WORKDIR /app
+
+RUN echo "UID: $HOST_UID, GID: $HOST_GID"
+
+# Create user and group matching the host's
+# Avoid conflicts if the UID/GID already exist
+RUN EXISTING_USER=$(getent passwd "$HOST_UID" | cut -d: -f1) && \
+    if [ -z "$EXISTING_USER" ]; then \
+      groupadd -g "$HOST_GID" appgroup && \
+      useradd -u "$HOST_UID" -g "$HOST_GID" -m appuser && \
+      export TARGET_USER=appuser; \
+    else \
+      export TARGET_USER=$EXISTING_USER; \
+    fi && \
+    echo "alias ll='ls -la'" >> /home/$TARGET_USER/.bashrc
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Switch user
+USER $TARGET_USER
+
 COPY package*.json ./
 RUN npm install
 RUN cp -r node_modules /node_modules.bak
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
 # Source files will be mounted from the host, we don't copy them here.
 CMD ["npm", "run", "dev", "--", "--host"]
