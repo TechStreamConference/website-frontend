@@ -1,6 +1,6 @@
 import type {Writable} from "svelte/store";
 import {get, writable} from "svelte/store";
-import {createPersistentStore} from "stores/persistantStore";
+import {createPersistentStore} from "stores/persistentStore";
 import {browser} from "$app/environment";
 
 type Theme = "system" | "light" | "dark";
