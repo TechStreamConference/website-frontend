@@ -3,8 +3,8 @@
     import * as MenuItemPage from 'menu/pageItems';
     import * as MenuItemDashboard from 'menu/dashboardItems';
 
-    import type { LoadYear } from 'types/loadTypes';
-    import type { Person, Talk } from 'types/provideTypes';
+    import type {LoadYear} from 'types/loadTypes';
+    import type {Person, Talk} from 'types/provideTypes';
 
     import LogoBig from 'elements/image/logoBig.svelte';
     import YearEventLinks from 'elements/input/yearEventLinks.svelte';
@@ -14,7 +14,6 @@
     import PersonPopup from 'elements/person/personPopup.svelte';
     import Section from 'elements/section/section.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
-    import YouTubeVideo from 'elements/image/youTubeVideo.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
     import SponsorArray from 'elements/sponsor/sponsorArray.svelte';
     import Schedule from 'elements/schedule/schedule.svelte';
@@ -22,9 +21,10 @@
     import PageWrapper from 'elements/section/pageWrapper.svelte';
     import TextLine from 'elements/text/textLine.svelte';
     import Link from 'elements/text/link.svelte';
+    import Video from 'elements/image/video.svelte';
 
-    import { formatDate } from 'helper/dates';
-    import { apiUrl } from 'helper/links';
+    import {formatDate} from 'helper/dates';
+    import {apiUrl} from 'helper/links';
 
     export let data: LoadYear;
 
@@ -64,10 +64,10 @@
         const talks: Talk[] = data.year.talks;
         let dict: {
             [key: string]: ScheduleDay
-        }                   = {};
-        const newDays       = (): ScheduleDay => {
+        } = {};
+        const newDays = (): ScheduleDay => {
             return {
-                normal:  [],
+                normal: [],
                 special: [],
             };
         };
@@ -95,7 +95,7 @@
 
     <div class="year-header">
         <div class="year-header-content">
-            <LogoBig classes="year-logo-big" />
+            <LogoBig classes="year-logo-big"/>
 
             <div class="year-header-text-wrapper">
                 <Headline classes="headline-green headline-left">{data.year.event.title}</Headline>
@@ -106,18 +106,16 @@
                 <Paragraph classes="year-header-subtitle paragraph-white">
                     {data.year.event.subtitle}
                 </Paragraph>
-                <YearEventLinks {data} />
+                <YearEventLinks {data}/>
             </div>
         </div>
     </div>
     <div class="year-content-wrapper">
-        {#if data.year.event.trailer_youtube_id}
+        {#if data.year.event.trailer_url && data.year.event.trailer_poster_url}
             <Section id="Trailer">
                 <div class="year-video-wrapper">
-                    <YouTubeVideo
-                          id={data.year.event.trailer_youtube_id}
-                          title="Tech Stream Conference Trailer {data.year.event.year}"
-                    />
+                    <Video ariaLabel="Tech Stream Conference Trailer {data.year.event.year}"
+                           picturePath={data.year.event.trailer_poster_url} videoPath={data.year.event.trailer_url}/>
                 </div>
             </Section>
         {/if}
@@ -128,9 +126,9 @@
                 <div class="year-description-text-wrapper">
                     <Paragraph classes="year-discription-paragraph paragraph-pre-wrap"
                     >{data.year.event.description}</Paragraph>
-                    <YearEventLinks {data} />
+                    <YearEventLinks {data}/>
                 </div>
-                <LogoBig classes="year-logo-big" />
+                <LogoBig classes="year-logo-big"/>
             </div>
         </Section>
 
@@ -139,22 +137,22 @@
                 <div class="year-section-inner">
                     <HeadlineH2 classes="headline-h2-border">Noch in Planung</HeadlineH2>
                     <Paragraph --text-align="center">
-                        Wir sind gerade mitten in der Planung des nächsten Events.<br />
+                        Wir sind gerade mitten in der Planung des nächsten Events.<br/>
                         Du kannst dich
                         {#if data.year.event.call_for_papers_start && data.year.event.call_for_papers_end}
                             vom {formatDate(
-                              data.year.event.call_for_papers_start,
-                              '%DD.%MM.'
+                            data.year.event.call_for_papers_start,
+                            '%DD.%MM.'
                         )} bis {formatDate(data.year.event.call_for_papers_end, '%DD.%MM.%YYYY')}
                         {/if}
-                        als Speaker bewerben und einen Vortrag einreichen.<br />
+                        als Speaker bewerben und einen Vortrag einreichen.<br/>
                         {#if data.loggedIn}
                             Bewirb dich im
                             <Link classes="link-inline"
                                   href={MenuItemDashboard.userApplication.url}
                                   title={MenuItemDashboard.userApplication.description}>User-Dashboard
                             </Link>
-                            als Speaker.<br /><br /> Du bist bereits Speaker?<br /> Dann kannst du im
+                            als Speaker.<br/><br/> Du bist bereits Speaker?<br/> Dann kannst du im
                             <Link classes="link-inline"
                                   href={MenuItemDashboard.speakerApplication.url}
                                   title={MenuItemDashboard.speakerApplication.description}>Speaker-Dashboard
@@ -172,7 +170,7 @@
                             </Link>
                             einen neuen Account.
                         {/if}
-                        <br /><br />Oder schau dir in der Zwischenzeit
+                        <br/><br/>Oder schau dir in der Zwischenzeit
                         <Link classes="link-inline"
                               href={lastEventLink()}
                               title="Klicke hier, um dir die Hauptseite des letzten Events anzeigen zu lassen">
@@ -190,10 +188,10 @@
                 <div class="year-section-inner">
                     {#if data.year.speakers.length > 0}
                         <PersonArray personData={data.year.speakers}
-                                     personPopupCallback={openPersonPopup} />
+                                     personPopupCallback={openPersonPopup}/>
                     {:else}
                         <TextLine classes="text-line-center">Sei gespannt, welche Speaker in den nächsten Tagen hier auf
-                                                             dich warten.
+                            dich warten.
                         </TextLine>
                     {/if}
                 </div>
@@ -204,7 +202,7 @@
             <Section id="Sponsors">
                 <HeadlineH2 classes="headline-h2-border">Sponsoren</HeadlineH2>
                 <div class="year-section-inner">
-                    <SponsorArray logos={data.year.sponsors} />
+                    <SponsorArray logos={data.year.sponsors}/>
                 </div>
             </Section>
         {/if}
@@ -213,7 +211,7 @@
             <Section>
                 <HeadlineH2 classes="headline-h2-border">Medienpartner</HeadlineH2>
                 <div class="year-section-inner">
-                    <SponsorArray logos={data.year.media_partners} />
+                    <SponsorArray logos={data.year.media_partners}/>
                 </div>
             </Section>
         {/if}
@@ -224,10 +222,10 @@
                 <div class="year-section-inner">
                     {#if data.year.team_members.length > 0}
                         <PersonArray personData={data.year.team_members}
-                                     personPopupCallback={openPersonPopup} />
+                                     personPopupCallback={openPersonPopup}/>
                     {:else}
                         <TextLine classes="text-line-center">Sei gespannt welche, Team Member in den nächsten Tagen hier
-                                                             auf dich warten.
+                            auf dich warten.
                         </TextLine>
                     {/if}
                 </div>
@@ -240,32 +238,32 @@
                 {#if data.year.talks.length > 0}
                     <div class="center-styled-link">
                         <StyledLink
-                              classes="styled-link-white"
-                              href={apiUrl(`/events/${data.year.event.year}/ics`)}
-                              title="Klicke, um den Ablaufplan als ICS-Datei herunterzuladen"
-                              icon="Calender"
-                              newTab={false}
-                              text="Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!"
+                                classes="styled-link-white"
+                                href={apiUrl(`/events/${data.year.event.year}/ics`)}
+                                title="Klicke, um den Ablaufplan als ICS-Datei herunterzuladen"
+                                icon="Calender"
+                                newTab={false}
+                                text="Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!"
                         />
                     </div>
                     <div class="year-section-inner">
                         {#each splitTalks() as days}
                             <Schedule
-                                  schedule={days.normal}
-                                  speakers={data.year.speakers}
-                                  personPopupCallback={openPersonPopup}
+                                    schedule={days.normal}
+                                    speakers={data.year.speakers}
+                                    personPopupCallback={openPersonPopup}
                             />
                             <Schedule
-                                  schedule={days.special}
-                                  speakers={data.year.speakers}
-                                  personPopupCallback={openPersonPopup}
+                                    schedule={days.special}
+                                    speakers={data.year.speakers}
+                                    personPopupCallback={openPersonPopup}
                             />
                         {/each}
                     </div>
                 {:else}
                     <div class="year-section-inner">
                         <TextLine classes="text-line-center">Sei gespannt, welche Vorträge in den nächsten Tagen hier
-                                                             auf dich warten.
+                            auf dich warten.
                         </TextLine>
                     </div>
                 {/if}
@@ -275,22 +273,22 @@
 </PageWrapper>
 
 <PersonPopup bind:this={personPopup}
-             on:click={closePersonPopup} />
+             on:click={closePersonPopup}/>
 
 <style>
     .year-header {
-        width:               100%;
-        background-image:    url('/background.png');
+        width: 100%;
+        background-image: url('/background.png');
         background-position: center;
-        background-size:     cover;
-        background-repeat:   no-repeat;
-        height:              fit-content;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: fit-content;
     }
 
     .year-header-content {
         justify-content: center;
-        margin:          var(--8x-margin) var(--4x-margin);
-        display:         flex;
+        margin: var(--8x-margin) var(--4x-margin);
+        display: flex;
     }
 
     :global(.year-logo-big) {
@@ -303,7 +301,7 @@
 
     :global(.year-header-sub-headline) {
         padding-bottom: var(--full-padding);
-        border-bottom:  1px solid var(--secondary-color);
+        border-bottom: 1px solid var(--secondary-color);
     }
 
     :global(.year-header-subtitle) {
@@ -311,16 +309,16 @@
     }
 
     .year-description-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        margin-top:     var(--2x-margin);
+        margin-top: var(--2x-margin);
     }
 
     .year-description-text-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        margin-right:   var(--2x-margin);
-        flex-grow:      1;
+        margin-right: var(--2x-margin);
+        flex-grow: 1;
     }
 
     :global(.year-discription-paragraph) {
@@ -330,21 +328,21 @@
     .year-content-wrapper {
         flex-grow: 1;
         max-width: 150rem;
-        width:     100%;
-        margin:    0 auto 10rem;
-        padding:   0 var(--2x-padding);
+        width: 100%;
+        margin: 0 auto 10rem;
+        padding: 0 var(--2x-padding);
     }
 
     .year-section-inner {
-        margin-top:     var(--2x-margin);
-        display:        flex;
+        margin-top: var(--2x-margin);
+        display: flex;
         flex-direction: column;
-        gap:            var(--4x-gap);
+        gap: var(--4x-gap);
     }
 
     .year-video-wrapper {
         margin: var(--2x-margin);
-        width:  calc(100% - 4rem);
+        width: calc(100% - 4rem);
         height: auto;
     }
 
@@ -368,14 +366,14 @@
 
         .year-video-wrapper {
             margin: var(--full-margin);
-            width:  calc(100% - 2rem);
+            width: calc(100% - 2rem);
         }
     }
 
     @media (max-width: 600px) {
         .year-video-wrapper {
             margin: 0;
-            width:  100%;
+            width: 100%;
         }
     }
 </style>

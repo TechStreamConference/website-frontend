@@ -60,7 +60,10 @@ export const dashboardEventScheme = z.object({
                                                  presskit_url:          z.string()
                                                                          .nullable()
                                                                          .transform((val) => val ?? ''),
-                                                 trailer_youtube_id:    z.string()
+                                                 trailer_url:           z.string()
+                                                                         .nullable()
+                                                                         .transform((val) => val ?? ''),
+                                                 trailer_poster_url:    z.string()
                                                                          .nullable()
                                                                          .transform((val) => val ?? ''),
                                                  description_headline:  z.string(),
