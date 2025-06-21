@@ -33,12 +33,17 @@ RUN EXISTING_USER=$(getent passwd "$HOST_UID" | cut -d: -f1) && \
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Switch user
-USER $TARGET_USER
-
+RUN chown -R ${HOST_UID}:${HOST_GID} /app
 COPY package*.json ./
+RUN chown -R ${HOST_UID}:${HOST_GID} package*.json
+
+# Switch user
+USER ${HOST_UID}:${HOST_GID}
+
+RUN bash -c "echo $(id -u) $(id -g)"
+
 RUN npm install
-RUN cp -r node_modules /node_modules.bak
+RUN cp -r node_modules ~/node_modules.bak
 
 ENTRYPOINT ["/entrypoint.sh"]
 # Source files will be mounted from the host, we don't copy them here.
