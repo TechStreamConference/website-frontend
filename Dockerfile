@@ -20,15 +20,20 @@ RUN echo "UID: $HOST_UID, GID: $HOST_GID"
 
 # Create user and group matching the host's
 # Avoid conflicts if the UID/GID already exist
-RUN EXISTING_USER=$(getent passwd "$HOST_UID" | cut -d: -f1) && \
-    if [ -z "$EXISTING_USER" ]; then \
-      groupadd -g "$HOST_GID" appgroup && \
-      useradd -u "$HOST_UID" -g "$HOST_GID" -m appuser && \
-      export TARGET_USER=appuser; \
+RUN set -eux; \
+    if getent group "$HOST_GID" > /dev/null; then \
+        echo "Group with GID $HOST_GID already exists."; \
     else \
-      export TARGET_USER=$EXISTING_USER; \
-    fi && \
-    echo "alias ll='ls -la'" >> /home/$TARGET_USER/.bashrc
+        groupadd -g "$HOST_GID" appgroup; \
+    fi; \
+    if getent passwd "$HOST_UID" > /dev/null; then \
+        TARGET_USER=$(getent passwd "$HOST_UID" | cut -d: -f1); \
+        echo "User with UID $HOST_UID already exists: $TARGET_USER"; \
+    else \
+        useradd -u "$HOST_UID" -g "$HOST_GID" -m appuser; \
+        TARGET_USER=appuser; \
+    fi; \
+    echo "alias ll='ls -la'" >> "/home/$TARGET_USER/.bashrc"
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
