@@ -1,6 +1,6 @@
 <script lang="ts">
-    export let videoPath;
-    export let picturePath;
+    export let videoPath: string;
+    export let picturePath: string;
 
 
     export let ariaLabel: string;
