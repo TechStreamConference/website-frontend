@@ -207,7 +207,7 @@
           id="dashboard-admin-event-trailer-url"
           labelText="Trailer URL:"
           placeholderText="Trailer URL:"
-          ariaLabel="Gib die URL des Trailer des ausgewählten Events ein."
+          ariaLabel="Gib die URL des Trailers des ausgewählten Events ein."
           bind:value={event.trailer_url}
           on:input={setUnsavedChanges}
     />
