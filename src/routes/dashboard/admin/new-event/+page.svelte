@@ -27,13 +27,15 @@
         discord_url:           '',
         twitch_url:            '',
         presskit_url:          '',
-        trailer_youtube_id:    '',
+        trailer_url:           '',
+        trailer_poster_url:    '',
         description_headline:  '',
         description:           '',
         schedule_visible_from: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
         publish_date:          formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
         call_for_papers_start: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
         call_for_papers_end:   formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
+        frontpage_date:        formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
     };
 
 </script>
