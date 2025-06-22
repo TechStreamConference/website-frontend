@@ -1,14 +1,16 @@
 <script lang="ts">
     import type {SponsorLink} from 'types/provideTypes';
-
     import {isDarkStore} from "stores/theme";
+    import {imageUrl} from 'helper/links';
     import Image from 'elements/image/image.svelte';
 
-    import {imageUrl} from 'helper/links';
 
     export let link: SponsorLink;
-
     export let classes: string = 'sponsor-size-default';
+
+    $: isAlternativeActive = $isDarkStore && link.logo_alternative;
+    $: alternativeClass = isAlternativeActive ? '' : 'sponsor-logo-none';
+    $: defaultClass = isAlternativeActive ? 'sponsor-logo-none' : '';
 </script>
 
 <a
@@ -19,14 +21,15 @@
         title="Klicke hier um zu {link.name} zu navigieren."
         on:click
 >
-    {#if $isDarkStore}
-        <Image classes="image-default sponsor-link-hover"
-               src={imageUrl("")}
-               alt={link.alt_text}/>
-    {:else}
-        <Image classes="image-default sponsor-link-hover"
-               src={imageUrl(link.logo)}
-               alt={link.alt_text}/>
+    <Image classes="image-default {defaultClass} sponsor-link-hover"
+           src={imageUrl(link.logo)}
+           alt={link.alt_text}
+    />
+    {#if link.logo_alternative}
+        <Image classes="image-default {alternativeClass} sponsor-link-hover"
+               src={imageUrl(link.logo_alternative)}
+               alt={link.alt_text}
+        />
     {/if}
 </a>
 
@@ -35,6 +38,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    :global(.sponsor-logo-none) {
+        display: none;
     }
 
     .sponsor-size-default {
