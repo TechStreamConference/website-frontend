@@ -12,6 +12,7 @@ export type SetAdminEvent = {
     twitch_url: string | null,
     presskit_url: string | null,
     trailer_url: string | null,
+    youtube_channel_url: string | null,
     trailer_poster_url: string | null,
     description_headline: string,
     description: string,

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 
 export const dashboardRolesScheme = z.object({
                                                  user_id:        z.number(),
@@ -58,6 +58,9 @@ export const dashboardEventScheme = z.object({
                                                                          .nullable()
                                                                          .transform((val) => val ?? ''),
                                                  presskit_url:          z.string()
+                                                                         .nullable()
+                                                                         .transform((val) => val ?? ''),
+                                                 youtube_channel_url:   z.string()
                                                                          .nullable()
                                                                          .transform((val) => val ?? ''),
                                                  trailer_url:           z.string()

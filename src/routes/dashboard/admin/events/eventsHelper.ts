@@ -24,6 +24,7 @@ export function convertSaveEventData(data: DashboardEvent): SetAdminEvent {
         discord_url: trimOrNull(data.discord_url),
         twitch_url: trimOrNull(data.twitch_url),
         presskit_url: trimOrNull(data.presskit_url),
+        youtube_channel_url: trimOrNull(data.youtube_channel_url),
         trailer_url: trimOrNull(data.trailer_url),
         trailer_poster_url: trimOrNull(data.trailer_poster_url),
         description_headline: data.description_headline.trim(),
