@@ -11,7 +11,7 @@ const DEFAULT_THEME: Theme = "system";
 
 
 function initializeTheme(): Writable<Theme> {
-    const _theme = createPersistentStore<Theme>(THEME_STORAGE_KEY, DEFAULT_THEME);
+    const _theme = createPersistentStore<Theme, string>(THEME_STORAGE_KEY, DEFAULT_THEME);
     isDarkStore.set(calculateIsDarkLocal(_theme));
     updateTheme();
     return _theme;
