@@ -31,6 +31,7 @@ export type SocialMediaLinks = z.infer<typeof socialMediaLinksScheme>;
 export const sponsorLinkScheme = z.object({
                                               url:       z.string(),
                                               logo:      z.string(),
+                                              logo_alternative: z.string().nullable(),
                                               name:      z.string(),
                                               alt_text:  z.string(),
                                               copyright: z.string().nullable(),
