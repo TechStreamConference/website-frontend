@@ -3,6 +3,7 @@
 
     export let videoPath: string;
     export let picturePath: string;
+    export let captionPath: string;
 
 
     export let ariaLabel: string;
@@ -11,8 +12,7 @@
 <div class="general-video-wrapper">
     <video class="general-video" aria-label={ariaLabel} poster={apiUrl(picturePath)} controls playsinline>
         <source src={apiUrl(videoPath)} type="video/mp4"/>
-        <track kind="captions" src={apiUrl("/dummy_caption_de.vtt")} srclang="de" label="Deutsch"/>
-        <track kind="captions" src={apiUrl("/dummy_caption_en.vtt")} srclang="en" label="English"/>
+        <track kind="captions" src={apiUrl(captionPath)} srclang="de" label="Deutsch"/>
     </video>
 </div>
 
