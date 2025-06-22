@@ -98,6 +98,7 @@ export async function deleteLinkAsync(fetch: typeof globalThis.fetch, data: Dash
             result: {
                 success:  false,
                 messages: [],
+                infos:    {},
             },
         };
     }
