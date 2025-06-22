@@ -13,6 +13,12 @@
 </div>
 
 <style>
+    video::cue {
+        font-family: var(--normal-font-family), sans-serif;
+        font-weight: var(--normal-font-weight);
+        font-style: var(--normal-font-style);
+        color: var(--normal-font-color);
+    }
     .general-video-wrapper {
         position: relative;
         width: 100%;

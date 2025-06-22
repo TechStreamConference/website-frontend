@@ -40,9 +40,17 @@
     color: var(--text-color);
 }
 
+:root {
+    --normal-font-family: noto-sans, sans-serif;
+    --normal-font-weight: 300;
+    --normal-font-style: normal;
+    --normal-font-color: var(--text-color);
+}
+
 .normal-font {
-    font-family: noto-sans, sans-serif;
-    font-weight: 300;
-    font-style: normal;
-    color: var(--text-color);
+    /* remember too update the video subtitles when the css fields itself changes */
+    font-family: var(--normal-font-family), sans-serif;
+    font-weight: var(--normal-font-weight);
+    font-style: var(--normal-font-style);
+    color: var(--normal-font-color);
 }
