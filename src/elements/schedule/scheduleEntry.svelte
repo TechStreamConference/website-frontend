@@ -24,7 +24,6 @@
                 text="YouTube"
                 href={talk.youtube_url}
                 title="Klicke hier, um zu dem YouTube-Video dieses Talks zu gelangen"
-                showTextOnMobile={false}
                 iconClasses="text-color-only"
         />
     {/if}
