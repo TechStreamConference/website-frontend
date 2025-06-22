@@ -203,6 +203,15 @@
           on:input={setUnsavedChanges}
     />
     <Input
+            classes="dashboard-admin-event-youtube-channel-url input"
+            id="dashboard-admin-event-youtube-channel-url"
+            labelText="YouTube URL:"
+            placeholderText="YouTube URL:"
+            ariaLabel="Gib die URL des YouTube Kanals des ausgewählten Events ein."
+            bind:value={event.youtube_channel_url}
+            on:input={setUnsavedChanges}
+    />
+    <Input
           classes="dashboard-admin-event-trailer-url input"
           id="dashboard-admin-event-trailer-url"
           labelText="Trailer URL:"

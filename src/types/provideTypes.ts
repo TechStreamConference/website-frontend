@@ -52,14 +52,15 @@ export const personScheme = z.object({
 export type Person = z.infer<typeof personScheme>;
 
 export const talkScheme = z.object({
-                                       speaker_id:  z.number(),
-                                       starts_at:   z.string(),
-                                       duration:    z.number(),
-                                       title:       z.string(),
-                                       description: z.string(),
-                                       tags:        allTalkTagScheme,
-                                       guests:      z.array(personScheme),
-                                       is_special:  z.boolean(),
+                                       speaker_id:   z.number(),
+                                       starts_at:    z.string(),
+                                       duration:     z.number(),
+                                       title:        z.string(),
+                                       description:  z.string(),
+                                       youtube_url : z.string().nullable(),
+                                       tags:         allTalkTagScheme,
+                                       guests:       z.array(personScheme),
+                                       is_special:   z.boolean(),
                                    });
 export type Talk = z.infer<typeof talkScheme>;
 
@@ -75,6 +76,7 @@ export const eventScheme = z.object({
                                         discord_url:             z.string().nullable(),
                                         twitch_url:              z.string().nullable(),
                                         presskit_url:            z.string().nullable(),
+                                        youtube_channel_url:     z.string().nullable(),
                                         trailer_url:             z.string().nullable(),
                                         trailer_poster_url:      z.string().nullable(),
                                         is_visible_on_frontpage: z.boolean(),
