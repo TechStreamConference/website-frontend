@@ -52,14 +52,15 @@ export const personScheme = z.object({
 export type Person = z.infer<typeof personScheme>;
 
 export const talkScheme = z.object({
-                                       speaker_id:  z.number(),
-                                       starts_at:   z.string(),
-                                       duration:    z.number(),
-                                       title:       z.string(),
-                                       description: z.string(),
-                                       tags:        allTalkTagScheme,
-                                       guests:      z.array(personScheme),
-                                       is_special:  z.boolean(),
+                                       speaker_id:   z.number(),
+                                       starts_at:    z.string(),
+                                       duration:     z.number(),
+                                       title:        z.string(),
+                                       description:  z.string(),
+                                       youtube_url : z.string().nullable(),
+                                       tags:         allTalkTagScheme,
+                                       guests:       z.array(personScheme),
+                                       is_special:   z.boolean(),
                                    });
 export type Talk = z.infer<typeof talkScheme>;
 
