@@ -73,6 +73,7 @@
         flex-direction: row;
         gap:            var(--full-gap);
         flex-wrap:      wrap;
+        justify-content: end;
     }
 
     :global(.schedule-entry-time) {
@@ -98,6 +99,10 @@
         .schedule-entry-title-wrapper {
             flex-direction: column;
             gap: var(--full-gap);
+        }
+
+        .schedule-entry-tag-wrapper {
+            justify-content: start;
         }
     }
 
