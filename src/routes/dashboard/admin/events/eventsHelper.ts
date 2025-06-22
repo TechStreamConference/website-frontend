@@ -113,10 +113,12 @@ export function validateData(data: SetAdminEvent, allSpeaker: SetAllAdminEventSp
     if (!urlScheme.safeParse(data.twitch_url).success) {
         errorList.push('Die Twitch-URL ist nicht valide.');
     }
-    if (!urlScheme.safeParse(data.trailer_url).success) {
+
+// intern url
+    if (!z.string().nullable().safeParse(data.trailer_url).success) {
         errorList.push('Die Trailer-URL ist nicht valide.');
     }
-    if (!urlScheme.safeParse(data.trailer_poster_url).success) {
+    if (!z.string().nullable().safeParse(data.trailer_poster_url).success) {
         errorList.push('Die Trailer-Poster-URL ist nicht valide.');
     }
 

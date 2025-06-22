@@ -1,4 +1,6 @@
 <script lang="ts">
+    import {apiUrl} from "helper/links.js";
+
     export let videoPath: string;
     export let picturePath: string;
 
@@ -9,6 +11,8 @@
 <div class="general-video-wrapper">
     <video class="general-video" aria-label={ariaLabel} poster={picturePath} controls playsinline>
         <source src={videoPath} type="video/mp4"/>
+    <video class="general-video" aria-label={ariaLabel} poster={apiUrl(picturePath)} controls playsinline>
+        <source src={apiUrl(videoPath)} type="video/mp4"/>
     </video>
 </div>
 
