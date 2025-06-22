@@ -75,6 +75,7 @@ export const eventScheme = z.object({
                                         discord_url:             z.string().nullable(),
                                         twitch_url:              z.string().nullable(),
                                         presskit_url:            z.string().nullable(),
+                                        youtube_channel_url:     z.string().nullable(),
                                         trailer_url:             z.string().nullable(),
                                         trailer_poster_url:      z.string().nullable(),
                                         is_visible_on_frontpage: z.boolean(),

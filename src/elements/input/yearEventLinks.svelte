@@ -36,6 +36,15 @@
               text="Presskit"
         />
     {/if}
+    {#if data.year.event.youtube_channel_url}
+        <StyledLink
+                classes="styled-link-white"
+                href={data.year.event.youtube_channel_url}
+                title="Klicke hier, um auf die YouTube-Seite der Tech Stream Conference zu gelangen"
+                icon="YouTube"
+                text="YouTube"
+        />
+    {/if}
 </div>
 
 <style>
