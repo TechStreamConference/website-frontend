@@ -1,22 +1,50 @@
+import {isDark} from "stores/theme";
 
-const colors: string[] = [
-    "#FF5733", "#33FF57", "#3357FF", "#FF33A6", "#33FFF6",
-    "#FFC300", "#DAF7A6", "#581845", "#C70039", "#900C3F",
-    "#FFC0CB", "#FF1493", "#FF7F50", "#FFD700", "#2E8B57",
-    "#40E0D0", "#191970", "#8B008B", "#A52A2A", "#7FFF00",
-    "#DC143C", "#BDB76B", "#FA8072", "#D8BFD8", "#87CEFA",
-    "#9ACD32", "#BC8F8F", "#708090", "#556B2F", "#8B4513",
-    "#8FBC8F", "#228B22", "#ADFF2F", "#F08080", "#FFA07A",
-    "#B0E0E6", "#FFB6C1", "#F5DEB3", "#663399", "#CD5C5C",
-    "#DB7093", "#4169E1", "#008B8B", "#FF8C00", "#B8860B",
-    "#6B8E23", "#FFFAF0", "#191919", "#FFFACD", "#BA55D3",
-    "#FFDAB9", "#FF00FF", "#E6E6FA", "#6495ED", "#DAA520",
-    "#008080", "#708090", "#FF6347", "#3CB371", "#FFFFE0",
+// @formatter:off
+const colorsDark: string[] = [
+    // this additional information was once extracted from a seeding file within the backend.
+    // this is not mend to be updated.
+    // keep that in mind
+
+    // background color: #282828FF
+    // main tag, sub tag  // ID | subtag-count | color  | info      | tag
+    "#66CDAA", "#3D8B7A", // 1  | 2            |        | weak      | Didaktik
+    "#7956b7", "#6A5ACD", // 3  | 10           |        | important | Spieleentwicklung
+    "#20B2AA", "#008B8B", // 5  | 1            |        | weak      | Hacking
+    "#8FBC8F", "#5F9F6F", // 7  | 1            |        | weak      | Kommunikation
+    "#DDA0DD", "#9932CC", // 9  | 4            |        |           | Künstliche Intelligenz (KI)
+    "#90EE90", "#3CB371", // 11 | 2            |        | weak      | Maker
+    "#7FFFD4", "#48D1CC", // 13 | 0            |        | weak      | Musik
+    "#000000", "#464646", // 15 | 26           |        | important | Programmierung
+    "#00FA9A", "#1fc065", // 17 | 10           |        | important | Projektmanagement
+    "#98FB98", "#549B54", // 19 | 1            |        | weak      | Security
+    "#BA55D3", "#9400D3", // 21 | 0            |        | weak      | Streaming
+    "#3918fc", "#2210a2", // 23 | 19           |        | important | Web-Entwicklung
 ];
+const colorsLight: string[] = [
+    // background color: #FFFFFFFF
+    "#2F8B76", "#1D5B4D",
+    "#6A45C9", "#4A2F8F",
+    "#167F7F", "#0A4D4D",
+    "#548B54", "#325C32",
+    "#8B3A8B", "#662966",
+    "#3CB371", "#266B44",
+    "#3EBFB4", "#267B73",
+    "#595959", "#131313",
+    "#00995C", "#006B41",
+    "#549B54", "#326B32",
+    "#943AAD", "#682C7A",
+    "#1c0c9a", "#0d045d",
+];
+// @formatter:on,
 
-function hexToRgb(hex: string): { r: number; g: number; b: number } {
-    // Remove leading '#' if present
-    const cleanHex = hex.replace(/^#/, "");
+function hexToRgb(hex: string): {
+    r: number;
+    g: number;
+    b: number
+} {
+    // Remove the leading '#' if present
+    const cleanHex = hex.replace(/^#/, '');
 
     // Parse r, g, b
     const bigint = parseInt(cleanHex, 16);
@@ -24,20 +52,32 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } {
     const g = (bigint >> 8) & 255;
     const b = bigint & 255;
 
-    return { r, g, b };
+    return {
+        r,
+        g,
+        b,
+    };
+}
+
+function currentLookUp(): string[] {
+    return isDark() ? colorsDark : colorsLight;
 }
 
 function keyFromIndex(index: number): number {
-    return ((index - 1) % Object.keys(colors).length);
+    return ((index - 1) % Object.keys(currentLookUp()).length);
 }
 
 export function tagColorLookup(key: number): string {
-    return colors[keyFromIndex(key)];
+    return currentLookUp()[keyFromIndex(key)];
 }
 
 export function tagTextColorLookup(key: number): string {
-    const color = colors[keyFromIndex(key)];
-    const { r, g, b } = hexToRgb(color);
+    const color = currentLookUp()[keyFromIndex(key)];
+    const {
+        r,
+        g,
+        b,
+    } = hexToRgb(color);
     const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-    return luminance > 128 ? "#000" : "#fff";
+    return luminance > 128 ? '#000' : '#fff';
 }
