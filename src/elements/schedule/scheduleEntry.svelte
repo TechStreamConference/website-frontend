@@ -15,7 +15,7 @@
     export let talk: Talk;
 </script>
 
-<div class="schedule-entry-horizontal-line">
+<div class="schedule-entry-time-wrapper schedule-entry-horizontal-line">
     <SubHeadline classes="schedule-entry-time">{formatDate(talk.starts_at, '%hh:%mm Uhr')}</SubHeadline>
     {#if talk.youtube_url}
         <StyledLink
@@ -24,6 +24,8 @@
                 text="YouTube"
                 href={talk.youtube_url}
                 title="Klicke hier, um zu dem YouTube-Video dieses Talks zu gelangen"
+                showTextOnMobile={false}
+                iconClasses="text-color-only"
         />
     {/if}
 </div>
@@ -58,6 +60,13 @@
 </div>
 
 <style>
+    .schedule-entry-time-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: var(--quad-gap);
+    }
+
     .schedule-entry-horizontal-line {
         border-bottom: 1px solid var(--primary-color-dark);
         padding-bottom: var(--2x-padding);
