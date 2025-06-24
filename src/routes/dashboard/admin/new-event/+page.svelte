@@ -29,6 +29,7 @@
         presskit_url:          '',
         trailer_url:           '',
         trailer_poster_url:    '',
+        trailer_subtitles_url: '',
         description_headline:  '',
         description:           '',
         schedule_visible_from: formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
