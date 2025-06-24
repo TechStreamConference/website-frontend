@@ -27,6 +27,7 @@ export function convertSaveEventData(data: DashboardEvent): SetAdminEvent {
         youtube_channel_url: trimOrNull(data.youtube_channel_url),
         trailer_url: trimOrNull(data.trailer_url),
         trailer_poster_url: trimOrNull(data.trailer_poster_url),
+        trailer_subtitles_url: trimOrNull(data.trailer_subtitles_url),
         description_headline: data.description_headline.trim(),
         description: data.description.trim(),
         schedule_visible_from: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.schedule_visible_from)),

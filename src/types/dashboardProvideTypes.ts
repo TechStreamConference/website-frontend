@@ -69,6 +69,9 @@ export const dashboardEventScheme = z.object({
                                                  trailer_poster_url:    z.string()
                                                                          .nullable()
                                                                          .transform((val) => val ?? ''),
+                                                 trailer_subtitles_url: z.string()
+                                                                         .nullable()
+                                                                         .transform((val) => val ?? ''),
                                                  description_headline:  z.string(),
                                                  description:           z.string(),
                                                  schedule_visible_from: z.string()
