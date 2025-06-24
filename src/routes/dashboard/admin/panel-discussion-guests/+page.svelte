@@ -92,7 +92,12 @@
         if (result.success) {
             getElementByID(data.talksOfEvent, currentTalkId).guests = selectedArray;
         }
-        await loadNewGuests(talkDropDown.getSelected());
+        const selected = talkDropDown.getSelected();
+        if (typeof selected === 'string') {
+            await loadNewGuests(selected);
+        } else{
+            console.error('selected is no string by save');
+        }
 
         return result.success;
     }
@@ -112,7 +117,12 @@
         if (result.success) {
             getElementByID(data.talksOfEvent, currentTalkId).guests = [];
         }
-        await loadNewGuests(talkDropDown.getSelected());
+        const selected = talkDropDown.getSelected();
+        if (typeof selected === 'string') {
+            await loadNewGuests(selected);
+        } else{
+            console.error('selected is no string by save');
+        }
 
         scrollToTop();
     }

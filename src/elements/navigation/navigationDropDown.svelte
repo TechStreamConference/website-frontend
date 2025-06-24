@@ -26,7 +26,7 @@
         checkSelected();
     }
 
-    function checkSelected() {
+    function checkSelected() : void {
         if (selected !== displayed) {
             if (unsavedChanges()) {
                 popup.show();

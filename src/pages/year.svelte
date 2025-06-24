@@ -111,11 +111,16 @@
         </div>
     </div>
     <div class="year-content-wrapper">
-        {#if data.year.event.trailer_url && data.year.event.trailer_poster_url}
+        {#if data.year.event.trailer_url
+        && data.year.event.trailer_poster_url
+        && data.year.event.trailer_subtitles_url}
             <Section id="Trailer">
                 <div class="year-video-wrapper">
-                    <Video ariaLabel="Tech Stream Conference Trailer {data.year.event.year}"
-                           picturePath={data.year.event.trailer_poster_url} videoPath={data.year.event.trailer_url}/>
+                    <Video ariaLabel="{data.year.event.title} - Trailer}"
+                           videoPath={data.year.event.trailer_url}
+                           picturePath={data.year.event.trailer_poster_url}
+                           captionPath={data.year.event.trailer_subtitles_url}
+                    />
                 </div>
             </Section>
         {/if}

@@ -14,6 +14,7 @@ export type SetAdminEvent = {
     trailer_url: string | null,
     youtube_channel_url: string | null,
     trailer_poster_url: string | null,
+    trailer_subtitles_url: string | null,
     description_headline: string,
     description: string,
     schedule_visible_from: string | null,

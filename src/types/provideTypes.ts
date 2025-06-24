@@ -79,6 +79,7 @@ export const eventScheme = z.object({
                                         youtube_channel_url:     z.string().nullable(),
                                         trailer_url:             z.string().nullable(),
                                         trailer_poster_url:      z.string().nullable(),
+                                        trailer_subtitles_url:   z.string().nullable(),
                                         is_visible_on_frontpage: z.boolean(),
                                         call_for_papers_start:   z.string().nullable(),
                                         call_for_papers_end:     z.string().nullable(),

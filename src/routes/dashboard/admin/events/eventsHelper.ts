@@ -27,6 +27,7 @@ export function convertSaveEventData(data: DashboardEvent): SetAdminEvent {
         youtube_channel_url: trimOrNull(data.youtube_channel_url),
         trailer_url: trimOrNull(data.trailer_url),
         trailer_poster_url: trimOrNull(data.trailer_poster_url),
+        trailer_subtitles_url: trimOrNull(data.trailer_subtitles_url),
         description_headline: data.description_headline.trim(),
         description: data.description.trim(),
         schedule_visible_from: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.schedule_visible_from)),
@@ -113,10 +114,12 @@ export function validateData(data: SetAdminEvent, allSpeaker: SetAllAdminEventSp
     if (!urlScheme.safeParse(data.twitch_url).success) {
         errorList.push('Die Twitch-URL ist nicht valide.');
     }
-    if (!urlScheme.safeParse(data.trailer_url).success) {
+
+// intern url
+    if (!z.string().nullable().safeParse(data.trailer_url).success) {
         errorList.push('Die Trailer-URL ist nicht valide.');
     }
-    if (!urlScheme.safeParse(data.trailer_poster_url).success) {
+    if (!z.string().nullable().safeParse(data.trailer_poster_url).success) {
         errorList.push('Die Trailer-Poster-URL ist nicht valide.');
     }
 

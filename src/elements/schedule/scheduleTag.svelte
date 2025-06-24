@@ -10,8 +10,8 @@
     export let tag: TalkTag;
     export let classes: string = '';
 
-    let textColor: number;
-    let backgroundColor: number;
+    let textColor: string;
+    let backgroundColor: string;
 
     $:{
         const _ = $isDarkStore; // this is necessary to make this responsive block react to the theme.

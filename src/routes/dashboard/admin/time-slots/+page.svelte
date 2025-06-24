@@ -37,6 +37,7 @@
             start_time: getElementByID(data.allEvents, data.currentEventID).start_date + 'T00:00:00', // the start of the event is used here, as it should not be too far away from the actual date.
             duration:   0,
             is_special: false,
+            is_occupied: false,
         };
 
         data.currentSlots = [
