@@ -85,7 +85,7 @@
 
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorList = result.messages;
-        if (result.success && talk.suggested_time_slot) { // Time slot cannot be null because the initiating talk needs to have one. To make sure.
+        if (result.success && talk.suggested_time_slot) { // Check time slot against null to satisfy the type checker
             getElementByID(slots[talk.event_id], talk.suggested_time_slot.id).is_occupied = false;
             talk.suggested_time_slot = getElementByID(slots[talk.event_id], id);
             talk.suggested_time_slot.is_occupied = true;
