@@ -66,7 +66,7 @@ RUN npm run build
 FROM base AS prod
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --omit=dev
+RUN npm install --omit=dev --ignore-scripts
 COPY --from=builder /app/build ./build
 COPY --from=builder /app/.svelte-kit ./.svelte-kit
 COPY ./static ./static
