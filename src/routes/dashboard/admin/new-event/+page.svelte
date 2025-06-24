@@ -27,6 +27,7 @@
         discord_url:           '',
         twitch_url:            '',
         presskit_url:          '',
+        youtube_channel_url:   '',
         trailer_url:           '',
         trailer_poster_url:    '',
         trailer_subtitles_url: '',
