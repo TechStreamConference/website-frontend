@@ -9,6 +9,15 @@
 </script>
 
 <div class="year-event-links-wrapper {classes}">
+    {#if data.year.event.twitch_url}
+        <StyledLink
+                classes="styled-link-white"
+                href={data.year.event.twitch_url}
+                title="Klicke hier, um auf die Twitch-Seite der Tech Stream Conference zu gelangen"
+                icon="Twitch"
+                text="Schau zu"
+        />
+    {/if}
     {#if data.year.event.discord_url}
         <StyledLink
               classes="styled-link-white"
@@ -18,13 +27,13 @@
               text="Sei dabei"
         />
     {/if}
-    {#if data.year.event.twitch_url}
+    {#if data.year.event.youtube_channel_url}
         <StyledLink
-              classes="styled-link-white"
-              href={data.year.event.twitch_url}
-              title="Klicke hier, um auf die Twitch-Seite der Tech Stream Conference zu gelangen"
-              icon="Twitch"
-              text="Schau zu"
+                classes="styled-link-white"
+                href={data.year.event.youtube_channel_url}
+                title="Klicke hier, um auf die YouTube-Seite der Tech Stream Conference zu gelangen"
+                icon="YouTube"
+                text="YouTube"
         />
     {/if}
     {#if data.year.event.presskit_url}
@@ -34,15 +43,6 @@
               title="Klicke hier, um das Presskit der Tech Stream Conference herunterzuladen"
               icon="Download"
               text="Presskit"
-        />
-    {/if}
-    {#if data.year.event.youtube_channel_url}
-        <StyledLink
-                classes="styled-link-white"
-                href={data.year.event.youtube_channel_url}
-                title="Klicke hier, um auf die YouTube-Seite der Tech Stream Conference zu gelangen"
-                icon="YouTube"
-                text="YouTube"
         />
     {/if}
 </div>
