@@ -45,7 +45,6 @@
 <!--- the provided Button is providing the same functionality --->
 <dialog on:click={checkClickOutside}
         bind:this={dialog}
-        role="alertdialog"
 >
     <div class="content-wrapper">
 
