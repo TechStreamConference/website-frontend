@@ -4,7 +4,7 @@
     import { fade } from 'svelte/transition';
 
     export let message: string            = '';
-    export let classes: string            = 'message-error-color';
+    export let classes: string            = '';
     export let color: 'error' | 'success' = 'error';
 </script>
 
