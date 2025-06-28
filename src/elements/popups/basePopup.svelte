@@ -117,13 +117,11 @@
         0% {
             opacity:   0;
             transform: scaley(0);
-            display:   none;
         }
 
         100% {
             opacity:   1;
             transform: scaley(1);
-            display:   block;
         }
     }
 
