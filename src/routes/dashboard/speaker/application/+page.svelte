@@ -15,6 +15,7 @@
     import SubHeadline from 'elements/text/subHeadline.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
     import Link from 'elements/text/link.svelte';
+    import Message from 'elements/text/message.svelte'
 
     // Standard Apply Error is 'CURRENTLY_NOT_ACCEPTING_SPEAKER_APPLICATIONS'.
     // This error is the else path to make sure at least one error message is displayed.
@@ -82,8 +83,12 @@
                              on:save={() => saved = true} />
         {:else}
             {#if data.applyError === APPLY_ERROR_NO_SPEAKER}
+                <Message
+                    message="Du bist noch kein Speaker für das aktuelle Event."
+                    color="error"
+                />
                 <Paragraph --text-align="center">
-                    Du bist noch kein Speaker für das aktuelle Event.<br />Aber gute Neuigkeiten für dich: Das kannst du
+                    Aber gute Neuigkeiten für dich: Das kannst du
                     ganz einfach ändern.<br />
                     Bewirb dich gerne für das aktuelle Event im
                     <Link classes="link-inline"
