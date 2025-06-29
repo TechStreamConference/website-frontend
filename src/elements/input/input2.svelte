@@ -98,7 +98,9 @@
 <style>
     .input-line-wrapper {
         width: 100%;
+        height: fit-content;
         position: relative;
+        margin-top: var(--full-margin);
     }
 
     input {
@@ -124,8 +126,9 @@
 
     :global(.input-limit-text-line) {
         position: absolute;
-        top: -1.2rem;
+        top: -1.5rem;
         right: 1rem;
+        font-size: var(--half-font-size) !important;
         background-color: var(--background-color);
         padding: 0 var(--full-padding);
         transition: top var(--transition-duration),
@@ -142,6 +145,7 @@
         font-size: var(--full-font-size);
         background-color: var(--background-color);
         padding: 0 var(--half-padding);
+        border-radius: var(--border-radius);
         transition: top var(--transition-duration),
         left var(--transition-duration),
         font-size var(--transition-duration);
@@ -150,7 +154,7 @@
     input:focus ~ :global(.input-floating-label),
     input:not(:placeholder-shown) ~ :global(.input-floating-label),
     input:hover ~ :global(.input-floating-label) {
-        top: -0.5rem;
+        top: -0.7rem;
         left: 0.5rem;
         font-size: var(--half-font-size);
     }
