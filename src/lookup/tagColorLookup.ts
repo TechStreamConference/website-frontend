@@ -8,9 +8,9 @@ const colorsDark: string[] = [
 
     // background color: #282828FF
     // main tag, sub tag  // ID | subtag-count | color  | info      | tag
-    "#66CDAA", "#3D8B7A", // 1  | 2            |        | weak      | Didaktik
+    "#66CDAA", "#377c6a", // 1  | 2            |        | weak      | Didaktik
     "#7956b7", "#6A5ACD", // 3  | 10           |        | important | Spieleentwicklung
-    "#20B2AA", "#008B8B", // 5  | 1            |        | weak      | Hacking
+    "#20B2AA", "#007272", // 5  | 1            |        | weak      | Hacking
     "#8FBC8F", "#5F9F6F", // 7  | 1            |        | weak      | Kommunikation
     "#DDA0DD", "#9932CC", // 9  | 4            |        |           | Künstliche Intelligenz (KI)
     "#90EE90", "#3CB371", // 11 | 2            |        | weak      | Maker
