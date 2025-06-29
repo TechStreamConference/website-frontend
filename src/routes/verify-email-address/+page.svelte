@@ -2,13 +2,15 @@
     import * as Menu from 'menu/page';
     import * as MenuItem from 'menu/pageItems';
 
+    import type {LoadVerifyEmail} from "types/loadTypes";
+
     import StyledLink from 'elements/input/styledLink.svelte';
     import HeadlinePage from 'elements/text/headlinePage.svelte';
     import TextLine from 'elements/text/textLine.svelte';
     import PageWrapper from 'elements/section/pageWrapper.svelte';
 
 
-    export let data;
+    export let data : LoadVerifyEmail;
 </script>
 
 <PageWrapper headerMenu={Menu.headerOut}

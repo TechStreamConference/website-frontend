@@ -9,6 +9,7 @@
     export let text: string = '';
 
     export let iconClasses: string = '';
+    export let textClasses: string = '';
 </script>
 
 <a
@@ -23,7 +24,7 @@
         <Icon classes={iconClasses} type={icon}/>
     {/if}
     {#if text}
-        <span class="hide-text-on-mobile">
+        <span class={textClasses}>
             {text}
         </span>
     {/if}

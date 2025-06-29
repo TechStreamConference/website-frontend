@@ -2,6 +2,33 @@ import type { Menu } from 'types/provideTypes';
 import * as YearItem from './yearItems';
 import * as PageItem from './pageItems';
 
+export function headerMainInNotVisibleOnFrontpage(lastYearLink: string): Menu {
+    return [
+        PageItem.top,
+        {
+            name: 'Vorheriges Event',
+            url: lastYearLink,
+            description: "Klicke hier, um zum vorherigen Event zu gelangen"
+        },
+        PageItem.intern,
+        PageItem.logout,
+    ]
+}
+
+export function headerMainOutNotVisibleOnFrontpage(lastYearLink: string): Menu {
+    return [
+        PageItem.top,
+        {
+            name: 'Vorheriges Event',
+            url: lastYearLink,
+            description: "Klicke hier, um zum vorherigen Event zu gelangen"
+        },
+        PageItem.login,
+        PageItem.register,
+    ]
+}
+
+
 export const headerMainIn: Menu = [
     PageItem.top,
     YearItem.speaker,
