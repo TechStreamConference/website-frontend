@@ -11,7 +11,7 @@
     import CroppedImage from 'elements/image/croppedImage.svelte';
     import Button from 'elements/input/button.svelte';
     import Image from 'elements/image/image.svelte';
-    import Input from 'elements/input/input.svelte';
+    import Input2 from 'elements/input/input2.svelte';
     import TextArea from 'elements/input/textArea.svelte';
     import FormWrapper from 'elements/wrapper/formWrapper.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
@@ -114,45 +114,44 @@
         />
     {/if}
     <div class="input-grid">
-        <Input
-                bind:this={imageInput}
-                id="dashboard-speaker-event-image-input"
-                labelText="Profilbild:"
-                placeholderText="Profilbild"
-                ariaLabel="Lade hier dein Profilbild für das Event {data.current.title} hoch"
-                type="file"
-                fileAccept=".jpg, .jpeg, .png"
-                on:input={(event) => {
-				    setUnsavedChanges();
-				    changeImage(event);
-			    }}
+        <Input2
+              bind:this={imageInput}
+              id="dashboard-speaker-event-image-input"
+              labelText="Profilbild:"
+              ariaLabel="Lade hier dein Profilbild für das Event {data.current.title} hoch"
+              type="file"
+              fileAccept=".jpg, .jpeg, .png"
+              on:input={(event) => {
+				// no setUnsavedChanges here because the cropper already does that.
+				changeImage(event);
+			}}
+              value={newImage.imageFile}
         />
         <Paragraph classes="paragraph-gray">Lade hier dein Profilbild für deine Bewerbung hoch. Wenn deine
             Speaker-Bewerbung und später dein
             Vortrag angenommen werden, wird dieses Bild auf der Startseite angezeigt.
         </Paragraph>
-        <div class="row-border"></div>
-        <Input
-                id="dashboard-speaker-event-name-input"
-                labelText="Name:"
-                placeholderText="Name"
-                ariaLabel="Gib hier deinen Namen für das Event {data.current.title} ein"
-                bind:value={data.event.name}
-                on:input={setUnsavedChanges}
+        <div class="row-border" />
+        <Input2
+              id="dashboard-speaker-event-name-input"
+              labelText="Name:"
+              ariaLabel="Gib hier deinen Namen für das Event {data.current.title} ein"
+              bind:value={data.event.name}
+              on:input={setUnsavedChanges}
         />
         <Paragraph classes="paragraph-gray">Unter diesem Namen tauchst du später auf der Hauptseite auf. Er muss nicht
             identisch zu dem Namen
             sein, mit dem du dich einloggst.
         </Paragraph>
-        <div class="row-border"></div>
-        <Input
-                id="dashboard-speaker-event-short-bio-input"
-                labelText="Kurzbeschreibung:"
-                placeholderText="Kurzbeschreibung"
-                ariaLabel="Gib hier deine Kurzbeschreibung in Stichworten für das Event {data.current
+        <div class="row-border" />
+        <Input2
+              id="dashboard-speaker-event-short-bio-input"
+              labelText="Kurzbeschreibung:"
+              ariaLabel="Gib hier deine Kurzbeschreibung in Stichworten für das Event {data.current
 				.title} ein"
-                bind:value={data.event.short_bio}
-                on:input={setUnsavedChanges}
+              limit={100}
+              bind:value={data.event.short_bio}
+              on:input={setUnsavedChanges}
         />
         <Paragraph classes="paragraph-gray">Deine Kurzbeschreibung sollte aus etwa drei bis fünf Stichpunkten bestehen,
             z. B. <i>„Unity Developer,
@@ -160,12 +159,13 @@
         </Paragraph>
         <div class="row-border"></div>
         <TextArea
-                id="dashboard-speaker-event-bio-text-area"
-                labelText="Beschreibung:"
-                placeholderText="Beschreibung"
-                ariaLabel="Gib hier deine Beschreibung für das Event {data.current.title} ein"
-                bind:value={data.event.bio}
-                on:input={setUnsavedChanges}
+              id="dashboard-speaker-event-bio-text-area"
+              labelText="Beschreibung:"
+              placeholderText="Beschreibung"
+              ariaLabel="Gib hier deine Beschreibung für das Event {data.current.title} ein"
+              limit={1000}
+              bind:value={data.event.bio}
+              on:input={setUnsavedChanges}
         />
         <Paragraph classes="paragraph-gray">Beschreibe dich hier in einem kurzen Text von ca. 50 bis 80 Wörtern. Ein
             Beispieltext könnte lauten:
