@@ -63,7 +63,7 @@
                 <Tooltip
                       classes="edit-social-media-links-approval-icon"
                       tooltip={`Änderungswünsche:\n${link.requested_changes}`}
-                      ariaLabel="`Änderungswünsche:\n${link.requested_changes}`"
+                      ariaLabel={`Änderungswünsche: ${link.requested_changes}`}
                 >
                     <Icon type="CircleCross"
                           color="red" />
