@@ -20,6 +20,7 @@
     {#if talk.youtube_url}
         <StyledLink
                 classes="transparent-background"
+                textClasses="hide-text-on-mobile"
                 icon="YouTube"
                 text="YouTube"
                 href={talk.youtube_url}
