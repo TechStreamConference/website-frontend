@@ -1,6 +1,7 @@
 <script lang="ts">
     import Paragraph from './paragraph.svelte';
 
+    export let ariaLabel: string = "Klicke oder Hover hier, um weitere Informationen zu erhalten.";
     export let classes: string        = '';
     export let tooltipClasses: string = '';
     export let tooltip: string;
@@ -28,7 +29,7 @@
 <button
       type="button"
       class="tooltip-button-hover {classes}"
-      aria-label="Klicke oder Hover hier, um weite Infos zu erhalten."
+      aria-label={ariaLabel}
       on:mouseenter={enter}
       on:mouseleave={leave}
       on:mousemove={move}

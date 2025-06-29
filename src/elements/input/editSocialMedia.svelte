@@ -52,8 +52,10 @@
             <TextLine>Status:</TextLine>
             {#if link.approved}
                 <Tooltip
-                      classes="edit-social-media-links-approval-icon"
-                      tooltip="Dieser Link ist freigegeben.">
+                    classes="edit-social-media-links-approval-icon"
+                    tooltip="Dieser Link ist freigegeben."
+                    ariaLabel="Dieser Link ist freigegeben."
+                >
                     <Icon type="CircleCheck"
                           color="green" />
                 </Tooltip>
@@ -61,6 +63,7 @@
                 <Tooltip
                       classes="edit-social-media-links-approval-icon"
                       tooltip={`Änderungswünsche:\n${link.requested_changes}`}
+                      ariaLabel={`Änderungswünsche: ${link.requested_changes}`}
                 >
                     <Icon type="CircleCross"
                           color="red" />
@@ -69,6 +72,7 @@
                 <Tooltip
                       classes="edit-social-media-links-approval-icon"
                       tooltip={'Dieser Link muss noch Freigegeben werden.\nDerzeit gibt es keine Änderungswünsche.'}
+                      ariaLabel="Dieser Link muss noch Freigegeben werden. Derzeit gibt es keine Änderungswünsche."
                 >
                     <Icon type="Clock"
                           color="orange" />

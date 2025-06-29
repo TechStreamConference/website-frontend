@@ -8,9 +8,9 @@ const colorsDark: string[] = [
 
     // background color: #282828FF
     // main tag, sub tag  // ID | subtag-count | color  | info      | tag
-    "#66CDAA", "#3D8B7A", // 1  | 2            |        | weak      | Didaktik
+    "#66CDAA", "#377c6a", // 1  | 2            |        | weak      | Didaktik
     "#7956b7", "#6A5ACD", // 3  | 10           |        | important | Spieleentwicklung
-    "#20B2AA", "#008B8B", // 5  | 1            |        | weak      | Hacking
+    "#20B2AA", "#007272", // 5  | 1            |        | weak      | Hacking
     "#8FBC8F", "#5F9F6F", // 7  | 1            |        | weak      | Kommunikation
     "#DDA0DD", "#9932CC", // 9  | 4            |        |           | Künstliche Intelligenz (KI)
     "#90EE90", "#3CB371", // 11 | 2            |        | weak      | Maker
@@ -23,18 +23,19 @@ const colorsDark: string[] = [
 ];
 const colorsLight: string[] = [
     // background color: #FFFFFFFF
-    "#2F8B76", "#1D5B4D",
-    "#6A45C9", "#4A2F8F",
-    "#167F7F", "#0A4D4D",
-    "#548B54", "#325C32",
-    "#8B3A8B", "#662966",
-    "#3CB371", "#266B44",
-    "#3EBFB4", "#267B73",
-    "#595959", "#131313",
-    "#00995C", "#006B41",
-    "#549B54", "#326B32",
-    "#943AAD", "#682C7A",
-    "#1c0c9a", "#0d045d",
+    // main tag, sub tag  // ID | subtag-count | color  | info      | tag
+    "#39a68d", "#1D5B4D", // 1  | 2            |        | weak      | Didaktik
+    "#6A45C9", "#4A2F8F", // 3  | 10           |        | important | Spieleentwicklung
+    "#167F7F", "#0A4D4D", // 5  | 1            |        | weak      | Hacking
+    "#67ab67", "#325C32", // 7  | 1            |        | weak      | Kommunikation
+    "#8B3A8B", "#662966", // 9  | 4            |        |           | Künstliche Intelligenz (KI)
+    "#3CB371", "#266B44", // 11 | 2            |        | weak      | Maker
+    "#3EBFB4", "#267B73", // 13 | 0            |        | weak      | Musik
+    "#595959", "#131313", // 15 | 26           |        | important | Programmierung
+    "#00c475", "#006B41", // 17 | 10           |        | important | Projektmanagement
+    "#60b460", "#326B32", // 19 | 1            |        | weak      | Security
+    "#943AAD", "#682C7A", // 21 | 0            |        | weak      | Streaming
+    "#1c0c9a", "#0d045d", // 23 | 19           |        | important | Web-Entwicklung
 ];
 // @formatter:on,
 
