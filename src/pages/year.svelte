@@ -47,11 +47,11 @@
     function lastEventLink(): string {
         const currentIndex = data.globals.years_with_events.indexOf(data.year.event.year);
         if (currentIndex === -1) { // no element found. displays main-page then.
-            console.error(`current year '${data.year.event.year}' not in globals array`);
+            console.error(`current year '${data.year.event.year}' not in a globals array`);
             return '';
         }
         if (currentIndex >= data.globals.years_with_events.length - 1) { // no previous year in the array. displays main-page then.
-            console.error(`no previous year for current year '${data.year.event.year}' not in globals array`);
+            console.error(`no previous year for current year '${data.year.event.year}' not in a globals array`);
             return '';
         }
 
