@@ -89,9 +89,12 @@
     }
 </script>
 
-<PageWrapper headerMenu={data.loggedIn ? Menu.headerMainIn : Menu.headerMainOut}
-             footerMenu={data.loggedIn ? Menu.footerIn : Menu.footerOut}
-             globals={data.globals}>
+<PageWrapper
+        headerMenu={data.loggedIn ?
+         data.year.event.is_visible_on_frontpage ? Menu.headerMainIn : Menu.headerMainInNotVisibleOnFrontpage(lastEventLink()) :
+         data.year.event.is_visible_on_frontpage ?  Menu.headerMainOut : Menu.headerMainOutNotVisibleOnFrontpage(lastEventLink())}
+        footerMenu={data.loggedIn ? Menu.footerIn : Menu.footerOut}
+        globals={data.globals}>
 
     <div class="year-header">
         <div class="year-header-content">
