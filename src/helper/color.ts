@@ -1,3 +1,5 @@
+import {isDark} from "stores/theme";
+
 export interface Color {
     red: number;
     green: number;
@@ -31,12 +33,16 @@ export function lerpColor(start: Color, end: Color, factor: number): Color {
 }
 
 export function lerpTextCountColor(count: number, limit: number): Color {
-    let factor = 1 - (count / limit);
-    if (factor > 0.5) {
-        factor = 1;
-    } else {
-        factor *= 2;
-    }
+    const start = isDark() ? white : black;
+    const factor = (() => {
+        let f = 1 - (count / limit);
+        if (f > 0.5) {
+            f = 1;
+        } else {
+            f *= 2;
+        }
+        return f;
+    })();
 
-    return lerpColor(orange, white, factor);
+    return lerpColor(orange, start, factor);
 }
