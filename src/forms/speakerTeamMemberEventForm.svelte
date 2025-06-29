@@ -11,7 +11,7 @@
     import CroppedImage from 'elements/image/croppedImage.svelte';
     import Button from 'elements/input/button.svelte';
     import Image from 'elements/image/image.svelte';
-    import Input from 'elements/input/input.svelte';
+    import Input2 from 'elements/input/input2.svelte';
     import TextArea from 'elements/input/textArea.svelte';
     import MyCropper from 'elements/MyCropper/myCropper.svelte';
     import FormWrapper from 'elements/wrapper/formWrapper.svelte';
@@ -22,7 +22,7 @@
     export let displaySaveButton: boolean = true;
     const dispatch                        = createEventDispatcher();
 
-    let imageInput: Input;
+    let imageInput: Input2;
     let imagePreviewURL: string | undefined = undefined;
     let showCropperPopup: boolean           = false;
     let newImage: NewImage                  = {
@@ -142,11 +142,10 @@
         />
     {/if}
     <div class="input-grid">
-        <Input
+        <Input2
               bind:this={imageInput}
               id="dashboard-speaker-event-image-input"
               labelText="Profilbild:"
-              placeholderText="Profilbild"
               ariaLabel="Lade hier dein Profilbild für das Event {data.current.title} hoch"
               type="file"
               fileAccept=".jpg, .jpeg, .png"
@@ -161,10 +160,9 @@
                                             Vortrag angenommen werden, wird dieses Bild auf der Startseite angezeigt.
         </Paragraph>
         <div class="row-border" />
-        <Input
+        <Input2
               id="dashboard-speaker-event-name-input"
               labelText="Name:"
-              placeholderText="Name"
               ariaLabel="Gib hier deinen Namen für das Event {data.current.title} ein"
               bind:value={data.event.name}
               on:input={setUnsavedChanges}
@@ -174,12 +172,12 @@
                                             sein, mit dem du dich einloggst.
         </Paragraph>
         <div class="row-border" />
-        <Input
+        <Input2
               id="dashboard-speaker-event-short-bio-input"
               labelText="Kurzbeschreibung:"
-              placeholderText="Kurzbeschreibung"
               ariaLabel="Gib hier deine Kurzbeschreibung in Stichworten für das Event {data.current
 				.title} ein"
+              limit={100}
               bind:value={data.event.short_bio}
               on:input={setUnsavedChanges}
         />
@@ -193,6 +191,7 @@
               labelText="Beschreibung:"
               placeholderText="Beschreibung"
               ariaLabel="Gib hier deine Beschreibung für das Event {data.current.title} ein"
+              limit={1000}
               bind:value={data.event.bio}
               on:input={setUnsavedChanges}
         />
