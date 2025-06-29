@@ -5,7 +5,6 @@
     export let picturePath: string;
     export let captionPath: string;
 
-
     export let ariaLabel: string;
 </script>
 
@@ -21,7 +20,7 @@
         font-family: var(--normal-font-family), sans-serif;
         font-weight: var(--normal-font-weight);
         font-style: var(--normal-font-style);
-        color: var(--normal-font-color);
+        color: var(--white-color);
     }
     .general-video-wrapper {
         position: relative;

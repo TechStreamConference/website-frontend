@@ -22,11 +22,11 @@
     {#if icon}
         <Icon classes={iconClasses} type={icon}/>
     {/if}
-    <span class="hide-text-on-mobile">
     {#if text}
-        {text}
+        <span class="hide-text-on-mobile">
+            {text}
+        </span>
     {/if}
-    </span>
 </a>
 
 <style>
