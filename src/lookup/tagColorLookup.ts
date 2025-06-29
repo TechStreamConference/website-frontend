@@ -23,18 +23,19 @@ const colorsDark: string[] = [
 ];
 const colorsLight: string[] = [
     // background color: #FFFFFFFF
-    "#2F8B76", "#1D5B4D",
-    "#6A45C9", "#4A2F8F",
-    "#167F7F", "#0A4D4D",
-    "#548B54", "#325C32",
-    "#8B3A8B", "#662966",
-    "#3CB371", "#266B44",
-    "#3EBFB4", "#267B73",
-    "#595959", "#131313",
-    "#00995C", "#006B41",
-    "#549B54", "#326B32",
-    "#943AAD", "#682C7A",
-    "#1c0c9a", "#0d045d",
+    // main tag, sub tag  // ID | subtag-count | color  | info      | tag
+    "#39a68d", "#1D5B4D", // 1  | 2            |        | weak      | Didaktik
+    "#6A45C9", "#4A2F8F", // 3  | 10           |        | important | Spieleentwicklung
+    "#167F7F", "#0A4D4D", // 5  | 1            |        | weak      | Hacking
+    "#67ab67", "#325C32", // 7  | 1            |        | weak      | Kommunikation
+    "#8B3A8B", "#662966", // 9  | 4            |        |           | Künstliche Intelligenz (KI)
+    "#3CB371", "#266B44", // 11 | 2            |        | weak      | Maker
+    "#3EBFB4", "#267B73", // 13 | 0            |        | weak      | Musik
+    "#595959", "#131313", // 15 | 26           |        | important | Programmierung
+    "#00c475", "#006B41", // 17 | 10           |        | important | Projektmanagement
+    "#60b460", "#326B32", // 19 | 1            |        | weak      | Security
+    "#943AAD", "#682C7A", // 21 | 0            |        | weak      | Streaming
+    "#1c0c9a", "#0d045d", // 23 | 19           |        | important | Web-Entwicklung
 ];
 // @formatter:on,
 
