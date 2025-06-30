@@ -108,19 +108,14 @@
         padding: var(--half-padding);
         width: 100%;
         font-size: var(--full-font-size);
-        border-top-left-radius: var(--border-radius);
-        border-top-right-radius: var(--border-radius);
-        border: 1px solid transparent;
-        border-bottom: 1px solid var(--line-color);
-        transition: border var(--transition-duration),
-        border-radius var(--transition-duration);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--line-color);
+        transition: border-radius var(--transition-duration);
     }
 
-    input:focus, input:hover {
-        border: 1px solid var(--line-color);
-        border-radius: var(--border-radius);
-        transition: border var(--transition-duration),
-        border-radius var(--transition-duration);
+    input:hover {
+        border-radius: 0;
+        transition: border-radius var(--transition-duration);
     }
 
 
