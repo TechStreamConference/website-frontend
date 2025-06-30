@@ -4,10 +4,10 @@
     export let id: string                                      = '';
 </script>
 
-<h3 id={id || undefined}
+<h2 id={id || undefined}
     class="sub-headline-font {classes} {size}">
     <slot />
-</h3>
+</h2>
 
 <style>
     .sub-headline-center {

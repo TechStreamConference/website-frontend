@@ -50,7 +50,7 @@
 			return;
 		}
 
-		console.error('provided entry index from generic popup is not number');
+		console.error('the provided entry index from the generic popup is not number');
 	}}
       denyCallback={() => {}}
 ></GeneralPopup>
