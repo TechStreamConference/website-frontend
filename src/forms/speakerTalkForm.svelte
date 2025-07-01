@@ -83,7 +83,7 @@
         <Paragraph classes="paragraph-gray">Gibt deinem Vortrag einen Titel. Er sollte kurz, aber auch spannend sein,
                                             sodass er „Lust auf mehr” macht, ohne zu viel zu verraten.
         </Paragraph>
-        <div class="grid-line" />
+        <div class="grid-line" ></div>
         <TextArea id="dashboard-speaker-talk-input-description"
                   labelText="Beschreibung:"
                   placeholderText="Beschreibung"
@@ -96,7 +96,7 @@
                                             Besondere an deinem Vortrag? Eine
                                             Länge von ca. 30 bis 50 Wörtern ist ideal.
         </Paragraph>
-        <div class="grid-line" />
+        <div class="grid-line" ></div>
         <TagArray labelText="Tags:"
                   data={tags}
                   bind:selected={data.tags}
@@ -106,7 +106,7 @@
                                             beschränke dich am besten auf
                                             die drei wichtigsten.
         </Paragraph>
-        <div class="grid-line" />
+        <div class="grid-line" ></div>
         <DurationArray labelText="Vortragslänge in Minuten:"
                        data={talkDurations}
                        bind:selected={data.possible_durations}
@@ -120,7 +120,7 @@
                                             die in der Vortragsdauer enthalten sein sollten. Bei sehr kurzen Vorträgen (<i>„Lightning-Talks”</i>)
                                             entfällt die Fragerunde.
         </Paragraph>
-        <div class="grid-line" />
+        <div class="grid-line" ></div>
         <TextArea id="dashboard-speaker-talk-input-notes"
                   labelText="Anmerkungen:"
                   placeholderText="Anmerkungen"
@@ -138,7 +138,7 @@
                                             diesem Feld mit, damit wir besser planen können.
         </Paragraph>
         {#if useForm}
-            <div class="grid-line" />
+            <div class="grid-line" ></div>
             <div class="dashboard-speaker-talk-button-wrapper">
                 <Button type="submit"
                         ariaLabel="Klicke, um den Talk zu speichern">Speichern

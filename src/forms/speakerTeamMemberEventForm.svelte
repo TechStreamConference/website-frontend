@@ -160,7 +160,7 @@
                                             Speaker-Bewerbung und später dein
                                             Vortrag angenommen werden, wird dieses Bild auf der Startseite angezeigt.
         </Paragraph>
-        <div class="row-border" />
+        <div class="row-border" ></div>
         <Input
               id="dashboard-speaker-event-name-input"
               labelText="Name:"
@@ -173,7 +173,7 @@
                                             identisch zu dem Namen
                                             sein, mit dem du dich einloggst.
         </Paragraph>
-        <div class="row-border" />
+        <div class="row-border" ></div>
         <Input
               id="dashboard-speaker-event-short-bio-input"
               labelText="Kurzbeschreibung:"
@@ -187,7 +187,7 @@
                                             z. B. <i>„Unity Developer,
                                                      Game Designer”</i> oder <i>„Embedded- und Lowlevel-Coding”</i>.
         </Paragraph>
-        <div class="row-border" />
+        <div class="row-border" ></div>
         <TextArea
               id="dashboard-speaker-event-bio-text-area"
               labelText="Beschreibung:"
@@ -204,7 +204,7 @@
                an zahlreichen Projekten und vergisst niemals, den Yak-Stapel zu vergrößern.”</i>
         </Paragraph>
         {#if displaySaveButton}
-            <div class="row-border" />
+            <div class="row-border" ></div>
             <Button
                   type="submit"
                   ariaLabel="Klicke zum Speichern"

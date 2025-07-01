@@ -46,4 +46,4 @@
 
 <canvas bind:this={canvas}
         class={classes}
-        aria-label={alt} />
+        aria-label={alt} ></canvas>
