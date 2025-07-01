@@ -2,9 +2,10 @@
     import * as Menu from 'menu/page';
     import * as MenuItem from 'menu/pageItems';
 
-    import type { LoadResetPassword } from 'types/loadTypes';
+    import type {LoadResetPassword} from 'types/loadTypes';
 
-    import { trySaveDataAsync } from 'helper/trySaveData.js';
+    import {trySaveDataAsync} from 'helper/trySaveData.js';
+    import {SingleProcessState} from 'types/enums';
 
     import Input from 'elements/input/input.svelte';
     import Button from 'elements/input/button.svelte';
@@ -15,13 +16,9 @@
     import StyledLink from 'elements/input/styledLink.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
-    enum State {
-        DidReset,
-        Default,
-    }
 
     export let data: LoadResetPassword;
-    let state: State = State.Default;
+    let state: SingleProcessState = SingleProcessState.Default;
 
     let password1: string;
     let password2: string;
@@ -36,16 +33,16 @@
             return;
         }
 
-        const toSave   = {
+        const toSave = {
             new_password: trimmed_1,
-            token:        data.token,
+            token: data.token,
         };
         const response = await trySaveDataAsync(fetch, toSave, '/account/reset-password', 'POST');
 
         errorList = response.messages;
 
         if (response.success) {
-            state = State.DidReset;
+            state = SingleProcessState.Success;
         }
     }
 
@@ -54,39 +51,39 @@
 <PageWrapper headerMenu={Menu.headerOut}
              footerMenu={Menu.footerOut}
              globals={data.globals}>
-    {#if state === State.Default}
+    {#if state === SingleProcessState.Default}
         <form on:submit|preventDefault={resetPassword}
               class="reset-password-wrapper">
             <HeadlinePage>Passwort zurücksetzen</HeadlinePage>
-            <MessageWrapper messages={errorList} />
+            <MessageWrapper messages={errorList}/>
             <Input
-                  classes="reset-password-input-line"
-                  id="reset-password-input-line-1"
-                  type="password"
-                  labelText="Passwort:"
-                  placeholderText="Passwort"
-                  bind:value={password1}
-                  ariaLabel="Gib das neue Passwort ein"
+                    classes="reset-password-input-line"
+                    id="reset-password-input-line-1"
+                    type="password"
+                    labelText="Passwort:"
+                    placeholderText="Passwort"
+                    bind:value={password1}
+                    ariaLabel="Gib das neue Passwort ein"
             />
             <Input
-                  classes="reset-password-input-line"
-                  id="reset-password-input-line-2"
-                  type="password"
-                  labelText="Passwort wiederholen:"
-                  placeholderText="Passwort wiederholen"
-                  bind:value={password2}
-                  ariaLabel="Wiederhole das neue Passwort"
+                    classes="reset-password-input-line"
+                    id="reset-password-input-line-2"
+                    type="password"
+                    labelText="Passwort wiederholen:"
+                    placeholderText="Passwort wiederholen"
+                    bind:value={password2}
+                    ariaLabel="Wiederhole das neue Passwort"
             />
             <Button
-                  classes="reset-password-submit-button"
-                  type={'submit'}
-                  ariaLabel="Klicke hier, um dein Passwort zurückzusetzen"
+                    classes="reset-password-submit-button"
+                    type={'submit'}
+                    ariaLabel="Klicke hier, um dein Passwort zurückzusetzen"
             >
                 Passwort zurücksetzen
             </Button>
-            <PasswordHints />
+            <PasswordHints/>
         </form>
-    {:else if state === State.DidReset}
+    {:else if state === SingleProcessState.Success}
         <div class="reset-password-wrapper">
             <HeadlinePage>Passwort geändert</HeadlinePage>
             <Paragraph classes="paragraph-pre-wrap"
@@ -96,19 +93,19 @@
                     text={MenuItem.login.name}
                     href={MenuItem.login.url}
                     title={MenuItem.login.description}
-                    newTab={false} />
+                    newTab={false}/>
     {/if}
 </PageWrapper>
 
 <style>
     .reset-password-wrapper {
-        display:         flex;
-        flex-direction:  column;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
-        padding:         var(--2x-padding);
-        max-width:       100rem;
-        margin:          0 auto;
-        gap:             var(--full-gap)
+        padding: var(--2x-padding);
+        max-width: 100rem;
+        margin: 0 auto;
+        gap: var(--full-gap)
     }
 
     :global(.reset-password-submit-button) {

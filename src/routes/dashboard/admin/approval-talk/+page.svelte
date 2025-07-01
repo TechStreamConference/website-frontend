@@ -2,10 +2,11 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/dashboardItems';
 
-    import type { LoadAdminApprovalTalk } from 'types/dashboardLoadTypes';
-    import type { DashboardAllPendingTalks, DashboardAllTentativeOrAcceptedTalks } from 'types/dashboardProvideTypes';
+    import type {LoadAdminApprovalTalk} from 'types/dashboardLoadTypes';
+    import type {DashboardAllPendingTalks, DashboardAllTentativeOrAcceptedTalks} from 'types/dashboardProvideTypes';
 
-    import { fetchTentativeTalks, getUserIds } from './approvalHelper';
+    import {fetchTentativeTalks, getUserIds} from './approvalHelper';
+    import {ApprovalTalkType} from 'types/enums';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -16,10 +17,6 @@
 
     export let data: LoadAdminApprovalTalk;
 
-    enum DataType {
-        Pending,
-        Tentative,
-    }
 
     function getElementsByUserID<T extends {
         speaker: {
@@ -55,13 +52,13 @@
         return result ? result : '';
     }
 
-    function deleteEntry(type: DataType, id: number): void {
+    function deleteEntry(type: ApprovalTalkType, id: number): void {
         setTimeout(() => {
             switch (type) {
-                case DataType.Pending:
+                case ApprovalTalkType.Pending:
                     data.pendingTalks = data.pendingTalks.filter((talk) => talk.id !== id);
                     break;
-                case DataType.Tentative:
+                case ApprovalTalkType.Tentative:
                     data.tentativeTalks = data.tentativeTalks.filter((talk) => talk.id !== id);
                     break;
             }
@@ -72,9 +69,9 @@
     async function moveTalk(id: number): Promise<void> {
         setTimeout(async () => {
             const tentativeTalksPromise = fetchTentativeTalks(fetch);
-            data.pendingTalks           = data.pendingTalks.filter((talk) => talk.id !== id);
-            data.tentativeTalks         = await tentativeTalksPromise;
-            data.userIDArray            = getUserIds(data.pendingTalks, data.tentativeTalks);
+            data.pendingTalks = data.pendingTalks.filter((talk) => talk.id !== id);
+            data.tentativeTalks = await tentativeTalksPromise;
+            data.userIDArray = getUserIds(data.pendingTalks, data.tentativeTalks);
         }, 3000);
     }
 </script>
@@ -82,21 +79,21 @@
 <Tabs classes="subpage-navigation-tabs"
       position="center"
       entries={Menu.admin}
-      entryName={MenuItem.adminApprovalTalk.name} />
+      entryName={MenuItem.adminApprovalTalk.name}/>
 
 <SectionDashboard classes="standard-dashboard-section dashboard-admin-talk-approval-section">
     {#each data.userIDArray as userID}
         <div class="dashboard-admin-talk-approval-wrapper form-border">
             <SubHeadline classes="sub-headline-center">{getNameByUserID(data.pendingTalks,
-                                                                        data.tentativeTalks,
-                                                                        userID
+                data.tentativeTalks,
+                userID
             )}</SubHeadline>
             <AdminPendingTalkApprovalFormWrapper talks={getElementsByUserID(data.pendingTalks, userID)}
-                                                 on:reject={(e) => deleteEntry(DataType.Pending, e.detail)}
-                                                 on:approve={(e) => moveTalk(e.detail)} />
+                                                 on:reject={(e) => deleteEntry(ApprovalTalkType.Pending, e.detail)}
+                                                 on:approve={(e) => moveTalk(e.detail)}/>
             <AdminTentativeTalkApprovalFormWrapper talks={getElementsByUserID(data.tentativeTalks, userID)}
                                                    bind:slots={data.slots}
-                                                   on:reject={(e) => deleteEntry(DataType.Tentative, e.detail)} />
+                                                   on:reject={(e) => deleteEntry(ApprovalTalkType.Tentative, e.detail)}/>
         </div>
     {/each}
     {#if data.userIDArray.length === 0}

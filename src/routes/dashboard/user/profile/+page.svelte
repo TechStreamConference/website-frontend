@@ -12,6 +12,7 @@
     import { loadUserData } from './profileHelper';
     import { censorEmail } from './profileHelper.js';
     import { setFocus } from 'helper/basic';
+    import {UserProfileState} from 'types/enums'
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -23,15 +24,10 @@
     import TextLine from 'elements/text/textLine.svelte';
     import Explanation from 'elements/text/explanation.svelte';
 
-    enum State {
-        None,
-        Mail,
-        Password,
-        Name,
-    }
+
 
     export let data: LoadDashboard;
-    let state: State = State.None;
+    let state: UserProfileState = UserProfileState.None;
 
     let saveMessage: SaveMessage;
     let errorList: string[] = [];
@@ -42,33 +38,33 @@
     let newPassword2: string = '';
     let oldPassword: string  = '';
 
-    function changeState(value: State) {
+    function changeState(value: UserProfileState) {
         const focus = () => {
             setTimeout(() => {
                 switch (state) {
-                    case State.None:
+                    case UserProfileState.None:
                         console.error('State \'None\' while try setting focus');
                         return;
-                    case State.Mail:
+                    case UserProfileState.Mail:
                         setFocus('dashboard-user-profile-input-mail-password');
                         return;
-                    case State.Password:
+                    case UserProfileState.Password:
                         setFocus('dashboard-user-profile-input-password-old');
                         return;
-                    case State.Name:
+                    case UserProfileState.Name:
                         setFocus('dashboard-user-profile-input-username-password');
                         return;
                 }
             }, 10);
         };
 
-        if (state === State.None) {
+        if (state === UserProfileState.None) {
             state = value;
             focus();
             return;
         }
 
-        state = State.None;
+        state = UserProfileState.None;
         setTimeout(() => {
             state = value;
             focus();
@@ -83,7 +79,7 @@
 
         if (response.success) {
             oldPassword = '';
-            changeState(State.None);
+            changeState(UserProfileState.None);
         }
 
         return response;
@@ -166,20 +162,20 @@
             </div>
             <div class="dashboard-user-profile-button-wrapper">
                 <Button ariaLabel="Klicke, um deinen Namen zu ändern."
-                        on:click={() => {changeState(State.Name)}}>Name ändern
+                        on:click={() => {changeState(UserProfileState.Name)}}>Name ändern
                 </Button>
                 <Button ariaLabel="Klicke, um deine E-Mail zu ändern."
-                        on:click={() => {changeState(State.Mail)}}>E-Mail-Adresse ändern
+                        on:click={() => {changeState(UserProfileState.Mail)}}>E-Mail-Adresse ändern
                 </Button>
                 <Button ariaLabel="Klicke, um dein Passwort zu ändern."
-                        on:click={() => {changeState(State.Password)}}>Passwort ändern
+                        on:click={() => {changeState(UserProfileState.Password)}}>Passwort ändern
                 </Button>
             </div>
         </div>
     </div>
     <SaveMessage bind:this={saveMessage} />
     <MessageWrapper messages={errorList} />
-    {#if state === State.Name}
+    {#if state === UserProfileState.Name}
         <div class="dashboard-user-profile-transition-wrapper"
              transition:fade={{ duration: 300 }}>
             <div class="dashboard-user-profile-section-wrapper form-border">
@@ -207,7 +203,7 @@
                 </form>
             </div>
         </div>
-    {:else if state === State.Mail}
+    {:else if state === UserProfileState.Mail}
         <div class="dashboard-user-profile-transition-wrapper"
              transition:fade={{ duration: 300 }}>
             <div class="dashboard-user-profile-section-wrapper form-border">
@@ -235,7 +231,7 @@
                 </form>
             </div>
         </div>
-    {:else if state === State.Password}
+    {:else if state === UserProfileState.Password}
         <div class="dashboard-user-profile-transition-wrapper"
              transition:fade={{ duration: 300 }}>
             <div class="dashboard-user-profile-section-wrapper form-border">
