@@ -91,9 +91,9 @@
 
 <PageWrapper
         headerMenu={data.loggedIn ?
-         data.year.event.is_visible_on_frontpage ? Menu.headerMainIn : Menu.headerMainInNotVisibleOnFrontpage(lastEventLink()) :
-         data.year.event.is_visible_on_frontpage ?  Menu.headerMainOut : Menu.headerMainOutNotVisibleOnFrontpage(lastEventLink())}
-        footerMenu={data.loggedIn ? Menu.footerIn : Menu.footerOut}
+         data.year.event.is_visible_on_frontpage ? Menu.headerMainLoggedIn : Menu.getHeaderMenuForLoggedInHiddenEvent(lastEventLink()) :
+         data.year.event.is_visible_on_frontpage ?  Menu.headerMainLoggedOut : Menu.getHeaderMenuForLoggedOutHiddenEvent(lastEventLink())}
+        footerMenu={data.loggedIn ? Menu.footerLoggedIn : Menu.footerLoggedOut}
         globals={data.globals}>
 
     <div class="year-header">

@@ -2,7 +2,7 @@ import type { Menu } from 'types/provideTypes';
 import * as YearItem from './yearItems';
 import * as PageItem from './pageItems';
 
-export function headerMainInNotVisibleOnFrontpage(lastYearLink: string): Menu {
+export function getHeaderMenuForLoggedInHiddenEvent(lastYearLink: string): Menu {
     return [
         PageItem.top,
         {
@@ -15,7 +15,7 @@ export function headerMainInNotVisibleOnFrontpage(lastYearLink: string): Menu {
     ]
 }
 
-export function headerMainOutNotVisibleOnFrontpage(lastYearLink: string): Menu {
+export function getHeaderMenuForLoggedOutHiddenEvent(lastYearLink: string): Menu {
     return [
         PageItem.top,
         {
@@ -29,7 +29,7 @@ export function headerMainOutNotVisibleOnFrontpage(lastYearLink: string): Menu {
 }
 
 
-export const headerMainIn: Menu = [
+export const headerMainLoggedIn: Menu = [
     PageItem.top,
     YearItem.speaker,
     YearItem.sponsors,
@@ -39,7 +39,7 @@ export const headerMainIn: Menu = [
     PageItem.logout,
 ];
 
-export const headerMainOut: Menu = [
+export const headerMainLoggedOut: Menu = [
     PageItem.top,
     YearItem.speaker,
     YearItem.sponsors,
@@ -48,25 +48,25 @@ export const headerMainOut: Menu = [
     PageItem.login,
 ];
 
-export const headerIn: Menu  = [
+export const headerLoggedIn: Menu  = [
     PageItem.mainPage,
     PageItem.intern,
     PageItem.logout,
 ];
-export const headerOut: Menu = [
+export const headerLoggedOut: Menu = [
     PageItem.mainPage,
     PageItem.login,
     PageItem.register,
 ];
 
-export const footerIn: Menu  = [
+export const footerLoggedIn: Menu  = [
     PageItem.mainPage,
     PageItem.intern,
     PageItem.logout,
     PageItem.contact,
     PageItem.imprint,
 ];
-export const footerOut: Menu = [
+export const footerLoggedOut: Menu = [
     PageItem.mainPage,
     PageItem.login,
     PageItem.register,

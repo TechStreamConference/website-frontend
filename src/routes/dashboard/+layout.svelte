@@ -22,8 +22,8 @@
 </script>
 
 <UnsavedChangesPopup />
-<PageWrapper headerMenu={Menu.headerIn}
-             footerMenu={Menu.footerIn}
+<PageWrapper headerMenu={Menu.headerLoggedIn}
+             footerMenu={Menu.footerLoggedIn}
              globals={data.globals}>
     <slot />
 </PageWrapper>

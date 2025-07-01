@@ -13,8 +13,8 @@
     export let data : LoadVerifyEmail;
 </script>
 
-<PageWrapper headerMenu={Menu.headerOut}
-             footerMenu={Menu.footerOut}
+<PageWrapper headerMenu={Menu.headerLoggedOut}
+             footerMenu={Menu.footerLoggedOut}
              globals={data.globals}>
     <div class="verify-email-content-wrapper">
         <HeadlinePage>E-Mail Verifizierung</HeadlinePage>

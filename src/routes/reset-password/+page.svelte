@@ -51,8 +51,8 @@
 
 </script>
 
-<PageWrapper headerMenu={Menu.headerOut}
-             footerMenu={Menu.footerOut}
+<PageWrapper headerMenu={Menu.headerLoggedOut}
+             footerMenu={Menu.footerLoggedOut}
              globals={data.globals}>
     {#if state === State.Default}
         <form on:submit|preventDefault={resetPassword}

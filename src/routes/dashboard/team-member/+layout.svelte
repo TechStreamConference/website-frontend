@@ -12,7 +12,7 @@
 
 <Tabs position="end"
       color="purple"
-      entries={Menu.SectionIn(data.roles)}
+      entries={Menu.getSectionLoggedIn(data.roles)}
       entryName={MenuItem.teamMember.name} />
 <HeadlineInfoDashboard headline="Team Member">
     In diesem Bereich kannst du einstellen, wie du auf der Startseite angezeigt werden möchtest. Du tauchst dort als
