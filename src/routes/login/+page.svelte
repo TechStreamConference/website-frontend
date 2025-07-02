@@ -79,8 +79,8 @@
 </script>
 
 
-<PageWrapper headerMenu={data.loggedIn ? Menu.headerIn : Menu.headerOut}
-             footerMenu={data.loggedIn ? Menu.footerIn : Menu.footerOut}
+<PageWrapper headerMenu={data.loggedIn ? Menu.headerLoggedIn : Menu.headerLoggedOut}
+             footerMenu={data.loggedIn ? Menu.footerLoggedIn : Menu.footerLoggedOut}
              globals={data.globals}>
     {#if state === State.Login}
         <form class="login-form-width-wrapper"

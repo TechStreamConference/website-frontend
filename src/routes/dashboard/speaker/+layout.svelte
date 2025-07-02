@@ -56,7 +56,7 @@
 
 <Tabs position="end"
       color="purple"
-      entries={Menu.SectionIn(data.roles)}
+      entries={Menu.getSectionLoggedIn(data.roles)}
       entryName={MenuItem.speaker.name} />
 <HeadlineInfoDashboard headline="Speaker">
     Unter „Events” kannst du bestimmen, wie du auf unserer Startseite angezeigt werden möchtest. Möchtest du einen neuen

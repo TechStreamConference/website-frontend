@@ -4,7 +4,7 @@ import type { DashboardRoles } from 'types/dashboardProvideTypes';
 import * as PageItem from './pageItems';
 import * as DashboardItem from './dashboardItems';
 
-export function SectionIn(roles: DashboardRoles) {
+export function getSectionLoggedIn(roles: DashboardRoles) {
     const menu: Menu = [];
 
     if (roles.is_admin) {

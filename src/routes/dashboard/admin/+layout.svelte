@@ -12,7 +12,7 @@
 
 <Tabs position="end"
       color="purple"
-      entries={Menu.SectionIn(data.roles)}
+      entries={Menu.getSectionLoggedIn(data.roles)}
       entryName={MenuItem.admin.name} />
 <HeadlineInfoDashboard headline="Admin">
 

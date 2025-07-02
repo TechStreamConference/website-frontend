@@ -119,8 +119,8 @@
 <UnsavedChangesCallbackWrapper callback={saveAsync} />
 
 <PageWrapper globals={data.globals}
-             headerMenu={data.loggedIn ? Menu.headerIn : Menu.headerOut}
-             footerMenu={data.loggedIn ? Menu.footerIn : Menu.footerOut}
+             headerMenu={data.loggedIn ? Menu.headerLoggedIn : Menu.headerLoggedOut}
+             footerMenu={data.loggedIn ? Menu.footerLoggedIn : Menu.footerLoggedOut}
 >
     <SectionDashboard classes="standard-dashboard-section">
         <HeadlinePage>Kontakt</HeadlinePage>

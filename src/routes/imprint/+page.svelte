@@ -13,8 +13,8 @@
     export let data: LoadImprint; // data from database;
 </script>
 
-<PageWrapper headerMenu={data.loggedIn ? Menu.headerIn : Menu.headerOut}
-             footerMenu={data.loggedIn? Menu.footerIn : Menu.footerOut}
+<PageWrapper headerMenu={data.loggedIn ? Menu.headerLoggedIn : Menu.headerLoggedOut}
+             footerMenu={data.loggedIn? Menu.footerLoggedIn : Menu.footerLoggedOut}
              globals={data.globals}>
     <div class="imprint-content-wrapper">
         <HeadlinePage classes="imprint-headline">Impressum</HeadlinePage>

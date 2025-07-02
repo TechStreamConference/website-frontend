@@ -47,7 +47,7 @@
     }
 </script>
 
-<Header menu={Menu.headerOut} />
+<Header menu={Menu.headerLoggedOut} />
 <div class="wrapper page-404">
     <div class="content">
         <HeadlinePage classes="border">{$page.status}</HeadlinePage>
@@ -69,7 +69,7 @@
             Hauptseite
         </Button>
     </div>
-    <Footer menu={Menu.footerOut}
+    <Footer menu={Menu.footerLoggedOut}
             globals={data} />
 </div>
 
