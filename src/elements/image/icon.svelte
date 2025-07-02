@@ -10,7 +10,7 @@
 </script>
 
 <i class="fa {iconLookup(type)} {classes} {color}"
-   aria-hidden="true" />
+   aria-hidden="true" ></i>
 
 <style>
     i {

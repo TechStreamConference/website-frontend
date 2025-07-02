@@ -59,7 +59,7 @@
           aria-label={ariaLabel}
           {rows}
           on:keydown={handleKeydown}
-    />
+    ></textarea>
 </div>
 
 <style>

@@ -2,6 +2,7 @@
     import * as Menu from 'menu/page';
 
     import type { LoadLogin } from 'types/loadTypes';
+    import {LoginState} from "types/enums";
 
     import HeadlinePage from 'elements/text/headlinePage.svelte';
     import ErrorMessage from 'elements/text/message.svelte';
@@ -19,13 +20,7 @@
 
     export let data: LoadLogin; // data from database
 
-    enum State {
-        Login,
-        ResetPasswordPending,
-        ResetPasswordSuccess,
-    }
-
-    let state: State = State.Login;
+    let state: LoginState = LoginState.Login;
 
     let usernameOrEmail: string = '';
     let password: string        = '';
@@ -38,7 +33,7 @@
         setFocus('login-username-or-email');
     });
 
-    function changeState(_state: State): void {
+    function changeState(_state: LoginState): void {
         errorList = [];
         state     = _state;
     }
@@ -73,7 +68,7 @@
 
         errorList = result.messages;
         if (result.success) {
-            changeState(State.ResetPasswordSuccess);
+            changeState(LoginState.ResetPasswordSuccess);
         }
     }
 </script>
@@ -82,7 +77,7 @@
 <PageWrapper headerMenu={data.loggedIn ? Menu.headerLoggedIn : Menu.headerLoggedOut}
              footerMenu={data.loggedIn ? Menu.footerLoggedIn : Menu.footerLoggedOut}
              globals={data.globals}>
-    {#if state === State.Login}
+    {#if state === LoginState.Login}
         <form class="login-form-width-wrapper"
               on:submit|preventDefault={loginAsync}>
             <HeadlinePage>Anmelden</HeadlinePage>
@@ -115,7 +110,7 @@
             </Link>
             <Link href="#"
                   title="Klicke, um dein Passwort zurückzusetzen."
-                  on:click={() => {changeState(State.ResetPasswordPending)}}
+                  on:click={() => {changeState(LoginState.ResetPasswordPending)}}
             >
                 Passwort vergessen?
             </Link>
@@ -124,7 +119,7 @@
                     ariaLabel="Klicke zum Anmelden">Anmelden
             </Button>
         </form>
-    {:else if state === State.ResetPasswordPending}
+    {:else if state === LoginState.ResetPasswordPending}
         <form class="login-form-width-wrapper"
               on:submit|preventDefault={resetPassword}>
             <HeadlinePage>Passwort zurücksetzen</HeadlinePage>
@@ -144,14 +139,14 @@
             </Button>
             <Link href="#"
                   title="Klicke, um wieder zur Anmeldung zu kommen."
-                  on:click={() => {changeState(State.Login)}}
+                  on:click={() => {changeState(LoginState.Login)}}
             >
                 zurück
             </Link>
         </form>
-    {:else if state === State.ResetPasswordSuccess}
+    {:else if state === LoginState.ResetPasswordSuccess}
         <form class="login-form-width-wrapper login-form-gap-wrapper"
-              on:submit|preventDefault={() => {changeState(State.Login);}}>
+              on:submit|preventDefault={() => {changeState(LoginState.Login);}}>
             <HeadlinePage>Passwort zurückgesetzt</HeadlinePage>
             <Paragraph classes="paragraph-pre-wrap"
                        --text-align="center">{'Wir haben dir eine E-Mail gesendet. Darin findest du einen Link, mit dessen Hilfe du ein neues Passwort auswählen kannst.\nDanach kannst du dich mit deinem neuen Passwort wieder anmelden.'}</Paragraph>
