@@ -1,49 +1,70 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import type {CropperProps} from "types/cropperTypes";
+    import {onMount} from "svelte";
 
-    export let x: number;
-    export let y: number;
-    export let size: number;
-    export let file: Blob;
-    export let alt: string;
-    export let classes: string = '';
+    export let src: string;
+    export let ariaLabel: string;
+    export let cropperProps: CropperProps;
+    export let hideOverflow: boolean = true;
 
-    let mounted: boolean = false;
-    let canvas: HTMLCanvasElement;
 
-    onMount(() => {
-        mounted = true;
-        updateCrop();
-    });
+    let container: HTMLElement;
+    let scale: number = 1;
 
-    $: if (file || x || y || size) {
-        updateCrop();
+    $: if (cropperProps.width || cropperProps.height) {
+        updateScale();
     }
 
-    function updateCrop(): void {
-        if (!mounted) {
+    onMount(() => {
+        updateScale();
+        window.addEventListener('resize', updateScale);
+        return () => window.removeEventListener('resize', updateScale);
+    })
+
+    function updateScale() {
+        if (!container) {
             return;
         }
-
-        const context = canvas.getContext('2d');
-
-        const reader  = new FileReader();
-        reader.onload = (e) => {
-            const image  = new Image();
-            image.onload = () => {
-                canvas.height = size;
-                canvas.width  = size;
-                context?.drawImage(image, x, y, size, size, 0, 0, size, size);
-            };
-
-            if (e.target?.result) {
-                image.src = e.target.result as string;
-            }
-        };
-        reader.readAsDataURL(file);
+        let scale_width = container.offsetWidth / cropperProps.width;
+        let scale_height = container.offsetHeight / cropperProps.height;
+        scale = Math.min    (scale_width, scale_height);
     }
 </script>
 
-<canvas bind:this={canvas}
-        class={classes}
-        aria-label={alt} ></canvas>
+
+<div class="crop-container"
+     bind:this={container}
+     style="
+            {hideOverflow ? 'overflow: hidden;' : ''};
+        "
+>
+    <img
+            class="crop-image"
+            src={src}
+            alt={ariaLabel}
+            style="
+                object-fit: none;
+                object-position: -{cropperProps.x}px -{cropperProps.y}px;
+                width: {cropperProps.width}px;
+                height: {cropperProps.height}px;
+                transform: scale({scale});
+                transform-origin: top left;
+            "
+    />
+</div>
+
+<style>
+    .crop-container {
+        position: relative;
+        border: 1px solid var(--line-color);
+        border-radius: var(--border-radius);
+        width: 50rem;
+        height: 50rem;
+    }
+
+    .crop-image {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+</style>
