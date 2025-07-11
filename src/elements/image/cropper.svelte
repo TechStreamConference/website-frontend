@@ -13,7 +13,15 @@
     let isDragging: boolean = false;
     let lastMouseX: number = 0;
     let lastMouseY: number = 0;
+
     const MOVEMENT_SPEED: number = 10;
+    const ZOOM_SPEED: number = 0.1;
+    const MIN_ZOOM_SCALE: number = 0.1;
+    const MAX_ZOOM_SCALE: number = 5.0;
+
+    let originalWidth: number = 0;
+    let originalHeight: number = 0;
+    let currentZoomScale: number = 1.0;
 
     onMount(() => {
         window.addEventListener('keydown', handleKeyDown);
@@ -52,6 +60,8 @@
 
     // crop & clamp
     $: if (!cropped && file) {
+        originalWidth = cropperProps.width;
+        originalHeight = cropperProps.height;
         crop();
         cropped = true;
     }
@@ -125,6 +135,43 @@
         crop();
     }
 
+    function handleWheel(event: WheelEvent): void {
+        event.preventDefault();
+
+        const zoomFactor = event.deltaY > 0 ? 1.0 + ZOOM_SPEED : 1.0 - ZOOM_SPEED;
+        const newScale = currentZoomScale * zoomFactor;
+
+        if (newScale < MIN_ZOOM_SCALE || newScale > MAX_ZOOM_SCALE) {
+            return;
+        }
+
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = event.clientX - rect.left;
+        const mouseY = event.clientY - rect.top;
+
+        const relativeX = mouseX / canvas.width;
+        const relativeY = mouseY / canvas.height;
+
+        const newWidth = originalWidth * newScale;
+        const newHeight = originalHeight * newScale;
+
+        const widthDiff = newWidth - cropperProps.width;
+        const heightDiff = newHeight - cropperProps.height;
+        const xAdjust = widthDiff * relativeX;
+        const yAdjust = heightDiff * relativeY;
+
+        cropperProps = {
+            ...cropperProps,
+            x: cropperProps.x - xAdjust,
+            y: cropperProps.y - yAdjust,
+            width: newWidth,
+            height: newHeight,
+        }
+
+        currentZoomScale = newScale;
+        crop();
+    }
+
     // keyboard input
     function moveImage(deltaX: number, deltaY: number): void {
         const scaleX = canvas.width / cropperWrapper.scrollWidth;
@@ -174,6 +221,7 @@
         on:mouseup={handleMouseUp}
         on:mousemove={handleMouseMove}
         on:mouseleave={handleMouseUp}
+        on:wheel={handleWheel}
 >
     <canvas
             bind:this={canvas}
