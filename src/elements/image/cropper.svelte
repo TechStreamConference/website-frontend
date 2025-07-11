@@ -9,6 +9,10 @@
     let cropperWrapper: HTMLDivElement;
     let cropped: boolean = false;
 
+    let isDragging: boolean = false;
+    let lastMouseX:number = 0;
+    let lastMouseY:number = 0;
+
     let heightPercent: number = 0;
     $: heightPercent = (() => {
         if (!isValidHTMLValues()) {
@@ -32,6 +36,42 @@
     function calculateRelativeCropperOffset(canvas: number, wrapper: number): number {
         const percent = croppingOffset / canvas;
         return wrapper * percent;
+    }
+
+    function handleMouseDown(event: MouseEvent): void {
+        if(event.button !== 0) {
+            return;
+        }
+        isDragging = true;
+        lastMouseX = event.clientX;
+        lastMouseY = event.clientY;
+    }
+
+    function handleMouseUp(): void {
+        isDragging = false;
+    }
+
+    function handleMouseMove(event: MouseEvent): void {
+        if (!isDragging) {
+            return;
+        }
+
+        const deltaX = event.clientX - lastMouseX;
+        const deltaY = event.clientY - lastMouseY;
+
+        const scaleX = canvas.width / cropperWrapper.scrollWidth;
+        const scaleY = canvas.height / cropperWrapper.scrollHeight;
+
+        cropperProps = {
+            ...cropperProps,
+            x: cropperProps.x - deltaX / scaleX,
+            y: cropperProps.y - deltaY / scaleY,
+        }
+
+        lastMouseX = event.clientX;
+        lastMouseY = event.clientY;
+
+        crop();
     }
 
 
@@ -76,7 +116,12 @@
 
 <div
         bind:this={cropperWrapper}
-        class="cropper-wrapper">
+        class="cropper-wrapper"
+        on:mousedown={handleMouseDown}
+        on:mouseup={handleMouseUp}
+        on:mousemove={handleMouseMove}
+        on:mouseleave={handleMouseUp}
+>
     <canvas
             bind:this={canvas}
             class="cropper-canvas"
