@@ -218,21 +218,18 @@
     }
 
     function handleKeyDown(event: KeyboardEvent): void {
-        let deltaX = 0;
-        let deltaY = 0;
-
         switch (event.key.toLowerCase()) {
             case 'a':
-                deltaX = -MOVEMENT_SPEED;
+                handleKeyMove(-MOVEMENT_SPEED, 0);
                 break;
             case 'd':
-                deltaX = MOVEMENT_SPEED;
+                handleKeyMove(MOVEMENT_SPEED, 0);
                 break;
             case 'w':
-                deltaY = -MOVEMENT_SPEED;
+                handleKeyMove(0, -MOVEMENT_SPEED);
                 break;
             case 's':
-                deltaY = MOVEMENT_SPEED;
+                handleKeyMove(0, MOVEMENT_SPEED);
                 break;
             case 'q':
                 handleKeyZoom(false);
@@ -245,8 +242,6 @@
         }
 
         event.preventDefault();
-        handleKeyMove(deltaX, deltaY);
-
     }
 
 </script>
