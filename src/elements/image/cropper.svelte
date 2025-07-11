@@ -1,5 +1,6 @@
 <script lang="ts">
     import type {CropperProps} from "types/cropperTypes";
+    import {onMount} from "svelte";
 
     export let file: Blob;
     export let croppingOffset: number = 100;
@@ -10,9 +11,20 @@
     let cropped: boolean = false;
 
     let isDragging: boolean = false;
-    let lastMouseX:number = 0;
-    let lastMouseY:number = 0;
+    let lastMouseX: number = 0;
+    let lastMouseY: number = 0;
+    const MOVEMENT_SPEED: number = 10;
 
+    onMount(() => {
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    });
+
+
+    // relative cropping offset
     let heightPercent: number = 0;
     $: heightPercent = (() => {
         if (!isValidHTMLValues()) {
@@ -38,43 +50,7 @@
         return wrapper * percent;
     }
 
-    function handleMouseDown(event: MouseEvent): void {
-        if(event.button !== 0) {
-            return;
-        }
-        isDragging = true;
-        lastMouseX = event.clientX;
-        lastMouseY = event.clientY;
-    }
-
-    function handleMouseUp(): void {
-        isDragging = false;
-    }
-
-    function handleMouseMove(event: MouseEvent): void {
-        if (!isDragging) {
-            return;
-        }
-
-        const deltaX = event.clientX - lastMouseX;
-        const deltaY = event.clientY - lastMouseY;
-
-        const scaleX = canvas.width / cropperWrapper.scrollWidth;
-        const scaleY = canvas.height / cropperWrapper.scrollHeight;
-
-        cropperProps = {
-            ...cropperProps,
-            x: cropperProps.x - deltaX / scaleX,
-            y: cropperProps.y - deltaY / scaleY,
-        }
-
-        lastMouseX = event.clientX;
-        lastMouseY = event.clientY;
-
-        crop();
-    }
-
-
+    // crop & clamp
     $: if (!cropped && file) {
         crop();
         cropped = true;
@@ -110,6 +86,83 @@
             }
         };
         reader.readAsDataURL(file);
+    }
+
+    // mouse input
+    function handleMouseDown(event: MouseEvent): void {
+        if (event.button !== 0) {
+            return;
+        }
+        isDragging = true;
+        lastMouseX = event.clientX;
+        lastMouseY = event.clientY;
+    }
+
+    function handleMouseUp(): void {
+        isDragging = false;
+    }
+
+    function handleMouseMove(event: MouseEvent): void {
+        if (!isDragging) {
+            return;
+        }
+
+        const deltaX = event.clientX - lastMouseX;
+        const deltaY = event.clientY - lastMouseY;
+
+        const scaleX = canvas.width / cropperWrapper.scrollWidth;
+        const scaleY = canvas.height / cropperWrapper.scrollHeight;
+
+        cropperProps = {
+            ...cropperProps,
+            x: cropperProps.x - deltaX / scaleX,
+            y: cropperProps.y - deltaY / scaleY,
+        }
+
+        lastMouseX = event.clientX;
+        lastMouseY = event.clientY;
+
+        crop();
+    }
+
+    // keyboard input
+    function moveImage(deltaX: number, deltaY: number): void {
+        const scaleX = canvas.width / cropperWrapper.scrollWidth;
+        const scaleY = canvas.height / cropperWrapper.scrollHeight;
+
+        cropperProps = {
+            ...cropperProps,
+            x: cropperProps.x - deltaX / scaleX,
+            y: cropperProps.y - deltaY / scaleY,
+        }
+
+        crop();
+    }
+
+    function handleKeyDown(event: KeyboardEvent): void {
+        let deltaX = 0;
+        let deltaY = 0;
+
+        switch (event.key.toLowerCase()) {
+            case 'a':
+                deltaX = -MOVEMENT_SPEED;
+                break;
+            case 'd':
+                deltaX = MOVEMENT_SPEED;
+                break;
+            case 'w':
+                deltaY = -MOVEMENT_SPEED;
+                break;
+            case 's':
+                deltaY = MOVEMENT_SPEED;
+                break;
+            default:
+                return;
+        }
+
+        event.preventDefault();
+        moveImage(deltaX, deltaY);
+
     }
 
 </script>
