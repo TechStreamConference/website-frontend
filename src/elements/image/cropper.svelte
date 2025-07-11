@@ -173,7 +173,7 @@
     }
 
     // keyboard input
-    function moveImage(deltaX: number, deltaY: number): void {
+    function handleKeyMove(deltaX: number, deltaY: number): void {
         const scaleX = canvas.width / cropperWrapper.scrollWidth;
         const scaleY = canvas.height / cropperWrapper.scrollHeight;
 
@@ -183,6 +183,37 @@
             y: cropperProps.y - deltaY / scaleY,
         }
 
+        crop();
+    }
+
+    function handleKeyZoom(zoomIn: boolean): void {
+        const zoomFactor = zoomIn ? 1.0 + ZOOM_SPEED : 1.0 - ZOOM_SPEED;
+        const newScale = currentZoomScale * zoomFactor;
+
+        if (newScale < MIN_ZOOM_SCALE || newScale > MAX_ZOOM_SCALE) {
+            return;
+        }
+
+        const newWidth = originalWidth * newScale;
+        const newHeight = originalHeight * newScale;
+
+        const relativeX = 0.5;
+        const relativeY = 0.5;
+
+        const widthDiff = newWidth - cropperProps.width;
+        const heightDiff = newHeight - cropperProps.height;
+        const xAdjust = widthDiff * relativeX;
+        const yAdjust = heightDiff * relativeY;
+
+        cropperProps = {
+            ...cropperProps,
+            width: newWidth,
+            height: newHeight,
+            x: cropperProps.x - xAdjust,
+            y: cropperProps.y - yAdjust,
+        };
+
+        currentZoomScale = newScale;
         crop();
     }
 
@@ -203,12 +234,18 @@
             case 's':
                 deltaY = MOVEMENT_SPEED;
                 break;
+            case 'q':
+                handleKeyZoom(false);
+                break;
+            case 'e':
+                handleKeyZoom(true);
+                break;
             default:
                 return;
         }
 
         event.preventDefault();
-        moveImage(deltaX, deltaY);
+        handleKeyMove(deltaX, deltaY);
 
     }
 
