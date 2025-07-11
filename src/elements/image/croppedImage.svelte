@@ -1,70 +1,66 @@
 <script lang="ts">
     import type {CropperProps} from "types/cropperTypes";
-    import {onMount} from "svelte";
+    import {onMount} from 'svelte';
 
-    export let src: string;
-    export let ariaLabel: string;
     export let cropperProps: CropperProps;
-    export let hideOverflow: boolean = true;
+    export let file: Blob;
+    export let ariaLabel: string;
+    export let classes: string = '';
 
-
-    let container: HTMLElement;
-    let scale: number = 1;
-
-    $: if (cropperProps.width || cropperProps.height) {
-        updateScale();
-    }
+    let mounted: boolean = false;
+    let canvas: HTMLCanvasElement;
 
     onMount(() => {
-        updateScale();
-        window.addEventListener('resize', updateScale);
-        return () => window.removeEventListener('resize', updateScale);
-    })
+        mounted = true;
+        updateCrop();
+    });
 
-    function updateScale() {
-        if (!container) {
+    $: if (file || cropperProps) {
+        updateCrop();
+    }
+
+    function updateCrop(): void {
+        if (!mounted) {
             return;
         }
-        let scale_width = container.offsetWidth / cropperProps.width;
-        let scale_height = container.offsetHeight / cropperProps.height;
-        scale = Math.min    (scale_width, scale_height);
+        if (!file) {
+            return;
+        }
+
+        const context = canvas.getContext('2d');
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const image = new Image();
+            image.onload = () => {
+                canvas.height = cropperProps.height;
+                canvas.width = cropperProps.width;
+                context?.drawImage(
+                    image,
+                    cropperProps.x,
+                    cropperProps.y,
+                    cropperProps.width,
+                    cropperProps.height,
+                    0,
+                    0,
+                    cropperProps.width,
+                    cropperProps.height
+                );
+            };
+            if (e.target?.result) {
+                image.src = e.target.result as string;
+            }
+        };
+        reader.readAsDataURL(file);
     }
 </script>
 
-
-<div class="crop-container"
-     bind:this={container}
-     style="
-            {hideOverflow ? 'overflow: hidden;' : ''};
-        "
->
-    <img
-            class="crop-image"
-            src={src}
-            alt={ariaLabel}
-            style="
-                object-fit: none;
-                object-position: -{cropperProps.x}px -{cropperProps.y}px;
-                width: {cropperProps.width}px;
-                height: {cropperProps.height}px;
-                transform: scale({scale});
-                transform-origin: top left;
-            "
-    />
-</div>
+<canvas bind:this={canvas}
+        class={classes}
+        aria-label={ariaLabel}/>
 
 <style>
-    .crop-container {
-        position: relative;
-        border: 1px solid var(--line-color);
+    .default-cropped {
         border-radius: var(--border-radius);
-        width: 50rem;
-        height: 50rem;
-    }
-
-    .crop-image {
-        position: absolute;
-        left: 0;
-        top: 0;
+        border: 1px solid var(--line-color);
     }
 </style>
