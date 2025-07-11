@@ -35,6 +35,7 @@
     --icon-color: var(--secondary-color);
     --outline-hover-color: var(--secondary-color);
 
+    --cropper-overlay-transparent : rgba(215, 215, 215, 0.5);
 }
 
 :root.dark-theme {
@@ -51,6 +52,8 @@
     --line-color: var(--secondary-color);
     --icon-color: var(--primary-color-light);
     --outline-hover-color: white;
+
+    --cropper-overlay-transparent : rgba(80, 80, 80, 0.5);
 }
 
 .theme-transition * {
