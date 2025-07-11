@@ -26,7 +26,7 @@
     })();
 
     function isValidHTMLValues(): boolean {
-        return canvas && cropperWrapper;
+        return !!canvas && !!cropperWrapper;
     }
 
     function calculateRelativeCropperOffset(canvas: number, wrapper: number): number {
