@@ -56,7 +56,7 @@
 
 <canvas bind:this={canvas}
         class={classes}
-        aria-label={ariaLabel}/>
+        aria-label={ariaLabel}></canvas>
 
 <style>
     .default-cropped {

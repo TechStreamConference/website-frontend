@@ -80,7 +80,7 @@
     <canvas
             bind:this={canvas}
             class="cropper-canvas"
-    />
+    ></canvas>
     <div
             class="cropper-background-overlay"
             style="
@@ -89,7 +89,7 @@
                 right: 0;
                 height: {heightPercent}px;
             "
-    />
+    ></div>
     <div
             class="cropper-background-overlay"
             style="
@@ -98,7 +98,7 @@
                 right: 0;
                 height: {heightPercent}px;
             "
-    />
+    ></div>
     <div
             class="cropper-background-overlay"
             style="
@@ -108,7 +108,7 @@
                 width: {widthPercent}px;
             "
 
-    />
+    ></div>
     <div
             class="cropper-background-overlay"
             style="
@@ -116,7 +116,7 @@
                 right: 0;
                 bottom: {heightPercent}px;
                 width: {widthPercent}px;"
-    />
+    ></div>
     <div
             class="cropper-overlay"
             style="
@@ -126,10 +126,10 @@
                 right: {widthPercent}px;
             "
     >
-        <div class="cropper-overlay-inlay inlay-horizontal inlay-top"/>
-        <div class="cropper-overlay-inlay inlay-horizontal inlay-bottom"/>
-        <div class="cropper-overlay-inlay inlay-vertical inlay-left"/>
-        <div class="cropper-overlay-inlay inlay-vertical inlay-right"/>
+        <div class="cropper-overlay-inlay inlay-horizontal inlay-top"></div>
+        <div class="cropper-overlay-inlay inlay-horizontal inlay-bottom"></div>
+        <div class="cropper-overlay-inlay inlay-vertical inlay-left"></div>
+        <div class="cropper-overlay-inlay inlay-vertical inlay-right"></div>
 
 
     </div>
