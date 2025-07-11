@@ -5,6 +5,7 @@
     export let file: Blob;
     export let croppingOffset: number = 100;
     export let cropperProps: CropperProps;
+    export let classes: string = "";
 
     let canvas: HTMLCanvasElement;
     let cropperWrapper: HTMLDivElement;
@@ -248,7 +249,7 @@
 
 <div
         bind:this={cropperWrapper}
-        class="cropper-wrapper"
+        class="cropper-wrapper {classes}"
         on:mousedown={handleMouseDown}
         on:mouseup={handleMouseUp}
         on:mousemove={handleMouseMove}
