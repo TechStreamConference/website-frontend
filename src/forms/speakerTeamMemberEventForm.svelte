@@ -33,6 +33,13 @@
     let popup: BasePopup;
     let cropper: Cropper;
 
+    export function getNewImage() : Blob | null {
+        return newImage;
+    }
+
+    export function getCropperProps() : CropperProps {
+        return cropperProps;
+    }
 
     $: if (data.event.photo) {
         resetImage();
