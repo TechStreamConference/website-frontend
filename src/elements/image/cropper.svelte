@@ -3,7 +3,7 @@
     import {onMount} from "svelte";
 
     export let file: Blob;
-    export let croppingOffset: number = 100;
+    export let croppingOffsetPercent: number = 0.2;
     export let cropperProps: CropperProps;
     export let classes: string = "";
 
@@ -24,40 +24,31 @@
     let originalHeight: number = 0;
     let currentZoomScale: number = 1.0;
 
+    let widthOverlayOffset: number = 0;
+    let heightOverlayOffset: number = 0;
+
     onMount(() => {
+        const resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                const width = cropperWrapper.scrollWidth;
+                const croppingAreaX = width / (1.0 + 2 * croppingOffsetPercent);
+                widthOverlayOffset = (width - croppingAreaX) / 2;
+
+                const height = cropperWrapper.scrollHeight;
+                const croppingAreaY = height / (1.0 + 2 * croppingOffsetPercent);
+                heightOverlayOffset = (height - croppingAreaY) / 2;
+            }
+        });
+
+        resizeObserver.observe(cropperWrapper);
         window.addEventListener('keydown', handleKeyDown);
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
+            resizeObserver.disconnect();
         };
     });
 
-
-    // relative cropping offset
-    let heightPercent: number = 0;
-    $: heightPercent = (() => {
-        if (!isValidHTMLValues()) {
-            return 0;
-        }
-        return calculateRelativeCropperOffset(canvas.height, cropperWrapper.scrollHeight);
-    })();
-
-    let widthPercent: number = 0;
-    $: widthPercent = (() => {
-        if (!isValidHTMLValues()) {
-            return 0;
-        }
-        return calculateRelativeCropperOffset(canvas.width, cropperWrapper.scrollWidth);
-    })();
-
-    function isValidHTMLValues(): boolean {
-        return !!canvas && !!cropperWrapper;
-    }
-
-    function calculateRelativeCropperOffset(canvas: number, wrapper: number): number {
-        const percent = croppingOffset / canvas;
-        return wrapper * percent;
-    }
 
     // crop & clamp
     $: if (!cropped && file) {
@@ -78,18 +69,20 @@
         reader.onload = (e) => {
             const image = new Image();
             image.onload = () => {
-                canvas.height = cropperProps.height + 2 * croppingOffset;
-                canvas.width = cropperProps.width + 2 * croppingOffset;
+                const offsetX = cropperProps.width * croppingOffsetPercent;
+                const offsetY = cropperProps.height * croppingOffsetPercent;
+                canvas.width = cropperProps.width + 2.0 * offsetX;
+                canvas.height = cropperProps.height + 2.0 * offsetY;
                 context?.drawImage(
                     image,
-                    cropperProps.x - croppingOffset,
-                    cropperProps.y - croppingOffset,
-                    cropperProps.width + 2 * croppingOffset,
-                    cropperProps.height + 2 * croppingOffset,
+                    cropperProps.x - offsetX,
+                    cropperProps.y - offsetY,
+                    canvas.width,
+                    canvas.height,
                     0,
                     0,
-                    cropperProps.width + 2 * croppingOffset,
-                    cropperProps.height + 2 * croppingOffset,
+                    canvas.width,
+                    canvas.height,
                 );
             };
             if (e.target?.result) {
@@ -97,6 +90,7 @@
             }
         };
         reader.readAsDataURL(file);
+
     }
 
     // mouse input
@@ -266,7 +260,7 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                height: {heightPercent}px;
+                height: {heightOverlayOffset}px;
             "
     ></div>
     <div
@@ -275,34 +269,34 @@
                 bottom: 0;
                 left: 0;
                 right: 0;
-                height: {heightPercent}px;
+                height: {heightOverlayOffset}px;
             "
     ></div>
     <div
             class="cropper-background-overlay"
             style="
-                top: {heightPercent}px;
+                top: {heightOverlayOffset}px;
                 left: 0;
-                bottom: {heightPercent}px;
-                width: {widthPercent}px;
+                bottom: {heightOverlayOffset}px;
+                width: {widthOverlayOffset}px;
             "
 
     ></div>
     <div
             class="cropper-background-overlay"
             style="
-                top: {heightPercent}px;
+                top: {heightOverlayOffset}px;
                 right: 0;
-                bottom: {heightPercent}px;
-                width: {widthPercent}px;"
+                bottom: {heightOverlayOffset}px;
+                width: {widthOverlayOffset}px;"
     ></div>
     <div
             class="cropper-overlay"
             style="
-                top: {heightPercent}px;
-                left: {widthPercent}px;
-                bottom: {heightPercent}px;
-                right: {widthPercent}px;
+                top: {heightOverlayOffset}px;
+                left: {widthOverlayOffset}px;
+                bottom: {heightOverlayOffset}px;
+                right: {widthOverlayOffset}px;
             "
     >
         <div class="cropper-overlay-inlay inlay-horizontal inlay-top"></div>
