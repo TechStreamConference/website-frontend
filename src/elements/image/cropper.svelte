@@ -49,6 +49,10 @@
         };
     });
 
+    export function reset(): void {
+        currentZoomScale = 1.0;
+        cropped = false;
+    }
 
     // crop & clamp
     $: if (!cropped && file) {
