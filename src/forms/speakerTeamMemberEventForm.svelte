@@ -25,8 +25,8 @@
     const DEFAULT_CROPPER_PROPS: CropperProps = {
         x: 0,
         y: 0,
-        height: 300,
-        width: 300,
+        height: 350,
+        width: 350,
     };
     export let cropperProps: CropperProps = DEFAULT_CROPPER_PROPS;
     let newImage: Blob | null = null;
