@@ -2,7 +2,7 @@
     import type {CropperProps} from "types/cropperTypes";
     import {onMount} from "svelte";
 
-    export let file: Blob;
+    export let file: Blob | null;
     export let croppingOffsetPercent: number = 0.2;
     export let cropperProps: CropperProps;
     export let classes: string = "";
@@ -60,7 +60,6 @@
 
     function crop(): void {
         if (!file) {
-            console.log("No file to crop");
             return;
         }
 

@@ -3,7 +3,7 @@
     import {onMount} from 'svelte';
 
     export let cropperProps: CropperProps;
-    export let file: Blob;
+    export let file: Blob | null;
     export let ariaLabel: string;
     export let classes: string = '';
 
