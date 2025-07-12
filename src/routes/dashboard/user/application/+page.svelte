@@ -4,7 +4,6 @@
     import * as SocialHelper from 'pageHelper/speakerTeamMemberSocials';
     import * as EventHelper from 'pageHelper/speakerTeamMemberEvent';
 
-    import type {NewImage} from 'pageHelper/speakerTeamMemberEvent';
     import type {LoadDashboard, LoadUserApplication} from 'types/dashboardLoadTypes';
     import type {SetCreateSocialMediaLink, SetSpeakerTeamMemberEvent} from 'types/dashboardSetTypes';
     import type {CropperProps} from "types/cropperTypes";
@@ -50,7 +49,7 @@
         data.data.socials.socials = data.data.socials.socials;
     }
 
-    function validate(event: SetSpeakerTeamMemberEvent, image: NewImage): boolean {
+    function validate(event: SetSpeakerTeamMemberEvent, image: Blob | null): boolean {
         if (!data.data) {
             return false;
         }
