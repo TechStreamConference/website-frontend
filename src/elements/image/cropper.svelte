@@ -8,7 +8,7 @@
     export let classes: string = "";
 
     let canvas: HTMLCanvasElement;
-    let cropperWrapper: HTMLDivElement;
+    let cropperWrapper: HTMLElement;
     let cropped: boolean = false;
 
     let isDragging: boolean = false;
@@ -241,7 +241,7 @@
 
 </script>
 
-<div
+<figure
         bind:this={cropperWrapper}
         class="cropper-wrapper {classes}"
         on:mousedown={handleMouseDown}
@@ -249,6 +249,9 @@
         on:mousemove={handleMouseMove}
         on:mouseleave={handleMouseUp}
         on:wheel={handleWheel}
+        contenteditable={true}
+        aria-label="Image cropper. Use mouse to drag and scroll wheel to zoom. Keyboard controls: W,A,S,D keys to move, Q to zoom out, E to zoom in"
+        role="application"
 >
     <canvas
             bind:this={canvas}
@@ -306,7 +309,7 @@
 
 
     </div>
-</div>
+</figure>
 
 <style>
     .cropper-wrapper {
