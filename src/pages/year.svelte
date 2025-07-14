@@ -286,6 +286,7 @@
 <style>
     .year-header {
         width: 100%;
+        position: relative;
         background-image: url('/background.png');
         background-position: center;
         background-size: cover;
@@ -293,7 +294,24 @@
         height: fit-content;
     }
 
+    .year-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at center,
+            rgba(255, 255, 255, 0.02) 30%,
+            rgba(0, 0, 0, 0.2) 100%
+        );
+        pointer-events: none;
+    }
+
     .year-header-content {
+        position: relative;
+        z-index: 1;
         justify-content: center;
         margin: var(--8x-margin) var(--4x-margin);
         display: flex;
