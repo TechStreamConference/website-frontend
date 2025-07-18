@@ -33,7 +33,7 @@ export async function load({ fetch }: {
         `Unerwartete Daten für die Freigabedaten der Social Media Link.`,
     );
 
-    const speakerPromise = collectCanRejectSpeakerAsync(speakerParsePromise);
+    const speakerPromise = collectCanRejectSpeakerAsync(fetch, speakerParsePromise);
 
     return {
         speaker:     await speakerPromise,
@@ -43,7 +43,7 @@ export async function load({ fetch }: {
     };
 }
 
-async function collectCanRejectSpeakerAsync(speakerParsePromise: Promise<DashboardAllApprovalSpeakerTeamMembers>): Promise<DashboardAllApprovalSpeakerTeamMembers> {
+async function collectCanRejectSpeakerAsync(fetch: typeof globalThis.fetch, speakerParsePromise: Promise<DashboardAllApprovalSpeakerTeamMembers>): Promise<DashboardAllApprovalSpeakerTeamMembers> {
     const speaker = await speakerParsePromise;
 
     const promises: Promise<Response>[] = [];
