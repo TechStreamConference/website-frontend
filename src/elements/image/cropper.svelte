@@ -126,8 +126,8 @@
         const deltaX = event.clientX - lastMouseX;
         const deltaY = event.clientY - lastMouseY;
 
-        const scaleX = canvas.width / cropperWrapper.scrollWidth;
-        const scaleY = canvas.height / cropperWrapper.scrollHeight;
+        const scaleX = canvas.width / cropperWrapper.scrollWidth / currentZoomScale;
+        const scaleY = canvas.height / cropperWrapper.scrollHeight / currentZoomScale;
 
         cropperProps = {
             ...cropperProps,
@@ -180,8 +180,8 @@
 
     // keyboard input
     function handleKeyMove(deltaX: number, deltaY: number): void {
-        const scaleX = canvas.width / cropperWrapper.scrollWidth;
-        const scaleY = canvas.height / cropperWrapper.scrollHeight;
+        const scaleX = canvas.width / cropperWrapper.scrollWidth / currentZoomScale;
+        const scaleY = canvas.height / cropperWrapper.scrollHeight / currentZoomScale;
 
         cropperProps = {
             ...cropperProps,
