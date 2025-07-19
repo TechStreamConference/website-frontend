@@ -123,9 +123,9 @@
                 type="file"
                 fileAccept=".jpg, .jpeg, .png"
                 on:input={(event) => {
-				setUnsavedChanges();
-				changeImage(event);
-			}}
+				    setUnsavedChanges();
+				    changeImage(event);
+			    }}
         />
         <Paragraph classes="paragraph-gray">Lade hier dein Profilbild für deine Bewerbung hoch. Wenn deine
             Speaker-Bewerbung und später dein
