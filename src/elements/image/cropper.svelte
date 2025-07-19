@@ -1,6 +1,7 @@
 <script lang="ts">
     import type {CropperProps} from "types/cropperTypes";
     import {onMount} from "svelte";
+    import {setPreventAutoCollapsePopup, resetPreventAutoCollapsePopupWithDelay} from "stores/preventAutoCollapsePopupStore";
 
     export let file: Blob | null;
     export let croppingOffsetPercent: number = 0.2;
@@ -42,9 +43,13 @@
 
         resizeObserver.observe(cropperWrapper);
         window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('mouseup', handleMouseUp);
+        window.addEventListener('mousemove', handleMouseMove);
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('mouseup', handleMouseUp);
+            window.removeEventListener('mousemove', handleMouseMove);
             resizeObserver.disconnect();
         };
     });
@@ -102,12 +107,15 @@
             return;
         }
         isDragging = true;
+        setPreventAutoCollapsePopup();
+
         lastMouseX = event.clientX;
         lastMouseY = event.clientY;
     }
 
     function handleMouseUp(): void {
         isDragging = false;
+        resetPreventAutoCollapsePopupWithDelay(5);
     }
 
     function handleMouseMove(event: MouseEvent): void {
@@ -248,9 +256,6 @@
         bind:this={cropperWrapper}
         class="cropper-wrapper {classes}"
         on:mousedown={handleMouseDown}
-        on:mouseup={handleMouseUp}
-        on:mousemove={handleMouseMove}
-        on:mouseleave={handleMouseUp}
         on:wheel={handleWheel}
         contenteditable={true}
         aria-label="Image cropper. Use mouse to drag and scroll wheel to zoom. Keyboard controls: W,A,S,D keys to move, Q to zoom out, E to zoom in"
