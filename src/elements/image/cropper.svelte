@@ -260,6 +260,7 @@
         contenteditable={true}
         aria-label="Image cropper. Use mouse to drag and scroll wheel to zoom. Keyboard controls: W,A,S,D keys to move, Q to zoom out, E to zoom in"
         role="application"
+        style={isDragging? "cursor: grabbing;" : "cursor: grab;"}
 >
     <canvas
             bind:this={canvas}
