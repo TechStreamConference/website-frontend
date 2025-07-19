@@ -1,16 +1,19 @@
 <script lang="ts">
     import type {CropperProps} from "types/cropperTypes";
     import {onMount} from "svelte";
-    import {setPreventAutoCollapsePopup, resetPreventAutoCollapsePopupWithDelay} from "stores/preventAutoCollapsePopupStore";
+    import {
+        setPreventAutoCollapsePopup,
+        resetPreventAutoCollapsePopupWithDelay
+    } from "stores/preventAutoCollapsePopupStore";
 
     export let file: Blob | null;
+    let previousFile: Blob | null = null;
     export let croppingOffsetPercent: number = 0.2;
     export let cropperProps: CropperProps;
     export let classes: string = "";
 
     let canvas: HTMLCanvasElement;
     let cropperWrapper: HTMLElement;
-    let cropped: boolean = false;
 
     let isDragging: boolean = false;
     let lastMouseX: number = 0;
@@ -19,7 +22,7 @@
     const MOVEMENT_SPEED: number = 10;
     const ZOOM_SPEED: number = 0.1;
     const MIN_ZOOM_SCALE: number = 0.1;
-    const MAX_ZOOM_SCALE: number = 5.0;
+    let MAX_ZOOM_SCALE: number = 5.0; // this gets set in the initialDraw() to make sure one cannot scale smaller than the Viewport is.
 
     let originalWidth: number = 0;
     let originalHeight: number = 0;
@@ -28,6 +31,9 @@
     let widthOverlayOffset: number = 0;
     let heightOverlayOffset: number = 0;
 
+    let image: Image | null = null;
+
+    // initial & update
     onMount(() => {
         const resizeObserver = new ResizeObserver((entries) => {
             for (const entry of entries) {
@@ -54,20 +60,18 @@
         };
     });
 
-    export function reset(): void {
-        currentZoomScale = 1.0;
-        cropped = false;
+
+    $: if (file != previousFile) {
+        previousFile = file;
+        if (file != null) {
+            originalWidth = cropperProps.width;
+            originalHeight = cropperProps.height;
+            initialDraw();
+            crop();
+        }
     }
 
-    // crop & clamp
-    $: if (!cropped && file) {
-        originalWidth = cropperProps.width;
-        originalHeight = cropperProps.height;
-        crop();
-        cropped = true;
-    }
-
-    function crop(): void {
+    function initialDraw(): void {
         if (!file) {
             return;
         }
@@ -75,12 +79,21 @@
         const context = canvas.getContext('2d');
         const reader = new FileReader();
         reader.onload = (e) => {
-            const image = new Image();
+            image = new Image();
             image.onload = () => {
+                setMaxScale();
+                currentZoomScale = MAX_ZOOM_SCALE;
+                cropperProps.width *= MAX_ZOOM_SCALE;
+                cropperProps.height *= MAX_ZOOM_SCALE;
+
                 const offsetX = cropperProps.width * croppingOffsetPercent;
                 const offsetY = cropperProps.height * croppingOffsetPercent;
+                cropperProps.x = (image.width - cropperProps.width) / 2;
+                cropperProps.y = (image.height - cropperProps.height) / 2;
                 canvas.width = cropperProps.width + 2.0 * offsetX;
                 canvas.height = cropperProps.height + 2.0 * offsetY;
+
+
                 context?.drawImage(
                     image,
                     cropperProps.x - offsetX,
@@ -98,7 +111,63 @@
             }
         };
         reader.readAsDataURL(file);
+    }
 
+    function updateDraw(): void {
+        clamp();
+        crop();
+    }
+
+    // crop & clamp
+    function setMaxScale(): void {
+        if (!image) {
+            return;
+        }
+        const maxScaleX = image.width / originalWidth;
+        const maxScaleY = image.height / originalHeight;
+        MAX_ZOOM_SCALE = Math.min(maxScaleX, maxScaleY);
+    }
+
+    function clamp(): void {
+        if (!image) {
+            return;
+        }
+        if (cropperProps.x < 0) {
+            cropperProps.x = 0;
+        }
+        if (cropperProps.y < 0) {
+            cropperProps.y = 0;
+        }
+        if (cropperProps.x + cropperProps.width > image.width) {
+            cropperProps.x = image.width - cropperProps.width;
+        }
+        if (cropperProps.y + cropperProps.height > image.height) {
+            cropperProps.y = image.height - cropperProps.height;
+        }
+    }
+
+    function crop(): void {
+        const context = canvas.getContext('2d');
+        if (!context || !image) return;
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        const offsetX = cropperProps.width * croppingOffsetPercent;
+        const offsetY = cropperProps.height * croppingOffsetPercent;
+        canvas.width = cropperProps.width + 2.0 * offsetX;
+        canvas.height = cropperProps.height + 2.0 * offsetY;
+
+        context.drawImage(
+            image,
+            cropperProps.x - offsetX,
+            cropperProps.y - offsetY,
+            canvas.width,
+            canvas.height,
+            0,
+            0,
+            canvas.width,
+            canvas.height,
+        );
     }
 
     // mouse input
@@ -123,33 +192,33 @@
             return;
         }
 
-        const deltaX = event.clientX - lastMouseX;
-        const deltaY = event.clientY - lastMouseY;
-
-        const scaleX = canvas.width / cropperWrapper.scrollWidth / currentZoomScale;
-        const scaleY = canvas.height / cropperWrapper.scrollHeight / currentZoomScale;
-
-        cropperProps = {
-            ...cropperProps,
-            x: cropperProps.x - deltaX / scaleX,
-            y: cropperProps.y - deltaY / scaleY,
-        }
-
+        const mouseDeltaX = (event.clientX - lastMouseX) * currentZoomScale;
+        const mouseDeltaY = (event.clientY - lastMouseY) * currentZoomScale;
         lastMouseX = event.clientX;
         lastMouseY = event.clientY;
 
-        crop();
+        cropperProps = {
+            ...cropperProps,
+            x: cropperProps.x - mouseDeltaX,
+            y: cropperProps.y - mouseDeltaY,
+        }
+
+        updateDraw();
     }
 
     function handleWheel(event: WheelEvent): void {
         event.preventDefault();
-
-        const zoomFactor = event.deltaY > 0 ? 1.0 + ZOOM_SPEED : 1.0 - ZOOM_SPEED;
-        const newScale = currentZoomScale * zoomFactor;
-
-        if (newScale < MIN_ZOOM_SCALE || newScale > MAX_ZOOM_SCALE) {
-            return;
-        }
+        currentZoomScale = (() => {
+            const zoomFactor = event.deltaY > 0 ? 1.0 + ZOOM_SPEED : 1.0 - ZOOM_SPEED;
+            const scale = currentZoomScale * zoomFactor;
+            if (scale <= MIN_ZOOM_SCALE) {
+                return MIN_ZOOM_SCALE;
+            }
+            if (scale >= MAX_ZOOM_SCALE) {
+                return MAX_ZOOM_SCALE;
+            }
+            return scale;
+        })();
 
         const rect = canvas.getBoundingClientRect();
         const mouseX = event.clientX - rect.left;
@@ -158,8 +227,8 @@
         const relativeX = mouseX / canvas.width;
         const relativeY = mouseY / canvas.height;
 
-        const newWidth = originalWidth * newScale;
-        const newHeight = originalHeight * newScale;
+        const newWidth = originalWidth * currentZoomScale;
+        const newHeight = originalHeight * currentZoomScale;
 
         const widthDiff = newWidth - cropperProps.width;
         const heightDiff = newHeight - cropperProps.height;
@@ -174,53 +243,46 @@
             height: newHeight,
         }
 
-        currentZoomScale = newScale;
-        crop();
+        updateDraw();
     }
 
     // keyboard input
     function handleKeyMove(deltaX: number, deltaY: number): void {
-        const scaleX = canvas.width / cropperWrapper.scrollWidth / currentZoomScale;
-        const scaleY = canvas.height / cropperWrapper.scrollHeight / currentZoomScale;
+        const keyDeltaX = deltaX * currentZoomScale;
+        const keyDeltaY = deltaY * currentZoomScale;
 
         cropperProps = {
             ...cropperProps,
-            x: cropperProps.x - deltaX / scaleX,
-            y: cropperProps.y - deltaY / scaleY,
+            x: cropperProps.x - keyDeltaX,
+            y: cropperProps.y - keyDeltaY,
         }
 
-        crop();
+        updateDraw();
     }
 
     function handleKeyZoom(zoomIn: boolean): void {
-        const zoomFactor = zoomIn ? 1.0 + ZOOM_SPEED : 1.0 - ZOOM_SPEED;
-        const newScale = currentZoomScale * zoomFactor;
+        currentZoomScale = (() => {
+            const zoomFactor = zoomIn ? 1.0 + ZOOM_SPEED : 1.0 - ZOOM_SPEED;
+            const scale = currentZoomScale * zoomFactor;
+            if (scale <= MIN_ZOOM_SCALE) {
+                return MIN_ZOOM_SCALE;
+            }
+            if (scale >= MAX_ZOOM_SCALE) {
+                return MAX_ZOOM_SCALE;
+            }
+            return scale;
+        })();
 
-        if (newScale < MIN_ZOOM_SCALE || newScale > MAX_ZOOM_SCALE) {
-            return;
-        }
-
-        const newWidth = originalWidth * newScale;
-        const newHeight = originalHeight * newScale;
-
-        const relativeX = 0.5;
-        const relativeY = 0.5;
-
-        const widthDiff = newWidth - cropperProps.width;
-        const heightDiff = newHeight - cropperProps.height;
-        const xAdjust = widthDiff * relativeX;
-        const yAdjust = heightDiff * relativeY;
+        const newWidth = originalWidth * currentZoomScale;
+        const newHeight = originalHeight * currentZoomScale;
 
         cropperProps = {
             ...cropperProps,
             width: newWidth,
             height: newHeight,
-            x: cropperProps.x - xAdjust,
-            y: cropperProps.y - yAdjust,
-        };
+        }
 
-        currentZoomScale = newScale;
-        crop();
+        updateDraw();
     }
 
     function handleKeyDown(event: KeyboardEvent): void {
