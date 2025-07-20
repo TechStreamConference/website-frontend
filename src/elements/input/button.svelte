@@ -1,37 +1,37 @@
 <script lang="ts">
-    import { typeWorkaround } from 'types/workaround';
+    import {typeWorkaround} from 'types/workaround';
 
     export let ariaLabel: string;
 
     export let classes: string = '';
-    export let type: string    = 'button';
+    export let type: string = 'button';
 
-    export let fontSize: 'small-text' | 'medium-text' | 'large-text'         = 'medium-text';
+    export let fontSize: 'small-text' | 'medium-text' | 'large-text' = 'medium-text';
     export let buttonSize: 'small-button' | 'medium-button' | 'large-button' = 'medium-button';
 </script>
 
 <button
-      class="hover-move {classes} {fontSize} {buttonSize}"
-      use:typeWorkaround={type}
-      on:click
-      aria-label={ariaLabel}
+        class="hover-move {classes} {fontSize} {buttonSize}"
+        use:typeWorkaround={type}
+        on:click
+        aria-label={ariaLabel}
 >
     <span class="normal-font">
-        <slot />
+        <slot/>
     </span>
 </button>
 
 <style>
     button {
         background-color: var(--primary-color-light);
-        border:           none;
-        border-radius:    var(--border-radius);
-        justify-self:     center;
+        border: none;
+        border-radius: var(--border-radius);
+        justify-self: center;
     }
 
     span {
         text-align: var(--text-align);
-        color:      var(--white-color);
+        color: var(--white-color);
     }
 
     .small-text {

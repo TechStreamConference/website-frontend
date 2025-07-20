@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { saveCallback } from 'stores/saveCallback';
-    import { resetUnsavedChanges } from 'stores/saved';
+    import {saveCallback} from 'stores/saveCallback';
+    import {resetUnsavedChanges} from 'stores/saved';
 
     import Button from 'elements/input/button.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
@@ -63,8 +63,8 @@
         </Button>
         {#if saveButton}
             <Button
-                  on:click={saveAsync}
-                  ariaLabel="Klicke hier, um die Änderungen zu speichern und die Seite zu verlassen"
+                    on:click={saveAsync}
+                    ariaLabel="Klicke hier, um die Änderungen zu speichern und die Seite zu verlassen"
             >
                 Speichern und Verlassen
             </Button>
@@ -78,8 +78,8 @@
 
 <style>
     .unsaved-changes-button-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 </style>

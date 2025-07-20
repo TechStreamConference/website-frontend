@@ -3,7 +3,7 @@
 </script>
 
 <ul class={classes}>
-    <slot />
+    <slot/>
 </ul>
 
 <style>

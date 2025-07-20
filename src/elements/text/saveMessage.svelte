@@ -1,8 +1,8 @@
 <script lang="ts">
     import Message from './message.svelte';
-    import { isSuccessType, SaveMessageType } from 'types/saveMessageType';
+    import {isSuccessType, SaveMessageType} from 'types/saveMessageType';
 
-    let type                 = SaveMessageType.None;
+    let type = SaveMessageType.None;
     let timer: number | null = null;
 
     export function setSaveMessage(value: SaveMessageType): void {
@@ -21,21 +21,21 @@
 
     function reset(): void {
         timer = null;
-        type  = SaveMessageType.None;
+        type = SaveMessageType.None;
     }
 </script>
 
 {#if type === SaveMessageType.Save}
     <Message color="success"
-             message="Gespeichert" />
+             message="Gespeichert"/>
 {:else if type === SaveMessageType.Approved}
     <Message color="success"
-             message="Freigegeben" />
+             message="Freigegeben"/>
 {:else if type === SaveMessageType.Delete}
     <Message color="success"
-             message="Gelöscht" />
+             message="Gelöscht"/>
 {:else if type === SaveMessageType.Error}
-    <Message message="Fehler beim Speichern." />
+    <Message message="Fehler beim Speichern."/>
 {:else if type === SaveMessageType.DeleteError}
-    <Message message="Fehler beim Löschen." />
+    <Message message="Fehler beim Löschen."/>
 {/if}

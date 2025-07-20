@@ -1,10 +1,10 @@
-import { apiUrl } from 'helper/links';
-import { z } from 'zod';
-import { parseProvidedJsonAsync } from 'helper/parseJson';
+import {apiUrl} from 'helper/links';
+import {z} from 'zod';
+import {parseProvidedJsonAsync} from 'helper/parseJson';
 
 const existsResponseDataScheme = z.object({
-                                              exists: z.boolean(),
-                                          });
+    exists: z.boolean(),
+});
 
 export async function onUsernameChangedAsync(username: string, fetch: typeof globalThis.fetch): Promise<string | undefined> {
     const trimmed: string = username.trim();

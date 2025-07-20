@@ -22,6 +22,7 @@
         font-style: var(--normal-font-style);
         color: var(--white-color);
     }
+
     .general-video-wrapper {
         position: relative;
         width: 100%;

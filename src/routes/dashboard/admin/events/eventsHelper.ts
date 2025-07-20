@@ -15,27 +15,29 @@ function trimOrNull(entry: string): string | null {
 }
 
 export function convertSaveEventData(data: DashboardEvent): SetAdminEvent {
+    // @formatter:off
     return {
-        id: data.id,
-        title: data.title.trim(),
-        subtitle: data.title.trim(),
-        start_date: data.start_date,
-        end_date: data.end_date,
-        discord_url: trimOrNull(data.discord_url),
-        twitch_url: trimOrNull(data.twitch_url),
-        presskit_url: trimOrNull(data.presskit_url),
-        youtube_channel_url: trimOrNull(data.youtube_channel_url),
-        trailer_url: trimOrNull(data.trailer_url),
-        trailer_poster_url: trimOrNull(data.trailer_poster_url),
+        id:                    data.id,
+        title:                 data.title.trim(),
+        subtitle:              data.title.trim(),
+        start_date:            data.start_date,
+        end_date:              data.end_date,
+        discord_url:           trimOrNull(data.discord_url),
+        twitch_url:            trimOrNull(data.twitch_url),
+        presskit_url:          trimOrNull(data.presskit_url),
+        youtube_channel_url:   trimOrNull(data.youtube_channel_url),
+        trailer_url:           trimOrNull(data.trailer_url),
+        trailer_poster_url:    trimOrNull(data.trailer_poster_url),
         trailer_subtitles_url: trimOrNull(data.trailer_subtitles_url),
-        description_headline: data.description_headline.trim(),
-        description: data.description.trim(),
+        description_headline:  data.description_headline.trim(),
+        description:           data.description.trim(),
         schedule_visible_from: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.schedule_visible_from)),
-        publish_date: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.publish_date)),
+        publish_date:          checkSQLTimeAndDate(convertTimeAndDateToSQL(data.publish_date)),
         call_for_papers_start: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.call_for_papers_start)),
-        call_for_papers_end: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.call_for_papers_end)),
-        frontpage_date: checkSQLTimeAndDate(convertTimeAndDateToSQL(data.frontpage_date)),
+        call_for_papers_end:   checkSQLTimeAndDate(convertTimeAndDateToSQL(data.call_for_papers_end)),
+        frontpage_date:        checkSQLTimeAndDate(convertTimeAndDateToSQL(data.frontpage_date)),
     };
+    // @formatter:on
 }
 
 export function convertSaveSpeakerData(allSpeaker: DashboardAllEventSpeaker | undefined): SetAllAdminEventSpeaker {

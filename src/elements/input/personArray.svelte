@@ -1,8 +1,8 @@
 <script lang="ts">
-    import type { DashboardAllPersons, DashboardPerson } from 'types/dashboardProvideTypes';
+    import type {DashboardAllPersons, DashboardPerson} from 'types/dashboardProvideTypes';
 
-    import { createEventDispatcher } from 'svelte';
-    import { imageUrl } from 'helper/links';
+    import {createEventDispatcher} from 'svelte';
+    import {imageUrl} from 'helper/links';
 
     import Label from 'elements/text/label.svelte';
     import Tag from 'elements/text/tag.svelte';
@@ -55,11 +55,11 @@
                 on:toggle={ (e) => { updateSelected(e.detail, person); }}>
             <Image classes="toggle-person-image"
                    alt="Profilbild von {person.name}"
-                   src={imageUrl(person.photo)} />
+                   src={imageUrl(person.photo)}/>
             <div slot="slotTrue"
                  class="toggle-person-entry">
                 <Icon color="green"
-                      type="CircleCheck" />
+                      type="CircleCheck"/>
                 <Tag text={person.name}
                      --tag-text-color={"var(--white-color)"}
                      --tag-background-color={"var(--primary-color-dark)"}
@@ -68,7 +68,7 @@
             <div slot="slotFalse"
                  class="toggle-person-entry">
                 <Icon color="red"
-                      type="CircleCross" />
+                      type="CircleCross"/>
                 <Tag text={person.name}
                      --tag-text-color="var(--text-color)"
                      --tag-background-color="#FFFFFF00"
@@ -79,35 +79,35 @@
 </div>
 <style>
     .toggle-person-wrapper {
-        display:         flex;
-        flex-direction:  row;
-        gap:             var(--full-gap);
-        flex-wrap:       wrap;
+        display: flex;
+        flex-direction: row;
+        gap: var(--full-gap);
+        flex-wrap: wrap;
         justify-content: center;
 
     }
 
     :global(.toggle-person-entry-wrapper) {
-        background:     none;
-        border:         none;
-        display:        flex;
+        background: none;
+        border: none;
+        display: flex;
         flex-direction: column;
-        gap:            var(--full-gap);
-        align-items:    center;
-        cursor:         pointer;
+        gap: var(--full-gap);
+        align-items: center;
+        cursor: pointer;
     }
 
     :global(.toggle-person-image) {
-        height:        22rem;
-        width:         auto;
-        border:        1px solid var(--primary-color-dark);
+        height: 22rem;
+        width: auto;
+        border: 1px solid var(--primary-color-dark);
         border-radius: var(--border-radius);
     }
 
     .toggle-person-entry {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        gap:            var(--full-gap);
-        align-items:    center;
+        gap: var(--full-gap);
+        align-items: center;
     }
 </style>

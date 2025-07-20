@@ -1,11 +1,11 @@
 <script lang="ts">
-    import type { Person, Talk } from 'types/provideTypes';
+    import type {Person, Talk} from 'types/provideTypes';
 
     import ScheduleEntry from './scheduleEntry.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
 
-    import { error } from '@sveltejs/kit';
-    import { formatDate } from 'helper/dates';
+    import {error} from '@sveltejs/kit';
+    import {formatDate} from 'helper/dates';
 
     export let speakers: Person[];
     export let schedule: Talk[];
@@ -37,7 +37,7 @@
             {#each schedule as talk}
                 <ScheduleEntry speaker={getSpeakerById(talk.speaker_id)}
                                {talk}
-                               {personPopupCallback} />
+                               {personPopupCallback}/>
             {/each}
         </div>
     </div>
@@ -49,16 +49,16 @@
     }
 
     :global(.schedule-element-sub-headline-schedule) {
-        border-bottom:  1px solid var(--text-color);
-        margin-bottom:  var(--2x-margin);
+        border-bottom: 1px solid var(--text-color);
+        margin-bottom: var(--2x-margin);
         padding-bottom: var(--quad-padding);
     }
 
     .schedule-element-day {
-        display:               grid;
+        display: grid;
         grid-template-columns: 16rem 1fr;
-        row-gap:               var(--2x-gap);
-        margin:                0 var(--2x-margin) var(--4x-margin);
+        row-gap: var(--2x-gap);
+        margin: 0 var(--2x-margin) var(--4x-margin);
     }
 
     @media (max-width: 600px) {

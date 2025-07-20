@@ -26,10 +26,10 @@
             </div>
             <TextLine>Falls sich hier länger nix tun sollte, melde dich gerne bei uns.</TextLine>
             <StyledLink
-                  text={MenuItem.imprint.name}
-                  href={MenuItem.imprint.url}
-                  title={MenuItem.imprint.description}
-                  newTab={false}
+                    text={MenuItem.imprint.name}
+                    href={MenuItem.imprint.url}
+                    title={MenuItem.imprint.description}
+                    newTab={false}
             />
         {:else if data.success}
             <div class="verify-email-text-wrapper">
@@ -37,10 +37,10 @@
                 <TextLine>Du kannst dich jetzt anmelden.</TextLine>
             </div>
             <StyledLink
-                  text={MenuItem.login.name}
-                  href={MenuItem.login.url}
-                  title={MenuItem.login.description}
-                  newTab={false}
+                    text={MenuItem.login.name}
+                    href={MenuItem.login.url}
+                    title={MenuItem.login.description}
+                    newTab={false}
             ></StyledLink>
         {:else}
             <div class="verify-email-text-wrapper">
@@ -48,10 +48,10 @@
                 <TextLine>Registriere dich bitte erneut, um eine neue Mail zu erhalten.</TextLine>
             </div>
             <StyledLink
-                  text={MenuItem.register.name}
-                  href={MenuItem.register.url}
-                  title={MenuItem.register.description}
-                  newTab={false}
+                    text={MenuItem.register.name}
+                    href={MenuItem.register.url}
+                    title={MenuItem.register.description}
+                    newTab={false}
             />
         {/if}
     </div>
@@ -59,17 +59,17 @@
 
 <style>
     .verify-email-content-wrapper {
-        max-width:      150rem;
-        align-self:     center;
-        display:        flex;
+        max-width: 150rem;
+        align-self: center;
+        display: flex;
         flex-direction: column;
-        align-items:    center;
-        gap:            var(--8x-gap);
+        align-items: center;
+        gap: var(--8x-gap);
     }
 
     .verify-email-text-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        align-items:    center;
+        align-items: center;
     }
 </style>

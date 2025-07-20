@@ -2,18 +2,18 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/dashboardItems';
 
-    import type { LoadAdminEvents, LoadDashboard } from 'types/dashboardLoadTypes';
-    import type { DashboardAdminVdoLink, DashboardAllEventSpeaker, DashboardEvent } from 'types/dashboardProvideTypes';
+    import type {LoadAdminEvents, LoadDashboard} from 'types/dashboardLoadTypes';
+    import type {DashboardAdminVdoLink, DashboardAllEventSpeaker, DashboardEvent} from 'types/dashboardProvideTypes';
 
-    import { dashboardAdminVdoLinkScheme } from 'types/dashboardProvideTypes';
-    import { onMount } from 'svelte';
-    import { loadSpeaker } from './eventsHelper';
-    import { convertTimeAndDateToHTML } from 'helper/dates';
-    import { getElementByTitle } from 'helper/basic';
-    import { apiUrl } from 'helper/links';
-    import { trySaveDataAsyncOutReset } from 'helper/trySaveData.js';
-    import { parseProvidedJsonAsync } from 'helper/parseJson';
-    import { SaveMessageType } from 'types/saveMessageType';
+    import {dashboardAdminVdoLinkScheme} from 'types/dashboardProvideTypes';
+    import {onMount} from 'svelte';
+    import {loadSpeaker} from './eventsHelper';
+    import {convertTimeAndDateToHTML} from 'helper/dates';
+    import {getElementByTitle} from 'helper/basic';
+    import {apiUrl} from 'helper/links';
+    import {trySaveDataAsyncOutReset} from 'helper/trySaveData.js';
+    import {parseProvidedJsonAsync} from 'helper/parseJson';
+    import {SaveMessageType} from 'types/saveMessageType';
 
     import TextLine from 'elements/text/textLine.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -54,12 +54,12 @@
     });
 
     function updateDisplayed(title: string): void {
-        currentEvent                       = getElementByTitle(data.allEvents, title);
-        currentEvent.publish_date          = convertTimeAndDateToHTML(currentEvent.publish_date);
+        currentEvent = getElementByTitle(data.allEvents, title);
+        currentEvent.publish_date = convertTimeAndDateToHTML(currentEvent.publish_date);
         currentEvent.schedule_visible_from = convertTimeAndDateToHTML(currentEvent.schedule_visible_from);
         currentEvent.call_for_papers_start = convertTimeAndDateToHTML(currentEvent.call_for_papers_start);
-        currentEvent.call_for_papers_end   = convertTimeAndDateToHTML(currentEvent.call_for_papers_end);
-        currentEvent.frontpage_date        = convertTimeAndDateToHTML(currentEvent.frontpage_date);
+        currentEvent.call_for_papers_end = convertTimeAndDateToHTML(currentEvent.call_for_papers_end);
+        currentEvent.frontpage_date = convertTimeAndDateToHTML(currentEvent.frontpage_date);
 
         vdoLinks = undefined;
 
@@ -104,7 +104,7 @@
         }
         const response = await trySaveDataAsyncOutReset(
             fetch,
-            { base_url: baseUrl },
+            {base_url: baseUrl},
             `/dashboard/admin/video-room/event/${currentEvent.id}`,
             'POST',
         );
@@ -122,10 +122,10 @@
         );
 
         linkMessage.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
-        linkErrorQueue     = response.messages;
+        linkErrorQueue = response.messages;
         // number will stay undefined when no infos are provided
-        const numUsers     = response.infos['num_users'];
-        const numAccounts  = response.infos['num_accounts'];
+        const numUsers = response.infos['num_users'];
+        const numAccounts = response.infos['num_accounts'];
         const numMailsSent = response.infos['num_mails_sent'];
 
         if (numUsers !== numAccounts) {
@@ -143,43 +143,43 @@
               denyButtonText="Nein"
               acceptButtonText="Ja"
               denyCallback={() => {}}
-              acceptCallback={displayLinksAsync} />
+              acceptCallback={displayLinksAsync}/>
 <GeneralPopup bind:this={generateLinkPopup}
               headline="Links generieren?"
               text="Hinweis: Durch das generieren neuer Links werden die alten (kommunizierten) Links ungültig."
               denyButtonText="Nein"
               acceptButtonText="Ja"
               denyCallback={() => {}}
-              acceptCallback={genLinksAsync} />
+              acceptCallback={genLinksAsync}/>
 <GeneralPopup bind:this={sendLinkPopup}
               headline="Links versenden?"
               text="Hinweis: Alle Speaker werden benachrichtigt."
               denyButtonText="Nein"
               acceptButtonText="Ja"
               denyCallback={() => {}}
-              acceptCallback={sendLinksAsync} />
+              acceptCallback={sendLinksAsync}/>
 
 <Tabs classes="subpage-navigation-tabs"
       position="center"
       entries={Menu.admin}
-      entryName={MenuItem.adminEvents.name} />
+      entryName={MenuItem.adminEvents.name}/>
 <SectionDashboard classes="dashboard-admin-event-section standard-dashboard-section">
     {#if data.allEvents}
         <NavigationDropDown
-              id={'dashboard-admin-event-drop-down'}
-              data={data.allEvents.map(x => x.title)}
-              labelText="Aktuelles Event:"
-              on:navigated={ (e) => { updateDisplayed(e.detail); }}
-              bind:this={navigationDropDown}
+                id={'dashboard-admin-event-drop-down'}
+                data={data.allEvents.map(x => x.title)}
+                labelText="Aktuelles Event:"
+                on:navigated={ (e) => { updateDisplayed(e.detail); }}
+                bind:this={navigationDropDown}
         />
         {#if currentEvent}
             <AdminEventForm classes="dashboard-admin-event-form"
                             speakerArray={data.allSpeaker}
-                            event={currentEvent} />
+                            event={currentEvent}/>
             <div class="links-wrapper form-border">
                 <SubHeadline classes="white">Video Links</SubHeadline>
-                <SaveMessage bind:this={linkMessage} />
-                <MessageWrapper messages={linkErrorQueue} />
+                <SaveMessage bind:this={linkMessage}/>
+                <MessageWrapper messages={linkErrorQueue}/>
                 <div class="button-array">
                     <Button ariaLabel="Klicke hier, um vorhandene Links anzuzeigen"
                             on:click={ () => { displayLinkPopup.show(""); } }>Links anzeigen
@@ -197,7 +197,7 @@
                        id="dashboard-admin-input-base-url"
                        bind:value={baseUrl}></Input>
                 <VdoGrid entries={vdoLinks}
-                         displayAdmin={true} />
+                         displayAdmin={true}/>
 
             </div>
         {:else}
@@ -218,15 +218,15 @@
     }
 
     .links-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        gap:            var(--full-gap);
-        align-items:    center;
+        gap: var(--full-gap);
+        align-items: center;
     }
 
     .button-array {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 </style>

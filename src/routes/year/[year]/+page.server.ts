@@ -1,12 +1,9 @@
-import type { LoadYear } from 'types/loadTypes';
-import { error } from '@sveltejs/kit';
+import type {LoadYear} from 'types/loadTypes';
+import {error} from '@sveltejs/kit';
 
-import { loadYearAsync } from 'pageHelper/year';
+import {loadYearAsync} from 'pageHelper/year';
 
-export async function load({
-                               fetch,
-                               params,
-                           }: {
+export async function load({fetch, params}: {
     fetch: typeof globalThis.fetch,
     params: {
         year: string

@@ -95,7 +95,7 @@
         const selected = talkDropDown.getSelected();
         if (typeof selected === 'string') {
             await loadNewGuests(selected);
-        } else{
+        } else {
             console.error('selected is no string by save');
         }
 
@@ -120,7 +120,7 @@
         const selected = talkDropDown.getSelected();
         if (typeof selected === 'string') {
             await loadNewGuests(selected);
-        } else{
+        } else {
             console.error('selected is no string by save');
         }
 

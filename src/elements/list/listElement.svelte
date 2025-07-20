@@ -3,12 +3,12 @@
 </script>
 
 <li class="normal-font {classes}">
-    <slot />
+    <slot/>
 </li>
 
 <style>
     li {
-        font-size:       var(--full-font-size);
+        font-size: var(--full-font-size);
         list-style-type: none;
     }
 

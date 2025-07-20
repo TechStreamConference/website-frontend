@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { type DashboardApprovalSocialMediaLink } from 'types/dashboardProvideTypes';
+    import {type DashboardApprovalSocialMediaLink} from 'types/dashboardProvideTypes';
 
-    import { setUnsavedChanges } from 'stores/saved';
-    import { createEventDispatcher } from 'svelte';
-    import { trySaveDataAsync } from 'helper/trySaveData';
-    import { SaveMessageType } from 'types/saveMessageType';
-    import { scrollToAnchor } from 'helper/scroll';
+    import {setUnsavedChanges} from 'stores/saved';
+    import {createEventDispatcher} from 'svelte';
+    import {trySaveDataAsync} from 'helper/trySaveData';
+    import {SaveMessageType} from 'types/saveMessageType';
+    import {scrollToAnchor} from 'helper/scroll';
 
     import TextLine from 'elements/text/textLine.svelte';
     import TextArea from 'elements/input/textArea.svelte';
@@ -40,9 +40,9 @@
             return;
         }
 
-        const toSave        = { message: media.requested_changes };
+        const toSave = {message: media.requested_changes};
         const route: string = `/dashboard/admin/approval/social-media-link/${media.id}/request-changes`;
-        const response      = await trySaveDataAsync(fetch, toSave, route, 'PUT');
+        const response = await trySaveDataAsync(fetch, toSave, route, 'PUT');
 
         message.setSaveMessage(response.success ? SaveMessageType.Save : SaveMessageType.Error);
         errorList = response.messages;
@@ -67,7 +67,7 @@
         }
 
         const route: string = `/dashboard/admin/approval/social-media-link/${media.id}`;
-        const response      = await trySaveDataAsync(fetch, [], route, 'PUT');
+        const response = await trySaveDataAsync(fetch, [], route, 'PUT');
 
         message.setSaveMessage(response.success ? SaveMessageType.Approved : SaveMessageType.Error);
         errorList = response.messages;
@@ -86,35 +86,35 @@
 
 <div class="social-media-approval-wrapper form-border"
      id="social-media-approval-entry-{media.id}">
-    <SaveMessage bind:this={message} />
-    <MessageWrapper messages={errorList} />
+    <SaveMessage bind:this={message}/>
+    <MessageWrapper messages={errorList}/>
     <div class="dashboard-admin-approval-grid">
         <StyledLink
-              icon={media.name}
-              href={media.url}
-              title={`${media.name} Link von ${media.account.username}`}
-              text={media.name}
+                icon={media.name}
+                href={media.url}
+                title={`${media.name} Link von ${media.account.username}`}
+                text={media.name}
         />
         <TextLine classes="dashboard-admin-approval-social-media-text">{media.url}</TextLine>
     </div>
     <TextArea
-          rows={5}
-          id={'dashboard-admin-approval-social-media-changes-' + media.id}
-          ariaLabel="Trage hier die Änderungswünsche den aktuellen Datensatzes ein."
-          labelText="Änderungswünsche:"
-          bind:value={media.requested_changes}
-          on:submit={requestChanges}
-          on:input={setUnsavedChanges}
+            rows={5}
+            id={'dashboard-admin-approval-social-media-changes-' + media.id}
+            ariaLabel="Trage hier die Änderungswünsche den aktuellen Datensatzes ein."
+            labelText="Änderungswünsche:"
+            bind:value={media.requested_changes}
+            on:submit={requestChanges}
+            on:input={setUnsavedChanges}
     />
     <div class="dashboard-admin-approval-button-array">
         <Button
-              ariaLabel="Klicke hier, um Änderungswünsche zu stellen"
-              on:click={requestChanges}
+                ariaLabel="Klicke hier, um Änderungswünsche zu stellen"
+                on:click={requestChanges}
         >Änderungswünsche
         </Button>
         <Button
-              ariaLabel="Klicke hier, um den Datensatz freizugeben"
-              on:click={() => {approvalPopup.show('')}}
+                ariaLabel="Klicke hier, um den Datensatz freizugeben"
+                on:click={() => {approvalPopup.show('')}}
         >Freigeben
         </Button>
     </div>
@@ -126,10 +126,10 @@
     }
 
     .dashboard-admin-approval-grid {
-        display:      flex;
-        gap:          var(--full-gap);
+        display: flex;
+        gap: var(--full-gap);
         justify-self: center;
-        margin:       var(--2x-margin) 0;
+        margin: var(--2x-margin) 0;
     }
 
     :global(.dashboard-admin-approval-social-media-text) {
@@ -137,10 +137,10 @@
     }
 
     .dashboard-admin-approval-button-array {
-        display:         flex;
-        flex-direction:  row;
+        display: flex;
+        flex-direction: row;
         justify-content: center;
-        gap:             var(--full-gap);
-        margin:          var(--full-margin);
+        gap: var(--full-gap);
+        margin: var(--full-margin);
     }
 </style>

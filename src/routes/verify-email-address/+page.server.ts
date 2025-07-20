@@ -1,15 +1,12 @@
-import type { LoadVerifyEmail } from 'types/loadTypes';
-import type { Globals } from 'types/provideTypes';
+import type {LoadVerifyEmail} from 'types/loadTypes';
+import type {Globals} from 'types/provideTypes';
 
-import { apiUrl } from 'helper/links';
-import { getGlobalsAsync } from 'stores/globals';
+import {apiUrl} from 'helper/links';
+import {getGlobalsAsync} from 'stores/globals';
 
 export const ssr = false; // Disable Server Side Rendering to make sure the provided data gets only send once.
 
-export async function load({
-                               fetch,
-                               url,
-                           }: {
+export async function load({fetch, url}: {
     fetch: typeof globalThis.fetch,
     url: URL
 }): Promise<LoadVerifyEmail> {
@@ -24,10 +21,10 @@ export async function load({
         };
     }
 
-    const toSave   = { token };
+    const toSave = {token};
     const response = await fetch(apiUrl('/account/verify'), {
         method: 'POST',
-        body:   JSON.stringify(toSave),
+        body: JSON.stringify(toSave),
     });
 
     if (!response.ok) {

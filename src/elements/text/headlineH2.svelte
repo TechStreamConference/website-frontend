@@ -5,7 +5,7 @@
 </script>
 
 <h2 class="headline-font {size} {classes}">
-    <slot />
+    <slot/>
 </h2>
 
 <style>
@@ -14,12 +14,12 @@
     }
 
     .headline-h2-big {
-        font-size:   var(--3x-font-size);
+        font-size: var(--3x-font-size);
         line-height: var(--3x-line-height);
     }
 
     .headline-h2-small {
-        font-size:   var(--2x-font-size);
+        font-size: var(--2x-font-size);
         line-height: var(--2x-line-height);
     }
 
@@ -30,12 +30,12 @@
 
     @media (max-width: 600px) {
         .headline-h2-big {
-            font-size:   var(--2x-font-size);
+            font-size: var(--2x-font-size);
             line-height: var(--2x-line-height);
         }
 
         .headline-h2-small {
-            font-size:   var(--full-font-size);
+            font-size: var(--full-font-size);
             line-height: var(--full-line-height);
         }
     }

@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { lerpTextCountColor } from 'helper/color';
-    import { createEventDispatcher, onMount } from 'svelte';
+    import {lerpTextCountColor} from 'helper/color';
+    import {createEventDispatcher, onMount} from 'svelte';
 
     import Label from 'elements/text/label.svelte';
     import TextLine from 'elements/text/textLine.svelte';
@@ -9,14 +9,14 @@
     export let id: string;
     export let labelText: string;
 
-    export let classes: string         = '';
+    export let classes: string = '';
     export let placeholderText: string = '';
-    export let rows: number            = 10;
-    export const NO_LIMIT: number      = -1;
-    export let limit: number           = NO_LIMIT;
+    export let rows: number = 10;
+    export const NO_LIMIT: number = -1;
+    export let limit: number = NO_LIMIT;
 
     export let value: string = '';
-    let colorString: string  = '';
+    let colorString: string = '';
 
     const dispatch = createEventDispatcher();
 
@@ -49,44 +49,44 @@
             / {limit}</TextLine>
     {/if}
     <textarea
-          maxlength={limit}
-          class="normal-font"
-          {id}
-          name={id}
-          placeholder={placeholderText}
-          bind:value
-          on:input={ () => { calcColor(); dispatch('input'); } }
-          aria-label={ariaLabel}
-          {rows}
-          on:keydown={handleKeydown}
+            maxlength={limit}
+            class="normal-font"
+            {id}
+            name={id}
+            placeholder={placeholderText}
+            bind:value
+            on:input={ () => { calcColor(); dispatch('input'); } }
+            aria-label={ariaLabel}
+            {rows}
+            on:keydown={handleKeydown}
     ></textarea>
 </div>
 
 <style>
     div {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        width:          100%;
-        height:         100%;
-        position:       relative;
+        width: 100%;
+        height: 100%;
+        position: relative;
     }
 
     textarea {
-        color:            var(--white-color);
+        color: var(--white-color);
         background-color: var(--primary-color-light);
-        border-radius:    var(--border-radius);
-        border:           none;
-        padding:          var(--half-padding);
-        width:            100%;
-        height:           100%;
-        overflow:         auto;
-        resize:           vertical;
-        font-size:        var(--full-font-size);
+        border-radius: var(--border-radius);
+        border: none;
+        padding: var(--half-padding);
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        resize: vertical;
+        font-size: var(--full-font-size);
     }
 
     :global(.text-area-limit-text) {
         position: absolute;
-        right:    2rem;
-        bottom:   1rem;
+        right: 2rem;
+        bottom: 1rem;
     }
 </style>

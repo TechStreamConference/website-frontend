@@ -24,6 +24,7 @@
     <Button ariaLabel="Klicke hier, um den link in die Zwischenablage zu kopieren"
             buttonSize="small-button"
             fontSize="small-text"
-            on:click={copy}><Icon type="Copy"></Icon>
+            on:click={copy}>
+        <Icon type="Copy"></Icon>
     </Button>
 {/if}

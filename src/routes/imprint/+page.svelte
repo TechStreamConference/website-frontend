@@ -1,7 +1,7 @@
 <script lang="ts">
     import * as Menu from 'menu/page';
 
-    import type { LoadImprint } from 'types/loadTypes';
+    import type {LoadImprint} from 'types/loadTypes';
 
     import HeadlinePage from 'elements/text/headlinePage.svelte';
     import PageWrapper from 'elements/section/pageWrapper.svelte';
@@ -26,10 +26,10 @@
         <TextLine>
             E-Mail:
             <Link
-                  classes="link-inline"
-                  href="mailto:info@test-conf.de"
-                  newTab={true}
-                  title="Klicke, um uns eine Mail zu schreiben">info@test-conf.de
+                    classes="link-inline"
+                    href="mailto:info@test-conf.de"
+                    newTab={true}
+                    title="Klicke, um uns eine Mail zu schreiben">info@test-conf.de
             </Link
             >
         </TextLine>
@@ -40,24 +40,24 @@
 
         <Paragraph
         >Nach geltendem Recht sind wir verpflichtet, Verbraucher auf die Existenz der Europäischen
-         Online-Streitbeilegungs-Plattform hinzuweisen, die für die Beilegung von Streitigkeiten
-         genutzt werden kann, ohne dass ein Gericht eingeschaltet werden muss. Für die Einrichtung der
-         Plattform ist die Europäische Kommission zuständig. Die Europäische
-         Online-Streitbeilegungs-Plattform ist hier zu finden:
+            Online-Streitbeilegungs-Plattform hinzuweisen, die für die Beilegung von Streitigkeiten
+            genutzt werden kann, ohne dass ein Gericht eingeschaltet werden muss. Für die Einrichtung der
+            Plattform ist die Europäische Kommission zuständig. Die Europäische
+            Online-Streitbeilegungs-Plattform ist hier zu finden:
             <Link
-                  classes="link-inline"
-                  href="https://ec.europa.eu/odr"
-                  newTab={true}
-                  title="Klicke, um dich über die Europäische Online-Streitbeilegungs-Plattform zu informieren"
+                    classes="link-inline"
+                    href="https://ec.europa.eu/odr"
+                    newTab={true}
+                    title="Klicke, um dich über die Europäische Online-Streitbeilegungs-Plattform zu informieren"
             >
                 https://ec.europa.eu/odr
             </Link>
-         . Unsere E-Mail lautet:
+            . Unsere E-Mail lautet:
             <Link
-                  classes="link-inline imprint-one-line-margin"
-                  href="mailto:info@test-conf.de"
-                  newTab={true}
-                  title="Klicke, um uns eine Mail zu schreiben"
+                    classes="link-inline imprint-one-line-margin"
+                    href="mailto:info@test-conf.de"
+                    newTab={true}
+                    title="Klicke, um uns eine Mail zu schreiben"
             >
                 info@test-conf.de
             </Link>
@@ -117,10 +117,10 @@
             Paragraphen abweichen, wird an entsprechender Stelle ausdrücklich darauf hingewiesen. In
             diesem Falle gelten im jeweiligen Einzelfall die besonderen Nutzungsbedingungen. Quelle:
             <Link
-                  classes="link-inline"
-                  href="https://www.juraforum.de/"
-                  newTab={true}
-                  title="Klicke hier, um zur Quelle dieses Online-Impressums zu gelangen"
+                    classes="link-inline"
+                    href="https://www.juraforum.de/"
+                    newTab={true}
+                    title="Klicke hier, um zur Quelle dieses Online-Impressums zu gelangen"
             >
                 Hier ansehen >>
             </Link>
@@ -130,9 +130,9 @@
 
 <style>
     .imprint-content-wrapper {
-        padding:   0 var(--2x-padding);
+        padding: 0 var(--2x-padding);
         max-width: 150rem;
-        margin:    0 auto;
+        margin: 0 auto;
     }
 
     :global(.imprint-headline) {
@@ -144,7 +144,7 @@
     }
 
     :global(.imprint-sub-headline) {
-        margin-top:    var(--4x-margin);
+        margin-top: var(--4x-margin);
         margin-bottom: var(--2x-margin);
     }
 

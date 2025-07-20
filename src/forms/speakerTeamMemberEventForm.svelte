@@ -33,11 +33,11 @@
     let popup: BasePopup;
     let cropper: Cropper;
 
-    export function getNewImage() : Blob | null {
+    export function getNewImage(): Blob | null {
         return newImage;
     }
 
-    export function getCropperProps() : CropperProps {
+    export function getCropperProps(): CropperProps {
         return cropperProps;
     }
 
@@ -67,7 +67,7 @@
         if (imageInput) {
             imageInput.clear();
         }
-        if (cropper){
+        if (cropper) {
             cropper.reset();
         }
     }

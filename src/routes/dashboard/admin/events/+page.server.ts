@@ -1,10 +1,10 @@
-import type { LoadAdminEvents } from 'types/dashboardLoadTypes';
+import type {LoadAdminEvents} from 'types/dashboardLoadTypes';
 
-import { apiUrl } from 'helper/links';
-import { checkAndParseInputDataAsync } from 'helper/parseJson';
-import { dashboardAllEventsScheme } from 'types/dashboardProvideTypes';
+import {apiUrl} from 'helper/links';
+import {checkAndParseInputDataAsync} from 'helper/parseJson';
+import {dashboardAllEventsScheme} from 'types/dashboardProvideTypes';
 
-export async function load({ fetch }: {
+export async function load({fetch}: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminEvents> {
     const allEventsFetchPromise = fetch(apiUrl('/dashboard/admin/all-events'));
@@ -17,7 +17,7 @@ export async function load({ fetch }: {
     );
 
     return {
-        allEvents:  await allEventsParsePromise,
+        allEvents: await allEventsParsePromise,
         allSpeaker: [], // will be filled inside the component
     };
 }

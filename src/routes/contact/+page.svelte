@@ -1,15 +1,15 @@
 <script lang="ts">
     import * as Menu from 'menu/page';
 
-    import type { LoadContact } from 'types/loadTypes';
+    import type {LoadContact} from 'types/loadTypes';
 
-    import { resetUnsavedChanges, setUnsavedChanges, unsavedChanges } from 'stores/saved';
-    import { trySaveDataAsync } from 'helper/trySaveData.js';
-    import { SaveMessageType } from 'types/saveMessageType';
-    import { onMount } from 'svelte';
-    import { scrollToTop } from 'helper/scroll';
-    import { setFocus } from 'helper/basic';
-    import { z } from 'zod';
+    import {resetUnsavedChanges, setUnsavedChanges, unsavedChanges} from 'stores/saved';
+    import {trySaveDataAsync} from 'helper/trySaveData.js';
+    import {SaveMessageType} from 'types/saveMessageType';
+    import {onMount} from 'svelte';
+    import {scrollToTop} from 'helper/scroll';
+    import {setFocus} from 'helper/basic';
+    import {z} from 'zod';
     import {SingleProcessState} from 'types/enums'
 
     import PageWrapper from 'elements/section/pageWrapper.svelte';
@@ -25,21 +25,19 @@
     import UnsavedChangesPopup from 'elements/popups/unsavedChangesPopup.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 
-
-
-    const subjectOther: string  = 'Sonstiges';
+    const subjectOther: string = 'Sonstiges';
     const subjectData: string[] = [
         'Vortrag',
         'sponsoring',
         subjectOther,
     ];
 
-    let state                   = SingleProcessState.Default;
-    let name: string            = '';
-    let mail: string            = '';
-    let subject: string         = subjectData[0];
+    let state = SingleProcessState.Default;
+    let name: string = '';
+    let mail: string = '';
+    let subject: string = subjectData[0];
     let subjectConcrete: string = '';
-    let message: string         = '';
+    let message: string = '';
 
     let saveMessage: SaveMessage;
     let errorList: string[] = [];
@@ -90,8 +88,8 @@
         }
 
         const saveData = {
-            'name':    name.trim(),
-            'email':   mail.trim(),
+            'name': name.trim(),
+            'email': mail.trim(),
             'subject': subject === subjectOther ? subjectConcrete.trim() : subject,
             'message': message.trim(),
         };
@@ -102,19 +100,19 @@
         errorList = result.messages;
 
         if (result.success) {
-            state           = SingleProcessState.Success;
-            name            = '';
-            mail            = '';
+            state = SingleProcessState.Success;
+            name = '';
+            mail = '';
             subjectConcrete = '';
-            message         = '';
+            message = '';
         }
 
         return result.success;
     }
 </script>
 
-<UnsavedChangesPopup />
-<UnsavedChangesCallbackWrapper callback={saveAsync} />
+<UnsavedChangesPopup/>
+<UnsavedChangesCallbackWrapper callback={saveAsync}/>
 
 <PageWrapper globals={data.globals}
              headerMenu={data.loggedIn ? Menu.headerLoggedIn : Menu.headerLoggedOut}
@@ -122,8 +120,8 @@
 >
     <SectionDashboard classes="standard-dashboard-section">
         <HeadlinePage>Kontakt</HeadlinePage>
-        <SaveMessage bind:this={saveMessage} />
-        <MessageWrapper messages={errorList} />
+        <SaveMessage bind:this={saveMessage}/>
+        <MessageWrapper messages={errorList}/>
         {#if state === SingleProcessState.Default}
             <form class="contact-form"
                   on:submit|preventDefault={saveAsync}>
@@ -132,18 +130,18 @@
                        placeholderText="Name"
                        ariaLabel="Gib hier deinen Namen ein"
                        bind:value={name}
-                       on:input={setUnsavedChanges} />
+                       on:input={setUnsavedChanges}/>
                 <Input id="contact-mail-input"
                        labelText="E-Mail:"
                        placeholderText="E-Mail"
                        ariaLabel="Gib hier deine E-mail ein"
                        bind:value={mail}
-                       on:input={setUnsavedChanges} />
+                       on:input={setUnsavedChanges}/>
                 <div class="contact-subject-wrapper">
                     <DropDown id="contact-subject-dropdown"
                               labelText="Was gibt's?"
                               data={subjectData}
-                              bind:selected={subject} />
+                              bind:selected={subject}/>
                     {#if subject === subjectOther}
                         <Input id="contact-subject-concrete-input"
                                labelText="Betreff:"
@@ -151,7 +149,7 @@
                                ariaLabel="Spezifiziere hier den Betreff"
                                limit={78}
                                bind:value={subjectConcrete}
-                               on:input={setUnsavedChanges} />
+                               on:input={setUnsavedChanges}/>
                     {/if}
                 </div>
                 <TextArea id="contact-message-text-area"
@@ -162,7 +160,7 @@
                           limit={2000}
                           bind:value={message}
                           on:input={setUnsavedChanges}
-                          on:submit={saveAsync} />
+                          on:submit={saveAsync}/>
                 <Button type="submit"
                         ariaLabel="Klicke, um die Mail zu verschicken"
                         classes="center-button">Senden
@@ -179,14 +177,14 @@
 
 <style>
     .contact-form {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 
     .contact-subject-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 </style>

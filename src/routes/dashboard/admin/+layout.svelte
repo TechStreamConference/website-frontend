@@ -2,7 +2,7 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/pageItems';
 
-    import type { LoadDashboard } from 'types/dashboardLoadTypes';
+    import type {LoadDashboard} from 'types/dashboardLoadTypes';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import HeadlineInfoDashboard from 'elements/text/headlineInfoDashboard.svelte';
@@ -13,8 +13,8 @@
 <Tabs position="end"
       color="purple"
       entries={Menu.getSectionLoggedIn(data.roles)}
-      entryName={MenuItem.admin.name} />
+      entryName={MenuItem.admin.name}/>
 <HeadlineInfoDashboard headline="Admin">
 
 </HeadlineInfoDashboard>
-<slot />
+<slot/>

@@ -8,14 +8,14 @@
     <div class="message-wrapper">
         {#each messages as message}
             <Message {message}
-                     classes="message-pre-wrap" />
+                     classes="message-pre-wrap"/>
         {/each}
     </div>
 {/if}
 
 <style>
     .message-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
     }
 </style>

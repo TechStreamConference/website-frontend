@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { LoadYear } from 'types/loadTypes';
+    import type {LoadYear} from 'types/loadTypes';
 
     import StyledLink from './styledLink.svelte';
 
@@ -21,12 +21,12 @@
     {/if}
     {#if data.year.event.discord_url}
         <StyledLink
-              classes="styled-link-white"
-              textClasses="hide-text-on-mobile"
-              href={data.year.event.discord_url}
-              title="Klicke hier, um auf den Discord-Server der Tech Stream Conference zu gelangen"
-              icon="Discord"
-              text="Sei dabei"
+                classes="styled-link-white"
+                textClasses="hide-text-on-mobile"
+                href={data.year.event.discord_url}
+                title="Klicke hier, um auf den Discord-Server der Tech Stream Conference zu gelangen"
+                icon="Discord"
+                text="Sei dabei"
         />
     {/if}
     {#if data.year.event.youtube_channel_url}
@@ -41,20 +41,20 @@
     {/if}
     {#if data.year.event.presskit_url}
         <StyledLink
-              classes="styled-link-white"
-              textClasses="hide-text-on-mobile"
-              href={data.year.event.presskit_url}
-              title="Klicke hier, um das Presskit der Tech Stream Conference herunterzuladen"
-              icon="Download"
-              text="Presskit"
+                classes="styled-link-white"
+                textClasses="hide-text-on-mobile"
+                href={data.year.event.presskit_url}
+                title="Klicke hier, um das Presskit der Tech Stream Conference herunterzuladen"
+                icon="Download"
+                text="Presskit"
         />
     {/if}
 </div>
 
 <style>
     .year-event-links-wrapper {
-        display:   flex;
-        gap:       var(--full-gap);
+        display: flex;
+        gap: var(--full-gap);
         flex-wrap: wrap;
     }
 </style>

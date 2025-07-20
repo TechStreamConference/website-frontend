@@ -10,18 +10,18 @@
         <Headline classes="headline-border">{headline}</Headline>
     </div>
     <Paragraph>
-        <slot />
+        <slot/>
     </Paragraph>
 </div>
 
 <style>
     .dashboard-user {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        max-width:      100rem;
-        margin:         var(--2x-margin) auto 0;
-        text-align:     center;
-        gap:            var(--2x-gap);
+        max-width: 100rem;
+        margin: var(--2x-margin) auto 0;
+        text-align: center;
+        gap: var(--2x-gap);
     }
 
     .dashboard-user-headline-wrapper {

@@ -1,5 +1,6 @@
-import type { MenuItem } from 'types/provideTypes';
+import type {MenuItem} from 'types/provideTypes';
 
+// @formatter:off
 export const speaker: MenuItem = {
     name:        'Vortragende',
     url:         '#Speaker',
@@ -23,3 +24,4 @@ export const schedule: MenuItem = {
     url:         '#Schedule',
     description: 'Klicke, um zum Ablaufplan der Konferenz zu navigieren',
 };
+// @formatter:on

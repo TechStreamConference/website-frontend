@@ -3,18 +3,18 @@
 
     export let type: string;
 
-    export let classes: string                                      = '';
+    export let classes: string = '';
     export let color: 'standard-color' | 'red' | 'green' | 'orange' = 'standard-color';
 
-    import { iconLookup } from 'lookup/iconLookup';
+    import {iconLookup} from 'lookup/iconLookup';
 </script>
 
 <i class="fa {iconLookup(type)} {classes} {color}"
-   aria-hidden="true" ></i>
+   aria-hidden="true"></i>
 
 <style>
     i {
-        display:   inline-block;
+        display: inline-block;
         font-size: var(--1-5x-font-size);
     }
 

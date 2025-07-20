@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { DashboardAdminVdoLink } from 'types/dashboardProvideTypes';
+    import type {DashboardAdminVdoLink} from 'types/dashboardProvideTypes';
 
     import TextLine from 'elements/text/textLine.svelte';
     import Toggle from 'elements/input/toggle.svelte';
@@ -8,21 +8,21 @@
     export let entries: DashboardAdminVdoLink | undefined;
     export let displayAdmin: boolean = false;
 
-    let displayCam: boolean    = true;
+    let displayCam: boolean = true;
     let displayScreen: boolean = true;
-    let displayPush: boolean   = true;
-    let displayView: boolean   = true;
+    let displayPush: boolean = true;
+    let displayView: boolean = true;
 </script>
 
 {#if entries !== undefined}
     <div class="link-grid">
         {#if displayAdmin}
-            <div class="grid-line expand-grid-line" ></div>
+            <div class="grid-line expand-grid-line"></div>
             <VodGridEntry description="Raum:"
                           visible={true}
-                          link={entries.director} />
+                          link={entries.director}/>
 
-            <div class="grid-line expand-grid-line" ></div>
+            <div class="grid-line expand-grid-line"></div>
             <div class="grid-toggle-filter expand-grid-line">
                 <Toggle ariaLabel="Klicke hier, um Cam Links zu filtern"
                         bind:toggle={displayCam}>
@@ -64,21 +64,21 @@
         {/if}
 
         {#each entries.speakers as e}
-            <div class="grid-line expand-grid-line" ></div>
+            <div class="grid-line expand-grid-line"></div>
             <TextLine classes="expand-grid-line">{e.name}:</TextLine>
             <VodGridEntry description={"Cam" + (displayAdmin ? " Push:" : "")}
                           visible={displayCam && displayPush}
-                          link={e.push_cam} />
+                          link={e.push_cam}/>
             <VodGridEntry description={"Screen" + (displayAdmin ? " Push:" : "")}
                           visible={displayScreen && displayPush}
-                          link={e.push_screen} />
+                          link={e.push_screen}/>
             {#if displayAdmin}
                 <VodGridEntry description="Cam View:"
                               visible={displayCam && displayView}
-                              link={e.view_cam} />
+                              link={e.view_cam}/>
                 <VodGridEntry description="Screen View:"
                               visible={displayScreen && displayView}
-                              link={e.view_screen} />
+                              link={e.view_screen}/>
             {/if}
         {/each}
     </div>
@@ -86,22 +86,22 @@
 
 <style>
     .link-grid {
-        display:               grid;
-        gap:                   var(--full-gap);
+        display: grid;
+        gap: var(--full-gap);
         grid-template-columns: auto 1fr auto;
-        width:                 100%;
+        width: 100%;
     }
 
     .grid-toggle-filter {
-        display:         flex;
-        flex-direction:  row;
-        gap:             var(--full-gap);
+        display: flex;
+        flex-direction: row;
+        gap: var(--full-gap);
         justify-content: center;
     }
 
     :global(.toggle-slot) {
-        padding:       var(--full-padding);
-        color:         var(--text-color);
+        padding: var(--full-padding);
+        color: var(--text-color);
         border-radius: var(--border-radius);
     }
 

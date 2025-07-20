@@ -2,9 +2,9 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/dashboardItems';
 
-    import { type DashboardEvent } from 'types/dashboardProvideTypes';
+    import {type DashboardEvent} from 'types/dashboardProvideTypes';
 
-    import { formatDate } from 'helper/dates';
+    import {formatDate} from 'helper/dates';
     import {SingleProcessState} from "types/enums";
 
     import Tabs from 'elements/navigation/tabs.svelte';
@@ -12,10 +12,9 @@
     import AdminEventForm from 'forms/adminEventForm.svelte';
     import TextLine from 'elements/text/textLine.svelte';
 
-
-
     let currentState: SingleProcessState = SingleProcessState.Default;
 
+    // @formatter:off
     let event: DashboardEvent = {
         id:                    0,
         title:                 '',
@@ -37,13 +36,14 @@
         call_for_papers_end:   formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
         frontpage_date:        formatDate(String(new Date()), '%YYYY-%MM-%DDT%hh:00:00'),
     };
+    // @formatter:on
 
 </script>
 
 <Tabs classes="subpage-navigation-tabs"
       position="center"
       entries={Menu.admin}
-      entryName={MenuItem.adminNewEvent.name} />
+      entryName={MenuItem.adminNewEvent.name}/>
 
 <SectionDashboard classes="standard-dashboard-section">
     {#if currentState === SingleProcessState.Success}
@@ -54,16 +54,16 @@
     {:else}
         <AdminEventForm {event}
                         speakerArray={undefined}
-                        on:save={() => currentState = SingleProcessState.Success} />
+                        on:save={() => currentState = SingleProcessState.Success}/>
     {/if}
 </SectionDashboard>
 
 <style>
     .dashboard-admin-new-event-message-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        align-items:    center;
-        margin-top:     var(--4x-margin);
-        gap:            var(--full-gap);
+        align-items: center;
+        margin-top: var(--4x-margin);
+        gap: var(--full-gap);
     }
 </style>
