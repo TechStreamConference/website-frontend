@@ -443,7 +443,7 @@
         bottom: -8.5%;
     }
 
-    @media (max-width: 1280px) {
+    @media (pointer: coarse) {
         :global(.cropper-mobile-only) {
             display: block;
         }
