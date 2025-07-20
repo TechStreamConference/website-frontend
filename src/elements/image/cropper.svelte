@@ -322,7 +322,6 @@
         class="cropper-wrapper {classes}"
         on:mousedown={handleMouseDown}
         on:wheel={handleWheel}
-        contenteditable={true}
         aria-label="Image cropper. Use mouse to drag and scroll wheel to zoom. Keyboard controls: W,A,S,D keys to move, Q to zoom out, E to zoom in"
         role="application"
         style={isDragging? "cursor: grabbing;" : "cursor: grab;"}
@@ -380,7 +379,6 @@
         <div class="cropper-overlay-inlay inlay-horizontal inlay-bottom"></div>
         <div class="cropper-overlay-inlay inlay-vertical inlay-left"></div>
         <div class="cropper-overlay-inlay inlay-vertical inlay-right"></div>
-
 
     </div>
 </figure>
