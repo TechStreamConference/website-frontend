@@ -177,8 +177,11 @@
             return;
         }
 
-        const mouseDeltaX = (event.clientX - lastMouseX) * currentZoomScale;
-        const mouseDeltaY = (event.clientY - lastMouseY) * currentZoomScale;
+        const viewportScaleX = canvas.scrollWidth / canvas.width;
+        const viewportScaleY = canvas.scrollHeight / canvas.height;
+
+        const mouseDeltaX = (event.clientX - lastMouseX) * currentZoomScale * viewportScaleX / (1.0 + (2.0 * + croppingOffsetPercent));
+        const mouseDeltaY = (event.clientY - lastMouseY) * currentZoomScale * viewportScaleY / (1.0 + (2.0 * + croppingOffsetPercent));
         lastMouseX = event.clientX;
         lastMouseY = event.clientY;
 
