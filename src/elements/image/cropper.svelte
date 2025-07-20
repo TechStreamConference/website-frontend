@@ -271,16 +271,16 @@
     function handleKeyDown(event: KeyboardEvent): void {
         switch (event.key.toLowerCase()) {
             case 'a':
-                handleKeyMove(-MOVEMENT_SPEED, 0);
-                break;
-            case 'd':
                 handleKeyMove(MOVEMENT_SPEED, 0);
                 break;
+            case 'd':
+                handleKeyMove(-MOVEMENT_SPEED, 0);
+                break;
             case 'w':
-                handleKeyMove(0, -MOVEMENT_SPEED);
+                handleKeyMove(0, MOVEMENT_SPEED);
                 break;
             case 's':
-                handleKeyMove(0, MOVEMENT_SPEED);
+                handleKeyMove(0, -MOVEMENT_SPEED);
                 break;
             case 'q':
                 handleKeyZoom(false);
