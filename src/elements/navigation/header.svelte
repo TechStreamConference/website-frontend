@@ -77,6 +77,7 @@
                             classes="link-standard navigation-header-link"
                             href={entry.url}
                             title={entry.description}
+                            --text-align="center"
                             on:click={collapse}>{entry.name}</Link
                     >
                 {/each}
@@ -226,7 +227,6 @@
         :global(.navigation-header-link) {
             text-transform: uppercase;
             color: var(--white-color);
-            align-self: end !important;
         }
     }
 </style>
