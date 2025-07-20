@@ -31,7 +31,7 @@
     let widthOverlayOffset: number = 0;
     let heightOverlayOffset: number = 0;
 
-    let image: Image | null = null;
+    let image: HTMLImageElement | null = null;
 
     // initial & update
     onMount(() => {
@@ -81,6 +81,9 @@
         reader.onload = (e) => {
             image = new Image();
             image.onload = () => {
+                if (!image) {
+                    return; // this should never happen since this is the onload of the checked image
+                }
                 setMaxScale();
                 currentZoomScale = MAX_ZOOM_SCALE;
                 cropperProps.width *= MAX_ZOOM_SCALE;
