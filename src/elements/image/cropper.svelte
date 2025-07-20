@@ -2,6 +2,7 @@
     import type {CropperProps} from "types/cropperTypes";
     import {onMount} from "svelte";
     import {clamp} from 'helper/basic';
+    import Button from 'elements/input/button.svelte'
 
     export let file: Blob | null;
     let previousFile: Blob | null = null;
@@ -352,6 +353,20 @@
         <div class="cropper-overlay-inlay inlay-vertical inlay-right"></div>
 
     </div>
+    <Button
+            ariaLabel="Zoom in"
+            classes={"cropper-mobile-only cropper-button-left"}
+            on:click={() => handleKeyZoom(false)}
+            buttonSize="small-button"
+    >+
+    </Button>
+    <Button
+            ariaLabel="Zoom out"
+            classes={"cropper-mobile-only cropper-button-right"}
+            on:click={() => handleKeyZoom(true)}
+            buttonSize="small-button"
+    >-
+    </Button>
 </figure>
 
 <style>
@@ -411,4 +426,28 @@
     .inlay-right {
         right: 33.33%;
     }
+
+    :global(.cropper-mobile-only) {
+        display: none;
+    }
+
+    :global(.cropper-button-left) {
+        position: absolute;
+        left: 30%;
+        bottom: -8.5%;
+    }
+
+    :global(.cropper-button-right) {
+        position: absolute;
+        right: 30%;
+        bottom: -8.5%;
+    }
+
+    @media (max-width: 1280px) {
+        :global(.cropper-mobile-only) {
+            display: block;
+        }
+    }
+
+
 </style>
