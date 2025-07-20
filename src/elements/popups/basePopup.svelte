@@ -2,7 +2,6 @@
 
     import Button from 'elements/input/button.svelte';
     import {createEventDispatcher} from 'svelte';
-    import {preventAutoCollapsePopup} from "stores/preventAutoCollapsePopupStore";
 
     let eventDispatcher = createEventDispatcher();
     let dialog: HTMLDialogElement;
@@ -25,10 +24,6 @@
     }
 
     function checkClickOutside(event: MouseEvent): void {
-        if (preventAutoCollapsePopup()) {
-            return;
-        }
-
         const rect = dialog.getBoundingClientRect();
         const isOutside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top
             || event.clientY > rect.bottom;

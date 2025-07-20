@@ -1,10 +1,6 @@
 <script lang="ts">
     import type {CropperProps} from "types/cropperTypes";
     import {onMount} from "svelte";
-    import {
-        setPreventAutoCollapsePopup,
-        resetPreventAutoCollapsePopupWithDelay
-    } from "stores/preventAutoCollapsePopupStore";
     import {clamp} from 'helper/basic';
 
     export let file: Blob | null;
@@ -171,7 +167,6 @@
             return;
         }
         isDragging = true;
-        setPreventAutoCollapsePopup();
 
         lastMouseX = event.clientX;
         lastMouseY = event.clientY;
@@ -179,7 +174,6 @@
 
     function handleMouseUp(): void {
         isDragging = false;
-        resetPreventAutoCollapsePopupWithDelay(5);
     }
 
     function handleMouseMove(event: MouseEvent): void {
