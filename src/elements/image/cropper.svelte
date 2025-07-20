@@ -372,7 +372,7 @@
 <style>
     .cropper-wrapper {
         position: relative;
-        width: 60rem;
+        width: min(70vw, 80rem);
         border: 1px solid black;
         border-radius: var(--border-radius);
         touch-action: none;  /* because most Browser reclaims touch events otherwise */
