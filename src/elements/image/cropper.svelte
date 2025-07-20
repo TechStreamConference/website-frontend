@@ -5,6 +5,7 @@
         setPreventAutoCollapsePopup,
         resetPreventAutoCollapsePopupWithDelay
     } from "stores/preventAutoCollapsePopupStore";
+    import {clamp} from 'helper/basic';
 
     export let file: Blob | null;
     let previousFile: Blob | null = null;
@@ -117,7 +118,7 @@
     }
 
     function updateDraw(): void {
-        clamp();
+        clampImage();
         crop();
     }
 
@@ -131,22 +132,13 @@
         MAX_ZOOM_SCALE = Math.min(maxScaleX, maxScaleY);
     }
 
-    function clamp(): void {
+    function clampImage(): void {
         if (!image) {
             return;
         }
-        if (cropperProps.x < 0) {
-            cropperProps.x = 0;
-        }
-        if (cropperProps.y < 0) {
-            cropperProps.y = 0;
-        }
-        if (cropperProps.x + cropperProps.width > image.width) {
-            cropperProps.x = image.width - cropperProps.width;
-        }
-        if (cropperProps.y + cropperProps.height > image.height) {
-            cropperProps.y = image.height - cropperProps.height;
-        }
+
+        cropperProps.x = clamp(cropperProps.x, 0, image.width - cropperProps.width);
+        cropperProps.y = clamp(cropperProps.y, 0, image.height - cropperProps.height);
     }
 
     function crop(): void {
@@ -214,13 +206,7 @@
         currentZoomScale = (() => {
             const zoomFactor = event.deltaY > 0 ? 1.0 + ZOOM_SPEED : 1.0 - ZOOM_SPEED;
             const scale = currentZoomScale * zoomFactor;
-            if (scale <= MIN_ZOOM_SCALE) {
-                return MIN_ZOOM_SCALE;
-            }
-            if (scale >= MAX_ZOOM_SCALE) {
-                return MAX_ZOOM_SCALE;
-            }
-            return scale;
+            return clamp(scale, MIN_ZOOM_SCALE, MAX_ZOOM_SCALE);
         })();
 
         const rect = canvas.getBoundingClientRect();
@@ -267,13 +253,7 @@
         currentZoomScale = (() => {
             const zoomFactor = zoomIn ? 1.0 + ZOOM_SPEED : 1.0 - ZOOM_SPEED;
             const scale = currentZoomScale * zoomFactor;
-            if (scale <= MIN_ZOOM_SCALE) {
-                return MIN_ZOOM_SCALE;
-            }
-            if (scale >= MAX_ZOOM_SCALE) {
-                return MAX_ZOOM_SCALE;
-            }
-            return scale;
+            return clamp(scale, MIN_ZOOM_SCALE, MAX_ZOOM_SCALE);
         })();
 
         const newWidth = originalWidth * currentZoomScale;
