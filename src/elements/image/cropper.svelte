@@ -46,13 +46,9 @@
 
         resizeObserver.observe(cropperWrapper);
         window.addEventListener('keydown', handleKeyDown);
-        window.addEventListener('mouseup', handleMouseUp);
-        window.addEventListener('mousemove', handleMouseMove);
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
-            window.removeEventListener('mouseup', handleMouseUp);
-            window.removeEventListener('mousemove', handleMouseMove);
             resizeObserver.disconnect();
         };
     });
@@ -161,22 +157,21 @@
         );
     }
 
-    // mouse input
-    function handleMouseDown(event: MouseEvent): void {
-        if (event.button !== 0) {
-            return;
-        }
+    // mouse / touch input
+    function handlePointerDown(event: PointerEvent): void {
+        cropperWrapper.setPointerCapture(event.pointerId);
         isDragging = true;
 
         lastMouseX = event.clientX;
         lastMouseY = event.clientY;
     }
 
-    function handleMouseUp(): void {
+    function handlePointerUp(event: PointerEvent): void {
+        cropperWrapper.releasePointerCapture(event.pointerId);
         isDragging = false;
     }
 
-    function handleMouseMove(event: MouseEvent): void {
+    function handlePointerMove(event: PointerEvent): void {
         if (!isDragging) {
             return;
         }
@@ -195,7 +190,7 @@
         updateDraw();
     }
 
-    function handleWheel(event: WheelEvent): void {
+    function handleMouseZoom(event: WheelEvent): void {
         event.preventDefault();
         currentZoomScale = (() => {
             const zoomFactor = event.deltaY > 0 ? 1.0 + ZOOM_SPEED : 1.0 - ZOOM_SPEED;
@@ -294,8 +289,10 @@
 <figure
         bind:this={cropperWrapper}
         class="cropper-wrapper {classes}"
-        on:mousedown={handleMouseDown}
-        on:wheel={handleWheel}
+        on:pointerdown={handlePointerDown}
+        on:pointerup={handlePointerUp}
+        on:pointermove={handlePointerMove}
+        on:wheel={handleMouseZoom}
         aria-label="Image cropper. Use mouse to drag and scroll wheel to zoom. Keyboard controls: W,A,S,D keys to move, Q to zoom out, E to zoom in"
         role="presentation"
         style={isDragging? "cursor: grabbing;" : "cursor: grab;"}
@@ -363,6 +360,7 @@
         width: 60rem;
         border: 1px solid black;
         border-radius: var(--border-radius);
+        touch-action: none;  /* because most Browser reclaims touch events otherwise */
     }
 
     .cropper-canvas {
