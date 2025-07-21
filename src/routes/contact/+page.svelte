@@ -10,6 +10,7 @@
     import { scrollToTop } from 'helper/scroll';
     import { setFocus } from 'helper/basic';
     import { z } from 'zod';
+    import {SingleProcessState} from 'types/enums'
 
     import PageWrapper from 'elements/section/pageWrapper.svelte';
     import TextLine from 'elements/text/textLine.svelte';
@@ -24,10 +25,7 @@
     import UnsavedChangesPopup from 'elements/popups/unsavedChangesPopup.svelte';
     import UnsavedChangesCallbackWrapper from 'elements/navigation/unsavedChangesCallbackWrapper.svelte';
 
-    enum State {
-        Default,
-        EmailSent,
-    }
+
 
     const subjectOther: string  = 'Sonstiges';
     const subjectData: string[] = [
@@ -36,7 +34,7 @@
         subjectOther,
     ];
 
-    let state                   = State.Default;
+    let state                   = SingleProcessState.Default;
     let name: string            = '';
     let mail: string            = '';
     let subject: string         = subjectData[0];
@@ -104,7 +102,7 @@
         errorList = result.messages;
 
         if (result.success) {
-            state           = State.EmailSent;
+            state           = SingleProcessState.Success;
             name            = '';
             mail            = '';
             subjectConcrete = '';
@@ -126,7 +124,7 @@
         <HeadlinePage>Kontakt</HeadlinePage>
         <SaveMessage bind:this={saveMessage} />
         <MessageWrapper messages={errorList} />
-        {#if state === State.Default}
+        {#if state === SingleProcessState.Default}
             <form class="contact-form"
                   on:submit|preventDefault={saveAsync}>
                 <Input id="contact-name-input"
@@ -170,7 +168,7 @@
                         classes="center-button">Senden
                 </Button>
             </form>
-        {:else if state === State.EmailSent}
+        {:else if state === SingleProcessState.Success}
             <TextLine classes="text-line-center">Deine Nachricht wurde erfolgreich verschickt.</TextLine>
             <TextLine classes="text-line-center">Wir werden uns in nächster Zeit bei dir melden.</TextLine>
         {:else}

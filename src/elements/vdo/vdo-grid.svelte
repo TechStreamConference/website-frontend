@@ -17,12 +17,12 @@
 {#if entries !== undefined}
     <div class="link-grid">
         {#if displayAdmin}
-            <div class="grid-line expand-grid-line" />
+            <div class="grid-line expand-grid-line" ></div>
             <VodGridEntry description="Raum:"
                           visible={true}
                           link={entries.director} />
 
-            <div class="grid-line expand-grid-line" />
+            <div class="grid-line expand-grid-line" ></div>
             <div class="grid-toggle-filter expand-grid-line">
                 <Toggle ariaLabel="Klicke hier, um Cam Links zu filtern"
                         bind:toggle={displayCam}>
@@ -64,7 +64,7 @@
         {/if}
 
         {#each entries.speakers as e}
-            <div class="grid-line expand-grid-line" />
+            <div class="grid-line expand-grid-line" ></div>
             <TextLine classes="expand-grid-line">{e.name}:</TextLine>
             <VodGridEntry description={"Cam" + (displayAdmin ? " Push:" : "")}
                           visible={displayCam && displayPush}

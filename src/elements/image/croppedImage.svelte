@@ -1,11 +1,10 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import type {CropperProps} from "types/cropperTypes";
+    import {onMount} from 'svelte';
 
-    export let x: number;
-    export let y: number;
-    export let size: number;
-    export let file: Blob;
-    export let alt: string;
+    export let cropperProps: CropperProps;
+    export let file: Blob | null;
+    export let ariaLabel: string;
     export let classes: string = '';
 
     let mounted: boolean = false;
@@ -16,7 +15,7 @@
         updateCrop();
     });
 
-    $: if (file || x || y || size) {
+    $: if (file || cropperProps) {
         updateCrop();
     }
 
@@ -24,18 +23,29 @@
         if (!mounted) {
             return;
         }
+        if (!file) {
+            return;
+        }
 
         const context = canvas.getContext('2d');
-
-        const reader  = new FileReader();
+        const reader = new FileReader();
         reader.onload = (e) => {
-            const image  = new Image();
+            const image = new Image();
             image.onload = () => {
-                canvas.height = size;
-                canvas.width  = size;
-                context?.drawImage(image, x, y, size, size, 0, 0, size, size);
+                canvas.height = cropperProps.height;
+                canvas.width = cropperProps.width;
+                context?.drawImage(
+                    image,
+                    cropperProps.x,
+                    cropperProps.y,
+                    cropperProps.width,
+                    cropperProps.height,
+                    0,
+                    0,
+                    cropperProps.width,
+                    cropperProps.height
+                );
             };
-
             if (e.target?.result) {
                 image.src = e.target.result as string;
             }
@@ -46,4 +56,11 @@
 
 <canvas bind:this={canvas}
         class={classes}
-        aria-label={alt} />
+        aria-label={ariaLabel}></canvas>
+
+<style>
+    .default-cropped {
+        border-radius: var(--border-radius);
+        border: 1px solid var(--line-color);
+    }
+</style>

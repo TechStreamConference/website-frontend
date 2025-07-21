@@ -2,13 +2,14 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/dashboardItems';
 
-    import type { LoadAdminCreatePanelDiscussion } from 'types/dashboardLoadTypes';
-    import type { DashboardAllPersons, DashboardPendingTalk } from 'types/dashboardProvideTypes';
+    import type {LoadAdminCreatePanelDiscussion} from 'types/dashboardLoadTypes';
+    import type {DashboardAllPersons, DashboardPendingTalk} from 'types/dashboardProvideTypes';
 
-    import { getDropDownEntriesWithID, getIdFromDropDownEntry } from 'helper/navigation';
-    import { error } from '@sveltejs/kit';
-    import { initializePendingTalk, loadPossibleHosts } from './panelHelper';
-    import { onMount } from 'svelte';
+    import {getDropDownEntriesWithID, getIdFromDropDownEntry} from 'helper/navigation';
+    import {error} from '@sveltejs/kit';
+    import {initializePendingTalk, loadPossibleHosts} from './panelHelper';
+    import {onMount} from 'svelte';
+    import {SingleProcessState} from "types/enums";
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -19,21 +20,16 @@
     import TextLine from 'elements/text/textLine.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
     import SaveMessage from 'elements/text/saveMessage.svelte';
-    import { SaveMessageType } from 'types/saveMessageType';
-    import { trySaveDataAsync } from 'helper/trySaveData.js';
-    import { scrollToTop } from 'helper/scroll';
-
-    enum State {
-        Default,
-        Saved,
-    }
+    import {SaveMessageType} from 'types/saveMessageType';
+    import {trySaveDataAsync} from 'helper/trySaveData.js';
+    import {scrollToTop} from 'helper/scroll';
 
     export let data: LoadAdminCreatePanelDiscussion;
-    let currentState = State.Default;
+    let currentState = SingleProcessState.Default;
 
-    let talkData: DashboardPendingTalk     = initializePendingTalk();
+    let talkData: DashboardPendingTalk = initializePendingTalk();
     let selectedHosts: DashboardAllPersons = [];
-    let currentEventId: number             = 0;
+    let currentEventId: number = 0;
 
     let eventDropDown: NavigationDropDown;
     let message: SaveMessage;
@@ -55,7 +51,7 @@
         }
 
         data.possibleHosts = await loadPossibleHosts(fetch, currentEventId);
-        talkData           = initializePendingTalk();
+        talkData = initializePendingTalk();
     }
 
     async function save(): Promise<boolean> {
@@ -75,11 +71,11 @@
         }
 
         const toSave = {
-            event_id:           currentEventId,
-            user_id:            selectedHosts[0].user_id,
-            title:              talkData.title,
-            description:        talkData.description,
-            tag_ids:            talkData.tags.map((x) => x.id),
+            event_id: currentEventId,
+            user_id: selectedHosts[0].user_id,
+            title: talkData.title,
+            description: talkData.description,
+            tag_ids: talkData.tags.map((x) => x.id),
             possible_durations: talkData.possible_durations,
         };
 
@@ -87,7 +83,7 @@
 
         errorList = result.messages;
         message.setSaveMessage(result.success ? SaveMessageType.Save : SaveMessageType.Error);
-        currentState = result.success ? State.Saved : State.Default;
+        currentState = result.success ? SingleProcessState.Success : SingleProcessState.Default;
 
         return result.success;
     }
@@ -96,26 +92,26 @@
 <Tabs classes="subpage-navigation-tabs subpage-navigation-tabs-wide-tabs-override"
       position="center"
       entries={Menu.admin}
-      entryName={MenuItem.adminCreatePanelDiscussion.name} />
+      entryName={MenuItem.adminCreatePanelDiscussion.name}/>
 
 <SectionDashboard classes="standard-dashboard-section wide-dashboard-section-override">
-    {#if currentState === State.Default}
+    {#if currentState === SingleProcessState.Default}
         <NavigationDropDown bind:this={eventDropDown}
                             labelText="Aktuelles Jahr:"
                             id="dashboard-admin-create-panel-discussion-event-drop-down"
                             data={getDropDownEntriesWithID(data.allEvents)}
-                            on:navigated={(e) => {onNavigate(e.detail)}} />
-        <SaveMessage bind:this={message} />
-        <MessageWrapper messages={errorList} />
+                            on:navigated={(e) => {onNavigate(e.detail)}}/>
+        <SaveMessage bind:this={message}/>
+        <MessageWrapper messages={errorList}/>
         <form class="dashboard-admin-create-panel-discussion-form form-border"
               on:submit|preventDefault={save}>
             <SpeakerTalkForm bind:data={talkData}
                              tags={data.tags}
                              talkDurations={data.durations}
-                             useForm={false} />
+                             useForm={false}/>
             <PersonArray labelText="Mögliche Hosts:"
                          bind:selected={selectedHosts}
-                         data={data.possibleHosts} />
+                         data={data.possibleHosts}/>
             <Button classes="dashboard-admin-create-panel-discussion-button"
                     type="submit"
                     ariaLabel="Klicke hier, um den die neue Gesprächsrunde zu speichern">Speichern
@@ -123,8 +119,8 @@
         </form>
     {:else}
         <TextLine classes="text-line-center dashboard-admin-create-panel-discussion-success-text">Neue Gesprächsrunde
-                                                                                                  erfolgreich
-                                                                                                  hinzugefügt.
+            erfolgreich
+            hinzugefügt.
         </TextLine>
     {/if}
 </SectionDashboard>
@@ -132,9 +128,9 @@
 
 <style>
     .dashboard-admin-create-panel-discussion-form {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 
     :global(.dashboard-admin-create-panel-discussion-button) {

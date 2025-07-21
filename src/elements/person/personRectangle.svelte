@@ -23,7 +23,7 @@
                  {data}/>
     <SubHeadline classes="person-rectangle-margin">{data.name}</SubHeadline>
     <Paragraph classes="person-rectangle-paragraph person-rectangle-margin">{data.short_bio}</Paragraph>
-    <div class="person-rectangle-line person-rectangle-margin"/>
+    <div class="person-rectangle-line person-rectangle-margin"></div>
     <div class="person-rectangle-margin">
         <LinkArray on:click={onLinkClicked}
                    person={data.name}

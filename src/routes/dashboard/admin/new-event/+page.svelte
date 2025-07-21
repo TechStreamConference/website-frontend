@@ -5,18 +5,16 @@
     import { type DashboardEvent } from 'types/dashboardProvideTypes';
 
     import { formatDate } from 'helper/dates';
+    import {SingleProcessState} from "types/enums";
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import AdminEventForm from 'forms/adminEventForm.svelte';
     import TextLine from 'elements/text/textLine.svelte';
 
-    enum State {
-        Default,
-        Saved,
-    }
 
-    let currentState: State = State.Default;
+
+    let currentState: SingleProcessState = SingleProcessState.Default;
 
     let event: DashboardEvent = {
         id:                    0,
@@ -48,7 +46,7 @@
       entryName={MenuItem.adminNewEvent.name} />
 
 <SectionDashboard classes="standard-dashboard-section">
-    {#if currentState === State.Saved}
+    {#if currentState === SingleProcessState.Success}
         <div class="dashboard-admin-new-event-message-wrapper">
             <TextLine>Das Event '{event.title}' wurde erfolgreich angelegt.</TextLine>
             <TextLine>Du kannst es ab jetzt im Event Tab bearbeiten.</TextLine>
@@ -56,7 +54,7 @@
     {:else}
         <AdminEventForm {event}
                         speakerArray={undefined}
-                        on:save={() => currentState = State.Saved} />
+                        on:save={() => currentState = SingleProcessState.Success} />
     {/if}
 </SectionDashboard>
 

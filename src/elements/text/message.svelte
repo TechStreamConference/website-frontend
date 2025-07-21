@@ -9,17 +9,17 @@
 </script>
 
 {#if message !== ''}
-    <p class="normal-font {classes} {color}"
+    <div class="{classes} {color}"
        transition:fade={{ duration: 300 }}>
         <TextLine --text-align="center"
                   classes={color === 'error' ? 'text-line-black' : 'text-line-white'}>
             {message}
         </TextLine>
-    </p>
+    </div>
 {/if}
 
 <style>
-    p {
+    div {
         padding:       var(--half-padding) var(--full-padding);
         border-radius: var(--border-radius);
         margin:        var(--quad-margin) 0;

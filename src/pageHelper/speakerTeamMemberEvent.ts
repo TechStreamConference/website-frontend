@@ -6,15 +6,6 @@ import { dashboardAllEventIDScheme, dashboardSpeakerTeamMemberScheme } from 'typ
 import { apiUrl } from 'helper/links';
 import { checkAndParseInputDataAsync } from 'helper/parseJson';
 import { error } from '@sveltejs/kit';
-import { z } from 'zod';
-
-
-export type NewImage = {
-    lastPhotoX: number;
-    lastPhotoY: number;
-    lastPhotoSize: number;
-    imageFile: File | undefined;
-}
 
 export type ValidateReturn = {
     data: SetSpeakerTeamMemberEvent,
