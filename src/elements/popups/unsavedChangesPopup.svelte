@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { resetUnsavedChanges, unsavedChanges } from 'stores/saved';
-    import { beforeNavigate, goto } from '$app/navigation';
-    import { saveCallback } from 'stores/saveCallback';
+    import {resetUnsavedChanges, unsavedChanges} from 'stores/saved';
+    import {beforeNavigate, goto} from '$app/navigation';
+    import {saveCallback} from 'stores/saveCallback';
 
     import BasePopup from 'elements/popups/basePopup.svelte';
     import Button from 'elements/input/button.svelte';
@@ -56,7 +56,7 @@
         cancel();
 
         if (to) {
-            url         = to.url;
+            url = to.url;
         }
         basePopup.show();
     });
@@ -72,8 +72,8 @@
         </Button>
         {#if saveButton}
             <Button
-                  on:click={saveAsync}
-                  ariaLabel="Klicke hier, um die Änderungen zu speichern und die Seite zu verlassen"
+                    on:click={saveAsync}
+                    ariaLabel="Klicke hier, um die Änderungen zu speichern und die Seite zu verlassen"
             >
                 Speichern und Verlassen
             </Button>
@@ -87,8 +87,8 @@
 
 <style>
     .unsaved-changes-button-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 </style>

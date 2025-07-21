@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type { DashboardTalkDurationChoices } from 'types/dashboardProvideTypes';
-    import { createEventDispatcher } from 'svelte';
+    import type {DashboardTalkDurationChoices} from 'types/dashboardProvideTypes';
+    import {createEventDispatcher} from 'svelte';
 
     import Toggle from './toggle.svelte';
     import Label from 'elements/text/label.svelte';
@@ -48,7 +48,7 @@
                 <div slot="slotTrue"
                      class="toggle-talk-duration-entry-wrapper">
                     <Icon color="green"
-                          type="CircleCheck" />
+                          type="CircleCheck"/>
                     <Tag text={duration.toString()}
                          --tag-text-color={"var(--white-color)"}
                          --tag-background-color={"var(--primary-color-dark)"}
@@ -57,7 +57,7 @@
                 <div slot="slotFalse"
                      class="toggle-talk-duration-entry-wrapper">
                     <Icon color="red"
-                          type="CircleCross" />
+                          type="CircleCross"/>
                     <Tag text={duration.toString()}
                          --tag-text-color="var(--text-color)"
                          --tag-background-color="#FFFFFF00"
@@ -70,20 +70,20 @@
 
 <style>
     .toggle-talk-duration-wrapper {
-        display:         flex;
-        flex-direction:  row;
-        flex-wrap:       wrap;
-        gap:             var(--full-gap);
-        border:          1px solid var(--primary-color-dark);
-        border-radius:   var(--border-radius);
-        padding:         var(--full-padding);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--full-gap);
+        border: 1px solid var(--primary-color-dark);
+        border-radius: var(--border-radius);
+        padding: var(--full-padding);
         justify-content: space-between;
     }
 
     .toggle-talk-duration-entry-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        gap:            var(--full-gap);
-        align-items:    center;
+        gap: var(--full-gap);
+        align-items: center;
     }
 </style>

@@ -1,12 +1,12 @@
-import type { LoadUserSocials } from 'types/dashboardLoadTypes';
-import type { DashboardAllSocialMediaLinks, DashboardAllSocialMediaLinkTypes } from 'types/dashboardProvideTypes';
+import type {LoadUserSocials} from 'types/dashboardLoadTypes';
+import type {DashboardAllSocialMediaLinks, DashboardAllSocialMediaLinkTypes} from 'types/dashboardProvideTypes';
 
-import { apiUrl } from 'helper/links';
-import { checkAndParseInputDataAsync } from 'helper/parseJson';
-import { dashboardAllSocialMediaLinkScheme, dashboardAllSocialMediaLinkTypeScheme } from 'types/dashboardProvideTypes';
-import { error } from '@sveltejs/kit';
-import { z } from 'zod';
-import { type SaveResult, trySaveDataAsync } from 'helper/trySaveData';
+import {apiUrl} from 'helper/links';
+import {checkAndParseInputDataAsync} from 'helper/parseJson';
+import {dashboardAllSocialMediaLinkScheme, dashboardAllSocialMediaLinkTypeScheme} from 'types/dashboardProvideTypes';
+import {error} from '@sveltejs/kit';
+import {z} from 'zod';
+import {type SaveResult, trySaveDataAsync} from 'helper/trySaveData';
 
 export type ValidateReturn = {
     data: DashboardAllSocialMediaLinks,
@@ -19,13 +19,13 @@ export type DeleteReturn = {
 }
 
 export async function loadDataAsync(fetch: typeof globalThis.fetch): Promise<LoadUserSocials> {
-    const socialsFetchPromise    = fetch(apiUrl('/dashboard/user/social-media-link'));
+    const socialsFetchPromise = fetch(apiUrl('/dashboard/user/social-media-link'));
     const socialTypeFetchPromise = fetch(apiUrl('/social-media-link-types'));
 
-    const socialsParsePromise     = checkAndParseInputDataAsync(await socialsFetchPromise,
-                                                                dashboardAllSocialMediaLinkScheme,
-                                                                `Serveranfrage für alle Social Media Links nicht erfolgreich.`,
-                                                                `Unerwartete Daten für alle Social Media Links.`,
+    const socialsParsePromise = checkAndParseInputDataAsync(await socialsFetchPromise,
+        dashboardAllSocialMediaLinkScheme,
+        `Serveranfrage für alle Social Media Links nicht erfolgreich.`,
+        `Unerwartete Daten für alle Social Media Links.`,
     );
     const socialTypesParsePromise = checkAndParseInputDataAsync(
         await socialTypeFetchPromise,
@@ -35,7 +35,7 @@ export async function loadDataAsync(fetch: typeof globalThis.fetch): Promise<Loa
     );
 
     return {
-        socials:     await socialsParsePromise,
+        socials: await socialsParsePromise,
         socialTypes: await socialTypesParsePromise,
     };
 }
@@ -63,8 +63,8 @@ export function getIDFromSocialMediaType(types: DashboardAllSocialMediaLinkTypes
 
 
 export function validate(data: DashboardAllSocialMediaLinks): ValidateReturn {
-    const https: string      = 'https://';
-    const http: string       = 'http://';
+    const https: string = 'https://';
+    const http: string = 'http://';
     const messages: string[] = [];
     for (const entry of data) {
         entry.url = entry.url.trim();
@@ -96,9 +96,9 @@ export async function deleteLinkAsync(fetch: typeof globalThis.fetch, data: Dash
         return {
             data,
             result: {
-                success:  false,
+                success: false,
                 messages: [],
-                infos:    {},
+                infos: {},
             },
         };
     }

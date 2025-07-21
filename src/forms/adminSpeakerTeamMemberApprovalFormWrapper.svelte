@@ -1,8 +1,8 @@
 <script lang="ts">
 
-    import type { DashboardAllApprovalSpeakerTeamMembers } from 'types/dashboardProvideTypes';
+    import type {DashboardAllApprovalSpeakerTeamMembers} from 'types/dashboardProvideTypes';
 
-    import { createEventDispatcher } from 'svelte';
+    import {createEventDispatcher} from 'svelte';
 
     import AdminSpeakerTeamMemberApprovalForm from './adminSpeakerTeamMemberApprovalForm.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
@@ -30,8 +30,8 @@
 
 <style>
     .admin-approval-speaker-team-member-entry-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 </style>

@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import { createEventDispatcher } from 'svelte';
-    import { unsavedChanges } from 'stores/saved';
+    import {onMount} from 'svelte';
+    import {createEventDispatcher} from 'svelte';
+    import {unsavedChanges} from 'stores/saved';
 
     import DropDown from 'elements/input/dropDown.svelte';
     import ManualUnsavedChangesPopup from 'elements/popups/manualUnsavedChangesPopup.svelte';
@@ -26,7 +26,7 @@
         checkSelected();
     }
 
-    function checkSelected() : void {
+    function checkSelected(): void {
         if (selected !== displayed) {
             if (unsavedChanges()) {
                 popup.show();
@@ -61,7 +61,7 @@
         // notice that the drop-down data are bound in html.
         // They clear when the provided data are cleared.
         // When I would clear it here, Svelte would overwrite it anyway.
-        selected  = undefined;
+        selected = undefined;
         displayed = undefined;
     }
 
@@ -69,9 +69,9 @@
 
 <ManualUnsavedChangesPopup bind:this={popup}
                            navigateCallback={onNavigate}
-                           stayCallback={onStay} />
+                           stayCallback={onStay}/>
 <DropDown {classes}
           {id}
           {labelText}
           bind:selected={selected}
-          {data} />
+          {data}/>

@@ -1,11 +1,11 @@
-import type { LoadAdminGuests } from 'types/dashboardLoadTypes';
+import type {LoadAdminGuests} from 'types/dashboardLoadTypes';
 
-import { apiUrl } from 'helper/links';
-import { checkAndParseInputDataAsync } from 'helper/parseJson';
-import { dashboardAllEventsScheme } from 'types/dashboardProvideTypes';
-import { loadPossibleGuestsOfTalk, loadTalksOfEvent } from './guests-helper';
+import {apiUrl} from 'helper/links';
+import {checkAndParseInputDataAsync} from 'helper/parseJson';
+import {dashboardAllEventsScheme} from 'types/dashboardProvideTypes';
+import {loadPossibleGuestsOfTalk, loadTalksOfEvent} from './guests-helper';
 
-export async function load({ fetch }: {
+export async function load({fetch}: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminGuests> {
     const allEventsFetchPromise = fetch(apiUrl('/dashboard/admin/all-events'));

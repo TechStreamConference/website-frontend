@@ -1,20 +1,20 @@
-import type { LoadAdminTimeSlots } from 'types/dashboardLoadTypes';
-import { apiUrl } from 'helper/links';
-import { checkAndParseInputDataAsync } from 'helper/parseJson';
+import type {LoadAdminTimeSlots} from 'types/dashboardLoadTypes';
+import {apiUrl} from 'helper/links';
+import {checkAndParseInputDataAsync} from 'helper/parseJson';
 import {
     dashboardAllEventsScheme, dashboardAllTimeSlotsScheme, dashboardTalkDurationChoicesScheme,
 } from 'types/dashboardProvideTypes';
 
-export async function load({ fetch }: {
+export async function load({fetch}: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminTimeSlots> {
-    const allEventFetchPromise     = fetch(apiUrl('/dashboard/admin/all-events'));
+    const allEventFetchPromise = fetch(apiUrl('/dashboard/admin/all-events'));
     const talkDurationFetchPromise = fetch(apiUrl('/talk-duration-choices'));
 
-    const allEventsParsePromise           = checkAndParseInputDataAsync(await allEventFetchPromise,
-                                                                        dashboardAllEventsScheme,
-                                                                        `Serveranfrage für alle Events nicht erfolgreich.`,
-                                                                        `Unerwartete Daten für alle Events.`,
+    const allEventsParsePromise = checkAndParseInputDataAsync(await allEventFetchPromise,
+        dashboardAllEventsScheme,
+        `Serveranfrage für alle Events nicht erfolgreich.`,
+        `Unerwartete Daten für alle Events.`,
     );
     const talkDurationChoicesParsePromise = checkAndParseInputDataAsync(
         await talkDurationFetchPromise,
@@ -27,13 +27,13 @@ export async function load({ fetch }: {
     if (allEvents.length === 0) {
         return {
             allEvents,
-            currentSlots:        [],
+            currentSlots: [],
             talkDurationChoices: await talkDurationChoicesParsePromise,
-            currentEventID:      0,
+            currentEventID: 0,
         };
     }
 
-    const id                    = allEvents[0].id;
+    const id = allEvents[0].id;
     const timeSlotsFetchPromise = fetch(apiUrl(`/dashboard/admin/time-slots/${id}`));
     const timeSlotsParsePromise = checkAndParseInputDataAsync(
         await timeSlotsFetchPromise,
@@ -44,8 +44,8 @@ export async function load({ fetch }: {
 
     return {
         allEvents,
-        currentSlots:        await timeSlotsParsePromise,
+        currentSlots: await timeSlotsParsePromise,
         talkDurationChoices: await talkDurationChoicesParsePromise,
-        currentEventID:      id,
+        currentEventID: id,
     };
 }

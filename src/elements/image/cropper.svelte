@@ -180,8 +180,8 @@
         const viewportScaleX = canvas.scrollWidth / canvas.width;
         const viewportScaleY = canvas.scrollHeight / canvas.height;
 
-        const mouseDeltaX = (event.clientX - lastMouseX) * currentZoomScale * viewportScaleX / (1.0 + (2.0 * + croppingOffsetPercent));
-        const mouseDeltaY = (event.clientY - lastMouseY) * currentZoomScale * viewportScaleY / (1.0 + (2.0 * + croppingOffsetPercent));
+        const mouseDeltaX = (event.clientX - lastMouseX) * currentZoomScale * viewportScaleX / (1.0 + (2.0 * +croppingOffsetPercent));
+        const mouseDeltaY = (event.clientY - lastMouseY) * currentZoomScale * viewportScaleY / (1.0 + (2.0 * +croppingOffsetPercent));
         lastMouseX = event.clientX;
         lastMouseY = event.clientY;
 
@@ -378,7 +378,7 @@
         width: min(70vw, 80rem);
         border: 1px solid black;
         border-radius: var(--border-radius);
-        touch-action: none;  /* because most Browser reclaims touch events otherwise */
+        touch-action: none; /* because most Browser reclaims touch events otherwise */
     }
 
     .cropper-canvas {

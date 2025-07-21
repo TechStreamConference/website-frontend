@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Globals, MenuItem } from 'types/provideTypes.js';
+    import type {Globals, MenuItem} from 'types/provideTypes.js';
 
     import Header from 'elements/navigation/header.svelte';
     import Footer from 'elements/navigation/footer.svelte';
@@ -10,24 +10,24 @@
 </script>
 
 <div class="generic-page-wrapper">
-    <Header menu={headerMenu} />
+    <Header menu={headerMenu}/>
     <div class="generic-page-content">
-        <slot />
+        <slot/>
     </div>
     <Footer globals={globals}
-            menu={footerMenu} />
+            menu={footerMenu}/>
 </div>
 
 <style>
     .generic-page-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        min-height:     100vh;
+        min-height: 100vh;
     }
 
     .generic-page-content {
-        flex-grow:      1;
-        display:        flex;
+        flex-grow: 1;
+        display: flex;
         flex-direction: column;
     }
 </style>

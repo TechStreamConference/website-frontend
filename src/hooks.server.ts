@@ -1,8 +1,8 @@
 import {error, type HandleFetch} from '@sveltejs/kit';
-import { env } from '$env/dynamic/public';
+import {env} from '$env/dynamic/public';
 import {dev} from "$app/environment";
 
-export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
+export const handleFetch: HandleFetch = async ({event, request, fetch}) => {
     const cookies = event.request.headers.get("cookie")
     console.log(`[handleFetch] cookies: ${cookies}`);
     if (!env.PUBLIC_API_BASE_URL_SSR) {

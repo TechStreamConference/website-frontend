@@ -16,7 +16,6 @@
     import StyledLink from 'elements/input/styledLink.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
-
     export let data: LoadResetPassword;
     let state: SingleProcessState = SingleProcessState.Default;
 

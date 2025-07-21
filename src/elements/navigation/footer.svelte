@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Globals, MenuItem } from 'types/provideTypes';
+    import type {Globals, MenuItem} from 'types/provideTypes';
 
     import TextLine from 'elements/text/textLine.svelte';
     import List from 'elements/list/list.svelte';
@@ -39,9 +39,9 @@
                 {#each globals.years_with_events as number}
                     <ListElement>
                         <Link
-                              classes={'link-standard link-white navigation-footer-font-size'}
-                              href="/year/{number}"
-                              title="Tech Stream Conference Seite des Jahres {number} anschauen"
+                                classes={'link-standard link-white navigation-footer-font-size'}
+                                href="/year/{number}"
+                                title="Tech Stream Conference Seite des Jahres {number} anschauen"
                         >
                             {number}
                         </Link>
@@ -57,35 +57,35 @@
         </div>
 
         <div class="navigation-footer-element">
-            <LogoBig classes="navigation-footer-logo" />
+            <LogoBig classes="navigation-footer-logo"/>
         </div>
     </div>
     <div class="navigation-footer-copyright">
         <TextLine classes={'text-line-white navigation-footer-font-size'}>&copy; Tech Stream
-                                                                          Conference {currentYear}</TextLine>
+            Conference {currentYear}</TextLine>
     </div>
 </footer>
 
 <style>
     footer {
-        display:          flex;
-        flex-direction:   column;
+        display: flex;
+        flex-direction: column;
         background-color: var(--primary-color-light);
-        padding:          var(--2x-padding) 0;
+        padding: var(--2x-padding) 0;
     }
 
     .navigation-footer-wrapper {
-        display:         flex;
-        flex-direction:  row;
-        flex-wrap:       wrap;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         justify-content: space-evenly;
-        gap:             var(--4x-gap);
-        padding:         0 var(--4x-padding);
+        gap: var(--4x-gap);
+        padding: 0 var(--4x-padding);
     }
 
     .navigation-footer-element {
-        flex:       1;
-        min-width:  18rem;
+        flex: 1;
+        min-width: 18rem;
         text-align: center;
     }
 
@@ -94,14 +94,14 @@
     }
 
     :global(.navigation-footer-logo) {
-        height:     16rem;
+        height: 16rem;
         object-fit: contain;
         max-height: 20rem;
     }
 
     .navigation-footer-copyright {
-        margin-top:      var(--2x-margin);
-        display:         flex;
+        margin-top: var(--2x-margin);
+        display: flex;
         justify-content: center;
     }
 

@@ -1,6 +1,6 @@
-import { resetUnsavedChanges } from 'stores/saved';
-import { apiUrl } from './links';
-import { parseMultipleErrorsAsync, parseMultipleInfosAsync } from 'helper/parseJson';
+import {resetUnsavedChanges} from 'stores/saved';
+import {apiUrl} from './links';
+import {parseMultipleErrorsAsync, parseMultipleInfosAsync} from 'helper/parseJson';
 
 export type SaveResult = {
     success: boolean;
@@ -12,12 +12,12 @@ export type SaveResult = {
 
 export function combineSaveResult(lhs: SaveResult, rhs: SaveResult): SaveResult {
     return {
-        success:  lhs.success && rhs.success,
+        success: lhs.success && rhs.success,
         messages: [
             ...lhs.messages,
             ...rhs.messages,
         ],
-        infos:    {
+        infos: {
             ...lhs.infos, ...rhs.infos,
         },
     };
@@ -29,16 +29,16 @@ export async function trySaveDataAsyncOutReset<T>(
     url: string,
     routeType: string,
 ): Promise<SaveResult> {
-    const stringData         = data instanceof FormData ? data : JSON.stringify(data);
+    const stringData = data instanceof FormData ? data : JSON.stringify(data);
     const response: Response = await fetch(apiUrl(url), {
         method: routeType,
-        body:   stringData,
+        body: stringData,
     });
 
     return {
-        success:  response.ok,
+        success: response.ok,
         messages: response.ok ? [] : await parseMultipleErrorsAsync(response),
-        infos:    await parseMultipleInfosAsync(response),
+        infos: await parseMultipleInfosAsync(response),
     };
 }
 

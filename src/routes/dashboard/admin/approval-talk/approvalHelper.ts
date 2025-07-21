@@ -3,9 +3,9 @@ import type {
 } from 'types/dashboardProvideTypes';
 
 
-import { dashboardAllTentativeOrAcceptedTalkScheme, dashboardAllTimeSlotsScheme } from 'types/dashboardProvideTypes';
-import { apiUrl } from 'helper/links';
-import { checkAndParseInputDataAsync } from 'helper/parseJson';
+import {dashboardAllTentativeOrAcceptedTalkScheme, dashboardAllTimeSlotsScheme} from 'types/dashboardProvideTypes';
+import {apiUrl} from 'helper/links';
+import {checkAndParseInputDataAsync} from 'helper/parseJson';
 
 
 type TentativeSlots = {
@@ -44,7 +44,7 @@ export async function fetchTentativeSlots(
     tentativeTalks: DashboardAllTentativeOrAcceptedTalks,
 ): Promise<TentativeSlots> {
     const slots: TentativeSlots = {};
-    const fetchSlots            = async <T extends {
+    const fetchSlots = async <T extends {
         event_id: number,
     }>(talks: T[]) => {
         for (const talk of talks) {

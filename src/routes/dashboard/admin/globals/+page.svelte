@@ -2,14 +2,14 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/dashboardItems';
 
-    import type { LoadDashboard } from 'types/dashboardLoadTypes';
-    import type { SetAdminGlobals } from 'types/dashboardSetTypes';
+    import type {LoadDashboard} from 'types/dashboardLoadTypes';
+    import type {SetAdminGlobals} from 'types/dashboardSetTypes';
 
-    import { Clone } from 'helper/clone';
-    import { SaveMessageType } from 'types/saveMessageType';
-    import { setUnsavedChanges } from 'stores/saved';
-    import { trySaveDataAsync } from 'helper/trySaveData';
-    import { resetGlobals } from 'stores/globals';
+    import {Clone} from 'helper/clone';
+    import {SaveMessageType} from 'types/saveMessageType';
+    import {setUnsavedChanges} from 'stores/saved';
+    import {trySaveDataAsync} from 'helper/trySaveData';
+    import {resetGlobals} from 'stores/globals';
 
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
     import Button from 'elements/input/button.svelte';
@@ -21,7 +21,7 @@
 
     export let data: LoadDashboard; // data from database
 
-    let copiedData          = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
+    let copiedData = new Clone<LoadDashboard>(data); // copied data from database to not save original data until save
     let message: SaveMessage;
     let errorList: string[] = [];
 
@@ -42,28 +42,28 @@
 <Tabs classes="subpage-navigation-tabs"
       position="center"
       entries={Menu.admin}
-      entryName={MenuItem.adminGlobals.name} />
-<UnsavedChangesCallbackWrapper callback={trySaveAsync} />
+      entryName={MenuItem.adminGlobals.name}/>
+<UnsavedChangesCallbackWrapper callback={trySaveAsync}/>
 <SectionDashboard classes="dashboard-admin-global-section">
-    <SaveMessage bind:this={message} />
-    <MessageWrapper messages={errorList} />
+    <SaveMessage bind:this={message}/>
+    <MessageWrapper messages={errorList}/>
     <form class="dashboard-admin-global-form form-border"
           on:submit|preventDefault={trySaveAsync}>
 		<TextArea
-              classes="admin-footer-description input"
-              id="admin-footer-description"
-              labelText="Footer Beschreibung:"
-              placeholderText="Footer Beschreibung"
-              ariaLabel="Gib den Text ein, der im Footer der Internetseite angezeigt werden soll"
-              bind:value={copiedData.value.globals.footer_text}
-              on:submit={trySaveAsync}
-              on:input={setUnsavedChanges}
+                classes="admin-footer-description input"
+                id="admin-footer-description"
+                labelText="Footer Beschreibung:"
+                placeholderText="Footer Beschreibung"
+                ariaLabel="Gib den Text ein, der im Footer der Internetseite angezeigt werden soll"
+                bind:value={copiedData.value.globals.footer_text}
+                on:submit={trySaveAsync}
+                on:input={setUnsavedChanges}
         />
 
         <Button
-              classes="dashboard-admin-global-submit-button"
-              type={'submit'}
-              ariaLabel="Klicke zum Speichern"
+                classes="dashboard-admin-global-submit-button"
+                type={'submit'}
+                ariaLabel="Klicke zum Speichern"
         >
             Speichern
         </Button>
@@ -76,7 +76,7 @@
     }
 
     .dashboard-admin-global-form {
-        display:        flex;
+        display: flex;
         flex-direction: column;
     }
 

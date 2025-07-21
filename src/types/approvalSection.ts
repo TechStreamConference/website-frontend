@@ -1,6 +1,6 @@
 export enum ApprovalSection {
-    Speaker     = 0,
-    TeamMember  = 1,
+    Speaker = 0,
+    TeamMember = 1,
     SocialMedia = 2
 }
 

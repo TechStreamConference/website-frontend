@@ -3,7 +3,7 @@
         DashboardAllTimeSlots, DashboardTentativeOrAcceptedTalk, DashboardTimeSlot,
     } from 'types/dashboardProvideTypes';
 
-    import { formatDate } from 'helper/dates.js';
+    import {formatDate} from 'helper/dates.js';
 
     import TextLine from 'elements/text/textLine.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
@@ -16,17 +16,17 @@
     import GeneralPopup from 'elements/popups/generalPopup.svelte';
     import Message from 'elements/text/message.svelte';
 
-    import { trySaveDataAsync } from 'helper/trySaveData.js';
-    import { SaveMessageType } from 'types/saveMessageType';
-    import { createEventDispatcher, onMount } from 'svelte';
-    import { getElementByID } from 'helper/basic';
+    import {trySaveDataAsync} from 'helper/trySaveData.js';
+    import {SaveMessageType} from 'types/saveMessageType';
+    import {createEventDispatcher, onMount} from 'svelte';
+    import {getElementByID} from 'helper/basic';
 
     export let talk: DashboardTentativeOrAcceptedTalk;
     export let slots: {
         [key: number]: DashboardAllTimeSlots
     };
     let rejectReason: string = '';
-    let selected: string     = '';
+    let selected: string = '';
 
     let message: SaveMessage;
     let errorList: string[] = [];
@@ -44,7 +44,7 @@
         }
         let entry = `${slot.id} | ${formatDate(slot.start_time, '%DD.%MM.%YYYY %hh:%mm')} | ${slot.duration} Minuten`;
         if (slot.is_occupied) {
-            entry+= ' | Vergeben';
+            entry += ' | Vergeben';
         }
         return entry;
     }
@@ -56,7 +56,7 @@
     async function reject(): Promise<void> {
         const result = await trySaveDataAsync(
             fetch,
-            { reason: rejectReason },
+            {reason: rejectReason},
             `/dashboard/admin/talk/${talk.id}/reject`,
             'POST',
         );
@@ -78,7 +78,7 @@
 
         const result = await trySaveDataAsync(
             fetch,
-            { time_slot_id: id },
+            {time_slot_id: id},
             `/dashboard/admin/talk/${talk.id}/suggest-time-slot`,
             'PUT',
         );
@@ -101,12 +101,12 @@
               denyButtonText="Abbrechen"
               acceptButtonText="Ablehnen"
               denyCallback={() => {}}
-              acceptCallback={reject} />
+              acceptCallback={reject}/>
 
 <form class="dashboard-admin-tentative-talk-approval-form form-border"
       on:submit|preventDefault={suggest}>
-    <SaveMessage bind:this={message} />
-    <MessageWrapper messages={errorList} />
+    <SaveMessage bind:this={message}/>
+    <MessageWrapper messages={errorList}/>
     <div class="dashboard-admin-tentative-entry-wrapper">
         <TextLine>Name:</TextLine>
         <TextLine>{talk.speaker.name}</TextLine>
@@ -115,7 +115,7 @@
         <TextLine>Tags:</TextLine>
         <div class="dashboard-entry-array-wrapper">
             {#each talk.tags as tag}
-                <ScheduleTag {tag} />
+                <ScheduleTag {tag}/>
             {/each}
         </div>
         <TextLine>Mögliche Längen (in Minuten):</TextLine>
@@ -131,19 +131,19 @@
     </div>
     {#if talk.suggested_time_slot}
         <Message message={`Vorgeschlagen: ${getDropDownEntrySafe(talk.suggested_time_slot)}`}
-                 color="success" />
+                 color="success"/>
     {:else}
-        <Message message="Noch kein Slot vorgeschlagen." />
+        <Message message="Noch kein Slot vorgeschlagen."/>
     {/if}
     <DropDown id="dashboard-admin-tentative-talk-approval-slot-drop-down-{talk.id}"
               labelText="Slot:"
               data={slots[talk.event_id].map(x => getDropDownEntrySafe(x))}
-              bind:selected={selected} />
+              bind:selected={selected}/>
     <TextArea id="dashboard-admin-tentative-approval-rejection-area-{talk.id}"
               ariaLabel="Gibt hier einen Ablehnungsgrund ein"
               labelText="Ablehnungsgrund:"
               placeholderText="Ablehnungsgrund"
-              bind:value={rejectReason} />
+              bind:value={rejectReason}/>
     <div class="dashboard-tentative-talks-button-wrapper">
         <Button type="submit"
                 ariaLabel="Klicke hier, um einen slot vor zu schlagen">Slot vorschlagen
@@ -156,29 +156,29 @@
 
 <style>
     .dashboard-admin-tentative-talk-approval-form {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 
     .dashboard-admin-tentative-entry-wrapper {
-        display:               grid;
+        display: grid;
         grid-template-columns: auto auto;
-        justify-content:       center;
-        column-gap:            var(--2x-gap);
-        row-gap:               var(--quad-gap);
+        justify-content: center;
+        column-gap: var(--2x-gap);
+        row-gap: var(--quad-gap);
     }
 
     .dashboard-entry-array-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 
     .dashboard-tentative-talks-button-wrapper {
-        display:         flex;
-        flex-direction:  row;
-        gap:             var(--full-gap);
+        display: flex;
+        flex-direction: row;
+        gap: var(--full-gap);
         justify-content: center;
     }
 </style>

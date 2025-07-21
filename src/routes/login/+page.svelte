@@ -1,7 +1,7 @@
 <script lang="ts">
     import * as Menu from 'menu/page';
 
-    import type { LoadLogin } from 'types/loadTypes';
+    import type {LoadLogin} from 'types/loadTypes';
     import {LoginState} from "types/enums";
 
     import HeadlinePage from 'elements/text/headlinePage.svelte';
@@ -13,21 +13,21 @@
     import PageWrapper from 'elements/section/pageWrapper.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
 
-    import { goto } from '$app/navigation';
-    import { trySaveDataAsync } from 'helper/trySaveData';
-    import { setFocus } from 'helper/basic';
-    import { onMount } from 'svelte';
+    import {goto} from '$app/navigation';
+    import {trySaveDataAsync} from 'helper/trySaveData';
+    import {setFocus} from 'helper/basic';
+    import {onMount} from 'svelte';
 
     export let data: LoadLogin; // data from database
 
     let state: LoginState = LoginState.Login;
 
     let usernameOrEmail: string = '';
-    let password: string        = '';
+    let password: string = '';
 
-    const loggedInMessage     = data.loggedIn ? 'Du bist bereits angemeldet.' : '';
+    const loggedInMessage = data.loggedIn ? 'Du bist bereits angemeldet.' : '';
     const displayLoginMessage = data.showLoginMessage ? 'Du musst dich zunächst anmelden.' : '';
-    let errorList: string[]   = [];
+    let errorList: string[] = [];
 
     onMount(() => {
         setFocus('login-username-or-email');
@@ -35,13 +35,13 @@
 
     function changeState(_state: LoginState): void {
         errorList = [];
-        state     = _state;
+        state = _state;
     }
 
     async function loginAsync(): Promise<void> {
         const data = {
             username_or_email: usernameOrEmail.trim(),
-            password:          password.trim(),
+            password: password.trim(),
         };
 
         const result = await trySaveDataAsync(fetch, data, '/account/login', 'POST');
@@ -82,27 +82,27 @@
               on:submit|preventDefault={loginAsync}>
             <HeadlinePage>Anmelden</HeadlinePage>
             <div class="login-message-wrapper">
-                <ErrorMessage message={loggedInMessage} />
-                <ErrorMessage message={displayLoginMessage} />
-                <MessageWrapper messages={errorList} />
+                <ErrorMessage message={loggedInMessage}/>
+                <ErrorMessage message={displayLoginMessage}/>
+                <MessageWrapper messages={errorList}/>
             </div>
             <Input
-                  classes="login-username-mail"
-                  id="login-username-or-email"
-                  type="text"
-                  labelText="Nutzername oder E-Mail:"
-                  placeholderText="Nutzername oder E-Mail"
-                  ariaLabel="Gib den Nutzernamen oder die E-Mail ein"
-                  bind:value={usernameOrEmail}
+                    classes="login-username-mail"
+                    id="login-username-or-email"
+                    type="text"
+                    labelText="Nutzername oder E-Mail:"
+                    placeholderText="Nutzername oder E-Mail"
+                    ariaLabel="Gib den Nutzernamen oder die E-Mail ein"
+                    bind:value={usernameOrEmail}
             />
             <Input
-                  classes="login-password"
-                  id="login-password"
-                  type="password"
-                  labelText="Passwort:"
-                  placeholderText="Passwort"
-                  ariaLabel="Gib das Passwort ein"
-                  bind:value={password}
+                    classes="login-password"
+                    id="login-password"
+                    type="password"
+                    labelText="Passwort:"
+                    placeholderText="Passwort"
+                    ariaLabel="Gib das Passwort ein"
+                    bind:value={password}
             />
             <Link href="/register"
                   title="Klicke, um einen neuen Account anzulegen">
@@ -123,15 +123,15 @@
         <form class="login-form-width-wrapper"
               on:submit|preventDefault={resetPassword}>
             <HeadlinePage>Passwort zurücksetzen</HeadlinePage>
-            <MessageWrapper messages={errorList} />
+            <MessageWrapper messages={errorList}/>
             <Input
-                  classes="login-username-mail login-username-mail-reset-extra"
-                  id="login-username-or-email"
-                  type="text"
-                  labelText="Nutzername oder E-Mail:"
-                  placeholderText="Nutzername oder E-Mail"
-                  ariaLabel="Gib den Nutzernamen oder die E-Mail-Adresse ein"
-                  bind:value={usernameOrEmail}
+                    classes="login-username-mail login-username-mail-reset-extra"
+                    id="login-username-or-email"
+                    type="text"
+                    labelText="Nutzername oder E-Mail:"
+                    placeholderText="Nutzername oder E-Mail"
+                    ariaLabel="Gib den Nutzernamen oder die E-Mail-Adresse ein"
+                    bind:value={usernameOrEmail}
             />
             <Button classes="login-button"
                     type="submit"
@@ -160,10 +160,10 @@
 
 <style>
     .login-form-width-wrapper {
-        width:          100%;
-        max-width:      50rem;
-        margin:         0 auto;
-        display:        flex;
+        width: 100%;
+        max-width: 50rem;
+        margin: 0 auto;
+        display: flex;
         flex-direction: column;
         padding: 0 var(--2x-padding);
     }
@@ -173,9 +173,9 @@
     }
 
     .login-message-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        margin:         var(--2x-margin) auto;
+        margin: var(--2x-margin) auto;
     }
 
     :global(.login-username-mail) {

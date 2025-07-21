@@ -1,14 +1,14 @@
-import type { Writable } from 'svelte/store';
-import { writable, get } from 'svelte/store';
-import type { Globals } from 'types/provideTypes';
-import { apiUrl } from 'helper/links';
-import { checkAndParseGlobalsAsync } from 'helper/parseJson';
+import type {Writable} from 'svelte/store';
+import {writable, get} from 'svelte/store';
+import type {Globals} from 'types/provideTypes';
+import {apiUrl} from 'helper/links';
+import {checkAndParseGlobalsAsync} from 'helper/parseJson';
 
 type ValueType =
     Globals
     | undefined;
 const _globals: Writable<ValueType> = writable(undefined);
-let timer: number | undefined       = undefined;
+let timer: number | undefined = undefined;
 
 
 export async function getGlobalsAsync(fetch: typeof globalThis.fetch): Promise<Globals> {
@@ -22,7 +22,7 @@ export async function getGlobalsAsync(fetch: typeof globalThis.fetch): Promise<G
 }
 
 export async function getGlobalsAsyncForced(fetch: typeof globalThis.fetch): Promise<Globals> {
-    const globalsResponse      = await fetch(apiUrl('/globals'));
+    const globalsResponse = await fetch(apiUrl('/globals'));
     const globalsData: Globals = await checkAndParseGlobalsAsync(globalsResponse);
 
     resetGlobals();

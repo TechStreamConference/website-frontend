@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type { DashboardPendingTalk } from 'types/dashboardProvideTypes';
+    import type {DashboardPendingTalk} from 'types/dashboardProvideTypes';
 
-    import { trySaveDataAsync } from 'helper/trySaveData.js';
-    import { SaveMessageType } from 'types/saveMessageType';
-    import { createEventDispatcher } from 'svelte';
+    import {trySaveDataAsync} from 'helper/trySaveData.js';
+    import {SaveMessageType} from 'types/saveMessageType';
+    import {createEventDispatcher} from 'svelte';
 
     import SaveMessage from 'elements/text/saveMessage.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
@@ -66,7 +66,7 @@
 
         const result = await trySaveDataAsync(
             fetch,
-            { reason: talk.requested_changes },
+            {reason: talk.requested_changes},
             `/dashboard/admin/talk/${talk.id}/reject`,
             'POST',
         );
@@ -85,7 +85,7 @@
 
         const result = await trySaveDataAsync(
             fetch,
-            { requested_changes: talk.requested_changes },
+            {requested_changes: talk.requested_changes},
             `/dashboard/admin/talk/${talk.id}/request-changes`,
             'POST',
         );
@@ -104,19 +104,19 @@
               denyButtonText="Abbrechen"
               acceptButtonText="Freigeben"
               denyCallback={() => {}}
-              acceptCallback={approve} />
+              acceptCallback={approve}/>
 <GeneralPopup bind:this={rejectPopup}
               headline="Ablehnen?"
               text="Wenn du diesen Talk ablehnst, kannst du es nicht mehr rückgängig machen"
               denyButtonText="Abbrechen"
               acceptButtonText="Ablehnen"
               denyCallback={() => {}}
-              acceptCallback={reject} />
+              acceptCallback={reject}/>
 
 <form class="dashboard-admin-pending-talk-approval-form form-border"
       on:submit|preventDefault={() => approvePopup.show('') }>
-    <SaveMessage bind:this={message} />
-    <MessageWrapper messages={errorList} />
+    <SaveMessage bind:this={message}/>
+    <MessageWrapper messages={errorList}/>
 
     <div class="dashboard-admin-pending-talk-approval-entry">
         <TextLine>Speaker:</TextLine>
@@ -126,7 +126,7 @@
         <TextLine>Tags:</TextLine>
         <div class="dashboard-admin-pending-talk-list-wrapper">
             {#each talk.tags as tag}
-                <ScheduleTag {tag} />
+                <ScheduleTag {tag}/>
             {/each}
         </div>
         <TextLine>Mögliche Längen (in Minuten):</TextLine>
@@ -145,7 +145,7 @@
               labelText="Änderungswünsche / Ablehnungsgrund:"
               placeholderText="Änderungswünsche / Ablehnungsgrund"
               bind:value={talk.requested_changes}
-              on:submit={changes} />
+              on:submit={changes}/>
     <div class="pending-talk-button-array">
         <Button type="submit"
                 ariaLabel="Klicke hier, um den Talk frei zu geben">Freigeben
@@ -161,30 +161,30 @@
 
 <style>
     .dashboard-admin-pending-talk-approval-form {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 
     .dashboard-admin-pending-talk-approval-entry {
-        display:               grid;
+        display: grid;
         grid-template-columns: auto auto;
-        justify-content:       center;
-        row-gap:               var(--quad-gap);
-        column-gap:            var(--2x-gap);
+        justify-content: center;
+        row-gap: var(--quad-gap);
+        column-gap: var(--2x-gap);
     }
 
     .dashboard-admin-pending-talk-list-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        flex-wrap:      wrap;
-        gap:            var(--full-gap);
+        flex-wrap: wrap;
+        gap: var(--full-gap);
     }
 
     .pending-talk-button-array {
-        display:         flex;
-        flex-direction:  row;
-        gap:             var(--full-gap);
+        display: flex;
+        flex-direction: row;
+        gap: var(--full-gap);
         justify-content: center;
     }
 </style>

@@ -4,15 +4,15 @@
 
 <div class="explanation-wrapper">
     <Paragraph>
-        <slot />
+        <slot/>
     </Paragraph>
 </div>
 
 <style>
     .explanation-wrapper {
         width: 100%;
-        border : 1px solid var(--text-color);
-        border-radius : var(--border-radius);
+        border: 1px solid var(--text-color);
+        border-radius: var(--border-radius);
         padding: var(--full-padding);
         text-align: center;
     }

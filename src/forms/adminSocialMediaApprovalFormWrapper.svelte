@@ -1,8 +1,8 @@
 <script lang="ts">
 
-    import type { DashboardAllApprovalSocialMediaLinks } from 'types/dashboardProvideTypes';
+    import type {DashboardAllApprovalSocialMediaLinks} from 'types/dashboardProvideTypes';
 
-    import { createEventDispatcher } from 'svelte';
+    import {createEventDispatcher} from 'svelte';
 
     import AdminSocialMediaApprovalForm from './adminSocialMediaApprovalForm.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
@@ -20,6 +20,6 @@
     {#each media as link}
         <AdminSocialMediaApprovalForm media={link}
                                       on:changes={() => {dispatch('changes', link.id)}}
-                                      on:approved={() => {dispatch('approved', link.id)}} />
+                                      on:approved={() => {dispatch('approved', link.id)}}/>
     {/each}
 {/if}

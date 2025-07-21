@@ -1,6 +1,7 @@
-import type { MenuItem } from 'types/provideTypes';
-import { adminApprovalSpeakerTeamMember, speakerEvents, teamMemberEvents, userProfile } from 'menu/dashboardItems';
+import type {MenuItem} from 'types/provideTypes';
+import {adminApprovalSpeakerTeamMember, speakerEvents, teamMemberEvents, userProfile} from 'menu/dashboardItems';
 
+// @formatter:off
 export const top: MenuItem = {
     name:        'Top',
     url:         '#top',
@@ -49,7 +50,7 @@ export const contact: MenuItem = {
     description: 'Klicke hier, um mit uns in Kontakt zu treten',
 };
 
-export const admin: MenuItem      = {
+export const admin: MenuItem = {
     name:        'Admin',
     url:         adminApprovalSpeakerTeamMember.url,
     description: 'Klicke hier, um zum Admin-Dashboard zu gelangen',
@@ -59,13 +60,14 @@ export const teamMember: MenuItem = {
     url:         teamMemberEvents.url,
     description: 'Klicke hier, um zum Team-Member-Dashboard zu gelangen',
 };
-export const speaker: MenuItem    = {
+export const speaker: MenuItem = {
     name:        'Speaker',
     url:         speakerEvents.url,
     description: 'Klicke hier, um zum Speaker-Dashboard zu gelangen',
 };
-export const user: MenuItem       = {
+export const user: MenuItem = {
     name:        'User',
     url:         userProfile.url,
     description: 'Klicke hier, um zum User-Dashboard zu gelangen',
 };
+// @formatter:on

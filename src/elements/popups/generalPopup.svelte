@@ -68,8 +68,8 @@
 
 <style>
     .general-popup-button-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 </style>

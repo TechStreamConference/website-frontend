@@ -1,4 +1,4 @@
-import type { Menu } from 'types/provideTypes';
+import type {Menu} from 'types/provideTypes';
 import * as YearItem from './yearItems';
 import * as PageItem from './pageItems';
 
@@ -48,7 +48,7 @@ export const headerMainLoggedOut: Menu = [
     PageItem.login,
 ];
 
-export const headerLoggedIn: Menu  = [
+export const headerLoggedIn: Menu = [
     PageItem.mainPage,
     PageItem.intern,
     PageItem.logout,
@@ -59,7 +59,7 @@ export const headerLoggedOut: Menu = [
     PageItem.register,
 ];
 
-export const footerLoggedIn: Menu  = [
+export const footerLoggedIn: Menu = [
     PageItem.mainPage,
     PageItem.intern,
     PageItem.logout,

@@ -2,6 +2,7 @@ type ResponseDict = {
     [key: string]: string;
 };
 
+// @formatter:off
 const lookup: ResponseDict = {
     // name
     'The username field is required.':                                                    'Das Feld \'Name\' ist erforderlich.',
@@ -80,11 +81,12 @@ const lookup: ResponseDict = {
     // contact
     'The name field is required.':    'Das Feld \'Name\' ist erforderlich.',
     'The message field is required.': 'Das Feld \'Nachricht\' ist erforderlich.',
-    'The subject field is required.': 'Das feld \'Betreff\' ist erforderlich.',
+    'The subject field is required.': 'Das Feld \'Betreff\' ist erforderlich.',
 
     // video room
     VIDEO_ROOM_DOES_NOT_EXIST: 'Keine Links zum Verschicken vorhanden.',
 };
+// @formatter:on
 
 export function responseLookup(key: string): string {
     if (key in lookup) {

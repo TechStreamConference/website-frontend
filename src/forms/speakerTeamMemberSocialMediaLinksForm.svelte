@@ -1,10 +1,10 @@
 <script lang="ts">
-    import type { LoadUserSocials } from 'types/dashboardLoadTypes';
-    import type { DashboardRoles, DashboardSocialMediaLink } from 'types/dashboardProvideTypes';
+    import type {LoadUserSocials} from 'types/dashboardLoadTypes';
+    import type {DashboardRoles, DashboardSocialMediaLink} from 'types/dashboardProvideTypes';
 
-    import { setUnsavedChanges } from 'stores/saved';
-    import { getIDFromSocialMediaType } from 'pageHelper/speakerTeamMemberSocials';
-    import { createEventDispatcher } from 'svelte';
+    import {setUnsavedChanges} from 'stores/saved';
+    import {getIDFromSocialMediaType} from 'pageHelper/speakerTeamMemberSocials';
+    import {createEventDispatcher} from 'svelte';
 
     import EditSocialMedia from 'elements/input/editSocialMedia.svelte';
     import Button from 'elements/input/button.svelte';
@@ -21,15 +21,15 @@
 
     function addLink(): void {
         const newLink: DashboardSocialMediaLink = {
-            approved:             false,
-            id:                   0,
-            name:                 'Web',
-            url:                  'https://',
-            user_id:              roles.user_id,
-            requested_changes:    null,
+            approved: false,
+            id: 0,
+            name: 'Web',
+            url: 'https://',
+            user_id: roles.user_id,
+            requested_changes: null,
             social_media_type_id: getIDFromSocialMediaType(data.socialTypes, 'Web'),
         };
-        data.socials                            = [
+        data.socials = [
             ...data.socials,
             newLink,
         ];
@@ -39,12 +39,12 @@
 </script>
 
 <GeneralPopup
-      bind:this={deletePopup}
-      headline="Link löschen?"
-      text="Gelöschte Links können nicht wiederhergestellt werden."
-      acceptButtonText="Löschen"
-      denyButtonText="Abbrechen"
-      acceptCallback={(value) => {
+        bind:this={deletePopup}
+        headline="Link löschen?"
+        text="Gelöschte Links können nicht wiederhergestellt werden."
+        acceptButtonText="Löschen"
+        denyButtonText="Abbrechen"
+        acceptCallback={(value) => {
 		if (typeof value === 'number') {
             dispatch('delete', value);
 			return;
@@ -52,19 +52,19 @@
 
 		console.error('the provided entry index from the generic popup is not number');
 	}}
-      denyCallback={() => {}}
+        denyCallback={() => {}}
 ></GeneralPopup>
 
 <FormWrapper classes="form-border"
              submitCallback={() => dispatch('save')}
              useForm={displaySaveButton}>
     <EditSocialMedia
-          links={data.socials}
-          socialMediaTypes={data.socialTypes.map((x) => x.name)}
-          deleteCallback={(e) => {
+            links={data.socials}
+            socialMediaTypes={data.socialTypes.map((x) => x.name)}
+            deleteCallback={(e) => {
 				deletePopup.show(e);
 			}}
-          on:input={setUnsavedChanges}
+            on:input={setUnsavedChanges}
     />
     <div class="dashboard-social-media-links-button-wrapper">
         <Button ariaLabel="Klicke hier, um einen neuen Link hinzuzufügen"
@@ -82,10 +82,10 @@
 
 <style>
     .dashboard-social-media-links-button-wrapper {
-        display:         flex;
-        flex-direction:  row;
-        gap:             var(--full-gap);
-        margin-top:      var(--4x-gap);
+        display: flex;
+        flex-direction: row;
+        gap: var(--full-gap);
+        margin-top: var(--4x-gap);
         justify-content: center;
     }
 </style>

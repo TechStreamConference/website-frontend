@@ -3,16 +3,16 @@
 </script>
 
 <p class="normal-font {classes}">
-    <slot />
+    <slot/>
 </p>
 
 <style>
     p {
-        font-size:   var(--full-font-size);
+        font-size: var(--full-font-size);
         line-height: 1.5;
-        text-wrap:   wrap;
-        text-align:  var(--text-align);
-        width:       var(--width);
+        text-wrap: wrap;
+        text-align: var(--text-align);
+        width: var(--width);
     }
 
     .paragraph-white {

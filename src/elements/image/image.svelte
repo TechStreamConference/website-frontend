@@ -7,14 +7,14 @@
 
 <img class={classes}
      {src}
-     {alt} />
+     {alt}/>
 
 <style>
     .image-default {
-        max-height:    100%;
-        max-width:     100%;
-        height:        auto;
-        width:         auto;
+        max-height: 100%;
+        max-width: 100%;
+        height: auto;
+        width: auto;
         border-radius: var(--border-radius);
     }
 </style>

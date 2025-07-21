@@ -1,13 +1,13 @@
-import type { LoadYear } from 'types/loadTypes';
-import type { Year, Globals } from 'types/provideTypes';
+import type {LoadYear} from 'types/loadTypes';
+import type {Year, Globals} from 'types/provideTypes';
 
-import { yearScheme } from 'types/provideTypes';
+import {yearScheme} from 'types/provideTypes';
 
 
-import { checkAndParseInputDataAsync } from 'helper/parseJson';
-import { apiUrl } from 'helper/links';
-import { fetchLoginStatusAsync } from 'helper/loggedIn';
-import { getGlobalsAsync } from 'stores/globals';
+import {checkAndParseInputDataAsync} from 'helper/parseJson';
+import {apiUrl} from 'helper/links';
+import {fetchLoginStatusAsync} from 'helper/loggedIn';
+import {getGlobalsAsync} from 'stores/globals';
 
 export async function loadYearAsync(
     fetch: typeof globalThis.fetch,
@@ -25,7 +25,7 @@ export async function loadYearAsync(
 
     // data
     const loggedIn: boolean = await loggedInPromise;
-    const yearData: Year    = await checkAndParseInputDataAsync(
+    const yearData: Year = await checkAndParseInputDataAsync(
         await yearDataPromise,
         yearScheme,
         `Serveranfrage für das Jahr ${year} nicht erfolgreich.`,
@@ -35,6 +35,6 @@ export async function loadYearAsync(
     return {
         loggedIn,
         globals: await globalsPromise,
-        year:    yearData,
+        year: yearData,
     };
 }

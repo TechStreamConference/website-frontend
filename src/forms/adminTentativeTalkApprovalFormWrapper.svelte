@@ -1,8 +1,8 @@
 <script lang="ts">
-    import type { DashboardAllTentativeOrAcceptedTalks, DashboardAllTimeSlots } from 'types/dashboardProvideTypes';
+    import type {DashboardAllTentativeOrAcceptedTalks, DashboardAllTimeSlots} from 'types/dashboardProvideTypes';
     import AdminTentativeTalkApprovalForm from './adminTentativeTalkApprovalForm.svelte';
     import SubHeadline from 'elements/text/subHeadline.svelte';
-    import { createEventDispatcher } from 'svelte';
+    import {createEventDispatcher} from 'svelte';
 
     export let talks: DashboardAllTentativeOrAcceptedTalks;
     export let slots: {
@@ -20,7 +20,7 @@
             <AdminTentativeTalkApprovalForm {talk}
                                             bind:slots={slots}
                                             on:reject={()=> dispatch('reject', talk.id)}
-                                            on:suggest={()=> dispatch('suggest', talk.id)} />
+                                            on:suggest={()=> dispatch('suggest', talk.id)}/>
         {/each}
     </div>
 {/if}
@@ -28,8 +28,8 @@
 
 <style>
     .dashboard-admin-tentative-talk-approval-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 </style>

@@ -1,17 +1,17 @@
-import type { LoadAdminCreatePanelDiscussion } from 'types/dashboardLoadTypes';
+import type {LoadAdminCreatePanelDiscussion} from 'types/dashboardLoadTypes';
 
-import { apiUrl } from 'helper/links';
-import { checkAndParseInputDataAsync } from 'helper/parseJson';
-import { dashboardAllEventsScheme, dashboardTalkDurationChoicesScheme } from 'types/dashboardProvideTypes';
-import { loadPossibleHosts } from './panelHelper';
-import { allTalkTagScheme } from 'types/provideTypes';
+import {apiUrl} from 'helper/links';
+import {checkAndParseInputDataAsync} from 'helper/parseJson';
+import {dashboardAllEventsScheme, dashboardTalkDurationChoicesScheme} from 'types/dashboardProvideTypes';
+import {loadPossibleHosts} from './panelHelper';
+import {allTalkTagScheme} from 'types/provideTypes';
 
-export async function load({ fetch }: {
+export async function load({fetch}: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminCreatePanelDiscussion> {
     const eventsFetchPromise = fetch(apiUrl('/dashboard/admin/all-events'));
     const durationFetchPromise = fetch(apiUrl('/talk-duration-choices'));
-    const tagsFetchPromise     = fetch(apiUrl('/tags'));
+    const tagsFetchPromise = fetch(apiUrl('/tags'));
 
     const eventsParsePromise = checkAndParseInputDataAsync(
         await eventsFetchPromise,
@@ -36,7 +36,7 @@ export async function load({ fetch }: {
         'Serveranfrage für die Vortragslängen nicht erfolgreich.',
         'Unerwartete Daten für die Vortragslängen.',
     );
-    const tagsParsePromise     = checkAndParseInputDataAsync(
+    const tagsParsePromise = checkAndParseInputDataAsync(
         await tagsFetchPromise,
         allTalkTagScheme,
         'Serveranfrage für die Tags nicht erfolgreich.',
@@ -46,7 +46,7 @@ export async function load({ fetch }: {
     return {
         allEvents,
         possibleHosts: await possibleHostsPromise,
-        durations : await durationParsePromise,
-        tags : await tagsParsePromise,
+        durations: await durationParsePromise,
+        tags: await tagsParsePromise,
     };
 }

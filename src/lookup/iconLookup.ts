@@ -2,6 +2,7 @@ type IconDict = {
     [key: string]: string;
 };
 
+// @formatter:off
 const lookup: IconDict = {
     Web:         'fa-solid fa-globe',
     Twitch:      'fa-brands fa-twitch',
@@ -26,6 +27,7 @@ const lookup: IconDict = {
     Video:       'fa-solid fa-video',
     Copy:        'fa-solid fa-link',
 };
+// @formatter:on
 
 export function iconLookup(type: string): string {
     if (type in lookup) {

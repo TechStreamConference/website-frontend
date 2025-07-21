@@ -1,30 +1,30 @@
-import type { LoadAdminApprovalSpeakerTeamMember } from 'types/dashboardLoadTypes';
-import type { DashboardAllApprovalSpeakerTeamMembers } from 'types/dashboardProvideTypes';
+import type {LoadAdminApprovalSpeakerTeamMember} from 'types/dashboardLoadTypes';
+import type {DashboardAllApprovalSpeakerTeamMembers} from 'types/dashboardProvideTypes';
 
-import { apiUrl } from 'helper/links';
-import { checkAndParseInputDataAsync, parseProvidedJsonAsync } from 'helper/parseJson';
-import { z } from 'zod';
-import { getUserIds } from './approvalHelper';
+import {apiUrl} from 'helper/links';
+import {checkAndParseInputDataAsync, parseProvidedJsonAsync} from 'helper/parseJson';
+import {z} from 'zod';
+import {getUserIds} from './approvalHelper';
 import {
     dashboardAllApprovalSocialMediaLinkScheme, dashboardAllApprovalSpeakerTeamMemberScheme,
 } from 'types/dashboardProvideTypes';
 
-export async function load({ fetch }: {
+export async function load({fetch}: {
     fetch: typeof globalThis.fetch
 }): Promise<LoadAdminApprovalSpeakerTeamMember> {
-    const speakerFetchPromise: Promise<Response>     = fetch(apiUrl('/dashboard/admin/approval/speaker'));
-    const teamMemberFetchPromise: Promise<Response>  = fetch(apiUrl('/dashboard/admin/approval/team-member'));
+    const speakerFetchPromise: Promise<Response> = fetch(apiUrl('/dashboard/admin/approval/speaker'));
+    const teamMemberFetchPromise: Promise<Response> = fetch(apiUrl('/dashboard/admin/approval/team-member'));
     const socialMediaFetchPromise: Promise<Response> = fetch(apiUrl('/dashboard/admin/approval/social-media-link'));
 
-    const speakerParsePromise     = checkAndParseInputDataAsync(await speakerFetchPromise,
-                                                                dashboardAllApprovalSpeakerTeamMemberScheme,
-                                                                `Serveranfrage für die Freigabedaten der Speaker nicht erfolgreich.`,
-                                                                `Unerwartete Daten für die Freigabedaten der Speaker.`,
+    const speakerParsePromise = checkAndParseInputDataAsync(await speakerFetchPromise,
+        dashboardAllApprovalSpeakerTeamMemberScheme,
+        `Serveranfrage für die Freigabedaten der Speaker nicht erfolgreich.`,
+        `Unerwartete Daten für die Freigabedaten der Speaker.`,
     );
-    const teamMemberParsePromise  = checkAndParseInputDataAsync(await teamMemberFetchPromise,
-                                                                dashboardAllApprovalSpeakerTeamMemberScheme,
-                                                                `Serveranfrage für die Freigabedaten der Team Member nicht erfolgreich.`,
-                                                                `Unerwartete Daten für die Freigabedaten der Team Member.`,
+    const teamMemberParsePromise = checkAndParseInputDataAsync(await teamMemberFetchPromise,
+        dashboardAllApprovalSpeakerTeamMemberScheme,
+        `Serveranfrage für die Freigabedaten der Team Member nicht erfolgreich.`,
+        `Unerwartete Daten für die Freigabedaten der Team Member.`,
     );
     const socialMediaParsePromise = checkAndParseInputDataAsync(
         await socialMediaFetchPromise,
@@ -36,8 +36,8 @@ export async function load({ fetch }: {
     const speakerPromise = collectCanRejectSpeakerAsync(fetch, speakerParsePromise);
 
     return {
-        speaker:     await speakerPromise,
-        teamMember:  await teamMemberParsePromise,
+        speaker: await speakerPromise,
+        teamMember: await teamMemberParsePromise,
         socialMedia: await socialMediaParsePromise,
         userIDArray: getUserIds(await speakerPromise, await teamMemberParsePromise, await socialMediaParsePromise),
     };
@@ -59,9 +59,9 @@ async function collectCanRejectSpeakerAsync(fetch: typeof globalThis.fetch, spea
             continue;
         }
 
-        const result          = await parseProvidedJsonAsync(response, z.object({
-                                                                                    can_reject: z.boolean(),
-                                                                                }));
+        const result = await parseProvidedJsonAsync(response, z.object({
+            can_reject: z.boolean(),
+        }));
         speaker[i].can_reject = result ? result.can_reject : false;
     }
 

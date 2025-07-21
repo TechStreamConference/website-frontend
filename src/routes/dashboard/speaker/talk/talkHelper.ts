@@ -1,8 +1,8 @@
-import type { DashboardAllPendingTalks, DashboardAllTentativeOrAcceptedTalks } from 'types/dashboardProvideTypes';
+import type {DashboardAllPendingTalks, DashboardAllTentativeOrAcceptedTalks} from 'types/dashboardProvideTypes';
 
-import { apiUrl } from 'helper/links';
-import { dashboardAllPendingTalkScheme, dashboardAllTentativeOrAcceptedTalkScheme } from 'types/dashboardProvideTypes';
-import { checkAndParseInputDataAsync } from 'helper/parseJson';
+import {apiUrl} from 'helper/links';
+import {dashboardAllPendingTalkScheme, dashboardAllTentativeOrAcceptedTalkScheme} from 'types/dashboardProvideTypes';
+import {checkAndParseInputDataAsync} from 'helper/parseJson';
 
 export async function loadTentativeOrAcceptedTalksFromEventIDAsync(
     fetch: typeof globalThis.fetch,

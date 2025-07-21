@@ -2,11 +2,11 @@
     import * as Validators from './validation';
     import * as Menu from 'menu/page';
 
-    import type { LoadRegister } from 'types/loadTypes';
+    import type {LoadRegister} from 'types/loadTypes';
 
-    import { trySaveDataAsync } from 'helper/trySaveData.js';
-    import { setFocus } from 'helper/basic';
-    import { onMount } from 'svelte';
+    import {trySaveDataAsync} from 'helper/trySaveData.js';
+    import {setFocus} from 'helper/basic';
+    import {onMount} from 'svelte';
 
     import HeadlinePage from 'elements/text/headlinePage.svelte';
     import ErrorMessage from 'elements/text/message.svelte';
@@ -21,23 +21,23 @@
     export let data: LoadRegister; // data from database
 
     let timerUsername: number | null = null;
-    let timerEmail: number | null    = null;
+    let timerEmail: number | null = null;
     let timerPassword: number | null = null;
 
-    let timerUsernameRef = { current: timerUsername };
-    let timerEmailRef    = { current: timerEmail };
-    let timerPasswordRef = { current: timerPassword };
+    let timerUsernameRef = {current: timerUsername};
+    let timerEmailRef = {current: timerEmail};
+    let timerPasswordRef = {current: timerPassword};
 
-    let username: string   = '';
-    let email: string      = '';
+    let username: string = '';
+    let email: string = '';
     let password_1: string = '';
     let password_2: string = '';
 
-    const loggedInMessage       = data.loggedIn ? 'Du bist bereits angemeldet' : '';
+    const loggedInMessage = data.loggedIn ? 'Du bist bereits angemeldet' : '';
     let usernameMessage: string = '';
-    let emailMessage: string    = '';
+    let emailMessage: string = '';
     let passwordMessage: string = '';
-    let errorList: string[]     = [''];
+    let errorList: string[] = [''];
 
     let registered: boolean = false;
 
@@ -73,7 +73,7 @@
     }
 
     async function onUsernameChangedAsync(): Promise<void> {
-        const result    = await Validators.onUsernameChangedAsync(username, fetch);
+        const result = await Validators.onUsernameChangedAsync(username, fetch);
         usernameMessage = result ? result : '';
     }
 
@@ -83,7 +83,7 @@
     }
 
     function onPasswordChanged(): void {
-        const result    = Validators.onPasswordChanged(password_1, password_2);
+        const result = Validators.onPasswordChanged(password_1, password_2);
         passwordMessage = result ? result : '';
     }
 
@@ -96,9 +96,9 @@
         const nameResult = await namePromise;
         const mailResult = await mailPromise;
 
-        errorList       = [];
+        errorList = [];
         usernameMessage = nameResult ? nameResult : '';
-        emailMessage    = mailResult ? mailResult : '';
+        emailMessage = mailResult ? mailResult : '';
         passwordMessage = passwordResult ? passwordResult : '';
 
         if (nameResult || mailResult || passwordResult) {
@@ -116,14 +116,14 @@
             token: string | null;
         } = {
             username: username.trim(),
-            email:    email.trim(),
+            email: email.trim(),
             password: password_1.trim(),
-            token:    data.token,
+            token: data.token,
         };
 
         const response = await trySaveDataAsync(fetch, toSave, '/account/register', 'POST');
-        errorList      = response.messages;
-        registered     = response.success;
+        errorList = response.messages;
+        registered = response.success;
     }
 </script>
 
@@ -136,64 +136,64 @@
                   on:submit|preventDefault={tryRegisterAsync}>
                 <HeadlinePage>Registrieren</HeadlinePage>
                 <div class="register-message-wrapper">
-                    <ErrorMessage message={loggedInMessage} />
-                    <ErrorMessage message={usernameMessage} />
-                    <ErrorMessage message={emailMessage} />
-                    <ErrorMessage message={passwordMessage} />
-                    <MessageWrapper messages={errorList} />
+                    <ErrorMessage message={loggedInMessage}/>
+                    <ErrorMessage message={usernameMessage}/>
+                    <ErrorMessage message={emailMessage}/>
+                    <ErrorMessage message={passwordMessage}/>
+                    <MessageWrapper messages={errorList}/>
                 </div>
                 <Input
-                      classes="register-input-line"
-                      id="register-username"
-                      type="text"
-                      labelText="Name:"
-                      placeholderText="Name"
-                      bind:value={username}
-                      ariaLabel="Gib den Nutzernamen ein"
-                      on:input={() => {
+                        classes="register-input-line"
+                        id="register-username"
+                        type="text"
+                        labelText="Name:"
+                        placeholderText="Name"
+                        bind:value={username}
+                        ariaLabel="Gib den Nutzernamen ein"
+                        on:input={() => {
 						startTimer(timerUsernameRef, onUsernameChangedAsync, 200);
 					}}
                 />
                 <Input
-                      classes="register-input-line"
-                      id="register-email"
-                      type="email"
-                      labelText="E-Mail:"
-                      placeholderText="E-Mail"
-                      bind:value={email}
-                      ariaLabel="Gib die E-Mail ein"
-                      on:input={() => {
+                        classes="register-input-line"
+                        id="register-email"
+                        type="email"
+                        labelText="E-Mail:"
+                        placeholderText="E-Mail"
+                        bind:value={email}
+                        ariaLabel="Gib die E-Mail ein"
+                        on:input={() => {
 						startTimer(timerEmailRef, onEmailChangedAsync, 200);
 					}}
                 />
                 <Input
-                      classes="register-input-line"
-                      id="register-password"
-                      type="password"
-                      labelText="Passwort:"
-                      placeholderText="Passwort"
-                      bind:value={password_1}
-                      ariaLabel="Gib das Passwort ein"
-                      on:input={startPasswordTimer}
+                        classes="register-input-line"
+                        id="register-password"
+                        type="password"
+                        labelText="Passwort:"
+                        placeholderText="Passwort"
+                        bind:value={password_1}
+                        ariaLabel="Gib das Passwort ein"
+                        on:input={startPasswordTimer}
                 />
                 <Input
-                      classes="register-input-line"
-                      id="register-password-repeat"
-                      type="password"
-                      labelText="Passwort wiederholen:"
-                      placeholderText="Passwort wiederholen"
-                      bind:value={password_2}
-                      ariaLabel="Wiederhole das Passwort"
-                      on:input={startPasswordTimer}
+                        classes="register-input-line"
+                        id="register-password-repeat"
+                        type="password"
+                        labelText="Passwort wiederholen:"
+                        placeholderText="Passwort wiederholen"
+                        bind:value={password_2}
+                        ariaLabel="Wiederhole das Passwort"
+                        on:input={startPasswordTimer}
                 />
                 <Button
-                      classes="register-submit-button"
-                      type={'submit'}
-                      ariaLabel="Klicke zum Registrieren"
+                        classes="register-submit-button"
+                        type={'submit'}
+                        ariaLabel="Klicke zum Registrieren"
                 >
                     Registrieren
                 </Button>
-                <PasswordHints />
+                <PasswordHints/>
             </form>
         {:else}
             <div class="register-width-wrapper">
@@ -221,9 +221,9 @@
 
 <style>
     .register-content {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        margin:         0 var(--2x-margin);
+        margin: 0 var(--2x-margin);
     }
 
     a {
@@ -231,17 +231,17 @@
     }
 
     .register-width-wrapper {
-        width:          100%;
-        max-width:      50rem;
-        margin:         0 auto var(--4x-margin);
-        display:        flex;
+        width: 100%;
+        max-width: 50rem;
+        margin: 0 auto var(--4x-margin);
+        display: flex;
         flex-direction: column;
     }
 
     .register-message-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        margin:         var(--2x-margin) auto;
+        margin: var(--2x-margin) auto;
     }
 
     :global(.register-input-line) {
@@ -254,10 +254,10 @@
 
 
     .button-wrapper {
-        display:         flex;
-        flex-direction:  row;
+        display: flex;
+        flex-direction: row;
         justify-content: space-evenly;
-        margin-top:      var(--4x-margin);
+        margin-top: var(--4x-margin);
     }
 
     @media (max-width: 1280px) {

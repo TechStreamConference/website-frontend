@@ -46,7 +46,7 @@
     async function trySaveAsync(): Promise<boolean> {
         scrollToTop();
         const newImage: Blob | null = form.getNewImage();
-        const cropperProps:CropperProps = form.getCropperProps();
+        const cropperProps: CropperProps = form.getCropperProps();
 
         let toSave: SetSpeakerTeamMemberEvent = {
             name: data.event.name.trim(),

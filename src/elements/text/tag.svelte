@@ -13,9 +13,9 @@
 
 <style>
     :global(.schedule-entry-tag) {
-        border-radius:    var(--border-radius);
-        padding:          var(--quad-padding) var(--half-padding);
-        color:            var(--tag-text-color);
+        border-radius: var(--border-radius);
+        padding: var(--quad-padding) var(--half-padding);
+        color: var(--tag-text-color);
         background-color: var(--tag-background-color);
     }
 </style>

@@ -17,7 +17,6 @@
 
     export let data: LoadAdminApprovalSpeakerTeamMember;
 
-
     function collectElementMediaByUserId<T extends {
         user_id: number
     }>(elements: T[], userID: number): T[] {

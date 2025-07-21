@@ -1,4 +1,4 @@
-import { writable, get, type Writable } from 'svelte/store';
+import {writable, get, type Writable} from 'svelte/store';
 
 type ValueType =
     (() => Promise<boolean>)

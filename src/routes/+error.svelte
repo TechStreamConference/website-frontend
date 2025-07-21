@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type { Globals } from 'types/provideTypes';
+    import type {Globals} from 'types/provideTypes';
 
-    import { goto } from '$app/navigation';
-    import { page } from '$app/stores';
-    import { onMount } from 'svelte';
-    import { apiUrl } from 'helper/links';
-    import { globalsDefault, globalsScheme } from 'types/provideTypes';
-    import { parseProvidedJsonAsync } from 'helper/parseJson';
+    import {goto} from '$app/navigation';
+    import {page} from '$app/stores';
+    import {onMount} from 'svelte';
+    import {apiUrl} from 'helper/links';
+    import {globalsDefault, globalsScheme} from 'types/provideTypes';
+    import {parseProvidedJsonAsync} from 'helper/parseJson';
     import * as Menu from 'menu/page';
 
     import Header from 'elements/navigation/header.svelte';
@@ -47,7 +47,7 @@
     }
 </script>
 
-<Header menu={Menu.headerLoggedOut} />
+<Header menu={Menu.headerLoggedOut}/>
 <div class="wrapper page-404">
     <div class="content">
         <HeadlinePage classes="border">{$page.status}</HeadlinePage>
@@ -70,22 +70,22 @@
         </Button>
     </div>
     <Footer menu={Menu.footerLoggedOut}
-            globals={data} />
+            globals={data}/>
 </div>
 
 <style>
     .wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        min-height:     100vh;
+        min-height: 100vh;
     }
 
     .content {
-        display:         flex;
-        flex-direction:  column;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
-        align-items:     center;
-        flex-grow:       1;
+        align-items: center;
+        flex-grow: 1;
     }
 
     .page-404 :global(.sub-headline) {
@@ -93,7 +93,7 @@
     }
 
     .page-404 :global(.button) {
-        margin-top:    var(--4x-margin);
+        margin-top: var(--4x-margin);
         margin-bottom: var(--4x-margin);
     }
 </style>

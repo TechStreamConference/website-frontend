@@ -1,5 +1,5 @@
-import type { Menu } from 'types/provideTypes';
-import type { DashboardRoles } from 'types/dashboardProvideTypes';
+import type {Menu} from 'types/provideTypes';
+import type {DashboardRoles} from 'types/dashboardProvideTypes';
 
 import * as PageItem from './pageItems';
 import * as DashboardItem from './dashboardItems';
@@ -21,7 +21,7 @@ export function getSectionLoggedIn(roles: DashboardRoles) {
     return menu;
 }
 
-export const admin: Menu      = [
+export const admin: Menu = [
     DashboardItem.adminApprovalSpeakerTeamMember,
     DashboardItem.adminApprovalTalk,
     DashboardItem.adminPanelDiscussionGuests,
@@ -31,7 +31,7 @@ export const admin: Menu      = [
     DashboardItem.adminNewEvent,
     DashboardItem.adminGlobals,
 ];
-export const speaker: Menu    = [
+export const speaker: Menu = [
     DashboardItem.speakerEvents,
     DashboardItem.speakerTalk,
     DashboardItem.speakerApplication,
@@ -41,7 +41,7 @@ export const teamMember: Menu = [
     DashboardItem.teamMemberEvents,
     DashboardItem.teamMemberSocialMedia,
 ];
-export const user: Menu       = [
+export const user: Menu = [
     DashboardItem.userProfile,
     DashboardItem.userApplication,
 ];

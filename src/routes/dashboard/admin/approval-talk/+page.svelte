@@ -17,7 +17,6 @@
 
     export let data: LoadAdminApprovalTalk;
 
-
     function getElementsByUserID<T extends {
         speaker: {
             user_id: number

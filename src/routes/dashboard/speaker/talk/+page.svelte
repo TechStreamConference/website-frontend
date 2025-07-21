@@ -2,16 +2,16 @@
     import * as Menu from 'menu/dashboard';
     import * as MenuItem from 'menu/dashboardItems';
 
-    import type { LoadSpeakerTalk } from 'types/dashboardLoadTypes';
+    import type {LoadSpeakerTalk} from 'types/dashboardLoadTypes';
 
-    import { getElementByTitle } from 'helper/basic';
-    import { loadTentativeOrAcceptedTalksFromEventIDAsync } from './talkHelper';
-    import { setUnsavedChanges } from 'stores/saved';
-    import { SaveMessageType } from 'types/saveMessageType';
-    import { trySaveDataAsync } from 'helper/trySaveData.js';
-    import { formatDate } from 'helper/dates.js';
-    import { apiUrl } from 'helper/links';
-    import { fade } from 'svelte/transition';
+    import {getElementByTitle} from 'helper/basic';
+    import {loadTentativeOrAcceptedTalksFromEventIDAsync} from './talkHelper';
+    import {setUnsavedChanges} from 'stores/saved';
+    import {SaveMessageType} from 'types/saveMessageType';
+    import {trySaveDataAsync} from 'helper/trySaveData.js';
+    import {formatDate} from 'helper/dates.js';
+    import {apiUrl} from 'helper/links';
+    import {fade} from 'svelte/transition';
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import NavigationDropDown from 'elements/navigation/navigationDropDown.svelte';
@@ -37,13 +37,13 @@
     let rejectPopup: GeneralPopup;
 
     async function updateDisplayedEvent(selected: string): Promise<void> {
-        const current                 = getElementByTitle(data.allEvents, selected);
+        const current = getElementByTitle(data.allEvents, selected);
         data.tentativeOrAcceptedTalks = await loadTentativeOrAcceptedTalksFromEventIDAsync(fetch, current.event_id);
     }
 
     async function acceptSlot(index: number): Promise<void> {
         const currentTalk = data.tentativeOrAcceptedTalks[index];
-        const response    = await trySaveDataAsync(
+        const response = await trySaveDataAsync(
             fetch,
             [],
             `/dashboard/speaker/talk/${currentTalk.id}/accept-time-slot`,
@@ -59,12 +59,12 @@
 
     async function rejectSlot(index: number): Promise<void> {
         const currentTalk = data.tentativeOrAcceptedTalks[index];
-        const toSave      = {
+        const toSave = {
             reason: rejectText.trim(),
         };
-        const response    = await fetch(apiUrl(`/dashboard/speaker/talk/${currentTalk.id}/reject-time-slot`), {
+        const response = await fetch(apiUrl(`/dashboard/speaker/talk/${currentTalk.id}/reject-time-slot`), {
             method: 'PUT',
-            body:   JSON.stringify(toSave),
+            body: JSON.stringify(toSave),
         });
 
         if (response.ok) {
@@ -80,7 +80,7 @@
 <Tabs classes="subpage-navigation-tabs subpage-navigation-tabs-wide-tabs-override"
       position="center"
       entries={Menu.speaker}
-      entryName={MenuItem.speakerTalk.name} />
+      entryName={MenuItem.speakerTalk.name}/>
 
 <GeneralPopup bind:this={acceptPopup}
               headline="Vortragszeit akzeptieren?"
@@ -93,7 +93,7 @@
                       return;
                   }
                   acceptSlot(index);}}
-              denyCallback={() => {}} />
+              denyCallback={() => {}}/>
 <GeneralPopup bind:this={rejectPopup}
               headline="Vortragszeit ablehnen?"
               text="Hiermit lehnst du die vorgeschlagene Vortragszeit ab. Gib uns gerne einen Grund an."
@@ -105,24 +105,25 @@
                       return;
                   }
                   rejectSlot(index);}}
-              denyCallback={() => {}} />
+              denyCallback={() => {}}/>
 
 <SectionDashboard classes="standard-dashboard-section wide-dashboard-section-override">
     <Explanation>
-        Du siehst hier die Vorträge, die du eingereicht hast. Wähle zunächst über das Dropdown-Menü das Event aus. Wenn ein Talk von uns akzeptiert wurde, kannst du daran keine Änderungen mehr vornehmen.
+        Du siehst hier die Vorträge, die du eingereicht hast. Wähle zunächst über das Dropdown-Menü das Event aus. Wenn
+        ein Talk von uns akzeptiert wurde, kannst du daran keine Änderungen mehr vornehmen.
     </Explanation>
-    <SaveMessage bind:this={saveMessage} />
-    <MessageWrapper messages={errorList} />
+    <SaveMessage bind:this={saveMessage}/>
+    <MessageWrapper messages={errorList}/>
     <NavigationDropDown id="dashboard-speaker-talk-event-navigation"
                         labelText="Event:"
                         data={ data.allEvents.map(x => x.title) }
-                        on:navigated={ (e) => { updateDisplayedEvent(e.detail); }} />
+                        on:navigated={ (e) => { updateDisplayedEvent(e.detail); }}/>
 
     {#each data.pendingTalks as talk}
         <SpeakerTalkForm classes="dashboard-speaker-talk-form dashboard-speaker-section"
                          data={talk}
                          tags={data.tags}
-                         talkDurations={data.talkDurations} />
+                         talkDurations={data.talkDurations}/>
     {/each}
     {#each data.tentativeOrAcceptedTalks as talk, index}
         <div class="dashboard-speaker-talk-time-slot dashboard-speaker-section form-border">
@@ -136,7 +137,7 @@
                 <TextLine>Tags:</TextLine>
                 <div class="dashboard-speaker-talk-entry-wrapper">
                     {#each talk.tags as tag}
-                        <ScheduleTag {tag} />
+                        <ScheduleTag {tag}/>
                     {/each}
                 </div>
                 <TextLine>Mögliche Vortragszeiten:</TextLine>
@@ -155,14 +156,14 @@
                     <div class="dashboard-speaker-talk-time-slot-wrapper">
                         <TextLine>Slot:</TextLine>
                         <TextLine>{formatDate(talk.suggested_time_slot.start_time,
-                                              '%d, %DD.%MM.%YYYY - %hh:%mm Uhr'
+                            '%d, %DD.%MM.%YYYY - %hh:%mm Uhr'
                         )}</TextLine>
                         <TextLine>Dauer:</TextLine>
                         <TextLine>{talk.suggested_time_slot.duration} Minuten</TextLine>
                         <TextLine>Art:</TextLine>
                         <TextLine>{talk.suggested_time_slot.is_special
-                                   ? "YouTube-Premiere"
-                                   : "Live-Talk"}</TextLine>
+                            ? "YouTube-Premiere"
+                            : "Live-Talk"}</TextLine>
                     </div>
                     {#if !talk.time_slot_accepted}
                         <div class="dashboard-speaker-talk-time-slot-action-wrapper"
@@ -173,7 +174,7 @@
                               ariaLabel="Gib hier einen Grund an warum du den vorgeschlagenen Time-Slot ablehnen musst."
                               rows={5}
                               bind:value={rejectText}
-                              on:input={setUnsavedChanges} />
+                              on:input={setUnsavedChanges}/>
                             <div class="dashboard-speaker-talk-button-wrapper">
                                 <Button ariaLabel="Klicke, um den Time-Slot abzulehnen"
                                         on:click={() => { rejectPopup.show(index);}}>Ablehnen
@@ -195,41 +196,41 @@
 
 <style>
     :global(.dashboard-speaker-section) {
-        margin-top:    var(--4x-margin);
-        gap:           var(--2x-gap);
+        margin-top: var(--4x-margin);
+        gap: var(--2x-gap);
     }
 
     .dashboard-speaker-talk-time-slot {
-        display:        flex;
+        display: flex;
         flex-direction: column;
 
     }
 
     .dashboard-speaker-talk-time-slot-wrapper {
-        display:               grid;
+        display: grid;
         grid-template-columns: auto auto;
-        width:                 fit-content;
-        gap:                   var(--full-gap);
-        margin:                0 auto;
+        width: fit-content;
+        gap: var(--full-gap);
+        margin: 0 auto;
     }
 
     .dashboard-speaker-talk-time-slot-action-wrapper {
-        display:         flex;
-        flex-direction:  column;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
     }
 
     .dashboard-speaker-talk-button-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        margin:         var(--2x-margin) auto 0;
-        gap:            var(--full-gap);
+        margin: var(--2x-margin) auto 0;
+        gap: var(--full-gap);
     }
 
     .dashboard-speaker-talk-entry-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: row;
-        gap:            var(--full-gap);
-        flex-wrap:      wrap;
+        gap: var(--full-gap);
+        flex-wrap: wrap;
     }
 </style>

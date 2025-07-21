@@ -2,7 +2,7 @@
     import Paragraph from './paragraph.svelte';
 
     export let ariaLabel: string = "Klicke oder Hover hier, um weitere Informationen zu erhalten.";
-    export let classes: string        = '';
+    export let classes: string = '';
     export let tooltipClasses: string = '';
     export let tooltip: string;
 
@@ -27,14 +27,14 @@
 </script>
 
 <button
-      type="button"
-      class="tooltip-button-hover {classes}"
-      aria-label={ariaLabel}
-      on:mouseenter={enter}
-      on:mouseleave={leave}
-      on:mousemove={move}
+        type="button"
+        class="tooltip-button-hover {classes}"
+        aria-label={ariaLabel}
+        on:mouseenter={enter}
+        on:mouseleave={leave}
+        on:mousemove={move}
 >
-    <slot />
+    <slot/>
 </button>
 
 {#if hovered}
@@ -49,27 +49,27 @@
 
 <style>
     .tooltip-button-hover {
-        height:     auto;
-        width:      auto;
+        height: auto;
+        width: auto;
         background: none;
-        border:     none;
-        border:     0;
-        cursor:     pointer;
+        border: none;
+        border: 0;
+        cursor: pointer;
     }
 
     .tooltip-button-hover:hover,
     .tooltip-button-hover:focus,
     .tooltip-button-hover:active {
-        outline:    none;
+        outline: none;
         box-shadow: none;
     }
 
     .tooltip {
-        box-shadow:    2px 2px var(--gray-color-light);
-        background:    var(--primary-color-dark);
+        box-shadow: 2px 2px var(--gray-color-light);
+        background: var(--primary-color-dark);
         border-radius: var(--border-radius);
-        padding:       var(--full-padding);
-        position:      absolute;
-        transform:     translateX(-50%) translateY(3rem); /* Center the tooltip horizontally */
+        padding: var(--full-padding);
+        position: absolute;
+        transform: translateX(-50%) translateY(3rem); /* Center the tooltip horizontally */
     }
 </style>

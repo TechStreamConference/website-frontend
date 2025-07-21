@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte';
+    import {createEventDispatcher} from 'svelte';
 
     export let toggle: boolean;
     export let ariaLabel: string;
@@ -20,16 +20,16 @@
 >
     <slot/>
     {#if toggle}
-        <slot name="slotTrue" />
+        <slot name="slotTrue"/>
     {:else}
-        <slot name="slotFalse" />
+        <slot name="slotFalse"/>
     {/if}
 </button>
 
 <style>
     .toggle-button {
         background: none;
-        border:     none;
-        cursor:     pointer;
+        border: none;
+        cursor: pointer;
     }
 </style>

@@ -1,11 +1,11 @@
-import type { DashboardSpeakerTeamMember } from 'types/dashboardProvideTypes';
-import type { LoadSpeakerTeamMemberEvent } from 'types/dashboardLoadTypes';
-import type { SetSpeakerTeamMemberEvent } from 'types/dashboardSetTypes';
+import type {DashboardSpeakerTeamMember} from 'types/dashboardProvideTypes';
+import type {LoadSpeakerTeamMemberEvent} from 'types/dashboardLoadTypes';
+import type {SetSpeakerTeamMemberEvent} from 'types/dashboardSetTypes';
 
-import { dashboardAllEventIDScheme, dashboardSpeakerTeamMemberScheme } from 'types/dashboardProvideTypes';
-import { apiUrl } from 'helper/links';
-import { checkAndParseInputDataAsync } from 'helper/parseJson';
-import { error } from '@sveltejs/kit';
+import {dashboardAllEventIDScheme, dashboardSpeakerTeamMemberScheme} from 'types/dashboardProvideTypes';
+import {apiUrl} from 'helper/links';
+import {checkAndParseInputDataAsync} from 'helper/parseJson';
+import {error} from '@sveltejs/kit';
 
 export type ValidateReturn = {
     data: SetSpeakerTeamMemberEvent,
@@ -17,7 +17,7 @@ export async function loadDataAsync(
     type: 'speaker' | 'team-member',
 ): Promise<LoadSpeakerTeamMemberEvent> {
     const allEventFetchPromise: Promise<Response> = fetch(apiUrl(`/dashboard/${type}/all-events`));
-    const allEventsParsePromise                   = checkAndParseInputDataAsync(
+    const allEventsParsePromise = checkAndParseInputDataAsync(
         await allEventFetchPromise,
         dashboardAllEventIDScheme,
         `Serveranfrage für alle Event IDs im ${type} nicht erfolgreich.`,

@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type { DashboardAllPendingTalks } from 'types/dashboardProvideTypes';
+    import type {DashboardAllPendingTalks} from 'types/dashboardProvideTypes';
     import SubHeadline from 'elements/text/subHeadline.svelte';
     import AdminPendingTalkApprovalForm from './adminPendingTalkApprovalForm.svelte';
 
-    import { createEventDispatcher } from 'svelte';
+    import {createEventDispatcher} from 'svelte';
 
     export let talks: DashboardAllPendingTalks;
 
@@ -19,15 +19,15 @@
             <AdminPendingTalkApprovalForm {talk}
                                           on:approve={() => dispatch('approve', talk.id)}
                                           on:reject={() => dispatch('reject', talk.id)}
-                                          on:changes={() => dispatch('changes', talk.id)} />
+                                          on:changes={() => dispatch('changes', talk.id)}/>
         {/each}
     </div>
 {/if}
 
 <style>
     .dashboard-admin-pending-talk-approval-wrapper {
-        display:        flex;
+        display: flex;
         flex-direction: column;
-        gap:            var(--full-gap);
+        gap: var(--full-gap);
     }
 </style>

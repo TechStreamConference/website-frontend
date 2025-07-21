@@ -4,12 +4,12 @@
 
 <label class="normal-font"
        for={for_}>
-    <slot />
+    <slot/>
 </label>
 
 <style>
     label {
-        font-size:   var(--full-font-size);
+        font-size: var(--full-font-size);
         line-height: var(--full-line-height);
     }
 </style>

@@ -15,17 +15,17 @@ export function formatDate(provided: string, format: string): string {
         [key: string]: string
     } = {
         '%YYYY': String(date.getFullYear()),
-        '%M':    String(date.getMonth() + 1),
-        '%MM':   String(date.getMonth() + 1).padStart(2, '0'),
-        '%D':    String(date.getDate()),
-        '%DD':   String(date.getDate()).padStart(2, '0'),
+        '%M': String(date.getMonth() + 1),
+        '%MM': String(date.getMonth() + 1).padStart(2, '0'),
+        '%D': String(date.getDate()),
+        '%DD': String(date.getDate()).padStart(2, '0'),
 
-        '%d':  lookup[date.getDay()],
-        '%h':  String(date.getHours()),
+        '%d': lookup[date.getDay()],
+        '%h': String(date.getHours()),
         '%hh': String(date.getHours()).padStart(2, '0'),
-        '%m':  String(date.getMinutes()),
+        '%m': String(date.getMinutes()),
         '%mm': String(date.getMinutes()).padStart(2, '0'),
-        '%s':  String(date.getSeconds()),
+        '%s': String(date.getSeconds()),
         '%ss': String(date.getSeconds()).padStart(2, '0'),
     };
 
