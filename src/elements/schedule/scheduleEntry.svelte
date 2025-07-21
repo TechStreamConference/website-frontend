@@ -40,7 +40,7 @@
     </div>
     <div class="schedule-entry-speaker-wrapper">
         {#if talk.guests.length > 0}
-            <TextLine classes="schedule-entry-speaker-text">Moderator:</TextLine>
+            <TextLine classes="schedule-entry-speaker-text">Moderation:</TextLine>
         {/if}
         <ScheduleSpeaker
                 {speaker}
