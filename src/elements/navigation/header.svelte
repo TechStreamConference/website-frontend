@@ -227,6 +227,7 @@
         :global(.navigation-header-link) {
             text-transform: uppercase;
             color: var(--white-color);
+            width: 100%;
         }
     }
 </style>
