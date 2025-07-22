@@ -1,6 +1,7 @@
 <script lang="ts">
     import {createEventDispatcher} from "svelte";
     import {lerpTextCountColor} from "helper/color";
+    import {onMount} from "svelte";
 
     import Label from "elements/text/label.svelte";
     import TextLine from "elements/text/textLine.svelte";
@@ -15,13 +16,17 @@
     export let placeholder: string = " ";
 
     export const NO_LIMIT = -1;
-    let colorString: string = '';
+    let colorString: string;
 
     const dispatch = createEventDispatcher();
 
     $: if (placeholder.trim().length == 0) {
         placeholder = " ";
     }
+
+    onMount(() => {
+        calcColor();
+    })
 
     function handleKeydown(event: KeyboardEvent) {
         if (event.ctrlKey && event.key === 'Enter') {
@@ -93,7 +98,7 @@
     :global(.input-limit-text-area) {
         position: absolute;
         top: -1.5rem;
-        right: 1rem;
+        right: 2rem;
         font-size: var(--half-font-size) !important;
         background-color: var(--background-color);
         padding: 0 var(--full-padding);
