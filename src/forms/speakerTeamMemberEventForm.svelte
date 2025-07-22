@@ -12,7 +12,7 @@
     import Button from 'elements/input/button.svelte';
     import Image from 'elements/image/image.svelte';
     import Input2 from 'elements/input/input2.svelte';
-    import TextArea from 'elements/input/textArea.svelte';
+    import TextArea2 from 'elements/input/textArea2.svelte';
     import FormWrapper from 'elements/wrapper/formWrapper.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
 
@@ -21,7 +21,7 @@
     export let displaySaveButton: boolean = true;
     const dispatch = createEventDispatcher();
 
-    let imageInput: Input;
+    let imageInput: Input2;
     const DEFAULT_CROPPER_PROPS: CropperProps = {
         x: 0,
         y: 0,
@@ -66,9 +66,6 @@
         cropperProps = DEFAULT_CROPPER_PROPS;
         if (imageInput) {
             imageInput.clear();
-        }
-        if (cropper) {
-            cropper.reset();
         }
     }
 </script>
@@ -115,23 +112,22 @@
     {/if}
     <div class="input-grid">
         <Input2
-              bind:this={imageInput}
-              id="dashboard-speaker-event-image-input"
-              labelText="Profilbild:"
-              ariaLabel="Lade hier dein Profilbild für das Event {data.current.title} hoch"
-              type="file"
-              fileAccept=".jpg, .jpeg, .png"
-              on:input={(event) => {
-				// no setUnsavedChanges here because the cropper already does that.
-				changeImage(event);
-			}}
-              value={newImage.imageFile}
+                bind:this={imageInput}
+                id="dashboard-speaker-event-image-input"
+                labelText="Profilbild:"
+                ariaLabel="Lade hier dein Profilbild für das Event {data.current.title} hoch"
+                type="file"
+                fileAccept=".jpg, .jpeg, .png"
+                on:input={(event) => {
+				    setUnsavedChanges();
+				    changeImage(event);
+			    }}
         />
         <Paragraph classes="paragraph-gray">Lade hier dein Profilbild für deine Bewerbung hoch. Wenn deine
             Speaker-Bewerbung und später dein
             Vortrag angenommen werden, wird dieses Bild auf der Startseite angezeigt.
         </Paragraph>
-        <div class="row-border" />
+        <div class="row-border"></div>
         <Input2
               id="dashboard-speaker-event-name-input"
               labelText="Name:"
@@ -143,7 +139,7 @@
             identisch zu dem Namen
             sein, mit dem du dich einloggst.
         </Paragraph>
-        <div class="row-border" />
+        <div class="row-border"></div>
         <Input2
               id="dashboard-speaker-event-short-bio-input"
               labelText="Kurzbeschreibung:"
@@ -158,14 +154,13 @@
                 Game Designer”</i> oder <i>„Embedded- und Lowlevel-Coding”</i>.
         </Paragraph>
         <div class="row-border"></div>
-        <TextArea
-              id="dashboard-speaker-event-bio-text-area"
-              labelText="Beschreibung:"
-              placeholderText="Beschreibung"
-              ariaLabel="Gib hier deine Beschreibung für das Event {data.current.title} ein"
-              limit={1000}
-              bind:value={data.event.bio}
-              on:input={setUnsavedChanges}
+        <TextArea2
+                id="dashboard-speaker-event-bio-text-area"
+                labelText="Beschreibung:"
+                ariaLabel="Gib hier deine Beschreibung für das Event {data.current.title} ein"
+                limit={1000}
+                bind:value={data.event.bio}
+                on:input={setUnsavedChanges}
         />
         <Paragraph classes="paragraph-gray">Beschreibe dich hier in einem kurzen Text von ca. 50 bis 80 Wörtern. Ein
             Beispieltext könnte lauten:
