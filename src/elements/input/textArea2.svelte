@@ -88,6 +88,9 @@
         resize: vertical;
         font-size: var(--full-font-size);
         transition: border-radius var(--transition-duration);
+        scrollbar-gutter: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--line-color) var(--background-color-light);
     }
 
     textarea:hover {
