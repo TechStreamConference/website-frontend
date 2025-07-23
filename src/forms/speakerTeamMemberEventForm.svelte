@@ -12,7 +12,7 @@
     import Button from 'elements/input/button.svelte';
     import Image from 'elements/image/image.svelte';
     import Input2 from 'elements/input/input2.svelte';
-    import TextArea2 from 'elements/input/textArea2.svelte';
+    import TextArea from 'elements/input/textArea.svelte';
     import FormWrapper from 'elements/wrapper/formWrapper.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
 
@@ -155,7 +155,7 @@
                 Game Designer”</i> oder <i>„Embedded- und Lowlevel-Coding”</i>.
         </Paragraph>
         <div class="row-border"></div>
-        <TextArea2
+        <TextArea
                 id="dashboard-speaker-event-bio-text-area"
                 labelText="Beschreibung:"
                 ariaLabel="Gib hier deine Beschreibung für das Event {data.current.title} ein"
