@@ -3,7 +3,7 @@
     import {createEventDispatcher} from 'svelte';
     import {unsavedChanges} from 'stores/saved';
 
-    import DropDown2 from 'elements/input/dropDown2.svelte';
+    import DropDown from 'elements/input/dropDown.svelte';
     import ManualUnsavedChangesPopup from 'elements/popups/manualUnsavedChangesPopup.svelte';
 
     export let id: string;
@@ -71,7 +71,7 @@
 <ManualUnsavedChangesPopup bind:this={popup}
                            navigateCallback={onNavigate}
                            stayCallback={onStay}/>
-<DropDown2 {classes}
+<DropDown {classes}
            {id}
            {labelText}
            bind:selected={selected}
