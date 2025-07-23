@@ -35,6 +35,7 @@
 <style>
     div {
         display: flex;
+        gap: var(--quad-gap);
         flex-direction: column;
         width: 100%;
     }
