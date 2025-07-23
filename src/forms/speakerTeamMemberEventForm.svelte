@@ -132,6 +132,7 @@
               id="dashboard-speaker-event-name-input"
               labelText="Name:"
               ariaLabel="Gib hier deinen Namen für das Event {data.current.title} ein"
+              limit={50}
               bind:value={data.event.name}
               on:input={setUnsavedChanges}
         />
