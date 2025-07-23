@@ -1,20 +1,19 @@
 <script lang="ts">
-    import Label from 'elements/text/label.svelte';
+    import Label from "elements/text/label.svelte";
+    import {createEventDispatcher} from "svelte";
 
-    import {createEventDispatcher} from 'svelte';
-
-    export let classes: string = '';
+    export let classes: string = "";
     export let id: string;
-    export let labelText: string;
+    export let labelText: string = "";
 
-    export let data: unknown[];
     export let selected: unknown;
+    export let data: unknown[];
 
     const dispatch = createEventDispatcher();
 
     function handleKeydown(event: KeyboardEvent) {
-        if (event.ctrlKey && event.key === 'Enter') {
-            dispatch('submit');
+        if (event.ctrlKey && event.key === "Enter") {
+            dispatch("submit");
         }
     }
 </script>
@@ -36,20 +35,31 @@
 <style>
     div {
         display: flex;
+        gap: var(--quad-gap);
         flex-direction: column;
         width: 100%;
     }
 
     select {
-        color: var(--white-color);
-        background-color: var(--primary-color-light);
+        color: var(--text-color);
+        background-color: transparent;
         border-radius: var(--border-radius);
         padding: var(--half-padding);
         width: 100%;
         font-size: var(--full-font-size);
+        border: 1px solid var(--line-color);
+        transition: border-radius var(--transition-duration);
+    }
+
+    select:hover {
+        border-radius: 0;
+        transition: border-radius var(--transition-duration);
     }
 
     option {
-        color: var(--white-color);
+        color: var(--text-color);
+        background-color: var(--background-color);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--line-color);
     }
 </style>
