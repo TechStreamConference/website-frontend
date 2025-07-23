@@ -57,6 +57,7 @@
         return selected;
     }
 
+    /*
     export function clear(): void {
         // notice that the drop-down data are bound in html.
         // They clear when the provided data are cleared.
@@ -64,14 +65,14 @@
         selected = "";
         displayed = "";
     }
-
+    */
 </script>
 
 <ManualUnsavedChangesPopup bind:this={popup}
                            navigateCallback={onNavigate}
                            stayCallback={onStay}/>
 <DropDown2 {classes}
-          {id}
-          {labelText}
-          bind:selected={selected}
-          {data}/>
+           {id}
+           {labelText}
+           bind:selected={selected}
+           {data}/>
