@@ -13,15 +13,15 @@
     export let limit: number;
     export let rows: number = 10;
     export let labelText: string;
-    export let placeholder: string = " ";
+    export let placeholderText: string = " ";
 
     export const NO_LIMIT = -1;
     let colorString: string;
 
     const dispatch = createEventDispatcher();
 
-    $: if (placeholder.trim().length == 0) {
-        placeholder = " ";
+    $: if (placeholderText.trim().length == 0) {
+        placeholderText = " ";
     }
 
     onMount(() => {
@@ -52,7 +52,7 @@
             {id}
             name={id}
             bind:value
-            placeholder={placeholder}
+            placeholder={placeholderText}
             on:input={ () => { calcColor(); dispatch('input'); } }
             aria-label={ariaLabel}
             {rows}
@@ -113,7 +113,7 @@
 
     :global(.floating-text-area-label) {
         position: absolute;
-        left: 1rem;
+        left: var(--half-padding);
         top: 1rem;
         font-size: var(--full-font-size);
         background-color: var(--background-color);
