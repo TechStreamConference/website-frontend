@@ -15,13 +15,12 @@
     export let type: "string" | "number" | "file" = "string";
     export const NO_LIMIT: number = -1;
     export let limit: number = NO_LIMIT;
-    export let placeholder: string = " ";
+    export let placeholderText: string = " ";
 
     export let fileAccept: string = "";
 
-
-    $: if (placeholder.trim().length == 0) {
-        placeholder = " ";
+    $: if (placeholderText.trim().length == 0) {
+        placeholderText = " ";
     }
 
     let colorString: string;
@@ -62,7 +61,7 @@
                 accept={fileAccept}
                 name={id}
                 bind:value
-                placeholder={placeholder}
+                placeholder={placeholderText}
                 on:input
                 on:change
                 aria-label={ariaLabel}
@@ -76,7 +75,7 @@
                 use:typeWorkaround={type}
                 maxlength={limit}
                 bind:value
-                placeholder={placeholder}
+                placeholder={placeholderText}
                 on:input={() => {calcColor(); dispatch("input");}}
                 on:change
                 aria-label={ariaLabel}
