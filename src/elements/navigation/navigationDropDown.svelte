@@ -3,17 +3,17 @@
     import {createEventDispatcher} from 'svelte';
     import {unsavedChanges} from 'stores/saved';
 
-    import DropDown from 'elements/input/dropDown.svelte';
+    import DropDown2 from 'elements/input/dropDown2.svelte';
     import ManualUnsavedChangesPopup from 'elements/popups/manualUnsavedChangesPopup.svelte';
 
     export let id: string;
     export let labelText: string;
     export let classes: string = '';
 
-    let selected: unknown;
-    let displayed: unknown;
+    let selected: string;
+    let displayed: string;
 
-    export let data: unknown[];
+    export let data: string[];
 
     let popup: ManualUnsavedChangesPopup;
     const dispatch = createEventDispatcher();
@@ -45,7 +45,7 @@
         selected = displayed;
     }
 
-    export function trySetSelected(value: unknown): void {
+    export function trySetSelected(value: string): void {
         if (data.includes(value)) {
             selected = value;
             checkSelected();
@@ -53,7 +53,7 @@
         }
     }
 
-    export function getSelected(): unknown {
+    export function getSelected(): string {
         return selected;
     }
 
@@ -61,8 +61,8 @@
         // notice that the drop-down data are bound in html.
         // They clear when the provided data are cleared.
         // When I would clear it here, Svelte would overwrite it anyway.
-        selected = undefined;
-        displayed = undefined;
+        selected = "";
+        displayed = "";
     }
 
 </script>
@@ -70,7 +70,7 @@
 <ManualUnsavedChangesPopup bind:this={popup}
                            navigateCallback={onNavigate}
                            stayCallback={onStay}/>
-<DropDown {classes}
+<DropDown2 {classes}
           {id}
           {labelText}
           bind:selected={selected}
