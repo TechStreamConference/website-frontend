@@ -11,7 +11,7 @@
     import CroppedImage from 'elements/image/croppedImage.svelte';
     import Button from 'elements/input/button.svelte';
     import Image from 'elements/image/image.svelte';
-    import Input2 from 'elements/input/input2.svelte';
+    import Input from 'elements/input/input.svelte';
     import TextArea from 'elements/input/textArea.svelte';
     import FormWrapper from 'elements/wrapper/formWrapper.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
@@ -21,7 +21,7 @@
     export let displaySaveButton: boolean = true;
     const dispatch = createEventDispatcher();
 
-    let imageInput: Input2;
+    let imageInput: Input;
     const DEFAULT_CROPPER_PROPS: CropperProps = {
         x: 0,
         y: 0,
@@ -111,7 +111,7 @@
         />
     {/if}
     <div class="input-grid">
-        <Input2
+        <Input
                 bind:this={imageInput}
                 id="dashboard-speaker-event-image-input"
                 labelText="Profilbild:"
@@ -128,7 +128,7 @@
             Vortrag angenommen werden, wird dieses Bild auf der Startseite angezeigt.
         </Paragraph>
         <div class="row-border"></div>
-        <Input2
+        <Input
               id="dashboard-speaker-event-name-input"
               labelText="Name:"
               ariaLabel="Gib hier deinen Namen für das Event {data.current.title} ein"
@@ -141,7 +141,7 @@
             sein, mit dem du dich einloggst.
         </Paragraph>
         <div class="row-border"></div>
-        <Input2
+        <Input
               id="dashboard-speaker-event-short-bio-input"
               labelText="Kurzbeschreibung:"
               ariaLabel="Gib hier deine Kurzbeschreibung in Stichworten für das Event {data.current
