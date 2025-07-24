@@ -38,16 +38,18 @@
 			}}
                 on:submit
         />
-        <Input
-                id="edit-social-media-links-link-{index}"
-                labelText="Link-URL:"
-                placeholderText="Link-URL"
-                bind:value={link.url}
-                ariaLabel="Trage die URL für {link.name} ein"
-                on:input={() => {
+        <div class="edit-social-media-input-wrapper">
+            <Input
+                    id="edit-social-media-links-link-{index}"
+                    labelText="Link-URL:"
+                    placeholderText="Link-URL"
+                    bind:value={link.url}
+                    ariaLabel="Trage die URL für {link.name} ein"
+                    on:input={() => {
 				onInput(link);
 			}}
-        />
+            />
+        </div>
         <div class="status-wrapper">
             <TextLine>Status:</TextLine>
             {#if link.approved}
@@ -96,6 +98,12 @@
         display: grid;
         grid-template-columns: auto 1fr 1fr auto auto;
         gap: var(--2x-gap);
+    }
+
+    .edit-social-media-input-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: end;
     }
 
     .status-wrapper {
