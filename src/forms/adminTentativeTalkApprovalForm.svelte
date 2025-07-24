@@ -142,7 +142,6 @@
     <TextArea id="dashboard-admin-tentative-approval-rejection-area-{talk.id}"
               ariaLabel="Gibt hier einen Ablehnungsgrund ein"
               labelText="Ablehnungsgrund:"
-              placeholderText="Ablehnungsgrund"
               bind:value={rejectReason}/>
     <div class="dashboard-tentative-talks-button-wrapper">
         <Button type="submit"

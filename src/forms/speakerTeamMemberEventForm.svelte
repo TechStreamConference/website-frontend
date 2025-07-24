@@ -144,8 +144,7 @@
         <Input
               id="dashboard-speaker-event-short-bio-input"
               labelText="Kurzbeschreibung:"
-              ariaLabel="Gib hier deine Kurzbeschreibung in Stichworten für das Event {data.current
-				.title} ein"
+              ariaLabel="Gib hier deine Kurzbeschreibung in Stichworten für das Event {data.current.title} ein"
               limit={100}
               bind:value={data.event.short_bio}
               on:input={setUnsavedChanges}
