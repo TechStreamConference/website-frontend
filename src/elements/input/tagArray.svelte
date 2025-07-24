@@ -40,8 +40,8 @@
     }
 </script>
 
-<div>
-    <Label>{labelText}</Label>
+<div class="toggle-talk-tag-outer-wrapper">
+    <Label classes="toggle-talk-tag-label">{labelText}</Label>
     <div class="toggle-talk-tag-wrapper">
         {#each data as tag}
             <Toggle ariaLabel="Klicke, um einen Tag aus- oder abzuwählen"
@@ -71,15 +71,36 @@
 </div>
 
 <style>
+    .toggle-talk-tag-outer-wrapper{
+        position: relative;
+        margin-top: var(--2x-margin);
+    }
+
+    :global(.toggle-talk-tag-label) {
+        font-size: var(--half-font-size) !important;
+        position: absolute;
+        top: -1.5rem;
+        left: 0.5rem;
+        background-color: var(--background-color);
+        padding: 0 var(--half-padding);
+        border-radius: var(--border-radius);
+    }
+
     .toggle-talk-tag-wrapper {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         gap: var(--full-gap);
-        border: 1px solid var(--primary-color-dark);
+        border: 1px solid var(--line-color);
         border-radius: var(--border-radius);
         padding: var(--full-padding);
         justify-content: space-between;
+        transition: border-radius var(--transition-duration);
+    }
+
+    .toggle-talk-tag-wrapper:hover {
+        border-radius: 0;
+        transition: border-radius var(--transition-duration);
     }
 
     .toggle-talk-tag-entry-wrapper {
