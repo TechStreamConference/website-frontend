@@ -24,15 +24,16 @@ const lookup: ResponseDict = {
     'The username_or_email field is required.': 'Name oder E-Mail fehlt.',
 
     // password
-    'The password field is required.':  'Das Feld \'Passwort\' ist erforderlich.',
-    PASSWORD_MISSING_FIELD:             'Das Feld \'Passwort\' ist erforderlich.',
-    PASSWORD_TOO_SHORT:                 'Dein Passwort ist zu kurz. Mindestanzahl: 8 Zeichen',
-    PASSWORD_MISSING_LOWERCASE_LETTER:  'Deinem Passwort fehlt ein Kleinbuchstabe.',
-    PASSWORD_MISSING_UPPERCASE_LETTER:  'Deinem Passwort fehlt ein Großbuchstabe.',
-    PASSWORD_MISSING_NUMBER:            'Deinem Passwort fehlt eine Ziffer.',
-    PASSWORD_MISSING_SPECIAL_CHARACTER: 'Deinem Passwort fehlt ein Sonderzeichen.',
-    PASSWORDS_EQUAL:                    'Das neue und das alte Passwort ist gleich.',
-    WRONG_PASSWORD:                     'Passwort ungültig.',
+    'The password field is required.':      'Das Feld \'Passwort\' ist erforderlich.',
+    PASSWORD_MISSING_FIELD:                 'Das Feld \'Passwort\' ist erforderlich.',
+    PASSWORD_TOO_SHORT:                     'Dein Passwort ist zu kurz. Mindestanzahl: 8 Zeichen',
+    PASSWORD_MISSING_LOWERCASE_LETTER:      'Deinem Passwort fehlt ein Kleinbuchstabe.',
+    PASSWORD_MISSING_UPPERCASE_LETTER:      'Deinem Passwort fehlt ein Großbuchstabe.',
+    PASSWORD_MISSING_NUMBER:                'Deinem Passwort fehlt eine Ziffer.',
+    PASSWORD_MISSING_SPECIAL_CHARACTER:     'Deinem Passwort fehlt ein Sonderzeichen.',
+    PASSWORDS_EQUAL:                        'Das neue und das alte Passwort ist gleich.',
+    WRONG_PASSWORD:                         'Passwort ungültig.',
+    "The new_password field is required." : 'Es wurde kein Passwort eingegeben.',
 
     // token
     TOKEN_EXPIRED_OR_DOES_NOT_EXIST: 'Der Link ist ungültig oder bereits abgelaufen.',
