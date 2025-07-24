@@ -104,7 +104,7 @@
         width: 100%;
         height: fit-content;
         position: relative;
-        margin-top: var(--full-margin);
+        margin-top: var(--2x-margin);
     }
 
     input {
