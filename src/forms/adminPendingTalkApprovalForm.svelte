@@ -143,7 +143,6 @@
     <TextArea id="dashboard-admin-pending-talk-approval-changes-{talk.id}"
               ariaLabel="Gebe hier Änderungswünsche zu dem Talks ein"
               labelText="Änderungswünsche / Ablehnungsgrund:"
-              placeholderText="Änderungswünsche / Ablehnungsgrund"
               bind:value={talk.requested_changes}
               on:submit={changes}/>
     <div class="pending-talk-button-array">
