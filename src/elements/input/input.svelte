@@ -29,8 +29,7 @@
 
     onMount(() => {
         calcColor();
-    })
-
+    });
 
     export function clear(): void {
         input.value = '';
