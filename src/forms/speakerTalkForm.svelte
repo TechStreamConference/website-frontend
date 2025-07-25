@@ -76,7 +76,6 @@
     <div class="input-grid">
         <Input id="dashboard-speaker-talk-input-title"
                labelText="Titel:"
-               placeholderText="Titel"
                ariaLabel="Gib hier den Titel des Talks ein"
                bind:value={data.title}
                on:input={setUnsavedChanges}/>
@@ -86,7 +85,6 @@
         <div class="grid-line"></div>
         <TextArea id="dashboard-speaker-talk-input-description"
                   labelText="Beschreibung:"
-                  placeholderText="Beschreibung"
                   ariaLabel="Gib hier die Beschreibung des Talks ein"
                   bind:value={data.description}
                   on:input={setUnsavedChanges}
@@ -123,7 +121,6 @@
         <div class="grid-line"></div>
         <TextArea id="dashboard-speaker-talk-input-notes"
                   labelText="Anmerkungen:"
-                  placeholderText="Anmerkungen"
                   ariaLabel="Gib hier Anmerkungen zum Talk ein."
                   bind:value={data.notes}
                   on:input={setUnsavedChanges}

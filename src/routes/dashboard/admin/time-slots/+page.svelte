@@ -94,7 +94,7 @@
     function moveDown(index: number) {
         errorList = [];
         if (index + 1 == data.currentSlots.length) {
-            errorList = ['Es gibt kein Slot hinter diesem Slot.'];
+            errorList = ['Es gibt keinen Slot hinter diesem Slot.'];
             return;
         }
 
@@ -140,14 +140,16 @@
         <MessageWrapper messages={errorList}/>
         <div class="dashboard-admin-time-slots-grid">
             {#each data.currentSlots as entry, index}
-                <Input
-                        id="dashboard-admin-time-slot-start-date-{index}"
-                        labelText="Start:"
-                        type="datetime-local"
-                        ariaLabel="Gib den Start des ausgewählten Slots ein."
-                        bind:value={entry.start_time}
-                        on:input={setUnsavedChanges}
-                />
+                <div class="dashboard-admin-time-slots-input-wrapper">
+                    <Input
+                            id="dashboard-admin-time-slot-start-date-{index}"
+                            labelText="Start:"
+                            type="datetime-local"
+                            ariaLabel="Gib den Start des ausgewählten Slots ein."
+                            bind:value={entry.start_time}
+                            on:input={setUnsavedChanges}
+                    />
+                </div>
                 <DropDown id="dashboard-admin-time-slot-duration-{index}"
                           labelText="Dauer (Minuten):"
                           data={data.talkDurationChoices}
@@ -202,6 +204,12 @@
         gap: var(--full-gap);
         margin: var(--2x-margin) 0 var(--4x-margin);
 
+    }
+
+    .dashboard-admin-time-slots-input-wrapper{
+        display: flex;
+        flex-direction: row;
+        align-items: end;
     }
 
     .dashboard-admin-time-slots-button-wrapper {

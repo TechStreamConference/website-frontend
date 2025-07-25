@@ -140,7 +140,7 @@
         >{speakerTeamMember.bio}</Paragraph>
         <TextLine classes={getBackgroundClass(speakerTeamMember.diff, 'photo')}>Foto:</TextLine>
         <Image
-                classes="{getBackgroundClass(speakerTeamMember.diff, 'photo')} dashboard-admin-approval-picture"
+                classes="{getBackgroundClass(speakerTeamMember.diff, 'photo')}"
                 alt={'Speaker-Bild von ' + speakerTeamMember.name}
                 src={imageUrl(speakerTeamMember.photo)}
         />
@@ -177,8 +177,8 @@
 
 <style>
     :global(.dashboard-admin-approval-has-changed-background) {
-        background-color: var(--primary-color-dark);
         border-radius: var(--border-radius);
+        border: 1px solid var(--line-color);
         padding: var(--half-padding);
     }
 
@@ -192,11 +192,6 @@
 
     .speaker-team-member-wrapper {
         scroll-margin-top: var(--16x-margin);
-    }
-
-    :global(.dashboard-admin-approval-picture) {
-        border: 1px solid var(--primary-color-dark);
-        border-radius: var(--border-radius);
     }
 
     .dashboard-admin-approval-button-array {

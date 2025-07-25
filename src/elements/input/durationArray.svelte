@@ -38,8 +38,8 @@
     }
 </script>
 
-<div>
-    <Label>{labelText}</Label>
+<div class="toggle-talk-duration-outer-wrapper">
+    <Label classes="toggle-talk-duration-label">{labelText}</Label>
     <div class="toggle-talk-duration-wrapper">
         {#each data as duration}
             <Toggle ariaLabel="Klicke, um eine mögliche Talk-Dauer in Minuten aus- oder abzuwählen"
@@ -69,15 +69,36 @@
 </div>
 
 <style>
+    .toggle-talk-duration-outer-wrapper {
+        position: relative;
+        margin-top: var(--2x-margin);
+    }
+
+    :global(.toggle-talk-duration-label) {
+        font-size: var(--half-font-size) !important;
+        position: absolute;
+        top: -1.5rem;
+        left: 0.5rem;
+        background-color: var(--background-color);
+        padding: 0 var(--half-padding);
+        border-radius: var(--border-radius);
+    }
+
     .toggle-talk-duration-wrapper {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         gap: var(--full-gap);
-        border: 1px solid var(--primary-color-dark);
+        border: 1px solid var(--line-color);
         border-radius: var(--border-radius);
         padding: var(--full-padding);
         justify-content: space-between;
+        transition: border-radius var(--transition-duration);
+    }
+
+    .toggle-talk-duration-wrapper:hover {
+        border-radius: 0;
+        transition: border-radius var(--transition-duration);
     }
 
     .toggle-talk-duration-entry-wrapper {

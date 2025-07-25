@@ -53,7 +53,6 @@
                 classes="admin-footer-description input"
                 id="admin-footer-description"
                 labelText="Footer Beschreibung:"
-                placeholderText="Footer Beschreibung"
                 ariaLabel="Gib den Text ein, der im Footer der Internetseite angezeigt werden soll"
                 bind:value={copiedData.value.globals.footer_text}
                 on:submit={trySaveAsync}

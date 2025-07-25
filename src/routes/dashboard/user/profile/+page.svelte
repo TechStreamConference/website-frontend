@@ -43,7 +43,7 @@
             setTimeout(() => {
                 switch (state) {
                     case UserProfileState.None:
-                        console.error('State \'None\' while try setting focus');
+                        console.error('State \'None\' while trying to set the state');
                         return;
                     case UserProfileState.Mail:
                         setFocus('dashboard-user-profile-input-mail-password');
@@ -184,14 +184,12 @@
                     <SubHeadline classes="sub-headline-center">Name</SubHeadline>
                     <Input id="dashboard-user-profile-input-username-password"
                            labelText="Passwort:"
-                           placeholderText="Passwort"
                            ariaLabel="Trage hier dein Passwort ein"
                            type="password"
                            bind:value={oldPassword}
                            on:input={setUnsavedChanges} />
                     <Input id="dashboard-user-profile-input-username"
                            labelText="Neuer Name:"
-                           placeholderText="Neuer Name"
                            ariaLabel="Trage hier deinen neuen Namen ein"
                            bind:value={name}
                            on:input={setUnsavedChanges} />
@@ -212,14 +210,12 @@
                     <SubHeadline classes="sub-headline-center">E-Mail</SubHeadline>
                     <Input id="dashboard-user-profile-input-mail-password"
                            labelText="Passwort:"
-                           placeholderText="Passwort"
                            ariaLabel="Trage hier dein Passwort ein"
                            type="password"
                            bind:value={oldPassword}
                            on:input={setUnsavedChanges} />
                     <Input id="dashboard-user-profile-input-mail"
                            labelText="Neue E-Mail-Adresse:"
-                           placeholderText="Neue E-Mail-Adresse"
                            ariaLabel="Trage hier deine neue E-Mail-Adresse ein"
                            bind:value={mail}
                            on:input={setUnsavedChanges} />
@@ -240,21 +236,18 @@
                     <SubHeadline classes="sub-headline-center">Passwort</SubHeadline>
                     <Input id="dashboard-user-profile-input-password-old"
                            labelText="Altes Passwort:"
-                           placeholderText="Altes Passwort"
                            ariaLabel="Trage hier dein altes Passwort ein"
                            type="password"
                            bind:value={oldPassword}
                            on:input={setUnsavedChanges} />
                     <Input id="dashboard-user-profile-input-password-new-1"
                            labelText="Neues Passwort:"
-                           placeholderText="Neues Passwort"
                            ariaLabel="Trage hier dein neues Passwort ein"
                            type="password"
                            bind:value={newPassword1}
                            on:input={setUnsavedChanges} />
                     <Input id="dashboard-user-profile-input-password-new-2"
                            labelText="Wiederholung neues Passwort:"
-                           placeholderText="Wiederholung neues Passwort"
                            ariaLabel="Wiederhole hier dein neues Passwort ein"
                            type="password"
                            bind:value={newPassword2}
@@ -291,7 +284,6 @@
     .dashboard-user-profile-section-entry-wrapper {
         display:        flex;
         flex-direction: column;
-        gap:            var(--full-gap);
     }
 
     .dashboard-user-profile-button-wrapper {

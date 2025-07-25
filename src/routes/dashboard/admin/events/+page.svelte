@@ -192,7 +192,6 @@
                     </Button>
                 </div>
                 <Input ariaLabel="Trage hier die base url zum generieren von links ein"
-                       placeholderText="Trage hier die base url zum generieren von links ein"
                        labelText="Base URL:"
                        id="dashboard-admin-input-base-url"
                        bind:value={baseUrl}></Input>

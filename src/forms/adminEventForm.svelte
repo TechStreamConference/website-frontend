@@ -103,7 +103,6 @@
             classes="dashboard-admin-event-title input"
             id="dashboard-admin-event-title"
             labelText="Titel:"
-            placeholderText="Titel"
             ariaLabel="Gib den Titel des ausgewählten Events ein."
             bind:value={event.title}
             on:input={setUnsavedChanges}
@@ -112,7 +111,6 @@
             classes="dashboard-admin-event-sub-title input"
             id="dashboard-admin-event-sub-title"
             labelText="Untertitel:"
-            placeholderText="Untertitel"
             ariaLabel="Gib den Untertitel des ausgewählten Events ein."
             bind:value={event.subtitle}
             on:input={setUnsavedChanges}
@@ -183,7 +181,6 @@
             classes="dashboard-admin-event-twitch-url input"
             id="dashboard-admin-event-twitch-url"
             labelText="Twitch URL:"
-            placeholderText="Twitch URL:"
             ariaLabel="Gib die URL der Twitchseite des ausgewählten Events ein."
             bind:value={event.twitch_url}
             on:input={setUnsavedChanges}
@@ -192,7 +189,6 @@
             classes="dashboard-admin-event-discord-url input"
             id="dashboard-admin-event-discord-url"
             labelText="Discord URL:"
-            placeholderText="Discord URL:"
             ariaLabel="Gib die URL des Discordservers des ausgewählten Events ein."
             bind:value={event.discord_url}
             on:input={setUnsavedChanges}
@@ -201,7 +197,6 @@
             classes="dashboard-admin-event-presskit-url input"
             id="dashboard-admin-event-presskit-url"
             labelText="Presskit URL:"
-            placeholderText="Presskit URL:"
             ariaLabel="Gib die URL des Presskits des ausgewählten Events ein."
             bind:value={event.presskit_url}
             on:input={setUnsavedChanges}
@@ -210,7 +205,6 @@
             classes="dashboard-admin-event-youtube-channel-url input"
             id="dashboard-admin-event-youtube-channel-url"
             labelText="YouTube URL:"
-            placeholderText="YouTube URL:"
             ariaLabel="Gib die URL des YouTube Kanals des ausgewählten Events ein."
             bind:value={event.youtube_channel_url}
             on:input={setUnsavedChanges}
@@ -219,7 +213,6 @@
             classes="dashboard-admin-event-trailer-url input"
             id="dashboard-admin-event-trailer-url"
             labelText="Trailer URL:"
-            placeholderText="Trailer URL:"
             ariaLabel="Gib die URL des Trailers des ausgewählten Events ein."
             bind:value={event.trailer_url}
             on:input={setUnsavedChanges}
@@ -228,7 +221,6 @@
             classes="dashboard-admin-event-trailer-poster-url input"
             id="dashboard-admin-event-trailer-poster-url"
             labelText="Trailer Poster URL:"
-            placeholderText="Trailer Poster URL:"
             ariaLabel="Gib die URL des Trailer-Posters des ausgewählten Events ein."
             bind:value={event.trailer_poster_url}
             on:input={setUnsavedChanges}
@@ -237,7 +229,6 @@
             classes="dashboard-admin-event-trailer-subtitle-url input"
             id="dashboard-admin-event-trailer-subtitle-url"
             labelText="Trailer Subtitle URL:"
-            placeholderText="Trailer Subtitle URL:"
             ariaLabel="Gib die URL der Trailer-Subtitles des ausgewählten Events ein."
             bind:value={event.trailer_subtitles_url}
             on:input={setUnsavedChanges}
@@ -246,7 +237,6 @@
             classes="dashboard-admin-event-description-headline input"
             id="dashboard-admin-event-description-headline"
             labelText="Überschrift Beschreibung:"
-            placeholderText="Überschrift Beschreibung:"
             ariaLabel="Gib die Überschrift der Eventbeschreibung des ausgewählten Events ein."
             bind:value={event.description_headline}
             on:input={setUnsavedChanges}
@@ -255,7 +245,6 @@
             classes="dashboard-admin-event-description input"
             id="dashboard-admin-event-description"
             labelText="Beschreibung:"
-            placeholderText="Beschreibung"
             ariaLabel="Gib den Eventbeschreibungstext des ausgewählten Events ein."
             bind:value={event.description}
             on:submit={trySaveAsync}
@@ -270,7 +259,6 @@
                         classes="dashboard-admin-event-speaker-date input"
                         id="dashboard-admin-event-speaker-date-{speaker.id}"
                         labelText="{speaker.name}:"
-                        placeholderText="{speaker.name}:"
                         type="datetime-local"
                         ariaLabel="Gib das Veröffentlichungsdatum von {speaker.name} für das ausgewählte Event an."
                         bind:value={speaker.visible_from}

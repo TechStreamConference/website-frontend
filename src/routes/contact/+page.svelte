@@ -127,13 +127,11 @@
                   on:submit|preventDefault={saveAsync}>
                 <Input id="contact-name-input"
                        labelText="Name:"
-                       placeholderText="Name"
                        ariaLabel="Gib hier deinen Namen ein"
                        bind:value={name}
                        on:input={setUnsavedChanges}/>
                 <Input id="contact-mail-input"
                        labelText="E-Mail:"
-                       placeholderText="E-Mail"
                        ariaLabel="Gib hier deine E-mail ein"
                        bind:value={mail}
                        on:input={setUnsavedChanges}/>
@@ -145,7 +143,6 @@
                     {#if subject === subjectOther}
                         <Input id="contact-subject-concrete-input"
                                labelText="Betreff:"
-                               placeholderText="Betreff"
                                ariaLabel="Spezifiziere hier den Betreff"
                                limit={78}
                                bind:value={subjectConcrete}
@@ -154,7 +151,6 @@
                 </div>
                 <TextArea id="contact-message-text-area"
                           labelText="Nachricht:"
-                          placeholderText="Nachricht"
                           ariaLabel="Gib hier deine Nachricht ein"
                           rows={15}
                           limit={2000}
@@ -185,6 +181,7 @@
     .contact-subject-wrapper {
         display: flex;
         flex-direction: row;
+        align-items: end;
         gap: var(--full-gap);
     }
 </style>
