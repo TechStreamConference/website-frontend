@@ -55,4 +55,8 @@
         border-radius: 0;
         transition: border-radius var(--transition-duration);
     }
+
+    option {
+        border-radius: var(--border-radius);
+    }
 </style>
