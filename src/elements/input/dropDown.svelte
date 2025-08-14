@@ -19,7 +19,7 @@
 </script>
 
 <div class={classes}>
-    <Label for_={id}>{labelText}</Label>
+    <Label classes="drop-down-floating-label" for_={id}>{labelText}</Label>
     <select class="normal-font"
             {id}
             bind:value={selected}
@@ -34,10 +34,9 @@
 
 <style>
     div {
-        display: flex;
-        gap: var(--quad-gap);
-        flex-direction: column;
+        position: relative;
         width: 100%;
+        margin-top: var(--2x-margin);
     }
 
     select {
@@ -57,6 +56,17 @@
     }
 
     option {
+        border-radius: var(--border-radius);
+    }
+
+    :global(.drop-down-floating-label) {
+        position: absolute;
+        top: -0.7rem;
+        left: 0.5rem;
+        transform: translateY(-50%);
+        font-size: var(--half-font-size) !important;
+        background-color: var(--background-color);
+        padding: 0 var(--half-padding);
         border-radius: var(--border-radius);
     }
 </style>
