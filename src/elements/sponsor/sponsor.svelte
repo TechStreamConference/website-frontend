@@ -14,6 +14,7 @@
 </script>
 
 <a
+        itemprop="url"
         href={link.url}
         target="_blank"
         rel="noopener noreferrer"
@@ -31,6 +32,7 @@
                alt={link.alt_text}
         />
     {/if}
+    <meta itemprop="name" content={link.name}/>
 </a>
 
 <style>

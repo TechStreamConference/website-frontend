@@ -11,7 +11,10 @@
 
 <div class="sponsor-array-image-grid {classes}">
     {#each logos as logo}
-        <div class="sponsor-array-image-container">
+        <div itemprop="sponsor"
+             itemscope
+             itemtype="https://schema.org/Organization"
+                class="sponsor-array-image-container">
             <Sponsor link={logo}
                      classes={'sponsor-array-link'}/>
             {#if logo.copyright}
