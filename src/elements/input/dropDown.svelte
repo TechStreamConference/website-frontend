@@ -42,7 +42,7 @@
 
     select {
         color: var(--text-color);
-        background-color: transparent;
+        background-color: var(--background-color);
         border-radius: var(--border-radius);
         padding: var(--half-padding);
         width: 100%;
@@ -54,12 +54,5 @@
     select:hover {
         border-radius: 0;
         transition: border-radius var(--transition-duration);
-    }
-
-    option {
-        color: var(--text-color);
-        background-color: var(--background-color);
-        border-radius: var(--border-radius);
-        border: 1px solid var(--line-color);
     }
 </style>
