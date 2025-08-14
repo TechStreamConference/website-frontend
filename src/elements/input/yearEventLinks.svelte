@@ -6,11 +6,13 @@
     export let classes: string = '';
 
     export let data: LoadYear;
+    export let useItemProps: boolean = false;
 </script>
 
 <div class="year-event-links-wrapper {classes}">
     {#if data.year.event.twitch_url}
         <StyledLink
+                itemprop={useItemProps ? "location" : undefined }
                 classes="styled-link-white"
                 textClasses="hide-text-on-mobile"
                 href={data.year.event.twitch_url}
@@ -21,6 +23,7 @@
     {/if}
     {#if data.year.event.discord_url}
         <StyledLink
+                itemprop={useItemProps ? "url" : undefined }
                 classes="styled-link-white"
                 textClasses="hide-text-on-mobile"
                 href={data.year.event.discord_url}
@@ -31,6 +34,7 @@
     {/if}
     {#if data.year.event.youtube_channel_url}
         <StyledLink
+                itemprop={useItemProps ? "url" : undefined }
                 classes="styled-link-white"
                 textClasses="hide-text-on-mobile"
                 href={data.year.event.youtube_channel_url}
@@ -41,6 +45,7 @@
     {/if}
     {#if data.year.event.presskit_url}
         <StyledLink
+                itemprop={useItemProps ? "url" : undefined }
                 classes="styled-link-white"
                 textClasses="hide-text-on-mobile"
                 href={data.year.event.presskit_url}

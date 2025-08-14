@@ -7,11 +7,15 @@
     export let headerMenu: MenuItem[];
     export let footerMenu: MenuItem[];
     export let globals: Globals;
+
+    export let itemtype: string = "";
 </script>
 
 <div class="generic-page-wrapper">
     <Header menu={headerMenu}/>
-    <div class="generic-page-content">
+    <div class="generic-page-content"
+         itemscope
+         itemtype={ itemtype ?? undefined }>
         <slot/>
     </div>
     <Footer globals={globals}

@@ -10,15 +10,17 @@
 
     export let iconClasses: string = '';
     export let textClasses: string = '';
+
+    export let itemprop: string = '';
 </script>
 
-<a
-        {href}
-        class={classes + ' normal-font button hover-move'}
-        target={newTab ? '_blank' : ''}
-        rel="noopener noreferrer"
-        {title}
-        on:click
+<a itemprop={itemprop ?? undefined}
+   {href}
+   class={classes + ' normal-font button hover-move'}
+   target={newTab ? '_blank' : ''}
+   rel="noopener noreferrer"
+   {title}
+   on:click
 >
     {#if icon}
         <Icon classes={iconClasses} type={icon}/>

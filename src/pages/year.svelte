@@ -94,22 +94,28 @@
          data.year.event.is_visible_on_frontpage ? Menu.headerMainLoggedIn : Menu.getHeaderMenuForLoggedInHiddenEvent(lastEventLink()) :
          data.year.event.is_visible_on_frontpage ?  Menu.headerMainLoggedOut : Menu.getHeaderMenuForLoggedOutHiddenEvent(lastEventLink())}
         footerMenu={data.loggedIn ? Menu.footerLoggedIn : Menu.footerLoggedOut}
-        globals={data.globals}>
+        globals={data.globals}
+        itemtype="https://schema.org/EducationEvent">
 
     <div class="year-header">
         <div class="year-header-content">
             <LogoBig classes="year-logo-big"/>
 
             <div class="year-header-text-wrapper">
-                <Headline classes="headline-green headline-left">{data.year.event.title}</Headline>
-                <SubHeadline classes="year-header-sub-headline sub-headline-white">
+                <Headline itemprop="name" classes="headline-green headline-left">{data.year.event.title}</Headline>
+                <SubHeadline
+                        seoProps={[
+                            {prop: "startDate", content: data.year.event.start_date },
+                            {prop: "endDate", content: data.year.event.end_date },
+                            ]}
+                        classes="year-header-sub-headline sub-headline-white">
                     Online-Konferenz {formatDate(data.year.event.start_date, '%DD.%MM.')}
                     - {formatDate(data.year.event.end_date, '%DD.%MM.%YYYY')}
                 </SubHeadline>
-                <Paragraph classes="year-header-subtitle paragraph-white">
+                <Paragraph itemprop="alternateName" classes="year-header-subtitle paragraph-white">
                     {data.year.event.subtitle}
                 </Paragraph>
-                <YearEventLinks {data}/>
+                <YearEventLinks useItemProps={true} {data}/>
             </div>
         </div>
     </div>
@@ -132,7 +138,7 @@
             <HeadlineH2 classes="headline-h2-border">{data.year.event.description_headline}</HeadlineH2>
             <div class="year-description-wrapper">
                 <div class="year-description-text-wrapper">
-                    <Paragraph classes="year-discription-paragraph paragraph-pre-wrap"
+                    <Paragraph itemprop="description" classes="year-discription-paragraph paragraph-pre-wrap"
                     >{data.year.event.description}</Paragraph>
                     <YearEventLinks {data}/>
                 </div>
@@ -302,9 +308,9 @@
         right: 0;
         bottom: 0;
         background: radial-gradient(
-            circle at center,
-            rgba(255, 255, 255, 0.02) 30%,
-            rgba(0, 0, 0, 0.2) 100%
+                circle at center,
+                rgba(255, 255, 255, 0.02) 30%,
+                rgba(0, 0, 0, 0.2) 100%
         );
         pointer-events: none;
     }
