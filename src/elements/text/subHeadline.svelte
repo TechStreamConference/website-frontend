@@ -3,23 +3,21 @@
     export let size: 'sub-headline-small' | 'sub-headline-big' = 'sub-headline-big';
     export let id: string = '';
 
-    export let seoProps: { prop: string, content: string }[] = [];
+    export let itemProp: string = '';
+    export let dateProps: { prop: string, content: string }[] = [];
 </script>
 
-<h2 id={id || undefined}
+<h2 itemprop="{itemProp ?? undefined}"
+    id={id || undefined}
     class="sub-headline-font {classes} {size}">
     <slot/>
-</h2>
 
-{#each seoProps as {prop, content}}
-    {#if prop === "startDate" || prop === "endDate"}}
+    {#each dateProps as {prop, content}}
         <time itemprop={prop}
               datetime={content}
         ></time>
-    {:else }
-        <div itemprop={prop}></div>
-    {/if}
-{/each}
+    {/each}
+</h2>
 
 
 <style>

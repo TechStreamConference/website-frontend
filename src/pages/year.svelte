@@ -104,7 +104,7 @@
             <div class="year-header-text-wrapper">
                 <Headline itemprop="name" classes="headline-green headline-left">{data.year.event.title}</Headline>
                 <SubHeadline
-                        seoProps={[
+                        dateProps={[
                             {prop: "startDate", content: data.year.event.start_date },
                             {prop: "endDate", content: data.year.event.end_date },
                             ]}
@@ -201,7 +201,8 @@
                 <HeadlineH2 classes="headline-h2-border">Vortragende</HeadlineH2>
                 <div class="year-section-inner">
                     {#if data.year.speakers.length > 0}
-                        <PersonArray personData={data.year.speakers}
+                        <PersonArray itemProp="performer"
+                                     personData={data.year.speakers}
                                      personPopupCallback={openPersonPopup}/>
                     {:else}
                         <TextLine classes="text-line-center">Sei gespannt, welche Speaker in den nächsten Tagen hier auf
@@ -235,7 +236,8 @@
                 <HeadlineH2 classes="headline-h2-border">Team</HeadlineH2>
                 <div class="year-section-inner">
                     {#if data.year.team_members.length > 0}
-                        <PersonArray personData={data.year.team_members}
+                        <PersonArray itemProp="organizer"
+                                     personData={data.year.team_members}
                                      personPopupCallback={openPersonPopup}/>
                     {:else}
                         <TextLine classes="text-line-center">Sei gespannt welche, Team Member in den nächsten Tagen hier

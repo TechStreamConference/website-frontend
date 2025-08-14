@@ -8,6 +8,7 @@
     import PersonImage from './personImage.svelte';
 
     export let classes: string = '';
+    export let itemProp: string = '';
 
     export let data: Person;
 
@@ -16,16 +17,21 @@
     }
 </script>
 
-<div class="person-rectangle {classes}"
+<div itemprop={itemProp ?? undefined}
+     itemscope
+     itemtype="https://schema.org/Person"
+     class="person-rectangle {classes}"
      on:click
      role="presentation">
     <PersonImage classes="person-rectangle-picture"
                  {data}/>
-    <SubHeadline classes="person-rectangle-margin">{data.name}</SubHeadline>
-    <Paragraph classes="person-rectangle-paragraph person-rectangle-margin">{data.short_bio}</Paragraph>
+    <SubHeadline itemProp="name" classes="person-rectangle-margin">{data.name}</SubHeadline>
+    <Paragraph itemprop="description"
+               classes="person-rectangle-paragraph person-rectangle-margin">{data.short_bio}</Paragraph>
     <div class="person-rectangle-line person-rectangle-margin"></div>
     <div class="person-rectangle-margin">
-        <LinkArray on:click={onLinkClicked}
+        <LinkArray itemProp="url"
+                   on:click={onLinkClicked}
                    person={data.name}
                    links={data.social_media_links}/>
     </div>

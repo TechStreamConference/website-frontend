@@ -11,10 +11,10 @@
     export let iconClasses: string = '';
     export let textClasses: string = '';
 
-    export let itemprop: string = '';
+    export let itemProp: string = '';
 </script>
 
-<a itemprop={itemprop ?? undefined}
+<a itemprop={itemProp ?? undefined}
    {href}
    class={classes + ' normal-font button hover-move'}
    target={newTab ? '_blank' : ''}

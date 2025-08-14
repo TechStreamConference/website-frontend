@@ -7,11 +7,13 @@
 
     export let person: string;
     export let links: SocialMediaLinks;
+    export let itemProp:string = "";
 </script>
 
 <div class={classes}>
     {#each links as link}
         <StyledLink
+                {itemProp}
                 classes="transparent-background"
                 iconClasses="text-color-only"
                 href={link.url}
