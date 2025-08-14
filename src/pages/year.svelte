@@ -254,6 +254,7 @@
                 {#if data.year.talks.length > 0}
                     <div class="center-styled-link">
                         <StyledLink
+                                itemProp="url"
                                 classes="styled-link-white"
                                 href={apiUrl(`/events/${data.year.event.year}/ics`)}
                                 title="Klicke, um den Ablaufplan als ICS-Datei herunterzuladen"

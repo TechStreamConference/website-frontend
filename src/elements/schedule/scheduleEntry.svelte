@@ -29,18 +29,39 @@
         />
     {/if}
 </div>
-<div class="schedule-entry-entry-wrapper schedule-entry-horizontal-line">
+<div itemprop="subEvent"
+     itemscope
+     itemtype="https://schema.org/Event"
+     class="schedule-entry-entry-wrapper schedule-entry-horizontal-line">
+    <meta itemprop="startDate" content={talk.starts_at}/>
+    <meta itemprop="duration" content={`PT${talk.duration}M`}/>
+    <meta itemprop="description" content={talk.description}/>
+    <meta itemprop="isAccessibleForFree" content="true"/>
+    <meta itemprop="url" content={talk.youtube_url}/>
     <div class="schedule-entry-title-wrapper">
-        <SubHeadline>{talk.title}</SubHeadline>
+        <SubHeadline itemProp="name">{talk.title}</SubHeadline>
         <div class="schedule-entry-tag-wrapper">
             {#each talk.tags as tag}
                 <ScheduleTag {tag}/>
+                <meta itemprop="keywords" content={tag.text}/>
             {/each}
         </div>
     </div>
     <div class="schedule-entry-speaker-wrapper">
+        <div hidden aria-hidden="true"
+             itemprop="performer"
+             itemscope
+             itemtype="https://schema.org/Person">
+            <meta itemprop="name" content={speaker.name}/>
+            <meta itemprop="description" content={speaker.short_bio}/>
+            <meta itemprop="description" content={speaker.bio}/>
+            {#each speaker.social_media_links as link}
+                <meta itemprop="url" content={link.url}/>
+            {/each}
+        </div>
         {#if talk.guests.length > 0}
             <TextLine classes="schedule-entry-speaker-text">Moderation:</TextLine>
+
         {/if}
         <ScheduleSpeaker
                 {speaker}
@@ -56,6 +77,17 @@
                         speaker={guest}
                         on:click={(event) => {personPopupCallback(event, guest);}}
                 />
+                <div hidden aria-hidden="true"
+                     itemprop="contributor"
+                     itemscope
+                     itemtype="https://schema.org/Person">
+                    <meta itemprop="name" content={guest.name}/>
+                    <meta itemprop="description" content={guest.short_bio}/>
+                    <meta itemprop="description" content={guest.bio}/>
+                    {#each guest.social_media_links as link}
+                        <meta itemprop="url" content={link.url}/>
+                    {/each}
+                </div>
             {/each}
         {/if}
     </div>
