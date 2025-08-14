@@ -2,11 +2,9 @@
     export let classes: string = '';
 
     export let size: string = 'headline-big';
-    export let itemprop: string = '';
 </script>
 
-<h1 class="headline-font {size} {classes}"
-    itemprop={itemprop ?? undefined}>
+<h1 class="headline-font {size} {classes}">
     <slot/>
 </h1>
 

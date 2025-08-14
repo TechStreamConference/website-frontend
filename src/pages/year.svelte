@@ -102,20 +102,25 @@
             <LogoBig classes="year-logo-big"/>
 
             <div class="year-header-text-wrapper">
-                <Headline itemprop="name" classes="headline-green headline-left">{data.year.event.title}</Headline>
-                <SubHeadline
-                        dateProps={[
-                            {prop: "startDate", content: data.year.event.start_date },
-                            {prop: "endDate", content: data.year.event.end_date },
-                            ]}
-                        classes="year-header-sub-headline sub-headline-white">
+                <Headline classes="headline-green headline-left">{data.year.event.title}</Headline>
+                <SubHeadline classes="year-header-sub-headline sub-headline-white">
                     Online-Konferenz {formatDate(data.year.event.start_date, '%DD.%MM.')}
                     - {formatDate(data.year.event.end_date, '%DD.%MM.%YYYY')}
                 </SubHeadline>
-                <Paragraph itemprop="alternateName" classes="year-header-subtitle paragraph-white">
+                <Paragraph classes="year-header-subtitle paragraph-white">
                     {data.year.event.subtitle}
                 </Paragraph>
-                <YearEventLinks useItemProps={true} {data}/>
+                <YearEventLinks {data}/>
+
+                <meta itemprop="startDate" content={data.year.event.start_date}/>
+                <meta itemprop="endDate" content={data.year.event.end_date}/>
+                <meta itemprop="name" content={data.year.event.title}/>
+                <meta itemprop="alternateName" content={data.year.event.subtitle}/>
+                <meta itemprop="description" content={data.year.event.description}/>
+                <meta itemprop="location" content={data.year.event.twitch_url}/>
+                <meta itemprop="url" content={data.year.event.discord_url}/>
+                <meta itemprop="url" content={data.year.event.youtube_channel_url}/>
+                <meta itemprop="url" content={data.year.event.presskit_url}/>
             </div>
         </div>
     </div>
@@ -138,7 +143,7 @@
             <HeadlineH2 classes="headline-h2-border">{data.year.event.description_headline}</HeadlineH2>
             <div class="year-description-wrapper">
                 <div class="year-description-text-wrapper">
-                    <Paragraph itemprop="description" classes="year-discription-paragraph paragraph-pre-wrap"
+                    <Paragraph classes="year-discription-paragraph paragraph-pre-wrap"
                     >{data.year.event.description}</Paragraph>
                     <YearEventLinks {data}/>
                 </div>
@@ -254,7 +259,6 @@
                 {#if data.year.talks.length > 0}
                     <div class="center-styled-link">
                         <StyledLink
-                                itemProp="url"
                                 classes="styled-link-white"
                                 href={apiUrl(`/events/${data.year.event.year}/ics`)}
                                 title="Klicke, um den Ablaufplan als ICS-Datei herunterzuladen"
@@ -262,6 +266,7 @@
                                 newTab={false}
                                 text="Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!"
                         />
+                        <meta itemprop="url" content={apiUrl(`/events/${data.year.event.year}/ics`)}/>
                     </div>
                     <div class="year-section-inner">
                         {#each splitTalks() as days}

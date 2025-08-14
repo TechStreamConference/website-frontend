@@ -23,11 +23,14 @@
      class="person-rectangle {classes}"
      on:click
      role="presentation">
+    <meta itemprop="name" content={data.name}/>
+    <meta itemprop="description" content={data.short_bio}/>
+    <meta itemprop="description" content={data.bio}/>
+
     <PersonImage classes="person-rectangle-picture"
                  {data}/>
-    <SubHeadline itemProp="name" classes="person-rectangle-margin">{data.name}</SubHeadline>
-    <Paragraph itemprop="description"
-               classes="person-rectangle-paragraph person-rectangle-margin">{data.short_bio}</Paragraph>
+    <SubHeadline classes="person-rectangle-margin">{data.name}</SubHeadline>
+    <Paragraph classes="person-rectangle-paragraph person-rectangle-margin">{data.short_bio}</Paragraph>
     <div class="person-rectangle-line person-rectangle-margin"></div>
     <div class="person-rectangle-margin">
         <LinkArray itemProp="url"

@@ -39,13 +39,14 @@
     <meta itemprop="isAccessibleForFree" content="true"/>
     <meta itemprop="url" content={talk.youtube_url}/>
     <div class="schedule-entry-title-wrapper">
-        <SubHeadline itemProp="name">{talk.title}</SubHeadline>
+        <SubHeadline>{talk.title}</SubHeadline>
         <div class="schedule-entry-tag-wrapper">
             {#each talk.tags as tag}
                 <ScheduleTag {tag}/>
                 <meta itemprop="keywords" content={tag.text}/>
             {/each}
         </div>
+        <meta itemprop="name" content={talk.title}/>
     </div>
     <div class="schedule-entry-speaker-wrapper">
         <div hidden aria-hidden="true"

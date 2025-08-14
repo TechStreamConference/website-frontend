@@ -20,6 +20,8 @@
             {#if logo.copyright}
                 <TextLine classes="sponsor-array-text-line">{logo.copyright}</TextLine>
             {/if}
+            <meta itemprop="url" content={logo.url}/>
+            <meta itemprop="name" content={logo.name}/>
         </div>
     {/each}
 </div>

@@ -2,21 +2,11 @@
     export let classes: string = '';
     export let size: 'sub-headline-small' | 'sub-headline-big' = 'sub-headline-big';
     export let id: string = '';
-
-    export let itemProp: string = '';
-    export let dateProps: { prop: string, content: string }[] = [];
 </script>
 
-<h2 itemprop="{itemProp ?? undefined}"
-    id={id || undefined}
+<h2 id={id || undefined}
     class="sub-headline-font {classes} {size}">
     <slot/>
-
-    {#each dateProps as {prop, content}}
-        <time itemprop={prop}
-              datetime={content}
-        ></time>
-    {/each}
 </h2>
 
 

@@ -13,7 +13,6 @@
 <div class={classes}>
     {#each links as link}
         <StyledLink
-                {itemProp}
                 classes="transparent-background"
                 iconClasses="text-color-only"
                 href={link.url}
@@ -21,6 +20,7 @@
                 title="Klicke für {link.name} von {person}"
                 on:click
         />
+        <meta itemprop={itemProp} content={link.url} />
     {/each}
 </div>
 
