@@ -143,11 +143,9 @@
                     <MessageWrapper messages={errorList}/>
                 </div>
                 <Input
-                        classes="register-input-line"
                         id="register-username"
                         type="text"
                         labelText="Name:"
-                        placeholderText="Name"
                         bind:value={username}
                         ariaLabel="Gib den Nutzernamen ein"
                         on:input={() => {
@@ -155,11 +153,9 @@
 					}}
                 />
                 <Input
-                        classes="register-input-line"
                         id="register-email"
                         type="email"
                         labelText="E-Mail:"
-                        placeholderText="E-Mail"
                         bind:value={email}
                         ariaLabel="Gib die E-Mail ein"
                         on:input={() => {
@@ -167,21 +163,17 @@
 					}}
                 />
                 <Input
-                        classes="register-input-line"
                         id="register-password"
                         type="password"
                         labelText="Passwort:"
-                        placeholderText="Passwort"
                         bind:value={password_1}
                         ariaLabel="Gib das Passwort ein"
                         on:input={startPasswordTimer}
                 />
                 <Input
-                        classes="register-input-line"
                         id="register-password-repeat"
                         type="password"
                         labelText="Passwort wiederholen:"
-                        placeholderText="Passwort wiederholen"
                         bind:value={password_2}
                         ariaLabel="Wiederhole das Passwort"
                         on:input={startPasswordTimer}
@@ -242,10 +234,6 @@
         display: flex;
         flex-direction: column;
         margin: var(--2x-margin) auto;
-    }
-
-    :global(.register-input-line) {
-        margin-bottom: var(--full-margin);
     }
 
     :global(.register-submit-button) {

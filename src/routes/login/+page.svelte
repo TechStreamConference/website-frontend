@@ -91,7 +91,6 @@
                     id="login-username-or-email"
                     type="text"
                     labelText="Nutzername oder E-Mail:"
-                    placeholderText="Nutzername oder E-Mail"
                     ariaLabel="Gib den Nutzernamen oder die E-Mail ein"
                     bind:value={usernameOrEmail}
             />
@@ -100,7 +99,6 @@
                     id="login-password"
                     type="password"
                     labelText="Passwort:"
-                    placeholderText="Passwort"
                     ariaLabel="Gib das Passwort ein"
                     bind:value={password}
             />
@@ -123,13 +121,14 @@
         <form class="login-form-width-wrapper"
               on:submit|preventDefault={resetPassword}>
             <HeadlinePage>Passwort zurücksetzen</HeadlinePage>
-            <MessageWrapper messages={errorList}/>
+            <div class="login-message-wrapper">
+                <MessageWrapper messages={errorList}/>
+            </div>
             <Input
                     classes="login-username-mail login-username-mail-reset-extra"
                     id="login-username-or-email"
                     type="text"
                     labelText="Nutzername oder E-Mail:"
-                    placeholderText="Nutzername oder E-Mail"
                     ariaLabel="Gib den Nutzernamen oder die E-Mail-Adresse ein"
                     bind:value={usernameOrEmail}
             />
@@ -161,7 +160,7 @@
 <style>
     .login-form-width-wrapper {
         width: 100%;
-        max-width: 50rem;
+        max-width: 60rem;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -176,10 +175,6 @@
         display: flex;
         flex-direction: column;
         margin: var(--2x-margin) auto;
-    }
-
-    :global(.login-username-mail) {
-        margin-bottom: var(--full-margin);
     }
 
     :global(.login-username-mail-reset-extra) {

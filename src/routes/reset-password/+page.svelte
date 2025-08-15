@@ -56,20 +56,16 @@
             <HeadlinePage>Passwort zurücksetzen</HeadlinePage>
             <MessageWrapper messages={errorList}/>
             <Input
-                    classes="reset-password-input-line"
                     id="reset-password-input-line-1"
                     type="password"
                     labelText="Passwort:"
-                    placeholderText="Passwort"
                     bind:value={password1}
                     ariaLabel="Gib das neue Passwort ein"
             />
             <Input
-                    classes="reset-password-input-line"
                     id="reset-password-input-line-2"
                     type="password"
                     labelText="Passwort wiederholen:"
-                    placeholderText="Passwort wiederholen"
                     bind:value={password2}
                     ariaLabel="Wiederhole das neue Passwort"
             />

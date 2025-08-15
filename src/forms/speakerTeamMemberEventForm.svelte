@@ -67,9 +67,6 @@
         if (imageInput) {
             imageInput.clear();
         }
-        if (cropper) {
-            cropper.reset();
-        }
     }
 </script>
 
@@ -118,7 +115,6 @@
                 bind:this={imageInput}
                 id="dashboard-speaker-event-image-input"
                 labelText="Profilbild:"
-                placeholderText="Profilbild"
                 ariaLabel="Lade hier dein Profilbild für das Event {data.current.title} hoch"
                 type="file"
                 fileAccept=".jpg, .jpeg, .png"
@@ -133,12 +129,12 @@
         </Paragraph>
         <div class="row-border"></div>
         <Input
-                id="dashboard-speaker-event-name-input"
-                labelText="Name:"
-                placeholderText="Name"
-                ariaLabel="Gib hier deinen Namen für das Event {data.current.title} ein"
-                bind:value={data.event.name}
-                on:input={setUnsavedChanges}
+              id="dashboard-speaker-event-name-input"
+              labelText="Name:"
+              ariaLabel="Gib hier deinen Namen für das Event {data.current.title} ein"
+              limit={50}
+              bind:value={data.event.name}
+              on:input={setUnsavedChanges}
         />
         <Paragraph classes="paragraph-gray">Unter diesem Namen tauchst du später auf der Hauptseite auf. Er muss nicht
             identisch zu dem Namen
@@ -146,13 +142,12 @@
         </Paragraph>
         <div class="row-border"></div>
         <Input
-                id="dashboard-speaker-event-short-bio-input"
-                labelText="Kurzbeschreibung:"
-                placeholderText="Kurzbeschreibung"
-                ariaLabel="Gib hier deine Kurzbeschreibung in Stichworten für das Event {data.current
-				.title} ein"
-                bind:value={data.event.short_bio}
-                on:input={setUnsavedChanges}
+              id="dashboard-speaker-event-short-bio-input"
+              labelText="Kurzbeschreibung:"
+              ariaLabel="Gib hier deine Kurzbeschreibung in Stichworten für das Event {data.current.title} ein"
+              limit={100}
+              bind:value={data.event.short_bio}
+              on:input={setUnsavedChanges}
         />
         <Paragraph classes="paragraph-gray">Deine Kurzbeschreibung sollte aus etwa drei bis fünf Stichpunkten bestehen,
             z. B. <i>„Unity Developer,
@@ -162,8 +157,8 @@
         <TextArea
                 id="dashboard-speaker-event-bio-text-area"
                 labelText="Beschreibung:"
-                placeholderText="Beschreibung"
                 ariaLabel="Gib hier deine Beschreibung für das Event {data.current.title} ein"
+                limit={1000}
                 bind:value={data.event.bio}
                 on:input={setUnsavedChanges}
         />

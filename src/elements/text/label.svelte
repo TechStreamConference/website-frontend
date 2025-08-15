@@ -1,8 +1,9 @@
 <script lang="ts">
     export let for_: string = '';
+    export let classes: string = "";
 </script>
 
-<label class="normal-font"
+<label class="normal-font {classes}"
        for={for_}>
     <slot/>
 </label>
