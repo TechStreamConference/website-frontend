@@ -12,13 +12,12 @@
     export let textClasses: string = '';
 </script>
 
-<a
-        {href}
-        class={classes + ' normal-font button hover-move'}
-        target={newTab ? '_blank' : ''}
-        rel="noopener noreferrer"
-        {title}
-        on:click
+<a {href}
+   class={classes + ' normal-font button hover-move'}
+   target={newTab ? '_blank' : ''}
+   rel="noopener noreferrer"
+   {title}
+   on:click
 >
     {#if icon}
         <Icon classes={iconClasses} type={icon}/>

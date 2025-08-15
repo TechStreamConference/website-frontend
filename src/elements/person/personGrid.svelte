@@ -7,11 +7,14 @@
 
     export let classes: string = '';
     export let personData: Person[];
+
+    export let itemProp: string = "";
 </script>
 
 <div class={classes}>
     {#each personData as person}
         <PersonRectangle
+                {itemProp}
                 data={person}
                 on:click={(event) => {
 				personPopupCallback(event, person);

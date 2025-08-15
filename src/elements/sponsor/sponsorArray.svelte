@@ -11,12 +11,17 @@
 
 <div class="sponsor-array-image-grid {classes}">
     {#each logos as logo}
-        <div class="sponsor-array-image-container">
+        <div itemprop="sponsor"
+             itemscope
+             itemtype="https://schema.org/Organization"
+                class="sponsor-array-image-container">
             <Sponsor link={logo}
                      classes={'sponsor-array-link'}/>
             {#if logo.copyright}
                 <TextLine classes="sponsor-array-text-line">{logo.copyright}</TextLine>
             {/if}
+            <meta itemprop="url" content={logo.url}/>
+            <meta itemprop="name" content={logo.name}/>
         </div>
     {/each}
 </div>

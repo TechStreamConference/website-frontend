@@ -94,7 +94,8 @@
          data.year.event.is_visible_on_frontpage ? Menu.headerMainLoggedIn : Menu.getHeaderMenuForLoggedInHiddenEvent(lastEventLink()) :
          data.year.event.is_visible_on_frontpage ?  Menu.headerMainLoggedOut : Menu.getHeaderMenuForLoggedOutHiddenEvent(lastEventLink())}
         footerMenu={data.loggedIn ? Menu.footerLoggedIn : Menu.footerLoggedOut}
-        globals={data.globals}>
+        globals={data.globals}
+        itemtype="https://schema.org/EducationEvent">
 
     <div class="year-header">
         <div class="year-header-content">
@@ -110,6 +111,16 @@
                     {data.year.event.subtitle}
                 </Paragraph>
                 <YearEventLinks {data}/>
+
+                <meta itemprop="startDate" content={data.year.event.start_date}/>
+                <meta itemprop="endDate" content={data.year.event.end_date}/>
+                <meta itemprop="name" content={data.year.event.title}/>
+                <meta itemprop="alternateName" content={data.year.event.subtitle}/>
+                <meta itemprop="description" content={data.year.event.description}/>
+                <meta itemprop="location" content={data.year.event.twitch_url}/>
+                <meta itemprop="url" content={data.year.event.discord_url}/>
+                <meta itemprop="url" content={data.year.event.youtube_channel_url}/>
+                <meta itemprop="url" content={data.year.event.presskit_url}/>
             </div>
         </div>
     </div>
@@ -195,7 +206,8 @@
                 <HeadlineH2 classes="headline-h2-border">Vortragende</HeadlineH2>
                 <div class="year-section-inner">
                     {#if data.year.speakers.length > 0}
-                        <PersonArray personData={data.year.speakers}
+                        <PersonArray itemProp="performer"
+                                     personData={data.year.speakers}
                                      personPopupCallback={openPersonPopup}/>
                     {:else}
                         <TextLine classes="text-line-center">Sei gespannt, welche Speaker in den nächsten Tagen hier auf
@@ -229,7 +241,8 @@
                 <HeadlineH2 classes="headline-h2-border">Team</HeadlineH2>
                 <div class="year-section-inner">
                     {#if data.year.team_members.length > 0}
-                        <PersonArray personData={data.year.team_members}
+                        <PersonArray itemProp="organizer"
+                                     personData={data.year.team_members}
                                      personPopupCallback={openPersonPopup}/>
                     {:else}
                         <TextLine classes="text-line-center">Sei gespannt welche, Team Member in den nächsten Tagen hier
@@ -253,6 +266,7 @@
                                 newTab={false}
                                 text="Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!"
                         />
+                        <meta itemprop="url" content={apiUrl(`/events/${data.year.event.year}/ics`)}/>
                     </div>
                     <div class="year-section-inner">
                         {#each splitTalks() as days}
@@ -302,9 +316,9 @@
         right: 0;
         bottom: 0;
         background: radial-gradient(
-            circle at center,
-            rgba(255, 255, 255, 0.02) 30%,
-            rgba(0, 0, 0, 0.2) 100%
+                circle at center,
+                rgba(255, 255, 255, 0.02) 30%,
+                rgba(0, 0, 0, 0.2) 100%
         );
         pointer-events: none;
     }

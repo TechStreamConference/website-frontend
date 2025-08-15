@@ -7,6 +7,7 @@
 
     export let person: string;
     export let links: SocialMediaLinks;
+    export let itemProp:string = "";
 </script>
 
 <div class={classes}>
@@ -19,6 +20,7 @@
                 title="Klicke für {link.name} von {person}"
                 on:click
         />
+        <meta itemprop={itemProp} content={link.url} />
     {/each}
 </div>
 

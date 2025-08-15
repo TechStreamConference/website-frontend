@@ -13,13 +13,12 @@
     $: defaultClass = isAlternativeActive ? 'sponsor-logo-none' : '';
 </script>
 
-<a
-        href={link.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class={classes}
-        title="Klicke hier um zu {link.name} zu navigieren."
-        on:click
+<a href={link.url}
+   target="_blank"
+   rel="noopener noreferrer"
+   class={classes}
+   title="Klicke hier um zu {link.name} zu navigieren."
+   on:click
 >
     <Image classes="image-default {defaultClass} sponsor-link-hover"
            src={imageUrl(link.logo)}
@@ -31,6 +30,7 @@
                alt={link.alt_text}
         />
     {/if}
+
 </a>
 
 <style>

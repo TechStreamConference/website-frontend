@@ -9,6 +9,7 @@
     <slot/>
 </h2>
 
+
 <style>
     .sub-headline-center {
         text-align: center;
