@@ -36,7 +36,8 @@
     const loggedInMessage = data.loggedIn ? 'Du bist bereits angemeldet' : '';
     let usernameMessage: string = '';
     let emailMessage: string = '';
-    let passwordMessage: string = '';
+    let password_1Message: string = '';
+    let password_2Message: string = '';
     let errorList: string[] = [''];
 
     let registered: boolean = false;
@@ -79,8 +80,14 @@
     function onPasswordChanged(checkFirst: boolean): void {
         stopTimer(timerPasswordRef);
 
-        const result = Validators.onPasswordChanged(password_1, password_2, checkFirst);
-        passwordMessage = result ? result : '';
+        if (checkFirst) {
+            const result = Validators.onPassword1Changed(password_1);
+            password_1Message = result ? result : '';
+            return;
+        }
+
+        const result = Validators.onPassword2Changed(password_1, password_2);
+        password_2Message = result ? result : '';
     }
 
     async function tryRegisterAsync(): Promise<void> {
@@ -95,7 +102,8 @@
         errorList = [];
         usernameMessage = nameResult ? nameResult : '';
         emailMessage = mailResult ? mailResult : '';
-        passwordMessage = passwordResult ? passwordResult : '';
+        password_1Message = passwordResult ? passwordResult : '';
+        password_2Message = '';
 
         if (nameResult || mailResult || passwordResult) {
             return;
@@ -135,7 +143,8 @@
                     <ErrorMessage message={loggedInMessage}/>
                     <ErrorMessage message={usernameMessage}/>
                     <ErrorMessage message={emailMessage}/>
-                    <ErrorMessage message={passwordMessage}/>
+                    <ErrorMessage message={password_1Message}/>
+                    <ErrorMessage message={password_2Message}/>
                     <MessageWrapper messages={errorList}/>
                 </div>
                 <Input
@@ -163,7 +172,7 @@
                         bind:value={password_1}
                         ariaLabel="Gib das Passwort ein"
                         on:blur={() => {onPasswordChanged(true);}}
-                        on:input={() => {startTimer(timerPasswordRef, ()=>{passwordMessage = ""}, 500 )}}
+                        on:input={() => {startTimer(timerPasswordRef, ()=>{password_1Message = ""}, 500 )}}
                 />
                 <Input
                         id="register-password-repeat"
@@ -171,8 +180,7 @@
                         labelText="Passwort wiederholen:"
                         bind:value={password_2}
                         ariaLabel="Wiederhole das Passwort"
-                        on:blur={() => {onPasswordChanged(false);}}
-                        on:input={() => {startTimer(timerPasswordRef, ()=>{passwordMessage = ""}, 500 )}}
+                        on:input={() => {onPasswordChanged(false);}}
                 />
                 <Button
                         classes="register-submit-button"
