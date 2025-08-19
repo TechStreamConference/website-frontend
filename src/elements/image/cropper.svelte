@@ -46,10 +46,9 @@
         });
 
         resizeObserver.observe(cropperWrapper);
-        window.addEventListener('keydown', handleKeyDown);
 
         return () => {
-            window.removeEventListener('keydown', handleKeyDown);
+            disableKeyboardInput();
             resizeObserver.disconnect();
         };
     });
@@ -63,6 +62,14 @@
             initialDraw();
             crop();
         }
+    }
+
+    export function enableKeyboardInput(): void {
+        window.addEventListener('keydown', handleKeyDown);
+    }
+
+    export function disableKeyboardInput(): void {
+        window.removeEventListener('keydown', handleKeyDown);
     }
 
     function initialDraw(): void {
