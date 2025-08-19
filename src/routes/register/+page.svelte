@@ -202,9 +202,6 @@
                     <a href="/">
                         <Button ariaLabel="Klicke, um zur aktuellen Hauptseite zu gelangen">Start</Button>
                     </a>
-                    <a href="./login">
-                        <Button ariaLabel="Klicke, um dich anzumelden">Anmelden</Button>
-                    </a>
                 </div>
             </div>
         {/if}
