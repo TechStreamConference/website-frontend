@@ -55,6 +55,7 @@
 
         newImage = input.files[0];
         popup.show();
+        cropper.enableKeyboardInput();
     }
 
     function resetImage(): void {
@@ -69,6 +70,7 @@
 
 <BasePopup
         bind:this={popup}
+        on:close={() => {cropper.disableKeyboardInput()}}
 >
     <Cropper
             bind:this={cropper}
