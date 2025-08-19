@@ -71,53 +71,64 @@ export async function onMailChangedAsync(mail: string, fetch: typeof globalThis.
     }
 }
 
-export function onPasswordChanged(password_1: string, password_2: string): string | undefined {
-    if (password_1.trim().length === 0) {
-        return undefined;
+export function onPasswordChanged(password_1: string, password_2: string, checkFirst: boolean): string | undefined {
+    const trimmed_1 = checkFirst ? password_1.trim() : password_2.trim();
+    const trimmed_2 = checkFirst ? password_2.trim() : password_1.trim();
+
+    if (trimmed_1.length === 0) {
+        return checkFirst ? "Das Feld 'Passwort' ist leer." : "Das Feld 'Passwort wiederholen' ist leer."
     }
 
-    if (password_2.trim().length === 0) {
-        return undefined;
+    if (trimmed_2.length > 0
+        && trimmed_1 !== trimmed_2) {
+        return "Die Passwörter stimmen nicht überein."
     }
 
-    return onPasswordValidate(password_1, password_2);
+    // not using trimmed_1 here to make sure the single validation is always performed on the first password
+    return validatePasswordSingle(password_1.trim());
 }
 
 export function onPasswordValidate(password_1: string, password_2: string): string | undefined {
-    const trimmed: string = password_1.trim();
+    const trimmed_1: string = password_1.trim();
+    const trimmed_2: string = password_2.trim();
 
-    if (trimmed.length === 0) {
+    if (trimmed_1.length === 0) {
         return 'Das Feld "Passwort" ist leer.';
     }
 
-    if (password_2.trim().length === 0) {
+    if (trimmed_2.length === 0) {
         return 'Das Feld "Passwort wiederholen" ist leer.';
     }
 
-    if (trimmed !== password_2.trim()) {
+    if (trimmed_1 !== trimmed_2) {
         return 'Die Passwörter stimmen nicht überein.';
     }
 
-    if (trimmed.length < 8) {
+
+    return validatePasswordSingle(trimmed_1);
+}
+
+function validatePasswordSingle(password: string): string | undefined {
+    if (password.length < 8) {
         return 'Das Password muss mindestens 8 Zeichen enthalten.';
     }
 
-    const hasLowerCase: boolean = /[a-z]/.test(trimmed);
+    const hasLowerCase: boolean = /[a-z]/.test(password);
     if (!hasLowerCase) {
         return 'Das Passwort muss mindestens einen Kleinbuchstaben enthalten.';
     }
 
-    const hasUpperCase: boolean = /[A-Z]/.test(trimmed);
+    const hasUpperCase: boolean = /[A-Z]/.test(password);
     if (!hasUpperCase) {
         return 'Das Passwort muss mindestens einen Großbuchstaben enthalten.';
     }
 
-    const hasNumber: boolean = /[0-9]/.test(trimmed);
+    const hasNumber: boolean = /[0-9]/.test(password);
     if (!hasNumber) {
         return 'Das Passwort muss mindestens eine Ziffer enthalten.';
     }
 
-    const hasSpecialCharacter: boolean = /[!@#$%^&*()\-_+={};:,<.>§~ ]/.test(trimmed);
+    const hasSpecialCharacter: boolean = /[!@#$%^&*()\-_+={};:,<.>§~ ]/.test(password);
     if (!hasSpecialCharacter) {
         return 'Das Passwort muss mindestens ein Sonderzeichen enthalten.';
     }
