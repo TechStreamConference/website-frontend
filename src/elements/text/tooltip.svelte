@@ -71,5 +71,6 @@
         padding: var(--full-padding);
         position: absolute;
         transform: translateX(-50%) translateY(3rem); /* Center the tooltip horizontally */
+        z-index: 1000;
     }
 </style>
