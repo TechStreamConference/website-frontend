@@ -145,9 +145,9 @@
                 <Input
                         id="register-username"
                         type="text"
-                        labelText="Name:"
+                        labelText="Anmeldename:"
                         bind:value={username}
-                        ariaLabel="Gib den Nutzernamen ein"
+                        ariaLabel="Gib den Anmeldenamen ein"
                         on:input={() => {
 						startTimer(timerUsernameRef, onUsernameChangedAsync, 200);
 					}}

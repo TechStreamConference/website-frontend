@@ -155,14 +155,14 @@
     <div class="dashboard-user-profile-section-wrapper form-border">
         <div class="dashboard-user-profile-section-entry-wrapper">
             <div class="dashboard-user-profile-entry-grid">
-                <TextLine classes="text-align-right">Name:</TextLine>
+                <TextLine classes="text-align-right">Anmeldename:</TextLine>
                 <TextLine>{data.roles.username}</TextLine>
                 <TextLine classes="text-align-right">E-Mail-Adresse:</TextLine>
                 <TextLine>{censorEmail(data.roles.email)}</TextLine>
             </div>
             <div class="dashboard-user-profile-button-wrapper">
                 <Button ariaLabel="Klicke, um deinen Namen zu ändern."
-                        on:click={() => {changeState(UserProfileState.Name)}}>Name ändern
+                        on:click={() => {changeState(UserProfileState.Name)}}>Anmeldename ändern
                 </Button>
                 <Button ariaLabel="Klicke, um deine E-Mail zu ändern."
                         on:click={() => {changeState(UserProfileState.Mail)}}>E-Mail-Adresse ändern
@@ -181,7 +181,7 @@
             <div class="dashboard-user-profile-section-wrapper form-border">
                 <form class="dashboard-user-profile-section-entry-wrapper"
                       on:submit|preventDefault={saveName}>
-                    <SubHeadline classes="sub-headline-center">Name</SubHeadline>
+                    <SubHeadline classes="sub-headline-center">Anmeldename</SubHeadline>
                     <Input id="dashboard-user-profile-input-username-password"
                            labelText="Passwort:"
                            ariaLabel="Trage hier dein Passwort ein"
@@ -189,8 +189,8 @@
                            bind:value={oldPassword}
                            on:input={setUnsavedChanges} />
                     <Input id="dashboard-user-profile-input-username"
-                           labelText="Neuer Name:"
-                           ariaLabel="Trage hier deinen neuen Namen ein"
+                           labelText="Neuer Anmeldename:"
+                           ariaLabel="Trage hier deinen neuen Anmeldenamen ein"
                            bind:value={name}
                            on:input={setUnsavedChanges} />
                     <div class="dashboard-user-profile-button-wrapper">
