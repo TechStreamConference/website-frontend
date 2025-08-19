@@ -63,6 +63,7 @@
                 placeholder={placeholderText}
                 on:input
                 on:change
+                on:blur
                 aria-label={ariaLabel}
                 step="1"
         />
@@ -77,6 +78,7 @@
                 placeholder={placeholderText}
                 on:input={() => {calcColor(); dispatch("input");}}
                 on:change
+                on:blur
                 aria-label={ariaLabel}
                 step="1"
         />
