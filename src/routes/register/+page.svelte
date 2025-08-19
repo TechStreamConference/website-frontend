@@ -36,7 +36,8 @@
     const loggedInMessage = data.loggedIn ? 'Du bist bereits angemeldet' : '';
     let usernameMessage: string = '';
     let emailMessage: string = '';
-    let passwordMessage: string = '';
+    let password_1Message: string = '';
+    let password_2Message: string = '';
     let errorList: string[] = [''];
 
     let registered: boolean = false;
@@ -45,53 +46,55 @@
         setFocus("register-username");
     })
 
-    function startTimer(timer: {
-        current: number | null
-    }, callback: () => void, time: number): void {
+    function stopTimer(timer: { current: number | null }) {
         if (timer.current !== null) {
             clearTimeout(timer.current);
             timer.current = null;
         }
+    }
+
+    function startTimer(timer: {
+        current: number | null
+    }, callback: () => void, time: number): void {
+
+        stopTimer(timer);
+
         timer.current = setTimeout(() => {
             callback();
         }, time);
     }
 
-    function startPasswordTimer() {
-        const isSecondShorter = password_1.trim().length > password_2.trim().length;
-        if (isSecondShorter) {
-            startTimer(timerPasswordRef, onPasswordChanged, 500);
-            return;
-        }
-
-        if (timerPassword) {
-            clearTimeout(timerPassword);
-            timerPassword = null;
-        }
-
-        onPasswordChanged();
-    }
-
     async function onUsernameChangedAsync(): Promise<void> {
+        stopTimer(timerUsernameRef);
         const result = await Validators.onUsernameChangedAsync(username, fetch);
         usernameMessage = result ? result : '';
     }
 
     async function onEmailChangedAsync(): Promise<void> {
+        stopTimer(timerEmailRef);
+
         const result = await Validators.onMailChangedAsync(email, fetch);
         emailMessage = result ? result : '';
     }
 
-    function onPasswordChanged(): void {
-        const result = Validators.onPasswordChanged(password_1, password_2);
-        passwordMessage = result ? result : '';
+    function onPasswordChanged(checkFirst: boolean): void {
+        stopTimer(timerPasswordRef);
+
+        if (checkFirst) {
+            const result = Validators.onPassword1Changed(password_1);
+            password_1Message = result ? result : '';
+            return;
+        }
+
+        const result = Validators.onPassword2Changed(password_1, password_2);
+        password_2Message = result ? result : '';
     }
 
     async function tryRegisterAsync(): Promise<void> {
         const namePromise = Validators.onUsernameChangedAsync(username, fetch);
         const mailPromise = Validators.onMailChangedAsync(email, fetch);
 
-        const passwordResult = Validators.onPasswordChanged(password_1, password_2);
+        const passwordResult = Validators.onPasswordValidate(password_1, password_2);
 
         const nameResult = await namePromise;
         const mailResult = await mailPromise;
@@ -99,7 +102,8 @@
         errorList = [];
         usernameMessage = nameResult ? nameResult : '';
         emailMessage = mailResult ? mailResult : '';
-        passwordMessage = passwordResult ? passwordResult : '';
+        password_1Message = passwordResult ? passwordResult : '';
+        password_2Message = '';
 
         if (nameResult || mailResult || passwordResult) {
             return;
@@ -139,7 +143,8 @@
                     <ErrorMessage message={loggedInMessage}/>
                     <ErrorMessage message={usernameMessage}/>
                     <ErrorMessage message={emailMessage}/>
-                    <ErrorMessage message={passwordMessage}/>
+                    <ErrorMessage message={password_1Message}/>
+                    <ErrorMessage message={password_2Message}/>
                     <MessageWrapper messages={errorList}/>
                 </div>
                 <Input
@@ -148,9 +153,8 @@
                         labelText="Anmeldename:"
                         bind:value={username}
                         ariaLabel="Gib den Anmeldenamen ein"
-                        on:input={() => {
-						startTimer(timerUsernameRef, onUsernameChangedAsync, 200);
-					}}
+                        on:blur={onUsernameChangedAsync}
+                        on:input={() => {startTimer(timerUsernameRef, ()=>{usernameMessage = ""}, 500 )}}
                 />
                 <Input
                         id="register-email"
@@ -158,9 +162,8 @@
                         labelText="E-Mail:"
                         bind:value={email}
                         ariaLabel="Gib die E-Mail ein"
-                        on:input={() => {
-						startTimer(timerEmailRef, onEmailChangedAsync, 200);
-					}}
+                        on:blur={onEmailChangedAsync}
+                        on:input={() => {startTimer(timerEmailRef, ()=>{emailMessage = ""}, 500 )}}
                 />
                 <Input
                         id="register-password"
@@ -168,7 +171,8 @@
                         labelText="Passwort:"
                         bind:value={password_1}
                         ariaLabel="Gib das Passwort ein"
-                        on:input={startPasswordTimer}
+                        on:blur={() => {onPasswordChanged(true);}}
+                        on:input={() => {startTimer(timerPasswordRef, ()=>{password_1Message = ""}, 500 )}}
                 />
                 <Input
                         id="register-password-repeat"
@@ -176,7 +180,7 @@
                         labelText="Passwort wiederholen:"
                         bind:value={password_2}
                         ariaLabel="Wiederhole das Passwort"
-                        on:input={startPasswordTimer}
+                        on:input={() => {onPasswordChanged(false);}}
                 />
                 <Button
                         classes="register-submit-button"

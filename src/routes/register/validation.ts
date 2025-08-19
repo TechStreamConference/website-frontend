@@ -10,20 +10,24 @@ export async function onUsernameChangedAsync(username: string, fetch: typeof glo
     const trimmed: string = username.trim();
 
     if (trimmed.length === 0) {
-        return 'Das Feld "Name" ist leer.';
+        return 'Das Feld "Anmeldename" ist leer.';
     }
 
     if (trimmed.length < 3) {
-        return 'Der Name muss mindestens 3 Zeichen enthalten.';
+        return 'Der Anmeldename muss mindestens 3 Zeichen enthalten.';
     }
 
     if (trimmed.length > 30) {
-        return 'Der Name darf maximal 30 Zeichen enthalten.';
+        return 'Der Anmeldename darf maximal 30 Zeichen enthalten.';
+    }
+
+    if (trimmed.includes(' ')) {
+        return 'Der Anmeldename darf keine Leerzeichen enthalten.';
     }
 
     const response: Response = await fetch(apiUrl('/account/username/exists?username=' + trimmed));
     if (!response.ok) {
-        console.error('Fehler beim Überprüfen des Namen. Fehlercode: ' + response.status);
+        console.error('Fehler beim Überprüfen des Anmeldenamens. Fehlercode: ' + response.status);
         return;
     }
 
@@ -34,7 +38,7 @@ export async function onUsernameChangedAsync(username: string, fetch: typeof glo
     }
 
     if (data.exists) {
-        return `Der Name "${trimmed}" ist bereits vergeben.`;
+        return `Der Anmeldename "${trimmed}" ist bereits vergeben.`;
     }
 }
 
@@ -52,13 +56,13 @@ export async function onMailChangedAsync(mail: string, fetch: typeof globalThis.
 
     const response: Response = await fetch(apiUrl('/account/email/exists?email=' + trimmed));
     if (!response.ok) {
-        console.error('Fehler beim Überprüfen der E-Mail. Fehlercode: ' + response.status);
+        console.error('Error while fetching email check. error code: ' + response.status);
         return;
     }
 
     const data = await parseProvidedJsonAsync(response, existsResponseDataScheme);
     if (!data) {
-        console.error('Error while checking mail');
+        console.error('Error while parsing mail check');
         return;
     }
 
@@ -67,41 +71,69 @@ export async function onMailChangedAsync(mail: string, fetch: typeof globalThis.
     }
 }
 
-export function onPasswordChanged(password_1: string, password_2: string): string | undefined {
-    const trimmed: string = password_1.trim();
+export function onPassword1Changed(password:string) : string | undefined {
+    const trimmed: string = password.trim();
 
     if (trimmed.length === 0) {
         return 'Das Feld "Passwort" ist leer.';
     }
 
-    if (password_2.trim().length === 0) {
-        return 'Das Feld "Passwort wiederholen" ist leer.';
-    }
+    return validatePasswordSingle(trimmed);
+}
 
-    if (trimmed !== password_2.trim()) {
-        return 'Die Passwörter stimmen nicht überein.';
-    }
+export function onPassword2Changed(password_1:string, password_2:string) : string | undefined{
+    const trimmed_1: string = password_1.trim();
+    const trimmed_2: string = password_2.trim();
 
-    if (trimmed.length < 8) {
+    if (trimmed_1.length <= trimmed_2.length
+        && trimmed_1 !== trimmed_2) {
+        return 'Die Passwörter stimmen nicht überein.'
+    }
+}
+
+export function onPasswordValidate(password_1:string, password_2:string) : string | undefined {
+        const trimmed_1: string = password_1.trim();
+        const trimmed_2: string = password_2.trim();
+
+        if (trimmed_1.length === 0) {
+            return 'Das Feld "Passwort" ist leer.';
+        }
+
+        const result = validatePasswordSingle(trimmed_1);
+        if (result) {
+            return result;
+        }
+
+        if (trimmed_2.length === 0) {
+            return 'Das Feld "Passwort wiederholen" ist leer.';
+        }
+
+        if (trimmed_1 !== trimmed_2) {
+            return 'Die Passwörter stimmen nicht überein.'
+        }
+}
+
+function validatePasswordSingle(password: string): string | undefined {
+    if (password.length < 8) {
         return 'Das Password muss mindestens 8 Zeichen enthalten.';
     }
 
-    const hasLowerCase: boolean = /[a-z]/.test(trimmed);
+    const hasLowerCase: boolean = /[a-z]/.test(password);
     if (!hasLowerCase) {
         return 'Das Passwort muss mindestens einen Kleinbuchstaben enthalten.';
     }
 
-    const hasUpperCase: boolean = /[A-Z]/.test(trimmed);
+    const hasUpperCase: boolean = /[A-Z]/.test(password);
     if (!hasUpperCase) {
         return 'Das Passwort muss mindestens einen Großbuchstaben enthalten.';
     }
 
-    const hasNumber: boolean = /[0-9]/.test(trimmed);
+    const hasNumber: boolean = /[0-9]/.test(password);
     if (!hasNumber) {
         return 'Das Passwort muss mindestens eine Ziffer enthalten.';
     }
 
-    const hasSpecialCharacter: boolean = /[!@#$%^&*()\-_+={};:,<.>§~ ]/.test(trimmed);
+    const hasSpecialCharacter: boolean = /[!@#$%^&*()\-_+={};:,<.>§~ ]/.test(password);
     if (!hasSpecialCharacter) {
         return 'Das Passwort muss mindestens ein Sonderzeichen enthalten.';
     }
