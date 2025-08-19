@@ -72,6 +72,18 @@ export async function onMailChangedAsync(mail: string, fetch: typeof globalThis.
 }
 
 export function onPasswordChanged(password_1: string, password_2: string): string | undefined {
+    if (password_1.trim().length === 0) {
+        return undefined;
+    }
+
+    if (password_2.trim().length === 0) {
+        return undefined;
+    }
+
+    return onPasswordValidate(password_1, password_2);
+}
+
+export function onPasswordValidate(password_1: string, password_2: string): string | undefined {
     const trimmed: string = password_1.trim();
 
     if (trimmed.length === 0) {
