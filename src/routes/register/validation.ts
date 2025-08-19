@@ -21,6 +21,10 @@ export async function onUsernameChangedAsync(username: string, fetch: typeof glo
         return 'Der Anmeldename darf maximal 30 Zeichen enthalten.';
     }
 
+    if (trimmed.includes(' ')) {
+        return 'Der Anmeldename darf keine Leerzeichen enthalten.';
+    }
+
     const response: Response = await fetch(apiUrl('/account/username/exists?username=' + trimmed));
     if (!response.ok) {
         console.error('Fehler beim Überprüfen des Anmeldenamens. Fehlercode: ' + response.status);
