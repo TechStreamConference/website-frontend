@@ -41,10 +41,6 @@
         return cropperProps;
     }
 
-    $: if (data.event.photo) {
-        resetImage();
-    }
-
     function changeImage(event: Event): void {
         if (!event.target) {
             resetImage();
