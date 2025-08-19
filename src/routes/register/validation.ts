@@ -71,41 +71,46 @@ export async function onMailChangedAsync(mail: string, fetch: typeof globalThis.
     }
 }
 
-export function onPasswordChanged(password_1: string, password_2: string, checkFirst: boolean): string | undefined {
-    const trimmed_1 = checkFirst ? password_1.trim() : password_2.trim();
-    const trimmed_2 = checkFirst ? password_2.trim() : password_1.trim();
+export function onPassword1Changed(password:string) : string | undefined {
+    const trimmed: string = password.trim();
 
-    if (trimmed_1.length === 0) {
-        return checkFirst ? "Das Feld 'Passwort' ist leer." : "Das Feld 'Passwort wiederholen' ist leer."
-    }
-
-    if (trimmed_2.length > 0
-        && trimmed_1 !== trimmed_2) {
-        return "Die Passwörter stimmen nicht überein."
-    }
-
-    // not using trimmed_1 here to make sure the single validation is always performed on the first password
-    return validatePasswordSingle(password_1.trim());
-}
-
-export function onPasswordValidate(password_1: string, password_2: string): string | undefined {
-    const trimmed_1: string = password_1.trim();
-    const trimmed_2: string = password_2.trim();
-
-    if (trimmed_1.length === 0) {
+    if (trimmed.length === 0) {
         return 'Das Feld "Passwort" ist leer.';
     }
 
-    if (trimmed_2.length === 0) {
-        return 'Das Feld "Passwort wiederholen" ist leer.';
+    return validatePasswordSingle(trimmed);
+}
+
+export function onPassword2Changed(password_1:string, password_2:string) : string | undefined{
+    const trimmed_1: string = password_1.trim();
+    const trimmed_2: string = password_2.trim();
+
+    if (trimmed_1.length <= trimmed_2.length
+        && trimmed_1 !== trimmed_2) {
+        return 'Die Passwörter stimmen nicht überein.'
     }
+}
 
-    if (trimmed_1 !== trimmed_2) {
-        return 'Die Passwörter stimmen nicht überein.';
-    }
+export function onPasswordValidate(password_1:string, password_2:string) : string | undefined {
+        const trimmed_1: string = password_1.trim();
+        const trimmed_2: string = password_2.trim();
 
+        if (trimmed_1.length === 0) {
+            return 'Das Feld "Passwort" ist leer.';
+        }
 
-    return validatePasswordSingle(trimmed_1);
+        const result = validatePasswordSingle(trimmed_1);
+        if (result) {
+            return result;
+        }
+
+        if (trimmed_2.length === 0) {
+            return 'Das Feld "Passwort wiederholen" ist leer.';
+        }
+
+        if (trimmed_1 !== trimmed_2) {
+            return 'Die Passwörter stimmen nicht überein.'
+        }
 }
 
 function validatePasswordSingle(password: string): string | undefined {
