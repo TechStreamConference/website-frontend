@@ -200,7 +200,7 @@
                 </Paragraph>
                 <div class="button-wrapper">
                     <a href="/">
-                        <Button ariaLabel="Klicke, um zur aktuellen Hauptseite zu gelangen">Start</Button>
+                        <Button ariaLabel="Klicke, um zur aktuellen Hauptseite zu gelangen">Hauptseite</Button>
                     </a>
                 </div>
             </div>
