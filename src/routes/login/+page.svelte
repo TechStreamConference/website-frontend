@@ -90,8 +90,8 @@
                     classes="login-username-mail"
                     id="login-username-or-email"
                     type="text"
-                    labelText="Nutzername oder E-Mail:"
-                    ariaLabel="Gib den Nutzernamen oder die E-Mail ein"
+                    labelText="Anmeldename oder E-Mail:"
+                    ariaLabel="Gib den Anmeldenamen oder die E-Mail ein"
                     bind:value={usernameOrEmail}
             />
             <Input
@@ -128,8 +128,8 @@
                     classes="login-username-mail login-username-mail-reset-extra"
                     id="login-username-or-email"
                     type="text"
-                    labelText="Nutzername oder E-Mail:"
-                    ariaLabel="Gib den Nutzernamen oder die E-Mail-Adresse ein"
+                    labelText="Anmeldename oder E-Mail:"
+                    ariaLabel="Gib den Anmeldenamen oder die E-Mail-Adresse ein"
                     bind:value={usernameOrEmail}
             />
             <Button classes="login-button"
