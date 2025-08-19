@@ -76,10 +76,10 @@
         emailMessage = result ? result : '';
     }
 
-    function onPasswordChanged(): void {
+    function onPasswordChanged(checkFirst: boolean): void {
         stopTimer(timerPasswordRef);
 
-        const result = Validators.onPasswordChanged(password_1, password_2);
+        const result = Validators.onPasswordChanged(password_1, password_2, checkFirst);
         passwordMessage = result ? result : '';
     }
 
@@ -162,7 +162,7 @@
                         labelText="Passwort:"
                         bind:value={password_1}
                         ariaLabel="Gib das Passwort ein"
-                        on:blur={onPasswordChanged}
+                        on:blur={() => {onPasswordChanged(true);}}
                         on:input={() => {startTimer(timerPasswordRef, ()=>{passwordMessage = ""}, 500 )}}
                 />
                 <Input
@@ -171,7 +171,7 @@
                         labelText="Passwort wiederholen:"
                         bind:value={password_2}
                         ariaLabel="Wiederhole das Passwort"
-                        on:blur={onPasswordChanged}
+                        on:blur={() => {onPasswordChanged(false);}}
                         on:input={() => {startTimer(timerPasswordRef, ()=>{passwordMessage = ""}, 500 )}}
                 />
                 <Button
