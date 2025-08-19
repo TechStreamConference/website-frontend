@@ -10,20 +10,20 @@ export async function onUsernameChangedAsync(username: string, fetch: typeof glo
     const trimmed: string = username.trim();
 
     if (trimmed.length === 0) {
-        return 'Das Feld "Name" ist leer.';
+        return 'Das Feld "Anmeldename" ist leer.';
     }
 
     if (trimmed.length < 3) {
-        return 'Der Name muss mindestens 3 Zeichen enthalten.';
+        return 'Der Anmeldename muss mindestens 3 Zeichen enthalten.';
     }
 
     if (trimmed.length > 30) {
-        return 'Der Name darf maximal 30 Zeichen enthalten.';
+        return 'Der Anmeldename darf maximal 30 Zeichen enthalten.';
     }
 
     const response: Response = await fetch(apiUrl('/account/username/exists?username=' + trimmed));
     if (!response.ok) {
-        console.error('Fehler beim Überprüfen des Namen. Fehlercode: ' + response.status);
+        console.error('Fehler beim Überprüfen des Anmeldenamens. Fehlercode: ' + response.status);
         return;
     }
 
@@ -34,7 +34,7 @@ export async function onUsernameChangedAsync(username: string, fetch: typeof glo
     }
 
     if (data.exists) {
-        return `Der Name "${trimmed}" ist bereits vergeben.`;
+        return `Der Anmeldename "${trimmed}" ist bereits vergeben.`;
     }
 }
 
@@ -52,13 +52,13 @@ export async function onMailChangedAsync(mail: string, fetch: typeof globalThis.
 
     const response: Response = await fetch(apiUrl('/account/email/exists?email=' + trimmed));
     if (!response.ok) {
-        console.error('Fehler beim Überprüfen der E-Mail. Fehlercode: ' + response.status);
+        console.error('Error while fetching email check. error code: ' + response.status);
         return;
     }
 
     const data = await parseProvidedJsonAsync(response, existsResponseDataScheme);
     if (!data) {
-        console.error('Error while checking mail');
+        console.error('Error while parsing mail check');
         return;
     }
 
