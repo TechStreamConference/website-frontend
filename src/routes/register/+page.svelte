@@ -45,44 +45,40 @@
         setFocus("register-username");
     })
 
-    function startTimer(timer: {
-        current: number | null
-    }, callback: () => void, time: number): void {
+    function stopTimer(timer: { current: number | null }) {
         if (timer.current !== null) {
             clearTimeout(timer.current);
             timer.current = null;
         }
+    }
+
+    function startTimer(timer: {
+        current: number | null
+    }, callback: () => void, time: number): void {
+
+        stopTimer(timer);
+
         timer.current = setTimeout(() => {
             callback();
         }, time);
     }
 
-    function startPasswordTimer() {
-        const isSecondShorter = password_1.trim().length > password_2.trim().length;
-        if (isSecondShorter) {
-            startTimer(timerPasswordRef, onPasswordChanged, 500);
-            return;
-        }
-
-        if (timerPassword) {
-            clearTimeout(timerPassword);
-            timerPassword = null;
-        }
-
-        onPasswordChanged();
-    }
-
     async function onUsernameChangedAsync(): Promise<void> {
+        stopTimer(timerUsernameRef);
         const result = await Validators.onUsernameChangedAsync(username, fetch);
         usernameMessage = result ? result : '';
     }
 
     async function onEmailChangedAsync(): Promise<void> {
+        stopTimer(timerEmailRef);
+
         const result = await Validators.onMailChangedAsync(email, fetch);
         emailMessage = result ? result : '';
     }
 
     function onPasswordChanged(): void {
+        stopTimer(timerPasswordRef);
+
         const result = Validators.onPasswordChanged(password_1, password_2);
         passwordMessage = result ? result : '';
     }
@@ -91,7 +87,7 @@
         const namePromise = Validators.onUsernameChangedAsync(username, fetch);
         const mailPromise = Validators.onMailChangedAsync(email, fetch);
 
-        const passwordResult = Validators.onPasswordChanged(password_1, password_2);
+        const passwordResult = Validators.onPasswordValidate(password_1, password_2);
 
         const nameResult = await namePromise;
         const mailResult = await mailPromise;
@@ -148,9 +144,8 @@
                         labelText="Anmeldename:"
                         bind:value={username}
                         ariaLabel="Gib den Anmeldenamen ein"
-                        on:input={() => {
-						startTimer(timerUsernameRef, onUsernameChangedAsync, 200);
-					}}
+                        on:blur={onUsernameChangedAsync}
+                        on:input={() => {startTimer(timerUsernameRef, ()=>{usernameMessage = ""}, 500 )}}
                 />
                 <Input
                         id="register-email"
@@ -158,9 +153,8 @@
                         labelText="E-Mail:"
                         bind:value={email}
                         ariaLabel="Gib die E-Mail ein"
-                        on:input={() => {
-						startTimer(timerEmailRef, onEmailChangedAsync, 200);
-					}}
+                        on:blur={onEmailChangedAsync}
+                        on:input={() => {startTimer(timerEmailRef, ()=>{emailMessage = ""}, 500 )}}
                 />
                 <Input
                         id="register-password"
@@ -168,7 +162,8 @@
                         labelText="Passwort:"
                         bind:value={password_1}
                         ariaLabel="Gib das Passwort ein"
-                        on:input={startPasswordTimer}
+                        on:blur={onPasswordChanged}
+                        on:input={() => {startTimer(timerPasswordRef, ()=>{passwordMessage = ""}, 500 )}}
                 />
                 <Input
                         id="register-password-repeat"
@@ -176,7 +171,8 @@
                         labelText="Passwort wiederholen:"
                         bind:value={password_2}
                         ariaLabel="Wiederhole das Passwort"
-                        on:input={startPasswordTimer}
+                        on:blur={onPasswordChanged}
+                        on:input={() => {startTimer(timerPasswordRef, ()=>{passwordMessage = ""}, 500 )}}
                 />
                 <Button
                         classes="register-submit-button"
