@@ -80,9 +80,9 @@
             bio: data.data.speaker.event.bio,
             short_bio: data.data.speaker.event.short_bio,
             name: data.data.speaker.event.name,
-            photo_size: Math.floor(cropperProps.x),
-            photo_x: Math.floor(cropperProps.y),
-            photo_y: Math.floor(cropperProps.width),
+            photo_size: Math.floor(cropperProps.width),
+            photo_x: Math.floor(cropperProps.x),
+            photo_y: Math.floor(cropperProps.y),
         };
 
         if (!validate(event, image)) {
