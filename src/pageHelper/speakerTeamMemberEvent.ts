@@ -29,7 +29,8 @@ export async function loadDataAsync(
         console.error('Keine Events nach dem Laden von allen Events vorhanden.');
         throw error(406);
     }
-    const current = allEvents[allEvents.length - 1];
+
+    const current = allEvents[0];
 
     const event: DashboardSpeakerTeamMember = await loadSpeakerTeamMemberAsync(fetch, current.event_id, type);
 
