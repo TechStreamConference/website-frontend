@@ -35,6 +35,14 @@ export async function trySaveDataAsyncOutReset<T>(
         body: stringData,
     });
 
+    if (!response.ok && response.status === 413) {
+        return {
+            success: response.ok,
+            messages: ["Die angehängte Datei ist zu groß. Versuche eine kleinere Datei zu verwenden."],
+            infos: {},
+        }
+    }
+
     return {
         success: response.ok,
         messages: response.ok ? [] : await parseMultipleErrorsAsync(response),
