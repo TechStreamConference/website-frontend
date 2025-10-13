@@ -40,6 +40,7 @@
     let currentEvent: DashboardEvent;
 
     let baseUrl: string = '';
+    let spareURLCount: number = 3;
 
     let linkMessage: SaveMessage;
     let linkErrorQueue: string[] = [];
@@ -79,7 +80,8 @@
 
 
     async function displayLinksAsync(): Promise<void> {
-        const response = await fetch(apiUrl(`/dashboard/admin/video-room/event/${currentEvent.id}`));
+        spareURLCount = spareURLCount < 0 ? 0 : spareURLCount;
+        const response = await fetch(apiUrl(`/dashboard/admin/video-room/event/${currentEvent.id}?num_spares=${spareURLCount}`));
 
         if (!response.ok) {
             linkErrorQueue = ['Keine Links für dieses Event gefunden. Sicher, dass schon welche generiert sind?'];
@@ -195,6 +197,11 @@
                        labelText="Base URL:"
                        id="dashboard-admin-input-base-url"
                        bind:value={baseUrl}></Input>
+                <Input ariaLabel="Tage hier die Anzahl der Spare Links ein"
+                       labelText="Anzahl Spare Links:"
+                       id="dashboard-admin-input-space-url-count"
+                       type="number"
+                       bind:value={spareURLCount}></Input>
                 <VdoGrid entries={vdoLinks}
                          displayAdmin={true}/>
 
