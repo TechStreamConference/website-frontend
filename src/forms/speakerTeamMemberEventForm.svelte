@@ -160,7 +160,7 @@
                 bind:value={data.event.bio}
                 on:input={setUnsavedChanges}
         />
-        <Paragraph classes="paragraph-gray">Beschreibe dich hier in einem kurzen Text von ca. 50 bis 80 Wörtern. Ein
+        <Paragraph classes="paragraph-gray">Verfasse eine 50–80 Wörter lange Beschreibung deiner Person in der dritten Person. Ein
             Beispieltext könnte lauten:
             <i>„GyrosGeier hat nicht nur einen witzigen Namen – nein – er kennt sich auch ziemlich gut im Bereich
                 der Low-Level- bzw. Systemprogrammierung aus. Im vergangenen Jahr ist er nach Tokyo ausgewandert und
