@@ -206,8 +206,8 @@
                        labelText="Base URL:"
                        id="dashboard-admin-input-base-url"
                        bind:value={baseUrl}></Input>
-                <Input ariaLabel="Tage hier die Anzahl der Spare Links ein"
-                       labelText="Anzahl Spare Links:"
+                <Input ariaLabel="Trage hier die Anzahl der Spare-Links ein"
+                       labelText="Anzahl Spare-Links:"
                        id="dashboard-admin-input-space-url-count"
                        type="number"
                        bind:value={spareURLCount}></Input>
