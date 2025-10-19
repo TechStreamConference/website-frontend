@@ -4,6 +4,7 @@
 
     import type {LoadAdminEvents, LoadDashboard} from 'types/dashboardLoadTypes';
     import type {DashboardAdminVdoLink, DashboardAllEventSpeaker, DashboardEvent} from 'types/dashboardProvideTypes';
+    import type {Writable} from "svelte/store";
 
     import {dashboardAdminVdoLinkScheme} from 'types/dashboardProvideTypes';
     import {onMount} from 'svelte';
@@ -14,6 +15,8 @@
     import {trySaveDataAsyncOutReset} from 'helper/trySaveData.js';
     import {parseProvidedJsonAsync} from 'helper/parseJson';
     import {SaveMessageType} from 'types/saveMessageType';
+    import {createPersistentStore} from "stores/persistentStore";
+    import {get} from "svelte/store";
 
     import TextLine from 'elements/text/textLine.svelte';
     import SectionDashboard from 'elements/section/sectionDashboard.svelte';
@@ -40,7 +43,14 @@
     let currentEvent: DashboardEvent;
 
     let baseUrl: string = '';
-    let spareURLCount: number = 3;
+
+    // this is a workaround to have a persistent store but also be able to bind a variable across components
+    let spareURLCountStore: Writable<number> = createPersistentStore("TEST_CONF_SPARE_VDO_COUNT", 5);
+    let spareURLCount: number = get(spareURLCountStore);
+    $: if (spareURLCount) {
+        spareURLCount = spareURLCount < 0 ? 0 : spareURLCount;
+        spareURLCountStore.set(spareURLCount);
+    }
 
     let linkMessage: SaveMessage;
     let linkErrorQueue: string[] = [];
@@ -80,7 +90,6 @@
 
 
     async function displayLinksAsync(): Promise<void> {
-        spareURLCount = spareURLCount < 0 ? 0 : spareURLCount;
         const response = await fetch(apiUrl(`/dashboard/admin/video-room/event/${currentEvent.id}?num_spares=${spareURLCount}`));
 
         if (!response.ok) {
