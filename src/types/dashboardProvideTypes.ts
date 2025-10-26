@@ -122,7 +122,7 @@ export const dashboardApprovalSpeakerTeamMemberScheme = z.object({
         .transform((val) => val ?? ''),
     account: z.object({
         username: z.string(),
-    }),
+    }).nullable(),
     event: z.object({
         title: z.string(),
     }),
