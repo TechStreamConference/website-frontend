@@ -30,19 +30,32 @@
     }
 
     function getNameByUserID(userID: number): string {
+
+        const getName = <T extends { account: { username: string | null } | null }>(obj: T): string => {
+            if (!obj.account) {
+                return "NO ACCOUNT";
+            }
+
+            if (!obj.account.username) {
+                return "NO USERNAME";
+            }
+
+            return obj.account.username;
+        };
+
         const speaker = getElementByUserIdSafe(data.speaker, userID);
         if (speaker) {
-            return speaker.account.username;
+            return getName(speaker);
         }
 
         const teamMember = getElementByUserIdSafe(data.teamMember, userID);
         if (teamMember) {
-            return teamMember.account.username;
+            return getName(teamMember);
         }
 
         const media = getElementByUserIdSafe(data.socialMedia, userID);
         if (media) {
-            return media.account.username;
+            return getName(media);
         }
 
         console.error(`not able to look up username by user ID: ${userID}`);
