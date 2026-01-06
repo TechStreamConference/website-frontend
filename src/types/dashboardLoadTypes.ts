@@ -86,6 +86,7 @@ export type LoadUserApplication = {
         event: DashboardEventApplication,
         speaker: LoadSpeakerTeamMemberEvent,
         socials: LoadUserSocials,
+        roles: DashboardRoles,
     } | undefined,
     error: SimpleError | undefined
 }

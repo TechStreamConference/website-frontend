@@ -25,6 +25,7 @@
     import TextLine from 'elements/text/textLine.svelte';
     import MessageWrapper from 'elements/text/messageWrapper.svelte';
     import Explanation from 'elements/text/explanation.svelte';
+    import {copyLastApprovedSpeakerEntryAsync} from "helper/copySpeaker";
 
     export let data: LoadDashboard & LoadUserApplication;
 
@@ -120,6 +121,14 @@
         success = result.success;
         return result.success;
     }
+
+    async function copySpeaker(): Promise<void> {
+        const result = await copyLastApprovedSpeakerEntryAsync(fetch)
+
+        if (!result) {
+            saveMessage.setSaveMessage(SaveMessageType.Error)
+        }
+    }
 </script>
 
 <Tabs classes="subpage-navigation-tabs"
@@ -165,6 +174,15 @@
             </div>
             <SaveMessage bind:this={saveMessage}/>
             <MessageWrapper messages={errorList}/>
+            {#if data.roles.is_speaker}
+                <div class="dashboard-user-application-event-infos">
+                <TextLine>Du kannst auch deinen letzten approvten Speaker Eintrag für das aktuelle Event kopieren:</TextLine>
+                <Button on:click={copySpeaker}
+                        ariaLabel="Klicke hier, um deinen letzten approvten Speaker Eintrag für das aktuelle Event zu kopieren.">
+                    Eintrag kompieren
+                </Button>
+                </div>
+            {/if}
             <div class="dashboard-user-application-section form-border">
                 <HeadlineH2>Deine Bewerbung</HeadlineH2>
                 <SpeakerTeamMemberEventForm bind:this={eventForm}
