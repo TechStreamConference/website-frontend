@@ -17,5 +17,6 @@
         padding: var(--quad-padding) var(--half-padding);
         color: var(--tag-text-color);
         background-color: var(--tag-background-color);
+        cursor: default;
     }
 </style>
