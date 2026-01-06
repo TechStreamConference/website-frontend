@@ -87,6 +87,13 @@
 
         return Object.values(dict);
     }
+    function isEventOver(): boolean {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const eventEnd = new Date(data.year.event.end_date);
+        eventEnd.setHours(0, 0, 0, 0);
+        return today > eventEnd;
+    }
 </script>
 
 <PageWrapper
@@ -257,17 +264,19 @@
             <Section id="Schedule">
                 <HeadlineH2 classes="headline-h2-border">Plan</HeadlineH2>
                 {#if data.year.talks.length > 0}
-                    <div class="center-styled-link">
-                        <StyledLink
-                                classes="styled-link-white"
-                                href={apiUrl(`/events/${data.year.event.year}/ics`)}
-                                title="Klicke, um den Ablaufplan als ICS-Datei herunterzuladen"
-                                icon="Calender"
-                                newTab={false}
-                                text="Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!"
-                        />
-                        <meta itemprop="url" content={apiUrl(`/events/${data.year.event.year}/ics`)}/>
-                    </div>
+                    {#if !isEventOver()}
+                        <div class="center-styled-link">
+                            <StyledLink
+                                    classes="styled-link-white"
+                                    href={apiUrl(`/events/${data.year.event.year}/ics`)}
+                                    title="Klicke, um den Ablaufplan als ICS-Datei herunterzuladen"
+                                    icon="Calender"
+                                    newTab={false}
+                                    text="Verpasse keinen Vortrag und hole dir jetzt alle Termine in deinen Kalender. Klicke hier!"
+                            />
+                            <meta itemprop="url" content={apiUrl(`/events/${data.year.event.year}/ics`)}/>
+                        </div>
+                    {/if}
                     <div class="year-section-inner">
                         {#each splitTalks() as days}
                             <Schedule
