@@ -78,7 +78,8 @@
                labelText="Titel:"
                ariaLabel="Gib hier den Titel des Talks ein"
                bind:value={data.title}
-               on:input={setUnsavedChanges}/>
+               on:input={setUnsavedChanges}
+               limit={100-28-data.speaker.name.length}/>
         <Paragraph classes="paragraph-gray">Gibt deinem Vortrag einen Titel. Er sollte kurz, aber auch spannend sein,
             sodass er „Lust auf mehr” macht, ohne zu viel zu verraten.
         </Paragraph>
