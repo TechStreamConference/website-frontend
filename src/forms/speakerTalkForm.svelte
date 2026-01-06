@@ -8,6 +8,7 @@
     import {trySaveDataAsync} from 'helper/trySaveData';
     import {SaveMessageType} from 'types/saveMessageType';
     import {createEventDispatcher} from 'svelte';
+    import {NO_LIMIT} from 'elements/input/textArea.svelte';
 
     import TagArray from 'elements/input/tagArray.svelte';
     import Message from 'elements/text/message.svelte';
@@ -26,6 +27,7 @@
     export let tags: AllTalkTag;
     export let talkDurations: DashboardTalkDurationChoices;
     export let useForm: boolean = true;
+    export let isAdmin: boolean = false;
 
     // @formatter:off
     let saveMessage: SaveMessage;
@@ -89,7 +91,8 @@
                   ariaLabel="Gib hier die Beschreibung des Talks ein"
                   bind:value={data.description}
                   on:input={setUnsavedChanges}
-                  on:submit={save}/>
+                  on:submit={save}
+                  limit={isAdmin ? NO_LIMIT : 280}/>
         <Paragraph classes="paragraph-gray">Beschreibe deinen Vortrag. Hier darfst du gerne etwas mehr ins Detail gehen.
             Worum geht es in deinem Vortrag? Was wird man dabei lernen? Was ist das
             Besondere an deinem Vortrag? Eine

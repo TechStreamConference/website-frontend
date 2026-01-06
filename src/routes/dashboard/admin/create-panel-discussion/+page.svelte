@@ -108,7 +108,8 @@
             <SpeakerTalkForm bind:data={talkData}
                              tags={data.tags}
                              talkDurations={data.durations}
-                             useForm={false}/>
+                             useForm={false}
+                             isAdmin={true}/>
             <PersonArray labelText="Mögliche Hosts:"
                          bind:selected={selectedHosts}
                          data={data.possibleHosts}/>
