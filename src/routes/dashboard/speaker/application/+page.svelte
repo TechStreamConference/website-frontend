@@ -6,8 +6,8 @@
     import type {DashboardPendingTalk} from 'types/dashboardProvideTypes';
 
     import {formatDate} from 'helper/dates.js';
-    import {apiUrl} from "helper/links";
     import {SaveMessageType} from "types/saveMessageType";
+    import {copyLastApprovedSpeakerEntryAsync} from "helper/copySpeaker";
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import TextLine from 'elements/text/textLine.svelte';
@@ -54,14 +54,13 @@
     };
     // @formatter:on
 
-    async function copyLastApprovedSpeakerEntry() {
-        const response = await fetch(apiUrl('/dashboard/speaker/copy-latest-approved-speaker-entry'), {method: 'POST'});
-        if (response.ok) {
-            window.location.reload();
-            return
+    async function copySpeakerAsync(): Promise<void> {
+        const result = await copyLastApprovedSpeakerEntryAsync(fetch);
+
+        if (!result) {
+            copySpeakerMessageErrorMessage.setSaveMessage(SaveMessageType.Error)
         }
 
-        copySpeakerMessageErrorMessage.setSaveMessage(SaveMessageType.Error)
     }
 </script>
 
@@ -126,7 +125,7 @@
                     <br/>
                     Dann kannst du direkt deinen Talk einreichen.
                     <br/><br/>
-                    <Button on:click={copyLastApprovedSpeakerEntry}
+                    <Button on:click={copySpeakerAsync}
                             ariaLabel="Klicke hier, um deinen letzten approvten Speaker Eintrag für das aktuelle Event zu kopieren.">
                         Eintrag kopieren
                     </Button>
