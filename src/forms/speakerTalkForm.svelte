@@ -22,9 +22,9 @@
     import FormWrapper from 'elements/wrapper/formWrapper.svelte';
     import Paragraph from 'elements/text/paragraph.svelte';
 
-    const YOUTUBE_VIDEO_TITLE_LENGTH = 100;
-    const YOUTUBE_VIDEO_TITLE_FIXED_PART = " –  – TECH STREAM CONFERENCE"
-    const DESCRIPTION_LIMIT = 280;
+    const YOUTUBE_VIDEO_TITLE_MAX_LENGTH = 100;
+    const YOUTUBE_VIDEO_TITLE_FIXED_PART = " –  – TECH STREAM CONFERENCE";
+    const TALK_DESCRIPTION_MAX_LENGTH = 280;
 
     export let classes: string = '';
     export let data: DashboardPendingTalk;
@@ -85,7 +85,7 @@
                ariaLabel="Gib hier den Titel des Talks ein"
                bind:value={data.title}
                on:input={setUnsavedChanges}
-               limit={YOUTUBE_VIDEO_TITLE_LENGTH-YOUTUBE_VIDEO_TITLE_FIXED_PART.length-data.speaker.name.length}/>
+               limit={YOUTUBE_VIDEO_TITLE_MAX_LENGTH-YOUTUBE_VIDEO_TITLE_FIXED_PART.length-data.speaker.name.length}/>
         <Paragraph classes="paragraph-gray">Gibt deinem Vortrag einen Titel. Er sollte kurz, aber auch spannend sein,
             sodass er „Lust auf mehr” macht, ohne zu viel zu verraten.
         </Paragraph>
@@ -96,7 +96,7 @@
                   bind:value={data.description}
                   on:input={setUnsavedChanges}
                   on:submit={save}
-                  limit={isAdmin ? NO_LIMIT : DESCRIPTION_LIMIT}/>
+                  limit={isAdmin ? NO_LIMIT : TALK_DESCRIPTION_MAX_LENGTH}/>
         <Paragraph classes="paragraph-gray">Beschreibe deinen Vortrag. Hier darfst du gerne etwas mehr ins Detail gehen.
             Worum geht es in deinem Vortrag? Was wird man dabei lernen? Was ist das
             Besondere an deinem Vortrag? Eine
