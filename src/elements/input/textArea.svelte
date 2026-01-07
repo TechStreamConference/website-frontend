@@ -1,3 +1,7 @@
+<script context="module" lang="ts">
+    export const NO_LIMIT = -1;
+</script>
+
 <script lang="ts">
     import {createEventDispatcher} from "svelte";
     import {lerpTextCountColor} from "helper/color";
@@ -14,7 +18,6 @@
     export let labelText: string;
     export let placeholderText: string = " ";
 
-    export const NO_LIMIT = -1;
     export let limit: number = NO_LIMIT;
 
     let colorString: string;
