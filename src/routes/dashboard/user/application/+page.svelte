@@ -176,10 +176,10 @@
             <MessageWrapper messages={errorList}/>
             {#if data.roles.is_speaker}
                 <div class="dashboard-user-application-event-infos">
-                <TextLine>Du kannst auch deinen letzten approvten Speaker Eintrag für das aktuelle Event kopieren:</TextLine>
+                <TextLine>Du kannst auch deinen letzten freigegebenen Speaker-Eintrag für das aktuelle Event kopieren:</TextLine>
                 <Button on:click={copySpeaker}
-                        ariaLabel="Klicke hier, um deinen letzten approvten Speaker Eintrag für das aktuelle Event zu kopieren.">
-                    Eintrag kompieren
+                        ariaLabel="Klicke hier, um deinen letzten freigegebenen Speaker-Eintrag für das aktuelle Event zu kopieren.">
+                    Eintrag kopieren
                 </Button>
                 </div>
             {/if}

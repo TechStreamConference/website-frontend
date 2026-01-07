@@ -108,7 +108,7 @@
                 />
                 <Paragraph --text-align="center">
                     Aber gute Neuigkeiten für dich: Das kannst du
-                    ganz einfach ändern. Dazu gibt es 2 Möglichkeiten
+                    ganz einfach ändern. Dazu gibt es zwei Möglichkeiten:
                     <br/><br/>
                     1. Bewirb dich mit frischen Daten für das aktuelle Event im
                     <Link classes="link-inline"
@@ -121,12 +121,12 @@
                     <br/>
                     Dann hab gerne etwas Geduld. Wir arbeiten dran.
                     <br/><br/>
-                    2. Lasse uns deinen letzten approveten Speaker Eintrag von einem vorherigen Event für dieses Event kopieren.
+                    2. Lass uns deinen letzten freigegebenen Speaker-Eintrag von einem vorherigen Event für dieses Event kopieren.
                     <br/>
                     Dann kannst du direkt deinen Talk einreichen.
                     <br/><br/>
                     <Button on:click={copySpeakerAsync}
-                            ariaLabel="Klicke hier, um deinen letzten approvten Speaker Eintrag für das aktuelle Event zu kopieren.">
+                            ariaLabel="Klicke hier, um deinen letzten freigegebenen Speaker-Eintrag für das aktuelle Event zu kopieren.">
                         Eintrag kopieren
                     </Button>
                 </Paragraph>

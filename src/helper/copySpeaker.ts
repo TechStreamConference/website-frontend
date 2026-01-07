@@ -5,8 +5,8 @@ export async function copyLastApprovedSpeakerEntryAsync(fetch: typeof globalThis
     const response = await fetch(apiUrl('/dashboard/speaker/copy-latest-approved-speaker-entry'), {method: 'POST'});
     if (response.ok) {
         window.location.reload();
-        return true
+        return true;
     }
 
-    return false
+    return false;
 }
