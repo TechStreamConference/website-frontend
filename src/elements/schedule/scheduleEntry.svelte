@@ -17,6 +17,7 @@
 
 <div class="schedule-entry-time-wrapper schedule-entry-horizontal-line">
     <SubHeadline classes="schedule-entry-time">{formatDate(talk.starts_at, '%hh:%mm Uhr')}</SubHeadline>
+    <TextLine classes="schedule-entry-time">{talk.duration} Min.</TextLine>
     {#if talk.youtube_url}
         <StyledLink
                 classes="transparent-background"
