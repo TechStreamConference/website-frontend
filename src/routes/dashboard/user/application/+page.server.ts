@@ -80,6 +80,7 @@ export async function load({ fetch }: {
                 socials: [],
                 socialTypes,
             },
+            roles: roles,
         },
         error: undefined,
     };

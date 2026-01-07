@@ -6,6 +6,8 @@
     import type {DashboardPendingTalk} from 'types/dashboardProvideTypes';
 
     import {formatDate} from 'helper/dates.js';
+    import {SaveMessageType} from "types/saveMessageType";
+    import {copyLastApprovedSpeakerEntryAsync} from "helper/copySpeaker";
 
     import Tabs from 'elements/navigation/tabs.svelte';
     import TextLine from 'elements/text/textLine.svelte';
@@ -16,6 +18,8 @@
     import Paragraph from 'elements/text/paragraph.svelte';
     import Link from 'elements/text/link.svelte';
     import Message from 'elements/text/message.svelte'
+    import Button from 'elements/input/button.svelte'
+    import SaveMessage from 'elements/text/saveMessage.svelte'
 
     // Standard Apply Error is 'CURRENTLY_NOT_ACCEPTING_SPEAKER_APPLICATIONS'.
     // This error is the else path to make sure at least one error message is displayed.
@@ -23,6 +27,8 @@
 
     export let data: LoadSpeakerApplication;
     let saved: boolean = false;
+
+    let copySpeakerMessageErrorMessage: SaveMessage
 
     // @formatter:off
     let entry: DashboardPendingTalk = {
@@ -47,6 +53,15 @@
         requested_changes:  '',
     };
     // @formatter:on
+
+    async function copySpeakerAsync(): Promise<void> {
+        const result = await copyLastApprovedSpeakerEntryAsync(fetch);
+
+        if (!result) {
+            copySpeakerMessageErrorMessage.setSaveMessage(SaveMessageType.Error)
+        }
+
+    }
 </script>
 
 <Tabs classes="subpage-navigation-tabs subpage-navigation-tabs-wide-tabs-override"
@@ -88,16 +103,32 @@
                         message="Du bist noch kein Speaker für das aktuelle Event."
                         color="error"
                 />
+                <SaveMessage
+                        bind:this={copySpeakerMessageErrorMessage}
+                />
                 <Paragraph --text-align="center">
                     Aber gute Neuigkeiten für dich: Das kannst du
-                    ganz einfach ändern.<br/>
-                    Bewirb dich gerne für das aktuelle Event im
+                    ganz einfach ändern. Dazu gibt es zwei Möglichkeiten:
+                    <br/><br/>
+                    1. Bewirb dich mit frischen Daten für das aktuelle Event im
                     <Link classes="link-inline"
                           title={MenuItem.userApplication.description}
                           href={MenuItem.userApplication.url}>User-Dashboard.
                     </Link>
-                    <br/><br/>Du hast dich bereits für dieses Jahr
-                    beworben?<br/> Dann hab gerne etwas Geduld. Wir arbeiten dran.
+                    <br/>
+                    Du hast dich bereits für dieses Jahr
+                    beworben?
+                    <br/>
+                    Dann hab gerne etwas Geduld. Wir arbeiten dran.
+                    <br/><br/>
+                    2. Lass uns deinen letzten freigegebenen Speaker-Eintrag von einem vorherigen Event für dieses Event kopieren.
+                    <br/>
+                    Dann kannst du direkt deinen Talk einreichen.
+                    <br/><br/>
+                    <Button on:click={copySpeakerAsync}
+                            ariaLabel="Klicke hier, um deinen letzten freigegebenen Speaker-Eintrag für das aktuelle Event zu kopieren.">
+                        Eintrag kopieren
+                    </Button>
                 </Paragraph>
             {:else}
                 <Paragraph --text-align="center">
