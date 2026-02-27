@@ -109,27 +109,34 @@
                 <Paragraph --text-align="center">
                     Aber gute Neuigkeiten für dich: Das kannst du
                     ganz einfach ändern. Dazu gibt es zwei Möglichkeiten:
-                    <br/><br/>
-                    1. Bewirb dich mit frischen Daten für das aktuelle Event im
-                    <Link classes="link-inline"
-                          title={MenuItem.userApplication.description}
-                          href={MenuItem.userApplication.url}>User-Dashboard.
-                    </Link>
-                    <br/>
-                    Du hast dich bereits für dieses Jahr
-                    beworben?
-                    <br/>
-                    Dann hab gerne etwas Geduld. Wir arbeiten dran.
-                    <br/><br/>
-                    2. Lass uns deinen letzten freigegebenen Speaker-Eintrag von einem vorherigen Event für dieses Event kopieren.
-                    <br/>
-                    Dann kannst du direkt deinen Talk einreichen.
-                    <br/><br/>
-                    <Button on:click={copySpeakerAsync}
-                            ariaLabel="Klicke hier, um deinen letzten freigegebenen Speaker-Eintrag für das aktuelle Event zu kopieren.">
-                        Eintrag kopieren
-                    </Button>
                 </Paragraph>
+                <div class="dashboard-speaker-application-wrapper">
+                    <SubHeadline classes="dashboard-speaker-application-wrapper-headline">Neue Speaker-Daten?</SubHeadline>
+                    <SubHeadline classes="dashboard-speaker-application-wrapper-headline">Speaker-Daten kopieren?</SubHeadline>
+                    <Paragraph --text-align="center">
+                        Bewirb dich mit frischen Daten für das aktuelle Event im
+                        <Link classes="link-inline"
+                              title={MenuItem.userApplication.description}
+                              href={MenuItem.userApplication.url}>User-Dashboard.
+                        </Link>
+                        <br/>
+                        Du hast dich bereits für dieses Jahr
+                        beworben?
+                        <br/>
+                        Dann hab gerne etwas Geduld. Wir arbeiten dran.
+                        <br/><br/>
+                    </Paragraph>
+                    <Paragraph --text-align="center">
+                        Lass uns deinen letzten freigegebenen Speaker-Eintrag von einem vorherigen Event für dieses Event kopieren.
+                        <br/>
+                        Dann kannst du direkt deinen Talk einreichen.
+                        <br/><br/>
+                        <Button on:click={copySpeakerAsync}
+                                ariaLabel="Klicke hier, um deinen letzten freigegebenen Speaker-Eintrag für das aktuelle Event zu kopieren.">
+                            Eintrag kopieren
+                        </Button>
+                    </Paragraph>
+                </div>
             {:else}
                 <Paragraph --text-align="center">
                     Aktuell nehmen wir keine neuen Talks an.<br/>
@@ -155,5 +162,15 @@
         flex-direction: column;
         align-items: center;
         margin: var(--full-margin) 0;
+    }
+
+    .dashboard-speaker-application-wrapper{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    :global(.dashboard-speaker-application-wrapper-headline) {
+        text-align: center;
+        margin: var(--4x-margin) 0 var(--2x-margin) 0;
     }
 </style>
