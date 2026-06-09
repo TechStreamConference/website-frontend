@@ -87,6 +87,7 @@
 
         return Object.values(dict);
     }
+
     function isEventOver(): boolean {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -278,18 +279,20 @@
                         </div>
                     {/if}
                     <div class="year-section-inner">
-                        {#each splitTalks() as days}
-                            <Schedule
-                                    schedule={days.normal}
-                                    speakers={data.year.speakers}
-                                    personPopupCallback={openPersonPopup}
-                            />
-                            <Schedule
-                                    schedule={days.special}
-                                    speakers={data.year.speakers}
-                                    personPopupCallback={openPersonPopup}
-                            />
-                        {/each}
+                        {#key data.year.event.id}
+                            {#each splitTalks() as days}
+                                <Schedule
+                                        schedule={days.normal}
+                                        speakers={data.year.speakers}
+                                        personPopupCallback={openPersonPopup}
+                                />
+                                <Schedule
+                                        schedule={days.special}
+                                        speakers={data.year.speakers}
+                                        personPopupCallback={openPersonPopup}
+                                />
+                            {/each}
+                        {/key}
                     </div>
                 {:else}
                     <div class="year-section-inner">
