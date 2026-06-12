@@ -48,9 +48,8 @@
 
 <style>
     .person-rectangle {
-        display: grid;
-        grid-template-rows: subgrid;
-        grid-row: span 6;
+        display: flex;
+        flex-direction: column;
         outline: 1px solid var(--primary-color-light);
         border-radius: var(--border-radius);
         text-align: center;
@@ -76,6 +75,7 @@
         line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        height: 8.5rem;
     }
 
     .person-rectangle-line {
@@ -85,6 +85,7 @@
     :global(.person-rectangle-button) {
         margin-bottom: var(--full-margin);
         width: calc(100% - 2 * var(--full-margin));
+        margin-top: auto;
     }
 
     :global(.person-rectangle-margin) {
