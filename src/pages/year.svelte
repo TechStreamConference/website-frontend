@@ -226,23 +226,39 @@
             </Section>
         {/if}
 
-        {#if data.year.sponsors.length > 0}
-            <Section id="Sponsors">
-                <HeadlineH2 classes="headline-h2-border">Sponsoren</HeadlineH2>
-                <div class="year-section-inner">
+        <Section id="Sponsors">
+            <HeadlineH2 classes="headline-h2-border">Sponsoren</HeadlineH2>
+            <div class="year-section-inner">
+                {#if data.year.sponsors.length > 0}
                     <SponsorArray logos={data.year.sponsors}/>
-                </div>
-            </Section>
-        {/if}
+                {:else}
+                    <TextLine classes="text-line-center">Du möchtest dieses Event unterstützen?
+                        <br/>Dann melde dich gerne bei uns.
+                        <br/>Entweder über das
+                        <Link href="/contact" classes="link-inline" newTab={true}>Kontaktformular</Link>
+                        oder über den
+                        <Link href={data.year.event.discord_url} classes="link-inline" newTab={true}>Discord.</Link>
+                    </TextLine>
+                {/if}
+            </div>
+        </Section>
 
-        {#if data.year.media_partners.length > 0}
-            <Section>
-                <HeadlineH2 classes="headline-h2-border">Medienpartner</HeadlineH2>
-                <div class="year-section-inner">
+        <Section>
+            <HeadlineH2 classes="headline-h2-border">Medienpartner</HeadlineH2>
+            <div class="year-section-inner">
+                {#if data.year.media_partners.length > 0}
                     <SponsorArray logos={data.year.media_partners}/>
-                </div>
-            </Section>
-        {/if}
+                {:else}
+                    <TextLine classes="text-line-center">Du möchtest dieses Event unterstützen?
+                        <br/>Dann melde dich gerne bei uns.
+                        <br/>Entweder über das
+                        <Link href="/contact" classes="link-inline" newTab={true}>Kontaktformular</Link>
+                        oder über den
+                        <Link href={data.year.event.discord_url} classes="link-inline" newTab={true}>Discord.</Link>
+                    </TextLine>
+                {/if}
+            </div>
+        </Section>
 
         {#if data.year.event.is_visible_on_frontpage}
             <Section id="Team">
