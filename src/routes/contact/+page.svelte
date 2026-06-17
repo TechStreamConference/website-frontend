@@ -28,7 +28,8 @@
     const subjectOther: string = 'Sonstiges';
     const subjectData: string[] = [
         'Vortrag',
-        'sponsoring',
+        'Sponsoring',
+        'Medienpartnerschaft',
         subjectOther,
     ];
 
