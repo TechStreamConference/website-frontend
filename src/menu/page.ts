@@ -10,6 +10,7 @@ export function getHeaderMenuForLoggedInHiddenEvent(lastYearLink: string): Menu 
             url: lastYearLink,
             description: "Klicke hier, um zum vorherigen Event zu gelangen"
         },
+        YearItem.sponsors,
         PageItem.intern,
         PageItem.logout,
     ]
@@ -23,6 +24,7 @@ export function getHeaderMenuForLoggedOutHiddenEvent(lastYearLink: string): Menu
             url: lastYearLink,
             description: "Klicke hier, um zum vorherigen Event zu gelangen"
         },
+        YearItem.sponsors,
         PageItem.login,
         PageItem.register,
     ]
