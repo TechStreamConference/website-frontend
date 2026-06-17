@@ -36,6 +36,7 @@ export const speaker: Menu = [
     DashboardItem.speakerTalk,
     DashboardItem.speakerApplication,
     DashboardItem.speakerSocialMedia,
+    DashboardItem.speakerVdoInstruction,
 ];
 export const teamMember: Menu = [
     DashboardItem.teamMemberEvents,

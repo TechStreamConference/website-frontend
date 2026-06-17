@@ -62,6 +62,11 @@ export const speakerApplication: MenuItem = {
     url:         '/dashboard/speaker/application',
     description: 'Klicke hier, um einen neuen Talk einzureichen',
 };
+export const speakerVdoInstruction: MenuItem = {
+    name:        'VDO Anleitung',
+    url:         '/dashboard/speaker/vdo-instruction',
+    description: 'Klicke hier, um die VDO Anleitung zu sehen',
+};
 
 export const teamMemberEvents: MenuItem = {
     name:        'Events',
