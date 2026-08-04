@@ -20,9 +20,10 @@
         <HeadlinePage classes="imprint-headline">Impressum</HeadlinePage>
 
         <TextLine>Michael Gerhold</TextLine>
+        <TextLine>Impressums-Service Impressum4u</TextLine>
         <TextLine>c/o LEADERLY UG (haftungsbeschränkt)</TextLine>
-        <TextLine>Amtstraße 22</TextLine>
-        <TextLine classes="imprint-one-line-margin">44575 Castrop-Rauxel</TextLine>
+        <TextLine>Jerichower Straße 50</TextLine>
+        <TextLine classes="imprint-one-line-margin">D - 39307 Genthin</TextLine>
         <TextLine>
             E-Mail:
             <Link
